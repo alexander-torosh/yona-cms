@@ -1,0 +1,146 @@
+@import "../../vendor/css/reset.min.css";
+
+@font-color: #434343;
+
+@gray: #CCCCCC;
+@gray-light: @gray + #222222;
+@placeholder-color: @gray;
+
+@container-max-width: 1280px;
+@container-min-width: 960px;
+
+body {
+    color: @font-color;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+a {
+
+}
+
+a:hover {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+h3 {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+article ul {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 10px;
+
+    ul {
+        list-style: circle;
+        margin-bottom: 0;
+    }
+}
+
+article ol {
+    list-style: decimal;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+li {
+
+}
+
+.input {
+    padding: 7px 10px;
+    border: 1px solid @font-color;
+}
+
+input, textarea, button {
+    .input();
+}
+
+.table {
+    margin-bottom: 10px;
+
+    th {
+        background: @gray-light;
+        font-weight: bold;
+        text-align: center;
+    }
+    td, th {
+        border: 1px solid @gray;
+        padding: 2px 4px;
+    }
+}
+
+::-webkit-input-placeholder {
+    color: @placeholder-color;
+}
+:-moz-placeholder {
+    color: @placeholder-color;
+    opacity: 1;
+}
+::-moz-placeholder {
+    color: @placeholder-color;
+    opacity: 1;
+}
+:-ms-input-placeholder {
+    color: @placeholder-color;
+}
+
+.rotation {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.margin-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.padding-lr {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container {
+    max-width: @container-max-width;
+    min-width: @container-min-width;
+    position: relative;
+    .margin-auto();
+    .padding-lr();
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+#menu {
+    margin-bottom: 20px;
+}
+
+#main {
+    margin-bottom: 20px;
+}

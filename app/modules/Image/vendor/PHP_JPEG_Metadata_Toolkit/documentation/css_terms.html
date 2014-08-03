@@ -1,0 +1,171 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>Customising the HTML look via style sheets</h2>
+                <p>
+                        <a href="css_terms.html#class_list">Below</a> is a list of style classes which have been used in the HTML for the PHP JPEG Metadata Toolkit.
+                        These allow the look of the output HTML to be changed via the use of cascading style sheets.
+
+                </p>
+
+                <p>There are two ways to do this:</p>
+                <ol>
+                        <li>Embedded Style sheets</li>
+                        <li>External Style sheets</li>
+                </ol>
+                
+                <h3>Examples</h3>
+                
+                <p> Both of the following two sections would cause the following visual effects:<p>
+                <ul>
+                        <li>The page will have a dark grey background colour (#505050)</li>
+                        <li>The default text colour for the page will be off-white (#F0F0F0)</li>
+                        <li>Links (Anchors) will be orange</li>
+                        <li>Main headings for the EXIF section will be red</li>
+                        <li>Secondary headings for the EXIF section will be orange</li>
+                        <li>The outer border of the Tables for the EXIF section  will be a thin dark yellow (#909000) solid line</li>
+                </ul>
+                <br>
+                <br>
+                <br>
+
+                <h4>Embedded Style Sheets</h4>
+                
+                <p>Include the following in the &lt;HEAD&gt; section of the HTML page:</p>
+                <pre style="color:brown">
+        &lt;META HTTP-EQUIV=&quot;Content-Style-Type&quot; CONTENT=&quot;text/css&quot;&gt;
+        &lt;STYLE TYPE=&quot;text/css&quot; MEDIA=&quot;screen, print, projection&quot;&gt;
+        &lt;!--
+                BODY { background-color:#505050; color:#F0F0F0 }
+                a  { color:orange  }
+                .EXIF_Main_Heading { color:red }
+                .EXIF_Secondary_Heading{ color: orange}
+                .EXIF_Table {  border-collapse: collapse ; border: 1px solid #909000}
+        --&gt;
+        &lt;/STYLE&gt;
+                </pre>
+
+
+                <h4>External Style Sheets</h4>
+                <p>Include the following in the &lt;HEAD&gt; section of the HTML page:</p>
+                <pre style="color:brown">
+        &lt;link rel=StyleSheet href=&quot;style.css&quot; type=&quot;text/css&quot;&gt;
+                </pre>
+                <p>Create an external file called &quot;style.css&quot; containing the following:</p>
+                <pre style="color:brown">
+        BODY { background-color:#505050; color:#F0F0F0 }
+        a  { color:orange  }
+        .EXIF_Main_Heading { color:red }
+        .EXIF_Secondary_Heading{ color: orange}
+        .EXIF_Table {  border-collapse: collapse ; border: 1px solid #909000}
+                </pre>
+
+
+
+                <br>
+                <br>
+
+                <a name="class_list"><h3>Cascading Style Sheets Class List</h3></a>
+                <p>Any of the following classes may be used to customise the look of the html output from the PHP JPEG Metadata Toolkit</p>
+                <ul>
+                        <li>JPEG_Intrinsic_Main_Heading</li>
+                        <li>JPEG_Intrinsic_Table</li>
+                        <li>JPEG_Intrinsic_Table_Row</li>
+                        <li>JPEG_Intrinsic_Caption_Cell</li>
+                        <li>JPEG_Intrinsic_Value_Cell</li>
+                </ul>
+                <ul>
+                        <li>JPEG_APP_Segments_Main_Heading</li>
+                        <li>JPEG_APP_Segments_Table</li>
+                        <li>JPEG_APP_Segments_Table_Row</li>
+                        <li>JPEG_APP_Segments_Caption_Cell</li>
+                        <li>JPEG_APP_Segments_Type_Cell</li>
+                        <li>JPEG_APP_Segments_Size_Cell</li>
+                </ul>
+                <ul>
+                        <li>XMP_Main_Heading</li>
+                        <li>XMP_Secondary_Heading</li>
+                        <li>XMP_Table</li>
+                        <li>XMP_Table_Row</li>
+                        <li>XMP_Caption_Cell</li>
+                        <li>XMP_Value_Cell</li>
+                </ul>
+                <ul>
+                        <li>JFIF_Main_Heading</li>
+                        <li>JFIF_Table</li>
+                        <li>JFIF_Table_Row</li>
+                        <li>JFIF_Caption_Cell</li>
+                        <li>JFIF_Value_Cell</li>
+                        <li>JFIF_Thumbnail</li>
+                </ul>
+                <ul>
+                        <li>JFXX_Main_Heading</li>
+                        <li>JFXX_Text</li>
+                        <li>JFXX_Thumbnail</li>
+                        <li>JFXX_Thumbnail_Link</li>
+                </ul>
+                <ul>
+                        <li>JPEG_Comment_Main_Heading</li>
+                        <li>JPEG_Comment_Text</li>
+                </ul>
+                <ul>
+                        <li>Picture_Info_Main_Heading</li>
+                        <li>Picture_Info_Caption_Text</li>
+                        <li>Picture_Info_Value_Text</li>
+                </ul>
+                <ul>
+                        <li>Photoshop_Main_Heading</li>
+                        <li>Photoshop_Table</li>
+                        <li>Photoshop_Table_Row</li>
+                        <li>Photoshop_Caption_Cell</li>
+                        <li>Photoshop_Value_Cell</li>
+                        <li>Photoshop_Thumbnail</li>
+                        <li>Photoshop_Thumbnail_Link</li>
+                </ul>
+                <ul>
+                        <li>IPTC_Main_Heading</li>
+                        <li>IPTC_Table</li>
+                        <li>IPTC_Table_Row</li>
+                        <li>IPTC_Caption_Cell</li>
+                        <li>IPTC_Value_Cell</li>
+                </ul>
+                <ul>
+                        <li>EXIF_Main_Heading</li>
+                        <li>EXIF_Secondary_Heading</li>
+                        <li>EXIF_Table</li>
+                        <li>EXIF_Table_Row</li>
+                        <li>EXIF_Caption_Cell</li>
+                        <li>EXIF_Value_Cell</li>
+                        <li>EXIF_First_IFD_Thumb</li>
+                        <li>EXIF_First_IFD_Thumb_Link</li>
+                        <li>EXIF_Minolta_Thumb</li>
+                        <li>EXIF_Minolta_Thumb_Link</li>
+                        <li>EXIF_Casio_Thumb</li>
+                        <li>EXIF_Casio_Thumb_Link</li>
+                        <li>EXIF_Makernote_Small_Heading</li>
+                        <li>EXIF_Makernote_Text</li>
+                </ul>
+
+
+                <br>
+                <br>
+
+                </div>
+
+        </body>
+</html>

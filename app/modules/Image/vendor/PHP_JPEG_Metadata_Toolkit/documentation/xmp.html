@@ -1,0 +1,228 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>XMP / RDF / Dublin Core Function Reference</h2>
+                <p>
+                        The Extensible Metadata Platform (XMP) information resides in
+                        the &quot;App 1&quot; segment of a JPEG image.
+                        An XMP segment is XML based and contains
+                        Resource Description Framework (RDF) data, which itself can
+                        contain the Dublin Core Metadata Initiative (DCMI) information.
+                </p>
+
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_XMP_text</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves the Extensible Metadata Platform (XMP) information
+                                        from an App1 JPEG segment and returns the raw XML text as a
+                                        string. This includes the Resource Description Framework (RDF)
+                                        information and may include Dublin Core Metadata Initiative (DCMI)
+                                        information. Uses information supplied by the get_jpeg_header_data
+                                        function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>xmp_data</td>
+                                <td>the string of raw XML text</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an APP 1 XMP segment could not be found, or if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_XMP_text</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Adds or modifies the Extensible Metadata Platform (XMP) information
+                                        in an App1 JPEG segment. If a XMP segment already exists, it is
+                                        replaced, otherwise a new one is inserted, using the supplied data.
+                                        Uses information supplied by the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>newXMP</td>
+                                <td>a string containing the XMP text to be stored in the XMP segment. Should be constructed using the write_XMP_array_to_text function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>the JPEG header data array with the XMP segment added.</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>read_XMP_array_from_text</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                An alias for read_xml_array_from_text.<br>
+                                                Parses a string containing XMP data (XML), and returns the resulting
+                                                tree structure array, which contains all the XMP (XML) information.<br>
+                                                Note: White space and comments in the XMP data (XML) are ignored<br>
+                                                Note: All text information contained in the tree structure<br>
+                                                is encoded as Unicode UTF-8. Hence text will appear as
+                                                normal ASCII except where there is an extended character.
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>xmptext</td>
+                                <td>a string containing the XMP data (XML) to be parsed</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>output</td>
+                                <td>the tree structure array containing the XMP (XML) information</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>write_XMP_array_to_text</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                Takes a tree structure array containing XMP (in the same format
+                                                as returned by read_XMP_array_from_text, and constructs a string
+                                                containing the equivalent XMP, including the XMP Packet header
+                                                and trailer. Produces XMP text which has correct indents, encoded
+                                                using UTF-8.<br>
+                                                Note: All text information contained in the tree structure
+                                                can be either 7-bit ASCII or encoded as Unicode UTF-8,
+                                                since UTF-8 passes 7-bit ASCII text unchanged.
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>xmparray</td>
+                                <td>the tree structure array containing the information to be converted to XMP text</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output_XMP_text</td>
+                                <td>the string containing the equivalent XMP text</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_XMP_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                Generates html showing the information contained in an Extensible
+                                                Metadata Platform (XMP) tree structure array, as retrieved
+                                                with read_XMP_array_from_text
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>XMP_array</td>
+                                <td>a XMP tree structure array as from read_XMP_array_from_text</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>the HTML string</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                </div>
+
+        </body>
+</html>

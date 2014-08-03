@@ -1,0 +1,133 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>Picture Info Function Reference</h2>
+                <p>
+                        The &quot;App 12&quot; segment is used by many older digital cameras, and contains
+                        text called &quot;Picture Info&quot;
+                </p>
+
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_jpeg_App12_Pic_Info</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves the Picture Info text information from an App12
+                                        JPEG segment and returns it as a string. Uses information
+                                        supplied by the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>App12_Head, App12_Text</td>
+                                <td>The text preceeding the Picture Info (often the camera manufacturer's name), plus the Picture Info Text</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE, FALSE</td>
+                                <td>if an APP 12 Picture Info segment could not be found</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_jpeg_App12_Pic_Info</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Writes Picture Info text into an App12 JPEG segment. Uses information
+                                        supplied by the get_jpeg_header_data function. If no App12 exists
+                                        already a new one is created, otherwise it replaces the old one
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_Pic_Info_Text</td>
+                                <td>The Picture Info Text, including any header that is required</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>the JPEG header array with the new Picture info segment inserted</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_App12_Pic_Info_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing the contents of any JPEG App12 Picture Info segment
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>the JPEG header data, as retrieved from the get_jpeg_header_data function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>the HTML</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+
+
+                </div>
+
+        </body>
+</html>

@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * LoginForm
+ * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
+ * @author Aleksandr Torosh <webtorua@gmail.com>
+ */
+
+namespace Admin\Form;
+
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Password;
+use Phalcon\Validation\Validator\PresenceOf;
+
+class LoginForm extends \Phalcon\Forms\Form
+{
+
+    public function initialize()
+    {
+        $login = new Text('login');
+        $login->addValidator(new PresenceOf(array('message' => $this->helper->translate('Login is required'))));
+
+    }
+
+}

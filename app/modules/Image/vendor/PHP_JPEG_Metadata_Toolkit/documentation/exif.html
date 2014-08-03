@@ -1,0 +1,284 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>EXIF and Kodak &quot;Meta&quot; Function Reference</h2>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_EXIF_JPEG</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves information from a Exchangeable Image File Format (EXIF)
+                                        APP1 segment and returns it in an array. Uses information
+                                        supplied by the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>filename</td>
+                                <td>the filename of the JPEG image to process</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>OutputArray</td>
+                                <td>Array of EXIF records</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured in decoding</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_EXIF_JPEG</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Stores information into a Exchangeable Image File Format (EXIF)
+                                        APP1 segment from an EXIF array.<br>
+                                        <br>
+                                        <b>WARNING</b>: Because the EXIF standard allows pointers to data
+                                        outside the APP1 segment, if there are any such pointers in
+                                        a makernote, this function will DAMAGE them since it will not
+                                        be aware that there is an external pointer. This will often
+                                        happen with Makernotes that include an embedded thumbnail.
+                                        This damage could be prevented where makernotes can be decoded,
+                                        but currently this is not implemented.
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>exif_data</td>
+                                <td>The array of EXIF data to insert into the JPEG header</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>The JPEG header into which the EXIF data should be stored, as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>JPEG header array with the EXIF segment inserted</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_Meta_JPEG</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                Retrieves information from a Meta APP3 segment and returns it
+                                                in an array. Uses information supplied by the
+                                                get_jpeg_header_data function.
+                                        </p>
+                                        <p>
+                                                The Meta segment has the same format as an EXIF segment, but
+                                                uses different tags
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>filename</td>
+                                <td>the filename of the JPEG image to process</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>OutputArray</td>
+                                <td>Array of Meta records</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured in decoding</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_Meta_JPEG</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Stores information into a Meta APP3 segment from a Meta array.<br>
+                                        <br>
+                                        <b>WARNING</b>: Because the Meta (EXIF) standard allows pointers to data
+                                        outside the APP1 segment, if there are any such pointers in
+                                        a makernote, this function will DAMAGE them since it will not
+                                        be aware that there is an external pointer.
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>meta_data</td>
+                                <td>The array of Meta data to insert into the JPEG header</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>The JPEG header into which the Meta data should be stored, as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>JPEG header array with the Meta segment inserted</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured</td>
+                        </tr>
+                </table>
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_EXIF_TIFF</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                Retrieves information from a Exchangeable Image File Format (EXIF)
+                                                within a TIFF file and returns it in an array.
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>filename</td>
+                                <td>the filename of the TIFF image to process </td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>OutputArray</td>
+                                <td>Array of EXIF records</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured in decoding</td>
+                        </tr>
+                </table>
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_EXIF_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        <p>
+                                                Generates html detailing the contents an APP1 EXIF array
+                                                which was retrieved with a get_EXIF_JPEG function.
+                                                Can also be used for APP3 Meta arrays.
+                                        </p>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>Exif_array</td>
+                                <td>the EXIF array,as read from get_EXIF_JPEG</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>filename</td>
+                                <td>the name of the Image file being processed (used by scripts which displays EXIF thumbnails)</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output_str</td>
+                                <td> A string containing the HTML</td>
+                        </tr>
+                </table>
+
+
+                <h3>Notes:</h3>
+                <p>
+                        Unfortunately, because EXIF data may be distributed anywhere
+                        throughout an image file, rather than just being in one block,
+                        it is impossible to pass just a string containing only the EXIF
+                        information. Hence it is neccessary to be able to seek to
+                        any point in the file. This causes the HTTP and FTP wrappers
+                        not to work - i.e. the EXIF functions will only work with local
+                        files.
+                </p>
+                        To work on an internet file, copy it locally to start with:
+                </p>
+                <blockquote>
+                        $newfilename = tempnam ( $dir, "tmpexif" );<br>
+                        copy ( "http://whatever.com", $newfilename );
+                </blockquote>
+
+                <p>
+                        There are three global variables which can be set to alter the look of any HTML
+                        output from Interpret_EXIF_to_HTML:
+                </p>
+                <blockquote>
+                        $GLOBALS['HIDE_UNKNOWN_TAGS'];<br>
+                        $GLOBALS['SHOW_BINARY_DATA_HEX'];<br>
+                        $GLOBALS['SHOW_BINARY_DATA_TEXT'];
+                </blockquote>
+                <p>These variables are all boolean and all default to FALSE</p>
+
+
+                </div>
+
+        </body>
+</html>

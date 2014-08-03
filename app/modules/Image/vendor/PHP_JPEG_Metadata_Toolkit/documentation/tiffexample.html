@@ -1,0 +1,57 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="examples.html">Go to Documentation - Examples</a>
+
+                <div class="maintext">
+
+                <h2>Example TIFF Metadata Display Script</h2>
+
+                <p>
+                        This example script is included with the PHP JPEG Metadata Toolkit. It shows how the library
+                        can be used to display detailed metadata from a TIFF image file. This is an explanation of some of the
+                        commands used in the script.
+                </p>
+
+                <br>
+                <br>
+                <a href="http://www.ozhiker.com/electronics/pjmt/library/list_contents.php4?filename=TIFFExample.php">
+                        Click here to see this script</a>
+
+                <br>
+                <br>
+                <br>
+                <p>This script is essentially a subset of <a href="example.html">Example.php</a></p>
+                <br>
+                <br>
+                <br>
+
+                <h4>TIFF EXIF</h4>
+                <p>
+                        The only metadata that can be stored in a TIFF file is TIFF/EXIF information.
+                        Displaying this information metadata in HTML format from a PHP script is very simple:
+                </p>
+                <pre style="color:brown">
+
+                echo Interpret_EXIF_to_HTML( <b>get_EXIF_TIFF</b>( $filename ), $filename );
+
+                </pre>
+
+                <br>
+                <br>
+
+                </div>
+
+        </body>
+</html>

@@ -1,0 +1,303 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>JPEG &amp; Intrinsic JPEG Values Function Reference</h2>
+                <p>
+                        Functions for performing basic operations on a JPEG file
+                </p>
+
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>get_jpeg_header_data</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Reads all the JPEG header segments from an JPEG image file into an array
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>filename</td>
+                                <td>the filename of the file to JPEG file to read</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>headerdata</td>
+                                <td>Array of JPEG header segments</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if headers could not be read</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>put_jpeg_header_data</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Writes JPEG header data into a JPEG file. Takes an array in the
+                                        same format as from get_jpeg_header_data, and combines it with
+                                        the image data of an existing JPEG file, to create a new JPEG file<br>
+                                        <br>
+                                        <b>WARNING</b>: As this function will replace all JPEG headers,
+                                        including SOF etc, it is best to read the jpeg headers
+                                        from a file, alter them, then put them back on the same
+                                        file. If a SOF segment wer to be transfered from one
+                                        file to another, the image could become unreadable unless
+                                        the images were idenical size and configuration
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=3>Parameters:</td>
+                                <td width=1%>old_filename</td>
+                                <td>the JPEG file from which the image data will be retrieved</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_filename</td>
+                                <td>the name of the new JPEG to create (can be same as old_filename)</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>TRUE</td>
+                                <td>on Success</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>on Failure</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>get_jpeg_Comment</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retreives the contents of the JPEG Comment (COM = 0xFFFE) segment if one exists
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>the JPEG header data, as retrieved from the get_jpeg_header_data function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>string</td>
+                                <td>Contents of the Comment segement</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if the comment segment couldnt be found</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>Interpret_Comment_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing the contents of any JPEG Comment segment
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>the JPEG header data, as retrieved from the get_jpeg_header_data function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>the HTML</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>get_jpeg_intrinsic_values</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retreives information about the intrinsic characteristics of the jpeg image, such as Bits per Component, Height and Width.
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>the JPEG header data, as retrieved from the get_jpeg_header_data function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>array</td>
+                                <td>An array containing the intrinsic JPEG values</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if the comment segment couldnt be found</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>Interpret_intrinsic_values_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing some of the intrinsic JPEG values which were retrieved with the get_jpeg_intrinsic_values function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>values</td>
+                                <td>the JPEG intrinsic values, as read from get_jpeg_intrinsic_values</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>OutputStr</td>
+                                <td>A string containing the HTML</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>get_jpeg_image_data</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves the compressed image data part of the JPEG file
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>filename</td>
+                                <td>the filename of the JPEG file to read</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>compressed_data</td>
+                                <td>A string containing the compressed data</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if retrieval failed</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td width=1%>Function:</td>
+                                <td colspan=2><b>Generate_JPEG_APP_Segment_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing information about the Application (APP) segments which are present in the JPEG file
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>the JPEG header data, as retrieved from the get_jpeg_header_data function</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>A string containing the HTML</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+
+                </div>
+
+        </body>
+</html>

@@ -1,0 +1,3 @@
+<article>
+    {{ page.getText() }}
+</article>

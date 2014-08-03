@@ -1,0 +1,29 @@
+body {
+        margin:0 0 0 0;
+        background: #A4C7A0;
+}
+
+.headerbar {    background:#505060;
+                color:#C0C070;
+        }
+.maintext {     margin-left:10%;
+                margin-right:10%;
+        }
+                
+
+a:link {
+  color: #00f;
+  background: transparent;
+}
+
+a:visited {
+  color: #800080;
+  background: transparent;
+}
+
+a:active {
+  color: green;
+  background: #FFD700
+}
+
+

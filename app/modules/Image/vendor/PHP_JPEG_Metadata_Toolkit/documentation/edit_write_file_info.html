@@ -1,0 +1,272 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="examples.html">Go to Documentation - Examples</a>
+
+                <div class="maintext">
+
+                <h2>Example Photoshop &quot;File Info&quot; Editor Scripts</h2>
+
+                <p>
+                        These two example scripts areincluded with the PHP JPEG Metadata Toolkit.
+                        They show how the library can be used to edit metadata over the internet
+                        in exactly the same format as Photoshop&quot;s &quot;File Info&quot; dialog box.
+                        This is an explanation of some of the commands used in the script.
+                </p>
+
+                <a href="http://www.ozhiker.com/electronics/pjmt/library/list_contents.php4?filename=Edit_File_Info_Example.php">
+                        Click here to see the Edit_File_Info_Example.php</a>
+                <br><br>
+                <a href="http://www.ozhiker.com/electronics/pjmt/library/list_contents.php4?filename=Write_File_Info.php">
+                        Click here to see the Write_File_Info.php</a>
+                <br>
+
+                <br>
+                <br>
+                <br>
+
+                <h2>Edit_File_Info_Example.php</h2>
+
+                <h4>Overview</h4>
+                <p>
+                        This script utilises another script called Edit_File_Info.php.<br />
+                        Edit_File_Info.php outputs the HTML required to display a HTML form which emulates
+                        the Photoshop &quot;File Info&quot; dialog box.
+                </p>
+                <p>
+                        Edit_File_Info.php has four modes of operation:
+                </p>
+                <ol>
+                        <li>
+                                If $new_ps_file_info_array is defined then it's data will be used
+                                to fill the fields.
+                        </li>
+                        <li>
+                                If $new_ps_file_info_array is not defined but $filename is
+                                defined, then the file info fields will be filled from the
+                                metadata in the file specified
+                        </li>
+                        <li>
+                                If $new_ps_file_info_array is not defined but $filename
+                                and $default_ps_file_info_array are defined, then the
+                                file info fields will be filled from the metadata in the
+                                file specified, but where fields are blank, they will be
+                                filled from $default_ps_file_info_array
+                        </li>
+                        <li>
+                                Otherwise the fields will be blank
+                        </li>
+                </ol>
+
+
+
+
+                <br>
+                <br>
+
+                <h4>Forced Field Values</h4>
+
+                <p>
+                        If the variable $new_ps_file_info_array before Edit_File_Info.php is included, then it
+                        forces the values of the fields to be loaded from $new_ps_file_info_array
+                </p>
+
+                <p>
+                        <b>NOTE:</b>
+                        <ul>
+                                <li>date must be in YYYY-MM-DD format</li>
+                                <li>coyrightstatus must be either "Copyrighted Work", "Public Domain", or "Unknown"</li>
+                                <li>urgency must be a single digit between 1 and 8 inclusive</li>
+                                <li>category must be 3 characters or less</li>
+                                <li>authors position is not used in Photoshop 7 or higher</li>
+                                <li>jobname is not used in Photoshop CS or higher</li>
+                        </ul>
+                </p>
+
+                <p>Here is some example code for defining $new_ps_file_info_array</p>
+                <pre style="color:brown">
+                        $new_ps_file_info_array = array (
+                                                                'title'                 => "Frenchmans Cap",
+                                                                'author'                => "Evan Hunter",
+                                                                'authorsposition'       => "",
+                                                                'caption'               => "A view of Frenchmans cap from a bus on the Lyell Highway",
+                                                                'captionwriter'         => "Evan Hunter",
+                                                                'jobname'               => "",
+                                                                'copyrightstatus'       => "Copyrighted Work",
+                                                                'copyrightnotice'       => "Copyright (c) Evan Hunter 2004",
+                                                                'ownerurl'              => "http://www.ozhiker.com",
+                                                                'keywords'              => array( "Frenchmans Cap", "Franklin Gordon National Park", "Tasmania" ),
+                                                                'category'              => "abc",
+                                                                'supplementalcategories'=> array( "Supp Category1", "Supp Category2" ),
+                                                                'date'                  => "2004-05-11",
+                                                                'city'                  => "Franklin Gordon National Park",
+                                                                'state'                 => "Tasmania",
+                                                                'country'               => "Australia",
+                                                                'credit'                => "Evan Hunter",
+                                                                'source'                => "Evan Hunter",
+                                                                'headline'              => "Frenchmans Cap from Lyell Highway",
+                                                                'instructions'          => "No Instructions",
+                                                                'transmissionreference' => "12345",
+                                                                'urgency'               => "3"
+                                                                );
+                </pre>
+
+                <br>
+                <br>
+
+
+                <h4>Default Field Values</h4>
+
+                <p>
+                        The variable $default_ps_file_info_array sets the default values of the File Info fields.
+                        These are only loaded into the fields where File Info has been loaded from a file, but
+                        the fields in question are still blank. It has similar definition requirements to $new_ps_file_info_array.
+                </p>
+
+                <pre style="color:brown">
+                        // Define defaults for the fields - These are only used where the image has blank fields
+                        $default_ps_file_info_array = array (
+                                                                'title'                 => "",
+                                                                'author'                => "Evan Hunter",
+                                                                'authorsposition'       => "",
+                                                                'caption'               => "",
+                                                                'captionwriter'         => "Evan Hunter",
+                                                                'jobname'               => "",
+                                                                'copyrightstatus'       => "Copyrighted Work",
+                                                                'copyrightnotice'       => "Copyright (c) Evan Hunter 2004",
+                                                                'ownerurl'              => "http://www.ozhiker.com",
+                                                                'keywords'              => array(),
+                                                                'category'              => "",
+                                                                'supplementalcategories'=> array(),
+                                                                'date'                  => "",
+                                                                'city'                  => "",
+                                                                'state'                 => "Tasmania",
+                                                                'country'               => "Australia",
+                                                                'credit'                => "Evan Hunter",
+                                                                'source'                => "Evan Hunter",
+                                                                'headline'              => "",
+                                                                'instructions'          => "",
+                                                                'transmissionreference' => "",
+                                                                'urgency'               => ""
+                                                                );
+                </pre>
+
+                <br>
+                <br>
+
+                <h4>Input Filename</h4>
+                <p>
+                        When the $filename variable is defined before the inclusion of Edit_File_Info.php, it defines
+                        which JPEG file should be searched to fill the File Info fields
+                </p>
+                <pre style="color:brown">
+                        $filename = "test.jpg";
+                </pre>
+
+                <br>
+                <br>
+
+                <h4>Output Filename</h4>
+                <p>
+                        The $outputfilename variable must always be defined before the inclusion of Edit_File_Info.php.
+                        It defines the target image which will be modified with the information that the user enters.
+                        It can be the same as $filename.
+                </p>
+                <pre style="color:brown">
+                        $outputfilename = "test.jpg";
+                </pre>
+
+                <h4>Including Edit_File_Info.php</h4>
+                <p>
+                        After $outputfilename has been defined, and any of the other variables have been defined as required,
+                        Edit_File_Info.php should be included. It outputs the HTML for the File Info Editor.
+                </p>
+                <pre style="color:brown">
+                        include "Edit_File_Info.php";
+                </pre>
+
+                <br>
+                <br>
+
+
+                <h2>Write_File_Info.php</h2>
+                <h4>Overview</h4>
+                <p>
+                        This script receives the File Info data from the user via the HTML POST method.<br />
+                </p>
+
+
+                <h4>Retrieving the POSTed variables</h4>
+                <p>
+                        The field data is retrieved as follows:
+                </p>
+                <pre style="color:brown">
+                        $new_ps_file_info_array = $GLOBALS['HTTP_POST_VARS'];
+                </pre>
+
+                <br>
+                <br>
+
+                <h4>Preparing the field data</h4>
+                <p>
+                        The POSTed field data has some characters escaped with backslashes, which need to be removed.
+                        Two of the fields should also be arrays which and need to be split.
+                </p>
+                <pre style="color:brown">
+                        // Some characters are escaped with backslashes in HTML Posted variable
+                        // Cycle through each of the HTML Posted variables, and strip out the slashes
+                        foreach( $new_ps_file_info_array as $var_key => $var_val )
+                        {
+                                $new_ps_file_info_array[ $var_key ] = stripslashes( $var_val );
+                        }
+
+                        // Keywords should be an array - explode it on newline boundarys
+                        $new_ps_file_info_array[ 'keywords' ] = explode( "\n", trim( $new_ps_file_info_array[ 'keywords' ] ) );
+
+                        // Supplemental Categories should be an array - explode it on newline boundarys
+                        $new_ps_file_info_array[ 'supplementalcategories' ] = explode( "\n", trim( $new_ps_file_info_array[ 'supplementalcategories' ] ) );
+                </pre>
+
+                <br>
+                <br>
+
+                <h4>Writing the File Info</h4>
+                <p>
+                        Now the File Info data can be written to a file. The following code results in
+                        the $jpeg_header_data being updated with the new Photoshop File Info, and it can
+                        then be written to a JPEG file as normal using put_jpeg_header_data:
+                </p>
+                <pre style="color:brown">
+                        // Retrieve the header information
+                        $jpeg_header_data = get_jpeg_header_data( $filename );
+
+                        // Retreive the EXIF, XMP and Photoshop IRB information from
+                        // the existing file, so that it can be updated
+                        $Exif_array = get_EXIF_JPEG( $filename );
+                        $XMP_array = read_XMP_array_from_text( get_XMP_text( $jpeg_header_data ) );
+                        $IRB_array = get_Photoshop_IRB( $jpeg_header_data );
+
+                        // Update the JPEG header information with the new Photoshop File Info
+                        $jpeg_header_data = put_photoshop_file_info( $jpeg_header_data, $new_ps_file_info_array, $Exif_array, $XMP_array, $IRB_array );
+                </pre>
+
+                <br>
+                <br>
+
+
+
+                </div>
+
+        </body>
+</html>

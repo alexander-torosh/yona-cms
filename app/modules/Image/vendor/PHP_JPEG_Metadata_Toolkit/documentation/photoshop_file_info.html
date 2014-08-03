@@ -1,0 +1,162 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>Photoshop File Info Function Reference</h2>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_photoshop_file_info</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves Photoshop 'File Info' metadata in the same way that Photoshop
+                                        does. The results are returned in an array as below:<br>
+                                        <pre>
+                $file_info_array = array(
+                        "title"                  => "",
+                        "author"                 => "",
+                        "authorsposition"        => "",      // Note: Not used in Photoshop 7 or higher
+                        "caption"                => "",
+                        "captionwriter"          => "",
+                        "jobname"                => "",      // Note: Not used in Photoshop CS
+                        "copyrightstatus"        => "",
+                        "copyrightnotice"        => "",
+                        "ownerurl"               => "",
+                        "keywords"               => array( 0 => "", 1 => "", ... ),
+                        "category"               => "",     // Note: Max 3 characters
+                        "supplementalcategories" => array( 0 => "", 1 => "", ... ),
+                        "date"                   => "",     // Note: DATE MUST BE IN YYYY-MM-DD format
+                        "city"                   => "",
+                        "state"                  => "",
+                        "country"                => "",
+                        "credit"                 => "",
+                        "source"                 => "",
+                        "headline"               => "",
+                        "instructions"           => "",
+                        "transmissionreference"  => "",
+                        "urgency"                => "" );
+                                        </pre>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=3>Parameters:</td>
+                                <td width=1%>Exif_array</td>
+                                <td>an array containing the EXIF information to be searched, as retrieved by get_EXIF_JPEG.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>XMP_array</td>
+                                <td>an array containing the XMP information to be searched, as retrieved by read_XMP_array_from_text.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>IRB_array</td>
+                                <td>an array containing the Photoshop IRB information to be searched, as retrieved by get_Photoshop_IRB.</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>outputarray</td>
+                                <td>an array as above, containing the Photoshop File Info data</td>
+                        </tr>
+
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_photoshop_file_info</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Stores Photoshop &quot;File Info&quot; metadata in the same way that Photoshop
+                                        does. The &quot;File Info&quot; metadata must be in an array similar to that
+                                        returned by get_photoshop_file_info, as follows: <br>
+                                        <pre>
+                $file_info_array = array(
+                        "title"                  => "",
+                        "author"                 => "",
+                        "authorsposition"        => "",      // Note: Not used in Photoshop 7 or higher
+                        "caption"                => "",
+                        "captionwriter"          => "",
+                        "jobname"                => "",      // Note: Not used in Photoshop CS
+                        "copyrightstatus"        => "",
+                        "copyrightnotice"        => "",
+                        "ownerurl"               => "",
+                        "keywords"               => array( 0 => "", 1 => "", ... ),
+                        "category"               => "",     // Note: Max 3 characters
+                        "supplementalcategories" => array( 0 => "", 1 => "", ... ),
+                        "date"                   => "",     // Note: DATE MUST BE IN YYYY-MM-DD format
+                        "city"                   => "",
+                        "state"                  => "",
+                        "country"                => "",
+                        "credit"                 => "",
+                        "source"                 => "",
+                        "headline"               => "",
+                        "instructions"           => "",
+                        "transmissionreference"  => "",
+                        "urgency"                => "" );
+                                        </pre>
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=5>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data.
+                                This contains the header information which is to be updated.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_ps_file_info_array</td>
+                                <td>An array as above, which contains the &quot;File Info&quot; metadata information to be written.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>Old_Exif_array</td>
+                                <td>an array containing the EXIF information to be updated, as retrieved by get_EXIF_JPEG.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>Old_XMP_array</td>
+                                <td>an array containing the XMP information to be updated, as retrieved by read_XMP_array_from_text.</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>Old_IRB_array</td>
+                                <td>an array containing the Photoshop IRB information to be updated, as retrieved by get_Photoshop_IRB.</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data,
+                                containing the Photshop &quot;File Info&quot; metadata.
+                                This can then be written to a file using put_jpeg_header_data.</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>If an error occured</td>
+                        </tr>
+                </table>
+
+                <br>
+                <br>
+        </body>
+</html>

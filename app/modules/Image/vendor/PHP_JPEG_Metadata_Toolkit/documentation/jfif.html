@@ -1,0 +1,237 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>JFIF &amp; JFIF Extension Function Reference</h2>
+                <p>
+                        The &quot;App 0&quot; segment is often used by the JPEG File Interchange Format (JFIF) information.
+                        Sometimes, there is an additional &quot;App 0&quot; segment for the JFIF Extension (JFXX) information.
+                </p>
+
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_JFIF</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves information from a JPEG File Interchange Format (JFIF)
+                                        segment and returns it in an array. Uses information supplied by
+                                        the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>JFIF_data</td>
+                                <td>an array of JFIF data</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if a JFIF segment could not be found</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_JFIF</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Creates a new JFIF segment from an array of JFIF data in the
+                                        same format as would be retrieved from get_JFIF, and inserts
+                                        this segment into the supplied JPEG header array
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data, into which the new JFIF segment will be put</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_JFIF_array</td>
+                                <td>a JFIF information array in the same format as from get_JFIF, to create the new segment</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>the JPEG header data array with the new JFIF segment added</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_JFIF_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing the JFIF information contained in a JFIF data array, as retrieved with get_JFIF
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>JFIF_array</td>
+                                <td>a JFIF data array, as from get_JFIF</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>filename</td>
+                                <td>the name of the JPEG file being processed (used by the script which displays the JFIF thumbnail)</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>the HTML string</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_JFXX</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves information from a JPEG File Interchange Format Extension (JFXX)
+                                        segment and returns it in an array. Uses information supplied by
+                                        the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>JFXX_data</td>
+                                <td>an array of JFXX data</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>FALSE</td>
+                                <td>if a JFXX segment could not be found</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_JFXX</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Creates a new JFXX segment from an array of JFXX data in the
+                                        same format as would be retrieved from get_JFXX, and inserts
+                                        this segment into the supplied JPEG header array
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data, into which the new JFXX segment will be put</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_JFXX_array</td>
+                                <td>a JFXX information array in the same format as from get_JFXX, to create the new segment</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>the JPEG header data array with the new JFXX segment added</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_JFXX_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing the JFXX thumbnail contained in a JFXX data array, as retrieved with get_JFXX
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>JFXX_array</td>
+                                <td>a JFXX information array in the same format as from get_JFXX, to create the new segment</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>filename</td>
+                                <td>the name of the JPEG file being processed (used by the script which displays the JFXX thumbnail)</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output</td>
+                                <td>the Html string</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+
+                </div>
+
+        </body>
+</html>

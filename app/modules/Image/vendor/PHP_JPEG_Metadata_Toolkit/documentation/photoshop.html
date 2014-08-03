@@ -1,0 +1,262 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="index.html">Go to Documentation - Home</a>
+
+                <div class="maintext">
+
+                <h2>Photoshop IRB & IPTC-NAA IIM Function Reference</h2>
+                <p>
+                        The Photoshop Image Resource Block (IRB) resides in
+                        the &quot;App 13&quot; segment of a JPEG image.
+                        It contains photoshop information but can also contain the
+                        IPTC-NAA IIM record. (International Press Telecommunications Council, Newspaper Association of America, Information Interchange Model)
+                </p>
+
+                <br>
+                <br>
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_Photoshop_IRB</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves the Photoshop Information Resource Block (IRB) information
+                                        from an App13 JPEG segment and returns it as an array. This may
+                                        include IPTC-NAA IIM Information. Uses information
+                                        supplied by the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>IRBdata</td>
+                                <td>The array of Photoshop IRB records</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an APP 13 Photoshop IRB segment could not be found, or if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_Photoshop_IRB</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Adds or modifies the Photoshop Information Resource Block (IRB)
+                                        information from an App13 JPEG segment. If a Photoshop IRB already
+                                        exists, it is replaced, otherwise a new one is inserted, using the
+                                        supplied data. Uses information supplied by the get_jpeg_header_data
+                                        function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>jpeg_header_data</td>
+                                <td>a JPEG header data array in the same format as from get_jpeg_header_data</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_IRB_data</td>
+                                <td>
+                                        an array of the data to be stored in the Photoshop
+                                        IRB segment. Should be in the same format as received
+                                        from get_Photoshop_IRB
+                                </td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>jpeg_header_data</td>
+                                <td>the JPEG header data array with the Photoshop IRB added.</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>get_Photoshop_IPTC</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Retrieves IPTC-NAA IIM information from within a Photoshop
+                                        IRB (if it is present) and returns it in an array. Uses
+                                        information supplied by the get_jpeg_header_data function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>Photoshop_IRB_data</td>
+                                <td>an array of Photoshop IRB records, as returned from get_Photoshop_IRB</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=2>Returns:</td>
+                                <td>IPTC_Data_Out</td>
+                                <td>The array of IPTC-NAA IIM records</td>
+                        </tr>
+                        <tr>
+                                <td>FALSE</td>
+                                <td>if an IPTC-NAA IIM record could not be found, or if an error occured</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>put_Photoshop_IPTC</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Inserts a new IPTC-NAA IIM resource into a Photoshop
+                                        IRB, or replaces an the existing resource if one is present.
+                                        Uses information supplied by the get_Photoshop_IRB function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>Photoshop_IRB_data</td>
+                                <td>an array of Photoshop IRB records, as returned from get_Photoshop_IRB, into which the IPTC-NAA IIM record will be inserted</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>new_IPTC_block</td>
+                                <td>an array of IPTC-NAA records in the same format as those returned by get_Photoshop_IPTC</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>Photoshop_IRB_data</td>
+                                <td>The Photoshop IRB array with the IPTC-NAA IIM resource inserted</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_IRB_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html showing the information contained in a Photoshop
+                                        IRB data array, as retrieved with get_Photoshop_IRB, including
+                                        any IPTC-NAA IIM records found.<br>
+                                        <br>
+                                        Note: The following resource numbers are not currently
+                                        decoded: ( Many of these do not apply to JPEG images)<br>
+                                        0x03E9, 0x03EE, 0x03EF, 0x03F0, 0x03F1, 0x03F2, 0x03F6, 0x03F9,
+                                        0x03FA, 0x03FB, 0x03FD, 0x03FE, 0x0400, 0x0401, 0x0402, 0x0405,
+                                        0x040E, 0x040F, 0x0410, 0x0412, 0x0413, 0x0415, 0x0416, 0x0417,
+                                        0x041B, 0x041C, 0x041D, 0x0BB7<br>
+                                        <br>
+                                        ( Also these Obsolete resource numbers)<br>
+                                        0x03E8, 0x03EB, 0x03FC, 0x03FF, 0x0403
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=2>Parameters:</td>
+                                <td width=1%>IRB_array</td>
+                                <td>a Photoshop IRB data array as from get_Photoshop_IRB</td>
+                        </tr>
+                        <tr>
+                                <td width=1%>filename</td>
+                                <td>the name of the JPEG file being processed (used by the script which displays the Photoshop thumbnail)</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>output_str</td>
+                                <td>the HTML string</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+
+
+                <table border cellpadding=8 cellspacing=0>
+                        <tr>
+                                <td>Function:</td>
+                                <td colspan=2><b>Interpret_IPTC_to_HTML</b></td>
+                        </tr>
+                        <tr>
+                                <td>Description:</td>
+                                <td colspan=2>
+                                        Generates html detailing the contents a IPTC-NAA IIM array which was retrieved with the get_Photoshop_IPTC function
+                                </td>
+                        <tr>
+                        <tr>
+                                <td rowspan=1>Parameters:</td>
+                                <td width=1%>IPTC_info</td>
+                                <td>the IPTC-NAA IIM array,as read from get_IPTC</td>
+                        </tr>
+                        <tr>
+                                <td rowspan=1>Returns:</td>
+                                <td>OutputStr</td>
+                                <td>A string containing the HTML</td>
+                        </tr>
+                </table>
+
+
+                <br>
+                <br>
+
+
+                </div>
+
+        </body>
+</html>

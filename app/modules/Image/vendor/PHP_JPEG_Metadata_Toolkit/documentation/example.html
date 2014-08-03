@@ -1,0 +1,131 @@
+<html>
+        <head>
+                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+                <link rel=StyleSheet href="style.css" type="text/css">
+                <META NAME="keywords" CONTENT="JPEG Metadata Application Segments APP0 APP1 APP2 APP3 APP12 APP13 APP14 EXIF DCF XMP RDF Photoshop IRB IPTC DCMI JFIF">
+
+                <title>The PHP JPEG Metadata Toolkit - Documentation</title>
+        </head>
+
+        <body>
+                <div class="headerbar">
+                        <H1 align="center" style="padding:15">The PHP JPEG Metadata Toolkit - Documentation</H1>
+                </div>
+
+                <a href="examples.html">Go to Documentation - Examples</a>
+
+                <div class="maintext">
+
+                <h2>Example Metadata Display Script</h2>
+
+                <p>
+                        This example script is included with the PHP JPEG Metadata Toolkit. It shows how the library
+                        can be used to display detailed metadata from a JPEG image file. This is an explanation of some of the
+                        commands used in the script.
+                </p>
+
+                <a href="http://www.ozhiker.com/electronics/pjmt/library/list_contents.php4?filename=Example.php">
+                        Click here to see the script</a>
+
+                <br>
+
+                <br>
+                <br>
+                <br>
+
+                <h4>Error Reporting</h4>
+                <p>
+                        Although this library has been tested to be error free on a large number of images,
+                        it is good programming to turn error reporting off, to ensure that users don't see
+                        any error messages. This is not just cosmetic, it helps hide the details of the program
+                        from hackers.
+                </p>
+                <pre style="color:brown">
+        // Turn off Error Reporting
+        error_reporting ( 0 );
+                </pre>
+
+                <h4>Includes</h4>
+                <p>Ensure that the correct files are included:</p>
+                <table border=1 cellspacing=0 cellpadding=4>
+                        <tr>
+                                <td>JPEG.php</td>
+                                <td>For accessing basic JPEG functions - most programs will need this</td>
+                        </tr>
+                        <tr>
+                                <td>EXIF.php</td>
+                                <td>For accessing Exchangeable Image File Format (EXIF) APP1 segments</td>
+                        </tr>
+                        <tr>
+                                <td>JFIF.php</td>
+                                <td>For accessing JPEG File Interchange Format and JFIF Extension segments</td>
+                        </tr>
+                        <tr>
+                                <td>Photoshop_IRB.php</td>
+                                <td>For accessing Photoshop IRB & IPTC-NAA IIM segments</td>
+                        </tr>
+                        <tr>
+                                <td>PictureInfo.php</td>
+                                <td>For accessing APP12 Picture Info segments</td>
+                        </tr>
+                        <tr>
+                                <td>XMP.php</td>
+                                <td>For accessing APP1 XMP / RDF / Dublin Core segments</td>
+                        </tr>
+
+                </table>
+
+                <br>
+                <br>
+
+                <h4>Displaying Metadata Information</h4>
+
+                <p>
+                        Displaying metadata in HTML format from a PHP script is very simple. For example,
+                        the following will display any EXIF information in a JPEG image:
+                </p>
+
+                <pre style="color:brown">
+        echo Interpret_EXIF_to_HTML( get_EXIF_JPEG( $filename ), $filename );
+                </pre>
+
+                <br>
+                <br>
+
+                <p>To display the Photoshop IRB and IPTC-NAA information, use:</p>
+                <pre style="color:brown">
+        echo Interpret_IRB_to_HTML( get_Photoshop_IRB( get_jpeg_header_data( $filename ) ), $filename );
+                </pre>
+
+                <br>
+                <br>
+
+                <p>
+                        Note: The HTML returned from these functions is just a fragment, and requires
+                        &lt;HTML&gt;, &lt;HEAD&gt; and &lt;BODY&gt; tags to be provided.
+                </p>
+
+                <br>
+                <br>
+
+                <h4>Writing Metadata Information</h4>
+                <p>
+                        Although this is not shown in the example script, writing metadata is also very simple. For example, the following will allow
+                        the EXIF data in an image to be modified, and written to a file called &quot;output.jpg&quot; :
+                </p>
+                <pre style="color:brown">
+        $exif_data = get_EXIF_JPEG( $filename );
+
+        // Modify the $exif_data array here
+
+        $jpeg_header_data = put_EXIF_JPEG( $exif_data, $jpeg_header_data );
+        put_jpeg_header_data( $filename, "output.jpg", $jpeg_header_data );
+                </pre>
+
+                <br>
+                <br>
+
+                </div>
+
+        </body>
+</html>
