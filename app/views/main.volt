@@ -28,14 +28,10 @@ $this->assets->collection('js')
 
     <title>{{ helper.title().get() }}</title>
 
-    <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-
-    <!--less-->
-    <link href="/static/less/style.less" rel="stylesheet/less" type="text/css">
-    <!--/less-->
-
     {{ helper.meta().get('description') }}
     {{ helper.meta().get('keywords') }}
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
     <!--less-->
     <script src="/vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
