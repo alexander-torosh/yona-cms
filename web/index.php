@@ -2,6 +2,8 @@
 
 chdir(dirname(__DIR__));
 
+define('ROOT', __DIR__);
+
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 define('APPLICATION_PATH', (APPLICATION_ENV == 'development') ? __DIR__ . '/../app' : __DIR__ . '/../private/app' );

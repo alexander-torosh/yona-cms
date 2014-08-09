@@ -1,8 +1,10 @@
-<p><a href="/admin/admin-user/edit/{{ model.getId() }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> {{ helper.translate('Back') }}</a></p>
+<p><a href="/admin/admin-user/edit/{{ model.getId() }}" class="ui button"><i
+                class="icon left"></i> {{ helper.translate('Назад') }}</a></p>
 
-<div class="well">
-    <p>{{ helper.translate('Are you sure want delete <b>%login%</b>?', ['login': model.getLogin()]) }}</b></p>
-    <form action="" method="post">
-        <input type="submit" class="btn btn-danger" value="{{ helper.translate('Confirm delete') }}">
-    </form>
-</div>
+
+<form method="post" class="ui form" action="">
+    <div class="ui segment">
+        {{ helper.translate('Вы уверены что хотите удалить пользователя <b>%login%</b>?', ['login': model.getLogin()]) }}
+    </div>
+    <input type="submit" class="ui button negative" value="{{ helper.translate('Подтвердить удаление') }}">
+</form>

@@ -164,7 +164,7 @@ class Bootstrap
             'error' => 'ui red inverted segment',
             'success' => 'ui green inverted segment',
             'notice' => 'ui blue inverted segment',
-            'warning' => 'ui yellow inverted segment',
+            'warning' => 'ui orange inverted segment',
         ));
         $di->set('flash', $flash);
 
