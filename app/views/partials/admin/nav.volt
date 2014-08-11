@@ -28,6 +28,9 @@
     <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="/admin/admin-user">
         <i class="user icon"></i> Администраторы
     </a>
+    <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
+        <i class="settings icon"></i> Настройки
+    </a>
     <a href="/admin/index/logout" class="item right">
         <i class="plane icon"></i> Вылет
     </a>

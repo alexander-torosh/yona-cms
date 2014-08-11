@@ -9,8 +9,6 @@
 
         <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
 
-        {# assets.outputCss('admin-login-css') #}
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="/vendor/js/html5shiv.js"></script>
@@ -28,7 +26,7 @@
             <form class="ui form segment" method="post">
                 {{ flash.output() }}
                 <div class="field">
-                    <label>Username</label>
+                    <label>Логин</label>
                     <div class="ui left labeled icon input">
                         <input name="login" type="text" placeholder="Username">
                         <i class="user icon"></i>
@@ -38,7 +36,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Password</label>
+                    <label>Пароль</label>
                     <div class="ui left labeled icon input">
                         <input name="password" type="password">
                         <i class="lock icon"></i>
@@ -48,7 +46,7 @@
                     </div>
                 </div>
                 <div class="ui error message">
-                    <div class="header">We noticed some issues</div>
+                    <div class="header">Ошибки</div>
                 </div>
                 <input type="submit" class="ui blue submit button" value="Login">
             </form>

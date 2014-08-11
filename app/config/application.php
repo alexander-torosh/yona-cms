@@ -28,6 +28,7 @@ $config = array(
         'namespaces' => array(
             'Zend' => APPLICATION_PATH . '/../vendor/zendframework/zendframework/library/Zend',
             'Application' => APPLICATION_PATH . '/modules/Application',
+            'Cms' => APPLICATION_PATH . '/modules/Cms',
             'Image' => APPLICATION_PATH . '/modules/Image',
             'Index' => APPLICATION_PATH . '/modules/Index',
             'Admin' => APPLICATION_PATH . '/modules/Admin',
@@ -48,6 +49,10 @@ $config = array(
         'admin' => array(
             'className' => 'Admin\Module',
             'path' => APPLICATION_PATH . '/modules/Admin/Module.php'
+        ),
+        'cms' => array(
+            'className' => 'Cms\Module',
+            'path' => APPLICATION_PATH . '/modules/Cms/Module.php'
         ),
         'file-manager' => array(
             'className' => 'FileManager\Module',
