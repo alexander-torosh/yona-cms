@@ -63,9 +63,9 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
-    public function title()
+    public function title($title = null)
     {
-        return \Application\Mvc\Helper\Title::getInstance();
+        return \Application\Mvc\Helper\Title::getInstance($title);
     }
 
     public function meta()

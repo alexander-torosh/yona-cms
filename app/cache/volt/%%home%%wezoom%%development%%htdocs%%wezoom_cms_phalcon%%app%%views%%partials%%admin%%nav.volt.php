@@ -32,7 +32,7 @@
                 <i class="user icon"></i> Администраторы
             </a>
             <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-cms'); ?>" href="/cms/configuration">
-                <i class="setting icon"></i> Настройки
+                <i class="setting icon"></i> Конфигурация
             </a>
         </div>
     </div>
