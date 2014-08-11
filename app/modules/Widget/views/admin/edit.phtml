@@ -38,19 +38,17 @@ $this->tag->prependTitle($title);
 </script>
 
 <link rel="stylesheet" href="/vendor/codemirror-4.2/lib/codemirror.css">
-<link rel="stylesheet" href="/vendor/codemirror-4.2/theme/eclipse.css">
 
-<script src="/vendor/codemirror-4.2/lib/codemirror.js"></script>
-<script src="/vendor/codemirror-4.2/mode/htmlmixed/htmlmixed.js"></script>
-<script src="/vendor/codemirror-4.2/mode/javascript/javascript.js"></script>
-<script src="/vendor/codemirror-4.2/mode/css/css.js"></script>
+<script src="/vendor/codemirror-4.2/codemirror-compressed.js"></script>
 
 <script>
-    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('html'), {
-        lineNumbers: true,               // показывать номера строк
-        matchBrackets: true,             // подсвечивать парные скобки
-        mode: 'html', // стиль подсветки
-        indentUnit: 4,                    // размер табуляции
-        theme: 'eclipse'
+    $(function () {
+        var codeMirror = CodeMirror.fromTextArea(document.getElementById('html'), {
+            lineNumbers: true,               // показывать номера строк
+            matchBrackets: true,             // подсвечивать парные скобки
+            mode: "htmlmixed", // стиль подсветки
+            indentUnit: 4,                    // размер табуляции
+            viewportMargin: Infinity
+        });
     });
 </script>
