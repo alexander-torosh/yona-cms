@@ -3,14 +3,13 @@
     <!--tabs-->
     <div class="ui tabular menu init">
         <a class="item active" data-tab="main">
-            Окружение
+            Главные
         </a>
     </div>
     <!--/end tabs-->
 
     <!--tab main-->
     <div class="ui segment tab active" data-tab="main">
-        {{ form.renderDecorated('APPLICATION_ENV') }}
         {{ form.renderDecorated('DEBUG_MODE') }}
         {{ form.renderDecorated('TECHNICAL_WORKS') }}
     </div>

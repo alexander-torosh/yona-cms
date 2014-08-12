@@ -10,14 +10,8 @@ use \Phalcon\Mvc\View;
 class Bootstrap
 {
 
-    public static function run()
+    public function run()
     {
-        if (in_array(APPLICATION_ENV, array('development')) || $_GET['debug'] == 'true') {
-            $debug = new \Phalcon\Debug();
-            $debug->listen();
-        }
-
-
         $di = new \Phalcon\DI\FactoryDefault();
 
 
@@ -102,6 +96,13 @@ class Bootstrap
         }
         $di->set('modelsMetadata', $modelsMetadata);
 
+        /**
+         * CMS Конфигурация
+         */
+        $cmsModel = new \Cms\Model\Configuration();
+        $cms = $cmsModel->getConfig();
+        $registry->cms = $cms;
+
 
         $application = new \Phalcon\Mvc\Application();
 
@@ -130,7 +131,7 @@ class Bootstrap
             new AclPlugin($di->get('acl'), $dispatcher);
         });
 
-        // <Profiler>
+
         $profiler = new Phalcon\Db\Profiler();
 
         $eventsManager->attach('db', function ($event, $db) use ($profiler) {
@@ -144,7 +145,6 @@ class Bootstrap
 
         $db->setEventsManager($eventsManager);
         $di->set('profiler', $profiler);
-        // </Profiler>
 
 
         $dispatcher->setEventsManager($eventsManager);
@@ -178,57 +178,86 @@ class Bootstrap
 
         $application->setDI($di);
 
-        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
-            return self::getAjaxContent($application);
-        } else {
-            self::echoContent($application);
-        }
+        $this->dispatch($di);
 
     }
 
-    private static function getAjaxContent($application)
+    private function dispatch($di)
     {
-        ob_start();
-        self::echoContent($application);
-        $contents = ob_get_contents();
-        ob_end_clean();
+        $registry = $di['registry'];
 
-        $return = new \stdClass();
-        $return->html = $contents;
-        $di = $application->getDi();
-        $return->title = $di->get('helper')->title()->get();
-        $return->success = true;
+        $router = $di['router'];
 
-        $view = $di->get('view');
-        if ($view->bodyClass) {
-            $return->bodyClass = $view->bodyClass;
+        $router->handle();
+
+        $view = $di['view'];
+
+        $dispatcher = $di['dispatcher'];
+
+        $dispatcher->setModuleName($router->getModuleName());
+        $dispatcher->setControllerName($router->getControllerName());
+        $dispatcher->setActionName($router->getActionName());
+        $dispatcher->setParams($router->getParams());
+
+        $ModuleClassName = ucfirst($router->getModuleName()) . '\Module';
+        if (class_exists($ModuleClassName)) {
+            $module = new $ModuleClassName;
+            $module->registerAutoloaders();
+            $module->registerServices($di);
         }
 
-        $response = $di->get('response');
-        $headers = $response->getHeaders()->toArray();
-        if (isset($headers[404]) || isset($headers[503])) {
-            $return->success = false;
-        }
+        $view->start();
 
-        $response->setContentType('application/json', 'UTF-8');
-        $response->setContent(json_encode($return));
-        return $response->send();
-    }
-
-    private static function echoContent($application)
-    {
         try {
-            echo $application->handle()->getContent();
-        } catch (\Phalcon\Exception $e) {
-            if (in_array(APPLICATION_ENV, array('development')) || $_GET['debug'] == 'true') {
-                echo "<pre>";
-                echo $e->getMessage() . PHP_EOL;
-                print_r($e->getTrace());
-                exit;
-            } else {
-                $application->getDi()->get('helper')->error(404);
-            }
+            $dispatcher->dispatch();
+        } catch (Phalcon\Exception $e) {
+            $module = new Index\Module();
+            $module->registerAutoloaders();
+            $module->registerServices($di);
+
+            $dispatcher->setModuleName('index');
+            $dispatcher->setControllerName('error');
+            $dispatcher->setActionName('error404');
+            $dispatcher->setParam('e', $e);
+
+            $dispatcher->dispatch();
         }
+
+        $view->render(
+            $dispatcher->getControllerName(),
+            $dispatcher->getActionName(),
+            $dispatcher->getParams()
+        );
+
+        $view->finish();
+
+        $response = $di['response'];
+
+        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
+            $contents = $view->getContent();
+
+            $return = new \stdClass();
+            $return->html = $contents;
+            $return->title = $di->get('helper')->title()->get();
+            $return->success = true;
+
+            if ($view->bodyClass) {
+                $return->bodyClass = $view->bodyClass;
+            }
+
+            $headers = $response->getHeaders()->toArray();
+            if (isset($headers[404]) || isset($headers[503])) {
+                $return->success = false;
+            }
+            $response->setContentType('application/json', 'UTF-8');
+            $response->setContent(json_encode($return));
+        } else {
+            $response->setContent($view->getContent());
+        }
+
+        $response->sendHeaders();
+
+        echo $response->getContent();
     }
 
 }

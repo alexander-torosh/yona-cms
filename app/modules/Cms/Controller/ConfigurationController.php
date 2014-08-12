@@ -50,16 +50,17 @@ class ConfigurationController extends Controller
     public function saveFormData($post)
     {
         $result = true;
-        foreach ($post as $key => $value) {
-            if ($key == 'form') {
-                continue;
-            }
+        foreach (Configuration::$keys as $key => $value) {
             $model = Configuration::findFirst("key = '$key'");
             if (!$model) {
                 $model = new Configuration();
                 $model->setKey($key);
             }
-            $model->setValue($value);
+            if (array_key_exists($key, $post)) {
+                $model->setValue($post[$key]);
+            } else {
+                $model->setValue($value);
+            }
             if (!$model->save()) {
                 $result = false;
                 $this->flashErrors($model);

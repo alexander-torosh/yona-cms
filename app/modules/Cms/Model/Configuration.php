@@ -21,7 +21,6 @@ class Configuration extends \Phalcon\Mvc\Model
      * Если таблица в БД будет пустая, она автоматически заполнится значениями по-умолчанию
      */
     public static $keys = [
-        'APPLICATION_ENV' => 'development',
         'DEBUG_MODE' => 1,
         'TECHNICAL_WORKS' => 0,
     ];
@@ -33,10 +32,10 @@ class Configuration extends \Phalcon\Mvc\Model
     {
         if ($_POST['form']) {
             if ($this->key == 'DEBUG_MODE') {
-                $this->value = ($_POST['DEBUG_MODE']) ? 1 : 0 ;
+                $this->value = (isset($_POST['DEBUG_MODE'])) ? 1 : 0 ;
             }
             if ($this->key == 'TECHNICAL_WORKS') {
-                $this->value = ($_POST['TECHNICAL_WORKS']) ? 1 : 0 ;
+                $this->value = (isset($_POST['TECHNICAL_WORKS'])) ? 1 : 0 ;
             }
         }
     }

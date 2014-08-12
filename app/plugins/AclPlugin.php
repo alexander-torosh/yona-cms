@@ -16,15 +16,17 @@ class AclPlugin extends Plugin
     {
         $role = $this->getRole();
 
-        $module     = $dispatcher->getModuleName();
+        $module = $dispatcher->getModuleName();
         $controller = $dispatcher->getControllerName();
-        $action     = $dispatcher->getActionName();
+        $action = $dispatcher->getActionName();
 
         $resourceKey = $module . '/' . $controller;
         $resourceVal = $action;
 
-        if (!$acl->isAllowed($role, $resourceKey, $resourceVal)) {
-            $this->accessDenied($role, $resourceKey, $resourceVal);
+        if ($acl->isResource($resourceKey)) {
+            if (!$acl->isAllowed($role, $resourceKey, $resourceVal)) {
+                $this->accessDenied($role, $resourceKey, $resourceVal);
+            }
         }
 
     }

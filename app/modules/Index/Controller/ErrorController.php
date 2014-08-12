@@ -15,12 +15,14 @@ class ErrorController extends Controller
 
     public function error404Action()
     {
-        $this->helper->error(404);
+        $this->response->setHeader(404, 'Not Found');
+        $this->view->e = $this->dispatcher->getParam('e');
     }
 
     public function error503Action()
     {
-        $this->helper->error(503);
+        $this->response->setHeader(503, 'Service Unavailable');
+        $this->view->e = $this->dispatcher->getParam('e');
     }
 
 }
