@@ -34,6 +34,9 @@ $this->assets->collection('js')
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
     <!--less-->
+    <link href="/static/less/style.less" rel="stylesheet/less" type="text/css">
+    <!--/less-->
+    <!--less-->
     <script src="/vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
     <!--/less-->
 
