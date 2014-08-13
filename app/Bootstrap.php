@@ -184,8 +184,6 @@ class Bootstrap
 
     private function dispatch($di)
     {
-        $registry = $di['registry'];
-
         $router = $di['router'];
 
         $router->handle();
@@ -199,7 +197,13 @@ class Bootstrap
         $dispatcher->setActionName($router->getActionName());
         $dispatcher->setParams($router->getParams());
 
-        $ModuleClassName = ucfirst($router->getModuleName()) . '\Module';
+        $tmpModuleNameArr = explode('-', $router->getModuleName());
+        $moduleName = '';
+        foreach($tmpModuleNameArr as $part) {
+            $moduleName .= ucfirst($part);
+        }
+
+        $ModuleClassName = $moduleName . '\Module';
         if (class_exists($ModuleClassName)) {
             $module = new $ModuleClassName;
             $module->registerAutoloaders();

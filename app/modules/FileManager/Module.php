@@ -13,7 +13,7 @@ class Module
     public function registerServices($di)
     {
         $dispatcher = $di->get('dispatcher');
-        $dispatcher->setDefaultNamespace("FileManager\Controller");
+        $dispatcher->setDefaultNamespace('FileManager\Controller');
         $di->set('dispatcher', $dispatcher);
 
         /**
