@@ -35,8 +35,11 @@ $this->assets->collection('js')
 
     <!--less-->
     <link href="/static/less/style.less" rel="stylesheet/less" type="text/css">
+<<<<<<< HEAD
     <!--/less-->
     <!--less-->
+=======
+>>>>>>> 302e52acf2e1c006bdbcf394cc7aad7dcc5722ce
     <script src="/vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
     <!--/less-->
 

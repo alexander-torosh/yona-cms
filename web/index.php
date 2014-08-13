@@ -13,4 +13,5 @@ define('PUBLIC_PATH', __DIR__);
 include APPLICATION_PATH . '/config/defines.php';
 
 require_once APPLICATION_PATH . '/Bootstrap.php';
-Bootstrap::run();
+$bootstrap = new Bootstrap();
+$bootstrap->run();

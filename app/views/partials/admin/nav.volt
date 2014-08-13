@@ -25,12 +25,17 @@
             </a>
         </div>
     </div>
-    <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="/admin/admin-user">
-        <i class="user icon"></i> Администраторы
-    </a>
-    <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
-        <i class="settings icon"></i> Настройки
-    </a>
+    <div class="ui dropdown item">
+        <i class="settings icon"></i> Администрирование <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="/admin/admin-user">
+                <i class="user icon"></i> Администраторы
+            </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
+                <i class="setting icon"></i> Конфигурация
+            </a>
+        </div>
+    </div>
     <a href="/admin/index/logout" class="item right">
         <i class="plane icon"></i> Вылет
     </a>
