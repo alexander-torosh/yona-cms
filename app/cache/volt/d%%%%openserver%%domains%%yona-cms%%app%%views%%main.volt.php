@@ -26,10 +26,10 @@ $this->assets->collection('js')
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ helper.title().get() }}</title>
+    <title><?php echo $this->helper->title()->get(); ?></title>
 
-    {{ helper.meta().get('description') }}
-    {{ helper.meta().get('keywords') }}
+    <?php echo $this->helper->meta()->get('description'); ?>
+    <?php echo $this->helper->meta()->get('keywords'); ?>
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
@@ -45,29 +45,29 @@ $this->assets->collection('js')
     <![endif]-->
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-    {{ assets.outputJs('js') }}
+    <?php echo $this->assets->outputJs('js'); ?>
 </head>
-<body{% if view.bodyClass %} class="{{ view.bodyClass }}"{% endif %}>
+<body<?php if ($this->view->bodyClass) { ?> class="<?php echo $this->view->bodyClass; ?>"<?php } ?>>
 
 <header>
-        {{ partial('main/header') }}
+        <?php echo $this->partial('main/header'); ?>
 </header>
 
-{{ partial('main/menu') }}
+<?php echo $this->partial('main/menu'); ?>
 
 <div id="main">
-    {{ content() }}
+    <?php echo $this->getContent(); ?>
 </div>
 
 <footer>
-    {{ partial('main/footer') }}
+    <?php echo $this->partial('main/footer'); ?>
 </footer>
 
-{# partial('main/callback') #}
 
-{% if config.profiler %}
-    {{ helper.dbProfiler() }}
-{% endif %}
+
+<?php if ($this->config->profiler) { ?>
+    <?php echo $this->helper->dbProfiler(); ?>
+<?php } ?>
 
 </body>
 </html>

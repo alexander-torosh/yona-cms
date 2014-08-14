@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>{{ helper.title().append('Административная панель') }}{{ helper.title().get() }}</title>
+        <title><?php echo $this->helper->title()->append('Административная панель'); ?><?php echo $this->helper->title()->get(); ?></title>
 
         <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
@@ -25,13 +25,13 @@
         <![endif]-->
     </head>
     <body>
-        {{ partial('admin/nav') }}
+        <?php echo $this->partial('admin/nav'); ?>
         <div class="container">
-            {% if title is defined %}
-            <h1>{{ title }}</h1>
-            {% endif %}
-            {{ flash.output() }}
-            {{ content() }}
+            <?php if (isset($title)) { ?>
+            <h1><?php echo $title; ?></h1>
+            <?php } ?>
+            <?php echo $this->flash->output(); ?>
+            <?php echo $this->getContent(); ?>
         </div>
     </body>
 </html>

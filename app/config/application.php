@@ -16,7 +16,7 @@ $env = array(
             'host' => 'localhost',
             'username' => 'root',
             'password' => '111',
-            'dbname' => 'wezoom_cms_phalcon',
+            'dbname' => 'yona-cms',
             'charset' => 'utf8',
         ),
         'profiler' => false,
