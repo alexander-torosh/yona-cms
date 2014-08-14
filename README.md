@@ -17,8 +17,3 @@ yona
 yonacmsphalcon  
 
 **After authorization remove user 'yona' and change password for user 'admin'**
-=======
-yona-cms
-========
-
-CMS based on Phalcon PHP Framework
