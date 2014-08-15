@@ -27,6 +27,7 @@ class AdminController extends Controller
         $this->view->entries = Page::find();
 
         $this->view->title = 'Список страниц';
+        $this->helper->title('Список страниц');
     }
 
     public function addAction()
@@ -52,6 +53,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
         $this->view->title = 'Создание страницы';
+        $this->helper->title('Создание страницы');
 
     }
 
@@ -80,6 +82,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
         $this->view->title = 'Редактирование страницы';
+        $this->helper->title('Редактирование страницы');
     }
 
     public function deleteAction($id)
@@ -93,6 +96,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->title = 'Удаление страницы';
+        $this->helper->title('Удаление страницы');
     }
 
 } 

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Создание страницы | Административная панель</title>
+
+        <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/suite.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
+
+        <script src="/vendor/js/jquery-1.11.0.min.js"></script>
+        <script src="/vendor/semantic/javascript/semantic.min.js"></script>
+        <script src="/vendor/js/jquery.address.js"></script>
+        <script src="/static/js/admin.js"></script>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="/vendor/js/html5shiv.js"></script>
+            <script src="/vendor/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="ui black inverted tiered menu">
+    <a class="item" href="/admin">
+        <i class="browser icon"></i> Админ-панель
+    </a>
+    <div class="ui dropdown item">
+        <i class="font icon"></i> Контент <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item active" href="/page/admin">
+                <i class="file outline icon"></i> Статические страницы
+            </a>
+            <a class="item" href="/publication/admin">
+                <i class="calendar icon"></i> Публикации
+            </a>
+            <a class="item" href="/projects/admin">
+                <i class="home icon"></i> Проекты
+            </a>
+            <a class="item" href="/video/admin">
+                <i class="video icon"></i> Видео
+            </a>
+            <a class="item" href="/widget/admin">
+                <i class="code icon"></i> Виджеты
+            </a>
+            <a class="item" href="/file-manager">
+                <i class="attachment icon"></i> Файловый менеджер
+            </a>
+        </div>
+    </div>
+    <div class="ui dropdown item">
+        <i class="settings icon"></i> Администрирование <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item" href="/admin/admin-user">
+                <i class="user icon"></i> Администраторы
+            </a>
+            <a class="item" href="/cms/configuration">
+                <i class="setting icon"></i> Конфигурация
+            </a>
+        </div>
+    </div>
+    <a href="/admin/index/logout" class="item right">
+        <i class="plane icon"></i> Вылет
+    </a>
+    <a href="/" class="item right" target="_blank">
+        <i class="home icon"></i> На сайт
+    </a>
+</div>        <div class="container">
+                        <h1>Создание страницы</h1>
+                                    <form method="post" class="ui form" action="" enctype="multipart/form-data">
+
+    <!--controls-->
+    <div class="ui segment">
+
+        <a href="/page/admin" class="ui button">
+            <i class="icon left"></i> Назад
+        </a>
+
+        <div class="ui positive submit button">
+            <i class="save icon"></i> Сохранить
+        </div>
+
+        
+    </div>
+    <!--end controls-->
+
+    <div class="ui segment">
+        <div class="field"><label for="title">Название</label><input type="text" id="title" name="title" required="1" /></div>        <div class="field"><label for="slug">Транслитерация</label><input type="text" id="slug" name="slug" /></div>        <div class="field"><label for="meta_title">meta-title</label><input type="text" id="meta_title" name="meta_title" required="1" /></div>        <div class="field"><label for="meta_description">meta-description</label><textarea id="meta_description" name="meta_description"></textarea></div>        <div class="field"><label for="meta_keywords">meta-keywords</label><textarea id="meta_keywords" name="meta_keywords"></textarea></div>        <div class="field"><label for="text">Текст</label><textarea id="text" name="text"></textarea></div>    </div>
+
+</form>
+
+<!--ui semantic-->
+<script>
+    $('.ui.form').form({
+        title: {
+            identifier: 'title',
+            rules: [
+                {type: 'empty'}
+            ]
+        }
+    });
+</script><!--/end ui semantic-->
+
+<script type="text/javascript" src="/vendor/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "#text",
+        language: "ru",
+        height: "700px",
+        plugins: [
+            "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons textcolor paste textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px",
+        file_browser_callback : elFinderBrowser
+    });
+
+    function elFinderBrowser (field_name, url, type, win) {
+        tinymce.activeEditor.windowManager.open({
+            file: '/vendor/elfinder-2.1/elfinder_tinymce.html',// use an absolute path!
+            title: 'elFinder 2.0',
+            width: 900,
+            height: 450,
+            resizable: 'yes'
+        }, {
+            setUrl: function (url) {
+                console.log(url);
+                win.document.getElementById(field_name).value = url.url;
+            }
+        });
+        return false;
+    }
+
+</script>        </div>
+    </body>
+</html>

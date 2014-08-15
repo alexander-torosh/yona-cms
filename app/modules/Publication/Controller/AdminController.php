@@ -29,6 +29,7 @@ class AdminController extends Controller
         ));
 
         $this->view->title = 'Список публикаций';
+        $this->helper->title('Список публикаций');
     }
 
     public function addAction()
@@ -54,6 +55,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
         $this->view->title = 'Создание публикации';
+        $this->helper->title('Создание публикации');
 
     }
 
@@ -83,6 +85,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
         $this->view->title = 'Редактирование публикации';
+        $this->helper->title('Редактирование публикации');
     }
 
     public function deleteAction($id)
@@ -96,6 +99,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->title = 'Удаление публикации';
+        $this->helper->title('Удаление публикации');
     }
 
     private function uploadImage($model)

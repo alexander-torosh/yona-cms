@@ -28,7 +28,7 @@
                 <div class="field">
                     <label>Логин</label>
                     <div class="ui left labeled icon input">
-                        <input name="login" type="text" placeholder="Username">
+                        <input name="login" id="login" type="text" placeholder="Username">
                         <i class="user icon"></i>
                         <div class="ui corner label">
                             <i class="icon asterisk"></i>
@@ -38,7 +38,7 @@
                 <div class="field">
                     <label>Пароль</label>
                     <div class="ui left labeled icon input">
-                        <input name="password" type="password">
+                        <input name="password" id="password" type="password">
                         <i class="lock icon"></i>
                         <div class="ui corner label">
                             <i class="icon asterisk"></i>
@@ -48,7 +48,7 @@
                 <div class="ui error message">
                     <div class="header">Ошибки</div>
                 </div>
-                <input type="submit" class="ui blue submit button" value="Login">
+                <input type="submit" id="submit" class="ui blue submit button" value="Login">
             </form>
         </div> <!-- /container -->
     </body>

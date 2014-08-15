@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Стартовая страница | Административная панель</title>
+
+        <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/suite.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
+
+        <script src="/vendor/js/jquery-1.11.0.min.js"></script>
+        <script src="/vendor/semantic/javascript/semantic.min.js"></script>
+        <script src="/vendor/js/jquery.address.js"></script>
+        <script src="/static/js/admin.js"></script>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="/vendor/js/html5shiv.js"></script>
+            <script src="/vendor/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="ui black inverted tiered menu">
+    <a class="item active" href="/admin">
+        <i class="browser icon"></i> Админ-панель
+    </a>
+    <div class="ui dropdown item">
+        <i class="font icon"></i> Контент <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item" href="/page/admin">
+                <i class="file outline icon"></i> Статические страницы
+            </a>
+            <a class="item" href="/publication/admin">
+                <i class="calendar icon"></i> Публикации
+            </a>
+            <a class="item" href="/projects/admin">
+                <i class="home icon"></i> Проекты
+            </a>
+            <a class="item" href="/video/admin">
+                <i class="video icon"></i> Видео
+            </a>
+            <a class="item" href="/widget/admin">
+                <i class="code icon"></i> Виджеты
+            </a>
+            <a class="item" href="/file-manager">
+                <i class="attachment icon"></i> Файловый менеджер
+            </a>
+        </div>
+    </div>
+    <div class="ui dropdown item">
+        <i class="settings icon"></i> Администрирование <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item" href="/admin/admin-user">
+                <i class="user icon"></i> Администраторы
+            </a>
+            <a class="item" href="/cms/configuration">
+                <i class="setting icon"></i> Конфигурация
+            </a>
+        </div>
+    </div>
+    <a href="/admin/index/logout" class="item right">
+        <i class="plane icon"></i> Вылет
+    </a>
+    <a href="/" class="item right" target="_blank">
+        <i class="home icon"></i> На сайт
+    </a>
+</div>        <div class="container">
+                        <h1>Административная панель YonaCms</h1>
+                        <div class="ui orange inverted segment">Обнаружен административный пользователь 'yona', для соблюдения мер безопасности, его необходимо удалить и создать новую личную учетную запись</div>
+            <div class="container">
+    <div class="ui segment updates">
+    <h3>Последние обновления YonaCms:</h3>
+    v. 0.0.5<br />
+- Сделана своя инициализация приложения для улучшеной обработки ошибок и работы с AJAX<br />
+- Добавлены тесты на Codeception<br />
+<br />
+v. 0.0.4<br />
+- Добавлен модуль Cms<br />
+- Добавлен функционал по работе с конфигурацией приложения<br />
+<br />
+v. 0.0.3<br />
+- Исправлена подсветка синтаксиса в модуле Widget<br />
+- Высота поля с кодом в модуле Widget подстраивается автоматически под размер контента<br />
+- Немного перегруппировано меню в админке<br />
+<br />
+v. 0.0.2<br />
+- Исправлен путь к elfinder в модуле FileManager<br />
+- Добавлена проверка на административного пользователя 'yona', вывод сообщения о необходимости его удаления<br />
+- Добавлена константа ROOT = $_SERVER['DOCUMENT_ROOT'];<br />
+- Добавлен вывод CHANGELOG.md на главной странице админки<br />
+<br />
+v. 0.0.1<br />
+- Создан репозиторий и сделан первый коммит</div></div>        </div>
+    </body>
+</html>

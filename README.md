@@ -23,6 +23,7 @@ Installation
         'profiler' => false,
     ),
 ```
+- Make write/read permissions for app/cache/volt, web/assets, web/img directories
 - Launch 'yona-cms' on your host
 - Open 'http://yona-cms/admin' and auth
 - After authorization remove user 'yona' and change password for user 'admin'
