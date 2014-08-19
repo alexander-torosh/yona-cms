@@ -5,7 +5,6 @@ window.onresize = function () {
 onReady(function () {
     var rotation = new Rotation();
     rotation.init();
-
 });
 
 function callbackClick() {

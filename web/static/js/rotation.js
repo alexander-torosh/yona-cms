@@ -8,6 +8,27 @@ function nodeHasClass(el, clss) {
  *
  * Библиотека для универсального управления элементами со сменным содержимим по принципу "листалки" или "rotation"
  *
+ * JS:
+ * // Подключаем 1 раз
+ * <script src="your-path/rotation.js"></script>
+ *
+ * // Инициализируем
+ * <script>
+ *     var rotation = new Rotation();
+ *     rotation.init();
+ * </script>
+ *
+ *
+ * HTML:
+ * <div data-rotation="target: .items > .item; interval: 2; animationSpeed: 300">
+ *     <div class="items">
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/1.png"></div>
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/2.png"></div>
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/3.png"></div>
+ *     </div>
+ * </div>
+ *
+ *
  * Для инициализации элемента, необходимо добавить атрибут data-rotation="" для корневого HTML-элемента.
  * Атрибут должен содержать конфигурацию
  * Пример конфигурации: data-rotation="target: .items > .item; interval: 2; animationSpeed: 300; nav: .nav-sm; current: .nav-counter > .current"
