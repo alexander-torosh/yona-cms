@@ -16,9 +16,11 @@ function AjaxViewModel() {
         var ajaxButtons = document.querySelectorAll('a');
         for (var i = 0; i < ajaxButtons.length; i++) {
             var ajaxButton = ajaxButtons[i];
-            var url = new URL(ajaxButton.href).hostname;
-            if (url == window.location.hostname) {
-                ajaxButton.addEventListener('click', self.click, false);
+            if (ajaxButton.href) {
+                var url = new URL(ajaxButton.href).hostname;
+                if (url == window.location.hostname) {
+                    ajaxButton.addEventListener('click', self.click, false);
+                }
             }
         }
     }
