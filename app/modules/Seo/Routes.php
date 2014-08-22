@@ -13,14 +13,7 @@ class Routes
 
     public function init($router)
     {
-        $router->addML('/seo/admin/robots', array(
-            'module' => 'seo',
-            'controller' => 'robots',
-            'action' => 'index',
-        ), 'robots');
-
         return $router;
-
     }
 
 }

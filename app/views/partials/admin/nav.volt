@@ -34,8 +34,8 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
                 <i class="setting icon"></i> Конфигурация
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('seo-admin-robots') }}" href="/seo/admin/robots">
-                <i class="setting icon"></i> Robots.txt
+            <a class="item{{ helper.activeMenu().activeClass('seo-admin-robots') }}" href="/seo/robots">
+                <i class="android icon"></i> Robots.txt
             </a>
         </div>
     </div>
