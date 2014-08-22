@@ -13,17 +13,17 @@ class Routes
 
     public function init($router)
     {
-        $router->add('/', array(
+        $router->addML('/', array(
             'module' => 'index',
             'controller' => 'index',
             'action' => 'index',
-        ))->setName('index');
+        ), 'index');
 
-        $router->add('/contacts', array(
+        $router->addML('/contacts', array(
             'module' => 'index',
             'controller' => 'index',
             'action' => 'contacts',
-        ));
+        ), 'contacts');
 
         return $router;
 

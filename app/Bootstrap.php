@@ -5,8 +5,6 @@
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
-use \Phalcon\Mvc\View;
-
 class Bootstrap
 {
 
@@ -38,7 +36,7 @@ class Bootstrap
         $di->set('db', $db);
 
 
-        $view = new View();
+        $view = new \Phalcon\Mvc\View();
 
         define('MAIN_VIEW_PATH', '../../../views/');
         $view->setMainView(MAIN_VIEW_PATH . 'main');
@@ -58,7 +56,7 @@ class Bootstrap
         $view->registerEngines($viewEngines);
 
         if (isset($_GET['_ajax']) && $_GET['_ajax']) {
-            $view->setRenderLevel(View::LEVEL_LAYOUT);
+            $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
         }
 
         $di->set('view', $view);
@@ -122,9 +120,6 @@ class Bootstrap
         $eventsManager = new \Phalcon\Events\Manager();
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
-        $eventsManager->attach("dispatch:beforeException", function ($event, $dispatcher, $exception) {
-            new ExceptionPlugin($dispatcher, $exception);
-        });
 
         $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
             new LocalizationPlugin($dispatcher);
@@ -132,7 +127,7 @@ class Bootstrap
         });
 
 
-        $profiler = new Phalcon\Db\Profiler();
+        $profiler = new \Phalcon\Db\Profiler();
 
         $eventsManager->attach('db', function ($event, $db) use ($profiler) {
             if ($event->getType() == 'beforeQuery') {
@@ -192,6 +187,8 @@ class Bootstrap
 
         $dispatcher = $di['dispatcher'];
 
+        $response = $di['response'];
+
         $dispatcher->setModuleName($router->getModuleName());
         $dispatcher->setControllerName($router->getControllerName());
         $dispatcher->setActionName($router->getActionName());
@@ -199,7 +196,7 @@ class Bootstrap
 
         $tmpModuleNameArr = explode('-', $router->getModuleName());
         $moduleName = '';
-        foreach($tmpModuleNameArr as $part) {
+        foreach ($tmpModuleNameArr as $part) {
             $moduleName .= ucfirst($part);
         }
 
@@ -214,17 +211,34 @@ class Bootstrap
 
         try {
             $dispatcher->dispatch();
-        } catch (Phalcon\Exception $e) {
-            $module = new Index\Module();
-            $module->registerAutoloaders();
-            $module->registerServices($di);
+        } catch (\Phalcon\Exception $e) {
 
-            $dispatcher->setModuleName('index');
-            $dispatcher->setControllerName('error');
-            $dispatcher->setActionName('error404');
-            $dispatcher->setParam('e', $e);
+            if ($e instanceof Phalcon\Mvc\Dispatcher\Exception) {
+                $module = new \Index\Module();
+                $module->registerAutoloaders();
+                $module->registerServices($di);
 
-            $dispatcher->dispatch();
+                $dispatcher->setModuleName('index');
+                $dispatcher->setControllerName('error');
+                $dispatcher->setActionName('error404');
+                $dispatcher->setParam('e', $e);
+
+                $dispatcher->dispatch();
+
+            } else {
+                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+                $view->setPartialsDir('');
+                $view->e = $e;
+
+                $response->setHeader(503, 'Service Unavailable');
+                $view->partial('error/error503');
+                $response->sendHeaders();
+
+                echo $response->getContent();
+                return;
+
+            }
+
         }
 
         $view->render(

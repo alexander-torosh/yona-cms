@@ -16,7 +16,7 @@ function AjaxViewModel() {
         var ajaxButtons = document.querySelectorAll('a');
         for (var i = 0; i < ajaxButtons.length; i++) {
             var ajaxButton = ajaxButtons[i];
-            if (ajaxButton.href) {
+            if (ajaxButton.href && ajaxButton.href != '#') {
                 var url = new URL(ajaxButton.href).hostname;
                 if (url == window.location.hostname) {
                     ajaxButton.addEventListener('click', self.click, false);
@@ -79,8 +79,8 @@ function AjaxViewModel() {
         document.body.style.opacity = 1;
 
         if (response) {
+            document.body.setAttribute('class','');
             if (response.bodyClass) {
-                document.body.classList = null;
                 document.body.classList.add(response.bodyClass);
             }
         }

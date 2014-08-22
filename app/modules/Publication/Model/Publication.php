@@ -29,8 +29,8 @@ class Publication extends Model
     public $preview_inner;
 
     public static $types = array(
-        'events' => 'События',
-        'press' => 'Пресса',
+        'news' => 'Новости',
+        'articles' => 'Статьи',
     );
 
     public function beforeCreate()

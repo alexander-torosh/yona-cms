@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function indexAction()
     {
         $this->view->entries = Publication::find(array(
-            "order" => "type ASC, id DESC"
+            "order" => "type ASC, date DESC, id DESC"
         ));
 
         $this->view->title = 'Список публикаций';

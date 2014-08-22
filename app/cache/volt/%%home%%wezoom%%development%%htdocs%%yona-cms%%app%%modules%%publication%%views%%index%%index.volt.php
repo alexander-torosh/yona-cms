@@ -2,33 +2,24 @@
 
 <div class="publications">
 
-    <div class="limit">
-        <section>Отображать по:</section>
-        <ul class="numbers">
-            <?php $publicationsLink = $this->url->get(array('for' => 'publications', 'type' => $type)); ?>
-            <li><a href="<?php echo $publicationsLink; ?>?limit=5" class="ajax<?php if ($limit == 5) { ?> active<?php } ?>">5</a>
-            </li>
-            <li><a href="<?php echo $publicationsLink; ?>?limit=10" class="ajax<?php if ($limit == 10) { ?> active<?php } ?>">10</a>
-            </li>
-            <li><a href="<?php echo $publicationsLink; ?>?limit=all"
-                   class="infinity ajax<?php if ($limit == 'all') { ?> active<?php } ?>">
-                    &nbsp;</a></li>
-        </ul>
-    </div>
-
-    <?php foreach ($paginate->items as $item) { ?>
-        <div class="item">
-            <div class="row">
-                <?php $image = $this->helper->image(array('id' => $item->getId(), 'type' => 'publication', 'width' => 205, 'strategy' => 'w')); ?>
-                <?php $link = $this->url->get(array('for' => 'publication', 'type' => $item->getType(), 'slug' => $item->getSlug())); ?>
-                <a class="image" href="<?php echo $link; ?>"><?php echo $image->imageHTML(); ?></a>
-
+    <?php if ($paginate->total_items > 0) { ?>
+        <?php foreach ($paginate->items as $item) { ?>
+            <?php $image = $this->helper->image(array('id' => $item->getId(), 'type' => 'publication', 'width' => 240, 'strategy' => 'w')); ?>
+            <?php $link = $this->url->get(array('for' => 'publication', 'type' => $item->getType(), 'slug' => $item->getSlug())); ?>
+            <?php if ($image->isExists()) { ?><?php $imageExists = true; ?><?php } else { ?><?php $imageExists = false; ?><?php } ?>
+            <div class="item<?php if ($imageExists) { ?> with-image<?php } ?>">
+                <?php if ($imageExists) { ?>
+                    <a class="image" href="<?php echo $link; ?>"><?php echo $image->imageHTML(); ?></a>
+                <?php } ?>
                 <div class="text">
                     <a href="<?php echo $link; ?>" class="title"><?php echo $item->getTitle(); ?></a>
                     <section class="announce"><?php echo $this->helper->announce($item->getText(), 300); ?></section>
+                    <a href="<?php echo $link; ?>" class="details">Подробнее &rarr;</a>
                 </div>
             </div>
-        </div>
+        <?php } ?>
+    <?php } else { ?>
+        <p>Публикации отсутствуют</p>
     <?php } ?>
 
 </div>
