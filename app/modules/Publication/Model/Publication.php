@@ -46,7 +46,7 @@ class Publication extends Model
     public function beforeValidation()
     {
         if ($_POST['form']) {
-            $this->preview_inner = (isset($_POST['preview_inner'])) ? 1 : 0 ;
+            $this->preview_inner = (isset($_POST['preview_inner'])) ? 1 : 0;
         }
     }
 
@@ -286,6 +286,12 @@ class Publication extends Model
         return $this->preview_inner;
     }
 
-
+    public static function findCachedBySlug($slug)
+    {
+        $query = "slug = '$slug'";
+        $key = HOST_HASH . md5("Publication::findFirst($query)");
+        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
+        return $publication;
+    }
 
 }

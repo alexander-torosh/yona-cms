@@ -16,7 +16,7 @@ function AjaxViewModel() {
         var ajaxButtons = document.querySelectorAll('a');
         for (var i = 0; i < ajaxButtons.length; i++) {
             var ajaxButton = ajaxButtons[i];
-            if (ajaxButton.href && ajaxButton.href != '#') {
+            if (ajaxButton.href && ajaxButton.href != '#' && !ajaxButton.classList.contains('noajax')) {
                 var url = new URL(ajaxButton.href).hostname;
                 if (url == window.location.hostname) {
                     ajaxButton.addEventListener('click', self.click, false);

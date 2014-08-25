@@ -71,6 +71,12 @@ class AdminController extends Controller
                 if ($model->save()) {
                     $this->uploadImage($model);
                     $this->flash->success('Информация обновлена');
+
+                    // Очищаем кеш публикации
+                    $query = "slug = '{$model->getSlug()}'";
+                    $key = md5("Publication::findFirst($query)");
+                    $this->cache->delete($key);
+
                     return $this->redirect('/publication/admin/edit/' . $model->getId());
                 } else {
                     $this->flashErrors($model);

@@ -13,7 +13,7 @@ class IndexController extends Controller
     {
         $this->view->bodyClass = 'home';
 
-        $page = Page::findFirst("slug = 'index'");
+        $page = Page::findCachedBySlug('index');
         if (!$page) {
             throw new Exception("Page 'index' not found");
             return;

@@ -207,5 +207,13 @@ class Page extends Model
         return $this->updated_at;
     }
 
+    public static function findCachedBySlug($slug)
+    {
+        $query = "slug = '$slug'";
+        $key = HOST_HASH . md5("Page::findFirst($query)");
+        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
+        return $publication;
+    }
+
 
 }
