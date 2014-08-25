@@ -12,10 +12,13 @@ class IndexController extends Controller
     public function indexAction()
     {
         $type = $this->dispatcher->getParam('type','string');
+        if (!$type || !in_array($type, array_keys(Publication::$types))) {
+            throw new Exception("Publication hasn't type = '$type''");
+        }
 
-        $limit = $this->request->getQuery('limit', 'string', 5);
+        $limit = $this->request->getQuery('limit', 'string', 10);
         if ($limit != 'all') {
-            $paginatorLimit = (int)$limit;
+            $paginatorLimit = (int) $limit;
         } else {
             $paginatorLimit = 9999;
         }
@@ -37,7 +40,7 @@ class IndexController extends Controller
         $title = Publication::$types[$type];
         $this->helper->title()->append($title);
         $this->view->title = $title;
-        $this->view->limit = $limit;
+        //$this->view->limit = $limit;
         $this->view->type = $type;
     }
 
@@ -46,7 +49,7 @@ class IndexController extends Controller
         $slug = $this->dispatcher->getParam('slug','string');
         $type = $this->dispatcher->getParam('type','string');
 
-        $publication = Publication::findFirst(array("slug = '$slug'"));
+        $publication = Publication::findCachedBySlug($slug);
         if (!$publication) {
             throw new Exception("Publication '$slug.html' not found");
             return;

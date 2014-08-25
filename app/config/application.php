@@ -10,6 +10,8 @@ $env = array(
             'charset' => 'utf8',
         ),
         'profiler' => false,
+        'cache' => 'file',
+        'metadata_cache' => 'memory',
     ),
     'development' => array(
         'database' => array(
@@ -19,7 +21,9 @@ $env = array(
             'dbname' => 'yona-cms',
             'charset' => 'utf8',
         ),
-        'profiler' => false,
+        'profiler' => true,
+        'cache' => 'file', // file, memcache
+        'metadata_cache' => 'memory', // memory, apc
     ),
 );
 
@@ -81,6 +85,8 @@ $config = array(
     ),
     'database' => $env[APPLICATION_ENV]['database'],
     'profiler' => $env[APPLICATION_ENV]['profiler'],
+    'cache' => $env[APPLICATION_ENV]['cache'],
+    'metadata_cache' => $env[APPLICATION_ENV]['metadata_cache'],
 );
 
 return new \Phalcon\Config($config);

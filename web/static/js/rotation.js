@@ -8,14 +8,37 @@ function nodeHasClass(el, clss) {
  *
  * Библиотека для универсального управления элементами со сменным содержимим по принципу "листалки" или "rotation"
  *
+ * JS:
+ * // Подключаем 1 раз
+ * <script src="your-path/rotation.js"></script>
+ *
+ * // Инициализируем
+ * <script>
+ *     var rotation = new Rotation();
+ *     rotation.init();
+ * </script>
+ *
+ *
+ * HTML:
+ * <div data-rotation="target: .items > .item; interval: 2; animationSpeed: 300">
+ *     <div class="items">
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/1.png"></div>
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/2.png"></div>
+ *         <div class="item"><img src="http://wezoom.net/images/layout/home-banner/3.png"></div>
+ *     </div>
+ * </div>
+ *
+ *
  * Для инициализации элемента, необходимо добавить атрибут data-rotation="" для корневого HTML-элемента.
  * Атрибут должен содержать конфигурацию
- * Пример конфигурации: data-rotation="target: .items > .item; interval: 2; nav: .nav-sm; current: .nav-counter > .current"
+ * Пример конфигурации: data-rotation="target: .items > .item; interval: 2; animationSpeed: 300; nav: .nav-sm; current: .nav-counter > .current"
  *
  * Перечень свойств конфигурации:
  * target - (селектор) элементы, которые будут перелистываться
  *
  * interval - (секунды) интервал смены текущей позиции ротатора
+ *
+ * animationSpeed - (миллисекунды) время анимации смены активного элемента
  *
  * nav - (селектор) элемент навигации. HTML-элемент, который соотв. селектору, должен содержать внутри два HTML-элемента с классами: "prev" и "next"
  *
@@ -43,7 +66,8 @@ function Rotation() {
             elem.classList.add('rotation');
             var config = self.parseConfig(elem.getAttribute('data-rotation'));
             if (config.target) {
-                targetElements = elem.querySelectorAll(config.target);
+                var targetElements = elem.querySelectorAll(config.target);
+                self.initTargetElements(targetElements);
                 elem.setAttribute('data-count', targetElements.length);
                 elem.setAttribute('data-current', '1');
                 if (config.interval) {
@@ -81,6 +105,17 @@ function Rotation() {
         }
         self.initIntervals();
     };
+
+    self.initTargetElements = function(targetElements)
+    {
+        for (var i = 0; i < targetElements.length; i++) {
+            var elem = targetElements[i];
+            if (i != 0) {
+                elem.style.display = 'none';
+                elem.style.opacity = 0;
+            }
+        }
+    }
 
     self.initIntervals = function () {
         window.setInterval(function () {
@@ -188,16 +223,33 @@ function Rotation() {
         return pickerElements;
     };
 
-    self.setTargetActive = function (newPosition, targetElements) {
+    self.setTargetActive = function (newPosition, rootNode, targetElements) {
+        var i, animationSpeed = null;
+        var config = self.getConfig(rootNode);
+        if (config.animationSpeed) {
+            animationSpeed = config.animationSpeed;
+        }
         for (i = 0; i <= targetElements.length; i++) {
             var itemNode = targetElements[i];
             if ((newPosition - 1) === i) {
                 if (itemNode) {
                     itemNode.classList.add('active');
+                    if (animationSpeed != null) {
+                        $(itemNode).css('display', 'block').animate({opacity: 1},animationSpeed);
+                    } else {
+                        itemNode.style.display = 'block';
+                        itemNode.style.opacity = 1;
+                    }
                 }
             } else {
                 if (itemNode) {
                     itemNode.classList.remove('active');
+                    if (animationSpeed != null) {
+                        $(itemNode).css('display', 'none').animate({opacity: 0},animationSpeed);
+                    } else {
+                        itemNode.style.display = 'none';
+                        itemNode.style.opacity = 0;
+                    }
                 }
             }
         }
@@ -217,9 +269,9 @@ function Rotation() {
         if (currentElement) {
             currentElement.innerHTML = newPosition;
         }
-        self.setTargetActive(newPosition, self.getTargetElements(rootNode));
-        self.setTargetActive(newPosition, self.getTargetRelElements(rootNode));
-        self.setTargetActive(newPosition, self.getPickerElements(rootNode));
+        self.setTargetActive(newPosition, rootNode, self.getTargetElements(rootNode));
+        self.setTargetActive(newPosition, rootNode, self.getTargetRelElements(rootNode));
+        self.setTargetActive(newPosition, rootNode, self.getPickerElements(rootNode));
     };
 
     self.setVisibleByActive = function (element) {

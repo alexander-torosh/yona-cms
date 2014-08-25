@@ -11,6 +11,7 @@
     }
     #profiler > .bar {
         cursor: pointer;
+        height: 20px;
         padding: 5px;
         display: block;
         border-top: 1px solid #999999;
@@ -28,11 +29,12 @@
     }
     #profiler > .results {
         position: absolute;
-        bottom: 33px;
+        bottom: 30px;
         max-height: 500px;
         overflow: auto;
         background: black;
         width: 100%;
+        border-bottom: 1px solid #666666;
     }
     #profiler > .results > .profile {
         background: #333333;

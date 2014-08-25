@@ -1,26 +1,36 @@
 @import "../../vendor/css/reset.min.css";
 
 @font-color: #434343;
+@font-size: 13px;
+@line-height: 18px;
 
 @gray: #CCCCCC;
 @gray-light: @gray + #222222;
 @placeholder-color: @gray;
 
+@link: #3F83B6;
+
 @container-max-width: 1280px;
 @container-min-width: 960px;
+
+@item-padding-bottom: 40px;
 
 body {
     color: @font-color;
     font-family: Arial, sans-serif;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: @font-size;
+    line-height: @line-height;
 }
 
 a {
-
+    color: @link;
 }
 
 a:hover {
+    color: @link + #333333;
+}
+
+a:visited {
 
 }
 
@@ -94,14 +104,17 @@ input, textarea, button {
 ::-webkit-input-placeholder {
     color: @placeholder-color;
 }
+
 :-moz-placeholder {
     color: @placeholder-color;
     opacity: 1;
 }
+
 ::-moz-placeholder {
     color: @placeholder-color;
     opacity: 1;
 }
+
 :-ms-input-placeholder {
     color: @placeholder-color;
 }
@@ -139,8 +152,56 @@ header {
 
 #menu {
     margin-bottom: 20px;
+    > li {
+        display: inline-block;
+        margin-right: 20px;
+        > a {
+            font-size: @font-size + 5;
+        }
+    }
 }
 
 #main {
     margin-bottom: 20px;
+}
+
+pre {
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.publications {
+    @image-width: 240px;
+
+    > .item {
+        padding-bottom: @item-padding-bottom;
+        display: inline-block;
+
+        &.with-image {
+            > .image {
+                float: left;
+            }
+            > .text {
+                margin-left: @image-width + 20;
+            }
+        }
+
+        > .text {
+            > * {
+                display: block;
+                margin-bottom: 10px;
+            }
+            > .title {
+                font-weight: bold;
+                font-size: @font-size + 5;
+                line-height: @line-height + 5;
+            }
+            > .details {
+
+            }
+        }
+
+    }
 }

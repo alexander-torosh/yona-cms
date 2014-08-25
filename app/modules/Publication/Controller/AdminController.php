@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function indexAction()
     {
         $this->view->entries = Publication::find(array(
-            "order" => "type ASC, id DESC"
+            "order" => "type ASC, date DESC, id DESC"
         ));
 
         $this->view->title = 'Список публикаций';
@@ -71,6 +71,12 @@ class AdminController extends Controller
                 if ($model->save()) {
                     $this->uploadImage($model);
                     $this->flash->success('Информация обновлена');
+
+                    // Очищаем кеш публикации
+                    $query = "slug = '{$model->getSlug()}'";
+                    $key = md5("Publication::findFirst($query)");
+                    $this->cache->delete($key);
+
                     return $this->redirect('/publication/admin/edit/' . $model->getId());
                 } else {
                     $this->flashErrors($model);

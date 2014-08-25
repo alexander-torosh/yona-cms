@@ -5,9 +5,8 @@
     <p>Ошибка сервера</p>
 
     {% if registry.cms['DEBUG_MODE'] %}
-        {{ e.getMessage() ~ "\n" ~
-        " File=", e.getFile(), "\n"~
-        " Line=", e.getLine(), "\n"
+        <p>{{ e.getMessage() }}</p>
+        <p>{{ e.getFile() }}::{{ e.getLine() }}</p>
         <pre>{{ e.getTraceAsString() }}</pre>
     {% endif %}
 
