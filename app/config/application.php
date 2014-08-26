@@ -43,6 +43,7 @@ $config = array(
             'FileManager' => APPLICATION_PATH . '/modules/FileManager',
             'Page' => APPLICATION_PATH . '/modules/Page',
             'Publication' => APPLICATION_PATH . '/modules/Publication',
+            'Seo' => APPLICATION_PATH . '/modules/Seo',
         ),
     ),
     'modules' => array(
@@ -81,6 +82,10 @@ $config = array(
         'publication' => array(
             'className' => 'Publication\Module',
             'path' => APPLICATION_PATH . '/modules/Publication/Module.php'
+        ),
+        'seo' => array(
+            'className' => 'Seo\Module',
+            'path' => APPLICATION_PATH . '/modules/Seo/Module.php'
         ),
     ),
     'database' => $env[APPLICATION_ENV]['database'],
