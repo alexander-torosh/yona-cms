@@ -19,7 +19,7 @@ class IndexController extends Controller
         }
 
         $this->helper->title()->append($page->getMetaTitle());
-        $this->helper->meta()->set('description', $page->getMetaDescription());
+        $this->helper->meta()->set('description', $page->getMeta_description());
         $this->helper->meta()->set('keywords', $page->getMetaKeywords());
 
         $this->view->page = $page;

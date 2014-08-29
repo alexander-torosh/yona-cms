@@ -2,7 +2,7 @@
 
 namespace Page\Model;
 
-use Phalcon\Mvc\Model;
+use Application\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -15,6 +15,8 @@ class Page extends Model
         return "page";
     }
 
+    protected $translateModel = 'Page\Model\Translate\PageTranslate';
+
     public $id;
     public $title;
     public $slug;
@@ -24,6 +26,11 @@ class Page extends Model
     public $meta_keywords;
     public $created_at;
     public $updated_at;
+
+    public function initialize()
+    {
+        $this->hasMany("id", $this->translateModel, "foreign_id");
+    }
 
     public function beforeCreate()
     {
@@ -44,10 +51,10 @@ class Page extends Model
             )
         ));
 
-        $this->validate(new PresenceOf(array(
+        /*$this->validate(new PresenceOf(array(
             'field' => 'title',
             'message' => 'Укажите название страницы'
-        )));
+        )));*/
 
 
         return $this->validationHasFailed() != true;
@@ -98,17 +105,17 @@ class Page extends Model
     /**
      * @param mixed $meta_description
      */
-    public function setMetaDescription($meta_description)
+    public function setMeta_description($meta_description)
     {
-        $this->meta_description = $meta_description;
+        $this->setMLVariable('meta_description', $meta_description);
     }
 
     /**
      * @return mixed
      */
-    public function getMetaDescription()
+    public function getMeta_description()
     {
-        return $this->meta_description;
+        return $this->getMLVariable('meta_description');
     }
 
     /**
@@ -180,7 +187,7 @@ class Page extends Model
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->setMLVariable('title', $title);
     }
 
     /**
@@ -188,7 +195,7 @@ class Page extends Model
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->getMLVariable('title');
     }
 
     /**

@@ -19,6 +19,7 @@ class AdminController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-page');
+        Page::setTranslateCache(false);
 
     }
 
