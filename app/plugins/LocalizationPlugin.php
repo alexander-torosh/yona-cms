@@ -43,12 +43,14 @@ class LocalizationPlugin extends Plugin
 
         Locale::setDefault(LOCALE);
 
-        $this->getDI()->set('translate', new \Application\Localization\GettextAdapter(array(
+        /*$this->getDI()->set('translate', new \Application\Localization\GettextAdapter(array(
             'locale'    => LOCALE,
             'lang'      => LANG,
             'file'      => 'messages',
             'directory' => APPLICATION_PATH . '/lang'
-        )));
+        )));*/
+        $translations = Cms\Model\Translate::findCachedByLangInArray(LANG);
+        $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
 
     }
 

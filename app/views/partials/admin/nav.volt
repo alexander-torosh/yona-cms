@@ -42,6 +42,9 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
                 <i class="settings icon"></i> Конфигурация
             </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="/cms/translate">
+                <i class="book icon"></i> Переводы
+            </a>
         </div>
     </div>
     <a href="/admin/index/logout" class="item right">

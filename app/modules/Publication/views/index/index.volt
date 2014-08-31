@@ -19,7 +19,7 @@
                 <div class="text">
                     <a href="{{ link }}" class="title">{{ item.getTitle() }}</a>
                     <section class="announce">{{ helper.announce(item.getText(), 300) }}</section>
-                    <a href="{{ link }}" class="details">Подробнее &rarr;</a>
+                    <a href="{{ link }}" class="details">{{ helper.translate('Подробнее') }} &rarr;</a>
                 </div>
             </div>
         {% endfor %}

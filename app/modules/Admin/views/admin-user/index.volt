@@ -1,12 +1,12 @@
-<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> {{ helper.translate('Add') }}</a></p>
+<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> Добавить</a></p>
 
 <table class="ui table segment">
     <thead>
         <tr>
-            <th>{{ helper.translate('Edit') }}</th>
-            <th>{{ helper.translate('Login') }}</th>
-            <th>{{ helper.translate('Email') }}</th>
-            <th>{{ helper.translate('Active') }}</th>
+            <th>Редактировать</th>
+            <th>Логин</th>
+            <th>Email</th>
+            <th>Активен</th>
         </tr>
     </thead>
     <tbody>

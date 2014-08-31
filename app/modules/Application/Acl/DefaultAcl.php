@@ -29,6 +29,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
         $privateResources = array(
             'admin/admin-user',
             'cms/configuration',
+            'cms/translate',
             'widget/admin',
             'projects/admin',
             'systems/admin',

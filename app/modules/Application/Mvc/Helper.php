@@ -101,4 +101,10 @@ class Helper extends \Phalcon\Mvc\User\Component
         return $imageFilter;
     }
 
+    public function querySymbol()
+    {
+        $object = new \Application\Mvc\Helper\RequestQuery();
+        return $object->getSymbol();
+    }
+
 }

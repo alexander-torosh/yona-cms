@@ -47,6 +47,9 @@ function AjaxViewModel() {
         $.getJSON(url, {_ajax: true}, function (response) {
             if (response.success) {
                 self.update(response, url);
+            } else {
+                alert('Ошибка');
+                self.update(response, url);
             }
             self.postUpdate(response);
         });

@@ -133,7 +133,7 @@ self.manualStateChange=true;});self.bind=function(){var ajaxButtons=document.que
 self.click=function(e){if(!self.History.enabled){console.log('history disabled');return true;}
 var url=this.href;self.preUpdate();self.getData(url);self.manualStateChange=false;e=e||window.event
 e.preventDefault?e.preventDefault():(e.returnValue=false)}
-self.getData=function(url){self.preUpdate();$.getJSON(url,{_ajax:true},function(response){if(response.success){self.update(response,url);}
+self.getData=function(url){self.preUpdate();$.getJSON(url,{_ajax:true},function(response){if(response.success){self.update(response,url);}else{alert('Ошибка');self.update(response,url);}
 self.postUpdate(response);});}
 self.preUpdate=function(){document.body.style.opacity=0.2;}
 self.update=function(response,href){self.History.pushState({href:href},response.title,href);var main=document.getElementById('main');main.innerHTML=response.html;self.forceRedraw(main);}

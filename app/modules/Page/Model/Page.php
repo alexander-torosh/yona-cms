@@ -51,23 +51,25 @@ class Page extends Model
             )
         ));
 
-        /*$this->validate(new PresenceOf(array(
-            'field' => 'title',
-            'message' => 'Укажите название страницы'
-        )));*/
-
-
         return $this->validationHasFailed() != true;
     }
 
     public function afterValidation()
     {
-        if (!$this->meta_title) {
-            $this->setMetaTitle($this->title);
+        if (!$this->getMeta_title()) {
+            $this->setMeta_title($this->getTitle());
         }
-        if (!$this->slug) {
-            $this->setSlug(Transliterator::slugify($this->title));
+        if (!$this->getSlug()) {
+            $this->setSlug(Transliterator::slugify($this->getTitle()));
         }
+    }
+
+    public static function findCachedBySlug($slug)
+    {
+        $query = "slug = '$slug'";
+        $key = HOST_HASH . md5("Page::findFirst($query)");
+        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
+        return $publication;
     }
 
     /**
@@ -121,33 +123,33 @@ class Page extends Model
     /**
      * @param mixed $meta_keywords
      */
-    public function setMetaKeywords($meta_keywords)
+    public function setMeta_keywords($meta_keywords)
     {
-        $this->meta_keywords = $meta_keywords;
+        $this->setMLVariable('meta_keywords', $meta_keywords);
     }
 
     /**
      * @return mixed
      */
-    public function getMetaKeywords()
+    public function getMeta_keywords()
     {
-        return $this->meta_keywords;
+        return $this->getMLVariable('meta_keywords');
     }
 
     /**
      * @param mixed $meta_title
      */
-    public function setMetaTitle($meta_title)
+    public function setMeta_title($meta_title)
     {
-        $this->meta_title = $meta_title;
+        $this->setMLVariable('meta_title', $meta_title);
     }
 
     /**
      * @return mixed
      */
-    public function getMetaTitle()
+    public function getMeta_title()
     {
-        return $this->meta_title;
+        return $this->getMLVariable('meta_title');
     }
 
     /**
@@ -171,7 +173,7 @@ class Page extends Model
      */
     public function setText($text)
     {
-        $this->text = $text;
+        $this->setMLVariable('text', $text);
     }
 
     /**
@@ -179,7 +181,7 @@ class Page extends Model
      */
     public function getText()
     {
-        return $this->text;
+        return $this->getMLVariable('text');
     }
 
     /**
@@ -213,14 +215,5 @@ class Page extends Model
     {
         return $this->updated_at;
     }
-
-    public static function findCachedBySlug($slug)
-    {
-        $query = "slug = '$slug'";
-        $key = HOST_HASH . md5("Page::findFirst($query)");
-        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
-        return $publication;
-    }
-
 
 }

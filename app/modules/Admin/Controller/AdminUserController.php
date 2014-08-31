@@ -28,7 +28,7 @@ class AdminUserController extends Controller
                     "order" => "id DESC"
         ));
 
-        $this->view->title = $this->helper->translate('Administrators');
+        $this->view->title = $this->helper->translate('Администраторы');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -61,9 +61,9 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = $this->helper->translate('Add');
+        $this->view->submitButton = $this->helper->translate('Добавить');
 
-        $this->view->title = $this->helper->translate('Add Administrator');
+        $this->view->title = $this->helper->translate('Добавить Administrator');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -95,10 +95,10 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = $this->helper->translate('Save');
+        $this->view->submitButton = $this->helper->translate('Сохранить');
         $this->view->model = $model;
 
-        $this->view->title = $this->helper->translate('Edit Administrator');
+        $this->view->title = $this->helper->translate('Редактировать администратора');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -119,7 +119,7 @@ class AdminUserController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->translate('Delete Administrator');
+        $this->view->title = $this->helper->translate('Удалить администратора');
         $this->helper->title()->append($this->view->title);
 
     }
