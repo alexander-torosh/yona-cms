@@ -8,6 +8,7 @@ namespace Cms\Controller;
 
 use Application\Mvc\Controller;
 use Cms\Model\Translate;
+use Cms\Scanner;
 
 class TranslateController extends Controller
 {
@@ -48,42 +49,11 @@ class TranslateController extends Controller
             $this->redirect('/cms/translate?lang=' . LANG);
         }
 
-        $phrases = $this->searchPhrasesForTranslation();
+        $scanner = new Scanner();
+        $phrases = $scanner->search();
+
         $this->view->phrases = $phrases;
         $this->view->model = $model;
-    }
-
-    private function searchPhrasesForTranslation()
-    {
-        $phrases = array();
-        $files = $this->rsearch(APPLICATION_PATH, "/.*\.(volt)$/");
-        if ($files) {
-            foreach ($files as $file) {
-                $contents = file_get_contents($file);
-                $pattern = "/translate\('(.*)'\)/";
-                $matchesCount = preg_match_all($pattern, $contents, $matches);
-                if ($matchesCount) {
-                    foreach ($matches[1] as $match) {
-                        if (!in_array($match, $phrases)) {
-                            $phrases[] = $match;
-                        }
-                    }
-                }
-            }
-        }
-        return $phrases;
-    }
-
-    private function rsearch($folder, $pattern)
-    {
-        $dir = new \RecursiveDirectoryIterator($folder);
-        $ite = new \RecursiveIteratorIterator($dir);
-        $files = new \RegexIterator($ite, $pattern, \RegexIterator::GET_MATCH);
-        $fileList = array();
-        foreach ($files as $file) {
-            $fileList = array_merge($fileList, $file);
-        }
-        return $fileList;
     }
 
 }

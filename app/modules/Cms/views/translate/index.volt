@@ -2,6 +2,7 @@
     <form method="post" action="" class="ui form segment" enctype="application/x-www-form-urlencoded">
         <div class="field">
             <input type="submit" class="ui button positive" value="Сохранить">
+			<button type="button" class="ui button blue" onclick="fillEmpties();">Проставить пустые ячейки исходными значениями</button>
         </div>
         <table class="ui table small">
             <tr>
@@ -25,3 +26,15 @@
         </div>
     </form>
 {% endif %}
+
+<script>
+    function fillEmpties()
+    {
+        $("input[type='text']").each(function(index, object){
+            var input = $(object);
+            if (!input.val()) {
+                input.val(input.attr('name'));
+            }
+        });
+    }
+</script>
