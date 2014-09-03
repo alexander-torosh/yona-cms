@@ -68,8 +68,8 @@ class Page extends Model
     {
         $query = "slug = '$slug'";
         $key = HOST_HASH . md5("Page::findFirst($query)");
-        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
-        return $publication;
+        $page = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
+        return $page;
     }
 
     /**

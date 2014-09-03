@@ -12,7 +12,7 @@ class Scanner
     public function search()
     {
         $phrases = array();
-        $files = $this->rsearch(APPLICATION_PATH, "/.*\.(volt|php|phtml)$/");
+        $files = $this->rsearch(APPLICATION_PATH, "/.*\.(volt|php|phtml|^volt.php)$/");
         if ($files) {
             foreach ($files as $file) {
                 $contents = file_get_contents($file);
