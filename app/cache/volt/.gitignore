@@ -1,1 +1,2 @@
-.php
+*.volt.php
+!index.html

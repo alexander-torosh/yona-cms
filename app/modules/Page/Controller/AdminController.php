@@ -19,6 +19,7 @@ class AdminController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-page');
+        Page::setTranslateCache(false);
 
     }
 
@@ -61,13 +62,19 @@ class AdminController extends Controller
     {
         $id = (int)$id;
         $form = new PageForm();
-        $model = Page::findFirst($id);
+        $model = Page::findFirst(array("id = $id"));
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->flash->success('Информация обновлена');
+
+                    // Очищаем кеш страницы
+                    $query = "slug = '{$model->getSlug()}'";
+                    $key = md5("Page::findFirst($query)");
+                    $this->cache->delete($key);
+
                     return $this->redirect('/page/admin/edit/' . $model->getId());
                 } else {
                     $this->flashErrors($model);

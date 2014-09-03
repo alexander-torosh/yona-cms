@@ -14,7 +14,6 @@ a:hover {
     margin: 0;
 }
 
-
 select {
     margin: 0em;
     padding: 0.85em 1.2em;
@@ -27,6 +26,10 @@ select {
 }
 select option {
     padding: 0.85em 1.2em;
+}
+
+textarea {
+    font-family: Arial, sans-serif;
 }
 
 .field .description {

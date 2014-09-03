@@ -47,6 +47,10 @@ class DefaultRouter extends Router
         $pattern = '/uk' . $pattern;
         $paths['lang'] = 'uk';
         $this->add($pattern, $paths)->setName($name . '_uk');
+
+        $pattern = '/en' . $pattern;
+        $paths['lang'] = 'en';
+        $this->add($pattern, $paths)->setName($name . '_en');
     }
 
 }

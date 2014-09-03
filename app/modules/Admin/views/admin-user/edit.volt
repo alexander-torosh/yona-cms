@@ -1,10 +1,10 @@
 <p>
     <a href="/admin/admin-user" class="ui button">
-        <i class="icon left"></i> {{ helper.translate('Back') }}
+        <i class="icon left"></i> Назад
     </a>
     {% if model is defined %}
     <a href="/admin/admin-user/delete/{{ model.getId() }}" class="ui button red">
-        <i class="icon trash"></i> {{ helper.translate('Delete') }}
+        <i class="icon trash"></i> Удалить
     </a>
     {% endif %}
 </p>

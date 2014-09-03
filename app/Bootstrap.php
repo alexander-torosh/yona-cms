@@ -71,26 +71,39 @@ class Bootstrap
         $url->setBasePath('/');
         $url->setBaseUri('/');
 
-
-        $cache = new \Phalcon\Cache\Backend\Memcache(
-            new \Phalcon\Cache\Frontend\Data(array(
-                "lifetime" => 60,
-                "prefix" => 'schuco_landing',
-            )), array(
-            "host" => "localhost",
-            "port" => "11211"
+        $cacheFrontend = new \Phalcon\Cache\Frontend\Data(array(
+            "lifetime" => 60,
+            "prefix" => HOST_HASH,
         ));
+
+        switch ($config->cache) {
+            case 'file':
+                $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, array(
+                    "cacheDir" => __DIR__ . "/cache/backend/"
+                ));
+                break;
+            case 'memcache':
+                $cache = new \Phalcon\Cache\Backend\Memcache(
+                    $cacheFrontend, array(
+                    "host" => "localhost",
+                    "port" => "11211"
+                ));
+                break;
+        }
         $di->set('cache', $cache);
         $di->set('modelsCache', $cache);
 
 
-        if (APPLICATION_ENV == 'development') {
-            $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
-        } else {
-            $modelsMetadata = new \Phalcon\Mvc\Model\MetaData\Apc(array(
-                "lifetime" => 60,
-                "prefix" => 'schuco_landing',
-            ));
+        switch ($config->metadata_cache) {
+            case 'memory':
+                $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
+                break;
+            case 'apc':
+                $modelsMetadata = new \Phalcon\Mvc\Model\MetaData\Apc(array(
+                    "lifetime" => 60,
+                    "prefix" => HOST_HASH,
+                ));
+                break;
         }
         $di->set('modelsMetadata', $modelsMetadata);
 
@@ -99,7 +112,16 @@ class Bootstrap
          */
         $cmsModel = new \Cms\Model\Configuration();
         $cms = $cmsModel->getConfig();
-        $registry->cms = $cms;
+        $cms['languages'] = [[
+            'name' => 'Русский',
+            'iso' => 'ru',
+            'locale' => 'ru_RU'
+        ], [
+            'name' => 'English',
+            'iso' => 'en',
+            'locale' => 'en_EN',
+        ]];
+        $registry->cms = $cms; // Отправляем в Registry
 
 
         $application = new \Phalcon\Mvc\Application();
