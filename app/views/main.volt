@@ -43,7 +43,7 @@ $this->assets->collection('js')
     <!--[if lt IE 9]>
     <script src="/static/vendor/js/html5shiv.js"></script>
     <![endif]-->
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    {#<script src="http://maps.google.com/maps/api/js?sensor=false"></script>#}
 
     {{ assets.outputJs('js') }}
 </head>

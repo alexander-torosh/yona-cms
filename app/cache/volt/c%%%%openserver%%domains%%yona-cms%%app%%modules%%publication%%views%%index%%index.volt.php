@@ -14,7 +14,7 @@
                 <div class="text">
                     <a href="<?php echo $link; ?>" class="title"><?php echo $item->getTitle(); ?></a>
                     <section class="announce"><?php echo $this->helper->announce($item->getText(), 300); ?></section>
-                    <a href="<?php echo $link; ?>" class="details">Подробнее &rarr;</a>
+                    <a href="<?php echo $link; ?>" class="details"><?php echo $this->helper->translate('Подробнее'); ?> &rarr;</a>
                 </div>
             </div>
         <?php } ?>
