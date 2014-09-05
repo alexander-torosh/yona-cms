@@ -35,25 +35,24 @@ class AdminController extends Controller
 
     public function addAction()
     {
-        $model = new Slider();
+        $this->view->pick('admin/edit');
         $form = new SliderForm();
+        $model = new Slider();
+
 
         if ($this->request->isPost()) {
-            $form->bind($_POST, $model);
+            $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
-                if (!$model->save()) {
-                    $this->echoMessages($model->getMessages());
-                } else {
-                    $result = $this->uploadImages($model->getId(), 'slider'); //  изображения объявления
-                    if ($this->echoMessages($result)) {
-//                        if ($model->getImages()) {
-//                            $model->setLogoId($model->getImages()->getFirst()->getId());
-//                            $model->save();
-//                        }
-                        $this->redirect('/slider/admin/edit/' . $model->getId());
-                    } else {
+                if ($model->save()) {
+                    $this->flash->success('Слайдер создан');
+                    $result = $this->uploadImages($model->getId(), 'slider');
+                    if (!$this->echoMessages($result)) {
                         $this->flash->error('Ошибка загрузки изображний');
                     }
+                    $this->redirect('/slider/admin/edit/' . $model->getId());
+
+                } else {
+                    $this->echoMessages($model->getMessages());
                 }
             } else {
                 foreach ($form->getMessages() as $message) {
@@ -64,32 +63,30 @@ class AdminController extends Controller
             $form->setEntity($model);
         }
 
-        $this->view->pick('admin/edit');
         $this->view->setVars(array(
             'form' => $form,
-            'title' => 'Добавление фотогалереи'
+            'title' => 'Добавление слайдера'
         ));
     }
 
     public function editAction($id)
     {
-        $id = $this->filter->sanitize($id, "int");
-        $model = Slider::findFirst($id);
-        if (!$model) {
-            $this->redirect('/slider/admin/add');
-        }
-
+        $id = (int)$id;
         $form = new SliderForm();
+        $model = Slider::findFirst(array("id = $id"));
+
         if ($this->request->isPost()) {
-            $form->bind($_POST, $model);
+            $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
-                $result = $this->uploadImages($model->getId(), 'slider'); //  изображения объявления
-                if ($this->echoMessages($result)) {
-                    if ($model->save()) {
+                if ($model->save()) {
+                    $result = $this->uploadImages($model->getId(), 'slider');
+                    $this->flash->success('Информация обновлена');
+                    if ($this->echoMessages($result)) {
                         $this->redirect('/slider/admin/edit/' . $model->getId());
-                    } else {
-                        $this->echoMessages($model->getMessages());
                     }
+                } else {
+                    $this->flash->error('Слайдер не сохранен!');
+                    $this->echoMessages($model->getMessages());
                 }
 
             } else {
@@ -110,28 +107,22 @@ class AdminController extends Controller
 
     public function deleteAction($id)
     {
-        $id = $this->filter->sanitize($id, "int");
-        $entity = Slider::findFirst($id);
-        if (!$entity) {
-            $this->response->redirect('admin/admin-user');
-            return $this->response->send();
-        }
+        $id = (int)$id;
+        $model = Slider::findFirst($id);
 
         if ($this->request->isPost()) {
-            $entity->delete();
-            //$this->cache->delete($this->cache->delete($this->key . $entity->getSlug()));
-            $this->redirect('/slider/admin/index');
-            return $this->response->send();
+            $model->delete();
+            $this->redirect('/slider/admin');
         }
 
-        $this->view->model = $entity;
-        $this->view->title = $this->helper->translate('Удалить галерею');
-        $this->helper->title()->append($this->view->title);
+        $this->view->model = $model;
+        $this->view->title = $this->helper->translate('Удалить слайдер');
+        $this->helper->title('Удаление публикации');
     }
 
     public function deleteImageAction()
     {
-        $id = $this->request->getPost('id', 'int');
+        $id = (int)$id;
         $this->view->cleanTemplateBefore();
 
         $model = Image::findFirst(array('id = ' . $id));
@@ -145,11 +136,6 @@ class AdminController extends Controller
 
             $entity = Slider::findFirst('id = ' . $model->getSliderId());
 
-//            if ($entity->getLogoId() == $id) {
-//                $result = 'preview-delete';
-//                $entity->setLogoId($entity->getImages(array('order' => 'sort ASC'))->getFirst()->getId());
-//                $entity->update();
-//            }
             if ($model->delete()) {
                 if ($result != 'preview-delete') {
                     $result = true;
@@ -178,15 +164,6 @@ class AdminController extends Controller
         $this->view->cleanTemplateBefore();
 
         $itemsData = $this->request->getPost('items');
-//        $logo_id = (int)$this->request->getPost('logo', 'int');
-//
-//        if ($logo_id) {
-//            $model = Slider::findFirst('id = ' . $slider_id);
-//            if ($model) {
-//                $model->setLogoId($logo_id);
-//                $model->update();
-//            }
-//        }
 
         foreach ($itemsData as $k => $v) {
             $imageModel = Image::findFirst('id = ' . $k . ' AND slider_id = ' . $slider_id);
@@ -209,7 +186,7 @@ class AdminController extends Controller
     {
         if ($this->request->hasFiles() == true) {
             $files = $this->request->getUploadedFiles();
-            $messages = $this->validateImages($files, $id);
+            $messages = $this->validateImages($files);
 
             if (empty($messages)) {
                 foreach ($files as $key => $file) {

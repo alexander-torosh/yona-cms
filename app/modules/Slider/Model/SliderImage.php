@@ -104,7 +104,7 @@ class SliderImage extends Model
      * @param mixed $sortorder
      */
     public function setSortOrder($sortorder)
-    { 
+    {
         $this->sortorder = $sortorder;
     }
 

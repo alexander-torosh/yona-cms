@@ -102,8 +102,8 @@
                     'id': image.id,
                     'type': 'slider',
                     'strategy': 'a',
-                    'width': 600,
-                    'height':400,
+                    'width': 400,
+                    'height':200,
                     'widthHeight': true
                     ],
                     [
@@ -123,12 +123,9 @@
     <div class="header">
     </div>
     <div class="content">
-        <div class="left">
-
-        </div>
-        <div class="right" style="height: 500px">
+        <div style="height: 200px">
             <h1 style="text-align: center">Вы уверенны, что хотите удалить это изображение?</h1>
-            <img class="img-Delete" style="width: 600px; min-height: 300px;max-height:450px " src="" alt=""/>
+            <img class="img-Delete" style="width: 300px; min-height: 150px;max-height:200px " src="" alt=""/>
         </div>
     </div>
     <div class="actions">
@@ -168,23 +165,13 @@
 
         document.lang = '{{  helper.constant('LANG') }}';
         liveEdit();
-//        form.form({
-//            title: {
-//                identifier: 'title',
-//                rules: [
-//                    {
-//                        type: 'empty',
-//                        prompt: 'Введите название страницы'
-//                    }
-//                ]
-//            }
-//        });
+
         var $element = $('.delete.corner');
 
         $element.on('click', function () {
             var item = $(this).parent().parent(),
                     id = item.attr('data-id'),
-                    src = $('.gallery-hidden').find('img[data-id="' + id + '"]').attr('src');
+                    src = $('.gallery-item').find('img[data-id="' + id + '"]').attr('src');
             $('.img-Delete').attr('src', src);
             $('.ui.modal.imageDelete').modal('setting', {
                 closable: true,
@@ -221,10 +208,9 @@
                 };
             });
             $.ajax({
-                url: "/slider/admin/saveSlider?lang=" + document.lang,
+                url: "/slider/admin/saveSlider?lang={{  helper.constant('LANG') }}",
                 data: {
                     items: items,
-                    //primary: primary,
                     slider: {% if model is defined %}{{ model.getId() }}{% else %}0{% endif %},
                     logo: $('#logo').val()
                 },
