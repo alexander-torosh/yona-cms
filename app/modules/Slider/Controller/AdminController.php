@@ -12,8 +12,7 @@ class AdminController extends Controller
 
     private $key = 'slider-inner-';
 
-    private $images = array(
-        // images
+    private $allowedFormats = array(
         'png' => 'image/png',
         'jpe' => 'image/jpeg',
         'jpeg' => 'image/jpeg',
@@ -45,14 +44,11 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->flash->success('Слайдер создан');
-                    $result = $this->uploadImages($model->getId(), 'slider');
-                    if (!$this->echoMessages($result)) {
-                        $this->flash->error('Ошибка загрузки изображний');
-                    }
-                    $this->redirect('/slider/admin/edit/' . $model->getId());
+                    $this->uploadImages($model->getId(), 'slider');
+                    return $this->redirect('/slider/admin/edit/' . $model->getId());
 
                 } else {
-                    $this->echoMessages($model->getMessages());
+                    $this->flashErrors($model);
                 }
             } else {
                 foreach ($form->getMessages() as $message) {
@@ -78,15 +74,13 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
+                $this->uploadImages($model->getId(), 'slider');
                 if ($model->save()) {
-                    $result = $this->uploadImages($model->getId(), 'slider');
                     $this->flash->success('Информация обновлена');
-                    if ($this->echoMessages($result)) {
-                        $this->redirect('/slider/admin/edit/' . $model->getId());
-                    }
+                    return $this->redirect('/slider/admin/edit/' . $model->getId());
                 } else {
-                    $this->flash->error('Слайдер не сохранен!');
-                    $this->echoMessages($model->getMessages());
+                    $this->flash->error('Информация не сохранена!');
+                    $this->flashErrors($model);
                 }
 
             } else {
@@ -111,18 +105,26 @@ class AdminController extends Controller
         $model = Slider::findFirst($id);
 
         if ($this->request->isPost()) {
+            foreach ($model->SliderImages as $img)
+            {
+                $imageFilter = new \Image\Filter(array(
+                    'id' => $img->getId(),
+                    'type' => 'slider'
+                ));
+                $imageFilter->remove(true);
+            }
             $model->delete();
-            $this->redirect('/slider/admin');
+            return $this->redirect('/slider/admin');
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->translate('Удалить слайдер');
+        $this->view->title = 'Удалить слайдер';
         $this->helper->title('Удаление публикации');
     }
 
     public function deleteImageAction()
     {
-        $id = (int)$id;
+        $id = $this->request->getPost('id', 'int');
         $this->view->cleanTemplateBefore();
 
         $model = Image::findFirst(array('id = ' . $id));
@@ -169,6 +171,7 @@ class AdminController extends Controller
             $imageModel = Image::findFirst('id = ' . $k . ' AND slider_id = ' . $slider_id);
             $imageModel->setSortOrder($v['sort']);
             $imageModel->setCaption($v['text']);
+            $imageModel->setImgLang($v['imglang']);
             $imageModel->update();
         }
 
@@ -184,15 +187,14 @@ class AdminController extends Controller
 
     public function uploadImages($id, $type)
     {
-        if ($this->request->hasFiles() == true) {
-            $files = $this->request->getUploadedFiles();
-            $messages = $this->validateImages($files);
+        if ($this->request->isPost()) {
+            if ($this->request->hasFiles() == true) {
+                foreach ($this->request->getUploadedFiles() as $key => $file) {
 
-            if (empty($messages)) {
-                foreach ($files as $key => $file) {
-                    if ($file->getKey() != 'logo') {
+                    if (in_array($file->getType(), $this->allowedFormats)) {
                         $image = new \Slider\Model\SliderImage();
                         $image->setSliderId($id);
+                        $image->setImgLang(LANG);
                         $image->save();
                         $filename = $key . '.jpg';
                         $fullFilePath = $file->getTempName();
@@ -200,42 +202,18 @@ class AdminController extends Controller
 
                         $imageFilter = new \Image\Filter(array(
                             'id' => $image->getId(),
-                            'type' => $type
+                            'type' => $type,
                         ));
                         $imageFilter->remove(false);
-                        $originalAbsPath = $imageFilter->originalAbsPath();
-                        if (is_file($fullFilePath)) {
-                            copy($fullFilePath, $originalAbsPath);
-                            unlink($fullFilePath);
-                        }
+                        $file->moveTo($imageFilter->originalAbsPath());
+
+                    } else {
+                        $this->flash->error('Разрешается загружать только картинки с расширением jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' );
                     }
                 }
+
             }
-            return $messages;
         }
     }
 
-    private function validateImages($files)
-    {
-        $massages = array();
-
-        foreach ($files as $k) {
-            if (!in_array($k->getType(), $this->images)) {
-                $massages[] = 'Файл ' . $k->getName() . ' не являеться изображением';
-            }
-        }
-        return $massages;
-    }
-
-    private function echoMessages($messages)
-    {
-        if (!empty($messages)) {
-            foreach ($messages as $message) {
-                $this->flash->error($message);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
 }

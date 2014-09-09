@@ -1,6 +1,6 @@
-<link href="//dzub-remote/static/css/gall-phalcon.css" rel="stylesheet" type="text/css" />
-<script src="//dzub-remote/static/js/gall-phalcon.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<link href="/static/css/gall-phalcon.css" rel="stylesheet" type="text/css" />
+<script src="/static/js/gall-phalcon.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.for.gall-phalcon.js"></script>
 
 <form method="post" class="ui form" action="" enctype="multipart/form-data">
 
@@ -57,20 +57,21 @@
             <div class="ui button purple small save-gallery">Сохранить изображения</div>
 
             <div class="ui stackable items gallery-item">
-                {% for image in model.SliderImages %}
+                {% for image in model.getRelated('SliderImages', ["img_lang='"~constant('LANG')~"' OR img_lang='all'"]) %}
+
                     {% set img = helper.image([
-                    'id': image.id,
-                    'type': 'slider',
-                    'strategy': 'a',
-                    'width': 250,
-                    'height':150,
-                    'widthHeight': true
+                        'id': image.id,
+                        'type': 'slider',
+                        'strategy': 'a',
+                        'width': 250,
+                        'height':150,
+                        'widthHeight': true
                     ],
                     [
-                    'alt': model.getTitle()|escape,
-                    'data-id' : image.id
+                        'alt': model.getTitle()|escape,
+                        'data-id' : image.id
                     ]) %}
-                    <div class="item" data-id="{{ image.id }}">
+                    <div class="item" data-id="{{ image.id }}" data-lang="{{ image.getImgLang() }}">
                         <div class="image">
                             {{ img.imageHtml() }}
                             <a class="delete like ui corner label">
@@ -78,6 +79,10 @@
                             </a>
                         </div>
                         <div class="content">
+                            <div class="ui checkbox">
+                                <input name="img_lang" id="img_lang" type="checkbox" {% if image.getImgLang() == 'all' %}checked="checked"{% endif %} >
+                                <label>Для всех языков</label>
+                            </div>
                             {% set text = image.getCaption() %}
                             <textarea class="description live-edit live-input {{  helper.constant('LANG') }}-gallery"
                                       style="display: none">{{ image.getCaption() }}</textarea>
@@ -160,6 +165,12 @@
 </script><!--/end ui semantic-->
 
 <script>
+/*    $('.checkbox').on('click', function() {
+        var rememberme = $('input').prop('checked') ? 'all' : '{{ constant('LANG') }}';
+        // this value always returns 'on' no matter what the checkbox state is!
+        $('#value').text(rememberme);
+    }); */
+
     var form = $('.ui.form');
     $(document).ready(function () {
 
@@ -202,9 +213,11 @@
         $('.save-gallery').click(function () {
             var items = {};
             $('.work-with-image').find('.item').each(function () {
+
                 items[$(this).data('id')] = {
                     sort: $(this).index(),
                     text: $(this).find('.live-edit.{{  helper.constant('LANG') }}-gallery').val(),
+                    imglang: $(this).find('#img_lang').prop('checked') ? 'all' : '{{ constant('LANG') }}'
                 };
             });
             $.ajax({
