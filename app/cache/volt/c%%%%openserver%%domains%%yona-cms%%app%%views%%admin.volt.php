@@ -10,7 +10,6 @@
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
     <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/suite.css" rel="stylesheet" type="text/css">
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
 
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>
@@ -36,6 +35,7 @@
     <?php if (isset($title)) { ?>
         <h1><?php echo $title; ?></h1>
     <?php } ?>
+    <?php echo $this->partial('admin/languages'); ?>
     <?php echo $this->flash->output(); ?>
     <?php echo $this->getContent(); ?>
 </div>

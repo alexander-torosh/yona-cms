@@ -107,4 +107,25 @@ class Helper extends \Phalcon\Mvc\User\Component
         return $object->getSymbol();
     }
 
+    public function getSlider($id)
+    {
+        $slider = \Slider\Model\Slider::findFirst(array(
+            "id = $id AND visible = '1'", array(
+//                'cache' => array(
+//                    'key' => md5("Slider::findById($id)"),
+//                    'lifetime' => 60,
+//                )
+            )
+        ));
+
+        $view = clone($this->getDI()->get('view'));
+        $view->start();
+        $view->slider = $slider;
+        $view->partial('main/slider_base');
+        $html = ob_get_contents();
+        $view->finish();
+
+        return $html;
+    }
+
 }

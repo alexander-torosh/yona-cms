@@ -20,22 +20,33 @@
             <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-widget'); ?>" href="/widget/admin">
                 <i class="code icon"></i> Виджеты
             </a>
+            <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-slider'); ?>" href="/slider/admin">
+                <i class="resize horizontal icon"></i> Слайдеры
+            </a>
             <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-fm'); ?>" href="/file-manager">
                 <i class="attachment icon"></i> Файловый менеджер
             </a>
         </div>
     </div>
     <div class="ui dropdown item">
-        <i class="settings icon"></i> Администрирование <i class="icon dropdown"></i>
+        <i class="lab icon"></i> SEO <i class="icon dropdown"></i>
+        <div class="menu">
+            <a class="item<?php echo $this->helper->activeMenu()->activeClass('seo-admin-robots'); ?>" href="/seo/robots">
+                <i class="android icon"></i> Robots.txt
+            </a>
+        </div>
+    </div>
+    <div class="ui dropdown item">
+        <i class="wrench icon"></i> Администрирование <i class="icon dropdown"></i>
         <div class="menu">
             <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-user'); ?>" href="/admin/admin-user">
                 <i class="user icon"></i> Администраторы
             </a>
             <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-cms'); ?>" href="/cms/configuration">
-                <i class="setting icon"></i> Конфигурация
+                <i class="settings icon"></i> Конфигурация
             </a>
-            <a class="item<?php echo $this->helper->activeMenu()->activeClass('seo-admin-robots'); ?>" href="/seo/robots">
-                <i class="android icon"></i> Robots.txt
+            <a class="item<?php echo $this->helper->activeMenu()->activeClass('admin-translate'); ?>" href="/cms/translate">
+                <i class="book icon"></i> Переводы
             </a>
         </div>
     </div>
