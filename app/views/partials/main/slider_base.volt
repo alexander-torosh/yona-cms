@@ -1,11 +1,12 @@
 <br />-------slider begin-------
 {% if slider is not empty %}
-    <div id="slider-{{ slider.getId() }}" data-rotation="target: .content > .item; targetRel: .image > .item; pickerItems: .content > .nav > li; interval: {{ slider.getDelay() }};">
+    <div id="slider-{{ slider.getId() }}" data-rotation="target: .content > .item; targetRel: .image > .item; pickerItems: .content > .nav > li; interval: {{ slider.getDelay() }}; animationSpeed: {{ slider.getAnimationSpeed() }};">
 
         <div class="nav-el prev">prev</div>
         <div class="nav-el next">next</div>
         <section class="image">
-            {% for item in slider.getSliderImages() %}
+            {% set slides = slider.getRelated('SliderImages', ['order': 'sortorder ASC']) %}
+            {% for item in slides %}
                 <section class="item{% if 1 == loop.index %} active{% endif %}">
                     <a href="{{ item.getLink() }}" title="{{ item.getCaption() }}" rel="nofollow">
                         {% set image = helper.image([
@@ -23,11 +24,11 @@
         </section>
         <section class="content">
             <ul class="nav">
-                {% for item in slider.getSliderImages() %}
+                {% for item in slides %}
                     <li class="{% if 1 == loop.index %} active{% endif %}" data-pos="{{ loop.index }}">{{ loop.index }}</li>
                 {% endfor %}
             </ul>
-            {% for item in slider.getSliderImages() %}
+            {% for item in slides %}
             <section class="item{% if 1 == loop.index %} active{% endif %}">
                     <a href="{{ item.getLink() }}" rel="nofollow">{{ item.getCaption() }}</a>
             </section>

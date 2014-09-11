@@ -21,12 +21,12 @@
                 <i class="icon trash"></i> Удалить
             </a>
 
-            {% if model.getId() %}
-                <a class="ui blue button"
-                   href="/slider/{{ model.getId() }}">
-                    Посмотреть на сайте
-                </a>
-            {% endif %}
+            {#{% if model.getId() %}#}
+                {#<a class="ui blue button"#}
+                   {#href="/slider/{{ model.getId() }}">#}
+                    {#Посмотреть на сайте#}
+                {#</a>#}
+            {#{% endif %}#}
 
         {% endif %}
 
@@ -57,7 +57,7 @@
             <div class="ui button purple small save-gallery">Сохранить изображения</div>
 
             <div class="ui stackable items gallery-item">
-                {% for image in model.getRelated('SliderImages', ["img_lang='"~constant('LANG')~"' OR img_lang='all'"]) %}
+                {% for image in model.getRelated('SliderImages', ['order': 'sortorder ASC']) %}
 
                     {% set img = helper.image([
                         'id': image.id,
@@ -71,7 +71,7 @@
                         'alt': model.getTitle()|escape,
                         'data-id' : image.id
                     ]) %}
-                    <div class="item" data-id="{{ image.id }}" data-lang="{{ image.getImgLang() }}">
+                    <div class="item" data-id="{{ image.id }}" >
                         <div class="image">
                             {{ img.imageHtml() }}
                             <a class="delete like ui corner label">
@@ -79,13 +79,15 @@
                             </a>
                         </div>
                         <div class="content">
-                            <div class="ui checkbox">
-                                <input name="img_lang" id="img_lang" type="checkbox" {% if image.getImgLang() == 'all' %}checked="checked"{% endif %} >
-                                <label>Для всех языков</label>
+                            <div class="ui input">
+                                <input name="link" id="link" placeholder="Ссылка" value="{{ image.getLink() }}">
+                                <label></label>
                             </div>
+
+                            <div style="margin-top: 10px;"></div>
                             {% set text = image.getCaption() %}
-                            <textarea class="description live-edit live-input {{  helper.constant('LANG') }}-gallery"
-                                      style="display: none">{{ image.getCaption() }}</textarea>
+                            <textarea class="description live-edit live-input {{ helper.constant('LANG') }}-gallery"
+                                      style="display: none; ">{{ image.getCaption() }}</textarea>
 
                             <p class="description to-edit {{  helper.constant('LANG') }}-gallery">{{ image.getCaption() }}</p>
 
@@ -102,7 +104,7 @@
 
         <div class="gallery-hidden">
             {% if model.Images is not empty %}
-                {% for image in model.getRelated('SliderImages', ['order':'sort_order ASC']) %}
+                {% for image in model.getRelated('SliderImages', ['order':'sortorder ASC']) %}
                     {% set img = helper.image([
                     'id': image.id,
                     'type': 'slider',
@@ -217,7 +219,7 @@
                 items[$(this).data('id')] = {
                     sort: $(this).index(),
                     text: $(this).find('.live-edit.{{  helper.constant('LANG') }}-gallery').val(),
-                    imglang: $(this).find('#img_lang').prop('checked') ? 'all' : '{{ constant('LANG') }}'
+                    link: $(this).find('#link').val()
                 };
             });
             $.ajax({

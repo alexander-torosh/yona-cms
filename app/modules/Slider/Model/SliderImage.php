@@ -25,7 +25,6 @@ class SliderImage extends Model
     public $caption;
     public $link;
     public $sortorder;
-    public $img_lang; //это язык при котором была загружена картинка. Для каждого языка надо указывать разные картинки
 
     public function initialize()
     {
@@ -90,7 +89,7 @@ class SliderImage extends Model
      */
     public function getLink()
     {
-        return $this->link;
+        return $this->getMLVariable('link');
     }
 
     /**
@@ -98,7 +97,7 @@ class SliderImage extends Model
      */
     public function setLink($link)
     {
-        $this->link = $link;
+        $this->setMLVariable('link', $link);
     }
 
     /**
@@ -116,23 +115,5 @@ class SliderImage extends Model
     {
         return $this->sortorder;
     }
-
-    /**
-     * @param mixed $img_lang
-     */
-    public function setImgLang($img_lang)
-    {
-        $this->img_lang = $img_lang;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImgLang()
-    {
-        return $this->img_lang;
-    }
-
-
 
 } 
