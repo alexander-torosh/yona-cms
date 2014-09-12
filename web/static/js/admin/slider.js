@@ -79,12 +79,6 @@ function checkPreview() {
 
 function liveEdit() {
     var $filed = $('.to-edit');
-//    on('keydown', function (e) {\
-//        if (e.keyCode == 13) {
-//            e.preventDefault();
-//            findAddress();
-//        }
-//    });
 
     $filed.on('click', function () {
         var langClass = '.' + document.lang + '-gallery';
@@ -132,21 +126,6 @@ function liveEdit() {
     });
 
 }
-
-function setLogo() {
-    var logo_id = $('#logo').val();
-    $('.work-with-image').find('.item[data-id="' + logo_id + '"]').find('.logo-gallery').addClass('active');
-}
-//Устанавливает отметку превью
-
-function toggleGallery() {
-    $('.ui.toggle.button').click(function () {
-        $(this).addClass('active').parent().parent().siblings().find('.ui.toggle.button').removeClass('active');
-        $('#logo').val($(this).parent().parent().attr('data-id'));
-    });
-}
-// Дает возможность делать переключатель активности
-
 
 function deleteImage(id, url, type) {
     if (confirm('Удалить логотип?')) {

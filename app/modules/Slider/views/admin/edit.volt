@@ -1,6 +1,6 @@
-<link href="/static/css/gall-phalcon.css" rel="stylesheet" type="text/css" />
-<script src="/static/js/gall-phalcon.js"></script>
-<script type="text/javascript" src="/static/js/jquery-ui.min.for.gall-phalcon.js"></script>
+<link href="/static/css/admin/slider.css" rel="stylesheet" type="text/css" />
+<script src="/static/js/admin/slider.js"></script>
+<script type="text/javascript" src="/vendor/js/jquery-ui.min.js"></script>
 
 <form method="post" class="ui form" action="" enctype="multipart/form-data">
 
@@ -16,23 +16,14 @@
         </div>
 
         {% if model is not empty and model.getId() %}
-
             <a href="/slider/admin/delete/{{ model.getId() }}" class="ui button red">
                 <i class="icon trash"></i> Удалить
             </a>
-
-            {#{% if model.getId() %}#}
-                {#<a class="ui blue button"#}
-                   {#href="/slider/{{ model.getId() }}">#}
-                    {#Посмотреть на сайте#}
-                {#</a>#}
-            {#{% endif %}#}
-
         {% endif %}
 
     </div>
     <!--end controls-->
-
+    <div class="ui red message" style="display: none">Параметры картинок не сохранены!</div>
     <div class="ui segment">
         {{ form.renderDecorated('title') }}
         {{ form.renderDecorated('animation_speed') }}
@@ -53,8 +44,6 @@
         </h3>
 
         <div class="ui segment teal inverted attached work-with-image">
-            <div class="ui green message" style="display: none">Успешно сохранено!</div>
-            <div class="ui button purple small save-gallery">Сохранить изображения</div>
 
             <div class="ui stackable items gallery-item">
                 {% for image in model.getRelated('SliderImages', ['order': 'sortorder ASC']) %}
@@ -163,15 +152,45 @@
                 {type: 'empty'}
             ]
         }
+    }, {
+        onSuccess: function () {
+            return saveGallery();
+        }
     });
 </script><!--/end ui semantic-->
 
 <script>
-/*    $('.checkbox').on('click', function() {
-        var rememberme = $('input').prop('checked') ? 'all' : '{{ constant('LANG') }}';
-        // this value always returns 'on' no matter what the checkbox state is!
-        $('#value').text(rememberme);
-    }); */
+
+    function saveGallery () {
+        var items = {};
+        var isSuccess = false;
+
+        $('.work-with-image').find('.item').each(function () {
+            items[$(this).data('id')] = {
+                sort: $(this).index(),
+                text: $(this).find('.live-edit.{{  helper.constant('LANG') }}-gallery').val(),
+                link: $(this).find('#link').val()
+            };
+        });
+
+        $.ajax({
+            async: false,
+            url: "/slider/admin/saveSlider?lang={{  helper.constant('LANG') }}",
+            data: {
+                items: items,
+                slider: {% if model is defined %}{{ model.getId() }}{% else %}0{% endif %}
+            },
+            type: 'POST',
+            success: function (data) {
+                if (data === 1){
+                    isSuccess = true;
+                } else {
+                    var message = $('.ui.red.message').show();
+                }
+            }
+        });
+        return isSuccess;
+    }
 
     var form = $('.ui.form');
     $(document).ready(function () {
@@ -196,12 +215,9 @@
                         },
                         type: 'POST',
                         success: function (data) {
-                            //console.log(data);
-                            if (data == true || data == 'preview-delete') {
+
+                            if (data == true) {
                                 item.remove();
-                                if (data == 'preview-delete') {
-                                    $('.gallery-item').find('.item').eq(0).find('.logo-gallery').addClass('active');
-                                }
                             } else {
                                 alert('ошибка удаления');
                             }
@@ -212,34 +228,6 @@
         });
 
         $('.gallery-item').sortable();
-        $('.save-gallery').click(function () {
-            var items = {};
-            $('.work-with-image').find('.item').each(function () {
-
-                items[$(this).data('id')] = {
-                    sort: $(this).index(),
-                    text: $(this).find('.live-edit.{{  helper.constant('LANG') }}-gallery').val(),
-                    link: $(this).find('#link').val()
-                };
-            });
-            $.ajax({
-                url: "/slider/admin/saveSlider?lang={{  helper.constant('LANG') }}",
-                data: {
-                    items: items,
-                    slider: {% if model is defined %}{{ model.getId() }}{% else %}0{% endif %},
-                    logo: $('#logo').val()
-                },
-                type: 'POST',
-                success: function (data) {
-                    //console.log(data);
-                    var message = $('.ui.green.message').show();
-                    setTimeout(function () {
-                        message.hide(500);
-                    }, 2000);
-                }
-            });
-        });
-        setLogo(); //Устанавливает отметку превью
     });
 
 </script>

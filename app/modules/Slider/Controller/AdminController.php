@@ -135,9 +135,7 @@ class AdminController extends Controller
             $entity = Slider::findFirst('id = ' . $model->getSliderId());
 
             if ($model->delete()) {
-                if ($result != 'preview-delete') {
-                    $result = true;
-                }
+                $result = true;
             } else {
                 $result = false;
             }
