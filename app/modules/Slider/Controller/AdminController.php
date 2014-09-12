@@ -10,7 +10,7 @@ use Slider\Form\SliderForm;
 class AdminController extends Controller
 {
 
-    private $key = 'slider-inner-';
+    private $key = 'slider-inner-'; // use in template - {{ helper.getSlider(slider ID) }}
 
     private $allowedFormats = array(
         'png' => 'image/png',
@@ -51,9 +51,7 @@ class AdminController extends Controller
                     $this->flashErrors($model);
                 }
             } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
+                $this->flashErrors($form);
             }
         } else {
             $form->setEntity($model);
@@ -84,9 +82,7 @@ class AdminController extends Controller
                 }
 
             } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
+                $this->flashErrors($form);
             }
         } else {
             $form->setEntity($model);
@@ -161,7 +157,7 @@ class AdminController extends Controller
 
     public function saveSliderAction()
     {
-        $slider_id = (int)$this->request->getPost('slider', 'int');
+        $slider_id = $this->request->getPost('slider', 'int');
 
         $this->view->cleanTemplateBefore();
 
@@ -171,15 +167,19 @@ class AdminController extends Controller
             $imageModel = Image::findFirst('id = ' . $k . ' AND slider_id = ' . $slider_id);
             $imageModel->setSortOrder($v['sort']);
             $imageModel->setCaption($v['text']);
-            $imageModel->setImgLang($v['imglang']);
+            $imageModel->setLink($v['link']);
             $imageModel->update();
+
+            $query = 'foreign_id = ' . $k . ' AND lang = "' . LANG . '"'; //for \Application\Mvc\Model->getTranslations();
+            $key = HOST_HASH . md5('slider_image_translate ' . $query);
+            $this->cache->delete($key);
         }
 
         $this->response->setHeader('Content-Type', 'text/plain');
         $this->response->setContentType('application/json', 'UTF-8');
         $this->response->setStatusCode(200, 'OK');
 
-        $this->response->setContent(json_encode($_POST));
+        $this->response->setContent(json_encode($this->request->getPost()));
         $this->view->disable();
         echo '1'; return;
         return $this->response;
@@ -194,7 +194,7 @@ class AdminController extends Controller
                     if (in_array($file->getType(), $this->allowedFormats)) {
                         $image = new \Slider\Model\SliderImage();
                         $image->setSliderId($id);
-                        $image->setImgLang(LANG);
+                        $image->setLink($v['link']);
                         $image->save();
                         $filename = $key . '.jpg';
                         $fullFilePath = $file->getTempName();

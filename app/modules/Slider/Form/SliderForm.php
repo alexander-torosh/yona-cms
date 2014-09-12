@@ -27,12 +27,13 @@ class SliderForm extends Form
 
         $this->add(
             (new Text('animation_speed', array('required' => true)))
-                ->setLabel('Частота смены слайдов')
+                ->setLabel('Продолжительность перехода к следующему слайду')
+                ->setAttribute('placeholder', '300')
         );
 
         $this->add(
             (new Text('delay'))
-                ->setLabel('Задержка перед началом автопрокрутки')
+                ->setLabel('Частота смены слайдов')
         );
 
         $this->add(
