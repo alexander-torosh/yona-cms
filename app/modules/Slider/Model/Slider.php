@@ -39,7 +39,7 @@ class Slider extends Model
 
     public function beforeValidation()
     {
-        $this->setVisible( (isset($_POST['visible'])) ? 1 : 0 );
+        $this->setVisible((isset($_POST['visible'])) ? 1 : 0);
     }
 
     public function afterValidation()
@@ -52,6 +52,41 @@ class Slider extends Model
 
     }
 
+    public static function findCachedById($id)
+    {
+        $query = "id = :id: AND visible = :visible:";
+        $key = HOST_HASH . md5("Slider::findCachedById($query)");
+        $slider = self::findFirst(array(
+            $query,
+            'bind' => array(
+                'id' => $id,
+                'visible' => 1,
+            ),
+            'cache' => array(
+                'key' => $key,
+                'lifetime' => 60,
+            )
+        ));
+        return $slider;
+    }
+
+    public function cachedImages()
+    {
+        $query = "slider_id = :slider_id:";
+        $key = HOST_HASH . md5("Slider::cachedImages($query)");
+        $images = SliderImage::find(array(
+            $query,
+            'order' => 'sortorder ASC',
+            'bind' => array(
+                'slider_id' => $this->id,
+            ),
+            'cache' => array(
+                'key' => $key,
+                'lifetime' => 60,
+            )
+        ));
+        return $images;
+    }
 
     /**
      * @param int $visible
