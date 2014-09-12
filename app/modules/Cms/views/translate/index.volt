@@ -25,6 +25,8 @@
             <input type="submit" class="ui button positive" value="Сохранить">
         </div>
     </form>
+{% else %}
+    <div class="ui blue inverted segment">Исходники переводов не обнарежены</div>
 {% endif %}
 
 <script>
