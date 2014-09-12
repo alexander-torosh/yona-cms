@@ -91,7 +91,7 @@ class AdminController extends Controller
         $this->view->setVars(array(
             'form' => $form,
             'model' => $model,
-            'title' => 'Редактирование фотогалереи'
+            'title' => 'Редактирование слайдера'
         ));
     }
 
