@@ -37,6 +37,8 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'file-manager/index',
             'page/admin',
             'publication/admin',
+            'slider/admin',
+            'seo/robots',
         );
         foreach ($privateResources as $resource) {
             $this->addResource(new \Phalcon\Acl\Resource($resource));

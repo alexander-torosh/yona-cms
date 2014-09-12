@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title><?php echo $this->helper->translate('Login'); ?></title>
+        <title>Login</title>
 
         <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
 
