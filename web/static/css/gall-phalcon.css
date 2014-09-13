@@ -1,0 +1,107 @@
+.images-gallery {
+    margin-left: 21px;
+}
+
+.images-gallery img {
+    margin: 20px 20px 0 0;
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
+
+.live-edit {
+    line-height: 1.2 !important;
+    /*display: none !important;*/
+    margin: -8px 0px 0px -8px !important;
+    box-shadow: none !important;
+    left: 12px !important;
+    font-family: Cuprum, sans-serif !important;
+    font-size: 18px !important;
+    border-radius: 0 !important;
+    padding: 7px !important;
+    width: 252px !important;
+}
+
+.live-input {
+
+}
+
+.gallery-item div.description {
+    word-wrap: break-word;
+    margin-top: 4px;
+}
+
+.gallery-item textarea {
+    /*position: absolute;*/
+    z-index: 1000;
+}
+
+.gallery-item .item img {
+    width: auto !important;
+    margin: 0 auto;
+}
+
+.gallery-hidden {
+    display: none;
+}
+
+.gallery-item .item {
+    position: relative;
+    min-height: 350px !important;
+    margin-left: 11px !important;
+    width: 270px !Important;
+}
+
+.gallery-buttons-panel {
+    margin-bottom: 20px !important;
+}
+
+.gallery-submit {
+    margin-top: 30px;
+}
+
+.work-with-image + div {
+    margin-bottom: 30px !important;
+}
+
+.imageDelete {
+    text-align: center !important;
+}
+
+.logo-gallery {
+    margin: 10px 0 10px 0 !important;
+}
+
+.catalog-image img {
+    min-height: 150px;
+}
+
+.catalog-image.item {
+    min-height: 255px !important;
+}
+
+.catalog-image.item .ui.toggle.button {
+    width: 100%;
+}
+
+#likeLink {
+    font-family: Cuprum, sans-serif !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+}
+
+.save-gallery {
+    /*float : left;*/
+}
+
+.lang-panel {
+    float: right;
+    margin-right: 30px;
+}
+
+.novis {
+    display: none !important;
+}
+
+.work-with-image {
+    background-color: #82C5C2 !important;
+}

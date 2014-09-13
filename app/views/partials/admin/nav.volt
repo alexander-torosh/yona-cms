@@ -20,6 +20,9 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="/widget/admin">
                 <i class="code icon"></i> Виджеты
             </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
+                <i class="resize horizontal icon"></i> Слайдеры
+            </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="/file-manager">
                 <i class="attachment icon"></i> Файловый менеджер
             </a>

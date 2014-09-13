@@ -57,7 +57,7 @@ function Rotation() {
 
     var self = this;
     self.elements = [];
-    self.timerPosition = 0;
+    self.timerPosition = 1;
 
     self.init = function () {
         var elements = document.querySelectorAll('[data-rotation]');
@@ -106,8 +106,7 @@ function Rotation() {
         self.initIntervals();
     };
 
-    self.initTargetElements = function(targetElements)
-    {
+    self.initTargetElements = function (targetElements) {
         for (var i = 0; i < targetElements.length; i++) {
             var elem = targetElements[i];
             if (i != 0) {
@@ -127,6 +126,7 @@ function Rotation() {
                     if (interval > 0) {
                         if (self.timerPosition >= interval && self.timerPosition % interval == 0) {
                             self.next(elem);
+                            console.log(self.timerPosition);
                         }
                     }
                 }
@@ -223,7 +223,7 @@ function Rotation() {
         return pickerElements;
     };
 
-    self.setTargetActive = function (newPosition, rootNode, targetElements) {
+    self.setTargetActive = function (newPosition, rootNode, targetElements, slide) {
         var i, animationSpeed = null;
         var config = self.getConfig(rootNode);
         if (config.animationSpeed) {
@@ -234,21 +234,25 @@ function Rotation() {
             if ((newPosition - 1) === i) {
                 if (itemNode) {
                     itemNode.classList.add('active');
-                    if (animationSpeed != null) {
-                        $(itemNode).css('display', 'block').animate({opacity: 1},animationSpeed);
-                    } else {
-                        itemNode.style.display = 'block';
-                        itemNode.style.opacity = 1;
+                    if (slide) {
+                        if (animationSpeed != null) {
+                            $(itemNode).css('display', 'block').animate({opacity: 1}, animationSpeed);
+                        } else {
+                            itemNode.style.display = 'block';
+                            itemNode.style.opacity = 1;
+                        }
                     }
                 }
             } else {
                 if (itemNode) {
                     itemNode.classList.remove('active');
-                    if (animationSpeed != null) {
-                        $(itemNode).css('display', 'none').animate({opacity: 0},animationSpeed);
-                    } else {
-                        itemNode.style.display = 'none';
-                        itemNode.style.opacity = 0;
+                    if (slide) {
+                        if (animationSpeed != null) {
+                            $(itemNode).css('display', 'none').animate({opacity: 0}, animationSpeed);
+                        } else {
+                            itemNode.style.display = 'none';
+                            itemNode.style.opacity = 0;
+                        }
                     }
                 }
             }
@@ -269,9 +273,9 @@ function Rotation() {
         if (currentElement) {
             currentElement.innerHTML = newPosition;
         }
-        self.setTargetActive(newPosition, rootNode, self.getTargetElements(rootNode));
-        self.setTargetActive(newPosition, rootNode, self.getTargetRelElements(rootNode));
-        self.setTargetActive(newPosition, rootNode, self.getPickerElements(rootNode));
+        self.setTargetActive(newPosition, rootNode, self.getTargetElements(rootNode), true);
+        self.setTargetActive(newPosition, rootNode, self.getTargetRelElements(rootNode), false);
+        self.setTargetActive(newPosition, rootNode, self.getPickerElements(rootNode), false);
     };
 
     self.setVisibleByActive = function (element) {

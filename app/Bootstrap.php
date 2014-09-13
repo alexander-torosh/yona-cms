@@ -112,6 +112,7 @@ class Bootstrap
          */
         $cmsModel = new \Cms\Model\Configuration();
         $cms = $cmsModel->getConfig();
+        // @todo Будет отдельный раздел конфигурации для управления языками. Пока заглушка.
         $cms['languages'] = [[
             'name' => 'Русский',
             'iso' => 'ru',

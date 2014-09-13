@@ -44,6 +44,7 @@ $config = array(
             'Page' => APPLICATION_PATH . '/modules/Page',
             'Publication' => APPLICATION_PATH . '/modules/Publication',
             'Seo' => APPLICATION_PATH . '/modules/Seo',
+            'Slider' => APPLICATION_PATH . '/modules/Slider',
         ),
     ),
     'modules' => array(
@@ -86,6 +87,10 @@ $config = array(
         'seo' => array(
             'className' => 'Seo\Module',
             'path' => APPLICATION_PATH . '/modules/Seo/Module.php'
+        ),
+        'slider' => array(
+            'className' => 'Slider\Module',
+            'path' => APPLICATION_PATH . '/modules/Slider/Module.php'
         ),
     ),
     'database' => $env[APPLICATION_ENV]['database'],
