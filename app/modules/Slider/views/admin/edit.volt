@@ -35,6 +35,7 @@
 
 
     <div class="ui segment">
+        <h5>Выбрать изображения для загрузки</h5>
         {{ form.render('image[]') }}
     </div>
 
