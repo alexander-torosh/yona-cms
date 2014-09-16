@@ -161,16 +161,18 @@ class AdminController extends Controller
 
         $itemsData = $this->request->getPost('items');
 
-        foreach ($itemsData as $k => $v) {
-            $imageModel = Image::findFirst('id = ' . $k . ' AND slider_id = ' . $slider_id);
-            $imageModel->setSortOrder($v['sort']);
-            $imageModel->setCaption($v['text']);
-            $imageModel->setLink($v['link']);
-            $imageModel->update();
+        if (count($itemsData)){
+            foreach ($itemsData as $k => $v) {
+                $imageModel = Image::findFirst('id = ' . $k . ' AND slider_id = ' . $slider_id);
+                $imageModel->setSortOrder($v['sort']);
+                $imageModel->setCaption($v['text']);
+                $imageModel->setLink($v['link']);
+                $imageModel->update();
 
-            $query = 'foreign_id = ' . $k . ' AND lang = "' . LANG . '"'; //for \Application\Mvc\Model->getTranslations();
-            $key = HOST_HASH . md5('slider_image_translate ' . $query);
-            $this->cache->delete($key);
+                $query = 'foreign_id = ' . $k . ' AND lang = "' . LANG . '"'; //for \Application\Mvc\Model->getTranslations();
+                $key = HOST_HASH . md5('slider_image_translate ' . $query);
+                $this->cache->delete($key);
+            }
         }
 
         $this->response->setHeader('Content-Type', 'text/plain');
