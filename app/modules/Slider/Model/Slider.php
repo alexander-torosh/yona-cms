@@ -20,8 +20,8 @@ class Slider extends Model
 
     public $id;
     public $title;
-    public $animation_speed;
-    public $delay;
+    public $animation_speed = 300;
+    public $delay = 5;
     public $visible;
 
     public function initialize()
@@ -52,6 +52,16 @@ class Slider extends Model
 
     }
 
+    public function beforeSave()
+    {
+        if (empty ($this->animation_speed)){
+            $this->animation_speed = 300;
+        }
+
+        if (empty ($this->delay)){
+            $this->delay = 5;
+        }
+    }
 
     /**
      * @param int $visible

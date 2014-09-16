@@ -76,7 +76,7 @@
                             <div style="margin-top: 10px;"></div>
                             {% set text = image.getCaption() %}
                             <textarea class="description live-edit live-input {{ helper.constant('LANG') }}-gallery"
-                                      style="display: none; ">{{ image.getCaption() }}</textarea>
+                                      style="display: none; height: 114px;">{{ image.getCaption() }}</textarea>
 
                             <p class="description to-edit {{  helper.constant('LANG') }}-gallery">{{ image.getCaption() }}</p>
 
@@ -143,18 +143,17 @@
         title: {
             identifier: 'title',
             rules: [
-                {type: 'empty'}
-            ]
-        },
-        location: {
-            identifier: 'location',
-            rules: [
-                {type: 'empty'}
+                {
+                    type: 'empty',
+                    prompt : 'Укажите название слайдера'
+                }
             ]
         }
     }, {
         onSuccess: function () {
-            return saveGallery();
+            {% if model is not empty and model.getId() %}
+                return saveGallery();
+            {% endif %}
         }
     });
 </script><!--/end ui semantic-->

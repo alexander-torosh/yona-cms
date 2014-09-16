@@ -111,7 +111,8 @@ function liveEdit() {
         var langClass = '.' + document.lang + '-gallery';
         $(this).hide().siblings('textarea' + langClass).css({
             display: 'block',
-            height: 159
+            height: 114,
+            "min-height": 70
         }).focus();
         var $myLiveEdit = $(this).siblings('textarea' + langClass),
             $button = $(this);
