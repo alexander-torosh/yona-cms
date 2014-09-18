@@ -1,5 +1,6 @@
 {% if slider is not empty %}
     {% set images = slider.cachedImages() %}
+    <?php echo count($images); ?>
     <div id="slider-{{ slider.getId() }}"
          data-rotation="target: .items > .item; pickerItems: .nav > li; nav: .arrows; interval: {{ slider.getDelay() }}; animationSpeed: {{ slider.getAnimationSpeed() }};">
         <div class="arrows">

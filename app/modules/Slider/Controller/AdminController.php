@@ -124,6 +124,7 @@ class AdminController extends Controller
         $this->view->cleanTemplateBefore();
 
         $model = Image::findFirst(array('id = ' . $id));
+        $slider_id = $model->getSliderId();
 
         if ($model) {
             $imageFilter = new \Image\Filter(array(
@@ -168,10 +169,6 @@ class AdminController extends Controller
                 $imageModel->setCaption($v['text']);
                 $imageModel->setLink($v['link']);
                 $imageModel->update();
-
-                $query = 'foreign_id = ' . $k . ' AND lang = "' . LANG . '"'; //for \Application\Mvc\Model->getTranslations();
-                $key = HOST_HASH . md5('slider_image_translate ' . $query);
-                $this->cache->delete($key);
             }
         }
 

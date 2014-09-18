@@ -37,6 +37,19 @@ class Slider extends Model
 
     }
 
+    public function afterUpdate()
+    {
+        $cache = $this->getDi()->get('cache');
+
+        $query = "id = {$this->id} AND visible = 1";
+        $key = HOST_HASH . md5("Slider::findCachedById($query)");
+        $cache->delete($key);
+
+        $key = HOST_HASH . md5("Slider::cachedImages({$this->id})");
+        $cache->delete($key);
+    }
+
+
     public function beforeValidation()
     {
         $this->setVisible((isset($_POST['visible'])) ? 1 : 0);
@@ -54,14 +67,10 @@ class Slider extends Model
 
     public static function findCachedById($id)
     {
-        $query = "id = :id: AND visible = :visible:";
+        $query = "id = {$id} AND visible = 1";
         $key = HOST_HASH . md5("Slider::findCachedById($query)");
         $slider = self::findFirst(array(
             $query,
-            'bind' => array(
-                'id' => $id,
-                'visible' => 1,
-            ),
             'cache' => array(
                 'key' => $key,
                 'lifetime' => 60,
@@ -72,14 +81,11 @@ class Slider extends Model
 
     public function cachedImages()
     {
-        $query = "slider_id = :slider_id:";
-        $key = HOST_HASH . md5("Slider::cachedImages($query)");
+        $query = "slider_id = {$this->id}";
+        $key = HOST_HASH . md5("Slider::cachedImages({$this->id})");
         $images = SliderImage::find(array(
             $query,
             'order' => 'sortorder ASC',
-            'bind' => array(
-                'slider_id' => $this->id,
-            ),
             'cache' => array(
                 'key' => $key,
                 'lifetime' => 60,
@@ -96,6 +102,7 @@ class Slider extends Model
 
         if (empty ($this->delay)){
             $this->delay = 5;
+        }
     }
 
     /**
