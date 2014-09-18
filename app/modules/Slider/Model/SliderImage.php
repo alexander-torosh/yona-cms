@@ -36,6 +36,10 @@ class SliderImage extends Model
 
     }
 
+    public function afterDelete()
+    {
+        echo $this->id; exit;
+    }
     /**
      * @param mixed $id
      */
