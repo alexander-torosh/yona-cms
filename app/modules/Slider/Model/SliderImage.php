@@ -36,10 +36,14 @@ class SliderImage extends Model
 
     }
 
-    public function afterDelete()
+    public function afterUpdate()
     {
-        echo $this->id; exit;
+        $cache = $this->getDi()->get('cache');
+        $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"'; //for \Application\Mvc\Model->getTranslations();
+        $transKey = HOST_HASH . md5('slider_image_translate ' . $query);
+        $cache->delete($transKey);
     }
+
     /**
      * @param mixed $id
      */
