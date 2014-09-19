@@ -17,11 +17,11 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-video') }}" href="/video/admin">
                 <i class="video icon"></i> Видео
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="/widget/admin">
-                <i class="code icon"></i> Виджеты
-            </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
                 <i class="resize horizontal icon"></i> Слайдеры
+            </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="/widget/admin">
+                <i class="text file icon"></i> Статические виджеты
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="/file-manager">
                 <i class="attachment icon"></i> Файловый менеджер
@@ -48,8 +48,8 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="/cms/translate">
                 <i class="book icon"></i> Переводы
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}" href="/cms/javascript/index/top">
-                <i class="ordered list icon"></i> JS скрипты
+            <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}" href="/cms/javascript">
+                <i class="code icon"></i> {{ '<head>, <body> javascript'|escape }}
             </a>
         </div>
     </div>

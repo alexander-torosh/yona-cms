@@ -16,7 +16,7 @@
                     </td>
                     <td class="ui input small">
                         {% set translation = model.findByPhraseAndLang(phrase) %}
-                        <input type="text" name="{{ phrase }}" value="{% if translation %}{{ translation.getTranslation() }}{% endif %}">
+                        <input type="text" name="{{ phrase|escape }}" value="{% if translation %}{{ translation.getTranslation()|escape }}{% endif %}">
                     </td>
                 </tr>
             {% endfor %}

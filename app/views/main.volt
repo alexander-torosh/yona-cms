@@ -47,14 +47,13 @@ $this->assets->collection('js')
 
     {{ assets.outputJs('js') }}
 
-    <script type="text/javascript">
-        {{ helper.javascript('top') }}
-    </script>
+    {{ helper.javascript('head') }}
+
 </head>
 <body{% if view.bodyClass %} class="{{ view.bodyClass }}"{% endif %}>
 
 <header>
-        {{ partial('main/header') }}
+    {{ partial('main/header') }}
 </header>
 
 {{ partial('main/menu') }}
@@ -73,8 +72,7 @@ $this->assets->collection('js')
     {{ helper.dbProfiler() }}
 {% endif %}
 
-<script type="text/javascript">
-    {{ helper.javascript('bottom') }}
-</script>
+{{ helper.javascript('body') }}
+
 </body>
 </html>

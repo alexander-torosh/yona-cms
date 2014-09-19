@@ -24,12 +24,15 @@ class AdminController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-slider');
+        $this->view->languages_disabled = true;
+
     }
 
     public function indexAction()
     {
         $this->view->entries = Slider::find();
         $this->view->title = 'Список слайдеров';
+
     }
 
     public function addAction()
@@ -37,7 +40,6 @@ class AdminController extends Controller
         $this->view->pick('admin/edit');
         $form = new SliderForm();
         $model = new Slider();
-
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $model);

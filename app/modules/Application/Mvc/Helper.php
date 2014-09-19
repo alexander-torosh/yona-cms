@@ -128,7 +128,9 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function javascript($id)
     {
         $javascript = \Cms\Model\Javascript::findCachedById($id);
-        return $javascript->getText();
+        if ($javascript) {
+            return $javascript->getText();
+        }
     }
 
 }

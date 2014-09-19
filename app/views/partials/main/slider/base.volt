@@ -13,7 +13,7 @@
     <section class="items">
         {% for image in images %}
             <section class="item{% if 1 == loop.index %} active{% endif %}">
-                <a href="{{ image.getLink() }}" title="{{ image.getCaption() }}" rel="nofollow">
+                <a{% if image.getLink() %} href="{{ image.getLink() }}"{% endif %}{% if image.getCaption() %} title="{{ image.getCaption() }}"{% endif %} rel="nofollow">
                     {% set img = helper.image([
                     'type': 'slider',
                     'id': image.getId(),

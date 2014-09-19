@@ -32,11 +32,17 @@
             Пожалуйста, не проводите никаких действий до окончания работ.
         </div>
     {% endif %}
+
     {% if title is defined %}
         <h1>{{ title }}</h1>
     {% endif %}
-    {{ partial('admin/languages') }}
+
+    {% if not languages_disabled %}
+        {{ partial('admin/languages') }}
+    {% endif %}
+
     {{ flash.output() }}
+
     {{ content() }}
 </div>
 </body>

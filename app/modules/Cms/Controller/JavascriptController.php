@@ -17,38 +17,39 @@ class JavascriptController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-javascript');
+        $this->view->languages_disabled = true;
 
     }
 
-    public function indexAction($id)
+    public function indexAction()
     {
-        $model = Javascript::findFirst(array("id = '$id'"));
+        $head = Javascript::findFirst("id = 'head'");
+        $body = Javascript::findFirst("id = 'body'");
+
         $form = new JavascriptForm();
 
         if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
-            if ($form->isValid()) {
-                if ($model->save()) {
+            if ($form->isValid($this->request->getPost())) {
+                $head->setText($this->request->getPost('head'));
+                $body->setText($this->request->getPost('body'));
+                if ($head->save() && $body->save()) {
                     $this->flash->success('Информация обновлена');
-                    return $this->redirect('/cms/javascript/index/' . $id);
+                    return $this->redirect('/cms/javascript');
                 } else {
-                    $this->flash->error('Информация не обновлена');
+                    $this->flash->error('Ошибка сохранения');
                 }
             } else {
-                $this->flash->error('Информация не обновлена');
+                $this->flashErrors($form);
             }
         } else {
-            $form->setEntity($model);
+            $form->get('head')->setDefault($head->getText());
+            $form->get('body')->setDefault($body->getText());
         }
 
-
-        ${$id} = 'active'; //init $bottom or $top variable
-
-        $title = 'Редактировать скрипты сайта';
+        $title = htmlentities('<head>, <body> javascript');
         $this->helper->title($title);
-        $this->view->top = $top;
-        $this->view->bottom = $bottom;
         $this->view->title = $title;
+
         $this->view->form = $form;
     }
 

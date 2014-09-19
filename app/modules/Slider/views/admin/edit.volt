@@ -33,6 +33,7 @@
         <input type="hidden" name="form" value="1">
     </div>
 
+    {{ partial('admin/languages') }}
 
     <div class="ui segment">
         <h5>Выбрать изображения для загрузки</h5>
