@@ -24,6 +24,8 @@ abstract class Form extends \Phalcon\Forms\Form
 
         $element = $this->get($name);
 
+		$helper = $this->getDI()->get('helper');
+
         $messages = $this->getMessagesFor($element->getName());
 
         $html = '';
@@ -59,7 +61,7 @@ abstract class Form extends \Phalcon\Forms\Form
                 {
                     $html .= '<div class="inline field">';
                     if ($element->getLabel()) {
-                        $html .= '<label for="' . $element->getName() . '">' . $element->getLabel() . '</label>';
+                        $html .= '<label for="' . $element->getName() . '">' . $helper->translate($element->getLabel()) . '</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
@@ -69,7 +71,7 @@ abstract class Form extends \Phalcon\Forms\Form
                     {
                     $html .= '<div class="field">';
                     if ($element->getLabel()) {
-                        $html .= '<label for="' . $element->getName() . '">' . $element->getLabel() . '</label>';
+                        $html .= '<label for="' . $element->getName() . '">' . $helper->translate($element->getLabel()) . '</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
