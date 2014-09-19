@@ -48,6 +48,9 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="/cms/translate">
                 <i class="book icon"></i> Переводы
             </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}" href="/cms/javascript/index/top">
+                <i class="ordered list icon"></i> JS скрипты
+            </a>
         </div>
     </div>
     <a href="/admin/index/logout" class="item right">

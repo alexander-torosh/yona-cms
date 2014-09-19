@@ -46,6 +46,10 @@ $this->assets->collection('js')
     {#<script src="http://maps.google.com/maps/api/js?sensor=false"></script>#}
 
     {{ assets.outputJs('js') }}
+
+    <script type="text/javascript">
+        {{ helper.javascript('top') }}
+    </script>
 </head>
 <body{% if view.bodyClass %} class="{{ view.bodyClass }}"{% endif %}>
 
@@ -69,5 +73,8 @@ $this->assets->collection('js')
     {{ helper.dbProfiler() }}
 {% endif %}
 
+<script type="text/javascript">
+    {{ helper.javascript('bottom') }}
+</script>
 </body>
 </html>

@@ -125,4 +125,10 @@ class Helper extends \Phalcon\Mvc\User\Component
         return $html;
     }
 
+    public function javascript($id)
+    {
+        $javascript = \Cms\Model\Javascript::findCachedById($id);
+        return $javascript->getText();
+    }
+
 }
