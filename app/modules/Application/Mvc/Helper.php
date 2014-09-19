@@ -111,11 +111,16 @@ class Helper extends \Phalcon\Mvc\User\Component
     {
         $slider = \Slider\Model\Slider::findCachedById($id);
 
-        $view = clone($this->getDI()->get('view'));
-        $view->start();
-        $view->partial('main/slider/base', array('slider' => $slider));
-        $html = ob_get_contents();
-        $view->finish();
+        if ($slider && count($slider->cachedImages()))
+        {
+            $view = clone($this->getDI()->get('view'));
+            $view->start();
+            $view->partial('main/slider/base', array('slider' => $slider));
+            $html = ob_get_contents();
+            $view->finish();
+        } else {
+            $html = '';
+        }
 
         return $html;
     }
