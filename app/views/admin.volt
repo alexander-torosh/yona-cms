@@ -10,6 +10,9 @@
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
     <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+
+    {{ assets.outputCss('modules-admin-css') }}
+
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
 
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>

@@ -109,20 +109,8 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function slider($id)
     {
-        $slider = \Slider\Model\Slider::findCachedById($id);
-
-        if ($slider && count($slider->cachedImages()))
-        {
-            $view = clone($this->getDI()->get('view'));
-            $view->start();
-            $view->partial('main/slider/base', array('slider' => $slider));
-            $html = ob_get_contents();
-            $view->finish();
-        } else {
-            $html = '';
-        }
-
-        return $html;
+        $helper = new \Slider\Mvc\Helper();
+        return $helper->slider($id);
     }
 
     public function javascript($id)

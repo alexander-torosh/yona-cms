@@ -1,6 +1,6 @@
 <?php
 
-$root = $_SERVER['DOCUMENT_ROOT'];
+$root = ROOT;
 $this->assets->collection('js')
 ->addJs($root . "/vendor/history/native.history.js")
 ->addJs($root . "/vendor/noty/jquery.noty.js")
@@ -32,6 +32,8 @@ $this->assets->collection('js')
     {{ helper.meta().get('keywords') }}
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+    {{ assets.outputCss('modules-css') }}
 
     <!--less-->
     <link href="/static/less/style.less" rel="stylesheet/less" type="text/css">

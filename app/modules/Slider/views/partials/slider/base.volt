@@ -1,5 +1,5 @@
 {% set images = slider.cachedImages() %}
-<div id="slider-{{ slider.getId() }}"
+<div class="yona slider"
      data-rotation="target: .items > .item; pickerItems: .nav > li; nav: .arrows; interval: {{ slider.getDelay() }}; animationSpeed: {{ slider.getAnimationSpeed() }};">
     <div class="arrows">
         <div class="nav-el prev">prev</div>

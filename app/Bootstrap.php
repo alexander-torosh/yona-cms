@@ -130,16 +130,6 @@ class Bootstrap
         $application->registerModules($config->modules->toArray());
 
 
-        $router = new \Application\Mvc\Router\DefaultRouter();
-        foreach ($application->getModules() as $module) {
-            $className = str_replace('Module', 'Routes', $module['className']);
-            if (class_exists($className)) {
-                $class = new $className();
-                $router = $class->init($router);
-            }
-        }
-        $di->set('router', $router);
-
         $eventsManager = new \Phalcon\Events\Manager();
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
@@ -175,8 +165,20 @@ class Bootstrap
         $acl = new \Application\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
-        $assets = new \Phalcon\Assets\Manager();
-        $di->set('assets', $assets);
+        $assetsManager = new \Phalcon\Assets\Manager();
+        $assetsManager->collection('modules-css')
+            ->setLocal(true)
+            ->addFilter(new \Phalcon\Assets\Filters\Cssmin())
+            ->setTargetPath(ROOT . '/assets/modules-css.css')
+            ->setTargetUri('assets/modules-css.css')
+            ->join(true);
+        $assetsManager->collection('modules-admin-css')
+            ->setLocal(true)
+            ->addFilter(new \Phalcon\Assets\Filters\Cssmin())
+            ->setTargetPath(ROOT . '/assets/modules-admin-css.css')
+            ->setTargetUri('assets/modules-admin-css.css')
+            ->join(true);
+        $di->set('assets', $assetsManager);
 
         $flash = new \Phalcon\Flash\Session(array(
             'error' => 'ui red inverted segment',
@@ -190,9 +192,20 @@ class Bootstrap
 
         $di->set('registry', $registry);
 
-        $assetsManager = new \Phalcon\Assets\Manager();
-        $di->set('assets', $assetsManager);
-
+        $router = new \Application\Mvc\Router\DefaultRouter();
+        foreach ($application->getModules() as $module) {
+            $routesClassName = str_replace('Module', 'Routes', $module['className']);
+            if (class_exists($routesClassName)) {
+                $routesClass = new $routesClassName();
+                $router = $routesClass->init($router);
+            }
+            $initClassName = str_replace('Module', 'Init', $module['className']);
+            if (class_exists($initClassName)) {
+                $initClass = new $initClassName();
+                $initClass->init($di);
+            }
+        }
+        $di->set('router', $router);
 
         $application->setDI($di);
 
