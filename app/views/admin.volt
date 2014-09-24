@@ -11,7 +11,11 @@
 
     <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
 
-    {{ assets.outputCss('modules-admin-css') }}
+    <!--less-->
+    {{ assets.outputLess('modules-admin-less') }}
+
+    <script src="/vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
+    <!--/less-->
 
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
 

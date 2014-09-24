@@ -1,4 +1,3 @@
-<link href="/static/css/admin/slider.css" rel="stylesheet" type="text/css" />
 <script src="/static/js/admin/slider.js"></script>
 <script type="text/javascript" src="/vendor/js/jquery-ui.min.js"></script>
 

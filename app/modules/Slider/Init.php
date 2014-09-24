@@ -14,11 +14,11 @@ class Init
         // CSS
         $assets = $di->get('assets');
 
-        $assets->collection('modules-css')
-            ->addCss(__DIR__ . '/assets/main.css');
+        $assets->collection('modules-less')
+            ->addCss(__DIR__ . '/assets/main.less');
 
-        $assets->collection('modules-admin-css')
-            ->addCss(__DIR__ . '/assets/admin.css');
+        $assets->collection('modules-admin-less')
+            ->addCss(__DIR__ . '/assets/admin.less');
     }
 
 } 

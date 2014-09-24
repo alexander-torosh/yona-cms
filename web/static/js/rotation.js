@@ -126,7 +126,6 @@ function Rotation() {
                     if (interval > 0) {
                         if (self.timerPosition >= interval && self.timerPosition % interval == 0) {
                             self.next(elem);
-                            console.log(self.timerPosition);
                         }
                     }
                 }

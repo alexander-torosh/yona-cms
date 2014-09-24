@@ -165,19 +165,40 @@ class Bootstrap
         $acl = new \Application\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
-        $assetsManager = new \Phalcon\Assets\Manager();
-        $assetsManager->collection('modules-css')
+        $assetsManager = new \Application\Assets\Manager();
+        $assetsManager->collection('js')
             ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Cssmin())
-            ->setTargetPath(ROOT . '/assets/modules-css.css')
-            ->setTargetUri('assets/modules-css.css')
-            ->join(true);
-        $assetsManager->collection('modules-admin-css')
+            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
+            ->setTargetPath(ROOT . '/assets/js.js')
+            ->setTargetUri('assets/js.js')
+            ->join(true)
+
+            ->addJs(ROOT . "/vendor/history/native.history.js")
+            ->addJs(ROOT . "/vendor/noty/jquery.noty.js")
+            ->addJs(ROOT . "/vendor/noty/themes/default.js")
+            ->addJs(ROOT . "/vendor/noty/layouts/center.js")
+            ->addJs(ROOT . "/vendor/fancybox/jquery.fancybox.pack.js")
+            ->addJs(ROOT . "/static/js/library.js")
+            ->addJs(ROOT . "/static/js/rotation.js")
+            ->addJs(ROOT . "/static/js/main.js")
+            ->addJs(ROOT . "/static/js/ajax.js");
+
+        $assetsManager->collection('modules-less')
             ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Cssmin())
-            ->setTargetPath(ROOT . '/assets/modules-admin-css.css')
-            ->setTargetUri('assets/modules-admin-css.css')
+            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
+            ->addFilter(new \Application\Assets\Filter\Less())
+            ->setTargetPath(ROOT . '/assets/modules.less')
+            ->setTargetUri('assets/modules.less')
             ->join(true);
+
+        $assetsManager->collection('modules-admin-less')
+            ->setLocal(true)
+            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
+            ->addFilter(new \Application\Assets\Filter\Less())
+            ->setTargetPath(ROOT . '/assets/modules-admin.less')
+            ->setTargetUri('assets/modules-admin.less')
+            ->join(true);
+
         $di->set('assets', $assetsManager);
 
         $flash = new \Phalcon\Flash\Session(array(

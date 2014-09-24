@@ -1,25 +1,4 @@
-<?php
-
-$root = ROOT;
-$this->assets->collection('js')
-->addJs($root . "/vendor/history/native.history.js")
-->addJs($root . "/vendor/noty/jquery.noty.js")
-->addJs($root . "/vendor/noty/themes/default.js")
-->addJs($root . "/vendor/noty/layouts/center.js")
-->addJs($root . "/vendor/fancybox/jquery.fancybox.pack.js")
-->addJs($root . "/static/js/library.js")
-->addJs($root . "/static/js/rotation.js")
-->addJs($root . "/static/js/main.js")
-->addJs($root . "/static/js/ajax.js");
-
-$this->assets->collection('js')
-->setLocal(true)
-->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-->setTargetPath($root . '/assets/js.js')
-->setTargetUri('assets/js.js')
-->join(true);
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -33,21 +12,31 @@ $this->assets->collection('js')
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    {{ assets.outputCss('modules-css') }}
+    <!--css reset-->
+    <link href="/vendor/css/reset.min.css" rel="stylesheet" type="text/css">
+    <!--css reset -->
+
+    <!--css lib-->
+    <link href="/vendor/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--/css lib-->
 
     <!--less-->
+    {{ assets.outputLess('modules-less') }}
     <link href="/static/less/style.less" rel="stylesheet/less" type="text/css">
+
     <script src="/vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
     <!--/less-->
 
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="/static/vendor/js/html5shiv.js"></script>
     <![endif]-->
-    {#<script src="http://maps.google.com/maps/api/js?sensor=false"></script>#}
 
+    <!--js-->
     {{ assets.outputJs('js') }}
+    <!--/js-->
 
     {{ helper.javascript('head') }}
 
