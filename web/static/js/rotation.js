@@ -1,9 +1,5 @@
-function nodeHasClass(el, clss) {
-    return el.className && new RegExp("(^|\\s)" + clss + "(\\s|$)").test(el.className);
-}
-
-/*<!--Rotation-->*/
 /**
+ * Rotation
  * Documentation
  *
  * Библиотека для универсального управления элементами со сменным содержимим по принципу "листалки" или "rotation"
@@ -46,10 +42,8 @@ function nodeHasClass(el, clss) {
  *
  * pickerItems - (селектор) элементы, которые используются для точечного выбора текущей позиции.
  * Элементы должны содержать атрибут data-pos="1" со значением позиции на которую произойдет перелистывание при клике на этот элемент.
- * Например widget('Index').top() - квадратики указывающие текущую позицию, а также widget('Index').publication-pkr() - Активный раздел
  *
  * targetRel - (селектор) сопряженные элементы, которые перелистываются при изменении текущей позиции при перелистывании.
- * Например widget('Index').top() и изображения в его левой части, которые также перелистываются
  *
  * Если любое из свойств не задано - оно не используется. Значений по умолчанию нет.
  **/
@@ -233,7 +227,7 @@ function Rotation() {
             if ((newPosition - 1) === i) {
                 if (itemNode) {
                     itemNode.classList.add('active');
-                    if (slide) {
+                    if (slide === true) {
                         if (animationSpeed != null) {
                             $(itemNode).css('display', 'block').animate({opacity: 1}, animationSpeed);
                         } else {
@@ -245,7 +239,7 @@ function Rotation() {
             } else {
                 if (itemNode) {
                     itemNode.classList.remove('active');
-                    if (slide) {
+                    if (slide === true) {
                         if (animationSpeed != null) {
                             $(itemNode).css('display', 'none').animate({opacity: 0}, animationSpeed);
                         } else {
@@ -296,4 +290,7 @@ function Rotation() {
     };
 
 }
-/*<!--/Rotation-->*/
+
+function nodeHasClass(el, clss) {
+    return el.className && new RegExp("(^|\\s)" + clss + "(\\s|$)").test(el.className);
+}

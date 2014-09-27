@@ -29,8 +29,8 @@
     <div class="nav">
         <ul>
             {% for item in images %}
-                <li class="{% if 1 == loop.index %} active{% endif %}"
-                    data-pos="{{ loop.index }}"><i class="fa fa-circle"></i></li>
+                <li class="fa fa-circle{% if 1 == loop.index %} active{% endif %}"
+                    data-pos="{{ loop.index }}"></li>
             {% endfor %}
         </ul>
     </div>
