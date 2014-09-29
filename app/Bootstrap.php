@@ -139,6 +139,9 @@ class Bootstrap
             new AclPlugin($di->get('acl'), $dispatcher);
         });
 
+        $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {
+            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'));
+        });
 
         $profiler = new \Phalcon\Db\Profiler();
 
@@ -254,7 +257,7 @@ class Bootstrap
         $tmpModuleNameArr = explode('-', $router->getModuleName());
         $moduleName = '';
         foreach ($tmpModuleNameArr as $part) {
-            $moduleName .= ucfirst($part);
+            $moduleName .= \Phalcon\Text::camelize($part);
         }
 
         $ModuleClassName = $moduleName . '\Module';

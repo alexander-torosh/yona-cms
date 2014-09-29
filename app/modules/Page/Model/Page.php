@@ -18,12 +18,12 @@ class Page extends Model
     protected $translateModel = 'Page\Model\Translate\PageTranslate';
 
     public $id;
-    public $title;
+    public $title; // translate
     public $slug;
-    public $text;
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
+    public $text; // translate
+    public $meta_title; // translate
+    public $meta_description; // translate
+    public $meta_keywords; // translate
     public $created_at;
     public $updated_at;
 

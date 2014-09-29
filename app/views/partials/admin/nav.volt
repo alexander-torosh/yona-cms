@@ -31,8 +31,11 @@
     <div class="ui dropdown item">
         <i class="lab icon"></i> SEO <i class="icon dropdown"></i>
         <div class="menu">
-            <a class="item{{ helper.activeMenu().activeClass('seo-admin-robots') }}" href="/seo/robots">
+            <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="/seo/robots">
                 <i class="android icon"></i> Robots.txt
+            </a>
+            <a class="item{{ helper.activeMenu().activeClass('seo-manager') }}" href="/seo/manager">
+                <i class="lightbulb icon"></i> SEO Менеджер
             </a>
         </div>
     </div>
