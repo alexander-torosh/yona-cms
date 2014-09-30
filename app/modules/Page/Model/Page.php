@@ -15,11 +15,11 @@ class Page extends Model
         return "page";
     }
 
-    protected $translateModel = 'Page\Model\Translate\PageTranslate';
+    protected $translateModel = 'Page\Model\Translate\PageTranslate'; // translate
 
     public $id;
-    public $title; // translate
     public $slug;
+    public $title; // translate
     public $text; // translate
     public $meta_title; // translate
     public $meta_description; // translate
@@ -29,7 +29,7 @@ class Page extends Model
 
     public function initialize()
     {
-        $this->hasMany("id", $this->translateModel, "foreign_id");
+        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
     public function beforeCreate()

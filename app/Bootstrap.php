@@ -140,7 +140,8 @@ class Bootstrap
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {
-            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'));
+            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
+            new TitlePlugin($di);
         });
 
         $profiler = new \Phalcon\Db\Profiler();

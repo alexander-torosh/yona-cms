@@ -21,7 +21,14 @@ class ManagerController extends Controller
 
     public function indexAction()
     {
+        $entries = Manager::find(array(
+            'order' => 'route ASC, module ASC, controller ASC, action ASC, id ASC'
+        ));
+        $this->view->entries = $entries;
 
+        $title = 'SEO-менеджер';
+        $this->view->title = $title;
+        $this->helper->title($title);
     }
 
     public function addAction()
@@ -55,7 +62,31 @@ class ManagerController extends Controller
 
     public function editAction($id)
     {
+        $model = Manager::findFirst($id);
+        $form = new ManagerForm();
 
+        if ($this->request->isPost()) {
+            $form->bind($this->request->getPost(), $model);
+            if ($form->isValid()) {
+                if ($model->save()) {
+                    $this->flash->success('Информация обновлена');
+                    $this->redirect('/seo/manager/edit/' . $id);
+                } else {
+                    $this->flashErrors($model);
+                }
+            } else {
+                $this->flashErrors($form);
+            }
+        } else {
+            $form->setEntity($model);
+        }
+
+        $title = 'Редактирование записи SEO-менеджера';
+        $this->view->title = $title;
+        $this->helper->title($title);
+
+        $this->view->model = $model;
+        $this->view->form = $form;
     }
 
     public function deleteAction($id)

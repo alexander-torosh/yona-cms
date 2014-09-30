@@ -44,4 +44,9 @@ class Title extends \Phalcon\Mvc\User\Component
         }
     }
 
+    public function set($string)
+    {
+        self::$parts = array($string);
+    }
+
 }
