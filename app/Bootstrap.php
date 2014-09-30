@@ -218,6 +218,7 @@ class Bootstrap
         $di->set('registry', $registry);
 
         $router = new \Application\Mvc\Router\DefaultRouter();
+        $router->setDi($di);
         foreach ($application->getModules() as $module) {
             $routesClassName = str_replace('Module', 'Routes', $module['className']);
             if (class_exists($routesClassName)) {

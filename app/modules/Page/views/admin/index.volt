@@ -19,7 +19,7 @@
         <tr>
             <td><a href="{{ link }}" class="mini ui icon button"><i class="icon edit"></i> id = {{ item.getId() }}</a></td>
             <td><a href="{{ link }}">{{ item.getTitle() }}</a></td>
-            {% set url = url(['for':'page', 'slug':item.getSlug()]) %}
+            {% set url = helper.langUrl(['for':'page', 'slug':item.getSlug()]) %}
             <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
         </tr>
     {% endfor %}

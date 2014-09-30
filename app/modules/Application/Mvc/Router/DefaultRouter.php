@@ -22,35 +22,41 @@ class DefaultRouter extends Router
         $this->setDefaultAction('index');
 
         $this->add('/:module/:controller/:action/:params', array(
-            'module'     => 1,
+            'module' => 1,
             'controller' => 2,
-            'action'     => 3,
-            'params'     => 4
+            'action' => 3,
+            'params' => 4
         ))->setName('default');
         $this->add('/:module/:controller', array(
-            'module'     => 1,
+            'module' => 1,
             'controller' => 2,
-            'action'     => 'index',
+            'action' => 'index',
         ))->setName('default_action');
         $this->add('/:module', array(
-            'module'     => 1,
+            'module' => 1,
             'controller' => 'index',
-            'action'     => 'index',
+            'action' => 'index',
         ))->setName('default_controller');
 
     }
 
-    public function addML($pattern, $paths=null, $name)
+    public function addML($pattern, $paths = null, $name)
     {
-        $this->add($pattern, $paths)->setName($name);
+        $registry = $this->getDI()->get('registry');
+        $languages = $registry->cms['languages'];
 
-        $pattern = '/uk' . $pattern;
-        $paths['lang'] = 'uk';
-        $this->add($pattern, $paths)->setName($name . '_uk');
-
-        $pattern = '/en' . $pattern;
-        $paths['lang'] = 'en';
-        $this->add($pattern, $paths)->setName($name . '_en');
+        $first = true;
+        foreach ($languages as $lang) {
+            if ($first) {
+                $this->add($pattern, $paths)->setName($name);
+                $first = false;
+            } else {
+                $iso = $lang['iso'];
+                $pattern = '/' . $iso . $pattern;
+                $paths['lang'] = $iso;
+                $this->add($pattern, $paths)->setName($name . '_' . $iso);
+            }
+        }
     }
 
 }
