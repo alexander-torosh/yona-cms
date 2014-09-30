@@ -12,7 +12,7 @@ class Title extends \Phalcon\Mvc\User\Component
 {
 
     private static $instance;
-    private static $parts;
+    private static $parts = array();
     private static $separator = ' | ';
 
     public static function getInstance($title = null)
@@ -29,18 +29,29 @@ class Title extends \Phalcon\Mvc\User\Component
 
     public function prepend($string)
     {
-        array_unshift(self::$parts, $string);
+        if ($string) {
+            array_unshift(self::$parts, $string);
+        }
     }
 
     public function append($string)
     {
-        self::$parts[] = $string;
+        if ($string) {
+            self::$parts[] = $string;
+        }
     }
 
     public function get()
     {
         if (!empty(self::$parts)) {
             return implode(self::$separator, self::$parts);
+        }
+    }
+
+    public function set($string)
+    {
+        if ($string) {
+            self::$parts = array($string);
         }
     }
 

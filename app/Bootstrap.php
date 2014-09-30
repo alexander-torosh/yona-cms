@@ -140,7 +140,8 @@ class Bootstrap
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {
-            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'));
+            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
+            new TitlePlugin($di);
         });
 
         $profiler = new \Phalcon\Db\Profiler();
@@ -217,6 +218,7 @@ class Bootstrap
         $di->set('registry', $registry);
 
         $router = new \Application\Mvc\Router\DefaultRouter();
+        $router->setDi($di);
         foreach ($application->getModules() as $module) {
             $routesClassName = str_replace('Module', 'Routes', $module['className']);
             if (class_exists($routesClassName)) {

@@ -16,6 +16,11 @@ class Model extends \Phalcon\Mvc\Model
     protected $translations = array(); // Массив переводов
     protected $translateModel; // Название связанного класса с переводами
 
+    public function initialize()
+    {
+        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
+    }
+
     /**
      * Метод вызывается после извлечения всех полей в модели
      */

@@ -28,12 +28,38 @@
 
     <div class="ui segment">
         {{ form.renderDecorated('custom_name') }}
-        {{ form.renderDecorated('module') }}
-        {{ form.renderDecorated('controller') }}
-        {{ form.renderDecorated('action') }}
+
+        <div class="ui label" style="text-transform: none;">
+            Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно
+        </div>
+
+        <!--tabs-->
+        <div class="ui tabular menu init">
+            <a class="item active" data-tab="route">
+                Route
+            </a>
+            <a class="item" data-tab="mca">
+                Module-Controller-Action
+            </a>
+        </div>
+        <!--/end tabs-->
+
+        <div class="ui tab active" data-tab="route">
+            {{ form.renderDecorated('route') }}
+            {{ form.renderDecorated('route_params_json') }}
+        </div>
+
+        <div class="ui tab" data-tab="mca">
+            {{ form.renderDecorated('module') }}
+            {{ form.renderDecorated('controller') }}
+            {{ form.renderDecorated('action') }}
+        </div>
+
         {{ form.renderDecorated('language') }}
-        {{ form.renderDecorated('route_params_json') }}
         {{ form.renderDecorated('query_params_json') }}
+
+        <hr>
+
         {{ form.renderDecorated('head_title') }}
         {{ form.renderDecorated('meta_description') }}
         {{ form.renderDecorated('meta_keywords') }}
