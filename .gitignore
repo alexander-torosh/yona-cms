@@ -1,2 +1,5 @@
 .idea/
 /app/cache/volt/*.php
+/web/assets/*.less
+/web/assets/*.js
+/web/assets/*.css
