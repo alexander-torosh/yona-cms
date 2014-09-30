@@ -22,8 +22,8 @@ class Bootstrap
 
         $loader = new \Phalcon\Loader();
         $loader->registerNamespaces($config->loader->namespaces->toArray());
-        $loader->register();
         $loader->registerDirs(array(APPLICATION_PATH . "/plugins/"));
+        $loader->register();
 
 
         $db = new \Phalcon\Db\Adapter\Pdo\Mysql(array(
