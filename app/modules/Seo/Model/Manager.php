@@ -8,6 +8,7 @@ namespace Seo\Model;
 
 
 use Application\Mvc\Model;
+use Phalcon\Mvc\Model\Message;
 
 class Manager extends Model
 {
@@ -17,8 +18,11 @@ class Manager extends Model
         return "seo_manager";
     }
 
+    protected $translateModel = 'Seo\Model\Translate\ManagerTranslate';  // translate
+
     public $id;
     public $custom_name;
+    public $route;
     public $module;
     public $controller;
     public $action;
@@ -31,6 +35,40 @@ class Manager extends Model
     public $seo_text; // translate
     public $created_at;
     public $updated_at;
+
+    public function initialize()
+    {
+        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
+    }
+
+    public function validation()
+    {
+        if ($this->route || $this->route_params_json) {
+            if ($this->module || $this->controller || $this->action) {
+                $message = new Message('Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно');
+                $this->appendMessage($message);
+                return false;
+            }
+        }
+        if ($this->route_params_json) {
+            $valid_json = json_decode($this->route_params_json);
+            if (!$valid_json) {
+                $message = new Message('Параметры Route должны быть в формате JSON');
+                $this->appendMessage($message);
+                return false;
+            }
+        }
+        if ($this->query_params_json) {
+            $valid_json = json_decode($this->query_params_json);
+            if (!$valid_json) {
+                $message = new Message('Параметры GET должны быть в формате JSON');
+                $this->appendMessage($message);
+                return false;
+            }
+        }
+
+        return $this->validationHasFailed() != true;
+    }
 
     public function beforeCreate()
     {
@@ -82,19 +120,19 @@ class Manager extends Model
         return $this->custom_name;
     }
 
-    public function setHeadTitle($head_title)
+    public function getRoute()
     {
-        $this->head_title = $head_title;
+        return $this->route;
     }
 
-    public function getHeadTitle()
+    public function setHead_title($head_title)
     {
-        return $this->head_title;
+        $this->setMLVariable('head_title', $head_title);
     }
 
-    public function setId($id)
+    public function getHead_title()
     {
-        $this->id = $id;
+        return $this->getMLVariable('head_title');
     }
 
     public function getId()
@@ -104,7 +142,7 @@ class Manager extends Model
 
     public function setLanguage($language)
     {
-        $this->language = $language;
+        $this->language = ($language) ? $language : null ;
     }
 
     public function getLanguage()
@@ -112,29 +150,29 @@ class Manager extends Model
         return $this->language;
     }
 
-    public function setMetaDescription($meta_description)
+    public function setMeta_description($meta_description)
     {
-        $this->meta_description = $meta_description;
+        $this->setMLVariable('meta_description', $meta_description);
     }
 
-    public function getMetaDescription()
+    public function getMeta_description()
     {
-        return $this->meta_description;
+        return $this->getMLVariable('meta_description');
     }
 
-    public function setMetaKeywords($meta_keywords)
+    public function setMeta_keywords($meta_keywords)
     {
-        $this->meta_keywords = $meta_keywords;
+        $this->setMLVariable('meta_keywords', $meta_keywords);
     }
 
-    public function getMetaKeywords()
+    public function getMeta_keywords()
     {
-        return $this->meta_keywords;
+        return $this->getMLVariable('meta_keywords');
     }
 
     public function setModule($module)
     {
-        $this->module = $module;
+        $this->module = ($module) ? $module : null;
     }
 
     public function getModule()
@@ -162,14 +200,14 @@ class Manager extends Model
         return $this->route_params_json;
     }
 
-    public function setSeoText($seo_text)
+    public function setSeo_text($seo_text)
     {
-        $this->seo_text = $seo_text;
+        $this->setMLVariable('seo_text', $seo_text);
     }
 
-    public function getSeoText()
+    public function getSeo_text()
     {
-        return $this->seo_text;
+        return $this->getMLVariable('seo_text');
     }
 
     public function setUpdatedAt($updated_at)
@@ -182,5 +220,9 @@ class Manager extends Model
         return $this->updated_at;
     }
 
+    public function setRoute($route)
+    {
+        $this->route = $route;
+    }
 
 }

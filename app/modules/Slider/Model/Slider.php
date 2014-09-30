@@ -26,7 +26,7 @@ class Slider extends Model
 
     public function initialize()
     {
-        $this->hasMany("id", "Slider\Model\SliderImage", "slider_id", array(
+        $this->hasMany('id', 'Slider\Model\SliderImage', 'slider_id', array(
             'alias' => 'SliderImages'
         ));
 
