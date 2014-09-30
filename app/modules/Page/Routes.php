@@ -8,16 +8,18 @@
 
 namespace Page;
 
+use Application\Mvc\Router\DefaultRouter;
+
 class Routes
 {
 
-    public function init($router)
+    public function init(DefaultRouter $router)
     {
-        $router->add('/{slug:[a-zA-Z_-]+}.html',array(
+        $router->addML('/{slug:[a-zA-Z_-]+}.html', array(
             'module' => 'page',
             'controller' => 'index',
             'action' => 'index'
-        ))->setName('page');
+        ), 'page');
 
         return $router;
 
