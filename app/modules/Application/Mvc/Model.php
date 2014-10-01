@@ -14,12 +14,21 @@ class Model extends \Phalcon\Mvc\Model
     private static $translateCache = true; // Флаг использования кеша переводов
 
     protected $translations = array(); // Массив переводов
-    protected $translateModel; // Название связанного класса с переводами
+
+    /**
+     * Translate. Для реализации мультиязычной схемы, необходимо скопировать в вашу модель следующие методы:
+     * Start Copy:
+     */
+    protected $translateModel; // translate // Название связанного класса с переводами, например = 'Page\Model\Translate\PageTranslate'
 
     public function initialize()
     {
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
+    /**
+     * End Copy
+     * -----------
+     * */
 
     /**
      * Метод вызывается после извлечения всех полей в модели

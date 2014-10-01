@@ -38,7 +38,11 @@ class SeoManagerPlugin extends Plugin
                 'bind' => array(
                     'route' => $route_name,
                     'language' => LANG,
-                )
+                ),
+                'cache' => array(
+                    'key' => Manager::routeCacheKey($route_name, LANG),
+                    'lifetime' => 60,
+                ),
             ));
             if ($manager_matched_routes) {
                 foreach ($manager_matched_routes as $entry) {

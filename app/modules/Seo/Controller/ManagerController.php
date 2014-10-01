@@ -15,6 +15,7 @@ class ManagerController extends Controller
 
     public function initialize()
     {
+        Manager::setTranslateCache(false);
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('seo-manager');
     }
@@ -69,6 +70,7 @@ class ManagerController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
+                    $this->cache->delete(Manager::routeCacheKey($model->getRoute(), LANG));
                     $this->flash->success('Информация обновлена');
                     $this->redirect('/seo/manager/edit/' . $id);
                 } else {
