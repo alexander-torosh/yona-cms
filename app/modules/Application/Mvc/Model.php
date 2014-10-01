@@ -42,6 +42,15 @@ class Model extends \Phalcon\Mvc\Model
     }
 
     /**
+     * Очищение кеша переводов
+     * Метод вызывается после обновления значений в модели
+     */
+    public function afterUpdate()
+    {
+        $this->deleteTranslateCache();
+    }
+
+    /**
      * Установка языка
      */
     public static function setLang($lang)
@@ -102,6 +111,19 @@ class Model extends \Phalcon\Mvc\Model
         $entity->save();
     }
 
+    public function translateCacheKey()
+    {
+        $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
+        $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
+        return $key;
+    }
+
+    public function deleteTranslateCache()
+    {
+        $cache = $this->getDi()->get('cache');
+        $cache->delete($this->translateCacheKey());
+    }
+
     /**
      * Извлечение массива переводов
      */
@@ -111,9 +133,8 @@ class Model extends \Phalcon\Mvc\Model
         $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
         $params = array('conditions' => $query);
         if (self::$translateCache) {
-            $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
             $params['cache'] = array(
-                'key' => $key,
+                'key' => $this->translateCacheKey(),
                 'lifetime' => 60,
             );
         }

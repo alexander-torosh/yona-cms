@@ -37,6 +37,27 @@ class Type extends Model
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
+    public static function getCachedBySlug($slug)
+    {
+        $result = self::findFirst(array(
+            'slug = :slug:',
+            'bind' => array(
+                'slug' => $slug,
+            ),
+            'cache' => array(
+                'key' => self::cacheSlugKey($slug),
+                'lifetime' => 60,
+            ),
+        ));
+        return $result;
+    }
+
+    public static function cacheSlugKey($slug)
+    {
+        $key = HOST_HASH . md5('Publication\Model\Type::' . $slug);
+        return $key;
+    }
+
     /**
      * @param string $format
      */
@@ -54,27 +75,11 @@ class Type extends Model
     }
 
     /**
-     * @param array $formats
-     */
-    public static function setFormats($formats)
-    {
-        self::$formats = $formats;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getFormats()
-    {
-        return self::$formats;
-    }
-
-    /**
      * @param mixed $head_title
      */
     public function setHeadTitle($head_title)
     {
-        $this->head_title = $head_title;
+        $this->setMLVariable('head_title', $head_title);
     }
 
     /**
@@ -82,7 +87,7 @@ class Type extends Model
      */
     public function getHeadTitle()
     {
-        return $this->head_title;
+        return $this->getMLVariable('head_title');
     }
 
     /**
@@ -122,7 +127,7 @@ class Type extends Model
      */
     public function setMetaDescription($meta_description)
     {
-        $this->meta_description = $meta_description;
+        $this->setMLVariable('meta_description', $meta_description);
     }
 
     /**
@@ -130,7 +135,7 @@ class Type extends Model
      */
     public function getMetaDescription()
     {
-        return $this->meta_description;
+        return $this->getMLVariable('meta_description');
     }
 
     /**
@@ -138,7 +143,7 @@ class Type extends Model
      */
     public function setMetaKeywords($meta_keywords)
     {
-        $this->meta_keywords = $meta_keywords;
+        $this->setMLVariable('meta_keywords', $meta_keywords);
     }
 
     /**
@@ -146,7 +151,7 @@ class Type extends Model
      */
     public function getMetaKeywords()
     {
-        return $this->meta_keywords;
+        return $this->getMLVariable('meta_keywords');
     }
 
     /**
@@ -154,7 +159,7 @@ class Type extends Model
      */
     public function setSeoText($seo_text)
     {
-        $this->seo_text = $seo_text;
+        $this->setMLVariable('seo_text', $seo_text);
     }
 
     /**
@@ -162,7 +167,7 @@ class Type extends Model
      */
     public function getSeoText()
     {
-        return $this->seo_text;
+        return $this->getMLVariable('seo_text');
     }
 
     /**

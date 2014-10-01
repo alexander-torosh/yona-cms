@@ -227,7 +227,7 @@ class Manager extends Model
 
     public static function routeCacheKey($route_name, $lang)
     {
-        $key = HOST_HASH . md5($route_name . $lang);
+        $key = HOST_HASH . md5('Seo\Model\Manager::' . $route_name . $lang);
         return $key;
     }
 
