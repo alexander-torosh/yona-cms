@@ -38,11 +38,18 @@ class AdminController extends Controller
         $model = new Page();
 
         if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
             if ($form->isValid()) {
-                if ($model->save()) {
-                    $this->flash->success('Страница создана');
-                    return $this->redirect('/page/admin/edit/' . $model->getId());
+                if ($model->create()) {
+                    $form->bind($post, $model);
+                    $model->updateFields($post);
+                    if ($model->update()) {
+                        $this->flash->success('Страница создана');
+                        return $this->redirect('/page/admin/edit/' . $model->getId());
+                    } else {
+                        $this->flashErrors($model);
+                    }
                 } else {
                     $this->flashErrors($model);
                 }
@@ -51,10 +58,13 @@ class AdminController extends Controller
             }
         }
 
+        $title = 'Создание страницы';
+        $this->view->title = $title;
+        $this->helper->title($title);
+
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = 'Создание страницы';
-        $this->helper->title('Создание страницы');
+
 
     }
 

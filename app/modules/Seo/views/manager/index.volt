@@ -15,8 +15,8 @@
         <th>Route</th>
         <th>M-C-A</th>
         <th>Язык</th>
-        <th>RouteParams</th>
-        <th>QueryParams</th>
+        <th>Route Params</th>
+        <th>GET Params</th>
     </tr>
     {% for item in entries %}
         {% set link = "/seo/manager/edit/" ~ item.getId() %}

@@ -7,13 +7,14 @@
  */
 namespace Application\Mvc;
 
+use Phalcon\Mvc\Model\Transaction\Manager as TransactionManager;
+
 class Model extends \Phalcon\Mvc\Model
 {
+    protected $translations = array(); // Массив переводов
 
     private static $lang = 'ru'; // Язык по-умолчанию
     private static $translateCache = true; // Флаг использования кеша переводов
-
-    protected $translations = array(); // Массив переводов
 
     /**
      * Translate. Для реализации мультиязычной схемы, необходимо скопировать в вашу модель следующие методы:
@@ -25,10 +26,7 @@ class Model extends \Phalcon\Mvc\Model
     {
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
-    /**
-     * End Copy
-     * -----------
-     * */
+    //End Copy
 
     /**
      * Метод вызывается после извлечения всех полей в модели
@@ -88,6 +86,9 @@ class Model extends \Phalcon\Mvc\Model
 
     public function setMLVariable($key, $value, $lang = null)
     {
+        if (!$this->id) {
+            return false;
+        }
         $model = new $this->translateModel();
         if (!$lang) {
             $lang = self::$lang;
@@ -113,6 +114,9 @@ class Model extends \Phalcon\Mvc\Model
 
     public function translateCacheKey()
     {
+        if (!$this->id) {
+            return false;
+        }
         $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
         $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
         return $key;
@@ -120,6 +124,9 @@ class Model extends \Phalcon\Mvc\Model
 
     public function deleteTranslateCache()
     {
+        if (!$this->id) {
+            return false;
+        }
         $cache = $this->getDi()->get('cache');
         $cache->delete($this->translateCacheKey());
     }
@@ -129,6 +136,9 @@ class Model extends \Phalcon\Mvc\Model
      */
     private function getTranslations()
     {
+        if (!$this->id) {
+            return false;
+        }
         $model = new $this->translateModel();
         $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
         $params = array('conditions' => $query);

@@ -39,11 +39,17 @@ class AdminController extends Controller
         $model = new Publication();
 
         if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
             if ($form->isValid()) {
-                if ($model->save()) {
-                    $this->flash->success('Публикация создана');
-                    return $this->redirect('/publication/admin/edit/' . $model->getId());
+                if ($model->create()) {
+                    $form->bind($post, $model);
+                    if ($model->update()) {
+                        $this->flash->success('Публикация создана');
+                        return $this->redirect('/publication/admin/edit/' . $model->getId());
+                    } else {
+                        $this->flashErrors($model);
+                    }
                 } else {
                     $this->flashErrors($model);
                 }

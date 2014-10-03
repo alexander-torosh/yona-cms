@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @copyright Copyright (c) 2011 - 2014 Oleksandr Torosh (http://wezoom.net)
  * @author Oleksandr Torosh <web@wezoom.net>
  */
@@ -39,11 +39,17 @@ class ManagerController extends Controller
         $form = new ManagerForm();
 
         if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
             if ($form->isValid()) {
-                if ($model->save()) {
-                    $this->flash->success('Запись создана');
-                    $this->redirect('/seo/manager');
+                if ($model->create()) {
+                    $form->bind($post, $model);
+                    if ($model->update()) {
+                        $this->flash->success('Запись создана');
+                        $this->redirect('/seo/manager');
+                    } else {
+                        $this->flashErrors($model);
+                    }
                 } else {
                     $this->flashErrors($model);
                 }

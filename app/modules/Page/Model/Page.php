@@ -42,6 +42,16 @@ class Page extends Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
+    public function updateFields($data)
+    {
+        if (!$this->getSlug()) {
+            $this->setSlug(Transliterator::slugify($data['title']));
+        }
+        if (!$this->getMeta_title()) {
+            $this->setMeta_title($data['title']);
+        }
+    }
+
     public function validation()
     {
         $this->validate(new Uniqueness(
@@ -52,16 +62,6 @@ class Page extends Model
         ));
 
         return $this->validationHasFailed() != true;
-    }
-
-    public function afterValidation()
-    {
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($this->getTitle());
-        }
-        if (!$this->getSlug()) {
-            $this->setSlug(Transliterator::slugify($this->getTitle()));
-        }
     }
 
     public static function findCachedBySlug($slug)
