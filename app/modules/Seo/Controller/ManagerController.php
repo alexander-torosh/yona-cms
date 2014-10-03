@@ -99,7 +99,17 @@ class ManagerController extends Controller
 
     public function deleteAction($id)
     {
+        $model = Manager::findFirst($id);
 
+        if ($this->request->isPost()) {
+            $model->delete();
+            $this->redirect('/seo/manager');
+        }
+
+        $this->view->model = $model;
+        $title = 'Удаление записи SEO-менеджера';
+        $this->view->title = $title;
+        $this->helper->title($title);
     }
 
 } 

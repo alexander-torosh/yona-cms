@@ -182,7 +182,7 @@ class Manager extends Model
 
     public function setQueryParamsJson($query_params_json)
     {
-        $this->query_params_json = $query_params_json;
+        $this->query_params_json = ($query_params_json) ? $query_params_json : null;
     }
 
     public function getQueryParamsJson()
@@ -192,7 +192,7 @@ class Manager extends Model
 
     public function setRouteParamsJson($route_params_json)
     {
-        $this->route_params_json = $route_params_json;
+        $this->route_params_json = ($route_params_json) ? $route_params_json : null ;
     }
 
     public function getRouteParamsJson()

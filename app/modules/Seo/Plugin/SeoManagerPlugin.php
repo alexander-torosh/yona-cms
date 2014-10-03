@@ -66,6 +66,8 @@ class SeoManagerPlugin extends Plugin
                         if (!array_diff_assoc($entry_query_params, $request_params)) {
                             $this->pick($entry);
                         }
+                    } else {
+                        $this->pick($entry);
                     }
                 }
             }
