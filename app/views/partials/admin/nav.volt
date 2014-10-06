@@ -11,12 +11,12 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}" href="/publication/admin">
                 <i class="calendar icon"></i> Публикации
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-projects') }}" href="/projects/admin">
+            {#<a class="item{{ helper.activeMenu().activeClass('admin-projects') }}" href="/projects/admin">
                 <i class="home icon"></i> Проекты
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-video') }}" href="/video/admin">
                 <i class="video icon"></i> Видео
-            </a>
+            </a>#}
             <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
                 <i class="resize horizontal icon"></i> Слайдеры
             </a>
@@ -47,6 +47,9 @@
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
                 <i class="settings icon"></i> Конфигурация
+            </a>
+            <a class="item{{ helper.activeMenu().activeClass('admin-language') }}" href="/cms/language">
+                <i class="globe icon"></i> Языки
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="/cms/translate">
                 <i class="book icon"></i> Переводы

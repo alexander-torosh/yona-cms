@@ -19,6 +19,7 @@ class AdminUserController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-user');
+        $this->view->languages_disabled = true;
 
     }
 

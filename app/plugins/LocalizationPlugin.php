@@ -5,50 +5,38 @@
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
-use Phalcon\Mvc\User\Plugin,
-    Phalcon\Mvc\Dispatcher;
+
+use Phalcon\Mvc\User\Plugin;
+use Phalcon\Mvc\Dispatcher;
 
 class LocalizationPlugin extends Plugin
 {
 
     public function __construct(Dispatcher $dispatcher)
     {
-        $request   = $this->getDI()->get('request');
+        $languages = \Cms\Model\Language::findCachedLanguages();
+        $defaultLang = $languages[0];
+
+        $request = $this->getDI()->get('request');
         $queryLang = $request->getQuery('lang');
         if (!$queryLang) {
-            $lang = $dispatcher->getParam('lang');
+            $langParam = $dispatcher->getParam('lang');
         } else {
-            $lang = $queryLang;
+            $langParam = $queryLang;
         }
 
-        switch ($lang) {
-            case 'uk' :
-                define('LANG', 'uk');
-                define('LANG_SUFFIX', '_uk');
-                define('LANG_URL', '/uk');
-                define('LOCALE', 'uk_UA');
-                break;
-            case 'en' :
-                define('LANG', 'en');
-                define('LANG_SUFFIX', '_en');
-                define('LANG_URL', '/en');
-                define('LOCALE', 'en_EN');
-                break;
-            default:
-                define('LANG', 'ru');
-                define('LANG_SUFFIX', '');
-                define('LANG_URL', '/');
-                define('LOCALE', 'ru_RU');
+        if (!$langParam) {
+            $langParam = $defaultLang->getIso();
         }
 
-        Locale::setDefault(LOCALE);
+        foreach ($languages as $language) {
+            var_dump($langParam, $language->getIso());
+            if ($langParam == $language->getIso()) {
+                define('LANG', $language->getIso());
+                define('LANG_URL', '/' . $language->getUrl());
+            }
+        }
 
-        /*$this->getDI()->set('translate', new \Application\Localization\GettextAdapter(array(
-            'locale'    => LOCALE,
-            'lang'      => LANG,
-            'file'      => 'messages',
-            'directory' => APPLICATION_PATH . '/lang'
-        )));*/
         $translations = Cms\Model\Translate::findCachedByLangInArray(LANG);
         $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
 

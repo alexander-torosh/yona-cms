@@ -8,7 +8,8 @@
 
 namespace Application\Mvc\Router;
 
-use \Phalcon\Mvc\Router;
+use Phalcon\Mvc\Router;
+use Cms\Model\Language;
 
 class DefaultRouter extends Router
 {
@@ -42,19 +43,18 @@ class DefaultRouter extends Router
 
     public function addML($pattern, $paths = null, $name)
     {
-        $registry = $this->getDI()->get('registry');
-        $languages = $registry->cms['languages'];
+        $languages = Language::findCachedLanguages();
 
-        $first = true;
         foreach ($languages as $lang) {
-            if ($first) {
-                $this->add($pattern, $paths)->setName($name);
-                $first = false;
-            } else {
-                $iso = $lang['iso'];
-                $pattern = '/' . $iso . $pattern;
-                $paths['lang'] = $iso;
+            $iso = $lang->getIso();
+            if ($lang->getPrimary()) {
                 $this->add($pattern, $paths)->setName($name . '_' . $iso);
+                //var_dump($pattern);
+            } else {
+                $new_pattern = '/' . $lang->getUrl() . $pattern;
+                $paths['lang'] = $iso; // будущее значение константы LANG
+                $this->add($new_pattern, $paths)->setName($name . '_' . $iso);
+                //var_dump($new_pattern);
             }
         }
     }

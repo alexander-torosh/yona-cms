@@ -10,7 +10,7 @@
             'width': 240,
             'strategy': 'w'
             ]) %}
-            {% set link = url(['for':'publication', 'type':item.getType(), 'slug':item.getSlug()]) %}
+            {% set link = helper.langUrl(['for':'publication', 'type':item.getType(), 'slug':item.getSlug()]) %}
             {% if image.isExists() %}{% set imageExists = true %}{% else %}{% set imageExists = false %}{% endif %}
             <div class="item{% if imageExists %} with-image{% endif %}">
                 {% if imageExists %}

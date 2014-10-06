@@ -18,6 +18,7 @@ class ManagerController extends Controller
         Manager::setTranslateCache(false);
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('seo-manager');
+        $this->view->languages_disabled = true;
     }
 
     public function indexAction()

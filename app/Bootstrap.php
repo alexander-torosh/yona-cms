@@ -111,18 +111,7 @@ class Bootstrap
          * CMS Конфигурация
          */
         $cmsModel = new \Cms\Model\Configuration();
-        $cms = $cmsModel->getConfig();
-        // @todo Будет отдельный раздел конфигурации для управления языками. Пока заглушка.
-        $cms['languages'] = [[
-            'name' => 'Русский',
-            'iso' => 'ru',
-            'locale' => 'ru_RU'
-        ], [
-            'name' => 'English',
-            'iso' => 'en',
-            'locale' => 'en_EN',
-        ]];
-        $registry->cms = $cms; // Отправляем в Registry
+        $registry->cms = $cmsModel->getConfig(); // Отправляем в Registry
 
 
         $application = new \Phalcon\Mvc\Application();

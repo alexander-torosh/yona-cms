@@ -25,9 +25,6 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
             return $resolvedArgs;
             //return "get_defined_constants()[$resolvedArgs]";
         });
-        $compiler->addFunction('suffix', function() {
-            return "LANG_SUFFIX";
-        });
         /*$compiler->addFunction('helper', function() {
             return '$this->helper';
         });*/

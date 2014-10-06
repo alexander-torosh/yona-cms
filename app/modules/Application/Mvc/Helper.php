@@ -32,7 +32,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function langUrl($params)
     {
-        $params['for'] .= LANG_SUFFIX;
+        $params['for'] .=  '_' . LANG;
         return $this->url->get($params);
     }
 

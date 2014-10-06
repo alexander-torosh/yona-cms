@@ -17,6 +17,7 @@ class ConfigurationController extends Controller
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
         $this->helper->activeMenu()->setActive('admin-cms');
+        $this->view->languages_disabled = true;
 
     }
 

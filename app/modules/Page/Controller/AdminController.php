@@ -58,9 +58,8 @@ class AdminController extends Controller
             }
         }
 
-        $title = 'Создание страницы';
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->view->title = 'Создание страницы';
+        $this->helper->title($this->view->title);
 
         $this->view->model = $model;
         $this->view->form = $form;
@@ -72,7 +71,7 @@ class AdminController extends Controller
     {
         $id = (int)$id;
         $form = new PageForm();
-        $model = Page::findFirst(array("id = $id"));
+        $model = Page::findFirst($id);
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $model);
@@ -99,7 +98,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
         $this->view->title = 'Редактирование страницы';
-        $this->helper->title('Редактирование страницы');
+        $this->helper->title($this->view->title);
     }
 
     public function deleteAction($id)
@@ -113,7 +112,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->title = 'Удаление страницы';
-        $this->helper->title('Удаление страницы');
+        $this->helper->title($this->view->title);
     }
 
 } 
