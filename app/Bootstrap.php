@@ -41,6 +41,7 @@ class Bootstrap
         define('MAIN_VIEW_PATH', '../../../views/');
         $view->setMainView(MAIN_VIEW_PATH . 'main');
         $view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
+        $view->setLayout('main');
         $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
 
         $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);

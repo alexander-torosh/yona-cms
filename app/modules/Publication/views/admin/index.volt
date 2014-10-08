@@ -25,7 +25,7 @@
             <td>{{ item.getTypeTitle() }}</td>
             <td>{{ item.getDate() }}</td>
             <td>{% if item.preview_inner %}<i class="icon checkmark green"></i>{% endif %}</td>
-            {% set url = url(['for':'publication', 'type':item.getType(), 'slug':item.getSlug()]) %}
+            {% set url = helper.langUrl(['for':'publication', 'type':item.getType(), 'slug':item.getSlug()]) %}
             <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
         </tr>
     {% endfor %}

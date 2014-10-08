@@ -16,7 +16,7 @@ class ManagerController extends Controller
     public function initialize()
     {
         Manager::setTranslateCache(false);
-        $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
+        $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-manager');
         $this->view->languages_disabled = true;
     }

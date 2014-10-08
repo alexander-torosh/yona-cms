@@ -51,6 +51,7 @@
     {{ flash.output() }}
 
     {{ content() }}
+
 </div>
 </body>
 </html>

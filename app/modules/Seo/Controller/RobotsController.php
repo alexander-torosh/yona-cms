@@ -12,7 +12,7 @@ class RobotsController extends Controller
 
     public function initialize()
     {
-        $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
+        $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-robots');
         $this->robotsFilePath = PUBLIC_PATH . '/robots.txt';
         $this->view->languages_disabled = true;

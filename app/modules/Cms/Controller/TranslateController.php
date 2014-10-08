@@ -15,7 +15,7 @@ class TranslateController extends Controller
 
     public function initialize()
     {
-        $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
+        $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-translate');
     }
 

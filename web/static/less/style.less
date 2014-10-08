@@ -1,6 +1,10 @@
 /*
 * Главный Less-файл CSS стилей.
 */
+@wrapper-max-width: 1380px;
+@wrapper-min-width: 420px;
+
+@item-padding-bottom: 40px;
 
 @font-color: #434343;
 @font-size: 13px;
@@ -12,16 +16,22 @@
 
 @link: #3F83B6;
 
-@container-max-width: 1280px;
-@container-min-width: 960px;
-
-@item-padding-bottom: 40px;
-
 body {
     color: @font-color;
     font-family: Arial, sans-serif;
     font-size: @font-size;
     line-height: @line-height;
+}
+
+#wrapper {
+    width: @wrapper-max-width;
+    max-width: 100%;
+    min-width: @wrapper-min-width;
+    margin: 0 auto;
+}
+
+.wrapper-in {
+    padding: 0 20px;
 }
 
 a {
@@ -140,16 +150,31 @@ input, textarea, button {
     padding-right: 10px;
 }
 
-.container {
-    max-width: @container-max-width;
-    min-width: @container-min-width;
-    position: relative;
-    .margin-auto();
-    .padding-lr();
-}
-
 header {
+    height: 50px;
     margin-bottom: 20px;
+
+    .logo {
+        display: block;
+        margin-top: 20px;
+        width: 30%;
+        max-width: 255px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .languages {
+        float: right;
+        margin-top: 20px;
+
+        .lang {
+            display: inline-block;
+            margin: 0 0 0 10px;
+
+        }
+    }
 }
 
 #menu {

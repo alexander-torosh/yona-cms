@@ -107,6 +107,18 @@ class Language extends Model
         ));
     }
 
+    public static function findCachedLanguagesIso()
+    {
+        $languages = self::findCachedLanguages();
+        $iso_array = array();
+        if (!empty($languages)) {
+            foreach($languages as $lang) {
+                $iso_array[] = $lang->getIso();
+            }
+        }
+        return $iso_array;
+    }
+
     public static function cacheKey()
     {
         return HOST_HASH . md5('Language::findCachedLanguages');

@@ -24,7 +24,7 @@
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
-                   href="{{ url(['for':'publication','type':model.getType(), 'slug':model.getSlug()]) }}">
+                   href="{{ helper.langUrl(['for':'publication','type':model.getType(), 'slug':model.getSlug()]) }}">
                     Посмотреть на сайте
                 </a>
             {% endif %}

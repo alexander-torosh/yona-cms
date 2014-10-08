@@ -8,6 +8,8 @@
 
 namespace Application\Mvc;
 
+use Cms\Model\Language;
+
 class Helper extends \Phalcon\Mvc\User\Component
 {
 
@@ -34,6 +36,18 @@ class Helper extends \Phalcon\Mvc\User\Component
     {
         $params['for'] .=  '_' . LANG;
         return $this->url->get($params);
+    }
+
+    public function languages()
+    {
+        return Language::findCachedLanguages();
+
+    }
+
+    public function langSwitcher($lang, $string)
+    {
+        $helper = new \Application\Mvc\Helper\LangSwitcher();
+        return $helper->render($lang, $string);
     }
 
     public function cacheExpire($seconds)

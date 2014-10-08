@@ -1,4 +1,4 @@
-<div id="project" class="container">
+<div id="project">
     <div class="wrapper">
         <div class="sidebar">
             <div class="back clearfix">

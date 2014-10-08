@@ -62,7 +62,7 @@ function AjaxViewModel() {
     self.update = function (response, href) {
         self.History.pushState({href: href}, response.title, href);
 
-        var main = document.getElementById('main');
+        var main = document.getElementById('wrapper');
         main.innerHTML = response.html;
         self.forceRedraw(main);
     }

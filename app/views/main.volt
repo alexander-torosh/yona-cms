@@ -43,27 +43,9 @@
 </head>
 <body{% if view.bodyClass %} class="{{ view.bodyClass }}"{% endif %}>
 
-<header>
-    {{ partial('main/header') }}
-</header>
-
-{{ partial('main/menu') }}
-
-<div id="main">
+<div id="wrapper">
     {{ content() }}
 </div>
-
-<footer>
-    {{ partial('main/footer') }}
-</footer>
-
-{# partial('main/callback') #}
-
-{% if config.profiler %}
-    {{ helper.dbProfiler() }}
-{% endif %}
-
-{{ helper.javascript('body') }}
 
 </body>
 </html>
