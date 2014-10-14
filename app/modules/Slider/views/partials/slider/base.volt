@@ -7,7 +7,7 @@
         <div class="items">
             {% for image in images %}
                 <div class="item{% if 1 == loop.index %} active{% endif %}">
-                    <a{% if image.getLink() %} href="{{ image.getLink() }}"{% endif %}{% if image.getCaption() %} title="{{ image.getCaption() }}"{% endif %}
+                    <a{% if image.getLink() %} href="{{ image.getLink() }}" target="_blank" {% endif %}{% if image.getCaption() %} title="{{ image.getCaption() }}"{% endif %}
                             rel="nofollow">
                         {% set img = helper.image([
                         'type': 'slider',
