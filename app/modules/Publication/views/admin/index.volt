@@ -20,8 +20,8 @@
     {% for item in entries %}
         {% set link = "/publication/admin/edit/" ~ item.getId() %}
         <tr>
-            <td><a href="{{ link }}" class="mini ui icon button"><i class="icon edit"></i> id = {{ item.getId() }}</a></td>
-            <td><a href="{{ link }}">{{ item.getTitle() }}</a></td>
+            <td><a href="{{ link }}?lang={{ constant('LANG') }}" class="mini ui icon button"><i class="icon edit"></i> id = {{ item.getId() }}</a></td>
+            <td><a href="{{ link }}?lang={{ constant('LANG') }}">{{ item.getTitle() }}</a></td>
             <td>{{ item.getTypeTitle() }}</td>
             <td>{{ item.getDate() }}</td>
             <td>{% if item.preview_inner %}<i class="icon checkmark green"></i>{% endif %}</td>

@@ -49,12 +49,10 @@ class DefaultRouter extends Router
             $iso = $lang->getIso();
             if ($lang->getPrimary()) {
                 $this->add($pattern, $paths)->setName($name . '_' . $iso);
-                //var_dump($pattern);
             } else {
                 $new_pattern = '/' . $lang->getUrl() . $pattern;
                 $paths['lang'] = $iso; // будущее значение константы LANG
                 $this->add($new_pattern, $paths)->setName($name . '_' . $iso);
-                //var_dump($new_pattern);
             }
         }
     }

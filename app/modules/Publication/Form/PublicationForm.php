@@ -9,6 +9,7 @@
 namespace Publication\Form;
 
 use Phalcon\Forms\Element\Check;
+use Phalcon\Validation\Validator\PresenceOf;
 use Publication\Model\Publication;
 use Application\Form\Form;
 use Phalcon\Forms\Element\Text;
@@ -26,6 +27,9 @@ class PublicationForm extends Form
         $this->add($type);
 
         $title = new Text('title', array('required' => true));
+        $title->addValidator(new PresenceOf(array(
+            'message' => 'Укажите название страницы'
+        )));
         $title->setLabel('Название');
         $this->add($title);
 

@@ -3,7 +3,7 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/page/admin" class="ui button">
+        <a href="/page/admin?lang={{ constant('LANG') }}" class="ui button">
             <i class="icon left"></i> Назад
         </a>
 
@@ -17,7 +17,7 @@
                 <i class="icon add"></i> Добавить
             </a>
 
-            <a href="/page/admin/delete/{{ model.getId() }}" class="ui button red">
+            <a href="/page/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
                 <i class="icon trash"></i> Удалить
             </a>
 

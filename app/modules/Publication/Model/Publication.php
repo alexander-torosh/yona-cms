@@ -2,7 +2,7 @@
 
 namespace Publication\Model;
 
-use Phalcon\Mvc\Model;
+use Application\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -13,6 +13,13 @@ class Publication extends Model
     public function getSource()
     {
         return "publication";
+    }
+
+    protected $translateModel = 'Publication\Model\Translate\PublicationTranslate'; // translate
+
+    public function initialize()
+    {
+        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
     public $id;
@@ -59,183 +66,121 @@ class Publication extends Model
             )
         ));
 
-        $this->validate(new PresenceOf(array(
-            'field' => 'title',
-            'message' => 'Укажите название страницы'
-        )));
-
-
         return $this->validationHasFailed() != true;
     }
 
     public function afterValidation()
     {
-        if (!$this->meta_title) {
-            $this->setMetaTitle($this->title);
-        }
-        if (!$this->slug) {
-            $this->setSlug(Transliterator::slugify($this->title));
-        }
         if (!$this->date) {
             $this->date = date("Y-m-d H:i:s");
         }
     }
 
-    /**
-     * @param mixed $created_at
-     */
+    public function updateFields($data)
+    {
+        if (!$this->getSlug()) {
+            $this->setSlug(Transliterator::slugify($data['title']));
+        }
+        if (!$this->getMeta_title()) {
+            $this->setMeta_title($data['title']);
+        }
+    }
+
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCreatedAt()
     {
         return $this->created_at;
     }
 
-    /**
-     * @param mixed $id
-     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $meta_description
-     */
-    public function setMetaDescription($meta_description)
+    public function setMeta_description($meta_description)
     {
-        $this->meta_description = $meta_description;
+        $this->setMLVariable('meta_description', $meta_description);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMetaDescription()
+    public function getMeta_description()
     {
-        return $this->meta_description;
+        return $this->getMLVariable('meta_description');
     }
 
-    /**
-     * @param mixed $meta_keywords
-     */
-    public function setMetaKeywords($meta_keywords)
+    public function setMeta_keywords($meta_keywords)
     {
-        $this->meta_keywords = $meta_keywords;
+        $this->setMLVariable('meta_keywords', $meta_keywords);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMetaKeywords()
+    public function getMeta_keywords()
     {
-        return $this->meta_keywords;
+        return $this->getMLVariable('meta_keywords');
     }
 
-    /**
-     * @param mixed $meta_title
-     */
-    public function setMetaTitle($meta_title)
+    public function setMeta_title($meta_title)
     {
-        $this->meta_title = $meta_title;
+        $this->setMLVariable('meta_title', $meta_title);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMetaTitle()
+    public function getMeta_title()
     {
-        return $this->meta_title;
+        return $this->getMLVariable('meta_title');
     }
 
-    /**
-     * @param mixed $slug
-     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $text
-     */
     public function setText($text)
     {
-        $this->text = $text;
+        $this->setMLVariable('text', $text);
     }
 
-    /**
-     * @return mixed
-     */
     public function getText()
     {
-        return $this->text;
+        return $this->getMLVariable('text');
     }
 
-    /**
-     * @param mixed $title
-     */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->setMLVariable('title', $title);
     }
 
-    /**
-     * @return mixed
-     */
     public function getTitle()
     {
-        return $this->title;
+        return $this->getMLVariable('title');
     }
 
-    /**
-     * @param mixed $updated_at
-     */
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
     }
 
-    /**
-     * @return mixed
-     */
     public function getUpdatedAt()
     {
         return $this->updated_at;
     }
 
-    /**
-     * @param mixed $date
-     */
     public function setDate($date)
     {
         $this->date = $date;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDate($format = 'Y-m-d')
     {
         if ($format) {

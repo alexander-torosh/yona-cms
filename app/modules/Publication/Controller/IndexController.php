@@ -59,9 +59,9 @@ class IndexController extends Controller
             return;
         }
 
-        $this->helper->title()->append($publication->getMetaTitle());
-        $this->helper->meta()->set('description', $publication->getMetaDescription());
-        $this->helper->meta()->set('keywords', $publication->getMetaKeywords());
+        $this->helper->title()->append($publication->getMeta_title());
+        $this->helper->meta()->set('description', $publication->getMeta_description());
+        $this->helper->meta()->set('keywords', $publication->getMeta_keywords());
 
         $this->view->publication = $publication;
 

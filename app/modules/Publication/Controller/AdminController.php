@@ -41,12 +41,14 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
             $form->bind($post, $model);
+
             if ($form->isValid()) {
                 if ($model->create()) {
                     $form->bind($post, $model);
+                    $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success('Публикация создана');
-                        return $this->redirect('/publication/admin/edit/' . $model->getId());
+                        return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -72,8 +74,10 @@ class AdminController extends Controller
         $model = Publication::findFirst($id);
 
         if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
             if ($form->isValid()) {
+                $model->updateFields($post);
                 if ($model->save()) {
                     $this->uploadImage($model);
                     $this->flash->success('Информация обновлена');
@@ -83,7 +87,7 @@ class AdminController extends Controller
                     $key = md5("Publication::findFirst($query)");
                     $this->cache->delete($key);
 
-                    return $this->redirect('/publication/admin/edit/' . $model->getId());
+                    return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
