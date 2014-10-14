@@ -16,7 +16,7 @@ class Scanner
         if ($files) {
             foreach ($files as $file) {
                 $contents = file_get_contents($file);
-                $pattern = "/translate\('(.*)'\)/";
+                $pattern = "/translate\('(.+)'\)/";
                 $matchesCount = preg_match_all($pattern, $contents, $matches);
                 if ($matchesCount) {
                     foreach ($matches[1] as $match) {
