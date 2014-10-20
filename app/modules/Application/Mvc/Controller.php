@@ -8,6 +8,13 @@
 
 namespace Application\Mvc;
 
+/**
+ * @property \Phalcon\Cache\Backend\Memcache $cache
+ * @property \Phalcon\Mvc\View\Simple $viewSimple
+ * @property \Application\Mvc\Helper $helper
+ * @property \Phalcon\Http\Cookie $cookies
+ */
+
 class Controller extends \Phalcon\Mvc\Controller
 {
 
@@ -23,7 +30,6 @@ class Controller extends \Phalcon\Mvc\Controller
         }
         header('Location: ' . $url);
         exit;
-
     }
 
     public function returnJSON($response)

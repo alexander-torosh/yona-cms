@@ -5,6 +5,10 @@
         <i class="icon plus"></i> Добавить
     </a>
 
+    <a href="/publication/type" class="ui button blue">
+        <i class="icon list"></i> Форматы публикаций
+    </a>
+
 </div>
 <!--/end controls-->
 

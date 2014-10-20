@@ -19,8 +19,9 @@ class Type extends Model
     protected $translateModel = 'Publication\Model\Translate\TypeTranslate';
 
     public $id;
+    public $title; // translate
     public $slug;
-    public $limit;
+    public $limit = 10;
     public $format = 'list';
     public $head_title; // translate
     public $meta_description; // translate

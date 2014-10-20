@@ -23,6 +23,7 @@ class Configuration extends \Phalcon\Mvc\Model
     public static $keys = [
         'DEBUG_MODE' => 1,
         'TECHNICAL_WORKS' => 0,
+        'PROFILER' => 1,
     ];
 
     public $key;
@@ -36,6 +37,9 @@ class Configuration extends \Phalcon\Mvc\Model
             }
             if ($this->key == 'TECHNICAL_WORKS') {
                 $this->value = (isset($_POST['TECHNICAL_WORKS'])) ? 1 : 0 ;
+            }
+            if ($this->key == 'PROFILER') {
+                $this->value = (isset($_POST['PROFILER'])) ? 1 : 0 ;
             }
         }
     }

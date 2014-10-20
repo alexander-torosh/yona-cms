@@ -26,7 +26,7 @@
 
 {# partial('main/callback') #}
 
-{% if config.profiler %}
+{% if registry.cms['PROFILER'] %}
     {{ helper.dbProfiler() }}
 {% endif %}
 

@@ -17,8 +17,8 @@ class ConfigurationForm extends Form
     public function initialize()
     {
         $this->add((new Check('DEBUG_MODE'))->setDefault(1)->setLabel('Режим отладки, вывод ошибок приложения'));
-
         $this->add((new Check('TECHNICAL_WORKS'))->setDefault(1)->setLabel('Режим "На сайте проводятся технические работы"'));
+        $this->add((new Check('PROFILER'))->setDefault(1)->setLabel('DB Profiler'));
 
     }
 

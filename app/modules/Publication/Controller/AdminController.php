@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: office-pb1
- * Date: 18.07.14
- * Time: 20:49
- */
 
 namespace Publication\Controller;
 
