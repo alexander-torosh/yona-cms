@@ -35,11 +35,6 @@ class Publication extends Model
     public $date;
     public $preview_inner;
 
-    public static $types = array(
-        'news' => 'Новости',
-        'articles' => 'Статьи',
-    );
-
     public function beforeCreate()
     {
         $this->created_at = date("Y-m-d H:i:s");
@@ -48,6 +43,15 @@ class Publication extends Model
     public function beforeUpdate()
     {
         $this->updated_at = date("Y-m-d H:i:s");
+    }
+
+    public function afterUpdate()
+    {
+        $cache = $this->getDi()->get('cache');
+
+        $query = "slug = '{$this->getSlug()}'";
+        $key = md5("Publication::findFirst($query)");
+        $cache->delete($key);
     }
 
     public function beforeValidation()
@@ -62,7 +66,7 @@ class Publication extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "slug",
-                "message" => "Страница с такой транслитерацией уже существует"
+                "message" => "Страница с такой транслитерацией = '".$this->slug."' уже существует"
             )
         ));
 
@@ -84,6 +88,22 @@ class Publication extends Model
         if (!$this->getMeta_title()) {
             $this->setMeta_title($data['title']);
         }
+    }
+
+    public static function findCachedBySlug($slug)
+    {
+        $publication = self::findFirst(array("slug = '$slug'",
+            'cache' => array(
+                'key' => self::cacheSlugKey($slug),
+                'lifetime' => 60)
+        ));
+        return $publication;
+    }
+
+    public static function cacheSlugKey($slug)
+    {
+        $key = HOST_HASH . md5('Publication\Model\Publication; slug = ' . $slug);
+        return $key;
     }
 
     public function setCreatedAt($created_at)
@@ -209,8 +229,9 @@ class Publication extends Model
     public function getTypeTitle()
     {
         if ($this->type) {
-            if (array_key_exists($this->type, self::$types)) {
-                return self::$types[$this->type];
+            $types = Type::cachedListArray(array('key' => 'id'));
+            if (array_key_exists($this->type, $types)) {
+                return $types[$this->type];
             }
         }
     }
@@ -229,14 +250,6 @@ class Publication extends Model
     public function getPreviewInner()
     {
         return $this->preview_inner;
-    }
-
-    public static function findCachedBySlug($slug)
-    {
-        $query = "slug = '$slug'";
-        $key = HOST_HASH . md5("Publication::findFirst($query)");
-        $publication = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
-        return $publication;
     }
 
 }

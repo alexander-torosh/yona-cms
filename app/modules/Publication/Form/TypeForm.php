@@ -8,6 +8,7 @@ namespace Publication\Form;
 
 use Application\Form\Form;
 use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Select;
 use Publication\Model\Type;
 
@@ -21,8 +22,8 @@ class TypeForm extends Form
         $this->add((new Text('head_title'))->setLabel('Title'));
         $this->add((new Text('meta_description'))->setLabel('Meta-description'));
         $this->add((new Text('meta_keywords'))->setLabel('Meta-keywords'));
-        $this->add((new Text('seo_text'))->setLabel('SEO-текст'));
-        $this->add((new Text('limit'))->setDefault(10)->setLabel('Кол-во публикаций на странице'));
+        $this->add((new TextArea('seo_text'))->setLabel('SEO-текст'));
+        $this->add((new Text('limit', array('style' => 'width:106px')))->setDefault(10)->setLabel('Кол-во публикаций на странице'));
         $this->add((new Select('format', Type::$formats))->setLabel('Формат вывода публикаций'));
 
     }

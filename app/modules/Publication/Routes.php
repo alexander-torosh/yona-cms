@@ -9,13 +9,14 @@
 namespace Publication;
 
 use Publication\Model\Publication;
+use Publication\Model\Type;
 
 class Routes
 {
 
     public function init($router)
     {
-        $types_keys = array_keys(Publication::$types);
+        $types_keys = array_keys(Type::cachedListArray());
         $types_regex = '(' . implode('|', $types_keys) . ')';
 
         $router->addML('/{type:' . $types_regex . '}', array(

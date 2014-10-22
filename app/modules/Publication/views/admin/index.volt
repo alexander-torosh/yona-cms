@@ -6,7 +6,7 @@
     </a>
 
     <a href="/publication/type" class="ui button blue">
-        <i class="icon list"></i> Форматы публикаций
+        <i class="icon list"></i> Типы публикаций
     </a>
 
 </div>

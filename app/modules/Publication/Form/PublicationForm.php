@@ -10,19 +10,19 @@ namespace Publication\Form;
 
 use Phalcon\Forms\Element\Check;
 use Phalcon\Validation\Validator\PresenceOf;
-use Publication\Model\Publication;
 use Application\Form\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Select;
 use \Phalcon\Forms\Element\File;
+use Publication\Model\Type;
 
 class PublicationForm extends Form
 {
 
     public function initialize()
     {
-        $type = new Select('type', Publication::$types, array());
+        $type = new Select('type', Type::cachedListArray(array('key' => 'id')), array());
         $type->setLabel('Тип пубикации');
         $this->add($type);
 

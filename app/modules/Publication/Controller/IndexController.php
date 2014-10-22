@@ -5,6 +5,7 @@ namespace Publication\Controller;
 use Application\Mvc\Controller;
 use Publication\Model\Publication;
 use Phalcon\Exception;
+use Publication\Model\Type;
 
 class IndexController extends Controller
 {
@@ -12,11 +13,13 @@ class IndexController extends Controller
     public function indexAction()
     {
         $type = $this->dispatcher->getParam('type','string');
-        if (!$type || !in_array($type, array_keys(Publication::$types))) {
+        $typeModel = Type::getCachedBySlug($type);
+        if (!$typeModel) {
             throw new Exception("Publication hasn't type = '$type''");
         }
 
-        $limit = $this->request->getQuery('limit', 'string', 10);
+        $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10 ;
+        $limit = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {
             $paginatorLimit = (int) $limit;
         } else {
@@ -25,7 +28,7 @@ class IndexController extends Controller
         $page = $this->request->getQuery('page', 'int', 1);
 
         $publications = Publication::find(array(
-            "type = '$type'",
+            "type = {$typeModel->getId()}",
             "order" => "date DESC",
         ));
 
@@ -37,10 +40,8 @@ class IndexController extends Controller
 
         $this->view->paginate = $paginator->getPaginate();
 
-        $title = Publication::$types[$type];
-        $this->helper->title()->append($title);
-        $this->view->title = $title;
-        //$this->view->limit = $limit;
+        $this->helper->title()->append($typeModel->getHead_title());
+        $this->view->title = $typeModel->getTitle();
         $this->view->type = $type;
     }
 

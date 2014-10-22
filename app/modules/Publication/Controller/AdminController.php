@@ -56,6 +56,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
+
         $this->view->title = 'Создание публикации';
         $this->helper->title('Создание публикации');
 
@@ -77,9 +78,9 @@ class AdminController extends Controller
                     $this->flash->success('Информация обновлена');
 
                     // Очищаем кеш публикации
-                    $query = "slug = '{$model->getSlug()}'";
+                    /*$query = "slug = '{$model->getSlug()}'";
                     $key = md5("Publication::findFirst($query)");
-                    $this->cache->delete($key);
+                    $this->cache->delete($key);*/
 
                     return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {

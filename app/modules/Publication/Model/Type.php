@@ -7,6 +7,7 @@
 namespace Publication\Model;
 
 use Application\Mvc\Model;
+use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Type extends Model
 {
@@ -38,6 +39,61 @@ class Type extends Model
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
+    public function validation()
+    {
+        $this->validate(new Uniqueness(
+            array(
+                "field" => "slug",
+                "message" => "Тип публикаций с таким URL раздела = '".$this->slug."' существует"
+            )
+        ));
+
+        return $this->validationHasFailed() != true;
+    }
+
+    public function afterUpdate()
+    {
+        parent::afterUpdate();
+
+        $cache = $this->getDi()->get('cache');
+        $cache->delete(self::cacheSlugKey($this->getSlug()));
+        $cache->delete(self::cacheListKey());
+    }
+
+    public function updateFields($data)
+    {
+        if (!$this->getSlug()) {
+            $this->setSlug(Transliterator::slugify($data['title']));
+        }
+        if (!$this->getTitle()) {
+            $this->setTitle($data['title']);
+        }
+        if (!$this->getHead_title()) {
+            $this->setHead_title($data['title']);
+        }
+    }
+
+    public static function cachedListArray($params = array())
+    {
+        $result = self::find(array(
+            'cache' => array(
+                'key' => self::cacheListKey(),
+                'lifetime' => 60,
+            ),
+        ));
+
+        $list = array();
+        foreach($result as $el) {
+            if (isset($params['key']) && $params['key']) {
+                $list[$el->{$params['key']}] = $el->getTitle();
+            } else {
+                $list[$el->getSlug()] = $el->getTitle();
+            }
+        }
+
+        return $list;
+    }
+
     public static function getCachedBySlug($slug)
     {
         $result = self::findFirst(array(
@@ -55,8 +111,28 @@ class Type extends Model
 
     public static function cacheSlugKey($slug)
     {
-        $key = HOST_HASH . md5('Publication\Model\Type::' . $slug);
-        return $key;
+        return HOST_HASH . md5('Publication\Model\Type; slug = ' . $slug);
+    }
+
+    public static function cacheListKey()
+    {
+        return HOST_HASH . md5('Publication\Model\Type; list');
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->setMLVariable('title', $title);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->getMLVariable('title');
     }
 
     /**
@@ -78,7 +154,7 @@ class Type extends Model
     /**
      * @param mixed $head_title
      */
-    public function setHeadTitle($head_title)
+    public function setHead_title($head_title)
     {
         $this->setMLVariable('head_title', $head_title);
     }
@@ -86,7 +162,7 @@ class Type extends Model
     /**
      * @return mixed
      */
-    public function getHeadTitle()
+    public function getHead_title()
     {
         return $this->getMLVariable('head_title');
     }
@@ -126,7 +202,7 @@ class Type extends Model
     /**
      * @param mixed $meta_description
      */
-    public function setMetaDescription($meta_description)
+    public function setMeta_description($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
     }
@@ -134,7 +210,7 @@ class Type extends Model
     /**
      * @return mixed
      */
-    public function getMetaDescription()
+    public function getMeta_description()
     {
         return $this->getMLVariable('meta_description');
     }
@@ -142,7 +218,7 @@ class Type extends Model
     /**
      * @param mixed $meta_keywords
      */
-    public function setMetaKeywords($meta_keywords)
+    public function setMeta_keywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
     }
@@ -150,7 +226,7 @@ class Type extends Model
     /**
      * @return mixed
      */
-    public function getMetaKeywords()
+    public function getMeta_keywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
@@ -158,7 +234,7 @@ class Type extends Model
     /**
      * @param mixed $seo_text
      */
-    public function setSeoText($seo_text)
+    public function setSeo_text($seo_text)
     {
         $this->setMLVariable('seo_text', $seo_text);
     }
@@ -166,7 +242,7 @@ class Type extends Model
     /**
      * @return mixed
      */
-    public function getSeoText()
+    public function getSeo_text()
     {
         return $this->getMLVariable('seo_text');
     }

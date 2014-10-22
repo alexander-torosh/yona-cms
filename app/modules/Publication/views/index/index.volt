@@ -17,8 +17,10 @@
                     <a class="image" href="{{ link }}">{{ image.imageHTML() }}</a>
                 {% endif %}
                 <div class="text">
+                    <section class="date">{{ item.getDate('d.m.Y') }}</section>
                     <a href="{{ link }}" class="title">{{ item.getTitle() }}</a>
                     <section class="announce">{{ helper.announce(item.getText(), 300) }}</section>
+
                     <a href="{{ link }}" class="details">{{ helper.translate('Подробнее') }} &rarr;</a>
                 </div>
             </div>

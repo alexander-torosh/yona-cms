@@ -7,8 +7,6 @@
  */
 namespace Application\Mvc;
 
-use Phalcon\Mvc\Model\Transaction\Manager as TransactionManager;
-
 class Model extends \Phalcon\Mvc\Model
 {
     protected $translations = array(); // Массив переводов
@@ -33,7 +31,7 @@ class Model extends \Phalcon\Mvc\Model
      */
     public function afterFetch()
     {
-        if ($this->translateModel) { // Если есть массив переводов
+        if ($this->translateModel && LANG != 'LANG') { // Если есть массив переводов
             self::setLang(LANG); // Устанавливаем текущий язык
             $this->getTranslations(); // Извлекаем переводы со связанной таблицы переводов
         }
@@ -86,6 +84,7 @@ class Model extends \Phalcon\Mvc\Model
 
     public function setMLVariable($key, $value, $lang = null)
     {
+
         if (!$this->id) {
             return false;
         }
