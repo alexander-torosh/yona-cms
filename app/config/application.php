@@ -9,7 +9,6 @@ $env = array(
             'dbname' => '',
             'charset' => 'utf8',
         ),
-        'profiler' => false,
         'cache' => 'file',
         'metadata_cache' => 'memory',
     ),
@@ -21,7 +20,6 @@ $env = array(
             'dbname' => 'yona-cms',
             'charset' => 'utf8',
         ),
-        'profiler' => true,
         'cache' => 'file', // file, memcache
         'metadata_cache' => 'memory', // memory, apc
     ),
