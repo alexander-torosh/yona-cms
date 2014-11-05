@@ -11,7 +11,7 @@ define('NOIMAGE', '/static/images/noimage.jpg');
 
 define('IMG_DEBUG_MODE', false);
 
-class Filter
+class Storage
 {
 
     private static $STRATEGIES = array(

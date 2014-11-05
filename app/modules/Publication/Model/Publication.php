@@ -47,11 +47,11 @@ class Publication extends Model
 
     public function afterUpdate()
     {
+        parent::afterUpdate();
+
         $cache = $this->getDi()->get('cache');
 
-        $query = "slug = '{$this->getSlug()}'";
-        $key = md5("Publication::findFirst($query)");
-        $cache->delete($key);
+        $cache->delete(self::cacheSlugKey($this->getSlug()));
     }
 
     public function beforeValidation()
@@ -230,6 +230,16 @@ class Publication extends Model
     {
         if ($this->type) {
             $types = Type::cachedListArray(array('key' => 'id'));
+            if (array_key_exists($this->type, $types)) {
+                return $types[$this->type];
+            }
+        }
+    }
+
+    public function getTypeSlug()
+    {
+        if ($this->type) {
+            $types = Type::cachedListArray(array('key' => 'id', 'value' => 'slug'));
             if (array_key_exists($this->type, $types)) {
                 return $types[$this->type];
             }

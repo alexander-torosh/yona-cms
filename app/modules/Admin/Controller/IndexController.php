@@ -37,8 +37,8 @@ class IndexController extends Controller
         $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
         $this->view->changelog = nl2br(trim($changelog));
 
-        $this->view->title = $this->helper->translate('Административная панель YonaCms');
-        $this->helper->title()->append($this->helper->translate('Стартовая страница'));
+        $this->view->title = 'Административная панель YonaCms';
+        $this->helper->title()->append('Стартовая страница');
 
         $this->helper->activeMenu()->setActive('admin-home');
 

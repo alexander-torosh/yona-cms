@@ -25,27 +25,27 @@ class AdminUserForm extends Form
             'required' => true,
             'autocomplete' => 'off',
         ));
-        $login->setLabel($this->helper->translate('Login'));
+        $login->setLabel('Login');
 
         $email = new Email('email', array(
             'required' => true,
             'autocomplete' => 'off',
         ));
         $email->addValidator(new ValidatorEmail(array(
-            'message' => $this->helper->translate('Email format required'),
+            'message' => 'Email format required',
         )));
         $email->addValidator(new PresenceOf(array(
-            'message' => $this->helper->translate('Email is required'),
+            'message' => 'Email is required',
         )));
         $email->setLabel('Email');
 
         $password = new Password('password', array(
             'autocomplete' => 'off',
         ));
-        $password->setLabel($this->helper->translate('Password'));
+        $password->setLabel('Password');
 
         $active = new Check('active');
-        $active->setLabel($this->helper->translate('Active'));
+        $active->setLabel('Active');
 
         $this->add($login);
         $this->add($email);
@@ -59,7 +59,7 @@ class AdminUserForm extends Form
         $password = $this->get('password');
         $password->setAttribute('required', true);
         $password->addValidator(new PresenceOf(array(
-            'message' => $this->helper->translate('Password is required'),
+            'message' => 'Password is required',
         )));
 
     }

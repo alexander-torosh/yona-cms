@@ -17,9 +17,8 @@
         <th style="width: 100px"></th>
         <th>Название</th>
         <th>URL раздела</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Формат вывода</th>
+        <th>Отображать дату</th>
     </tr>
     {% for item in entries %}
         {% set link = "/publication/type/edit/" ~ item.getId() %}
@@ -29,9 +28,8 @@
 
             {% set pub_link = helper.langUrl(['for':'publications', 'type': item.getSlug()]) %}
             <td><a href="{{ pub_link }}" target="_blank">{{ pub_link }}</a></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ item.getFormatTitle() }}</td>
+            <td>{% if item.getDisplay_date() %}<i class="icon checkmark green"></i>{% endif %}</td>
         </tr>
     {% endfor %}
 </table>

@@ -38,6 +38,7 @@
         {{ form.renderDecorated('slug') }}
         {{ form.renderDecorated('limit') }}
         {{ form.renderDecorated('format') }}
+        {{ form.renderDecorated('display_date') }}
         {{ form.renderDecorated('head_title') }}
         {{ form.renderDecorated('meta_description') }}
         {{ form.renderDecorated('meta_keywords') }}

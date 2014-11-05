@@ -18,10 +18,10 @@ class LoginForm extends \Phalcon\Forms\Form
     public function initialize()
     {
         $login = new Text('login');
-        $login->addValidator(new PresenceOf(array('message' => $this->helper->translate('Login is required'))));
+        $login->addValidator(new PresenceOf(array('message' => 'Login is required')));
 
         $password = new Password('password');
-        $password->addValidator(new PresenceOf(array('message' => $this->helper->translate('Password is required'))));
+        $password->addValidator(new PresenceOf(array('message' => 'Password is required')));
 
     }
 

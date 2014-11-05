@@ -7,6 +7,7 @@
 namespace Publication\Form;
 
 use Application\Form\Form;
+use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Select;
@@ -25,6 +26,7 @@ class TypeForm extends Form
         $this->add((new TextArea('seo_text'))->setLabel('SEO-текст'));
         $this->add((new Text('limit', array('style' => 'width:106px')))->setDefault(10)->setLabel('Кол-во публикаций на странице'));
         $this->add((new Select('format', Type::$formats))->setLabel('Формат вывода публикаций'));
+        $this->add((new Check('display_date'))->setLabel('Отображать дату'));
 
     }
 

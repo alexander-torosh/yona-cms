@@ -29,7 +29,7 @@ class AdminUserController extends Controller
                     "order" => "id DESC"
         ));
 
-        $this->view->title = $this->helper->translate('Администраторы');
+        $this->view->title = 'Администраторы';
         $this->helper->title()->append($this->view->title);
 
     }
@@ -46,7 +46,7 @@ class AdminUserController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
-                    $this->flash->success($this->helper->translate('Administrator <b>%login%</b> created', array('login' => $model->getLogin())));
+                    $this->flash->success('Администратор <b>'.$model->getLogin().'</b> создан');
                     $this->response->redirect('admin/admin-user');
                     return $this->response->send();
                 } else {
@@ -62,9 +62,9 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = $this->helper->translate('Добавить');
+        $this->view->submitButton = 'Добавить';
 
-        $this->view->title = $this->helper->translate('Добавить Administrator');
+        $this->view->title = 'Добавить администратора';
         $this->helper->title()->append($this->view->title);
 
     }
@@ -78,7 +78,7 @@ class AdminUserController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save() == true) {
-                    $this->flash->success($this->helper->translate('Administrator <b>%login%</b> saved', array('login' => $model->getLogin())));
+                    $this->flash->success('Администратор <b>'.$model->getLogin().'</b> сохранен');
                     $this->response->redirect('admin/admin-user');
                     return $this->response->send();
                 } else {
@@ -96,10 +96,10 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = $this->helper->translate('Сохранить');
+        $this->view->submitButton = 'Сохранить';
         $this->view->model = $model;
 
-        $this->view->title = $this->helper->translate('Редактировать администратора');
+        $this->view->title = 'Редактировать администратора';
         $this->helper->title()->append($this->view->title);
 
     }
@@ -114,13 +114,13 @@ class AdminUserController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->flash->warning($this->helper->translate('Administrator <b>%login%</b> deleted', array('login' => $model->getLogin())));
+            $this->flash->warning('Администратор <b>'.$model->getLogin().'</b> удален');
             $this->response->redirect('admin/admin-user');
             return $this->response->send();
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->translate('Удалить администратора');
+        $this->view->title = 'Удалить администратора';
         $this->helper->title()->append($this->view->title);
 
     }

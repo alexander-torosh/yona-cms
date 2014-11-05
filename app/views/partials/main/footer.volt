@@ -1,4 +1,1 @@
-<div id="wezoom">
-    <a href="http://wezoom.net" target="_blank">Создание сайтов</a>
-    <section>веб-студия WeZoom</section>
-</div>
+Working on <a href="https://github.com/oleksandr-torosh/yona-cms" target="_blank">YonaCMS</a>

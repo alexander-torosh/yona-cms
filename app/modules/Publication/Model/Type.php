@@ -23,6 +23,7 @@ class Type extends Model
     public $title; // translate
     public $slug;
     public $limit = 10;
+    public $display_date;
     public $format = 'list';
     public $head_title; // translate
     public $meta_description; // translate
@@ -71,6 +72,11 @@ class Type extends Model
         if (!$this->getHead_title()) {
             $this->setHead_title($data['title']);
         }
+        if (isset($data['display_date'])) {
+            $this->setDisplay_date(1);
+        } else {
+            $this->setDisplay_date(0);
+        }
     }
 
     public static function cachedListArray($params = array())
@@ -84,10 +90,15 @@ class Type extends Model
 
         $list = array();
         foreach($result as $el) {
-            if (isset($params['key']) && $params['key']) {
-                $list[$el->{$params['key']}] = $el->getTitle();
+            if (isset($params['value']) && $params['value']) {
+                $value = $el->{$params['value']};
             } else {
-                $list[$el->getSlug()] = $el->getTitle();
+                $value = $el->getTitle();
+            }
+            if (isset($params['key']) && $params['key']) {
+                $list[$el->{$params['key']}] = $value;
+            } else {
+                $list[$el->getSlug()] = $value;
             }
         }
 
@@ -149,6 +160,13 @@ class Type extends Model
     public function getFormat()
     {
         return $this->format;
+    }
+
+    public function getFormatTitle()
+    {
+        if (array_key_exists($this->format, self::$formats)) {
+            return self::$formats[$this->format];
+        }
     }
 
     /**
@@ -261,6 +279,22 @@ class Type extends Model
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param mixed $display_date
+     */
+    public function setDisplay_date($display_date)
+    {
+        $this->display_date = $display_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplay_date()
+    {
+        return $this->display_date;
     }
 
     

@@ -32,13 +32,13 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
             return '$this->helper->langUrl(' . $resolvedArgs . ')';
         });
         $compiler->addFunction('image', function($resolvedArgs) {
-            return '(new \Image\Filter(' . $resolvedArgs . '))';
+            return '(new \Image\Storage(' . $resolvedArgs . '))';
         });
         $compiler->addFunction('imageHtml', function($resolvedArgs) {
-            return '(new \Image\Filter(' . $resolvedArgs . '))->imageHtml()';
+            return '(new \Image\Storage(' . $resolvedArgs . '))->imageHtml()';
         });
         $compiler->addFunction('imageSrc', function($resolvedArgs) {
-            return '(new \Image\Filter(' . $resolvedArgs . '))->cachedRelPath()';
+            return '(new \Image\Storage(' . $resolvedArgs . '))->cachedRelPath()';
         });
         $compiler->addFunction('widget', function($resolvedArgs) {
             return '(new \Application\Widget\Proxy(' . $resolvedArgs . '))';

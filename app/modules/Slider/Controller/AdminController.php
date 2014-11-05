@@ -105,7 +105,7 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             foreach ($model->SliderImages as $img)
             {
-                $imageFilter = new \Image\Filter(array(
+                $imageFilter = new \Image\Storage(array(
                     'id' => $img->getId(),
                     'type' => 'slider'
                 ));
@@ -129,7 +129,7 @@ class AdminController extends Controller
         $slider_id = $model->getSliderId();
 
         if ($model) {
-            $imageFilter = new \Image\Filter(array(
+            $imageFilter = new \Image\Storage(array(
                 'id' => $id,
                 'type' => 'slider'
             ));
@@ -188,18 +188,15 @@ class AdminController extends Controller
     {
         if ($this->request->isPost()) {
             if ($this->request->hasFiles() == true) {
-                foreach ($this->request->getUploadedFiles() as $key => $file) {
+                foreach ($this->request->getUploadedFiles() as $file) {
 
                     if (in_array($file->getType(), $this->allowedFormats)) {
                         $image = new \Slider\Model\SliderImage();
                         $image->setSliderId($id);
-                        $image->setLink($v['link']);
+                        //$image->setLink($v['link']);
                         $image->save();
-                        $filename = $key . '.jpg';
-                        $fullFilePath = $file->getTempName();
-                        //$file->moveTo($fullFilePath);
 
-                        $imageFilter = new \Image\Filter(array(
+                        $imageFilter = new \Image\Storage(array(
                             'id' => $image->getId(),
                             'type' => $type,
                         ));

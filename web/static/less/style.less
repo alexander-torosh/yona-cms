@@ -205,30 +205,51 @@ pre {
     > .item {
         padding-bottom: @item-padding-bottom;
         display: inline-block;
+    }
 
-        &.with-image {
-            > .image {
-                float: left;
+    &.table {
+        > .item {
+
+            &.with-image {
+                > .image {
+                    float: left;
+                }
+                > .text {
+                    margin-left: @image-width + 20;
+                }
             }
+
             > .text {
-                margin-left: @image-width + 20;
+                > * {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+                > .title {
+                    font-weight: bold;
+                    font-size: @font-size + 5;
+                    line-height: @line-height + 5;
+                }
+                > .details {
+
+                }
+            }
+
+        }
+    }
+
+    &.grid {
+        margin-left: -2%;
+        margin-right: -2%;
+
+        > .item {
+            width: 21%;
+            margin-left: 2%;
+            margin-right: 2%;
+            vertical-align: top;
+
+            > .image > img {
+                width: 100%;
             }
         }
-
-        > .text {
-            > * {
-                display: block;
-                margin-bottom: 10px;
-            }
-            > .title {
-                font-weight: bold;
-                font-size: @font-size + 5;
-                line-height: @line-height + 5;
-            }
-            > .details {
-
-            }
-        }
-
     }
 }

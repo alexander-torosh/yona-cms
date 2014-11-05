@@ -246,11 +246,12 @@ class Bootstrap
         $dispatcher->setActionName($router->getActionName());
         $dispatcher->setParams($router->getParams());
 
-        $tmpModuleNameArr = explode('-', $router->getModuleName());
+        /*$tmpModuleNameArr = explode('-', $router->getModuleName());
         $moduleName = '';
         foreach ($tmpModuleNameArr as $part) {
             $moduleName .= \Phalcon\Text::camelize($part);
-        }
+        }*/
+        $moduleName = \Application\Utils\ModuleName::camelize($router->getModuleName());
 
         $ModuleClassName = $moduleName . '\Module';
         if (class_exists($ModuleClassName)) {

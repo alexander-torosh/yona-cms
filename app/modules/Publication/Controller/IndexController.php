@@ -42,6 +42,7 @@ class IndexController extends Controller
 
         $this->helper->title()->append($typeModel->getHead_title());
         $this->view->title = $typeModel->getTitle();
+        $this->view->format = $typeModel->getFormat();
         $this->view->type = $type;
     }
 
@@ -55,7 +56,7 @@ class IndexController extends Controller
             throw new Exception("Publication '$slug.html' not found");
             return;
         }
-        if ($publication->getType() != $type) {
+        if ($publication->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
             return;
         }

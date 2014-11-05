@@ -77,11 +77,6 @@ class AdminController extends Controller
                     $this->uploadImage($model);
                     $this->flash->success('Информация обновлена');
 
-                    // Очищаем кеш публикации
-                    /*$query = "slug = '{$model->getSlug()}'";
-                    $key = md5("Publication::findFirst($query)");
-                    $this->cache->delete($key);*/
-
                     return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
@@ -127,7 +122,7 @@ class AdminController extends Controller
                         return $this->flash->error('Разрешается загружать только файлы с расширением jpg, jpeg, png, bmp');
                     }
 
-                    $imageFilter = new \Image\Filter(array(
+                    $imageFilter = new \Image\Storage(array(
                         'id' => $model->getId(),
                         'type' => 'publication',
                     ));

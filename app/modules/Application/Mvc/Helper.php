@@ -111,7 +111,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function image($args, $attributes = array())
     {
-        $imageFilter = new \Image\Filter($args, $attributes);
+        $imageFilter = new \Image\Storage($args, $attributes);
         return $imageFilter;
     }
 
@@ -133,6 +133,19 @@ class Helper extends \Phalcon\Mvc\User\Component
         if ($javascript) {
             return $javascript->getText();
         }
+    }
+
+    public function modulePartial($template, $data, $module = null)
+    {
+        $view = clone $this->getDi()->get('view');
+        $partialsDir = '';
+        if ($module) {
+            $moduleName = \Application\Utils\ModuleName::camelize($module);
+            $partialsDir = '../../../modules/' . $moduleName . '/views/';
+        }
+        $view->setPartialsDir($partialsDir);
+
+        return $view->partial($template, $data);
     }
 
 }

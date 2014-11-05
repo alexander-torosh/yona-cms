@@ -110,7 +110,7 @@ class AdminController extends Controller
                     $projectImage->setProjectId($model->getId());
                     $projectImage->create();
 
-                    $imageFilter = new \Image\Filter(array(
+                    $imageFilter = new \Image\Storage(array(
                         'id' => $projectImage->getId(),
                         'type' => 'project',
                     ));
