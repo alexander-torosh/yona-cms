@@ -246,11 +246,6 @@ class Bootstrap
         $dispatcher->setActionName($router->getActionName());
         $dispatcher->setParams($router->getParams());
 
-        /*$tmpModuleNameArr = explode('-', $router->getModuleName());
-        $moduleName = '';
-        foreach ($tmpModuleNameArr as $part) {
-            $moduleName .= \Phalcon\Text::camelize($part);
-        }*/
         $moduleName = \Application\Utils\ModuleName::camelize($router->getModuleName());
 
         $ModuleClassName = $moduleName . '\Module';
@@ -265,32 +260,20 @@ class Bootstrap
         try {
             $dispatcher->dispatch();
         } catch (\Phalcon\Exception $e) {
+            $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+            $view->setPartialsDir('');
+            $view->e = $e;
 
             if ($e instanceof Phalcon\Mvc\Dispatcher\Exception) {
-                $module = new \Index\Module();
-                $module->registerAutoloaders();
-                $module->registerServices($di);
-
-                $dispatcher->setModuleName('index');
-                $dispatcher->setControllerName('error');
-                $dispatcher->setActionName('error404');
-                $dispatcher->setParam('e', $e);
-
-                $dispatcher->dispatch();
-
+                $response->setHeader(404, 'Not Found');
+                $view->partial('error/error404');
             } else {
-                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
-                $view->setPartialsDir('');
-                $view->e = $e;
-
                 $response->setHeader(503, 'Service Unavailable');
                 $view->partial('error/error503');
-                $response->sendHeaders();
-
-                echo $response->getContent();
-                return;
-
             }
+            $response->sendHeaders();
+            echo $response->getContent();
+            return;
 
         }
 

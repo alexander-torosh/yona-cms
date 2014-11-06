@@ -96,6 +96,11 @@ class TypeController extends Controller
     public function deleteAction($id)
     {
         $model = Type::findFirst($id);
+        $count = Type::count();
+        if ($count == 1) {
+            $this->flash->error('Невозможно удалить единственный тип публикаций');
+            return;
+        }
 
         if ($this->request->isPost()) {
             $model->delete();

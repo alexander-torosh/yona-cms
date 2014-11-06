@@ -4,7 +4,7 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/publication/admin?lang={{ constant('LANG') }}" class="ui button">
+        <a href="/publication/admin/{{ type }}?lang={{ constant('LANG') }}" class="ui button">
             <i class="icon left"></i> Назад
         </a>
 
@@ -14,7 +14,7 @@
 
         {% if model.getId() %}
 
-            <a href="/publication/admin/add" class="ui button">
+            <a href="/publication/admin/{{ type }}/add" class="ui button">
                 <i class="icon add"></i> Добавить
             </a>
 
@@ -35,7 +35,7 @@
     <!--end controls-->
 
     <div class="ui segment">
-        {{ form.renderDecorated('type') }}
+        {{ form.renderDecorated('type_id') }}
         {{ form.renderDecorated('title') }}
         {{ form.renderDecorated('slug') }}
         {{ form.renderDecorated('date') }}

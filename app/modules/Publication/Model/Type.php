@@ -37,7 +37,11 @@ class Type extends Model
 
     public function initialize()
     {
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
+        $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
+
+        $this->hasMany('id', 'Publication\Model\Publication', 'type_id', array(
+            'alias' => 'publications'
+        ));
     }
 
     public function validation()

@@ -19,6 +19,18 @@ class Routes
         $types_keys = array_keys(Type::cachedListArray());
         $types_regex = '(' . implode('|', $types_keys) . ')';
 
+        $router->add('/publication/admin/{type:' . $types_regex . '}', array(
+            'module' => 'publication',
+            'controller' => 'admin',
+            'action' => 'index'
+        ))->setName('publications_admin');
+
+        $router->add('/publication/admin/{type:' . $types_regex . '}/([a-zA-Z0-9_]+)', array(
+            'module' => 'publication',
+            'controller' => 'admin',
+            'action' => 2
+        ))->setName('publications_admin_action');
+
         $router->addML('/{type:' . $types_regex . '}', array(
             'module' => 'publication',
             'controller' => 'index',

@@ -19,11 +19,15 @@ class Publication extends Model
 
     public function initialize()
     {
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
+        $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
+
+        $this->belongsTo('type_id', 'Publication\Model\Type', 'id', array(
+            'alias' => 'type'
+        ));
     }
 
     public $id;
-    public $type;
+    public $type_id;
     public $title;
     public $slug;
     public $text;
@@ -211,37 +215,37 @@ class Publication extends Model
     }
 
     /**
-     * @param mixed $type
+     * @param mixed $type_id
      */
-    public function setType($type)
+    public function setType_id($type_id)
     {
-        $this->type = $type;
+        $this->type_id = $type_id;
     }
 
     /**
      * @return mixed
      */
-    public function getType()
+    public function getType_id()
     {
-        return $this->type;
+        return $this->type_id;
     }
 
     public function getTypeTitle()
     {
-        if ($this->type) {
+        if ($this->type_id) {
             $types = Type::cachedListArray(array('key' => 'id'));
-            if (array_key_exists($this->type, $types)) {
-                return $types[$this->type];
+            if (array_key_exists($this->type_id, $types)) {
+                return $types[$this->type_id];
             }
         }
     }
 
     public function getTypeSlug()
     {
-        if ($this->type) {
+        if ($this->type_id) {
             $types = Type::cachedListArray(array('key' => 'id', 'value' => 'slug'));
-            if (array_key_exists($this->type, $types)) {
-                return $types[$this->type];
+            if (array_key_exists($this->type_id, $types)) {
+                return $types[$this->type_id];
             }
         }
     }
