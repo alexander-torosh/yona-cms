@@ -50,16 +50,16 @@
                 {% for image in model.getRelated('SliderImages', ['order': 'sortorder ASC']) %}
 
                     {% set img = helper.image([
-                        'id': image.id,
-                        'type': 'slider',
-                        'strategy': 'a',
-                        'width': 250,
-                        'height':150,
-                        'widthHeight': true
+                    'id': image.id,
+                    'type': 'slider',
+                    'strategy': 'a',
+                    'width': 250,
+                    'height':150,
+                    'widthHeight': true
                     ],
                     [
-                        'alt': model.getTitle()|escape,
-                        'data-id' : image.id
+                    'alt': model.getTitle()|escape,
+                    'data-id' : image.id
                     ]) %}
                     <div class="item" data-id="{{ image.id }}" >
                         <div class="image">
@@ -153,7 +153,7 @@
     }, {
         onSuccess: function () {
             {% if model is not empty and model.getId() %}
-                return saveGallery();
+            return saveGallery();
             {% endif %}
         }
     });
@@ -181,8 +181,9 @@
                 slider: {% if model is defined %}{{ model.getId() }}{% else %}0{% endif %}
             },
             type: 'POST',
+            dataType: "json",
             success: function (data) {
-                if (data === 1){
+                if (data.success === 'true'){
                     isSuccess = true;
                 } else {
                     var message = $('.ui.red.message').show();
@@ -216,10 +217,10 @@
                         type: 'POST',
                         success: function (data) {
 
-                            if (data == true) {
+                            if (data.success === true) {
                                 item.remove();
                             } else {
-                                alert('ошибка удаления');
+                                alert('ошибка удаления картинки');
                             }
                         }
                     });
