@@ -28,7 +28,9 @@
 
     <div class="ui segment">
         {{ form.renderDecorated('iso') }}
+        {{ form.renderDecorated('locale') }}
         {{ form.renderDecorated('name') }}
+        {{ form.renderDecorated('short_name') }}
         {{ form.renderDecorated('url') }}
         {% if model.getId() %}
             {{ form.renderDecorated('sortorder') }}

@@ -20,7 +20,9 @@ class Language extends Model
 
     public $id;
     public $iso;
+    public $locale;
     public $name;
+    public $short_name;
     public $url;
     public $sortorder;
     public $primary;
@@ -117,6 +119,16 @@ class Language extends Model
             }
         }
         return $iso_array;
+    }
+
+    public static function findCachedByIso($iso)
+    {
+        $languages = self::findCachedLanguages();
+        foreach($languages as $lang) {
+            if ($iso == $lang->getIso()) {
+                return $lang;
+            }
+        }
     }
 
     public static function cacheKey()
@@ -238,5 +250,36 @@ class Language extends Model
         return $this->primary;
     }
 
+    /**
+     * @param mixed $short_name
+     */
+    public function setShort_name($short_name)
+    {
+        $this->short_name = $short_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShort_name()
+    {
+        return $this->short_name;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
 
 } 

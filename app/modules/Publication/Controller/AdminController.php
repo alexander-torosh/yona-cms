@@ -178,10 +178,9 @@ class AdminController extends Controller
 
                     $imageFilter->removeCached();
 
-                    require_once __DIR__ . '/../../Image/vendor/PHPThumb/ThumbLib.inc.php';
-                    $thumb = \PhpThumbFactory::create($file->getTempName());
-                    $thumb->resize($resize_x, $resize_y);
-                    $thumb->save($imageFilter->originalAbsPath());
+                    $image = new \Phalcon\Image\Adapter\GD($file->getTempName());
+                    $image->resize($resize_x, $resize_y);
+                    $image->save($imageFilter->originalAbsPath());
 
                     $this->flash->success($successMsg);
                 }

@@ -87,6 +87,9 @@ class Storage
 
         $attributes = $this->attributes;
         if ($this->widthHeight) {
+            if ($this->stretch && in_array($this->strategy, array('wh','a'))) {
+                $this->stretch = false;
+            }
             if ($this->stretch) {
                 if ($this->width) {
                     $attributes['width'] = $this->width;
@@ -295,26 +298,23 @@ class Storage
             return;
         }
 
-        require_once __DIR__ . '/vendor/PHPThumb/ThumbLib.inc.php';
-        $jpegQuality = 100;
-        $options = array('jpegQuality' => $jpegQuality);
-        $thumb = \PhpThumbFactory::create($originalAbsPath, $options);
+        $image = new \Phalcon\Image\Adapter\GD($originalAbsPath);
         switch ($this->strategy) {
             case 'w' :
-                $thumb->resize($this->width);                                   // Масштабируем по ширине
+                $image->resize($this->width);                   // Масштабируем по ширине
                 break;
             case 'wh' :
-                $this->stretch = false;
-                $thumb->resize($this->width, $this->height);                    // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
+                $image->resize($this->width, $this->height);    // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
                 break;
             case 'a' :
-                $thumb->adaptiveResize($this->width, $this->height);            // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
+                $image->resize($this->width);                   // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
+                $image->crop($this->width, $this->height);
                 break;
         }
 
-        if ($this->lockOriginal($originalAbsPath)) {                            // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
-            $thumb->save($this->getCachedAbsPath());                            // Сохраняем кешированное изображение
-            $this->unlockOriginal($originalAbsPath);                            // Снимаем блокировку
+        if ($this->lockOriginal($originalAbsPath)) {            // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
+            $image->save($this->getCachedAbsPath());            // Сохраняем кешированное изображение
+            $this->unlockOriginal($originalAbsPath);            // Снимаем блокировку
         } else {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} заблокирован механизмом проверки _LOCK или не существует");
@@ -328,7 +328,7 @@ class Storage
 
     public function cropOriginal($left, $top, $width, $height)
     {
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();   // Абсолютный путь оригинального изображения
+        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
         if (!file_exists($originalAbsPath)) {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} не существует");
@@ -338,13 +338,12 @@ class Storage
             return;
         }
 
-        require_once __DIR__ . '/vendor/PHPThumb/ThumbLib.inc.php';
-        $thumb = \PhpThumbFactory::create($originalAbsPath);
-        $thumb->crop($left, $top, $width, $height);
+        $image = new \Phalcon\Image\Adapter\Dg($originalAbsPath);
+        $image->crop($width, $height, $left, $top);
 
-        if ($this->lockOriginal($originalAbsPath)) {                            // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
-            $thumb->save($originalAbsPath);                            // Сохраняем кешированное изображение
-            $this->unlockOriginal($originalAbsPath);                            // Снимаем блокировку
+        if ($this->lockOriginal($originalAbsPath)) { // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
+            $image->save($originalAbsPath);          // Сохраняем кешированное изображение
+            $this->unlockOriginal($originalAbsPath); // Снимаем блокировку
         } else {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} заблокирован механизмом проверки _LOCK или не существует");

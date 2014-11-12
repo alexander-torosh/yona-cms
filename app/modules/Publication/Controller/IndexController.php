@@ -28,7 +28,7 @@ class IndexController extends Controller
         $page = $this->request->getQuery('page', 'int', 1);
 
         $publications = Publication::find(array(
-            "type = {$typeModel->getId()}",
+            "type_id = {$typeModel->getId()}",
             "order" => "date DESC",
         ));
 

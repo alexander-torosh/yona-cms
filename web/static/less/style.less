@@ -140,6 +140,12 @@ input, textarea, button {
     user-select: none;
 }
 
+.img-container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .margin-auto {
     margin-left: auto;
     margin-right: auto;
@@ -199,6 +205,11 @@ pre {
     border-radius: 20px;
 }
 
+footer {
+    padding: 20px 0;
+    border-top: 1px solid @gray;
+}
+
 .publications {
     @image-width: 240px;
 
@@ -207,8 +218,9 @@ pre {
         display: inline-block;
     }
 
-    &.table {
+    &.list {
         > .item {
+            display: block;
 
             &.with-image {
                 > .image {

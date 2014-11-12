@@ -17,7 +17,7 @@
         {% set image = helper.image([
         'id': publication.getId(),
         'type': 'publication',
-        'width': 205,
+        'width': 300,
         'strategy': 'w'
         ]) %}
         <div class="image inner">

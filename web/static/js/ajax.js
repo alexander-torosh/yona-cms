@@ -73,8 +73,6 @@ function AjaxViewModel() {
 
         self.bind();
 
-        setTimeout(initFancybox, 50);
-
         $('html,body').animate({
             scrollTop: 0
         }, 300);

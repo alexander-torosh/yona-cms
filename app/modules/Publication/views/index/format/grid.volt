@@ -2,7 +2,8 @@
 'id': item.getId(),
 'type': 'publication',
 'width': 300,
-'strategy': 'w'
+'height': 240,
+'strategy': 'a'
 ]) %}
 {% set link = helper.langUrl(['for':'publication', 'type':item.getTypeSlug(), 'slug':item.getSlug()]) %}
 {% if image.isExists() %}{% set imageExists = true %}{% else %}{% set imageExists = false %}{% endif %}

@@ -3,7 +3,7 @@
 <table class="ui table segment">
     <thead>
         <tr>
-            <th>Редактировать</th>
+            <th style="width: 100px"></th>
             <th>Логин</th>
             <th>Email</th>
             <th>Активен</th>
@@ -12,10 +12,11 @@
     <tbody>
         {% for user in entries %}
         <tr>
-            <td><a href="/admin/admin-user/edit/{{ user.getId() }}" class="mini ui icon button"><i class="pencil icon"></i></a></td>
-            <td>{{ user.getLogin() }}</td>
+            {% set url = '/admin/admin-user/edit/' ~ user.getId() %}
+            <td><a href="{{ url }}" class="mini ui icon button"><i class="pencil icon"></i></a></td>
+            <td><a href="{{ url }}">{{ user.getLogin() }}</a></td>
             <td>{{ user.getEmail() }}</td>
-            <td>{% if user.getActive() %}<i class="checkmark icon"></i>{% endif %}</td>
+            <td>{% if user.getActive() %}<i class="icon checkmark grren"></i>{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>
