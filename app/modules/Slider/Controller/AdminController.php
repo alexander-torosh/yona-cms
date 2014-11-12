@@ -32,7 +32,6 @@ class AdminController extends Controller
     {
         $this->view->entries = Slider::find();
         $this->view->title = 'Список слайдеров';
-
     }
 
     public function addAction()
@@ -46,7 +45,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->flash->success('Слайдер создан');
-                    $this->uploadImages($model->getId(), 'slider');
+                    $this->uploadImages($model->getId());
                     return $this->redirect('/slider/admin/edit/' . $model->getId());
 
                 } else {
@@ -74,7 +73,7 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
-                $this->uploadImages($model->getId(), 'slider');
+                $this->uploadImages($model->getId());
                 if ($model->save()) {
                     $this->flash->success('Информация обновлена');
                     return $this->redirect('/slider/admin/edit/' . $model->getId());
@@ -124,9 +123,9 @@ class AdminController extends Controller
     {
         $id = $this->request->getPost('id', 'int');
         $this->view->cleanTemplateBefore();
+        $result = false;
 
         $model = Image::findFirst(array('id = ' . $id));
-        $slider_id = $model->getSliderId();
 
         if ($model) {
             $imageFilter = new \Image\Storage(array(
@@ -135,33 +134,17 @@ class AdminController extends Controller
             ));
             $imageFilter->remove(true);
 
-            $entity = Slider::findFirst('id = ' . $model->getSliderId());
-
             if ($model->delete()) {
                 $result = true;
-            } else {
-                $result = false;
             }
-        } else {
-            $result = false;
         }
 
-        $this->response->setHeader('Content-Type', 'text/plain');
-        $this->response->setContentType('application/json', 'UTF-8');
-        $this->response->setStatusCode(200, 'OK');
-
-        $this->response->setContent(json_encode($result));
-        $this->view->disable();
-        echo !!$result;
-        return $this->response;
+        $this->returnJSON(array('success' => $result));
     }
 
     public function saveSliderAction()
     {
         $slider_id = $this->request->getPost('slider', 'int');
-
-        $this->view->cleanTemplateBefore();
-
         $itemsData = $this->request->getPost('items');
 
         if (count($itemsData)){
@@ -174,17 +157,10 @@ class AdminController extends Controller
             }
         }
 
-        $this->response->setHeader('Content-Type', 'text/plain');
-        $this->response->setContentType('application/json', 'UTF-8');
-        $this->response->setStatusCode(200, 'OK');
-
-        $this->response->setContent(json_encode($this->request->getPost()));
-        $this->view->disable();
-        echo '1'; return;
-        return $this->response;
+        $this->returnJSON(array('success' => 'true'));
     }
 
-    public function uploadImages($id, $type)
+    public function uploadImages($id)
     {
         if ($this->request->isPost()) {
             if ($this->request->hasFiles() == true) {
@@ -193,16 +169,14 @@ class AdminController extends Controller
                     if (in_array($file->getType(), $this->allowedFormats)) {
                         $image = new \Slider\Model\SliderImage();
                         $image->setSliderId($id);
-                        //$image->setLink($v['link']);
                         $image->save();
 
                         $imageFilter = new \Image\Storage(array(
                             'id' => $image->getId(),
-                            'type' => $type,
+                            'type' => 'slider',
                         ));
                         $imageFilter->remove(false);
                         $file->moveTo($imageFilter->originalAbsPath());
-
                     } else {
                         $this->flash->error('Разрешается загружать только картинки с расширением jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' );
                     }
