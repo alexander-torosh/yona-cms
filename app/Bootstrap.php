@@ -13,7 +13,7 @@ class Bootstrap
         $di = new \Phalcon\DI\FactoryDefault();
 
 
-        $config = include APPLICATION_PATH . '/config/application.php';
+        $config = include APPLICATION_PATH . '/config/config.php';
         $di->set('config', $config);
 
 
@@ -108,18 +108,17 @@ class Bootstrap
         }
         $di->set('modelsMetadata', $modelsMetadata);
 
-        /**
-         * CMS Конфигурация
-         */
+
         $cmsModel = new \Cms\Model\Configuration();
         $registry->cms = $cmsModel->getConfig(); // Отправляем в Registry
 
 
+        // Application
         $application = new \Phalcon\Mvc\Application();
-
         $application->registerModules($config->modules->toArray());
 
 
+        // Events Manager, Dispatcher
         $eventsManager = new \Phalcon\Events\Manager();
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
@@ -135,6 +134,7 @@ class Bootstrap
         });
 
         $profiler = new \Phalcon\Db\Profiler();
+        $di->set('profiler', $profiler);
 
         $eventsManager->attach('db', function ($event, $db) use ($profiler) {
             if ($event->getType() == 'beforeQuery') {
@@ -146,12 +146,13 @@ class Bootstrap
         });
 
         $db->setEventsManager($eventsManager);
-        $di->set('profiler', $profiler);
 
 
         $dispatcher->setEventsManager($eventsManager);
         $di->set('dispatcher', $dispatcher);
 
+
+        // Session
         $session = new \Phalcon\Session\Adapter\Files();
         $session->start();
         $di->set('session', $session);
@@ -159,6 +160,7 @@ class Bootstrap
         $acl = new \Application\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
+        // Подключение JS
         $assetsManager = new \Application\Assets\Manager();
         $assetsManager->collection('js')
             ->setLocal(true)
@@ -177,17 +179,17 @@ class Bootstrap
             ->addJs(ROOT . "/static/js/main.js")
             ->addJs(ROOT . "/static/js/ajax.js");
 
+        // Подключение LESS
         $assetsManager->collection('modules-less')
             ->setLocal(true)
-            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
             ->addFilter(new \Application\Assets\Filter\Less())
             ->setTargetPath(ROOT . '/assets/modules.less')
             ->setTargetUri('assets/modules.less')
             ->join(true);
 
+        // Подключение LESS админ.панели
         $assetsManager->collection('modules-admin-less')
             ->setLocal(true)
-            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
             ->addFilter(new \Application\Assets\Filter\Less())
             ->setTargetPath(ROOT . '/assets/modules-admin.less')
             ->setTargetUri('assets/modules-admin.less')

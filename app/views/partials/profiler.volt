@@ -51,7 +51,8 @@
         <section class="title">Profiler</section>
         <ul class="info">
             <li>Total Queries: {{ profiler.getNumberTotalStatements() }}</li>
-            <li>Total Elapsed Seconds: {{ profiler.getTotalElapsedSeconds() / 1000 }} ms</li>
+            <?php $seconds = round($profiler->getTotalElapsedSeconds(), 5) ?>
+            <li>Total Elapsed Seconds: {{ (seconds * 1000)|format('%01.2f') }} ms</li>
         </ul>
     </div>
     <div class="results" style="display: none;">
@@ -63,7 +64,8 @@
                     <dd>{{ profile.getSQLStatement() }}</dd>
 
                     <dt>Total Elapsed Time:</dt>
-                    <dd>{{ profile.getTotalElapsedSeconds() / 1000 }} ms</dd>
+                    <?php $seconds = round($profile->getTotalElapsedSeconds(), 5) ?>
+                    <dd>{{ (seconds * 1000)|format('%01.2f') }} ms</dd>
                 </dl>
             </div>
             {% endfor %}
