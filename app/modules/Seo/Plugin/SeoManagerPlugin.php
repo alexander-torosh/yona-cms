@@ -32,11 +32,11 @@ class SeoManagerPlugin extends Plugin
         $request_params = $request->getQuery();
 
         if ($route_name && !in_array($route_name, array('default', 'default_action', 'default_controller'))) {
-            $query = 'route = :route: AND language = :language:';
+            $query = 'route IN :route: AND language = :language:';
             $manager_matched_routes = Manager::find(array(
                 $query,
                 'bind' => array(
-                    'route' => $route_name,
+                    'route' => '("' . $route_name . '", "'.$route_name . '_'. LANG .'")',
                     'language' => LANG,
                 ),
                 'cache' => array(
@@ -44,6 +44,7 @@ class SeoManagerPlugin extends Plugin
                     'lifetime' => 60,
                 ),
             ));
+            var_dump($query);exit;
             if ($manager_matched_routes) {
                 foreach ($manager_matched_routes as $entry) {
                     if ($entry->getRouteParamsJson()) {
@@ -74,7 +75,6 @@ class SeoManagerPlugin extends Plugin
         } elseif ($module && $controller && $action) {
 
         }
-
     }
 
     private function pick($entry)

@@ -3,7 +3,7 @@
 </a>
 
 <!--Github stars-->
-<div style="position: absolute;top:10px;left:270px">
+<div style="position: absolute;top:10px;left:270px;z-index: 0;height: 30px;overflow: hidden;">
     <iframe frameborder="none" src="http://ghbtns.com/github-btn.html?user=oleksandr-torosh&repo=yona-cms&type=watch&count=true&size=large"></iframe>
 </div>
 <!--/Github stars-->

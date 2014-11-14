@@ -8,9 +8,11 @@ namespace Seo\Form;
 
 
 use Application\Form\Form;
+use Cms\Model\Language;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
+use Phalcon\Mvc\Model\Query\Lang;
 
 class ManagerForm extends Form
 {
@@ -25,10 +27,10 @@ class ManagerForm extends Form
         }
 
         $registry = $this->getDi()->get('registry');
-        $languages = $registry->cms['languages'];
+        $languages = Language::findCachedLanguages();
         $languagesArray = array('' => ' - ');
         foreach($languages as $lang) {
-            $languagesArray[$lang['iso']] = $lang['name'];
+            $languagesArray[$lang->getIso()] = $lang->getName();
         }
 
         $this->add((new Text('custom_name'))->setLabel('Рабочее имя, для удобства'));

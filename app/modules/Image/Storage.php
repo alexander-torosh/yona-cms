@@ -298,7 +298,7 @@ class Storage
             return;
         }
 
-        $image = new \Phalcon\Image\Adapter\GD($originalAbsPath);
+        $image = new \Phalcon\Image\Adapter\Imagick($originalAbsPath);
         switch ($this->strategy) {
             case 'w' :
                 $image->resize($this->width);                   // Масштабируем по ширине
@@ -338,7 +338,7 @@ class Storage
             return;
         }
 
-        $image = new \Phalcon\Image\Adapter\Dg($originalAbsPath);
+        $image = new \Phalcon\Image\Adapter\Imagick($originalAbsPath);
         $image->crop($width, $height, $left, $top);
 
         if ($this->lockOriginal($originalAbsPath)) { // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами

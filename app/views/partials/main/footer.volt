@@ -1,1 +1,1 @@
-Working on <a href="https://github.com/oleksandr-torosh/yona-cms" target="_blank">YonaCMS</a>
+Working on <a href="http://yonacms.com/" target="_blank">YonaCMS</a>

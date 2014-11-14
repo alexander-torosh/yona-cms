@@ -91,7 +91,17 @@ class LanguageController extends Controller
 
     public function deleteAction($id)
     {
+        $model = Language::findFirst($id);
 
+        if ($this->request->isPost()) {
+            $this->cache->delete(Language::cacheKey());
+            $model->delete();
+            $this->redirect('/cms/language');
+        }
+
+        $this->view->model = $model;
+        $this->view->title = 'Удаление языка';
+        $this->helper->title($this->view->title);
     }
 
 } 

@@ -10,7 +10,7 @@
 
 <table class="ui compact table small segment">
     <tr>
-        <th></th>
+        <th style="width: 100px"></th>
         <th>Название</th>
         <th>Route</th>
         <th>M-C-A</th>

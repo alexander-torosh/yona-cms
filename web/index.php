@@ -20,7 +20,7 @@ define('HOST_HASH', substr(md5($_SERVER['HTTP_HOST']), 0, 12));
 
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-define('APPLICATION_PATH', (APPLICATION_ENV == 'development') ? __DIR__ . '/../app' : __DIR__ . '/../private/app');
+define('APPLICATION_PATH', (APPLICATION_ENV == 'development') ? __DIR__ . '/../app' : __DIR__ . '/../app');
 define('PUBLIC_PATH', __DIR__);
 
 require_once APPLICATION_PATH . '/Bootstrap.php';

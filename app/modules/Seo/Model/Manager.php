@@ -82,7 +82,7 @@ class Manager extends Model
 
     public function setAction($action)
     {
-        $this->action = $action;
+        $this->action = $action ? $action : null;
     }
 
     public function getAction()
@@ -92,7 +92,7 @@ class Manager extends Model
 
     public function setController($controller)
     {
-        $this->controller = $controller;
+        $this->controller = $controller ? $controller : null;
     }
 
     public function getController()
