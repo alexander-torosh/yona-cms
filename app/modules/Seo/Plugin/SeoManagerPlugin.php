@@ -44,7 +44,6 @@ class SeoManagerPlugin extends Plugin
                     'lifetime' => 60,
                 ),
             ));
-            var_dump($query);exit;
             if ($manager_matched_routes) {
                 foreach ($manager_matched_routes as $entry) {
                     if ($entry->getRouteParamsJson()) {
