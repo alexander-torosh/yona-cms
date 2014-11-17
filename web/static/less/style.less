@@ -225,10 +225,19 @@ footer {
 
             &.with-image {
                 > .image {
-                    float: left;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 25%;
+                    margin-right: 2%;
+
+                    > img {
+                        max-width: 100%;
+                    }
                 }
                 > .text {
-                    margin-left: @image-width + 20;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 72%;
                 }
             }
 
