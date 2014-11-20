@@ -48,6 +48,8 @@
                 <div class="ui error message">
                     <div class="header">Ошибки</div>
                 </div>
+                <input type="hidden" name="{{ security.getTokenKey() }}"
+                       value="{{ security.getToken() }}"/>
                 <input type="submit" id="submit" class="ui blue submit button" value="Login">
             </form>
         </div> <!-- /container -->

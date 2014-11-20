@@ -2,8 +2,10 @@
     <a class="item{{ helper.activeMenu().activeClass('admin-home') }}" href="{{ url(['for': 'admin']) }}">
         <i class="browser icon"></i> Админ-панель
     </a>
+
     <div class="ui dropdown item">
         <i class="font icon"></i> Контент <i class="icon dropdown"></i>
+
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('admin-page') }}" href="/page/admin">
                 <i class="file outline icon"></i> Статические страницы
@@ -30,6 +32,7 @@
     </div>
     <div class="ui dropdown item">
         <i class="lab icon"></i> SEO <i class="icon dropdown"></i>
+
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="/seo/robots">
                 <i class="android icon"></i> Robots.txt
@@ -41,6 +44,7 @@
     </div>
     <div class="ui dropdown item">
         <i class="wrench icon"></i> Администрирование <i class="icon dropdown"></i>
+
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="/admin/admin-user">
                 <i class="user icon"></i> Администраторы
@@ -59,9 +63,13 @@
             </a>
         </div>
     </div>
-    <a href="/admin/index/logout" class="item right">
+    <a href="#" class="item right" onclick="document.getElementById('logout-form').submit()">
         <i class="plane icon"></i> Вылет
     </a>
+    <form action="/admin/index/logout" method="post" style="display: none;" id="logout-form">
+        <input type="hidden" name="{{ security.getTokenKey() }}"
+               value="{{ security.getToken() }}"/>
+    </form>
     <a href="/" class="item right" target="_blank">
         <i class="home icon"></i> На сайт
     </a>

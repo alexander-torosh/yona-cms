@@ -31,12 +31,15 @@ class SeoManagerPlugin extends Plugin
         $dispatcher_params = $dispatcher->getParams();
         $request_params = $request->getQuery();
 
+        /**
+         * @todo баг с многоязычностью и именем роутера. Нужно пересмотреть схему.
+         */
         if ($route_name && !in_array($route_name, array('default', 'default_action', 'default_controller'))) {
-            $query = 'route IN :route: AND language = :language:';
+            $query = 'route = :route: AND language = :language:';
             $manager_matched_routes = Manager::find(array(
                 $query,
                 'bind' => array(
-                    'route' => '("' . $route_name . '", "'.$route_name . '_'. LANG .'")',
+                    'route' => $route_name,
                     'language' => LANG,
                 ),
                 'cache' => array(

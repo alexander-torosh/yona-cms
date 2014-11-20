@@ -7,12 +7,13 @@
  */
 use Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\User\Plugin,
+    \Phalcon\Mvc\View,
     Application\Acl\DefaultAcl;
 
 class AclPlugin extends Plugin
 {
 
-    public function __construct(DefaultAcl $acl, Dispatcher $dispatcher)
+    public function __construct(DefaultAcl $acl, Dispatcher $dispatcher, View $view)
     {
         $role = $this->getRole();
 
@@ -27,6 +28,8 @@ class AclPlugin extends Plugin
             if (!$acl->isAllowed($role, $resourceKey, $resourceVal)) {
                 $this->accessDenied($role, $resourceKey, $resourceVal);
             }
+        } else {
+            $this->resourceNotFound($resourceKey, $view);
         }
 
     }
@@ -51,6 +54,20 @@ class AclPlugin extends Plugin
     private function accessDenied($role, $resourceKey = null, $resourceVal = null)
     {
         echo $role . " - Access Denied to resource " . $resourceKey . '::' . $resourceVal;
+        exit;
+    }
+
+    private function resourceNotFound($resourceKey, View $view)
+    {
+        $view->setViewsDir(__DIR__ . '/../modules/Index/views/');
+        $view->setPartialsDir('');
+        $view->message = "Acl resource <b>$resourceKey</b> not exists";
+        $view->partial('error/error404');
+
+        $response = new \Phalcon\Http\Response();
+        $response->setHeader(404, 'Not Found');
+        $response->sendHeaders();
+        echo $response->getContent();
         exit;
     }
 

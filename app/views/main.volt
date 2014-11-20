@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ helper.title().get() }}</title>
+    <title>{{ helper.title().get()|escape }}</title>
 
     {{ helper.meta().get('description') }}
     {{ helper.meta().get('keywords') }}

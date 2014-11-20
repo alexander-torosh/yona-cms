@@ -123,9 +123,9 @@ class Bootstrap
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
 
-        $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
+        $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di, $view) {
             new LocalizationPlugin($dispatcher);
-            new AclPlugin($di->get('acl'), $dispatcher);
+            new AclPlugin($di->get('acl'), $dispatcher, $view);
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {

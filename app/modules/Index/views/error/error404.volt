@@ -5,9 +5,14 @@
     <p>Страница не найдена</p>
 
     {% if registry.cms['DEBUG_MODE'] %}
-        <p>{{ e.getMessage() }}</p>
-        <p>{{ e.getFile() }}::{{ e.getLine() }}</p>
-        <pre>{{ e.getTraceAsString() }}</pre>
+        {% if e %}
+            <p>{{ e.getMessage() }}</p>
+            <p>{{ e.getFile() }}::{{ e.getLine() }}</p>
+            <pre>{{ e.getTraceAsString() }}</pre>
+        {% endif %}
+        {% if message %}
+            {{ message }}
+        {% endif %}
     {% endif %}
 
 </div>

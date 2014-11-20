@@ -51,30 +51,34 @@ class IndexController extends Controller
         $form = new LoginForm();
 
         if ($this->request->isPost()) {
-            if ($form->isValid($this->request->getPost())) {
-                $login = $this->request->getPost('login', 'string');
-                $password = $this->request->getPost('password', 'string');
-                $user = AdminUser::findFirst("login='$login'");
-                if ($user) {
-                    if ($user->checkPassword($password)) {
-                        if ($user->isActive()) {
-                            $this->session->set('auth', $user->getAuthData());
-                            $this->flash->success($this->helper->translate("Приветствуем в административной панели управления!"));
-                            $this->response->redirect('admin');
-                            return $this->response->send();
+            if ($this->security->checkToken()) {
+                if ($form->isValid($this->request->getPost())) {
+                    $login = $this->request->getPost('login', 'string');
+                    $password = $this->request->getPost('password', 'string');
+                    $user = AdminUser::findFirst("login='$login'");
+                    if ($user) {
+                        if ($user->checkPassword($password)) {
+                            if ($user->isActive()) {
+                                $this->session->set('auth', $user->getAuthData());
+                                $this->flash->success($this->helper->translate("Приветствуем в административной панели управления!"));
+                                $this->response->redirect('admin');
+                                return $this->response->send();
+                            } else {
+                                $this->flash->error($this->helper->translate("Пользователь не активирован"));
+                            }
                         } else {
-                            $this->flash->error($this->helper->translate("Пользователь не активирован"));
+                            $this->flash->error($this->helper->translate("Неверный логин или пароль"));
                         }
                     } else {
                         $this->flash->error($this->helper->translate("Неверный логин или пароль"));
                     }
                 } else {
-                    $this->flash->error($this->helper->translate("Неверный логин или пароль"));
+                    foreach ($form->getMessages() as $message) {
+                        $this->flash->error($message);
+                    }
                 }
             } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
+                $this->flash->error($this->helper->translate("Ошибка безопасности"));
             }
         }
 
@@ -82,10 +86,17 @@ class IndexController extends Controller
 
     public function logoutAction()
     {
-        $this->session->remove('auth');
-        $this->response->redirect('');
-        return $this->response->send();
-
+        if ($this->request->isPost()) {
+            if ($this->security->checkToken()) {
+                $this->session->remove('auth');
+                $this->response->redirect('');
+                return $this->response->send();
+            } else {
+                die("Ошибка безопасности");
+            }
+        } else {
+            die("Ошибка безопасности");
+        }
     }
 
 }
