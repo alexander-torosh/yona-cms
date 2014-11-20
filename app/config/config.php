@@ -10,8 +10,8 @@ $config = array(
     'loader' => array(
         'namespaces' => array(
 
-            // Vendors
-            'Zend' => APPLICATION_PATH . '/../vendor/zendframework/zendframework/library/Zend',
+            // Vendors:
+            // 'Zend' => APPLICATION_PATH . '/../vendor/zendframework/zendframework/library/Zend', // for example
 
         ),
     ),
