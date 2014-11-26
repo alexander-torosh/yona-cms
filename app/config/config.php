@@ -27,6 +27,7 @@ $config = array(
     'profiler' => $application['profiler'],
     'cache' => $application['cache'],
     'metadata_cache' => $application['metadata_cache'],
+    'admin_language' => 'ru' // ru, en. All translations contains in /app/modules/Cms/admin_translations
 );
 /**
  * ============================================================================

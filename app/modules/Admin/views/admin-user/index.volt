@@ -1,12 +1,12 @@
-<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> Добавить</a></p>
+<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> {{ helper.at('Добавить') }}</a></p>
 
 <table class="ui table very compact celled">
     <thead>
         <tr>
             <th style="width: 100px"></th>
-            <th>Логин</th>
+            <th>{{ helper.at('Логин') }}</th>
             <th>Email</th>
-            <th>Активен</th>
+            <th>{{ helper.at('Активен') }}</th>
         </tr>
     </thead>
     <tbody>

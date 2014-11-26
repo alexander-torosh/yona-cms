@@ -83,4 +83,15 @@ abstract class Form extends \Phalcon\Forms\Form
 
     }
 
+    public function renderAll()
+    {
+        $html = '';
+        if ($this->getElements()) {
+            foreach ($this->getElements() as $element) {
+                $html .= $this->renderDecorated($element->getName());
+            }
+        }
+        return $html;
+    }
+
 }

@@ -14,6 +14,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 {
 
     private $translate = null;
+    private $admin_translate = null;
 
     public function translate($string, $placeholders = null)
     {
@@ -21,6 +22,18 @@ class Helper extends \Phalcon\Mvc\User\Component
             $this->translate = $this->getDi()->get('translate');
         }
         return $this->translate->query($string, $placeholders);
+
+    }
+
+    /**
+     *
+     */
+    public function at($string, $placeholders = null)
+    {
+        if (!$this->admin_translate) {
+            $this->admin_translate = $this->getDi()->get('admin_translate');
+        }
+        return $this->admin_translate->query($string, $placeholders);
 
     }
 
