@@ -9,7 +9,7 @@
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/semantic-1.0.0/semantic.min.css" rel="stylesheet" type="text/css">
 
     <!--less-->
     {{ assets.outputLess('modules-admin-less') }}
@@ -20,7 +20,7 @@
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css">
 
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>
-    <script src="/vendor/semantic/javascript/semantic.min.js"></script>
+    <script src="/vendor/semantic-1.0.0/semantic.min.js"></script>
     <script src="/vendor/js/jquery.address.js"></script>
     <script src="/static/js/admin.js"></script>
 

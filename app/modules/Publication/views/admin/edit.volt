@@ -5,7 +5,7 @@
     <div class="ui segment">
 
         <a href="/publication/admin/{{ type }}?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left"></i> Назад
+            <i class="icon left arrow"></i> Назад
         </a>
 
         <div class="ui positive submit button">

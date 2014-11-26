@@ -73,6 +73,10 @@ class AdminController extends Controller
         $form = new PageForm();
         $model = Page::findFirst($id);
 
+        if ($model->getSlug() == 'index') {
+            $form->get('slug')->setAttribute('disabled','disabled');
+        }
+
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
             $form->bind($post, $model);
@@ -106,6 +110,10 @@ class AdminController extends Controller
     public function deleteAction($id)
     {
         $model = Page::findFirst($id);
+
+        if ($model->getSlug() == 'index') {
+            die('Страница index не может быть удалена');
+        }
 
         if ($this->request->isPost()) {
             $model->delete();

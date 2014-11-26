@@ -1,6 +1,6 @@
 <p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> Добавить</a></p>
 
-<table class="ui table segment">
+<table class="ui table very compact celled">
     <thead>
         <tr>
             <th style="width: 100px"></th>
@@ -16,7 +16,7 @@
             <td><a href="{{ url }}" class="mini ui icon button"><i class="pencil icon"></i></a></td>
             <td><a href="{{ url }}">{{ user.getLogin() }}</a></td>
             <td>{{ user.getEmail() }}</td>
-            <td>{% if user.getActive() %}<i class="icon checkmark grren"></i>{% endif %}</td>
+            <td>{% if user.getActive() %}<i class="icon checkmark green"></i>{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>

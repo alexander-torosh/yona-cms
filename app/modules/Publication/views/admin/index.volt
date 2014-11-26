@@ -23,7 +23,8 @@
 
 {% if paginate.total_items > 0 %}
 
-        <table class="ui compact table small segment">
+        <table class="ui table very compact celled">
+            <thead>
             <tr>
                 <th style="width: 100px"></th>
                 <th>Название</th>
@@ -32,6 +33,8 @@
                 <th>Превью внутри</th>
                 <th>Ссылка</th>
             </tr>
+            </thead>
+            <tbody>
             {% for item in paginate.items %}
                 {% set link = "/publication/admin/edit/" ~ item.getId() %}
                 <tr>
@@ -45,6 +48,7 @@
                     <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
                 </tr>
             {% endfor %}
+            </tbody>
         </table>
 {% else %}
     <p>Публикации отсутствуют</p>

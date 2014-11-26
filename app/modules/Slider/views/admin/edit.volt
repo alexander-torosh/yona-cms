@@ -7,7 +7,7 @@
     <div class="ui segment">
 
         <a href="/slider/admin" class="ui button">
-            <i class="icon left"></i> Назад
+            <i class="icon left arrow"></i> Назад
         </a>
 
         <div class="ui positive submit button">
@@ -40,13 +40,13 @@
     </div>
 
     {% if model is defined %}
-        <h3 class="ui top attached inverted teal block header">
+        <h3 class="ui top attached block header">
             Работа с изображениями
         </h3>
 
-        <div class="ui segment teal inverted attached work-with-image">
+        <div class="ui segment attached work-with-image">
 
-            <div class="ui stackable items gallery-item">
+            <div class="ui cards gallery-item">
                 {% for image in model.getRelated('SliderImages', ['order': 'sortorder ASC']) %}
 
                     {% set img = helper.image([
@@ -61,7 +61,7 @@
                     'alt': model.getTitle()|escape,
                     'data-id' : image.id
                     ]) %}
-                    <div class="item" data-id="{{ image.id }}" >
+                    <div class="card" data-id="{{ image.id }}" >
                         <div class="image">
                             {{ img.imageHtml() }}
                             <a class="delete like ui corner label">
@@ -165,7 +165,7 @@
         var items = {};
         var isSuccess = false;
 
-        $('.work-with-image').find('.item').each(function () {
+        $('.work-with-image').find('.card').each(function () {
             items[$(this).data('id')] = {
                 sort: $(this).index(),
                 text: $(this).find('.live-edit.{{  helper.constant('LANG') }}-gallery').val(),

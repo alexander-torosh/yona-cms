@@ -30,6 +30,8 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'admin/admin-user',
             'cms/configuration',
             'cms/translate',
+            'cms/language',
+            'cms/javascript',
             'widget/admin',
             'projects/admin',
             'systems/admin',
@@ -39,6 +41,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'publication/admin',
             'slider/admin',
             'seo/robots',
+            'seo/manager',
         );
         foreach ($privateResources as $resource) {
             $this->addResource(new \Phalcon\Acl\Resource($resource));

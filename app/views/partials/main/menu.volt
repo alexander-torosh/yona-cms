@@ -11,4 +11,7 @@
     <li>
         <a href="{{ helper.langUrl(['for':'contacts']) }}">{{ helper.translate('Контакты') }}</a>
     </li>
+    <li>
+        <a href="{{ url(['for':'admin']) }}" class="noajax">{{ helper.translate('Админка') }}</a>
+    </li>
 </ul>

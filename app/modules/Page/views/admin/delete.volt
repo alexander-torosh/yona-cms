@@ -1,6 +1,6 @@
 <p>
     <a href="/page/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
-        <i class="icon left"></i> Назад
+        <i class="icon left arrow"></i> Назад
     </a>
 </p>
 

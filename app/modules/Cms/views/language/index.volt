@@ -8,7 +8,8 @@
 </div>
 <!--/end controls-->
 
-<table class="ui table segment">
+<table class="ui table very compact celled">
+    <thead>
     <tr>
         <th>Имя</th>
         <th>Краткое</th>
@@ -18,6 +19,8 @@
         <th>Порядковый №</th>
         <th>Основной</th>
     </tr>
+    </thead>
+    <tbody>
     {% for item in entries %}
         <tr>
             <td><a href="/cms/language/edit/{{ item.getId() }}">{{ item.getName() }}</a></td>
@@ -32,4 +35,5 @@
             <td>{% if item.getPrimary() %}<i class="icon plus"></i>{% endif %}</td>
         </tr>
     {% endfor %}
+    </tbody>
 </table>

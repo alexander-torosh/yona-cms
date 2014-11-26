@@ -114,7 +114,7 @@ class Language extends Model
         $languages = self::findCachedLanguages();
         $iso_array = array();
         if (!empty($languages)) {
-            foreach($languages as $lang) {
+            foreach ($languages as $lang) {
                 $iso_array[] = $lang->getIso();
             }
         }
@@ -124,7 +124,7 @@ class Language extends Model
     public static function findCachedByIso($iso)
     {
         $languages = self::findCachedLanguages();
-        foreach($languages as $lang) {
+        foreach ($languages as $lang) {
             if ($iso == $lang->getIso()) {
                 return $lang;
             }
@@ -228,18 +228,20 @@ class Language extends Model
      */
     public function setPrimary($primary)
     {
-        if ($primary === 1) {
+        if ($primary == 1) {
             $languages = self::find();
             foreach ($languages as $lang) {
-                if ($lang->getId() != $this->id) {
-                    $lang->primary = 0;
-                    $lang->update();
-                }
+                $lang->primary = 0;
+                $lang->save();
+                //var_dump($lang);
+                var_dump($lang->getIso(), $lang->getPrimary());
             }
             $this->primary = 1;
         } else {
             $this->primary = 0;
         }
+        //var_dump($lang->getIso(), $this->getPrimary());
+        //exit;
     }
 
     /**
