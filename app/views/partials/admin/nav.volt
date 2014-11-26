@@ -13,12 +13,6 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}" href="/publication/admin">
                 <i class="calendar icon"></i> Публикации
             </a>
-            {#<a class="item{{ helper.activeMenu().activeClass('admin-projects') }}" href="/projects/admin">
-                <i class="home icon"></i> Проекты
-            </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-video') }}" href="/video/admin">
-                <i class="video icon"></i> Видео
-            </a>#}
             <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
                 <i class="resize horizontal icon"></i> Слайдеры
             </a>
@@ -26,7 +20,7 @@
                 <i class="text file icon"></i> Статические виджеты
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="/file-manager">
-                <i class="attachment icon"></i> Файловый менеджер
+                <i class="file image outline icon"></i> Файловый менеджер
             </a>
         </div>
     </div>

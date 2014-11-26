@@ -1,8 +1,10 @@
 <?php
 
+/**
+ * Modules "Application" and "Cms" loads automatically
+ * */
+
 return array(
-    'Application',
-    'Cms',
     'Image',
     'Index',
     'Admin',
