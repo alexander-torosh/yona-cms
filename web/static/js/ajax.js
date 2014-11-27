@@ -56,7 +56,7 @@ function AjaxViewModel() {
     }
 
     self.preUpdate = function () {
-        document.body.style.opacity = 0.2;
+        //document.body.style.opacity = 0.2;
     }
 
     self.update = function (response, href) {
@@ -77,7 +77,7 @@ function AjaxViewModel() {
             scrollTop: 0
         }, 300);
 
-        document.body.style.opacity = 1;
+        //document.body.style.opacity = 1;
 
         if (response) {
             document.body.setAttribute('class','');

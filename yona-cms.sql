@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2014 at 11:06 AM
+-- Generation Time: Nov 27, 2014 at 11:15 AM
 -- Server version: 5.5.35
 -- PHP Version: 5.4.6-1ubuntu1.7
 
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `language` (
 --
 
 INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sortorder`, `primary`) VALUES
-(1, 'ru', 'ru_RU', 'Русский', 'Рус', '', 1, '1'),
-(2, 'en', 'en_EN', 'English', 'Eng', 'en', 2, '1'),
+(1, 'ru', 'ru_RU', 'Русский', 'Рус', 'ru', 1, '1'),
+(2, 'en', 'en_EN', 'English', 'Eng', 'en', 2, '0'),
 (3, 'uk', 'uk_UA', 'Українська', 'Укр', 'uk', 3, '0');
 
 -- --------------------------------------------------------
@@ -383,12 +383,17 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_name` varchar(50) DEFAULT NULL,
   `route` varchar(50) DEFAULT NULL,
+  `route_ml` varchar(60) DEFAULT NULL,
   `module` varchar(50) DEFAULT NULL,
   `controller` varchar(50) DEFAULT NULL,
   `action` varchar(50) DEFAULT NULL,
   `language` varchar(50) DEFAULT NULL,
   `route_params_json` text,
   `query_params_json` text,
+  `head_title` varchar(500) DEFAULT NULL,
+  `meta_description` varchar(500) DEFAULT NULL,
+  `meta_keywords` varchar(500) DEFAULT NULL,
+  `seo_text` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -398,34 +403,8 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 -- Dumping data for table `seo_manager`
 --
 
-INSERT INTO `seo_manager` (`id`, `custom_name`, `route`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `created_at`, `updated_at`) VALUES
-(1, 'Новости', 'publications', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', '2014-09-30 10:39:23', '2014-11-14 18:06:38');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `seo_manager_translate`
---
-
-CREATE TABLE IF NOT EXISTS `seo_manager_translate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `foreign_id` int(11) NOT NULL,
-  `lang` varchar(20) DEFAULT NULL,
-  `key` varchar(255) DEFAULT NULL,
-  `value` text,
-  PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `seo_manager_translate`
---
-
-INSERT INTO `seo_manager_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
-(1, 1, 'ru', 'head_title', 'Последние новости'),
-(2, 1, 'ru', 'meta_description', 'Раздел сайта с последними новостями'),
-(3, 1, 'ru', 'meta_keywords', ''),
-(4, 1, 'ru', 'seo_text', 'Самые свежие и интересные новости. SEO-текст для тестирования');
+INSERT INTO `seo_manager` (`id`, `custom_name`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
+(1, 'Новости', 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41');
 
 -- --------------------------------------------------------
 
@@ -461,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `slider_image` (
   `sortorder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `slider_id` (`slider_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `slider_image`
@@ -594,12 +573,6 @@ ALTER TABLE `publication_translate`
 --
 ALTER TABLE `publication_type_translate`
   ADD CONSTRAINT `publication_type_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `seo_manager_translate`
---
-ALTER TABLE `seo_manager_translate`
-  ADD CONSTRAINT `seo_manager_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `seo_manager` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `slider_image`

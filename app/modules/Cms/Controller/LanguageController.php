@@ -69,6 +69,7 @@ class LanguageController extends Controller
             if ($form->isValid()) {
                 ($this->request->getPost('primary') != null) ? $model->setPrimary(1) : $model->setPrimary(0);
                 if ($model->save()) {
+                    $model->setOnlyOnePrimary();
                     $this->flash->success('Информация обновлена');
                     $this->cache->delete(Language::cacheKey());
                     return $this->redirect('/cms/language/edit/' . $model->getId());

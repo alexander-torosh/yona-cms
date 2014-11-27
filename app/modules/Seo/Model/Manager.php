@@ -8,6 +8,7 @@ namespace Seo\Model;
 
 
 use Application\Mvc\Model;
+use Application\Mvc\Router\DefaultRouter;
 use Phalcon\Mvc\Model\Message;
 
 class Manager extends Model
@@ -18,28 +19,22 @@ class Manager extends Model
         return "seo_manager";
     }
 
-    protected $translateModel = 'Seo\Model\Translate\ManagerTranslate';  // translate
-
     public $id;
     public $custom_name;
     public $route;
+    public $route_ml;
     public $module;
     public $controller;
     public $action;
     public $language;
     public $route_params_json;
     public $query_params_json;
-    public $head_title; // translate
-    public $meta_description; // translate
-    public $meta_keywords; // translate
-    public $seo_text; // translate
+    public $head_title;
+    public $meta_description;
+    public $meta_keywords;
+    public $seo_text;
     public $created_at;
     public $updated_at;
-
-    public function initialize()
-    {
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
-    }
 
     public function validation()
     {
@@ -70,6 +65,15 @@ class Manager extends Model
         return $this->validationHasFailed() != true;
     }
 
+    public function afterValidation()
+    {
+        if ($this->language) {
+            $this->route_ml = DefaultRouter::ML_PREFIX . $this->route . '_' . $this->language;
+        } else {
+            $this->route_ml = $this->route;
+        }
+    }
+
     public function beforeCreate()
     {
         $this->created_at = date("Y-m-d H:i:s");
@@ -78,6 +82,13 @@ class Manager extends Model
     public function beforeUpdate()
     {
         $this->updated_at = date("Y-m-d H:i:s");
+    }
+
+    public function afterUpdate()
+    {
+        $cache = $this->getDI()->get('cache');
+        $cache->delete(self::routeCacheKey($this->route_ml, $this->language));
+        $cache->delete(self::mcaCacheKey($this->module, $this->controller, $this->action, $this->language));
     }
 
     public function setAction($action)
@@ -125,16 +136,6 @@ class Manager extends Model
         return $this->route;
     }
 
-    public function setHead_title($head_title)
-    {
-        $this->setMLVariable('head_title', $head_title);
-    }
-
-    public function getHead_title()
-    {
-        return $this->getMLVariable('head_title');
-    }
-
     public function getId()
     {
         return $this->id;
@@ -148,26 +149,6 @@ class Manager extends Model
     public function getLanguage()
     {
         return $this->language;
-    }
-
-    public function setMeta_description($meta_description)
-    {
-        $this->setMLVariable('meta_description', $meta_description);
-    }
-
-    public function getMeta_description()
-    {
-        return $this->getMLVariable('meta_description');
-    }
-
-    public function setMeta_keywords($meta_keywords)
-    {
-        $this->setMLVariable('meta_keywords', $meta_keywords);
-    }
-
-    public function getMeta_keywords()
-    {
-        return $this->getMLVariable('meta_keywords');
     }
 
     public function setModule($module)
@@ -200,16 +181,6 @@ class Manager extends Model
         return $this->route_params_json;
     }
 
-    public function setSeo_text($seo_text)
-    {
-        $this->setMLVariable('seo_text', $seo_text);
-    }
-
-    public function getSeo_text()
-    {
-        return $this->getMLVariable('seo_text');
-    }
-
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
@@ -227,8 +198,95 @@ class Manager extends Model
 
     public static function routeCacheKey($route_name, $lang)
     {
-        $key = HOST_HASH . md5('Seo\Model\Manager::' . $route_name . $lang);
+        $key = HOST_HASH . md5('Seo\Model\Manager::' . DefaultRouter::ML_PREFIX . $route_name . '_' . $lang);
         return $key;
     }
+
+    public static function mcaCacheKey($module, $controller, $action, $lang) {
+        $key = HOST_HASH . md5('Seo\Model\Manager::' . $module . '::' . $controller . '::' . $action . '_' . $lang);
+        return $key;
+    }
+
+    /**
+     * @param mixed $route_ml
+     */
+    public function setRouteMl($route_ml)
+    {
+        $this->route_ml = $route_ml;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteMl()
+    {
+        return $this->route_ml;
+    }
+
+    /**
+     * @param mixed $head_title
+     */
+    public function setHead_title($head_title)
+    {
+        $this->head_title = $head_title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHead_title()
+    {
+        return $this->head_title;
+    }
+
+    /**
+     * @param mixed $meta_description
+     */
+    public function setMeta_description($meta_description)
+    {
+        $this->meta_description = $meta_description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeta_description()
+    {
+        return $this->meta_description;
+    }
+
+    /**
+     * @param mixed $meta_keywords
+     */
+    public function setMeta_keywords($meta_keywords)
+    {
+        $this->meta_keywords = $meta_keywords;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeta_keywords()
+    {
+        return $this->meta_keywords;
+    }
+
+    /**
+     * @param mixed $seo_text
+     */
+    public function setSeo_text($seo_text)
+    {
+        $this->seo_text = $seo_text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeo_text()
+    {
+        return $this->seo_text;
+    }
+
+
 
 }

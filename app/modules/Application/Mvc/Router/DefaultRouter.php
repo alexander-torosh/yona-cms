@@ -14,6 +14,8 @@ use Cms\Model\Language;
 class DefaultRouter extends Router
 {
 
+    const ML_PREFIX = 'ml__';
+
     public function __construct()
     {
         parent::__construct();
@@ -48,11 +50,11 @@ class DefaultRouter extends Router
         foreach ($languages as $lang) {
             $iso = $lang->getIso();
             if ($lang->getPrimary()) {
-                $this->add($pattern, $paths)->setName($name . '_' . $iso);
+                $this->add($pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
             } else {
                 $new_pattern = '/' . $lang->getUrl() . $pattern;
                 $paths['lang'] = $iso; // будущее значение константы LANG
-                $this->add($new_pattern, $paths)->setName($name . '_' . $iso);
+                $this->add($new_pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
             }
         }
     }

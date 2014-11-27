@@ -8,6 +8,7 @@
 
 namespace Application\Mvc;
 
+use Application\Mvc\Router\DefaultRouter;
 use Cms\Model\Language;
 
 class Helper extends \Phalcon\Mvc\User\Component
@@ -16,6 +17,9 @@ class Helper extends \Phalcon\Mvc\User\Component
     private $translate = null;
     private $admin_translate = null;
 
+    /**
+     * Мультиязычный перевод строки по сайту/пользовательской_части
+     */
     public function translate($string, $placeholders = null)
     {
         if (!$this->translate) {
@@ -26,7 +30,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     }
 
     /**
-     *
+     * Мультиязычный перевод строки по админке
      */
     public function at($string, $placeholders = null)
     {
@@ -37,9 +41,13 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
+    /**
+     * Вызов выджета из модуля StaticWidget
+     * @param $id - идентификатор виджета, например "phone"
+     */
     public function widget($id)
     {
-        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => "Widget::findFirst({$id})")));
+        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH . md5("Widget::findFirst({$id})"))));
         if ($widget) {
             return $widget->getHtml();
         }
@@ -47,7 +55,9 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function langUrl($params)
     {
-        $params['for'] .=  '_' . LANG;
+        $routeName = $params['for'];
+        $routeName = DefaultRouter::ML_PREFIX . $routeName . '_' . LANG;
+        $params['for'] = $routeName;
         return $this->url->get($params);
     }
 

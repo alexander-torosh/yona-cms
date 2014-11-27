@@ -23,10 +23,11 @@ class ManagerForm extends Form
         $modules = $config->modules->toArray();
         $modulesArray = array('' => ' - ');
         foreach($modules as $module => $val) {
-            $modulesArray[$module] = $module;
+            if (!in_array($module, array('cms','image','admin','widget','file-manager','seo','slider'))) {
+                $modulesArray[$module] = $module;
+            }
         }
 
-        $registry = $this->getDi()->get('registry');
         $languages = Language::findCachedLanguages();
         $languagesArray = array('' => ' - ');
         foreach($languages as $lang) {
@@ -38,7 +39,7 @@ class ManagerForm extends Form
         $this->add((new Select('module', $modulesArray))->setLabel('Module'));
         $this->add((new Text('controller'))->setLabel('Controller'));
         $this->add((new Text('action'))->setLabel('Action'));
-        $this->add((new Select('language', $languagesArray))->setLabel('Язык'));
+        $this->add((new Select('language', $languagesArray,array('data-description' => 'Если роутер многоязычный - указывайте язык')))->setLabel('Язык'));
         $this->add((new TextArea('route_params_json', array('data-description' => 'Пример: {"type" : "news", "page" : 1}')))->setLabel('Параметры Route. JSON'));
         $this->add((new TextArea('query_params_json', array('data-description' => 'Пример: {"limit" : 10, "display" : "table"}')))->setLabel('Параметры GET. JSON'));
         $this->add((new Text('head_title'))->setLabel('title'));

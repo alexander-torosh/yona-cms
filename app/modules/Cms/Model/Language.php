@@ -143,6 +143,26 @@ class Language extends Model
 
     }
 
+    public function setOnlyOnePrimary()
+    {
+        if ($this->getPrimary() == 1) {
+            $languages = $this->find();
+            foreach($languages as $lang) {
+                if ($lang->getId() != $this->getId()) {
+                    $lang->setPrimary(0);
+                    $lang->save();
+                }
+            }
+        } else {
+            $primary = $this->findFirst("primary = '1'");
+            if (!$primary) {
+                $this->setPrimary(1);
+                $this->save();
+                $this->getDI()->get('flash')->notice('Всегда должен быть один основной язык');
+            }
+        }
+    }
+
     /**
      * @param mixed $id
      */
@@ -228,20 +248,7 @@ class Language extends Model
      */
     public function setPrimary($primary)
     {
-        if ($primary == 1) {
-            $languages = self::find();
-            foreach ($languages as $lang) {
-                $lang->primary = 0;
-                $lang->save();
-                //var_dump($lang);
-                var_dump($lang->getIso(), $lang->getPrimary());
-            }
-            $this->primary = 1;
-        } else {
-            $this->primary = 0;
-        }
-        //var_dump($lang->getIso(), $this->getPrimary());
-        //exit;
+        $this->primary = $primary;
     }
 
     /**
@@ -284,4 +291,4 @@ class Language extends Model
         return $this->locale;
     }
 
-} 
+}

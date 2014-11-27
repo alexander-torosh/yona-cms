@@ -36,7 +36,7 @@ class LanguageForm extends Form
         )))->setLabel('Краткое написание языка'));
 
         $this->add((new Text('url', array(
-            'data-description' => 'Приставка в URL-строке страницы. Например: en',
+            'data-description' => 'Приставка в URL-строке страницы. Например: en. Для "Основного языка" не учитывается при формировании URL',
             'required' => true
         )))->setLabel('URL-префикс'));
 

@@ -29,7 +29,7 @@
             <td>{{ item.getLocale() }}</td>
 
             {% set url = '/' %}
-            {% if item.getUrl() %}{% set url = '/' ~ item.getUrl() ~ '/' %}{% endif %}
+            {% if item.getUrl() and not item.getPrimary() %}{% set url = '/' ~ item.getUrl() ~ '/' %}{% endif %}
             <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
             <td>{{ item.getSortorder() }}</td>
             <td>{% if item.getPrimary() %}<i class="icon plus"></i>{% endif %}</td>

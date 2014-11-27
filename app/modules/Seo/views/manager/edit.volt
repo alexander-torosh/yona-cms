@@ -35,21 +35,21 @@
 
         <!--tabs-->
         <div class="ui tabular menu init">
-            <a class="item active" data-tab="route">
+            <a class="item{% if not model.getModule() %} active{% endif %}" data-tab="route">
                 Route
             </a>
-            <a class="item" data-tab="mca">
+            <a class="item{% if model.getModule() %} active{% endif %}" data-tab="mca">
                 Module-Controller-Action
             </a>
         </div>
         <!--/end tabs-->
 
-        <div class="ui tab active" data-tab="route">
+        <div class="ui tab{% if not model.getModule() %} active{% endif %}" data-tab="route">
             {{ form.renderDecorated('route') }}
             {{ form.renderDecorated('route_params_json') }}
         </div>
 
-        <div class="ui tab" data-tab="mca">
+        <div class="ui tab{% if model.getModule() %} active{% endif %}" data-tab="mca">
             {{ form.renderDecorated('module') }}
             {{ form.renderDecorated('controller') }}
             {{ form.renderDecorated('action') }}

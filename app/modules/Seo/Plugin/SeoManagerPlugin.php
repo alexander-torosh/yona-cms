@@ -30,52 +30,94 @@ class SeoManagerPlugin extends Plugin
 
         $dispatcher_params = $dispatcher->getParams();
         $request_params = $request->getQuery();
+        unset($request_params['_url']);
 
-        /**
-         * @todo баг с многоязычностью и именем роутера. Нужно пересмотреть схему.
-         */
         if ($route_name && !in_array($route_name, array('default', 'default_action', 'default_controller'))) {
-            $query = 'route = :route: AND language = :language:';
-            $manager_matched_routes = Manager::find(array(
-                $query,
-                'bind' => array(
-                    'route' => $route_name,
-                    'language' => LANG,
-                ),
-                'cache' => array(
-                    'key' => Manager::routeCacheKey($route_name, LANG),
-                    'lifetime' => 60,
-                ),
-            ));
-            if ($manager_matched_routes) {
-                foreach ($manager_matched_routes as $entry) {
-                    if ($entry->getRouteParamsJson()) {
-                        if ($entry->getQueryParamsJson()) {
-                            $entry_route_params = json_decode($entry->getRouteParamsJson(), true);
-                            $entry_query_params = json_decode($entry->getQueryParamsJson(), true);
-                            if (!array_diff_assoc($entry_route_params, $dispatcher_params)) {
-                                if (!array_diff_assoc($entry_query_params, $request_params)) {
-                                    $this->pick($entry);
-                                }
-                            }
-                        } else {
-                            $entry_route_params = json_decode($entry->getRouteParamsJson(), true);
-                            if (!array_diff_assoc($entry_route_params, $dispatcher_params)) {
-                                $this->pick($entry);
-                            }
-                        }
-                    } elseif ($entry->getQueryParamsJson()) {
-                        $entry_query_params = json_decode($entry->getQueryParamsJson(), true);
-                        if (!array_diff_assoc($entry_query_params, $request_params)) {
-                            $this->pick($entry);
-                        }
-                    } else {
-                        $this->pick($entry);
-                    }
+            if (!$this->matchingRoute($route_name, $dispatcher_params, $request_params)) {
+                if ($module && $controller && $action) {
+                    $this->matchingMCA($module, $controller, $action, $dispatcher_params, $request_params);
                 }
             }
         } elseif ($module && $controller && $action) {
+            $this->matchingMCA($module, $controller, $action, $dispatcher_params, $request_params);
+        }
+    }
 
+    private function matchingRoute($route_name, $dispatcher_params, $request_params)
+    {
+        $query = 'route_ml = :route: AND language = :language:';
+        $manager_matched_routes = Manager::find(array(
+            $query,
+            'bind' => array(
+                'route' => $route_name,
+                'language' => LANG,
+            ),
+            'cache' => array(
+                'key' => Manager::routeCacheKey($route_name, LANG),
+                'lifetime' => 10,
+            ),
+        ));
+        if ($manager_matched_routes) {
+            foreach ($manager_matched_routes as $entry) {
+                if ($this->match($entry, $dispatcher_params, $request_params)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    private function matchingMCA($module, $controller, $action, $dispatcher_params, $request_params)
+    {
+        $query = 'module = :module: AND controller = :controller: AND action = :action: AND language = :language:';
+        $manager_matched_routes = Manager::find(array(
+            $query,
+            'bind' => array(
+                'module' => $module,
+                'controller' => $controller,
+                'action' => $action,
+                'language' => LANG,
+            ),
+            'cache' => array(
+                'key' => Manager::mcaCacheKey($module, $controller, $action, LANG),
+                'lifetime' => 10,
+            ),
+        ));
+        if ($manager_matched_routes) {
+            foreach ($manager_matched_routes as $entry) {
+                if ($this->match($entry, $dispatcher_params, $request_params)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    private function match($entry, $dispatcher_params, $request_params)
+    {
+        if ($entry->getRouteParamsJson()) {
+            if ($entry->getQueryParamsJson()) {
+                $entry_route_params = json_decode($entry->getRouteParamsJson(), true);
+                $entry_query_params = json_decode($entry->getQueryParamsJson(), true);
+                if (!array_diff_assoc($entry_route_params, $dispatcher_params)) {
+                    if (!array_diff_assoc($entry_query_params, $request_params)) {
+                        return $this->pick($entry);
+                    }
+                }
+            } else {
+                if (!empty($request_params)) {
+                    return;
+                }
+                $entry_route_params = json_decode($entry->getRouteParamsJson(), true);
+                if (!array_diff_assoc($entry_route_params, $dispatcher_params)) {
+                    return $this->pick($entry);
+                }
+            }
+        } elseif ($entry->getQueryParamsJson()) {
+            $entry_query_params = json_decode($entry->getQueryParamsJson(), true);
+            if (!array_diff_assoc($entry_query_params, $request_params)) {
+                return $this->pick($entry);
+            }
+        } else {
+            return $this->pick($entry);
         }
     }
 
@@ -95,6 +137,7 @@ class SeoManagerPlugin extends Plugin
         if ($entry->getSeo_text()) {
             $view->seo_text = $entry->getSeo_text();
         }
+        return true;
     }
 
 } 
