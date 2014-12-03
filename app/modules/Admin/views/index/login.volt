@@ -7,7 +7,7 @@
 
         <title>Login</title>
 
-        <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="/vendor/semantic-1.0.0/semantic.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
         <![endif]-->
         <style>
         .container {
-            width: 600px;
+            width: 400px;
             margin: 100px auto 0;
         }
         </style>
@@ -24,33 +24,28 @@
     <body>
         <div class="container">
             <form class="ui form segment" method="post">
+                <h1>Admin panel</h1>
                 {{ flash.output() }}
-                <div class="field">
-                    <label>Логин</label>
-                    <div class="ui left labeled icon input">
-                        <input name="login" id="login" type="text" placeholder="Username">
+                <div class="required field">
+                    <label>Login</label>
+                    <div class="ui icon input">
+                        <input type="text" name="login" placeholder="Login">
                         <i class="user icon"></i>
-                        <div class="ui corner label">
-                            <i class="icon asterisk"></i>
-                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label>Пароль</label>
-                    <div class="ui left labeled icon input">
-                        <input name="password" id="password" type="password">
+                <div class="required field">
+                    <label>Password</label>
+                    <div class="ui icon input">
+                        <input name="password" type="password">
                         <i class="lock icon"></i>
-                        <div class="ui corner label">
-                            <i class="icon asterisk"></i>
-                        </div>
                     </div>
                 </div>
                 <div class="ui error message">
-                    <div class="header">Ошибки</div>
+                    <div class="header">Errors</div>
                 </div>
                 <input type="hidden" name="{{ security.getTokenKey() }}"
                        value="{{ security.getToken() }}"/>
-                <input type="submit" id="submit" class="ui blue submit button" value="Login">
+                <input type="submit" id="submit" class="ui blue submit button" value="Log in">
             </form>
         </div> <!-- /container -->
     </body>

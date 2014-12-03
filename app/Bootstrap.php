@@ -129,22 +129,24 @@ class Bootstrap
             new AclPlugin($di->get('acl'), $dispatcher, $view);
         });
 
-        $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {
+        $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
             new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
             new TitlePlugin($di);
         });
 
-        $profiler = new \Phalcon\Db\Profiler();
-        $di->set('profiler', $profiler);
+        if ($registry->cms['PROFILER']) {
+            $profiler = new \Phalcon\Db\Profiler();
+            $di->set('profiler', $profiler);
 
-        $eventsManager->attach('db', function ($event, $db) use ($profiler) {
-            if ($event->getType() == 'beforeQuery') {
-                $profiler->startProfile($db->getSQLStatement());
-            }
-            if ($event->getType() == 'afterQuery') {
-                $profiler->stopProfile();
-            }
-        });
+            $eventsManager->attach('db', function ($event, $db) use ($profiler) {
+                if ($event->getType() == 'beforeQuery') {
+                    $profiler->startProfile($db->getSQLStatement());
+                }
+                if ($event->getType() == 'afterQuery') {
+                    $profiler->stopProfile();
+                }
+            });
+        }
 
         $db->setEventsManager($eventsManager);
 
