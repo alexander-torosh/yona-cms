@@ -137,6 +137,7 @@ class SeoManagerPlugin extends Plugin
         if ($entry->getSeo_text()) {
             $view->seo_text = $entry->getSeo_text();
         }
+        $helper->meta()->set('seo-manager','matched');
         return true;
     }
 

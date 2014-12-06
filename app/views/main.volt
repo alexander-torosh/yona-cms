@@ -9,6 +9,7 @@
 
     {{ helper.meta().get('description') }}
     {{ helper.meta().get('keywords') }}
+    {{ helper.meta().get('seo-manager') }}
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 

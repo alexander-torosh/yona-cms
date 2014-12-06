@@ -12,7 +12,9 @@ class TitlePlugin extends Plugin
     public function __construct($di)
     {
         $helper = $di->get('helper');
-        $helper->title($helper->translate('SITE NAME'));
+        if (!$helper->meta()->get('seo-manager')) {
+            $helper->title($helper->translate('SITE NAME'));
+        }
     }
 
 } 
