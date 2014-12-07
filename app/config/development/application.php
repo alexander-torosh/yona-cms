@@ -10,4 +10,5 @@ return array(
     ),
     'cache' => 'file', // file, memcache
     'metadata_cache' => 'memory', // memory, apc
+    'profiler' => true,
 );
