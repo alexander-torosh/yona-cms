@@ -10,7 +10,7 @@
 
         {{ content() }}
 
-        {% if seo_text and not seo_text_inner %}
+        {% if seo_text is defined and seo_text_inner is not defined %}
             <div class="seo-text">
                 {{ seo_text }}
             </div>

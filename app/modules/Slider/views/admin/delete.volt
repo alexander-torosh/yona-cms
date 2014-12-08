@@ -1,13 +1,10 @@
-<link href="/static/css/gall-phalcon.css" rel="stylesheet" type="text/css" />
-<script src="/static/js/gall-phalcon.js"></script>
-
-{{ helper.title().append(title) }}
-
-<p><a href="/slider/admin/edit/{{ model.getId() }}" class="ui blue button"><i class="left icon"></i> Назад</a></p>
-<div class="well">
-    <p>Вы уверенны, что хотите удалить слайдер <b>{{ model.getTitle() }}</b></p>
-
-    <form action="" method="post">
-        <input type="submit" class="ui red button" value="Подтвердить удаление">
-    </form>
+<div class="ui segment">
+    <a href="/slider/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
+        <i class="icon left arrow"></i> Назад
+    </a>
 </div>
+
+<form method="post" class="ui negative message form" action="">
+    <p>Удалить слайдер <b>{{ model.getTitle() }}</b>?</p>
+    <button type="submit" class="ui button negative"><i class="icon trash"></i> Удалить</button>
+</form>

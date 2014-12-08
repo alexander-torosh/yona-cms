@@ -31,7 +31,7 @@ class Model extends \Phalcon\Mvc\Model
      */
     public function afterFetch()
     {
-        if ($this->translateModel && LANG != 'LANG') { // Если есть массив переводов
+        if ($this->translateModel && defined('LANG')) { // Если есть массив переводов и установлена константа активного языка
             self::setLang(LANG); // Устанавливаем текущий язык
             $this->getTranslations(); // Извлекаем переводы со связанной таблицы переводов
         }

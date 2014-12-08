@@ -44,7 +44,7 @@
         <h1>{{ title }}</h1>
     {% endif %}
 
-    {% if not languages_disabled %}
+    {% if languages_disabled is not defined %}
         {{ partial('admin/languages') }}
     {% endif %}
 

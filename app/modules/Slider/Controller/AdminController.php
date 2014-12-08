@@ -115,8 +115,7 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = 'Удалить слайдер';
-        $this->helper->title('Удаление публикации');
+        $this->helper->title('Удаление слайдера', true);
     }
 
     public function deleteImageAction()

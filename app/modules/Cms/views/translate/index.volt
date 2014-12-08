@@ -1,4 +1,4 @@
-{% if phrases is not empty %}
+{% if phrases is defined %}
     <form method="post" action="" class="ui form segment" enctype="application/x-www-form-urlencoded">
         <div class="field">
             <input type="submit" class="ui button positive" value="Сохранить">

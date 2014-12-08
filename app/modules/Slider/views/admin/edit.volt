@@ -14,7 +14,7 @@
             <i class="save icon"></i> Сохранить
         </div>
 
-        {% if model is not empty and model.getId() %}
+        {% if model is defined and model.getId() %}
             <a href="/slider/admin/delete/{{ model.getId() }}" class="ui button red">
                 <i class="icon trash"></i> Удалить
             </a>
@@ -81,7 +81,7 @@
 
                             <p class="description to-edit {{  helper.constant('LANG') }}-gallery">{{ image.getCaption() }}</p>
 
-                            <div class="button ui small red add-desc {{  helper.constant('LANG') }}-gallery" {% if text is not empty %} style="display: none" {% endif %}>
+                            <div class="button ui small red add-desc {{  helper.constant('LANG') }}-gallery" {% if text is defined %} style="display: none" {% endif %}>
                                 добавить описание
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
 
         <div class="gallery-hidden">
-            {% if model.Images is not empty %}
+            {% if model.Images is defined %}
                 {% for image in model.getRelated('SliderImages', ['order':'sortorder ASC']) %}
                     {% set img = helper.image([
                     'id': image.id,
@@ -152,7 +152,7 @@
         }
     }, {
         onSuccess: function () {
-            {% if model is not empty and model.getId() %}
+            {% if model is defined and model.getId() %}
             return saveGallery();
             {% endif %}
         }

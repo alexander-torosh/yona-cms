@@ -39,6 +39,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'file-manager/index',
             'page/admin',
             'publication/admin',
+            'publication/type',
             'slider/admin',
             'seo/robots',
             'seo/manager',
