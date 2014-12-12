@@ -165,7 +165,7 @@ class AdminController extends Controller
             if ($this->request->hasFiles() == true) {
                 foreach ($this->request->getUploadedFiles() as $file) {
 
-                    if (in_array($file->getType(), $this->allowedFormats)) {
+                    if (in_array($file->getRealType(), $this->allowedFormats)) {
                         $image = new \Slider\Model\SliderImage();
                         $image->setSliderId($id);
                         $image->save();
