@@ -57,7 +57,7 @@
             </a>
         </div>
     </div>
-    <a href="#" class="item right" onclick="document.getElementById('logout-form').submit()">
+    <a href="javascript:void(0);" class="item right" onclick="document.getElementById('logout-form').submit()">
         <i class="plane icon"></i> Вылет
     </a>
     <form action="/admin/index/logout" method="post" style="display: none;" id="logout-form">

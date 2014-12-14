@@ -29,14 +29,14 @@
                 <div class="required field">
                     <label>Login</label>
                     <div class="ui icon input">
-                        <input type="text" name="login" placeholder="Login">
+                        {{ form.render('login') }}
                         <i class="user icon"></i>
                     </div>
                 </div>
                 <div class="required field">
                     <label>Password</label>
                     <div class="ui icon input">
-                        <input name="password" type="password">
+                        {{ form.render('password') }}
                         <i class="lock icon"></i>
                     </div>
                 </div>

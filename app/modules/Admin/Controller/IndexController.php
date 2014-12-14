@@ -82,6 +82,8 @@ class IndexController extends Controller
             }
         }
 
+        $this->view->form = $form;
+
     }
 
     public function logoutAction()
