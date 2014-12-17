@@ -2,6 +2,7 @@
 
 return array(
     'database' => array(
+        'adapter' => 'Mysql',
         'host' => 'localhost',
         'username' => '',
         'password' => '',
