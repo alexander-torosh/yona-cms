@@ -29,7 +29,7 @@ class AdminUserController extends Controller
                     "order" => "id DESC"
         ));
 
-        $this->view->title = 'Администраторы';
+        $this->view->title = $this->helper->at('Администраторы');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -46,7 +46,7 @@ class AdminUserController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
-                    $this->flash->success('Администратор <b>'.$model->getLogin().'</b> создан');
+                    $this->flash->success($this->helper->at('User created'), ['name' => $model->getLogin()]);
                     $this->response->redirect('admin/admin-user');
                     return $this->response->send();
                 } else {
@@ -62,9 +62,9 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = 'Добавить';
+        $this->view->submitButton = $this->helper->at('Add New');
 
-        $this->view->title = 'Добавить администратора';
+        $this->view->title = $this->helper->at('Administrator');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -96,10 +96,10 @@ class AdminUserController extends Controller
         }
 
         $this->view->form = $form;
-        $this->view->submitButton = 'Сохранить';
+        $this->view->submitButton = $this->helper->at('Save');
         $this->view->model = $model;
 
-        $this->view->title = 'Редактировать администратора';
+        $this->view->title = $this->helper->at('Редактировать администратора');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -120,7 +120,7 @@ class AdminUserController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = 'Удалить администратора';
+        $this->view->title = $this->helper->at('Delete User');
         $this->helper->title()->append($this->view->title);
 
     }

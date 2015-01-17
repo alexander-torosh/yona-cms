@@ -2,7 +2,7 @@
 <div class="ui segment">
 
     <a href="/cms/language/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
 </div>

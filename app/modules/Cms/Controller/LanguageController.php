@@ -27,8 +27,8 @@ class LanguageController extends Controller
             'order' => 'primary DESC, sortorder ASC',
         ));
 
-        $this->view->title = 'Список языков';
-        $this->helper->title('Список языков');
+        $this->view->title = $this->helper->at('Список языков');
+        $this->helper->title($this->view->title);
     }
 
     public function addAction()
@@ -42,7 +42,7 @@ class LanguageController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->cache->delete(Language::cacheKey());
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Информация обновлена'));
                     return $this->redirect('/cms/language');
                 } else {
                     $this->flashErrors($model);
@@ -55,7 +55,7 @@ class LanguageController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Добавление языка';
+        $this->view->title = $this->helper->at('Добавление языка');
         $this->helper->title($this->view->title);
     }
 
@@ -70,7 +70,7 @@ class LanguageController extends Controller
                 ($this->request->getPost('primary') != null) ? $model->setPrimary(1) : $model->setPrimary(0);
                 if ($model->save()) {
                     $model->setOnlyOnePrimary();
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Информация обновлена'));
                     $this->cache->delete(Language::cacheKey());
                     return $this->redirect('/cms/language/edit/' . $model->getId());
                 } else {
@@ -101,7 +101,7 @@ class LanguageController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = 'Удаление языка';
+        $this->view->title = $this->helper->at('Удаление языка');
         $this->helper->title($this->view->title);
     }
 

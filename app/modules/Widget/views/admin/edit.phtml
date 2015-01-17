@@ -9,11 +9,11 @@
 
 <p>
     <a href="/widget/admin/index" class="ui button">
-        <i class="icon left arrow"></i> Назад
+        <i class="icon left arrow"></i> Back
     </a>
     <?php if (isset($widget)): ?>
         <a href="/widget/admin/delete/<?php echo $widget->getId() ?>" class="ui button red">
-            <i class="icon trash"></i> Удалить
+            <i class="icon trash"></i> Delete
         </a>
     <?php endif; ?>
 </p>
@@ -27,7 +27,7 @@
     <?php echo $form->renderDecorated('title'); ?>
     <?php echo $form->renderDecorated('html'); ?>
     <div class="ui positive submit button">
-        <i class="save icon"></i> Сохранить
+        <i class="save icon"></i> Save
     </div>
 </form>
 

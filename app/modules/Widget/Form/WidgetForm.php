@@ -22,16 +22,16 @@ class WidgetForm extends Form
     {
         $id = new Text("id");
         $id->addValidator(new PresenceOf(array(
-            'message' => 'ID должен быть указан'
+            'message' => 'ID can not be empty.'
         )));
         $id->addValidator(new Regex(array(
             'pattern' => '/[a-z0-9_-]+/i',
-            'message' => 'В ID могут быть только символы a-z 0-9 _ -'
+            'message' => 'В ID must be a-z 0-9 _ -'
         )));
         $id->setLabel('ID');
 
         $title = new Text("title");
-        $title->setLabel('Название');
+        $title->setLabel('Title');
 
         $html = new TextArea("html");
         $html->setLabel('HTML');

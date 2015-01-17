@@ -28,7 +28,7 @@
     {{ publication.getText() }}
 
     <p>
-        <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}">&larr; {{ helper.translate('Назад к перечню публикаций') }}</a>
+        <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}">&larr; {{ helper.translate('Back к перечню публикаций') }}</a>
     </p>
 
 </article>

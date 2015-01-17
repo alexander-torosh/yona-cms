@@ -31,7 +31,7 @@ class AdminController extends Controller
     public function indexAction()
     {
         $this->view->entries = Slider::find();
-        $this->view->title = 'Список слайдеров';
+        $this->view->title = $this->helper->at('Manage Slider');
     }
 
     public function addAction()
@@ -44,7 +44,7 @@ class AdminController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
-                    $this->flash->success('Слайдер создан');
+                    $this->flash->success($this->helper->at('Slider created'));
                     $this->uploadImages($model->getId());
                     return $this->redirect('/slider/admin/edit/' . $model->getId());
 
@@ -60,7 +60,7 @@ class AdminController extends Controller
 
         $this->view->setVars(array(
             'form' => $form,
-            'title' => 'Добавление слайдера'
+            'title' => $this->helper->at('Adding a slider')
         ));
     }
 
@@ -75,10 +75,10 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 $this->uploadImages($model->getId());
                 if ($model->save()) {
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Slider edited'));
                     return $this->redirect('/slider/admin/edit/' . $model->getId());
                 } else {
-                    $this->flash->error('Информация не сохранена!');
+                    $this->flash->error($this->helper->at('Errors while editing slider!'));
                     $this->flashErrors($model);
                 }
 
@@ -92,7 +92,7 @@ class AdminController extends Controller
         $this->view->setVars(array(
             'form' => $form,
             'model' => $model,
-            'title' => 'Редактирование слайдера'
+            'title' => $this->helper->at('Editing the slider')
         ));
     }
 
@@ -115,7 +115,7 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->helper->title('Удаление слайдера', true);
+        $this->helper->title($this->helper->at('Удаление слайдера'), true);
     }
 
     public function deleteImageAction()
@@ -177,7 +177,7 @@ class AdminController extends Controller
                         $imageFilter->remove(false);
                         $file->moveTo($imageFilter->originalAbsPath());
                     } else {
-                        $this->flash->error('Разрешается загружать только картинки с расширением jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' );
+                        $this->flash->error($this->helper->at('Разрешается загружать только картинки с расширением jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' ));
                     }
                 }
 

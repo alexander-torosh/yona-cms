@@ -2,11 +2,11 @@
 <div class="ui segment">
 
     <a href="/publication/admin?lang={{ constant('LANG') }}" class="ui button">
-        <i class="icon left arrow"></i> Перечень публикаций
+        <i class="icon left arrow"></i> Manage Publications
     </a>
 
     <a href="/publication/type/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
 </div>
@@ -16,10 +16,10 @@
     <thead>
     <tr>
         <th style="width: 100px"></th>
-        <th>Название</th>
-        <th>URL раздела</th>
-        <th>Формат вывода</th>
-        <th>Отображать дату</th>
+        <th>Title</th>
+        <th>URL</th>
+        <th>Display Layout</th>
+        <th>Thumbnail Inside</th>
     </tr>
     </thead>
     <tbody>

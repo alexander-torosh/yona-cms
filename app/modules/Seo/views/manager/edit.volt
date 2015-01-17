@@ -4,21 +4,21 @@
     <div class="ui segment">
 
         <a href="/seo/manager" class="ui button">
-            <i class="icon left arrow"></i> Назад
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model.getId() %}
 
             <a href="/seo/manager/add" class="ui button">
-                <i class="icon add"></i> Добавить
+                <i class="icon add"></i> Add New
             </a>
 
             <a href="/seo/manager/delete/{{ model.getId() }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+                <i class="icon trash"></i> Delete
             </a>
 
         {% endif %}

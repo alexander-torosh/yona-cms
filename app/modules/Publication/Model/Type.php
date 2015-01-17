@@ -31,8 +31,8 @@ class Type extends Model
     public $seo_text; // translate
 
     public static $formats = array(
-        'list' => 'Список',
-        'grid' => 'Сетка',
+        'list' => 'List',
+        'grid' => 'Grid',
     );
 
     public function initialize()

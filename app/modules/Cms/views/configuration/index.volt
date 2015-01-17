@@ -17,5 +17,5 @@
     <!--/end tab main-->
 
     <input type="hidden" name="form" value="1">
-    <button type="submit" class="ui button positive"><i class="icon save"></i> Сохранить</button>
+    <button type="submit" class="ui button positive"><i class="icon save"></i> Save</button>
 </form>

@@ -27,8 +27,8 @@ class AdminController extends Controller
     {
         $this->view->entries = Page::find();
 
-        $this->view->title = 'Список страниц';
-        $this->helper->title('Список страниц');
+        $this->view->title = $this->helper->at('Manage Pages');
+        $this->helper->title($this->view->title);
     }
 
     public function addAction()
@@ -45,7 +45,7 @@ class AdminController extends Controller
                     $form->bind($post, $model);
                     $model->updateFields($post);
                     if ($model->update()) {
-                        $this->flash->success('Страница создана');
+                        $this->flash->success($this->helper->at('Page created'));
                         return $this->redirect('/page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
@@ -58,7 +58,8 @@ class AdminController extends Controller
             }
         }
 
-        $this->view->title = 'Создание страницы';
+        $helper = $this->di->get('helper');
+        $this->view->title = $helper->at('Manage Pages');
         $this->helper->title($this->view->title);
 
         $this->view->model = $model;
@@ -83,7 +84,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 $model->updateFields($post);
                 if ($model->save()) {
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Информация обновлена'));
 
                     // Очищаем кеш страницы
                     $query = "slug = '{$model->getSlug()}'";
@@ -103,7 +104,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = 'Редактирование страницы';
+        $this->view->title = $this->helper->at('Edit Page');
         $this->helper->title($this->view->title);
     }
 
@@ -112,7 +113,7 @@ class AdminController extends Controller
         $model = Page::findFirst($id);
 
         if ($model->getSlug() == 'index') {
-            die('Страница index не может быть удалена');
+            die($this->helper->at('Index page can not be removed'));
         }
 
         if ($this->request->isPost()) {
@@ -121,7 +122,7 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = 'Удаление страницы';
+        $this->view->title = $this->helper->at('Delete Page');
         $this->helper->title($this->view->title);
     }
 

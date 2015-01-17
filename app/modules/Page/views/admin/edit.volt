@@ -4,27 +4,27 @@
     <div class="ui segment">
 
         <a href="/page/admin?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left arrow"></i> Назад
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model.getId() %}
         
             <a href="/page/admin/add" class="ui button">
-                <i class="icon add"></i> Добавить
+                <i class="icon add"></i> Add
             </a>
 
             <a href="/page/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+                <i class="icon trash"></i> Trash
             </a>
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
                    href="{{ helper.langUrl(['for':'page','slug':model.getSlug()]) }}">
-                    Посмотреть на сайте
+                    View Online
                 </a>
             {% endif %}
 
@@ -60,7 +60,7 @@
 <script type="text/javascript">
     tinymce.init({
         selector: "#text",
-        language: "ru",
+        language: "en",
         height: "700px",
         plugins: [
             "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",

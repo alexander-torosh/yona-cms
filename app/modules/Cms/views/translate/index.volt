@@ -1,7 +1,7 @@
 {% if phrases is defined %}
     <form method="post" action="" class="ui form segment" enctype="application/x-www-form-urlencoded">
         <div class="field">
-            <input type="submit" class="ui button positive" value="Сохранить">
+            <input type="submit" class="ui button positive" value="Save">
 			<button type="button" class="ui button blue" onclick="fillEmpties();">Проставить пустые ячейки исходными значениями</button>
         </div>
         <table class="ui table very compact celled">
@@ -26,7 +26,7 @@
             </tbody>
         </table>
         <div class="field">
-            <input type="submit" class="ui button positive" value="Сохранить">
+            <input type="submit" class="ui button positive" value="Save">
         </div>
     </form>
 {% else %}

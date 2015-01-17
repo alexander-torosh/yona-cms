@@ -7,16 +7,16 @@
     <div class="ui segment">
 
         <a href="/slider/admin" class="ui button">
-            <i class="icon left arrow"></i> Назад
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model is defined and model.getId() %}
             <a href="/slider/admin/delete/{{ model.getId() }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+                <i class="icon trash"></i> Delete
             </a>
         {% endif %}
 
@@ -35,13 +35,13 @@
     {{ partial('admin/languages') }}
 
     <div class="ui segment">
-        <h5>Выбрать изображения для загрузки</h5>
+        <h5>Upload images</h5>
         {{ form.render('image[]') }}
     </div>
 
     {% if model is defined %}
         <h3 class="ui top attached block header">
-            Работа с изображениями
+            Woe
         </h3>
 
         <div class="ui segment attached work-with-image">
@@ -82,7 +82,7 @@
                             <p class="description to-edit {{  helper.constant('LANG') }}-gallery">{{ image.getCaption() }}</p>
 
                             <div class="button ui small red add-desc {{  helper.constant('LANG') }}-gallery" {% if text is defined %} style="display: none" {% endif %}>
-                                добавить описание
+                                Add New описание
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
     </div>
     <div class="content">
         <div style="height: 200px">
-            <h1 style="text-align: center">Вы уверенны, что хотите удалить это изображение?</h1>
+            <h1 style="text-align: center">Вы уверенны, что хотите Delete это изображение?</h1>
             <img class="img-Delete" style="width: 300px; min-height: 150px;max-height:200px " src="" alt=""/>
         </div>
     </div>

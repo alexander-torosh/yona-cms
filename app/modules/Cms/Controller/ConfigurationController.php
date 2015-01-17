@@ -31,7 +31,7 @@ class ConfigurationController extends Controller
             $post = $this->request->getPost();
             if ($form->isValid($post)) {
                 if ($this->saveFormData($post)) {
-                    $this->flash->success('Настройки сохранены');
+                    $this->flash->success($this->helper->at('Настройки сохранены'));
                     $this->redirect('/cms/configuration');
                 }
             } else {
@@ -43,7 +43,7 @@ class ConfigurationController extends Controller
 
         $this->view->form = $form;
 
-        $title = 'Конфигурация CMS';
+        $title = $this->helper->at('Конфигурация CMS');
         $this->view->title = $title;
         $this->helper->title($title);
     }

@@ -51,8 +51,8 @@ class AdminController extends Controller
         $this->view->type = $type;
         $this->view->type_id = $type_id;
 
-        $this->view->title = 'Список публикаций';
-        $this->helper->title('Список публикаций');
+        $this->view->title = $this->helper->at('Manage Publications');
+        $this->helper->title($this->view->title);
     }
 
     public function addAction()
@@ -77,7 +77,7 @@ class AdminController extends Controller
                     $form->bind($post, $model);
                     $model->updateFields($post);
                     if ($model->update()) {
-                        $this->flash->success('Публикация создана');
+                        $this->flash->success($this->helper->at('Publication created'));
                         return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
@@ -93,8 +93,8 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Создание публикации';
-        $this->helper->title('Создание публикации');
+        $this->view->title = $this->helper->at('Create a publication');
+        $this->helper->title($this->view->title);
 
     }
 
@@ -115,7 +115,7 @@ class AdminController extends Controller
                 $model->updateFields($post);
                 if ($model->save()) {
                     $this->uploadImage($model);
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Publication edited'));
 
                     return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
@@ -130,8 +130,8 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = 'Редактирование публикации';
-        $this->helper->title('Редактирование публикации');
+        $this->view->title = $this->helper->at('Edit publication');
+        $this->helper->title($this->view->title);
     }
 
     public function deleteAction($id)
@@ -148,8 +148,8 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = 'Удаление публикации';
-        $this->helper->title('Удаление публикации');
+        $this->view->title = $this->helper->at('Unpublishing');
+        $this->helper->title($this->view->title);
     }
 
     private function uploadImage($model)
@@ -163,7 +163,7 @@ class AdminController extends Controller
                         'image/png',
                     ))
                     ) {
-                        return $this->flash->error('Разрешается загружать только файлы с расширением jpg, jpeg, png, bmp');
+                        return $this->flash->error($this->helper->at('Only allow image formats jpg, jpeg, png, bmp'));
                     }
 
                     $imageFilter = new \Image\Storage(array(
@@ -174,7 +174,7 @@ class AdminController extends Controller
                     $resize_x = 1000;
                     $resize_y = 1000;
 
-                    $successMsg = 'Фото добавлено';
+                    $successMsg = $this->helper->at('Photo added');
 
                     $imageFilter->removeCached();
 
