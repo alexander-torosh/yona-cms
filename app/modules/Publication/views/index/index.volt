@@ -14,6 +14,6 @@
 
 {% if paginate.total_pages > 1 %}
     <div class="pagination">
-        {{ partial('main/pagination', ['paginate':paginate, 'url':publicationsLink] ) }}
+        {{ partial('main/pagination', ['paginate':paginate] ) }}
     </div>
 {% endif %}
