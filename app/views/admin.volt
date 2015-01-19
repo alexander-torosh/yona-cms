@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ helper.title().append('Административная панель') }}{{ helper.title().get() }}</title>
+    <title>{{ helper.title().append('Administrative Panel') }}{{ helper.title().get() }}</title>
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 

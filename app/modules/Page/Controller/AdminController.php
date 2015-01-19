@@ -84,7 +84,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 $model->updateFields($post);
                 if ($model->save()) {
-                    $this->flash->success($this->helper->at('Информация обновлена'));
+                    $this->flash->success($this->helper->at('Updated has been successful'));
 
                     // Очищаем кеш страницы
                     $query = "slug = '{$model->getSlug()}'";

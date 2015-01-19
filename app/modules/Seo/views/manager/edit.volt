@@ -30,7 +30,7 @@
         {{ form.renderDecorated('custom_name') }}
 
         <div class="ui label" style="text-transform: none;">
-            Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно
+            You must use the Route or Module-Controller-Action. Simultaneous indication of the parameters can not be
         </div>
 
         <!--tabs-->

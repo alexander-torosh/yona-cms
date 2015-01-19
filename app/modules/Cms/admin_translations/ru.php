@@ -32,4 +32,13 @@ return array(
     'Manage Languages' => 'Список языков',
     'Manage Users' => 'Администраторы',
     'Editing User' => 'Редактировать администратора',
+    'Editing language' => 'Редактирование языка',
+    'Deleting language' => 'Удаление языка',
+    'Adding language' => 'Добавление языка',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 );

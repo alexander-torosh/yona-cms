@@ -27,10 +27,10 @@ class RobotsController extends Controller
                 $robots = $this->request->getPost('robots', 'string');
                 $result = file_put_contents($this->robotsFilePath, $robots);
                 if ($result) {
-                    $this->flash->success('Файл robots.txt обновлен');
+                    $this->flash->success('File robots.txt has been saved');
                     $this->redirect('/seo/robots');
                 } else {
-                    $this->flash->error('Ошибка! Файл robots.txt не обновлен. Проверьте права на запись файла.');
+                    $this->flash->error('Error! The robots.txt file is not updated. Check the write permissions to the file.');
                 }
             } else {
                 $this->flashErrors($form);
@@ -59,7 +59,7 @@ class RobotsController extends Controller
             }*/
         }
 
-        $title = 'Редактирование robots.txt';
+        $title = 'Editing robots.txt';
         $this->helper->title($title);
         $this->view->title = $title;
         $this->view->form = $form;
