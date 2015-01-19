@@ -31,14 +31,14 @@ class IndexController extends Controller
         // Проверка пользователя yona
         $wezoom = AdminUser::findFirst("login = 'yona'");
         if ($wezoom) {
-            $this->flash->warning("Обнаружен административный пользователь 'yona', для соблюдения мер безопасности, его необходимо Delete и создать новую личную учетную запись");
+            $this->flash->warning("Found the administrative user 'yona', to comply with security measures, it is necessary to Delete and create a new personal account");
         }
 
         $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
         $this->view->changelog = nl2br(trim($changelog));
 
-        $this->view->title = $this->helper->translate('Административная панель YonaCms');
-        $this->helper->title()->append($this->helper->translate('Стартовая страница'));
+        $this->view->title = $this->helper->translate('YonaCms Admin Panel');
+        $this->helper->title()->append($this->helper->translate('Home'));
 
         $this->helper->activeMenu()->setActive('admin-home');
 
@@ -60,17 +60,17 @@ class IndexController extends Controller
                         if ($user->checkPassword($password)) {
                             if ($user->isActive()) {
                                 $this->session->set('auth', $user->getAuthData());
-                                $this->flash->success($this->helper->translate("Приветствуем в административной панели управления!"));
+                                $this->flash->success($this->helper->translate("Welcome to the administrative control panel!"));
                                 $this->response->redirect('admin');
                                 return $this->response->send();
                             } else {
-                                $this->flash->error($this->helper->translate("Пользователь не активирован"));
+                                $this->flash->error($this->helper->translate("User is not activated yet"));
                             }
                         } else {
-                            $this->flash->error($this->helper->translate("Неверный логин или пароль"));
+                            $this->flash->error($this->helper->translate("Incorrect login or password"));
                         }
                     } else {
-                        $this->flash->error($this->helper->translate("Неверный логин или пароль"));
+                        $this->flash->error($this->helper->translate("Incorrect login or password"));
                     }
                 } else {
                     foreach ($form->getMessages() as $message) {
@@ -78,7 +78,7 @@ class IndexController extends Controller
                     }
                 }
             } else {
-                $this->flash->error($this->helper->translate("Ошибка безопасности"));
+                $this->flash->error($this->helper->translate("Security errors"));
             }
         }
 
@@ -94,10 +94,10 @@ class IndexController extends Controller
                 $this->response->redirect('');
                 return $this->response->send();
             } else {
-                die("Ошибка безопасности");
+                die("Security errors");
             }
         } else {
-            die("Ошибка безопасности");
+            die("Security errors");
         }
     }
 

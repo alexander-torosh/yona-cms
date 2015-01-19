@@ -146,7 +146,7 @@
             rules: [
                 {
                     type: 'empty',
-                    prompt : 'Укажите название слайдера'
+                    prompt : 'Specify the name of the slider'
                 }
             ]
         }
@@ -220,7 +220,7 @@
                             if (data.success === true) {
                                 item.remove();
                             } else {
-                                alert('ошибка удаления картинки');
+                                alert('Error deleting pictures');
                             }
                         }
                     });

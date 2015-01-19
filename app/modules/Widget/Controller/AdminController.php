@@ -48,7 +48,7 @@ class AdminController extends Controller
         $this->view->pick('admin/edit');
         $this->view->setVar('form', $form);
 
-        $this->view->title = $this->helper->at('Adding a Slider');
+        $this->view->title = $this->helper->at('Adding widget');
         $this->helper->title($this->view->title);
 
     }

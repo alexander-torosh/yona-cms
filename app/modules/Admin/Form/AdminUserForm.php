@@ -32,7 +32,7 @@ class AdminUserForm extends Form
             'autocomplete' => 'off',
         ));
         $email->addValidator(new ValidatorEmail(array(
-            'message' => 'Email format required',
+            'message' => 'Email format is invalid',
         )));
         $email->addValidator(new PresenceOf(array(
             'message' => 'Email is required',

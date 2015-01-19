@@ -35,12 +35,12 @@ class Language extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "iso",
-                "message" => "Одинаковые ISO для языков не допускаются"
+                "message" => "The inputted ISO language is existing"
             )
         ));
         $this->validate(new PresenceOf(array(
             'field' => 'iso',
-            'message' => 'Укажите ISO'
+            'message' => 'ISO is required'
         )));
 
         /**
@@ -49,12 +49,12 @@ class Language extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "name",
-                "message" => "Одинаковые имена для языков не допускаются"
+                "message" => "The inputted name is existing"
             )
         ));
         $this->validate(new PresenceOf(array(
             'field' => 'name',
-            'message' => 'Укажите имя'
+            'message' => 'Name is required'
         )));
 
         /**
@@ -63,7 +63,7 @@ class Language extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "url",
-                "message" => "Одинаковые URL для языков не допускаются"
+                "message" => "The inputted URL is existing"
             )
         ));
 
@@ -71,7 +71,7 @@ class Language extends Model
         if ($this->primary == 0) {
             $this->validate(new PresenceOf(array(
                 'field' => 'url',
-                'message' => 'Укажите URL'
+                'message' => 'URL is required'
             )));
         }
 
@@ -158,7 +158,7 @@ class Language extends Model
             if (!$primary) {
                 $this->setPrimary(1);
                 $this->save();
-                $this->getDI()->get('flash')->notice('Всегда должен быть один основной язык');
+                $this->getDI()->get('flash')->notice('There should always be a primary language');
             }
         }
     }

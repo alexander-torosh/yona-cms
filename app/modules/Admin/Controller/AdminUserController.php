@@ -46,7 +46,7 @@ class AdminUserController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
-                    $this->flash->success($this->helper->at('User created'), ['name' => $model->getLogin()]);
+                    $this->flash->success($this->helper->at('User created', ['name' => $model->getLogin()]));
                     $this->response->redirect('admin/admin-user');
                     return $this->response->send();
                 } else {
@@ -78,7 +78,7 @@ class AdminUserController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save() == true) {
-                    $this->flash->success('Администратор <b>'.$model->getLogin().'</b> сохранен');
+                    $this->flash->success('User <b>'.$model->getLogin().'</b> has been saved');
                     $this->response->redirect('admin/admin-user');
                     return $this->response->send();
                 } else {
@@ -114,7 +114,7 @@ class AdminUserController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->flash->warning('Администратор <b>'.$model->getLogin().'</b> удален');
+            $this->flash->warning('Deleting user <b>'.$model->getLogin().'</b>');
             $this->response->redirect('admin/admin-user');
             return $this->response->send();
         }

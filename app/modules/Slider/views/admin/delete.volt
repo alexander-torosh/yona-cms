@@ -5,6 +5,6 @@
 </div>
 
 <form method="post" class="ui negative message form" action="">
-    <p>Delete слайдер <b>{{ model.getTitle() }}</b>?</p>
+    <p>Delete slider <b>{{ model.getTitle() }}</b>?</p>
     <button type="submit" class="ui button negative"><i class="icon trash"></i> Delete</button>
 </form>

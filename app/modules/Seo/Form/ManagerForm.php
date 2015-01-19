@@ -34,18 +34,18 @@ class ManagerForm extends Form
             $languagesArray[$lang->getIso()] = $lang->getName();
         }
 
-        $this->add((new Text('custom_name'))->setLabel('Рабочее имя, для удобства'));
+        $this->add((new Text('custom_name'))->setLabel('Business name, for convenience'));
         $this->add((new Text('route'))->setLabel('Route'));
         $this->add((new Select('module', $modulesArray))->setLabel('Module'));
         $this->add((new Text('controller'))->setLabel('Controller'));
         $this->add((new Text('action'))->setLabel('Action'));
-        $this->add((new Select('language', $languagesArray,array('data-description' => 'Если роутер многоязычный - указывайте язык')))->setLabel('Язык'));
-        $this->add((new TextArea('route_params_json', array('data-description' => 'Пример: {"type" : "news", "page" : 1}')))->setLabel('Параметры Route. JSON'));
-        $this->add((new TextArea('query_params_json', array('data-description' => 'Пример: {"limit" : 10, "display" : "table"}')))->setLabel('Параметры GET. JSON'));
+        $this->add((new Select('language', $languagesArray,array('data-description' => 'If the router is multilingual - Indicates the language')))->setLabel('Language'));
+        $this->add((new TextArea('route_params_json', array('data-description' => 'Example: {"type" : "news", "page" : 1}')))->setLabel('Route Parameters. JSON'));
+        $this->add((new TextArea('query_params_json', array('data-description' => 'Example: {"limit" : 10, "display" : "table"}')))->setLabel('Parameters GET. JSON'));
         $this->add((new Text('head_title'))->setLabel('title'));
         $this->add((new TextArea('meta_description'))->setLabel('meta-description'));
         $this->add((new TextArea('meta_keywords'))->setLabel('meta-keywords'));
-        $this->add((new TextArea('seo_text'))->setLabel('SEO текст'));
+        $this->add((new TextArea('seo_text'))->setLabel('SEO Text'));
 
     }
 

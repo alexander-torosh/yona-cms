@@ -115,7 +115,7 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->helper->title($this->helper->at('Удаление слайдера'), true);
+        $this->helper->title($this->helper->at('Removing slider'), true);
     }
 
     public function deleteImageAction()
@@ -177,7 +177,7 @@ class AdminController extends Controller
                         $imageFilter->remove(false);
                         $file->moveTo($imageFilter->originalAbsPath());
                     } else {
-                        $this->flash->error($this->helper->at('Разрешается загружать только картинки с расширением jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' ));
+                        $this->flash->error($this->helper->at('Only allow to upload the images with the extension jpg, jpeg, png, gif! '. $file->getName() .' - не загружен.' ));
                     }
                 }
 

@@ -5,6 +5,6 @@
 </div>
 
 <form method="post" class="ui negative message form" action="">
-    <p>Delete язык <b>{{ model.getName() }} - {{ model.getIso() }}</b>?</p>
+    <p>Delete language <b>{{ model.getName() }} - {{ model.getIso() }}</b>?</p>
     <button type="submit" class="ui button negative"><i class="icon trash"></i> Delete</button>
 </form>
