@@ -31,14 +31,14 @@ class IndexController extends Controller
         // Проверка пользователя yona
         $wezoom = AdminUser::findFirst("login = 'yona'");
         if ($wezoom) {
-            $this->flash->warning("Обнаружен административный пользователь 'yona', для соблюдения мер безопасности, его необходимо удалить и создать новую личную учетную запись");
+            $this->flash->warning("Обнаружен административный пользователь 'yona', для соблюдения мер безопасности, его необходимо Delete и создать новую личную учетную запись");
         }
 
         $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
         $this->view->changelog = nl2br(trim($changelog));
 
-        $this->view->title = 'Административная панель YonaCms';
-        $this->helper->title()->append('Стартовая страница');
+        $this->view->title = $this->helper->translate('Административная панель YonaCms');
+        $this->helper->title()->append($this->helper->translate('Стартовая страница'));
 
         $this->helper->activeMenu()->setActive('admin-home');
 

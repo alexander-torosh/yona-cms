@@ -22,29 +22,29 @@ class SliderForm extends Form
     {
         $this->add(
             (new Text('title', array('required' => true)))
-                ->setLabel('Внутреннее название слайдера')
+                ->setLabel('Internal name')
         );
 
         $this->add(
             (new Text('animation_speed', array('required' => true)))
-                ->setLabel('Продолжительность перехода к следующему слайду')
+                ->setLabel('Animation speed')
                 ->setAttribute('placeholder', '300')
         );
 
         $this->add(
             (new Text('delay'))
-                ->setLabel('Частота смены слайдов')
+                ->setLabel('Delay duration')
         );
 
         $this->add(
             (new Check('visible'))
-                ->setLabel('Отображать')
+                ->setLabel('Visible')
                 ->setDefault(1)
         );
 
         $this->add(
             (new File('image[]', array('id' => 'file')))
-                ->setLabel('Загрузка изображений')
+                ->setLabel('Images')
                 ->setAttribute('multiple', 'multiple')
         );
 

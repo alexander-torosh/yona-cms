@@ -2,7 +2,7 @@
 <div class="ui segment">
 
     <a href="/seo/manager/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
 </div>

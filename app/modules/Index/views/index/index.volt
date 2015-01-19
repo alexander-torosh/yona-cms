@@ -1,4 +1,4 @@
-{{ helper.slider(1) }}
+{{ helper.slider(2) }}
 
 <article>
     {{ page.getText() }}

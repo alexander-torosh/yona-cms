@@ -22,7 +22,7 @@ class TypeController extends Controller
     {
         $this->view->entries = Type::find();
 
-        $this->view->title = 'Типы публикаций';
+        $this->view->title = 'Manage Types of Publication';
         $this->helper->title($this->view->title);
     }
 
@@ -42,7 +42,7 @@ class TypeController extends Controller
                     $form->bind($post, $model);
                     $model->updateFields($post);
                     if ($model->update()) {
-                        $this->flash->success('Тип публикации создан');
+                        $this->flash->success('Type created');
                         return $this->redirect('/publication/type/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
@@ -74,7 +74,7 @@ class TypeController extends Controller
             if ($form->isValid()) {
                 $model->updateFields($post);
                 if ($model->update()) {
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success('Type created');
                     return $this->redirect('/publication/type/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
@@ -89,7 +89,7 @@ class TypeController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Редактирование типа публикаций';
+        $this->view->title = 'Manage Type of Publications';
         $this->helper->title($this->view->title);
     }
 
@@ -98,7 +98,7 @@ class TypeController extends Controller
         $model = Type::findFirst($id);
         $count = Type::count();
         if ($count == 1) {
-            $this->flash->error('Невозможно удалить единственный тип публикаций');
+            $this->flash->error('Can not Delete the last Type');
             return;
         }
 
@@ -109,7 +109,7 @@ class TypeController extends Controller
 
         $this->view->model = $model;
 
-        $this->view->title = 'Удаление типа публикаций';
+        $this->view->title = 'Delete Type';
         $this->helper->title($this->view->title);
     }
 

@@ -4,8 +4,8 @@ return array(
     'database' => array(
         'host' => 'localhost',
         'username' => 'root',
-        'password' => '111',
-        'dbname' => 'yona-cms',
+        'password' => 'vagrant',
+        'dbname' => 'yona',
         'charset' => 'utf8',
     ),
     'cache' => 'file', // file, memcache

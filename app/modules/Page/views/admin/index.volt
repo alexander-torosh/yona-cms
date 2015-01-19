@@ -2,7 +2,7 @@
 <div class="ui segment">
 
     <a href="/page/admin/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
 </div>
@@ -12,8 +12,8 @@
     <thead>
     <tr>
         <th style="width: 100px"></th>
-        <th>Название</th>
-        <th>Ссылка</th>
+        <th>Title</th>
+        <th>Url</th>
     </tr>
     </thead>
     <tbody>

@@ -33,10 +33,10 @@ class JavascriptController extends Controller
                 $head->setText($this->request->getPost('head'));
                 $body->setText($this->request->getPost('body'));
                 if ($head->save() && $body->save()) {
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success($this->helper->at('Информация обновлена'));
                     return $this->redirect('/cms/javascript');
                 } else {
-                    $this->flash->error('Ошибка сохранения');
+                    $this->flash->error($this->helper->at('Ошибка сохранения'));
                 }
             } else {
                 $this->flashErrors($form);
