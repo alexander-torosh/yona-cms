@@ -11,13 +11,13 @@
 <table class="ui table very compact celled">
     <thead>
     <tr>
-        <th>Имя</th>
-        <th>Краткое</th>
+        <th>Name</th>
+        <th>Code</th>
         <th>ISO</th>
         <th>Locale</th>
         <th>URL</th>
-        <th>Порядковый №</th>
-        <th>Основной</th>
+        <th>Sort order</th>
+        <th>Main</th>
     </tr>
     </thead>
     <tbody>

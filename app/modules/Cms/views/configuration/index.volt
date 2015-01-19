@@ -3,7 +3,7 @@
     <!--tabs-->
     <div class="ui tabular menu init">
         <a class="item active" data-tab="main">
-            Главные
+            Main
         </a>
     </div>
     <!--/end tabs-->

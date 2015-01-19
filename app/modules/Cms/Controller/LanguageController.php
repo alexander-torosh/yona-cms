@@ -27,7 +27,7 @@ class LanguageController extends Controller
             'order' => 'primary DESC, sortorder ASC',
         ));
 
-        $this->view->title = $this->helper->at('Список языков');
+        $this->view->title = $this->helper->at('Manage Languages');
         $this->helper->title($this->view->title);
     }
 

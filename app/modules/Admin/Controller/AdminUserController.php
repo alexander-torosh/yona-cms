@@ -29,7 +29,7 @@ class AdminUserController extends Controller
                     "order" => "id DESC"
         ));
 
-        $this->view->title = $this->helper->at('Администраторы');
+        $this->view->title = $this->helper->at('Manage Users');
         $this->helper->title()->append($this->view->title);
 
     }
@@ -99,7 +99,7 @@ class AdminUserController extends Controller
         $this->view->submitButton = $this->helper->at('Save');
         $this->view->model = $model;
 
-        $this->view->title = $this->helper->at('Редактировать администратора');
+        $this->view->title = $this->helper->at('Manage Users');
         $this->helper->title()->append($this->view->title);
 
     }

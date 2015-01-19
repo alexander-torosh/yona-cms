@@ -24,5 +24,12 @@ return array(
     'Publication edited' => 'Информация обновлена',
     'Unpublishing' => 'Удаление публикации',
     'Create a publication' => 'Создание публикации',
-    '' => '',
+    'Configuration CMS' => 'Конфигурация CMS',
+    'Debug mode, display application errors' => 'Режим отладки, вывод ошибок приложения',
+    'The site under maintenance' => 'Режим "На сайте проводятся технические работы"',
+    'Setting saved' => 'Настройки сохранены',
+    'Auto fill empty cells' => 'Проставить пустые ячейки исходными значениями',
+    'Manage Languages' => 'Список языков',
+    'Manage Users' => 'Администраторы',
+    'Editing User' => 'Редактировать администратора',
 );

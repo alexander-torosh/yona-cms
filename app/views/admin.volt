@@ -35,8 +35,8 @@
 <div class="container">
     {% if registry.cms['TECHNICAL_WORKS'] %}
         <div class="ui red inverted segment">
-            На сайте проводятся технические работы.<br>
-            Пожалуйста, не проводите никаких действий до окончания работ.
+            The site under maintenance.<br>
+            Please do not perform any action until the work is completed.
         </div>
     {% endif %}
 

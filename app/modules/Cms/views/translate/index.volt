@@ -2,13 +2,13 @@
     <form method="post" action="" class="ui form segment" enctype="application/x-www-form-urlencoded">
         <div class="field">
             <input type="submit" class="ui button positive" value="Save">
-			<button type="button" class="ui button blue" onclick="fillEmpties();">Проставить пустые ячейки исходными значениями</button>
+			<button type="button" class="ui button blue" onclick="fillEmpties();">Auto fill empty cells</button>
         </div>
         <table class="ui table very compact celled">
             <thead>
             <tr>
-                <th style="text-align: right; width: 25%;">Исходник</th>
-                <th>Перевод</th>
+                <th style="text-align: right; width: 25%;">Phrase</th>
+                <th>Translation</th>
             </tr>
             </thead>
             <tbody>
