@@ -70,7 +70,7 @@
                         </div>
                         <div class="content">
                             <div class="ui input">
-                                <input name="link" id="link" placeholder="Ссылка" value="{{ image.getLink() }}">
+                                <input name="link" id="link" placeholder="Url" value="{{ image.getLink() }}">
                                 <label></label>
                             </div>
 
@@ -82,7 +82,7 @@
                             <p class="description to-edit {{  helper.constant('LANG') }}-gallery">{{ image.getCaption() }}</p>
 
                             <div class="button ui small red add-desc {{  helper.constant('LANG') }}-gallery" {% if text is defined %} style="display: none" {% endif %}>
-                                Add New описание
+                                Add New Description
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
     </div>
     <div class="content">
         <div style="height: 200px">
-            <h1 style="text-align: center">Вы уверенны, что хотите Delete это изображение?</h1>
+            <h1 style="text-align: center">Do you want to delete this image?</h1>
             <img class="img-Delete" style="width: 300px; min-height: 150px;max-height:200px " src="" alt=""/>
         </div>
     </div>
@@ -146,7 +146,7 @@
             rules: [
                 {
                     type: 'empty',
-                    prompt : 'Укажите название слайдера'
+                    prompt : 'Specify the name of the slider'
                 }
             ]
         }
@@ -220,7 +220,7 @@
                             if (data.success === true) {
                                 item.remove();
                             } else {
-                                alert('ошибка удаления картинки');
+                                alert('Error deleting pictures');
                             }
                         }
                     });

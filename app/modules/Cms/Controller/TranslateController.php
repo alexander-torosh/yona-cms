@@ -40,7 +40,7 @@ class TranslateController extends Controller
                     }
                 }
             }
-            $this->flash->success($this->helper->at('Данные обновлены'));
+            $this->flash->success($this->helper->at('Saved has been successful'));
 
             $lang = LANG;
             $key = HOST_HASH . md5("Translate::findByLang($lang)");

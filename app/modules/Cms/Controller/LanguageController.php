@@ -42,7 +42,7 @@ class LanguageController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->cache->delete(Language::cacheKey());
-                    $this->flash->success($this->helper->at('Информация обновлена'));
+                    $this->flash->success($this->helper->at('Updated has been successful'));
                     return $this->redirect('/cms/language');
                 } else {
                     $this->flashErrors($model);
@@ -55,7 +55,7 @@ class LanguageController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = $this->helper->at('Добавление языка');
+        $this->view->title = $this->helper->at('Adding language');
         $this->helper->title($this->view->title);
     }
 
@@ -70,7 +70,7 @@ class LanguageController extends Controller
                 ($this->request->getPost('primary') != null) ? $model->setPrimary(1) : $model->setPrimary(0);
                 if ($model->save()) {
                     $model->setOnlyOnePrimary();
-                    $this->flash->success($this->helper->at('Информация обновлена'));
+                    $this->flash->success($this->helper->at('Updated has been successful'));
                     $this->cache->delete(Language::cacheKey());
                     return $this->redirect('/cms/language/edit/' . $model->getId());
                 } else {
@@ -86,7 +86,7 @@ class LanguageController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Редактирование языка';
+        $this->view->title = 'Editing language';
         $this->helper->title($this->view->title);
     }
 
@@ -101,7 +101,7 @@ class LanguageController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->at('Удаление языка');
+        $this->view->title = $this->helper->at('Removing language');
         $this->helper->title($this->view->title);
     }
 

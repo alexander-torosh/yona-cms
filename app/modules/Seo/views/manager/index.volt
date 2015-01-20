@@ -12,7 +12,7 @@
     <thead>
     <tr>
         <th style="width: 100px"></th>
-        <th>Название</th>
+        <th>Title</th>
         <th>Route</th>
         <th>M-C-A</th>
         <th>Язык</th>
