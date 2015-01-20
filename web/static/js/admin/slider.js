@@ -50,7 +50,7 @@ function liveEdit() {
 }
 
 function deleteImage(id, url, type) {
-    if (confirm('Удалить логотип?')) {
+    if (confirm('Do you want to delete this image?')) {
         $.ajax({
             url: url,
             data: {
