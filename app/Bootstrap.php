@@ -70,7 +70,9 @@ class Bootstrap
 
         $url = new \Phalcon\Mvc\Url();
         $url->setBasePath('/');
-        $url->setBaseUri('/');
+        $url->setBaseUri('/'); // <- указать путь относительно папки web
+        
+        $di->set('url', $url);
 
         $cacheFrontend = new \Phalcon\Cache\Frontend\Data(array(
             "lifetime" => 60,
