@@ -17,6 +17,13 @@ class Helper extends \Phalcon\Mvc\User\Component
     private $translate = null;
     private $admin_translate = null;
 
+    public $menu;
+
+    public function __construct()
+    {
+        $this->menu = \Menu\Helper\Menu::getInstance();
+    }
+
     /**
      * Мультиязычный перевод строки по сайту/пользовательской_части
      */

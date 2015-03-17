@@ -1,17 +1,18 @@
 <ul id="menu">
-    <li>
-        <a href="{{ helper.langUrl(['for':'index']) }}">{{ helper.translate('Home') }}</a>
-    </li>
-    <li>
-        <a href="{{ helper.langUrl(['for':'publications', 'type':'news']) }}">{{ helper.translate('News') }}</a>
-    </li>
-    <li>
-        <a href="{{ helper.langUrl(['for':'publications', 'type':'articles']) }}">{{ helper.translate('Articles') }}</a>
-    </li>
-    <li>
-        <a href="{{ helper.langUrl(['for':'contacts']) }}">{{ helper.translate('Contacts') }}</a>
-    </li>
-    <li>
-        <a href="{{ url(['for':'admin']) }}" class="noajax">{{ helper.translate('Admin') }}</a>
-    </li>
+    {{ helper.menu.item( helper.translate('Home'), 'index', helper.langUrl(['for':'index']) ) }}
+    {{ helper.menu.item( helper.translate('News'), 'news', helper.langUrl(['for':'publications', 'type':'news']) ) }}
+    {{ helper.menu.item( helper.translate('Articles'), 'articles', helper.langUrl(['for':'publications', 'type':'articles']) ) }}
+    {{ helper.menu.item( helper.translate('Contacts'), 'contacts', helper.langUrl(['for':'contacts']) ) }}
+    {{ helper.menu.item( helper.translate('Admin'), null, url(['for':'admin']), ['class':'noajax'] ) }}
+    {#
+        submenu items exampple:
+
+        {{ helper.menu.item( helper.translate('Services'), 'services', helper.langUrl(['for':'services']), [],
+        [
+            helper.menu.item( helper.translate('Printing'), 'printing', helper.langUrl(['for':'printing']) ),
+            helper.menu.item( helper.translate('Design'), 'design', helper.langUrl(['for':'design']) )
+        ]
+        ) }}
+
+    #}
 </ul>

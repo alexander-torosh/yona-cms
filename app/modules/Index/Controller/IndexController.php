@@ -23,6 +23,8 @@ class IndexController extends Controller
         $this->helper->meta()->set('keywords', $page->getMeta_keywords());
         $this->view->page = $page;
 
+        $this->helper->menu->setActive('index');
+
     }
 
     public function contactsAction()
@@ -37,6 +39,8 @@ class IndexController extends Controller
         $this->helper->meta()->set('description', $page->getMeta_description());
         $this->helper->meta()->set('keywords', $page->getMeta_keywords());
         $this->view->page = $page;
+
+        $this->helper->menu->setActive('contacts');
     }
 
 }

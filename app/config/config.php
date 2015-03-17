@@ -41,6 +41,4 @@ $modules_config = $modules->modulesConfig($modules_list);
 
 $config = array_merge_recursive($config, $modules_config);
 
-//var_dump($config);exit;
-
 return new \Phalcon\Config($config);
