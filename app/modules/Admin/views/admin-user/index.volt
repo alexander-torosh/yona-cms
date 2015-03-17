@@ -1,4 +1,4 @@
-<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> {{ helper.at('Добавить') }}</a></p>
+<p><a href="/admin/admin-user/add" class="ui positive button"><i class="add icon"></i> {{ helper.at('Add New') }}</a></p>
 
 <table class="ui table very compact celled">
     <thead>

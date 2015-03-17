@@ -23,26 +23,26 @@ class PublicationForm extends Form
     public function initialize()
     {
         $type = new Select('type_id', Type::cachedListArray(array('key' => 'id')), array());
-        $type->setLabel('Тип пубикации');
+        $type->setLabel('Type of Publication');
         $this->add($type);
 
         $title = new Text('title', array('required' => true));
         $title->addValidator(new PresenceOf(array(
-            'message' => 'Укажите название страницы'
+            'message' => 'Title can not be empty'
         )));
-        $title->setLabel('Название');
+        $title->setLabel('Title');
         $this->add($title);
 
         $slug = new Text('slug');
-        $slug->setLabel('Транслитерация');
+        $slug->setLabel('Slug');
         $this->add($slug);
 
         $date = new Text('date');
-        $date->setLabel('Дата публикации');
+        $date->setLabel('Published Date');
         $this->add($date);
 
         $text = new TextArea('text');
-        $text->setLabel('Текст');
+        $text->setLabel('Text');
         $this->add($text);
 
         $meta_title = new Text('meta_title', array('required' => true));
@@ -58,12 +58,12 @@ class PublicationForm extends Form
         $this->add($meta_keywords);
 
         $preview_inner = new Check('preview_inner');
-        $preview_inner->setLabel('Превью внутри публикации');
+        $preview_inner->setLabel('Show in the publication');
         $preview_inner->setDefault(1);
         $this->add($preview_inner);
 
         $image = new File('image');
-        $image->setLabel('Загрузить превью');
+        $image->setLabel('Thumbnail Image');
         $this->add($image);
     }
 

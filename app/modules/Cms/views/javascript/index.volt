@@ -3,5 +3,5 @@
     {{ form.renderDecorated('head') }}
     {{ form.renderDecorated('body') }}
 
-    <button type="submit" class="ui button positive"><i class="icon save"></i> Сохранить</button>
+    <button type="submit" class="ui button positive"><i class="icon save"></i> Save</button>
 </form>

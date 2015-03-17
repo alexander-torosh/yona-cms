@@ -2,7 +2,7 @@
 <div class="ui segment">
 
     <a href="/publication/admin/{{ type }}/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
     <a href="/publication/type" class="ui button">
@@ -27,11 +27,11 @@
             <thead>
             <tr>
                 <th style="width: 100px"></th>
-                <th>Название</th>
-                <th>Тип публикации</th>
-                <th>Дата публикации</th>
-                <th>Превью внутри</th>
-                <th>Ссылка</th>
+                <th>Title</th>
+                <th>Type of Publication</th>
+                <th>Created Date</th>
+                <th>Thumbs Inside</th>
+                <th>Url</th>
             </tr>
             </thead>
             <tbody>
@@ -51,11 +51,11 @@
             </tbody>
         </table>
 {% else %}
-    <p>Публикации отсутствуют</p>
+    <p>No publication</p>
 {% endif %}
 
 {% if paginate.total_pages > 1 %}
     <div class="pagination">
-        {{ partial('main/pagination', ['paginate':paginate, 'url':publicationsLink] ) }}
+        {{ partial('admin/pagination', ['paginate':paginate] ) }}
     </div>
 {% endif %}

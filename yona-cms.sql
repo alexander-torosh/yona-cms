@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2014 at 11:15 AM
+-- Generation Time: Jan 20, 2015 at 09:53 AM
 -- Server version: 5.5.35
 -- PHP Version: 5.4.6-1ubuntu1.7
 
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `language` (
 --
 
 INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sortorder`, `primary`) VALUES
-(1, 'ru', 'ru_RU', 'Русский', 'Рус', 'ru', 1, '1'),
-(2, 'en', 'en_EN', 'English', 'Eng', 'en', 2, '0'),
+(1, 'ru', 'ru_RU', 'Русский', 'Рус', 'ru', 2, '0'),
+(2, 'en', 'en_EN', 'English', 'Eng', 'en', 1, '1'),
 (3, 'uk', 'uk_UA', 'Українська', 'Укр', 'uk', 3, '0');
 
 -- --------------------------------------------------------
@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
 --
 
 INSERT INTO `slider` (`id`, `title`, `animation_speed`, `delay`, `visible`) VALUES
-(1, 'Слайдер на главной странице', '300', '5', '1');
+(1, 'Homepage slider', '300', '5', '1');
 
 -- --------------------------------------------------------
 
@@ -440,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `slider_image` (
   `sortorder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `slider_id` (`slider_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `slider_image`
@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `slider_translate` (
   `value` text,
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `slider_translate`
@@ -480,7 +480,15 @@ INSERT INTO `slider_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALU
 (9, 6, 'ru', 'caption', 'Модульное приложение'),
 (10, 6, 'ru', 'link', ''),
 (11, 7, 'ru', 'caption', 'Гибкая и одновременно простая структура'),
-(12, 7, 'ru', 'link', '');
+(12, 7, 'ru', 'link', ''),
+(13, 4, 'en', 'caption', ''),
+(14, 4, 'en', 'link', ''),
+(15, 5, 'en', 'caption', ''),
+(16, 5, 'en', 'link', ''),
+(17, 6, 'en', 'caption', ''),
+(18, 6, 'en', 'link', ''),
+(19, 7, 'en', 'caption', ''),
+(20, 7, 'en', 'link', '');
 
 -- --------------------------------------------------------
 
@@ -494,7 +502,7 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `phrase` varchar(500) DEFAULT NULL,
   `translation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `translate`
@@ -524,7 +532,31 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (21, 'uk', 'Контакты', 'Контакти'),
 (22, 'ru', 'Статьи', 'Статьи'),
 (23, 'en', 'Статьи', 'Articles'),
-(24, 'uk', 'Статьи', 'Статті');
+(24, 'uk', 'Статьи', 'Статті'),
+(25, 'en', 'Home', 'Home'),
+(26, 'en', 'News', 'News'),
+(27, 'en', 'Articles', 'Articles'),
+(28, 'en', 'Contacts', 'Contacts'),
+(29, 'en', 'Admin', 'Admin'),
+(30, 'en', 'YonaCms Admin Panel', 'YonaCms Admin Panel'),
+(31, 'en', 'Back к перечню публикаций', 'Back to publications list'),
+(32, 'en', 'Страница №', 'Page num.'),
+(33, 'ru', 'Home', 'Главная'),
+(34, 'ru', 'News', 'Новости'),
+(35, 'ru', 'Articles', 'Статьи'),
+(36, 'ru', 'Contacts', 'Контакты'),
+(37, 'ru', 'Admin', 'Админка'),
+(38, 'ru', 'YonaCms Admin Panel', 'YonaCms Admin Panel'),
+(39, 'ru', 'Back к перечню публикаций', 'Назад к перечню публикаций'),
+(40, 'ru', 'Страница №', 'Страница №'),
+(41, 'uk', 'Home', 'Головна'),
+(42, 'uk', 'News', 'Новини'),
+(43, 'uk', 'Articles', 'Статті'),
+(44, 'uk', 'Contacts', 'Контакти'),
+(45, 'uk', 'Admin', 'Адмінка'),
+(46, 'uk', 'YonaCms Admin Panel', 'YonaCms Admin Panel'),
+(47, 'uk', 'Back к перечню публикаций', 'Назад до переліку публікацій'),
+(48, 'uk', 'Страница №', 'Сторінка №');
 
 -- --------------------------------------------------------
 
@@ -544,7 +576,7 @@ CREATE TABLE IF NOT EXISTS `widget` (
 --
 
 INSERT INTO `widget` (`id`, `title`, `html`) VALUES
-('phone', 'Телефон в шапке', '<div class="phone">+1 (001) 555-44-33</div>');
+('phone', 'Phone in header', '<div class="phone">+1 (001) 555-44-33</div>');
 
 --
 -- Constraints for dumped tables

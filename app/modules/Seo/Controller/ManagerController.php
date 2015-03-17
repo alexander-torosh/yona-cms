@@ -28,7 +28,7 @@ class ManagerController extends Controller
         ));
         $this->view->entries = $entries;
 
-        $title = 'SEO-менеджер';
+        $title = 'SEO-Manager';
         $this->view->title = $title;
         $this->helper->title($title);
     }
@@ -46,7 +46,7 @@ class ManagerController extends Controller
                 if ($model->create()) {
                     $form->bind($post, $model);
                     if ($model->update()) {
-                        $this->flash->success('Запись создана');
+                        $this->flash->success('This entry was posted');
                         $this->redirect('/seo/manager');
                     } else {
                         $this->flashErrors($model);
@@ -59,7 +59,7 @@ class ManagerController extends Controller
             }
         }
 
-        $title = 'Создание записи SEO-менеджера';
+        $title = 'Create a record SEO-Manager';
         $this->view->title = $title;
         $this->helper->title($title);
 
@@ -78,7 +78,7 @@ class ManagerController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->cache->delete(Manager::routeCacheKey($model->getRoute(), LANG));
-                    $this->flash->success('Информация обновлена');
+                    $this->flash->success('SEO record edited');
                     $this->redirect('/seo/manager/edit/' . $id);
                 } else {
                     $this->flashErrors($model);
@@ -90,7 +90,7 @@ class ManagerController extends Controller
             $form->setEntity($model);
         }
 
-        $title = 'Редактирование записи SEO-менеджера';
+        $title = 'Editing the SEO-manager';
         $this->view->title = $title;
         $this->helper->title($title);
 
@@ -108,7 +108,7 @@ class ManagerController extends Controller
         }
 
         $this->view->model = $model;
-        $title = 'Удаление записи SEO-менеджера';
+        $title = 'Delete SEO-Manager';
         $this->view->title = $title;
         $this->helper->title($title);
     }

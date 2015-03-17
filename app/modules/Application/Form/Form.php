@@ -24,6 +24,7 @@ abstract class Form extends \Phalcon\Forms\Form
 
         $element = $this->get($name);
 
+        /** @var \Application\Mvc\Helper $helper */
 		$helper = $this->getDI()->get('helper');
 
         $messages = $this->getMessagesFor($element->getName());

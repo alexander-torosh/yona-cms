@@ -2,7 +2,7 @@
 <div class="ui segment">
 
     <a href="/slider/admin/add" class="ui button positive">
-        <i class="icon plus"></i> Добавить
+        <i class="icon plus"></i> Add New
     </a>
 
 </div>
@@ -13,10 +13,10 @@
     <tr>
         <th></th>
         <th>ID</th>
-        <th>Название объекта</th>
-        <th>Частота смены слайдов</th>
-        <th>Продолжительность перехода к следующему слайду</th>
-        <th>Отображается</th>
+        <th>Name</th>
+        <th>Duration</th>
+        <th>Duration of transition to next slide</th>
+        <th>Is visible</th>
     </tr>
     </thead>
     <tbody>

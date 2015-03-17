@@ -16,7 +16,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $this->helper->title()->append('Файловый менеджер');
+        $this->helper->title()->append('File Manager');
 
     }
 

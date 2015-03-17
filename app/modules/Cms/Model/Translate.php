@@ -26,7 +26,7 @@ class Translate extends Model
         if (!$lang) {
             $lang = LANG;
         }
-        $key = HOST_HASH . md5("Translate::findByLang($lang)");
+        $key = time() . HOST_HASH . md5("Translate::findByLang($lang)");
         $result = self::find(array(
             'lang = :lang:',
             'bind' => array(

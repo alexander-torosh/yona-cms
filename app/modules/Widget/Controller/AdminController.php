@@ -20,7 +20,7 @@ class AdminController extends Controller
     {
         $this->view->setVar('entries', Widget::find());
 
-        $this->view->title = 'Статические виджеты';
+        $this->view->title = $this->helper->at('Manage Widgets');
         $this->helper->title($this->view->title);
 
     }
@@ -48,7 +48,7 @@ class AdminController extends Controller
         $this->view->pick('admin/edit');
         $this->view->setVar('form', $form);
 
-        $this->view->title = 'Добавление виджета';
+        $this->view->title = $this->helper->at('Adding widget');
         $this->helper->title($this->view->title);
 
     }
@@ -82,7 +82,7 @@ class AdminController extends Controller
         $this->view->setVar('form', $form);
         $this->view->setVar('widget', $widget);
 
-        $this->view->title = 'Редактирование виджета';
+        $this->view->title = $this->helper->at('Editing widget');
         $this->helper->title($this->view->title);
 
     }

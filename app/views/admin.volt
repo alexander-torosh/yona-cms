@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ helper.title().append('Административная панель') }}{{ helper.title().get() }}</title>
+    <title>{{ helper.title().append('Administrative Panel') }}{{ helper.title().get() }}</title>
 
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
@@ -30,13 +30,13 @@
     <script src="/vendor/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="google_translate_element">
 {{ partial('admin/nav') }}
 <div class="container">
     {% if registry.cms['TECHNICAL_WORKS'] %}
         <div class="ui red inverted segment">
-            На сайте проводятся технические работы.<br>
-            Пожалуйста, не проводите никаких действий до окончания работ.
+            The site under maintenance.<br>
+            Please do not perform any action until the work is completed.
         </div>
     {% endif %}
 
@@ -52,6 +52,32 @@
 
     {{ content() }}
 
+    <!--script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                    {pageLanguage: 'ru'},
+                    'google_translate_element'
+            );
+
+            /*
+             To remove the "powered by google",
+             uncomment one of the following code blocks.
+             NB: This breaks Google's Attribution Requirements:
+             https://developers.google.com/translate/v2/attribution#attribution-and-logos
+             */
+
+            // Native (but only works in browsers that support query selector)
+            //if(typeof(document.querySelector) == 'function') {
+            //    document.querySelector('.goog-logo-link').setAttribute('style', 'display: none');
+            //    document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
+            //}
+
+            // If you have jQuery - works cross-browser - uncomment this
+            //jQuery('.goog-logo-link').css('display', 'none');
+            //jQuery('.goog-te-gadget').css('font-size', '0');
+        }
+    </script-->
+    <!--script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script-->
 </div>
 </body>
 </html>

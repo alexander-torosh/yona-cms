@@ -5,27 +5,27 @@
     <div class="ui segment">
 
         <a href="/publication/admin/{{ type }}?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left arrow"></i> Назад
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model.getId() %}
 
             <a href="/publication/admin/{{ type }}/add" class="ui button">
-                <i class="icon add"></i> Добавить
+                <i class="icon add"></i> Add New
             </a>
 
             <a href="/publication/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+                <i class="icon trash"></i> Delete
             </a>
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
                    href="{{ helper.langUrl(['for':'publication','type':model.getTypeSlug(), 'slug':model.getSlug()]) }}">
-                    Посмотреть на сайте
+                    View Online
                 </a>
             {% endif %}
 
@@ -42,7 +42,7 @@
 
         <!--image-->
         <div class="field">
-            Загрузить превью<br>
+            Upload Image<br>
             {{ form.render('image') }}
         </div>
         {% set image = helper.image([
@@ -85,18 +85,18 @@
 <script src="/vendor/pickadate/picker.date.js"></script>
 <script>
     $(function () {
-        $.extend($.fn.pickadate.defaults, {
-            monthsFull: [ 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря' ],
-            monthsShort: [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек' ],
-            weekdaysFull: [ 'воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота' ],
-            weekdaysShort: [ 'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ],
-            today: 'сегодня',
-            clear: 'очистить',
-            close: 'закрыть',
-            firstDay: 1,
-            format: 'yyyy-mm-dd',
-            formatSubmit: 'yyyy-mm-dd'
-        })
+//        $.extend($.fn.pickadate.defaults, {
+//            monthsFull: [ 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря' ],
+//            monthsShort: [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек' ],
+//            weekdaysFull: [ 'воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота' ],
+//            weekdaysShort: [ 'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ],
+//            today: 'сегодня',
+//            clear: 'очистить',
+//            close: 'закрыть',
+//            firstDay: 1,
+//            format: 'yyyy-mm-dd',
+//            formatSubmit: 'yyyy-mm-dd'
+//        });
 
         $("#date").pickadate({
 
@@ -108,7 +108,7 @@
 <script type="text/javascript">
     tinymce.init({
         selector: "#text",
-        language: "ru",
+        language: "en",
         height: "700px",
         theme: "modern",
         plugins: [
