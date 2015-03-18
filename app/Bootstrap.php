@@ -127,11 +127,13 @@ class Bootstrap
             new LocalizationPlugin($dispatcher);
             new AdminLocalizationPlugin($config);
             new AclPlugin($di->get('acl'), $dispatcher, $view);
+            new MobileDetectPlugin($di->get('session'), $view);
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
             new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
             new TitlePlugin($di);
+            new LastModifiedPlugin($di->get('response'));
         });
 
         if ($registry->cms['PROFILER']) {

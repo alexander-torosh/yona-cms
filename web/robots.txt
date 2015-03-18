@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+
+Disallow: /admin
+Disallow: /*?mobile=true
+Disallow: /*?mobile=false
