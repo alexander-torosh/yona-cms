@@ -16,6 +16,15 @@ class Bootstrap
         $config = include APPLICATION_PATH . '/config/config.php';
         $di->set('config', $config);
 
+        if(isset($config->debug) && $config->debug){
+            /**
+             * Any Try/Catch blocks must be removed or
+             * disabled to make this component work properly.
+             */
+            $debug = new \Phalcon\Debug();
+            $debug->listen();
+        }
+
 
         $registry = new \Phalcon\Registry();
 
