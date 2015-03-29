@@ -20,7 +20,7 @@ class DefaultRouter extends Router
     {
         parent::__construct();
 
-        $this->setDefaultModule('index');
+        //$this->setDefaultModule('index'); // removed
         $this->setDefaultController('index');
         $this->setDefaultAction('index');
 

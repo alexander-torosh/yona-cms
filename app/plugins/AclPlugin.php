@@ -61,7 +61,7 @@ class AclPlugin extends Plugin
     {
         $view->setViewsDir(__DIR__ . '/../modules/Index/views/');
         $view->setPartialsDir('');
-        $view->message = "Acl resource <b>$resourceKey</b> not exists";
+        $view->message = "Acl resource <b>$resourceKey</b> in <b>Application\Acl\DefaultAcl</b> not exists";
         $view->partial('error/error404');
 
         $response = new \Phalcon\Http\Response();

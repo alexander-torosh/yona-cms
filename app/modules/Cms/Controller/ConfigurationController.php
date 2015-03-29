@@ -62,6 +62,7 @@ class ConfigurationController extends Controller
             } else {
                 $model->setValue($value);
             }
+            $model->updateCheckboxes($post);
             if (!$model->save()) {
                 $result = false;
                 $this->flashErrors($model);

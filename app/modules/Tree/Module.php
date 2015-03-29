@@ -1,6 +1,6 @@
 <?php
 
-namespace Index;
+namespace Tree;
 
 class Module
 {
@@ -13,7 +13,7 @@ class Module
     public function registerServices($di)
     {
         $dispatcher = $di->get('dispatcher');
-        $dispatcher->setDefaultNamespace('Index\Controller');
+        $dispatcher->setDefaultNamespace('Tree\Controller');
         $di->set('dispatcher', $dispatcher);
 
         /**

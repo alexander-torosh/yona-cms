@@ -15,4 +15,5 @@ return array(
     'Seo',
     'Slider',
     'Menu',
+    'Tree',
 );

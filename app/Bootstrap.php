@@ -16,15 +16,6 @@ class Bootstrap
         $config = include APPLICATION_PATH . '/config/config.php';
         $di->set('config', $config);
 
-        if(isset($config->debug) && $config->debug){
-            /**
-             * Any Try/Catch blocks must be removed or
-             * disabled to make this component work properly.
-             */
-            $debug = new \Phalcon\Debug();
-            $debug->listen();
-        }
-
 
         $registry = new \Phalcon\Registry();
 
@@ -273,24 +264,32 @@ class Bootstrap
 
         $view->start();
 
-        try {
+        $registry = $di['registry'];
+        if ($registry->cms['DEBUG_MODE']) {
+            $debug = new \Phalcon\Debug();
+            $debug->listen();
+
             $dispatcher->dispatch();
-        } catch (\Phalcon\Exception $e) {
-            $view->setViewsDir(__DIR__ . '/modules/Index/views/');
-            $view->setPartialsDir('');
-            $view->e = $e;
+        } else {
+            try {
+                $dispatcher->dispatch();
+            } catch (\Phalcon\Exception $e) {
+                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+                $view->setPartialsDir('');
+                $view->e = $e;
 
-            if ($e instanceof Phalcon\Mvc\Dispatcher\Exception) {
-                $response->setHeader(404, 'Not Found');
-                $view->partial('error/error404');
-            } else {
-                $response->setHeader(503, 'Service Unavailable');
-                $view->partial('error/error503');
+                if ($e instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+                    $response->setHeader(404, 'Not Found');
+                    $view->partial('error/error404');
+                } else {
+                    $response->setHeader(503, 'Service Unavailable');
+                    $view->partial('error/error503');
+                }
+                $response->sendHeaders();
+                echo $response->getContent();
+                return;
+
             }
-            $response->sendHeaders();
-            echo $response->getContent();
-            return;
-
         }
 
         $view->render(

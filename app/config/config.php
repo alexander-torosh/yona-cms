@@ -27,7 +27,6 @@ $config = array(
     'cache' => $application['cache'],
     'metadata_cache' => $application['metadata_cache'],
     'admin_language' => 'en', // ru, en. All translations contains in /app/modules/Cms/admin_translations
-    'debug' => isset($application['debug']) ? $application['debug'] : false
 );
 /**
  * ============================================================================
