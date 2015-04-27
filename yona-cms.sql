@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb1
+-- version 3.4.11.1deb2+deb7u1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2015 at 09:53 AM
--- Server version: 5.5.35
--- PHP Version: 5.4.6-1ubuntu1.7
+-- Generation Time: Apr 27, 2015 at 12:56 PM
+-- Server version: 5.6.23
+-- PHP Version: 5.6.8-1~dotdeb+wheezy.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -101,7 +101,8 @@ CREATE TABLE IF NOT EXISTS `language` (
   `url` varchar(20) DEFAULT NULL,
   `sortorder` int(11) DEFAULT NULL,
   `primary` enum('0','1') DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `iso` (`iso`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
@@ -501,7 +502,8 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `lang` varchar(20) DEFAULT NULL,
   `phrase` varchar(500) DEFAULT NULL,
   `translation` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
@@ -617,6 +619,12 @@ ALTER TABLE `slider_image`
 --
 ALTER TABLE `slider_translate`
   ADD CONSTRAINT `slider_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `slider_image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `translate`
+--
+ALTER TABLE `translate`
+  ADD CONSTRAINT `translate_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

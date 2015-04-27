@@ -6,6 +6,7 @@
 
 namespace Cms\Model;
 
+use Phalcon\DI;
 use Phalcon\Mvc\Model;
 
 class Translate extends Model
@@ -26,24 +27,38 @@ class Translate extends Model
         if (!$lang) {
             $lang = LANG;
         }
-        $key = time() . HOST_HASH . md5("Translate::findByLang($lang)");
-        $result = self::find(array(
-            'lang = :lang:',
-            'bind' => array(
-                'lang' => $lang,
-            ),
-            'cache' => array(
-                'key' => $key,
-                'lifetime' => 300,
-            )
-        ));
+        $cache = DI::getDefault()->get('cache');
+        $data = $cache->get(self::cacheKey($lang));
+        if (!$data) {
+            $data = self::find(array(
+                'lang = :lang:',
+                'bind' => array(
+                    'lang' => $lang,
+                ),
+            ));
+            if ($data) {
+                $cache->save(self::cacheKey($lang), $data, 300);
+            }
+        }
+
         $translations = array();
-        if ($result) {
-            foreach($result as $el) {
+        if ($data) {
+            foreach($data as $el) {
                 $translations[$el->getPhrase()] = $el->getTranslation();
             }
         }
         return $translations;
+    }
+
+    public function afterUpdate()
+    {
+        $cache = $this->getDI()->get('cache');
+        $cache->delete(self::cacheKey(LANG));
+    }
+
+    public static function cacheKey($lang)
+    {
+        return HOST_HASH . md5("Translate::findByLang($lang)");;
     }
 
     public function findByPhraseAndLang($phrase, $lang = null)

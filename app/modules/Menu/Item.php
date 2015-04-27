@@ -31,7 +31,7 @@ class Item
     public function make()
     {
         $li_attributes = [];
-        //$a_attributes = [];
+        $a_attributes = [];
 
         $li_class = '';
         $li_class_active = false;
@@ -40,6 +40,9 @@ class Item
         }
         if (isset($this->params['li_class'])) {
             $li_class .= $this->params['li_class'];
+        }
+        if (isset($this->params['class'])) {
+            $a_attributes['class'] = $this->params['class'];
         }
         if (in_array($this->id, $this->active_items)) {
             $li_class_active = true;
@@ -65,6 +68,11 @@ class Item
         if (!empty($li_attributes)) {
             foreach ($li_attributes as $key => $value) {
                 $this->li_attributes_str .= ' ' . $key . '="' . $value . '"';
+            }
+        }
+        if (!empty($a_attributes)) {
+            foreach($a_attributes as $key => $value) {
+                $this->a_attributes_str .= ' ' . $key . '="' . $value . '"';
             }
         }
 

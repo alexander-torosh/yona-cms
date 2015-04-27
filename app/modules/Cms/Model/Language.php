@@ -6,6 +6,7 @@
 
 namespace Cms\Model;
 
+use Phalcon\DI;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
@@ -84,6 +85,12 @@ class Language extends Model
 
     }
 
+    public function afterUpdate()
+    {
+        $cache = $this->getDI()->get('cache');
+        $cache->delete(self::cacheKey());
+    }
+
     public function afterValidation()
     {
         if (!$this->sortorder) {
@@ -100,13 +107,18 @@ class Language extends Model
 
     public static function findCachedLanguages()
     {
-        return self::find(array(
-            'order' => 'primary DESC, sortorder ASC',
-            'cache' => array(
-                'key' => self::cacheKey(),
-                'lifetime' => 300,
-            ),
-        ));
+        $cache = DI::getDefault()->get('cache');
+        $data = $cache->get(self::cacheKey());
+        if (!$data) {
+            $data = Language::find(array(
+                'order' => 'primary DESC, sortorder ASC',
+            ));
+            if ($data) {
+                $cache->save(self::cacheKey(), $data, 300);
+            }
+        }
+        return $data;
+
     }
 
     public static function findCachedLanguagesIso()

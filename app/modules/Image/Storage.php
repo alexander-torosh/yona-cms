@@ -39,7 +39,7 @@ class Storage
         $this->params = $params; // для no-image
         if (isset($params['id'])) {
             if (preg_match('/^\d+$/', $params['id'])) {
-                $this->id = (int) $params['id'];
+                $this->id = (int)$params['id'];
             } else {
                 $this->id = $params['id'];
             }
@@ -122,23 +122,9 @@ class Storage
                 $src .= '?' . microtime();
             }
         } else {
-            // КОСТЫЛЬ, возвращает кешированный no-image с запрошенными параметрами.
-            // В будущем нужно будет переписать.
-            $noImageParams = $this->params;
-            $noImageParams['type'] = 'no-image';
-            if ($this->type == 'profile_avatar') {
-                $noImageParams['id'] = 2;
-            } else {
-                $noImageParams['id'] = 1;
-            }
-//            var_dump($noImageParams);
-//            die;
-
-            $noImage = new self($noImageParams);
-            $src = $noImage->cachedRelPath();
-//            $src = NOIMAGE;
-//            $attributes['width'] = $this->width;
-//            $attributes['height'] = $this->height;
+            $src = NOIMAGE;
+            $attributes['width'] = $this->width;
+            $attributes['height'] = $this->height;
         }
 
         $result = '<img src="' . $src . '"';
@@ -213,7 +199,7 @@ class Storage
         $imageSize = getimagesize($this->originalAbsPath());
         if ($imageSize) {
             return array(
-                'width'  => $imageSize[0],
+                'width' => $imageSize[0],
                 'height' => $imageSize[1]
             );
         }
@@ -462,13 +448,13 @@ class Storage
             $imageSize = getimagesize($cachedAbsPath);
             if ($imageSize) {
                 return array(
-                    'width'  => $imageSize[0],
+                    'width' => $imageSize[0],
                     'height' => $imageSize[1]
                 );
             }
         } else {
             return array(
-                'width'  => null,
+                'width' => null,
                 'height' => null
             );
         }
