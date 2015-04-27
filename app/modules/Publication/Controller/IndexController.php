@@ -47,6 +47,8 @@ class IndexController extends Controller
         $this->view->title = $typeModel->getTitle();
         $this->view->format = $typeModel->getFormat();
         $this->view->type = $type;
+
+        $this->helper->menu->setActive($type);
     }
 
     public function publicationAction()
@@ -69,6 +71,7 @@ class IndexController extends Controller
         $this->helper->meta()->set('keywords', $publication->getMeta_keywords());
 
         $this->view->publication = $publication;
+        $this->helper->menu->setActive($type);
 
     }
 

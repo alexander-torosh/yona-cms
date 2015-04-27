@@ -127,11 +127,13 @@ class Bootstrap
             new LocalizationPlugin($dispatcher);
             new AdminLocalizationPlugin($config);
             new AclPlugin($di->get('acl'), $dispatcher, $view);
+            new MobileDetectPlugin($di->get('session'), $view);
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
             new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
             new TitlePlugin($di);
+            new LastModifiedPlugin($di->get('response'));
         });
 
         if ($registry->cms['PROFILER']) {
@@ -262,24 +264,32 @@ class Bootstrap
 
         $view->start();
 
-        try {
+        $registry = $di['registry'];
+        if ($registry->cms['DEBUG_MODE']) {
+            $debug = new \Phalcon\Debug();
+            $debug->listen();
+
             $dispatcher->dispatch();
-        } catch (\Phalcon\Exception $e) {
-            $view->setViewsDir(__DIR__ . '/modules/Index/views/');
-            $view->setPartialsDir('');
-            $view->e = $e;
+        } else {
+            try {
+                $dispatcher->dispatch();
+            } catch (\Phalcon\Exception $e) {
+                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+                $view->setPartialsDir('');
+                $view->e = $e;
 
-            if ($e instanceof Phalcon\Mvc\Dispatcher\Exception) {
-                $response->setHeader(404, 'Not Found');
-                $view->partial('error/error404');
-            } else {
-                $response->setHeader(503, 'Service Unavailable');
-                $view->partial('error/error503');
+                if ($e instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+                    $response->setHeader(404, 'Not Found');
+                    $view->partial('error/error404');
+                } else {
+                    $response->setHeader(503, 'Service Unavailable');
+                    $view->partial('error/error503');
+                }
+                $response->sendHeaders();
+                echo $response->getContent();
+                return;
+
             }
-            $response->sendHeaders();
-            echo $response->getContent();
-            return;
-
         }
 
         $view->render(

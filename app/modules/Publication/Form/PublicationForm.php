@@ -58,7 +58,7 @@ class PublicationForm extends Form
         $this->add($meta_keywords);
 
         $preview_inner = new Check('preview_inner');
-        $preview_inner->setLabel('Show in the publication');
+        $preview_inner->setLabel('Show preview image in the publication');
         $preview_inner->setDefault(1);
         $this->add($preview_inner);
 

@@ -4,7 +4,7 @@ namespace Page\Controller;
 
 use Application\Mvc\Controller;
 use Page\Model\Page;
-use Phalcon\Exception;
+use Phalcon\Mvc\Dispatcher\Exception;
 
 class IndexController extends Controller
 {

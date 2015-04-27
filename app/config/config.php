@@ -26,7 +26,7 @@ $config = array(
     'database' => $application['database'],
     'cache' => $application['cache'],
     'metadata_cache' => $application['metadata_cache'],
-    'admin_language' => 'en' // ru, en. All translations contains in /app/modules/Cms/admin_translations
+    'admin_language' => 'en', // ru, en. All translations contains in /app/modules/Cms/admin_translations
 );
 /**
  * ============================================================================
@@ -40,7 +40,5 @@ $modules = new \Application\Loader\Modules();
 $modules_config = $modules->modulesConfig($modules_list);
 
 $config = array_merge_recursive($config, $modules_config);
-
-//var_dump($config);exit;
 
 return new \Phalcon\Config($config);

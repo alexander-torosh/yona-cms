@@ -24,25 +24,11 @@ class Configuration extends \Phalcon\Mvc\Model
         'DEBUG_MODE' => 1,
         'TECHNICAL_WORKS' => 0,
         'PROFILER' => 1,
+        'WIDGETS_CACHE' => 0,
     ];
 
     public $key;
     public $value;
-
-    public function beforeValidation()
-    {
-        if ($_POST['form']) {
-            if ($this->key == 'DEBUG_MODE') {
-                $this->value = (isset($_POST['DEBUG_MODE'])) ? 1 : 0 ;
-            }
-            if ($this->key == 'TECHNICAL_WORKS') {
-                $this->value = (isset($_POST['TECHNICAL_WORKS'])) ? 1 : 0 ;
-            }
-            if ($this->key == 'PROFILER') {
-                $this->value = (isset($_POST['PROFILER'])) ? 1 : 0 ;
-            }
-        }
-    }
 
     public function validation()
     {
@@ -50,12 +36,21 @@ class Configuration extends \Phalcon\Mvc\Model
          * Проверка на наличие ключа в перечне подустимых ключей
          */
         if (!array_key_exists($this->key, self::$keys)) {
-            $message = new Message('Key '.$this->key.' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
+            $message = new Message('Key ' . $this->key . ' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
             $this->appendMessage($message);
             return false;
         }
 
         return $this->validationHasFailed() != true;
+    }
+
+    public function updateCheckboxes($post)
+    {
+        foreach (array_keys(self::$keys) as $key) {
+            if ($this->key == $key) {
+                $this->value = (isset($post[$key])) ? 1 : 0;
+            }
+        }
     }
 
     /**
@@ -94,7 +89,7 @@ class Configuration extends \Phalcon\Mvc\Model
     {
         $config = $this->getConfig();
         $entity = new \stdClass();
-        foreach($config as $key => $value) {
+        foreach ($config as $key => $value) {
             $entity->$key = $value;
         }
         return $entity;
@@ -108,7 +103,7 @@ class Configuration extends \Phalcon\Mvc\Model
         if (array_key_exists($key, self::$keys)) {
             $this->key = $key;
         } else {
-            die($key  . ' does not exists in Configuration\Model\Configuration::$keys');
+            die($key . ' does not exists in Configuration\Model\Configuration::$keys');
         }
     }
 

@@ -14,4 +14,6 @@ return array(
     'Publication',
     'Seo',
     'Slider',
+    'Menu',
+    'Tree',
 );

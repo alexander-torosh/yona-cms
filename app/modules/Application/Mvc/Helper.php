@@ -17,6 +17,13 @@ class Helper extends \Phalcon\Mvc\User\Component
     private $translate = null;
     private $admin_translate = null;
 
+    public $menu;
+
+    public function __construct()
+    {
+        $this->menu = \Menu\Helper\Menu::getInstance();
+    }
+
     /**
      * Мультиязычный перевод строки по сайту/пользовательской_части
      */
@@ -41,11 +48,16 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
+    public function widget($params)
+    {
+        return new \Application\Widget\Proxy($params);
+    }
+
     /**
      * Вызов выджета из модуля StaticWidget
      * @param $id - идентификатор виджета, например "phone"
      */
-    public function widget($id)
+    public function staticWidget($id)
     {
         $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH . md5("Widget::findFirst({$id})"))));
         if ($widget) {

@@ -200,6 +200,11 @@ header {
             font-size: @font-size + 5;
         }
     }
+    li.active {
+        > a {
+            font-weight: bold;
+        }
+    }
 }
 
 #main {
@@ -216,6 +221,10 @@ pre {
 footer {
     padding: 20px 0 40px;
     border-top: 1px solid @gray;
+
+    .device-version {
+        float: right;
+    }
 }
 
 .publications {

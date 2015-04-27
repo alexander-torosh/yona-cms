@@ -8,7 +8,7 @@
 </div>
 <!--/Github stars-->
 
-{{ helper.widget('phone') }}
+{{ helper.staticWidget('phone') }}
 
 {% set languages = helper.languages() %}
 {% if languages.count() > 1 %}

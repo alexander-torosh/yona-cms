@@ -16,9 +16,10 @@ class ConfigurationForm extends Form
 
     public function initialize()
     {
-        $this->add((new Check('DEBUG_MODE'))->setDefault(1)->setLabel('Debug mode, display application errors'));
-        $this->add((new Check('TECHNICAL_WORKS'))->setDefault(1)->setLabel('The site under maintenance'));
-        $this->add((new Check('PROFILER'))->setDefault(1)->setLabel('DB Profiler'));
+        $this->add((new Check('DEBUG_MODE'))->setLabel('Debug mode, display application errors'));
+        $this->add((new Check('TECHNICAL_WORKS'))->setLabel('The site under maintenance'));
+        $this->add((new Check('PROFILER'))->setLabel('DB Profiler'));
+        $this->add((new Check('WIDGETS_CACHE'))->setLabel('Widgets caching'));
 
     }
 
