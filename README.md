@@ -1,16 +1,22 @@
 Yona CMS
 ========
 
-Yona CMS - система управления контентом с открытым исходным кодом. Написана на [Phalcon PHP Framework](http://phalconphp.com/) (версии 1.3.x).
+Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (v 1.3.x)  
 
-[Сайт проекта](http://yonacms.com/)  
-[Документация](http://yonacms.com/documentation)  
+Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.  
 
-Особенности:  
-- Имеет удобную модульную структуру.  
-- Поддерживает многоязычность.  
-- Имеет удобную модульную структуру. Предназначена для разработки как простых сайтов, так и крупных порталов и веб-приложений. Благодаря простой конфигурации и архитектуре, может быть легко модифицирована под любую задачу.
+Features
+--------
 
-Текущая версия и изменения в [CHANGELOG.md](https://github.com/oleksandr-torosh/yona-cms/blob/master/CHANGELOG.md)
+* Yona CMS saves a lot of time in starting necessary basic functionality for any project
+* The modular structure with a convenient hierarchy that is based on namespaces
+* Each module can serve as a separate independent component. Have its own routes, helpers, css, js assets
+* Multi-lingual. Manage an unlimited number of languages and translations directly from admin
+* Yona CMS is really fast!
+
+[Project website](http://yonacms.com/)  
+[Documentation](http://yonacms.com/documentation)  
+
+Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-torosh/yona-cms/blob/master/CHANGELOG.md)
 
 
