@@ -1,106 +1,105 @@
 v.0.1.7
-- Добавлена система модульных виджетов; Добавлен виджет для примера на главную страницу;
-- Исправлены ошибки с кешированием типов публикаций;
-- Немного подправлены CSS-стили;
-- Удален модуль Slider;
+- Added a system of modular widgets; Added widget for example at home page;
+- Fixed error with caching types of publications;
+- Slightly fixed CSS-styles;
+- Deleted Slider module;
 
 v.0.1.6
-- Улучшено кеширование компонентов мультиязычности;
-- Исправлена ошибка с пунктом "Admin" после обновления 0.1.5;
-- Добавлен внешний индекс для таблицы `translate` на колонку `iso` таблицы `language`;
+- Improved multilingual caching components;
+- Fixed a bug with item "Admin" after the upgrade 0.1.5;
+- Added foreign key index from `translate`.`lang` to `language`.`iso`;
 
 v.0.1.5
-- Добавлены некоторые переводы на русский в админку;
-- Добавлен модуль Menu; Построение древовидного меню с определением активных страниц;
+- Added some translations into Russian to the admin panel;
+- Added module Menu; Construction of the menu tree to the definition of active pages;
 
 v.0.1.4
-- Выявлено и исправлено еще несколько PHP Notice;
-- Интерфейс админки начат частично адаптироваться под английский язык. Язык админки можно выбрать в конфигурации;
+- Identifying and correcting a few PHP Notice;
+- Admin interface launched in part to adapt to the English language. The admin can choose the language in the configuration;
 
 v.0.1.3
-- Исправлена некритическая ошибка валидации формы авторизации в админку;
+- Fixed non-critical error validation authorization form to the admin panel;
 
 v.0.1.2
-- Добавлена локализация административной панели;
-- Добавлен метод renderAll() для Application\Form\Form - выводит все элементы формы;
-- Исправлены все ошибки в модуле SEO. Теперь корректно применяются все инструкции по модификации title, meta-description, meta-keywords, seo-text. Title заменяется полностью, без глобального суфикса;
-- SEO manager добавляет мета тег <meta name="seo-manager" content="matched"> в тело страницы, если есть совпадение по условиям и применяются модификации;
-- Немного доработаны мультиязычные роутеры. Теперь к каждому такому роуту добавляется приставка 'ml__', это облегчает работу при распознавании обработанного роута в диспатчере;
-- Исправлены PHP Notice ошибки;
-- Доработки интерфейса;
-- Обновлен SQL-dump;
+- Added localization administrative panel;
+- Added method renderAll () for Application\Form\Form - displays all the form elements;
+- Fixed all the bugs in the module SEO. Now properly apply the instructions to modify the title, meta-description, meta-keywords, seo-text. Title replaced completely, without a global suffix;
+- SEO manager adds meta tag <meta name = "seo-manager" content = "matched"> in the body of the page, if there is a match for the circumstances and apply the modification;
+- Slightly modified multilingual routers. Now to each such routed prefixed 'ml__', it facilitates the work in recognition of the treated routed in dispatchere;
+- Fixed a PHP Notice errors;
+- Finalization of the interface;
+- Updated SQL-dump;
 
 v.0.1.1
-- Исправлены ошибки безопасности (#13, #12, #11 - спасибо за репорты xboston);
-- Добавлены ресурсы в ACL, теперь все страницы админки корректно открываются (была проблема с /cms/language, /seo/manager, /cms/javascript, /cms/javascript);
-- Обновлена версия Semantic UI (1.0.0);
-- SQL-dump выложен как простой .sql файл, а не .gz архив;
+- Fixed safety (# 13, # 12, # 11 - thanks for report xboston);
+- Added resources for ACL, now all the admin page correctly opened (there was a problem with /cms/language, /seo/manager, /cms/javascript, /cms/javascript);
+- Updated version of Semantic UI (1.0.0);
+- SQL-dump is laid out as a simple .sql file, not .gz archive;
 
 v.0.1
-- Конфигурационные файлы разделены на директории development, production;
-- Список подключаемых модулей вынесен в файл /app/config/modules.php и автоматически преобразуется в необходимые инструкции для Phalcon\Loader;
-- Доработан модуль Image. Преобразованиями изображений теперь занимается Phalcon\Image;
-- Удалены старые ненужные модули;
-- Исправлены некоторые ошибки;
+- Configuration files are divided into directories development, production;
+- List of plug-imposed /app/config/modules.php file and automatically converted into the necessary instructions for Phalcon\Loader;
+- Improved module Image. Convert images are now engaged Phalcon\Image;
+- Remove old unneeded modules;
+- Fixed some bugs;
 
 v. 0.0.13
-- Добавлена дополнительная проверка на существование маршрутов при обработке хелпером LangSwitcher
-- Исправлена ошибка с построением ссылок в публикациях
-- Пока что убраны переводы с адмн-части. В будущем будет локализация админки и этот момент будет полностью проработан.
-- Небольшие правки в Slider
+- Added additional check for the existence of the processing route helper LangSwitcher
+- Fixed a bug with building links in publications
+- So far removed translations admn part. In the future, it will be localized admin and this point will be fully worked out.
+- Small changes in the Slider
 
 v. 0.0.12
-- Добавлен административный раздел для управления языками;
-- Сделана мультиязычность модуля Publication;
-- Добавлен раздел управления типами публикаций в модуле Publication;
-- Добавлен чекбокс включения DB-профайлера в конфигурации CMS;
+- Added an administrative section to manage languages;
+- Make Multi-Module Publication;
+- Added the management of the types of publications in the module Publication;
+- Added checkbox enable DB-profiler configuration CMS;
 
 v. 0.0.11
-- Добавлен SEO-менеджер для возможности установки title, meta-description, meta-keywords и свободного СЕО-текста на любую страницу по заданным параметрам;
-- Небольшие исправления ошибок;
+- Added SEO-Manager for installing the title, meta-description, meta-keywords and free text-CEO to any page on the set parameters;
+- Minor bug fixes;
 
 v. 0.0.9
-- Добавлен класс Init внутри модулей. Класс выполняет функции инициализации возможных параметров и сервисов модуля;
-- Добавлена схема хранения css, less, js файлов отдельных модулей для улучшения их портируемости (директория assets внутри модулей).
-- Введено специальное именование родительских CSS селекторов для лучшей портируемости модулей. Пример: &lt;div clas=&quot;yona slider&quot;&gt;/* ... */&lt;/div&gt;;
-- Добавлен модуль Slider;
-- В модуль Cms добавлен функционал управления JS-скриптами на фронтенде, которые выводятся в head и в конце body. Можно использовать для вставки кода Google Analytics, Яндекс.Метрика и пр.;
-- Небольшие правки;
+- Added the class Init inside modules. The class serves as the initialization parameters and possible service module;
+- Added storage scheme css, less, js files, the individual modules to improve their portability (directory assets within modules).
+- Added module Slider;
+- In Module Cms added management functionality JS-script on the front end, which are displayed in the head and in the end body. You can use the code to insert Google Analytics, Moscow, etc .;
+- Small changes;
 
 v. 0.0.8
-- Добавлена система управления переводами (вместо Gettext). Управление фразами и их переводами можно производить прямо в админке;
+- Added translation management system (instead of Gettext). Management of phrases and their translations can be made directly in the admin;
 
 v. 0.0.7
-- Добавлен модуль SEO;
-- Добавлена возможность редактирования файла robots.txt;
-- Добавлен паттерн неограниченной мульти-язычности;
+- Added module SEO;
+- Added the ability to edit the file robots.txt;
+- Added a pattern unlimited multi-lingual;
 
 v. 0.0.6
-- Исправлена обработка и вывод 404 и 503 ошибок;
-- Исправлен баг в ajax.js с атрибутом href;
-- rotation.js теперь переключает слайды плавно (плавность задается через конфиг). Немного доделана документация;
-- Установка backend главного кеша в конфиге;
-- Установка backend modelsMetadata кеша в конфиге;
-- Добавлена константа HOST_HASH. Генерируется по имени хоста;
+- Fixed handling and output of 404 and 503 errors;
+- Fixed a bug in ajax.js attribute href;
+- Rotation.js now switch slides smoothly (smoothness is defined by the config). Little documentation completed yet;
+- Installation of the main cache backend in the configuration;
+- Installation backend modelsMetadata cache in the configuration;
+- Added a constant HOST_HASH. Generated by hostname;
 
 v. 0.0.5
-- Сделана своя инициализация приложения для улучшеной обработки ошибок и работы с AJAX;
-- Добавлены тесты на Codeception;
+- To make their own applications for improved initialization error handling and working with AJAX;
+- Added tests Codeception;
 
 v. 0.0.4
-- Добавлен модуль Cms;
-- Добавлен функционал по работе с конфигурацией приложения;
+- Added module Cms;
+- Added functionality for working with the configuration of the application;
 
 v. 0.0.3
-- Исправлена подсветка синтаксиса в модуле Widget;
-- Высота поля с кодом в модуле Widget подстраивается автоматически под размер контента;
-- Немного перегруппировано меню в админке;
+- Fixed a syntax highlighting module Widget;
+- Height of code in the module Widget automatically adjusted to the size of the content;
+- Few in the admin menu to regroup;
 
 v. 0.0.2
-- Исправлен путь к elfinder в модуле FileManager;
-- Добавлена проверка на административного пользователя 'yona', вывод сообщения о необходимости его удаления;
-- Добавлена константа ROOT = $_SERVER['DOCUMENT_ROOT'];
-- Добавлен вывод CHANGELOG.md на главной странице админки;
+- Fixed path to elfinder module FileManager;
+- Added check for the administrative user 'yona', a warning message about the need to remove it;
+- Added a constant ROOT = $ _SERVER ['DOCUMENT_ROOT'];
+- Added displaying CHANGELOG.md on the main page of admin panel;
 
 v. 0.0.1
-- Создан репозиторий и сделан первый коммит;
+- Create a repository and made the first commit;
