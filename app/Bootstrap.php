@@ -94,6 +94,8 @@ class Bootstrap
         $di->set('cache', $cache);
         $di->set('modelsCache', $cache);
 
+        \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
+
 
         switch ($config->metadata_cache) {
             case 'memory':

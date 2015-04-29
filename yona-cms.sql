@@ -2,10 +2,10 @@
 -- version 3.4.11.1deb2+deb7u1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 27, 2015 at 12:56 PM
--- Server version: 5.6.23
--- PHP Version: 5.6.8-1~dotdeb+wheezy.1
+-- Хост: localhost
+-- Час створення: Квт 29 2015 р., 13:05
+-- Версія сервера: 5.6.23
+-- Версія PHP: 5.6.8-1~dotdeb+wheezy.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `yona-cms`
+-- БД: `yona-cms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_user`
+-- Структура таблиці `admin_user`
 --
 
 CREATE TABLE IF NOT EXISTS `admin_user` (
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `admin_user`
+-- Дамп даних таблиці `admin_user`
 --
 
 INSERT INTO `admin_user` (`id`, `login`, `email`, `password`, `active`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `admin_user` (`id`, `login`, `email`, `password`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms_configuration`
+-- Структура таблиці `cms_configuration`
 --
 
 CREATE TABLE IF NOT EXISTS `cms_configuration` (
@@ -58,18 +58,19 @@ CREATE TABLE IF NOT EXISTS `cms_configuration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cms_configuration`
+-- Дамп даних таблиці `cms_configuration`
 --
 
 INSERT INTO `cms_configuration` (`key`, `value`) VALUES
 ('DEBUG_MODE', '1'),
 ('PROFILER', '1'),
-('TECHNICAL_WORKS', '0');
+('TECHNICAL_WORKS', '0'),
+('WIDGETS_CACHE', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms_javascript`
+-- Структура таблиці `cms_javascript`
 --
 
 CREATE TABLE IF NOT EXISTS `cms_javascript` (
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `cms_javascript` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cms_javascript`
+-- Дамп даних таблиці `cms_javascript`
 --
 
 INSERT INTO `cms_javascript` (`id`, `text`) VALUES
@@ -89,7 +90,7 @@ INSERT INTO `cms_javascript` (`id`, `text`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `language`
+-- Структура таблиці `language`
 --
 
 CREATE TABLE IF NOT EXISTS `language` (
@@ -106,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `language` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `language`
+-- Дамп даних таблиці `language`
 --
 
 INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sortorder`, `primary`) VALUES
@@ -117,7 +118,7 @@ INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sor
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page`
+-- Структура таблиці `page`
 --
 
 CREATE TABLE IF NOT EXISTS `page` (
@@ -130,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `page` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `page`
+-- Дамп даних таблиці `page`
 --
 
 INSERT INTO `page` (`id`, `slug`, `created_at`, `updated_at`) VALUES
@@ -140,7 +141,7 @@ INSERT INTO `page` (`id`, `slug`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_translate`
+-- Структура таблиці `page_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `page_translate` (
@@ -154,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `page_translate` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
--- Dumping data for table `page_translate`
+-- Дамп даних таблиці `page_translate`
 --
 
 INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -192,7 +193,7 @@ INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publication`
+-- Структура таблиці `publication`
 --
 
 CREATE TABLE IF NOT EXISTS `publication` (
@@ -205,22 +206,23 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `preview_inner` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `publication`
+-- Дамп даних таблиці `publication`
 --
 
 INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`) VALUES
 (1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2014-11-26 09:54:15', '2014-08-19 00:00:00', '1'),
 (2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2014-11-26 09:52:58', '2014-08-21 00:00:00', '1'),
-(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2014-11-17 13:24:33', '2014-11-05 00:00:00', '0'),
-(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2014-11-26 09:49:06', '2014-11-06 00:00:00', '0');
+(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-04-29 12:34:35', '2014-11-05 00:00:00', '1'),
+(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2014-11-26 09:49:06', '2014-11-06 00:00:00', '0'),
+(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-04-29 11:17:41', '2015-04-29 00:00:00', '0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publication_translate`
+-- Структура таблиці `publication_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_translate` (
@@ -231,10 +233,10 @@ CREATE TABLE IF NOT EXISTS `publication_translate` (
   `value` text,
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
--- Dumping data for table `publication_translate`
+-- Дамп даних таблиці `publication_translate`
 --
 
 INSERT INTO `publication_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -297,12 +299,27 @@ INSERT INTO `publication_translate` (`id`, `foreign_id`, `lang`, `key`, `value`)
 (57, 4, 'uk', 'meta_title', 'Друга стаття'),
 (58, 4, 'uk', 'meta_description', ''),
 (59, 4, 'uk', 'meta_keywords', ''),
-(60, 4, 'uk', 'text', '<p>Текст другої статті</p>');
+(60, 4, 'uk', 'text', '<p>Текст другої статті</p>'),
+(61, 5, 'en', 'title', 'New modular widgets system'),
+(62, 5, 'en', 'meta_title', 'New widgets system'),
+(63, 5, 'en', 'meta_description', ''),
+(64, 5, 'en', 'meta_keywords', ''),
+(65, 5, 'en', 'text', '<p>Here is the new features of YonaCMS - "System of modular widgets".</p>\r\n<p>Now, in any of your modules, you can create dynamic widgets with their business logic and templates. Forget about dozens of separate helper and the need to do the same routine operations! Also, this scheme will maintain cleanliness and order in the code for your project.</p>\r\n<p>Call each widget can be produced directly from the template Volt with the transfer set of parameters. Each widget is automatically cached and does not lead to additional load on the database. Caching can be disabled in the administrative panel, see Admin -&gt; Settings, option "Widgets caching". Automatic regeneration of the cache is carried out after 60 seconds.</p>\r\n<p>As an example of such a call is made to the widget template''s main page /app/modules/Index/views/index.volt</p>\r\n<pre>{{Helper.widget (''Publication''). LastNews ()}}</pre>\r\n<p><br />Files widget:<br />/app/modules/Publication/Widget/PublicationWidget.php - inherits \\ Application \\ Widget \\ AbstractWidget<br />/app/modules/Publication/views/widget/last-news.volt - template output</p>\r\n<p>The main class of the widget - \\ Application \\ Widget \\ Proxy<br />It is possible to set the default value for time caching.</p>\r\n<p>This system will be very useful for developers who have a lot of individual information units, as well as those who want to keep your code clean and easy tool to use.</p>'),
+(66, 5, 'ru', 'title', 'Новая система модульных виджетов'),
+(67, 5, 'ru', 'meta_title', 'Новая система виджетов'),
+(68, 5, 'ru', 'meta_description', ''),
+(69, 5, 'ru', 'meta_keywords', ''),
+(70, 5, 'ru', 'text', '<p>Представляем вам новый функционал от YonaCMS - "Систему модульных виджетов".</p>\r\n<p>Теперь в любом из ваших модулей вы можете создать динамические виджеты со своей бизнес-логикой и шаблонами. Забудьте о десятках отдельных хелперов и необходимости делать одни и те же рутинные операции! Также эта схема позволит поддерживать чистоту и порядок в коде вашего проекта.</p>\r\n<p>Вызов каждого виджета может быть произведен непосредственно с шаблона Volt с передачей набора параметров. Каждый виджет автоматически кешируется и не влечет дополнительной нагрузки на базу данных. Кеширование можно отключить в административной панели в разделе Admin -&gt; Settings, опция "Widgets caching". Автоматическая перегенерация кеша осуществляется через 60 секунд.</p>\r\n<p>В качестве примера сделан вызов такого виджета в шаблоне главной страницы /app/modules/Index/views/index.volt</p>\r\n<pre>{{ helper.widget(''Publication'').lastNews() }}</pre>\r\n<p><br />Файлы виджета:<br />/app/modules/Publication/Widget/PublicationWidget.php - наследует класс \\Application\\Widget\\AbstractWidget<br />/app/modules/Publication/views/widget/last-news.volt - шаблон вывода</p>\r\n<p>Основной класс системы виджетов - \\Application\\Widget\\Proxy<br />В нем можно установить дефолтное значение времени кеширования.</p>\r\n<p>Данная система будет очень полезна для разработчиков, которые имеют много отдельных информационных блоков, а также тем, кто хочет поддерживать свой код в чистоте и пользоваться удобным инструментом.</p>'),
+(71, 5, 'uk', 'title', 'Нова система модульних віджетів'),
+(72, 5, 'uk', 'meta_title', 'Нова система віджетів'),
+(73, 5, 'uk', 'meta_description', ''),
+(74, 5, 'uk', 'meta_keywords', ''),
+(75, 5, 'uk', 'text', '<p>Представляємо вам новий функціонал від YonaCMS - "Систему модульних віджетів".</p>\r\n<p>Тепер в будь-якому з ваших модулів ви можете створити динамічні віджети з власною&nbsp;бізнес-логікою і шаблонами. Забудьте про десятки окремих хелперів та необхідності робити одні і ті ж самі рутинні операції! Також ця схема дозволить підтримувати чистоту і порядок у коді вашого проекту.</p>\r\n<p>Виклик кожного віджета може бути проведений безпосередньо з шаблону Volt з передачею набору параметрів. Кожен віджет автоматично кешуєтся і не тягне додаткового навантаження на базу даних. Кешування можна відключити в адміністративній панелі в розділі Admin -&gt; Settings, опція "Widgets caching". Автоматична перегенерація кеша здійснюється через 60 секунд.</p>\r\n<p>Як приклад зроблений виклик такого віджета в шаблоні головної сторінки /app/modules/Index/views/index.volt</p>\r\n<pre>{{Helper.widget (''Publication''). LastNews ()}}</pre>\r\n<p><br />Файли віджету:<br />/app/modules/Publication/Widget/PublicationWidget.php - успадковує клас \\ Application \\ Widget \\ AbstractWidget<br />/app/modules/Publication/views/widget/last-news.volt - шаблон виводу</p>\r\n<p>Основний клас системи віджетів - \\ Application \\ Widget \\ Proxy<br />У ньому можна встановити дефолтне значення часу кешування.</p>\r\n<p>Дана система буде дуже корисною для розробників, які мають багато окремих інформаційних блоків, а також тим, хто хоче підтримувати свій код в чистоті і користуватися зручним інструментом.</p>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publication_type`
+-- Структура таблиці `publication_type`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_type` (
@@ -311,11 +328,12 @@ CREATE TABLE IF NOT EXISTS `publication_type` (
   `limit` int(4) DEFAULT NULL,
   `format` enum('list','grid') DEFAULT NULL,
   `display_date` enum('0','1') NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `publication_type`
+-- Дамп даних таблиці `publication_type`
 --
 
 INSERT INTO `publication_type` (`id`, `slug`, `limit`, `format`, `display_date`) VALUES
@@ -325,7 +343,7 @@ INSERT INTO `publication_type` (`id`, `slug`, `limit`, `format`, `display_date`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publication_type_translate`
+-- Структура таблиці `publication_type_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_type_translate` (
@@ -339,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `publication_type_translate` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
--- Dumping data for table `publication_type_translate`
+-- Дамп даних таблиці `publication_type_translate`
 --
 
 INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -377,7 +395,7 @@ INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `va
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seo_manager`
+-- Структура таблиці `seo_manager`
 --
 
 CREATE TABLE IF NOT EXISTS `seo_manager` (
@@ -401,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `seo_manager`
+-- Дамп даних таблиці `seo_manager`
 --
 
 INSERT INTO `seo_manager` (`id`, `custom_name`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
@@ -410,91 +428,7 @@ INSERT INTO `seo_manager` (`id`, `custom_name`, `route`, `route_ml`, `module`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `slider`
---
-
-CREATE TABLE IF NOT EXISTS `slider` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `animation_speed` varchar(255) DEFAULT NULL,
-  `delay` varchar(255) DEFAULT NULL,
-  `visible` enum('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `slider`
---
-
-INSERT INTO `slider` (`id`, `title`, `animation_speed`, `delay`, `visible`) VALUES
-(1, 'Homepage slider', '300', '5', '1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slider_image`
---
-
-CREATE TABLE IF NOT EXISTS `slider_image` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `slider_id` int(11) NOT NULL,
-  `sortorder` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `slider_id` (`slider_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `slider_image`
---
-
-INSERT INTO `slider_image` (`id`, `slider_id`, `sortorder`) VALUES
-(4, 1, 0),
-(5, 1, 1),
-(6, 1, 2),
-(7, 1, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slider_translate`
---
-
-CREATE TABLE IF NOT EXISTS `slider_translate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `foreign_id` int(11) NOT NULL,
-  `lang` varchar(20) DEFAULT NULL,
-  `key` varchar(255) DEFAULT NULL,
-  `value` text,
-  PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
-
---
--- Dumping data for table `slider_translate`
---
-
-INSERT INTO `slider_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
-(5, 4, 'ru', 'caption', 'Yona CMS'),
-(6, 4, 'ru', 'link', 'https://github.com/oleksandr-torosh/yona-cms'),
-(7, 5, 'ru', 'caption', 'Phalcon PHP Framework'),
-(8, 5, 'ru', 'link', ''),
-(9, 6, 'ru', 'caption', 'Модульное приложение'),
-(10, 6, 'ru', 'link', ''),
-(11, 7, 'ru', 'caption', 'Гибкая и одновременно простая структура'),
-(12, 7, 'ru', 'link', ''),
-(13, 4, 'en', 'caption', ''),
-(14, 4, 'en', 'link', ''),
-(15, 5, 'en', 'caption', ''),
-(16, 5, 'en', 'link', ''),
-(17, 6, 'en', 'caption', ''),
-(18, 6, 'en', 'link', ''),
-(19, 7, 'en', 'caption', ''),
-(20, 7, 'en', 'link', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `translate`
+-- Структура таблиці `translate`
 --
 
 CREATE TABLE IF NOT EXISTS `translate` (
@@ -504,10 +438,10 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `translation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
--- Dumping data for table `translate`
+-- Дамп даних таблиці `translate`
 --
 
 INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
@@ -548,7 +482,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (35, 'ru', 'Articles', 'Статьи'),
 (36, 'ru', 'Contacts', 'Контакты'),
 (37, 'ru', 'Admin', 'Админка'),
-(38, 'ru', 'YonaCms Admin Panel', 'YonaCms Admin Panel'),
+(38, 'ru', 'YonaCms Admin Panel', 'Административная панель YonaCms'),
 (39, 'ru', 'Back к перечню публикаций', 'Назад к перечню публикаций'),
 (40, 'ru', 'Страница №', 'Страница №'),
 (41, 'uk', 'Home', 'Головна'),
@@ -556,14 +490,29 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (43, 'uk', 'Articles', 'Статті'),
 (44, 'uk', 'Contacts', 'Контакти'),
 (45, 'uk', 'Admin', 'Адмінка'),
-(46, 'uk', 'YonaCms Admin Panel', 'YonaCms Admin Panel'),
+(46, 'uk', 'YonaCms Admin Panel', 'Адміністративна панель YonaCms'),
 (47, 'uk', 'Back к перечню публикаций', 'Назад до переліку публікацій'),
-(48, 'uk', 'Страница №', 'Сторінка №');
+(48, 'uk', 'Страница №', 'Сторінка №'),
+(49, 'en', 'Полная версия', 'Full version'),
+(50, 'en', 'Мобильная версия', 'Mobile version'),
+(51, 'en', 'Services', 'Se'),
+(52, 'en', 'Printing', 'Printing'),
+(53, 'en', 'Design', 'Design'),
+(54, 'ru', 'Полная версия', 'Полная версия'),
+(55, 'ru', 'Мобильная версия', 'Мобильная версия'),
+(56, 'ru', 'Services', 'Services'),
+(57, 'ru', 'Printing', 'Printing'),
+(58, 'ru', 'Design', 'Design'),
+(59, 'uk', 'Полная версия', 'Повна версія'),
+(60, 'uk', 'Мобильная версия', 'Мобільна версія'),
+(61, 'uk', 'Services', 'Services'),
+(62, 'uk', 'Printing', 'Printing'),
+(63, 'uk', 'Design', 'Design');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `widget`
+-- Структура таблиці `widget`
 --
 
 CREATE TABLE IF NOT EXISTS `widget` (
@@ -574,7 +523,7 @@ CREATE TABLE IF NOT EXISTS `widget` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `widget`
+-- Дамп даних таблиці `widget`
 --
 
 INSERT INTO `widget` (`id`, `title`, `html`) VALUES
@@ -607,18 +556,6 @@ ALTER TABLE `publication_translate`
 --
 ALTER TABLE `publication_type_translate`
   ADD CONSTRAINT `publication_type_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `slider_image`
---
-ALTER TABLE `slider_image`
-  ADD CONSTRAINT `slider_image_ibfk_2` FOREIGN KEY (`slider_id`) REFERENCES `slider` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `slider_translate`
---
-ALTER TABLE `slider_translate`
-  ADD CONSTRAINT `slider_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `slider_image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `translate`

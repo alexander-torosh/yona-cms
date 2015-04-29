@@ -13,7 +13,6 @@ return array(
     'Page',
     'Publication',
     'Seo',
-    'Slider',
     'Menu',
     'Tree',
 );

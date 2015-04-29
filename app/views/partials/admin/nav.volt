@@ -13,9 +13,6 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}" href="/publication/admin">
                 <i class="calendar icon"></i> {{ helper.at('Manage Publication') }}
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
-                <i class="resize horizontal icon"></i> {{ helper.at('Manage Slider') }}
-            </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="/widget/admin">
                 <i class="text file icon"></i> {{ helper.at('Manage Widget') }}
             </a>
