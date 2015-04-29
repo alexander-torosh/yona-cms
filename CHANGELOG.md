@@ -1,6 +1,7 @@
 v.0.1.7
 - Added a system of modular widgets; Added widget for example at home page;
 - Fixed error with caching types of publications;
+- Fixed images compression error from Publicaion module;
 - Slightly fixed CSS-styles;
 - Deleted Slider module;
 

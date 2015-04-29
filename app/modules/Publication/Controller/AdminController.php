@@ -172,21 +172,21 @@ class AdminController extends Controller
                     ));
 
                     $resize_x = 1000;
-                    $resize_y = 1000;
 
                     $successMsg = $this->helper->at('Photo added');
 
                     $imageFilter->removeCached();
 
                     $image = new \Phalcon\Image\Adapter\GD($file->getTempName());
-                    $image->resize($resize_x, $resize_y);
+                    if ($image->getWidth() > $resize_x) {
+                        $image->resize($resize_x);
+                    }
                     $image->save($imageFilter->originalAbsPath());
 
                     $this->flash->success($successMsg);
                 }
             }
         }
-
     }
 
 } 

@@ -57,7 +57,7 @@ class Page extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "slug",
-                "message" => "Page with slug is already existed"
+                "message" => "Page with slug is already exists"
             )
         ));
 

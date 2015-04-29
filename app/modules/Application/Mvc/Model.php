@@ -11,7 +11,7 @@ class Model extends \Phalcon\Mvc\Model
 {
     protected $translations = array(); // Массив переводов
 
-    private static $lang = 'ru'; // Язык по-умолчанию
+    private static $lang = 'en'; // Язык по-умолчанию
     private static $translateCache = true; // Флаг использования кеша переводов
 
     /**
@@ -85,7 +85,7 @@ class Model extends \Phalcon\Mvc\Model
     public function setMLVariable($key, $value, $lang = null)
     {
 
-        if (!$this->id) {
+        if (!$this->getId()) {
             return false;
         }
         $model = new $this->translateModel();
@@ -94,7 +94,7 @@ class Model extends \Phalcon\Mvc\Model
         }
         $conditions = "foreign_id = :foreign_id: AND lang = :lang: AND key = :key:";
         $parameters = array(
-            'foreign_id' => $this->id,
+            'foreign_id' => $this->getId(),
             'lang' => $lang,
             'key' => $key
         );
@@ -103,7 +103,7 @@ class Model extends \Phalcon\Mvc\Model
             'bind' => $parameters));
         if (!$entity) {
             $entity = new $this->translateModel();
-            $entity->setForeignId($this->id);
+            $entity->setForeignId($this->getId());
             $entity->setLang($lang);
             $entity->setKey($key);
         }
@@ -113,17 +113,17 @@ class Model extends \Phalcon\Mvc\Model
 
     public function translateCacheKey()
     {
-        if (!$this->id) {
+        if (!$this->getId()) {
             return false;
         }
-        $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
         $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
         return $key;
     }
 
     public function deleteTranslateCache()
     {
-        if (!$this->id) {
+        if (!$this->getId()) {
             return false;
         }
         $cache = $this->getDi()->get('cache');
@@ -135,11 +135,11 @@ class Model extends \Phalcon\Mvc\Model
      */
     private function getTranslations()
     {
-        if (!$this->id) {
+        if (!$this->getId()) {
             return false;
         }
         $model = new $this->translateModel();
-        $query = 'foreign_id = ' . $this->id . ' AND lang = "' . LANG . '"';
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
         $params = array('conditions' => $query);
         if (self::$translateCache) {
             $params['cache'] = array(

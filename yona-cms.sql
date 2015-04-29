@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Квт 29 2015 р., 13:05
+-- Час створення: Квт 29 2015 р., 17:31
 -- Версія сервера: 5.6.23
 -- Версія PHP: 5.6.8-1~dotdeb+wheezy.1
 
@@ -512,6 +512,43 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблиці `tree_category`
+--
+
+CREATE TABLE IF NOT EXISTS `tree_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `root` enum('articles','news') NOT NULL DEFAULT 'articles',
+  `parent_id` int(11) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `depth` tinyint(2) NOT NULL DEFAULT '0',
+  `left` int(11) DEFAULT NULL,
+  `right` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `tree_category_translate`
+--
+
+CREATE TABLE IF NOT EXISTS `tree_category_translate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foreign_id` int(11) NOT NULL,
+  `lang` varchar(20) DEFAULT NULL,
+  `key` varchar(255) DEFAULT NULL,
+  `value` text,
+  PRIMARY KEY (`id`),
+  KEY `foreign_id` (`foreign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблиці `widget`
 --
 
@@ -562,6 +599,18 @@ ALTER TABLE `publication_type_translate`
 --
 ALTER TABLE `translate`
   ADD CONSTRAINT `translate_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE SET NULL;
+
+--
+-- Constraints for table `tree_category`
+--
+ALTER TABLE `tree_category`
+  ADD CONSTRAINT `tree_category_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `tree_category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tree_category_translate`
+--
+ALTER TABLE `tree_category_translate`
+  ADD CONSTRAINT `tree_category_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `tree_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

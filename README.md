@@ -19,4 +19,11 @@ Features
 
 Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-torosh/yona-cms/blob/master/CHANGELOG.md)
 
+Requirements
+------------
 
+* php 5.4+
+* phalcon 1.3.2+
+* mysql
+* php-intl
+* apache (+mod_rewrite) or nginx

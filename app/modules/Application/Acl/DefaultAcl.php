@@ -42,7 +42,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'publication/type',
             'seo/robots',
             'seo/manager',
-            'tree/tree',
+            'tree/admin',
         );
         foreach ($privateResources as $resource) {
             $this->addResource(new \Phalcon\Acl\Resource($resource));
