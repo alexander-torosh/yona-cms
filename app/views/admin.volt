@@ -22,6 +22,7 @@
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>
     <script src="/vendor/semantic-1.0.0/semantic.min.js"></script>
     <script src="/vendor/js/jquery.address.js"></script>
+    <script src="/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script src="/static/js/admin.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -1,31 +1,37 @@
+{%- macro leaf_item(leaf) %}
+    {% set children = leaf.children() %}
+    <li id="category_{{ leaf.getId() }}">
+        <div>{{ leaf.getTitle() }}</div>
+        {% if children.count() %}
+            <ol>
+                {% for child in children %}
+                {{ leaf_item(child) }}
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </li>
+{%- endmacro %}
+
 <div class="ui segment">
 
-    <h3>Articles</h3>
+    {% for root, root_title in roots %}
+        <h3>{{ root_title }}</h3>
 
-    <ol class="sortable" id="root_articles">
-        {#<li id="category_10">
-            <div>Books <a href="/tree/admin/edit/1"><i class="icon edit"></i></a></div>
-        </li>
-        <li id="category_3">
-            <div>Toys</div>
-            <ol>
-                <li id="category_7">
-                    <div>Eco-toys</div>
-                </li>
-                <li id="category_20">
-                    <div>Cars</div>
-                </li>
-            </ol>
-        </li>
-        <li id="category_33">
-            <div>Games</div>
-        </li>#}
-    </ol>
+        <ol class="sortable" id="root_{{ root }}">
 
-    <a class="save ui button primary" data-root="articles">Save</a>
-    <a href="javascript:void(0);" data-root="articles" class="add ui button positive">
-        <i class="icon plus"></i> Add
-    </a>
+            {% set tree = tree_helper.tree(root) %}
+            {% for leaf in tree %}
+                {{ leaf_item(leaf) }}
+            {% endfor %}
+
+        </ol>
+
+        <a class="save ui button primary" data-root="{{ root }}">Save</a>
+        <a href="javascript:void(0);" data-root="{{ root }}" class="add ui button positive">
+            <i class="icon plus"></i> Add
+        </a>
+
+    {% endfor %}
 
 </div>
 

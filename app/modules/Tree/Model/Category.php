@@ -25,8 +25,8 @@ class Category extends Model
     private $slug;
     private $title; // translate
     private $depth = 0;
-    private $left;
-    private $right;
+    private $left_key;
+    private $right_key;
     private $created_at;
     private $updated_at;
 
@@ -38,6 +38,7 @@ class Category extends Model
     public function initialize()
     {
         $this->belongsTo('parent_id', 'Category\Model\Category', 'id', ['alias' => 'Parent']);
+        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
     public function validation()
@@ -60,6 +61,31 @@ class Category extends Model
     public function beforeUpdate()
     {
         $this->updated_at = date("Y-m-d H:i:s");
+    }
+
+    public static function tree($root)
+    {
+        $entries = Category::find([
+            'root = :root:',
+            'order' => 'left_key',
+            'bind'  => ['root' => $root]
+        ]);
+        return $entries;
+    }
+
+    public function children()
+    {
+        $entries = $this->find([
+            'left_key >= :left_key: AND right_key <= :right_key: AND id <> :id: AND depth < :depth:',
+            'order' => 'left_key',
+            'bind'  => [
+                'id'        => $this->getId(),
+                'depth'     => $this->getDepth(),
+                'left_key'  => $this->getLeftKey(),
+                'right_key' => $this->getRightKey(),
+            ]
+        ]);
+        return $entries;
     }
 
     /**
@@ -129,33 +155,33 @@ class Category extends Model
     /**
      * @return mixed
      */
-    public function getLeft()
+    public function getLeftKey()
     {
-        return $this->left;
+        return $this->left_key;
     }
 
     /**
-     * @param mixed $left
+     * @param mixed $left_key
      */
-    public function setLeft($left)
+    public function setLeftKey($left_key)
     {
-        $this->left = $left;
+        $this->left_key = $left_key;
     }
 
     /**
      * @return mixed
      */
-    public function getRight()
+    public function getRightKey()
     {
-        return $this->right;
+        return $this->right_key;
     }
 
     /**
-     * @param mixed $right
+     * @param mixed $right_key
      */
-    public function setRight($right)
+    public function setRightKey($right_key)
     {
-        $this->right = $right;
+        $this->right_key = $right_key;
     }
 
     /**

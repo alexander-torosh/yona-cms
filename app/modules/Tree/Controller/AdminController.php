@@ -16,6 +16,9 @@ class AdminController extends Controller
     public function indexAction()
     {
         $this->setAdminEnvironment();
+
+        $this->view->roots = Category::$roots;
+
     }
 
     public function addAction()
@@ -29,10 +32,14 @@ class AdminController extends Controller
 
         $model = new Category();
         $model->setRoot($root);
-        $model->setTitle($title);
-        $model->setSlug(Transliterator::slugify($title));
         if ($model->create()) {
-            $this->returnJSON(['success' => true, 'id' => $model->getId()]);
+            $model->setTitle($title);
+            $model->setSlug(Transliterator::slugify($title));
+            if ($model->update()) {
+                $this->returnJSON(['success' => true, 'id' => $model->getId()]);
+            } else {
+                $this->returnJSON(['error' => implode(' | ', $model->getMessages())]);
+            }
         } else {
             $this->returnJSON(['error' => implode(' | ', $model->getMessages())]);
         }
@@ -67,8 +74,8 @@ class AdminController extends Controller
                         $model->setParentId(null);
                     }
                     $model->setDepth($el['depth']);
-                    $model->setLeft($el['left']);
-                    $model->setRight($el['right']);
+                    $model->setLeftKey($el['left']);
+                    $model->setRightKey($el['right']);
                     $model->update();
                 }
             }

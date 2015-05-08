@@ -19,6 +19,7 @@
     }
     #profiler > .bar > .title {
         float: left;
+        font-weight: bold;
     }
     #profiler > .bar > .info {
         float: left;
@@ -50,9 +51,12 @@
     <div class="bar clearfix" onclick="profilerToogle();">
         <section class="title">Profiler</section>
         <ul class="info">
-            <li>Total Queries: {{ profiler.getNumberTotalStatements() }}</li>
+            <li>Total SQL queries: {{ profiler.getNumberTotalStatements() }}</li>
             <?php $seconds = round($profiler->getTotalElapsedSeconds(), 5) ?>
-            <li>Total Elapsed Seconds: {{ (seconds * 1000)|format('%01.2f') }} ms</li>
+            <li>Total SQL elapsed seconds: {{ (seconds * 1000)|format('%01.2f') }} ms</li>
+            <li>Memory usage: <?php echo round(memory_get_peak_usage(true)/1024/1024, 2); ?> Mb</li>
+            <?php $time_end = microtime(true); ?>
+            <li></li>
         </ul>
     </div>
     <div class="results" style="display: none;">

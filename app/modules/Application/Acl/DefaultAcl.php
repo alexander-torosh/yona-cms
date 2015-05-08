@@ -45,7 +45,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'tree/admin',
         );
         foreach ($privateResources as $resource) {
-            $this->addResource(new \Phalcon\Acl\Resource($resource));
+            $this->addResource(new \Phalcon\Acl\Resource($resource), '*');
         }
 
         $publicResources = array(  
@@ -59,7 +59,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
             'publication/index',
         );
         foreach ($publicResources as $resource) {
-            $this->addResource(new \Phalcon\Acl\Resource($resource));
+            $this->addResource(new \Phalcon\Acl\Resource($resource), '*');
         }
 
         foreach ($roles as $role) {

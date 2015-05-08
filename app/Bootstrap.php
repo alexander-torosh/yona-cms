@@ -91,8 +91,8 @@ class Bootstrap
                 ));
                 break;
         }
-        $di->set('cache', $cache);
-        $di->set('modelsCache', $cache);
+        $di->set('cache', $cache, true);
+        $di->set('modelsCache', $cache, true);
 
         \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
 
