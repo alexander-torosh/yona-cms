@@ -32,5 +32,9 @@
       "type": "MIT",
       "url": "http://www.opensource.org/licenses/MIT"
     }
-  ]
+  ],
+  "require": {
+        "php": ">=5.4",
+        "ext-intl" : "*"
+  }
 }
