@@ -33,6 +33,5 @@
     "php": ">=5.4",
     "ext-intl" : "*",
     "ext-phalcon" : ">=1.3.0"
-  },
-  "preferred-install": "stable"
+  }
 }
