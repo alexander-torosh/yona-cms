@@ -34,7 +34,5 @@
     "ext-intl" : "*",
     "ext-phalcon" : ">=1.3.0"
   },
-  "config": {
-		"preferred-install": "dist"
-	}
+  "preferred-install": "stable"
 }
