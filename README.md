@@ -28,6 +28,12 @@ Then run
 php composer.phar create-project oleksandr-torosh/yona-cms -s dev
 ```
 
+If you have already installed composer
+
+```bash
+composer create-project oleksandr-torosh/yona-cms -s dev
+```
+
 ### Via Composer json file
 
 Create a composer.json file as follows:
@@ -43,6 +49,12 @@ Run the composer installer:
 
 ```bash
 php composer.phar install
+```
+
+or
+
+```bash
+composer install
 ```
 
 ### Installing via GitHub
