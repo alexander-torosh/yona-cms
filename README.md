@@ -47,17 +47,13 @@ php composer.phar install
 
 ### Installing via GitHub
 
-Just clone the repository in a common location or inside your project:
+Just clone the repository:
 
 ```
-git clone https://github.com/phalcon/incubator.git
+git clone git@github.com:oleksandr-torosh/yona-cms.git
 ```
 
-For a specific Git branch (eg 1.3.5) please use:
-
-```
-git clone -b 1.3.5 git@github.com:phalcon/incubator.git
-```
+[Full installation guide](http://doc.yonacms.com/reference/install.html)
 
 ##Features
 
