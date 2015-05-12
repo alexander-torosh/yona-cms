@@ -27,14 +27,10 @@
     "url": "https://github.com/oleksandr-torosh/yona-cms"
   },
   "bugs": "https://github.com/oleksandr-torosh/yona-cms/issues",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
-    }
-  ],
+  "license": "BSD-3",
   "require": {
     "php": ">=5.4",
-    "ext-intl" : "*"
+    "ext-intl" : "*",
+    "ext-phalcon" : ">=1.3.0",
   }
 }
