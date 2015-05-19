@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Квт 29 2015 р., 17:31
+-- Час створення: Трв 19 2015 р., 17:38
 -- Версія сервера: 5.6.23
--- Версія PHP: 5.6.8-1~dotdeb+wheezy.1
+-- Версія PHP: 5.6.9-1~dotdeb+7.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -521,14 +521,35 @@ CREATE TABLE IF NOT EXISTS `tree_category` (
   `parent_id` int(11) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `depth` tinyint(2) NOT NULL DEFAULT '0',
-  `left` int(11) DEFAULT NULL,
-  `right` int(11) DEFAULT NULL,
+  `left_key` int(11) DEFAULT NULL,
+  `right_key` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+
+--
+-- Дамп даних таблиці `tree_category`
+--
+
+INSERT INTO `tree_category` (`id`, `root`, `parent_id`, `slug`, `depth`, `left_key`, `right_key`, `created_at`, `updated_at`) VALUES
+(15, 'articles', NULL, 'computers', 1, 2, 7, '2015-05-19 16:46:38', '2015-05-19 17:32:57'),
+(16, 'articles', NULL, 'software', 1, 14, 21, '2015-05-19 16:47:32', '2015-05-19 17:32:58'),
+(17, 'articles', NULL, 'gadgets', 1, 8, 13, '2015-05-19 16:47:45', '2015-05-19 17:32:57'),
+(18, 'articles', 16, 'microsoft', 2, 17, 18, '2015-05-19 17:23:44', '2015-05-19 17:32:58'),
+(19, 'articles', 16, 'oracle', 2, 19, 20, '2015-05-19 17:24:00', '2015-05-19 17:32:58'),
+(20, 'articles', 16, 'google', 2, 15, 16, '2015-05-19 17:24:24', '2015-05-19 17:32:58'),
+(21, 'articles', 15, 'netbooks', 2, 3, 4, '2015-05-19 17:24:49', '2015-05-19 17:32:57'),
+(22, 'articles', 15, 'laptops', 2, 5, 6, '2015-05-19 17:30:49', '2015-05-19 17:32:57'),
+(23, 'articles', 17, 'smartpfone', 2, 9, 10, '2015-05-19 17:32:06', '2015-05-19 17:32:57'),
+(24, 'articles', 17, 'tablet', 2, 11, 12, '2015-05-19 17:32:53', '2015-05-19 17:32:58'),
+(25, 'news', NULL, 'world', 1, 2, 3, '2015-05-19 17:33:04', '2015-05-19 17:33:58'),
+(26, 'news', NULL, 'business', 1, 6, 11, '2015-05-19 17:33:11', '2015-05-19 17:33:58'),
+(27, 'news', NULL, 'politics', 1, 4, 5, '2015-05-19 17:33:16', '2015-05-19 17:33:58'),
+(28, 'news', 26, 'real-estate', 2, 7, 8, '2015-05-19 17:33:30', '2015-05-19 17:33:58'),
+(29, 'news', 26, 'investitions', 2, 9, 10, '2015-05-19 17:33:54', '2015-05-19 17:33:58');
 
 -- --------------------------------------------------------
 
@@ -544,7 +565,28 @@ CREATE TABLE IF NOT EXISTS `tree_category_translate` (
   `value` text,
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+
+--
+-- Дамп даних таблиці `tree_category_translate`
+--
+
+INSERT INTO `tree_category_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
+(14, 15, 'en', 'title', 'Computers'),
+(15, 16, 'en', 'title', 'Software'),
+(16, 17, 'en', 'title', 'Gadgets'),
+(17, 18, 'en', 'title', 'Microsoft'),
+(18, 19, 'en', 'title', 'Oracle'),
+(19, 20, 'en', 'title', 'Google'),
+(20, 21, 'en', 'title', 'Netbooks'),
+(21, 22, 'en', 'title', 'Laptops'),
+(22, 23, 'en', 'title', 'Smartpfone'),
+(23, 24, 'en', 'title', 'Tablet'),
+(24, 25, 'en', 'title', 'World'),
+(25, 26, 'en', 'title', 'Business'),
+(26, 27, 'en', 'title', 'Politics'),
+(27, 28, 'en', 'title', 'Real estate'),
+(28, 29, 'en', 'title', 'Investitions');
 
 -- --------------------------------------------------------
 

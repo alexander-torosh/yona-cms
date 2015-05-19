@@ -63,10 +63,10 @@ class Category extends Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-    public static function tree($root)
+    public static function treeUpperLeafs($root)
     {
         $entries = Category::find([
-            'root = :root:',
+            'root = :root: AND parent_id IS NULL',
             'order' => 'left_key',
             'bind'  => ['root' => $root]
         ]);
@@ -76,13 +76,14 @@ class Category extends Model
     public function children()
     {
         $entries = $this->find([
-            'left_key >= :left_key: AND right_key <= :right_key: AND id <> :id: AND depth < :depth:',
-            'order' => 'left_key',
+            'left_key >= :left_key: AND right_key <= :right_key: AND depth = :depth_plus: AND id <> :id: AND root = :root:',
+            'order' => 'left_key ASC',
             'bind'  => [
-                'id'        => $this->getId(),
-                'depth'     => $this->getDepth(),
-                'left_key'  => $this->getLeftKey(),
-                'right_key' => $this->getRightKey(),
+                'id'          => $this->getId(),
+                'root'        => $this->getRoot(),
+                'depth_plus' => $this->getDepth() + 1,
+                'left_key'    => $this->getLeftKey(),
+                'right_key'   => $this->getRightKey(),
             ]
         ]);
         return $entries;

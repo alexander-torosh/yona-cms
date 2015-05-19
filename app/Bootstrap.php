@@ -186,6 +186,15 @@ class Bootstrap
             ->addJs(ROOT . "/static/js/main.js")
             ->addJs(ROOT . "/static/js/ajax.js");
 
+        // Подключение JS админ.панели
+        $assetsManager = new \Application\Assets\Manager();
+        $assetsManager->collection('modules-admin-js')
+            ->setLocal(true)
+            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
+            ->setTargetPath(ROOT . '/assets/modules-admin.js')
+            ->setTargetUri('assets/modules-admin.js')
+            ->join(true);
+
         // Подключение LESS
         $assetsManager->collection('modules-less')
             ->setLocal(true)
