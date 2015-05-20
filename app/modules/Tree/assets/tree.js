@@ -8,7 +8,7 @@ $(function () {
         if (data) {
             $.post("/tree/admin/saveTree", {root: root, data: data}, function (response) {
                 if (response.success == true) {
-                    noty({layout: 'center', type: 'success', text: 'Saved', timeout: 2000});
+                    noty({layout: 'center', type: 'success', text: 'Root "'+root+'" saved', timeout: 2000});
                 }
             }, 'json');
         }
@@ -42,6 +42,7 @@ $(function () {
                     list.append(newItemLi);
 
                     initNestedSortable();
+                    $("#save-root-" + root).click();
                 }
                 if (response.error) {
                     noty({layout: 'center', type: 'error', text: response.error, timeout: 2000});

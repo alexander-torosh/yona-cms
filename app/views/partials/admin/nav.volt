@@ -31,6 +31,9 @@
             <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="/seo/robots">
                 <i class="android icon"></i> Robots.txt
             </a>
+            <a class="item{{ helper.activeMenu().activeClass('seo-sitemap') }}" href="/seo/sitemap">
+                <i class="sitemap icon"></i> Sitemap.xml
+            </a>
             <a class="item{{ helper.activeMenu().activeClass('seo-manager') }}" href="/seo/manager">
                 <i class="lightbulb icon"></i> SEO Manager
             </a>

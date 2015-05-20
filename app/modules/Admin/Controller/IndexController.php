@@ -24,13 +24,12 @@ class IndexController extends Controller
         $auth = $this->session->get('auth');
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
             $this->flash->notice($this->helper->translate("Авторизируйтесь пожалуйста"));
-            $this->response->redirect('admin/index/login');
-            return $this->response->send();
+            return $this->redirect('admin/index/login');
         }
 
         // Проверка пользователя yona
-        $wezoom = AdminUser::findFirst("login = 'yona'");
-        if ($wezoom) {
+        $yona = AdminUser::findFirst("login = 'yona'");
+        if ($yona) {
             $this->flash->warning("Found the administrative user 'yona', to comply with security measures, it is necessary to Delete and create a new personal account");
         }
 

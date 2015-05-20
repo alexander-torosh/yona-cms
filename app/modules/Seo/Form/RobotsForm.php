@@ -14,7 +14,7 @@ class RobotsForm extends Form
 
     public function initialize()
     {
-        $this->add((new TextArea('robots'))->setLabel('Contents'));
+        $this->add((new TextArea('robots', ['style' => 'height:600px;']))->setLabel('Contents'));
     }
 
 } 

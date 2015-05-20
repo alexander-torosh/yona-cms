@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Трв 19 2015 р., 17:38
+-- Час створення: Трв 20 2015 р., 15:31
 -- Версія сервера: 5.6.23
 -- Версія PHP: 5.6.9-1~dotdeb+7.1
 
@@ -528,28 +528,31 @@ CREATE TABLE IF NOT EXISTS `tree_category` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- Дамп даних таблиці `tree_category`
 --
 
 INSERT INTO `tree_category` (`id`, `root`, `parent_id`, `slug`, `depth`, `left_key`, `right_key`, `created_at`, `updated_at`) VALUES
-(15, 'articles', NULL, 'computers', 1, 2, 7, '2015-05-19 16:46:38', '2015-05-19 17:32:57'),
-(16, 'articles', NULL, 'software', 1, 14, 21, '2015-05-19 16:47:32', '2015-05-19 17:32:58'),
-(17, 'articles', NULL, 'gadgets', 1, 8, 13, '2015-05-19 16:47:45', '2015-05-19 17:32:57'),
-(18, 'articles', 16, 'microsoft', 2, 17, 18, '2015-05-19 17:23:44', '2015-05-19 17:32:58'),
-(19, 'articles', 16, 'oracle', 2, 19, 20, '2015-05-19 17:24:00', '2015-05-19 17:32:58'),
-(20, 'articles', 16, 'google', 2, 15, 16, '2015-05-19 17:24:24', '2015-05-19 17:32:58'),
-(21, 'articles', 15, 'netbooks', 2, 3, 4, '2015-05-19 17:24:49', '2015-05-19 17:32:57'),
-(22, 'articles', 15, 'laptops', 2, 5, 6, '2015-05-19 17:30:49', '2015-05-19 17:32:57'),
-(23, 'articles', 17, 'smartpfone', 2, 9, 10, '2015-05-19 17:32:06', '2015-05-19 17:32:57'),
-(24, 'articles', 17, 'tablet', 2, 11, 12, '2015-05-19 17:32:53', '2015-05-19 17:32:58'),
-(25, 'news', NULL, 'world', 1, 2, 3, '2015-05-19 17:33:04', '2015-05-19 17:33:58'),
-(26, 'news', NULL, 'business', 1, 6, 11, '2015-05-19 17:33:11', '2015-05-19 17:33:58'),
-(27, 'news', NULL, 'politics', 1, 4, 5, '2015-05-19 17:33:16', '2015-05-19 17:33:58'),
-(28, 'news', 26, 'real-estate', 2, 7, 8, '2015-05-19 17:33:30', '2015-05-19 17:33:58'),
-(29, 'news', 26, 'investitions', 2, 9, 10, '2015-05-19 17:33:54', '2015-05-19 17:33:58');
+(15, 'articles', NULL, 'computers', 1, 2, 7, '2015-05-19 16:46:38', '2015-05-20 13:31:24'),
+(16, 'articles', NULL, 'software', 1, 14, 21, '2015-05-19 16:47:32', '2015-05-20 13:31:25'),
+(17, 'articles', NULL, 'gadgets', 1, 8, 13, '2015-05-19 16:47:45', '2015-05-20 13:31:25'),
+(18, 'articles', 16, 'microsoft', 2, 17, 18, '2015-05-19 17:23:44', '2015-05-20 13:31:25'),
+(19, 'articles', 16, 'oracle', 2, 19, 20, '2015-05-19 17:24:00', '2015-05-20 13:31:25'),
+(20, 'articles', 16, 'google', 2, 15, 16, '2015-05-19 17:24:24', '2015-05-20 13:31:25'),
+(21, 'articles', 15, 'netbooks', 2, 3, 4, '2015-05-19 17:24:49', '2015-05-20 13:31:25'),
+(22, 'articles', 15, 'laptops', 2, 5, 6, '2015-05-19 17:30:49', '2015-05-20 13:31:25'),
+(23, 'articles', 17, 'smartpfone', 2, 9, 10, '2015-05-19 17:32:06', '2015-05-20 13:31:25'),
+(24, 'articles', 17, 'tablet', 2, 11, 12, '2015-05-19 17:32:53', '2015-05-20 13:31:25'),
+(25, 'news', NULL, 'world', 1, 2, 3, '2015-05-19 17:33:04', '2015-05-20 15:24:45'),
+(26, 'news', NULL, 'business', 1, 6, 11, '2015-05-19 17:33:11', '2015-05-20 15:24:45'),
+(27, 'news', NULL, 'politics', 1, 4, 5, '2015-05-19 17:33:16', '2015-05-20 15:24:45'),
+(28, 'news', 26, 'real-estate', 2, 7, 8, '2015-05-19 17:33:30', '2015-05-20 15:24:45'),
+(29, 'news', 26, 'investitions', 2, 9, 10, '2015-05-19 17:33:54', '2015-05-20 15:24:45'),
+(30, 'news', NULL, 'life', 1, 12, 17, '2015-05-20 15:24:05', '2015-05-20 15:24:45'),
+(31, 'news', 30, 'health', 2, 13, 14, '2015-05-20 15:24:22', '2015-05-20 15:24:45'),
+(32, 'news', 30, 'family', 2, 15, 16, '2015-05-20 15:24:42', '2015-05-20 15:24:45');
 
 -- --------------------------------------------------------
 
@@ -565,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `tree_category_translate` (
   `value` text,
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
 -- Дамп даних таблиці `tree_category_translate`
@@ -586,7 +589,10 @@ INSERT INTO `tree_category_translate` (`id`, `foreign_id`, `lang`, `key`, `value
 (25, 26, 'en', 'title', 'Business'),
 (26, 27, 'en', 'title', 'Politics'),
 (27, 28, 'en', 'title', 'Real estate'),
-(28, 29, 'en', 'title', 'Investitions');
+(28, 29, 'en', 'title', 'Investitions'),
+(29, 30, 'en', 'title', 'Life'),
+(30, 31, 'en', 'title', 'Health'),
+(31, 32, 'en', 'title', 'Family');
 
 -- --------------------------------------------------------
 

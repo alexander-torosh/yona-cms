@@ -1,5 +1,7 @@
 v.0.1.8
 - Added Tree Category module;
+- Changed ACL role/permission system. Added ACL config file - /app/config/acl.php. Added roles;
+- Added sitemap.xml editor;
 
 v.0.1.7
 - Added a system of modular widgets; Added widget for example at home page;

@@ -6,6 +6,8 @@
             <th style="width: 100px"></th>
             <th>{{ helper.at('Логин') }}</th>
             <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
             <th>{{ helper.at('Активен') }}</th>
         </tr>
     </thead>
@@ -16,6 +18,8 @@
             <td><a href="{{ url }}" class="mini ui icon button"><i class="pencil icon"></i></a></td>
             <td><a href="{{ url }}">{{ user.getLogin() }}</a></td>
             <td>{{ user.getEmail() }}</td>
+            <td>{{ user.getName() }}</td>
+            <td>{{ user.getRoleTitle() }}</td>
             <td>{% if user.getActive() %}<i class="icon checkmark green"></i>{% endif %}</td>
         </tr>
         {% endfor %}
