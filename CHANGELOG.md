@@ -1,3 +1,6 @@
+v.0.1.8
+- Added Tree Category module;
+
 v.0.1.7
 - Added a system of modular widgets; Added widget for example at home page;
 - Fixed error with caching types of publications;

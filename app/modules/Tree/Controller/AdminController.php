@@ -14,6 +14,11 @@ use Tree\Model\Category;
 class AdminController extends Controller
 {
 
+    public function initialize()
+    {
+        $this->helper->activeMenu()->setActive('tree');
+    }
+
     public function indexAction()
     {
         $this->setAdminEnvironment();
@@ -22,6 +27,8 @@ class AdminController extends Controller
         $assets = $this->getDI()->get('assets');
         $assets->collection('modules-admin-less')->addCss(__DIR__ . '/../assets/tree.less');
         $assets->collection('modules-admin-js')->addJs(__DIR__ . '/../assets/tree.js');
+
+        $this->helper->title($this->helper->at('Tree Categories'), true);
     }
 
     public function addAction()

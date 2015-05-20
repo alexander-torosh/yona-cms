@@ -175,7 +175,6 @@ class Bootstrap
             ->setTargetPath(ROOT . '/assets/js.js')
             ->setTargetUri('assets/js.js')
             ->join(true)
-
             ->addJs(ROOT . "/vendor/history/native.history.js")
             ->addJs(ROOT . "/vendor/noty/jquery.noty.js")
             ->addJs(ROOT . "/vendor/noty/themes/default.js")
@@ -187,7 +186,6 @@ class Bootstrap
             ->addJs(ROOT . "/static/js/ajax.js");
 
         // Подключение JS админ.панели
-        $assetsManager = new \Application\Assets\Manager();
         $assetsManager->collection('modules-admin-js')
             ->setLocal(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin())

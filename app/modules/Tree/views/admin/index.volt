@@ -1,5 +1,4 @@
 {%- macro leaf_item(leaf) %}
-    {% set children = leaf.children() %}
     <li id="category_{{ leaf.getId() }}">
         <div class="item">
             <span class="title">{{ leaf.getTitle() }}</span>
@@ -7,9 +6,9 @@
             <a href="/tree/admin/edit/{{ leaf.getId() }}"><i class="icon edit"></i></a>
             <a href="javascript:void(0);" onclick="deleteCategory({{ leaf.getId() }}, this)" class="delete"><i class="icon trash"></i></a>
         </div>
-        {% if children.count() %}
+        {% if leaf.hasChildren() %}
             <ol>
-                {% for child in children %}
+                {% for child in leaf.children() %}
                     {{ leaf_item(child) }}
                 {% endfor %}
             </ol>

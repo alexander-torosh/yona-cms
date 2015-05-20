@@ -89,6 +89,13 @@ class Category extends Model
         return $entries;
     }
 
+    public function hasChildren()
+    {
+        if (abs($this->getRightKey() - $this->getLeftKey()) > 1) {
+            return true;
+        }
+    }
+
     /**
      * @return mixed
      */
