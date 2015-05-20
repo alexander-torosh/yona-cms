@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Трв 20 2015 р., 15:31
+-- Час створення: Трв 20 2015 р., 17:35
 -- Версія сервера: 5.6.23
 -- Версія PHP: 5.6.9-1~dotdeb+7.1
 
@@ -28,8 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` enum('journalist','editor','admin') NOT NULL DEFAULT 'journalist',
   `login` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -41,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 -- Дамп даних таблиці `admin_user`
 --
 
-INSERT INTO `admin_user` (`id`, `login`, `email`, `password`, `active`) VALUES
-(1, 'admin', 'web@wezoom.net', '$2y$10$IgvGXdrkaRpuXnQLcpva3ebuRdNqbcY7NvlS9aluVQIgHWLf1bIMa', 1),
-(2, 'yona', 'yona@wezoom.net', '$2y$10$2UUYmTf4f13el.b5K69WmeijY6E/nY4.hRYaokNe/lfyfvJ3Bz05O', 1);
+INSERT INTO `admin_user` (`id`, `role`, `login`, `email`, `name`, `password`, `active`) VALUES
+(1, 'admin', 'admin', 'web@wezoom.net', 'Admin Name', '$2y$10$IgvGXdrkaRpuXnQLcpva3ebuRdNqbcY7NvlS9aluVQIgHWLf1bIMa', 1),
+(2, 'admin', 'yona', 'yona@wezoom.net', 'Yona CMS User', '$2y$10$2UUYmTf4f13el.b5K69WmeijY6E/nY4.hRYaokNe/lfyfvJ3Bz05O', 1);
 
 -- --------------------------------------------------------
 
