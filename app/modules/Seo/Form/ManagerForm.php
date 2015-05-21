@@ -12,7 +12,6 @@ use Cms\Model\Language;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
-use Phalcon\Mvc\Model\Query\Lang;
 
 class ManagerForm extends Form
 {
@@ -23,7 +22,7 @@ class ManagerForm extends Form
         $modules = $config->modules->toArray();
         $modulesArray = array('' => ' - ');
         foreach($modules as $module => $val) {
-            if (!in_array($module, array('cms','image','admin','widget','file-manager','seo','slider'))) {
+            if (!in_array($module, array('cms','image','admin','widget','file-manager','seo','tree'))) {
                 $modulesArray[$module] = $module;
             }
         }
@@ -35,6 +34,7 @@ class ManagerForm extends Form
         }
 
         $this->add((new Text('custom_name'))->setLabel('Business name, for convenience'));
+        $this->add((new Text('url'))->setLabel('URL'));
         $this->add((new Text('route'))->setLabel('Route'));
         $this->add((new Select('module', $modulesArray))->setLabel('Module'));
         $this->add((new Text('controller'))->setLabel('Controller'));

@@ -10,7 +10,6 @@ namespace Application\Form;
 
 use \Phalcon\Forms\Element\Hidden;
 use \Phalcon\Forms\Element\Check;
-use \Phalcon\Forms\Element\Select;
 use \Phalcon\Forms\Element\File;
 
 abstract class Form extends \Phalcon\Forms\Form

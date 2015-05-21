@@ -7,6 +7,7 @@
 namespace Seo\Controller;
 
 use Application\Mvc\Controller;
+use Seo\Form\ManagerAddForm;
 use Seo\Form\ManagerForm;
 use Seo\Model\Manager;
 
@@ -23,9 +24,9 @@ class ManagerController extends Controller
 
     public function indexAction()
     {
-        $entries = Manager::find(array(
+        $entries = Manager::find([
             'order' => 'route ASC, module ASC, controller ASC, action ASC, id ASC'
-        ));
+        ]);
         $this->view->entries = $entries;
 
         $title = 'SEO-Manager';
@@ -35,9 +36,8 @@ class ManagerController extends Controller
 
     public function addAction()
     {
-        $this->view->pick(array('manager/edit'));
         $model = new Manager();
-        $form = new ManagerForm();
+        $form = new ManagerAddForm();
 
         if ($this->request->isPost()) {
             $post = $this->request->getPost();

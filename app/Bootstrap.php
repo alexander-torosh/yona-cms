@@ -133,7 +133,7 @@ class Bootstrap
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
-            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
+            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
             new TitlePlugin($di);
             new LastModifiedPlugin($di->get('response'));
         });

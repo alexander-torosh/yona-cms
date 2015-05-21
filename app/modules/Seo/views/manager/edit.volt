@@ -1,4 +1,4 @@
-<form method="post" class="ui form" action="" enctype="multipart/form-data">
+<form method="post" class="ui form" action="">
 
     <!--controls-->
     <div class="ui segment">
@@ -29,34 +29,27 @@
     <div class="ui segment">
         {{ form.renderDecorated('custom_name') }}
 
-        <div class="ui label" style="text-transform: none;">
-            You must use the Route or Module-Controller-Action. Simultaneous indication of the parameters can not be
-        </div>
+        <p>Type: <b>{{ model.getTypeTitle() }}</b></p>
 
-        <!--tabs-->
-        <div class="ui tabular menu init">
-            <a class="item{% if not model.getModule() %} active{% endif %}" data-tab="route">
-                Route
-            </a>
-            <a class="item{% if model.getModule() %} active{% endif %}" data-tab="mca">
-                Module-Controller-Action
-            </a>
-        </div>
-        <!--/end tabs-->
+        {% if model.getType() == 'url' %}
+            {{ form.renderDecorated('url') }}
+        {% endif %}
 
-        <div class="ui tab{% if not model.getModule() %} active{% endif %}" data-tab="route">
+        {% if model.getType() == 'route' %}
             {{ form.renderDecorated('route') }}
             {{ form.renderDecorated('route_params_json') }}
-        </div>
+        {% endif %}
 
-        <div class="ui tab{% if model.getModule() %} active{% endif %}" data-tab="mca">
+        {% if model.getType() == 'mca' %}
             {{ form.renderDecorated('module') }}
             {{ form.renderDecorated('controller') }}
             {{ form.renderDecorated('action') }}
-        </div>
+        {% endif %}
 
-        {{ form.renderDecorated('language') }}
-        {{ form.renderDecorated('query_params_json') }}
+        {% if model.getType() in ['route', 'mca'] %}
+            {{ form.renderDecorated('language') }}
+            {{ form.renderDecorated('query_params_json') }}
+        {% endif %}
 
         <hr>
 

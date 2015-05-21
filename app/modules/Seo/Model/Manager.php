@@ -21,6 +21,8 @@ class Manager extends Model
 
     public $id;
     public $custom_name;
+    public $type;
+    public $url;
     public $route;
     public $route_ml;
     public $module;
@@ -36,27 +38,46 @@ class Manager extends Model
     public $created_at;
     public $updated_at;
 
+    public static $types = [
+        'url'   => 'URL',
+        'route' => 'Route',
+        'mca'   => 'Model Controller Action',
+    ];
+
     public function validation()
     {
-        if ($this->route || $this->route_params_json) {
-            if ($this->module || $this->controller || $this->action) {
-                $message = new Message('Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно');
+        $helper = $this->getDI()->get('helper');
+
+        if ($this->type == 'url') {
+            if (!$this->getUrl()) {
+                $message = new Message($helper->at('Укажите URL'));
                 $this->appendMessage($message);
                 return false;
             }
         }
-        if ($this->route_params_json) {
-            $valid_json = json_decode($this->route_params_json);
-            if (!$valid_json) {
-                $message = new Message('Параметры Route должны быть в формате JSON');
-                $this->appendMessage($message);
-                return false;
+
+        if ($this->type == 'route') {
+            if ($this->route || $this->route_params_json) {
+                if ($this->module || $this->controller || $this->action) {
+                    $message = new Message($helper->at('Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно'));
+                    $this->appendMessage($message);
+                    return false;
+                }
+            }
+            if ($this->route_params_json) {
+                $valid_json = json_decode($this->route_params_json);
+                if (!$valid_json) {
+                    $message = new Message($helper->at('Параметры Route должны быть в формате JSON'));
+                    $this->appendMessage($message);
+                    return false;
+                }
             }
         }
+
         if ($this->query_params_json) {
             $valid_json = json_decode($this->query_params_json);
             if (!$valid_json) {
-                $message = new Message('Параметры GET должны быть в формате JSON');
+                $message = new Message($helper->at('Параметры GET должны быть в формате JSON'));
                 $this->appendMessage($message);
                 return false;
             }
@@ -89,6 +110,31 @@ class Manager extends Model
         $cache = $this->getDI()->get('cache');
         $cache->delete(self::routeCacheKey($this->route_ml, $this->language));
         $cache->delete(self::mcaCacheKey($this->module, $this->controller, $this->action, $this->language));
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getTypeTitle()
+    {
+        return self::$types[$this->type];
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     public function setAction($action)
@@ -143,7 +189,7 @@ class Manager extends Model
 
     public function setLanguage($language)
     {
-        $this->language = ($language) ? $language : null ;
+        $this->language = ($language) ? $language : null;
     }
 
     public function getLanguage()
@@ -173,7 +219,7 @@ class Manager extends Model
 
     public function setRouteParamsJson($route_params_json)
     {
-        $this->route_params_json = ($route_params_json) ? $route_params_json : null ;
+        $this->route_params_json = ($route_params_json) ? $route_params_json : null;
     }
 
     public function getRouteParamsJson()
@@ -196,13 +242,20 @@ class Manager extends Model
         $this->route = $route;
     }
 
+    public static function urlCacheKey($url)
+    {
+        $key = HOST_HASH . md5('Seo\Model\Manager::url::' . $url);
+        return $key;
+    }
+
     public static function routeCacheKey($route_name, $lang)
     {
         $key = HOST_HASH . md5('Seo\Model\Manager::' . DefaultRouter::ML_PREFIX . $route_name . '_' . $lang);
         return $key;
     }
 
-    public static function mcaCacheKey($module, $controller, $action, $lang) {
+    public static function mcaCacheKey($module, $controller, $action, $lang)
+    {
         $key = HOST_HASH . md5('Seo\Model\Manager::' . $module . '::' . $controller . '::' . $action . '_' . $lang);
         return $key;
     }
@@ -286,7 +339,6 @@ class Manager extends Model
     {
         return $this->seo_text;
     }
-
 
 
 }

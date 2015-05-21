@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Трв 20 2015 р., 17:35
+-- Час створення: Трв 21 2015 р., 17:35
 -- Версія сервера: 5.6.23
 -- Версія PHP: 5.6.9-1~dotdeb+7.1
 
@@ -120,6 +120,43 @@ INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sor
 -- --------------------------------------------------------
 
 --
+-- Структура таблиці `menu`
+--
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `root` enum('top') NOT NULL DEFAULT 'top',
+  `parent_id` int(11) DEFAULT NULL,
+  `work_title` varchar(255) DEFAULT NULL,
+  `depth` tinyint(2) NOT NULL DEFAULT '0',
+  `left_key` int(11) DEFAULT NULL,
+  `right_key` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`work_title`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `menu_translate`
+--
+
+CREATE TABLE IF NOT EXISTS `menu_translate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foreign_id` int(11) NOT NULL,
+  `lang` varchar(20) DEFAULT NULL,
+  `key` varchar(255) DEFAULT NULL,
+  `value` text,
+  PRIMARY KEY (`id`),
+  KEY `foreign_id` (`foreign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблиці `page`
 --
 
@@ -138,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `page` (
 
 INSERT INTO `page` (`id`, `slug`, `created_at`, `updated_at`) VALUES
 (1, 'index', '2014-08-03 15:18:47', '2014-11-26 09:48:14'),
-(2, 'contacts', '2014-08-03 22:25:13', '2014-11-26 09:37:59');
+(2, 'contacts', '2014-08-03 22:25:13', '2015-05-21 17:26:05');
 
 -- --------------------------------------------------------
 
@@ -175,12 +212,12 @@ INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
 (12, 2, 'ru', 'meta_title', 'Контакты'),
 (13, 2, 'ru', 'meta_description', ''),
 (14, 2, 'ru', 'meta_keywords', ''),
-(15, 2, 'ru', 'text', '<h2>Контакты</h2>\r\n<p>Email:&nbsp;oleksandr.torosh@wezoom.net</p>\r\n<p>Facebook:&nbsp;<a href="https://www.facebook.com/oleksandrtorosh" target="_blank">https://www.facebook.com/oleksandrtorosh</a></p>\r\n<p>VK:&nbsp;<a href="https://vk.com/webtor" target="_blank">https://vk.com/webtor</a></p>\r\n<p>Google+:&nbsp;<a href="https://plus.google.com/u/0/+OleksandrTorosh">https://plus.google.com/u/0/+OleksandrTorosh</a></p>\r\n<p>Github:&nbsp;<a href="https://github.com/oleksandr-torosh" target="_blank">https://github.com/oleksandr-torosh</a></p>\r\n<p>Адрес студии:&nbsp;<a href="http://wezoom.net/" target="_blank">http://wezoom.net</a></p>'),
+(15, 2, 'ru', 'text', '<h2>Контакты</h2>\r\n<p><a href="http://yonacms.com">http://yonacms.com</a></p>'),
 (16, 2, 'en', 'title', 'Contacts'),
 (17, 2, 'en', 'meta_title', 'Contacts'),
 (18, 2, 'en', 'meta_description', ''),
 (19, 2, 'en', 'meta_keywords', ''),
-(20, 2, 'en', 'text', '<p>web@wezoom.net</p>'),
+(20, 2, 'en', 'text', '<h1>Contacts</h1>\r\n<p><a href="http://yonacms.com">http://yonacms.com</a></p>'),
 (21, 1, 'uk', 'title', 'Головна'),
 (22, 1, 'uk', 'meta_title', 'Головна'),
 (23, 1, 'uk', 'meta_description', 'meta-description головної сторінки'),
@@ -190,7 +227,7 @@ INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
 (27, 2, 'uk', 'meta_title', 'Контакти'),
 (28, 2, 'uk', 'meta_description', ''),
 (29, 2, 'uk', 'meta_keywords', ''),
-(30, 2, 'uk', 'text', '');
+(30, 2, 'uk', 'text', '<h1>Контакти</h1>\r\n<p><a href="http://yonacms.com">http://yonacms.com</a></p>');
 
 -- --------------------------------------------------------
 
@@ -403,6 +440,8 @@ INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `va
 CREATE TABLE IF NOT EXISTS `seo_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_name` varchar(50) DEFAULT NULL,
+  `type` enum('url','route','mca') NOT NULL DEFAULT 'url',
+  `url` varchar(255) DEFAULT NULL,
   `route` varchar(50) DEFAULT NULL,
   `route_ml` varchar(60) DEFAULT NULL,
   `module` varchar(50) DEFAULT NULL,
@@ -417,15 +456,17 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
   `seo_text` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп даних таблиці `seo_manager`
 --
 
-INSERT INTO `seo_manager` (`id`, `custom_name`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
-(1, 'Новости', 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41');
+INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
+(1, 'Новости', 'route', NULL, 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41'),
+(2, 'Contacts', 'url', '/contacts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-05-21 17:16:55');
 
 -- --------------------------------------------------------
 
@@ -619,6 +660,18 @@ INSERT INTO `widget` (`id`, `title`, `html`) VALUES
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `menu_translate`
+--
+ALTER TABLE `menu_translate`
+  ADD CONSTRAINT `menu_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `page_translate`

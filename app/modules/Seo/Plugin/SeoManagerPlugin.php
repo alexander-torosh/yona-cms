@@ -10,6 +10,7 @@ use Phalcon\Mvc\Router;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Http\Request;
 use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\View;
 use Seo\Model\Manager;
 
 /**
@@ -20,8 +21,12 @@ use Seo\Model\Manager;
 class SeoManagerPlugin extends Plugin
 {
 
-    public function __construct(Dispatcher $dispatcher, Request $request, Router $router)
+    public function __construct(Dispatcher $dispatcher, Request $request, Router $router, View $view)
     {
+        if ($view->getLayout() == 'admin') {
+            return;
+        }
+
         $route_name = ($router->getMatchedRoute()) ? $router->getMatchedRoute()->getName() : null;
 
         $module = $dispatcher->getModuleName();
@@ -32,7 +37,11 @@ class SeoManagerPlugin extends Plugin
         $request_params = $request->getQuery();
         unset($request_params['_url']);
 
-        if ($route_name && !in_array($route_name, array('default', 'default_action', 'default_controller'))) {
+        $match_url_entry = $this->matchingUrl($_SERVER['REQUEST_URI']);
+
+        if ($match_url_entry) {
+            return $this->pick($match_url_entry);
+        } elseif ($route_name && !in_array($route_name, ['default', 'default_action', 'default_controller'])) {
             if (!$this->matchingRoute($route_name, $dispatcher_params, $request_params)) {
                 if ($module && $controller && $action) {
                     $this->matchingMCA($module, $controller, $action, $dispatcher_params, $request_params);
@@ -43,20 +52,34 @@ class SeoManagerPlugin extends Plugin
         }
     }
 
+    private function matchingUrl($url)
+    {
+        return Manager::findFirst([
+            'url = :url:',
+            'bind'  => [
+                'url' => $url,
+            ],
+            'cache' => [
+                'key'      => Manager::urlCacheKey($url),
+                'lifetime' => 60,
+            ],
+        ]);
+    }
+
     private function matchingRoute($route_name, $dispatcher_params, $request_params)
     {
         $query = 'route_ml = :route: AND language = :language:';
-        $manager_matched_routes = Manager::find(array(
+        $manager_matched_routes = Manager::find([
             $query,
-            'bind' => array(
-                'route' => $route_name,
+            'bind'  => [
+                'route'    => $route_name,
                 'language' => LANG,
-            ),
-            'cache' => array(
-                'key' => Manager::routeCacheKey($route_name, LANG),
-                'lifetime' => 10,
-            ),
-        ));
+            ],
+            'cache' => [
+                'key'      => Manager::routeCacheKey($route_name, LANG),
+                'lifetime' => 60,
+            ],
+        ]);
         if ($manager_matched_routes) {
             foreach ($manager_matched_routes as $entry) {
                 if ($this->match($entry, $dispatcher_params, $request_params)) {
@@ -69,19 +92,19 @@ class SeoManagerPlugin extends Plugin
     private function matchingMCA($module, $controller, $action, $dispatcher_params, $request_params)
     {
         $query = 'module = :module: AND controller = :controller: AND action = :action: AND language = :language:';
-        $manager_matched_routes = Manager::find(array(
+        $manager_matched_routes = Manager::find([
             $query,
-            'bind' => array(
-                'module' => $module,
+            'bind'  => [
+                'module'     => $module,
                 'controller' => $controller,
-                'action' => $action,
-                'language' => LANG,
-            ),
-            'cache' => array(
-                'key' => Manager::mcaCacheKey($module, $controller, $action, LANG),
-                'lifetime' => 10,
-            ),
-        ));
+                'action'     => $action,
+                'language'   => LANG,
+            ],
+            'cache' => [
+                'key'      => Manager::mcaCacheKey($module, $controller, $action, LANG),
+                'lifetime' => 60,
+            ],
+        ]);
         if ($manager_matched_routes) {
             foreach ($manager_matched_routes as $entry) {
                 if ($this->match($entry, $dispatcher_params, $request_params)) {
@@ -137,7 +160,7 @@ class SeoManagerPlugin extends Plugin
         if ($entry->getSeo_text()) {
             $view->seo_text = $entry->getSeo_text();
         }
-        $helper->meta()->set('seo-manager','matched');
+        $helper->meta()->set('seo-manager', 'matched');
         return true;
     }
 
