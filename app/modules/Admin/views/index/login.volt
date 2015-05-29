@@ -7,7 +7,7 @@
 
         <title>Login</title>
 
-        <link href="/vendor/semantic-1.0.0/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="/vendor/semantic-1.12.3/semantic.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

@@ -2,10 +2,10 @@
 -- version 3.4.11.1deb2+deb7u1
 -- http://www.phpmyadmin.net
 --
--- Хост: localhost
--- Час створення: Трв 21 2015 р., 17:35
--- Версія сервера: 5.6.23
--- Версія PHP: 5.6.9-1~dotdeb+7.1
+-- Host: localhost
+-- Generation Time: May 29, 2015 at 05:26 PM
+-- Server version: 5.6.23
+-- PHP Version: 5.6.9-1~dotdeb+7.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- БД: `yona-cms`
+-- Database: `yona-cms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `admin_user`
+-- Table structure for table `admin_user`
 --
 
 CREATE TABLE IF NOT EXISTS `admin_user` (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп даних таблиці `admin_user`
+-- Dumping data for table `admin_user`
 --
 
 INSERT INTO `admin_user` (`id`, `role`, `login`, `email`, `name`, `password`, `active`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `admin_user` (`id`, `role`, `login`, `email`, `name`, `password`, `a
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `cms_configuration`
+-- Table structure for table `cms_configuration`
 --
 
 CREATE TABLE IF NOT EXISTS `cms_configuration` (
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `cms_configuration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп даних таблиці `cms_configuration`
+-- Dumping data for table `cms_configuration`
 --
 
 INSERT INTO `cms_configuration` (`key`, `value`) VALUES
@@ -72,7 +72,7 @@ INSERT INTO `cms_configuration` (`key`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `cms_javascript`
+-- Table structure for table `cms_javascript`
 --
 
 CREATE TABLE IF NOT EXISTS `cms_javascript` (
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `cms_javascript` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп даних таблиці `cms_javascript`
+-- Dumping data for table `cms_javascript`
 --
 
 INSERT INTO `cms_javascript` (`id`, `text`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `cms_javascript` (`id`, `text`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `language`
+-- Table structure for table `language`
 --
 
 CREATE TABLE IF NOT EXISTS `language` (
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `language` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Дамп даних таблиці `language`
+-- Dumping data for table `language`
 --
 
 INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sortorder`, `primary`) VALUES
@@ -120,7 +120,7 @@ INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sor
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `menu`
+-- Table structure for table `menu`
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `menu_translate`
+-- Table structure for table `menu_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `menu_translate` (
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `menu_translate` (
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `page`
+-- Table structure for table `page`
 --
 
 CREATE TABLE IF NOT EXISTS `page` (
@@ -170,17 +170,17 @@ CREATE TABLE IF NOT EXISTS `page` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп даних таблиці `page`
+-- Dumping data for table `page`
 --
 
 INSERT INTO `page` (`id`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'index', '2014-08-03 15:18:47', '2014-11-26 09:48:14'),
+(1, 'index', '2014-08-03 15:18:47', '2015-05-22 16:32:17'),
 (2, 'contacts', '2014-08-03 22:25:13', '2015-05-21 17:26:05');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `page_translate`
+-- Table structure for table `page_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `page_translate` (
@@ -190,11 +190,12 @@ CREATE TABLE IF NOT EXISTS `page_translate` (
   `key` varchar(255) DEFAULT NULL,
   `value` text,
   PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
+  KEY `foreign_id` (`foreign_id`),
+  KEY `lang` (`lang`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
--- Дамп даних таблиці `page_translate`
+-- Dumping data for table `page_translate`
 --
 
 INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -232,7 +233,7 @@ INSERT INTO `page_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `publication`
+-- Table structure for table `publication`
 --
 
 CREATE TABLE IF NOT EXISTS `publication` (
@@ -248,20 +249,20 @@ CREATE TABLE IF NOT EXISTS `publication` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Дамп даних таблиці `publication`
+-- Dumping data for table `publication`
 --
 
 INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`) VALUES
 (1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2014-11-26 09:54:15', '2014-08-19 00:00:00', '1'),
 (2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2014-11-26 09:52:58', '2014-08-21 00:00:00', '1'),
 (3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-04-29 12:34:35', '2014-11-05 00:00:00', '1'),
-(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2014-11-26 09:49:06', '2014-11-06 00:00:00', '0'),
+(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-05-26 17:08:58', '2014-11-06 00:00:00', '0'),
 (5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-04-29 11:17:41', '2015-04-29 00:00:00', '0');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `publication_translate`
+-- Table structure for table `publication_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_translate` (
@@ -271,11 +272,12 @@ CREATE TABLE IF NOT EXISTS `publication_translate` (
   `key` varchar(255) DEFAULT NULL,
   `value` text,
   PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
+  KEY `foreign_id` (`foreign_id`),
+  KEY `lang` (`lang`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
--- Дамп даних таблиці `publication_translate`
+-- Dumping data for table `publication_translate`
 --
 
 INSERT INTO `publication_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -358,7 +360,7 @@ INSERT INTO `publication_translate` (`id`, `foreign_id`, `lang`, `key`, `value`)
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `publication_type`
+-- Table structure for table `publication_type`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_type` (
@@ -372,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `publication_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп даних таблиці `publication_type`
+-- Dumping data for table `publication_type`
 --
 
 INSERT INTO `publication_type` (`id`, `slug`, `limit`, `format`, `display_date`) VALUES
@@ -382,7 +384,7 @@ INSERT INTO `publication_type` (`id`, `slug`, `limit`, `format`, `display_date`)
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `publication_type_translate`
+-- Table structure for table `publication_type_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `publication_type_translate` (
@@ -392,11 +394,12 @@ CREATE TABLE IF NOT EXISTS `publication_type_translate` (
   `key` varchar(255) DEFAULT NULL,
   `value` text,
   PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
+  KEY `foreign_id` (`foreign_id`),
+  KEY `lang` (`lang`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
--- Дамп даних таблиці `publication_type_translate`
+-- Dumping data for table `publication_type_translate`
 --
 
 INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -434,7 +437,7 @@ INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `va
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `seo_manager`
+-- Table structure for table `seo_manager`
 --
 
 CREATE TABLE IF NOT EXISTS `seo_manager` (
@@ -461,7 +464,7 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп даних таблиці `seo_manager`
+-- Dumping data for table `seo_manager`
 --
 
 INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
@@ -471,7 +474,7 @@ INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_m
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `translate`
+-- Table structure for table `translate`
 --
 
 CREATE TABLE IF NOT EXISTS `translate` (
@@ -484,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `translate` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
--- Дамп даних таблиці `translate`
+-- Dumping data for table `translate`
 --
 
 INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
@@ -555,7 +558,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `tree_category`
+-- Table structure for table `tree_category`
 --
 
 CREATE TABLE IF NOT EXISTS `tree_category` (
@@ -574,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `tree_category` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
--- Дамп даних таблиці `tree_category`
+-- Dumping data for table `tree_category`
 --
 
 INSERT INTO `tree_category` (`id`, `root`, `parent_id`, `slug`, `depth`, `left_key`, `right_key`, `created_at`, `updated_at`) VALUES
@@ -600,7 +603,7 @@ INSERT INTO `tree_category` (`id`, `root`, `parent_id`, `slug`, `depth`, `left_k
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `tree_category_translate`
+-- Table structure for table `tree_category_translate`
 --
 
 CREATE TABLE IF NOT EXISTS `tree_category_translate` (
@@ -610,11 +613,12 @@ CREATE TABLE IF NOT EXISTS `tree_category_translate` (
   `key` varchar(255) DEFAULT NULL,
   `value` text,
   PRIMARY KEY (`id`),
-  KEY `foreign_id` (`foreign_id`)
+  KEY `foreign_id` (`foreign_id`),
+  KEY `lang` (`lang`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
--- Дамп даних таблиці `tree_category_translate`
+-- Dumping data for table `tree_category_translate`
 --
 
 INSERT INTO `tree_category_translate` (`id`, `foreign_id`, `lang`, `key`, `value`) VALUES
@@ -640,7 +644,7 @@ INSERT INTO `tree_category_translate` (`id`, `foreign_id`, `lang`, `key`, `value
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `widget`
+-- Table structure for table `widget`
 --
 
 CREATE TABLE IF NOT EXISTS `widget` (
@@ -651,7 +655,7 @@ CREATE TABLE IF NOT EXISTS `widget` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп даних таблиці `widget`
+-- Dumping data for table `widget`
 --
 
 INSERT INTO `widget` (`id`, `title`, `html`) VALUES
@@ -677,7 +681,8 @@ ALTER TABLE `menu_translate`
 -- Constraints for table `page_translate`
 --
 ALTER TABLE `page_translate`
-  ADD CONSTRAINT `page_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `page_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `page_translate_ibfk_2` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `publication`
@@ -689,13 +694,15 @@ ALTER TABLE `publication`
 -- Constraints for table `publication_translate`
 --
 ALTER TABLE `publication_translate`
-  ADD CONSTRAINT `publication_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `publication_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `publication_translate_ibfk_2` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `publication_type_translate`
 --
 ALTER TABLE `publication_type_translate`
-  ADD CONSTRAINT `publication_type_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `publication_type_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `publication_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `publication_type_translate_ibfk_2` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `translate`
@@ -713,7 +720,8 @@ ALTER TABLE `tree_category`
 -- Constraints for table `tree_category_translate`
 --
 ALTER TABLE `tree_category_translate`
-  ADD CONSTRAINT `tree_category_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `tree_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tree_category_translate_ibfk_1` FOREIGN KEY (`foreign_id`) REFERENCES `tree_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tree_category_translate_ibfk_2` FOREIGN KEY (`lang`) REFERENCES `language` (`iso`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
