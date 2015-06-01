@@ -50,7 +50,7 @@ return array(
     'Logout' => 'Выход',
     'View Site' => 'На сайт',
     'Show preview image in the publication' => 'Показать изображение внутри статьи',
-    '' => '',
+    'Log in please' => 'Авторизируйтесь, пожалуйста',
     '' => '',
     '' => '',
 );

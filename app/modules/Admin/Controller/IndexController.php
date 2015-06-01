@@ -23,7 +23,7 @@ class IndexController extends Controller
 
         $auth = $this->session->get('auth');
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
-            $this->flash->notice($this->helper->translate("Авторизируйтесь пожалуйста"));
+            $this->flash->notice($this->helper->at("Log in please"));
             return $this->redirect('admin/index/login');
         }
 
