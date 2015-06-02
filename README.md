@@ -65,7 +65,7 @@ Just clone the repository:
 git clone git@github.com:oleksandr-torosh/yona-cms.git
 ```
 
-[Full installation guide](http://doc.yonacms.com/reference/install.html)
+[Full installation guide](http://doc.yonacms.com/ru/reference/install.html)
 
 ##Features
 
