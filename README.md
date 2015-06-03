@@ -1,6 +1,6 @@
 #Yona CMS
 
-Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (v 1.3.x)  
+Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 1.3.x or 2.x supported)  
 
 Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.
 
