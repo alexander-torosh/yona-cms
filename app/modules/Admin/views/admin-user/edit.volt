@@ -1,8 +1,3 @@
-<p>
-
-
-</p>
-
 <form method="post" action="" class="ui form">
 
     <!--controls-->
@@ -25,7 +20,20 @@
     </div>
     <!--end controls-->
 
-    {{ form.renderAll() }}
+    <div class="ui segment">
+        <div class="two fields">
+            <div class="field">
+                {{ form.renderDecorated('login') }}
+                {{ form.renderDecorated('email') }}
+                {{ form.renderDecorated('name') }}
+            </div>
+            <div class="field">
+                {{ form.renderDecorated('role') }}
+                {{ form.renderDecorated('password') }}
+                {{ form.renderDecorated('active') }}
+            </div>
+        </div>
+    </div>
 
 </form>
 

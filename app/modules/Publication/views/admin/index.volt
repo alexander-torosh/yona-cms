@@ -6,14 +6,14 @@
     </a>
 
     <a href="/publication/type" class="ui button">
-        <i class="icon list"></i> Типы публикаций
+        <i class="icon list"></i> {{ helper.at('Publications types') }}
     </a>
 
 </div>
 <!--/end controls-->
 
 <div class="ui tabular menu">
-    <a href="/publication/admin?lang={{ constant('LANG') }}" class="item{% if not type_id%} active{% endif %}">Все</a>
+    <a href="/publication/admin?lang={{ constant('LANG') }}" class="item{% if not type_id%} active{% endif %}">{{ helper.at('All') }}</a>
     {% for type_el in types %}
     <a href="{{ url(['for':'publications_admin','type':type_el.getSlug()]) }}?lang={{ constant('LANG') }}" class="item{% if type_el.getId() == type_id%} active{% endif %}">
         {{ type_el.getTitle() }}

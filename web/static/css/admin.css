@@ -86,3 +86,7 @@ textarea {
 .ui.form textarea, .ui.textarea {
     height: 4em;
 }
+
+.ui.form .field + .field.checkbox {
+    margin-top: 34px;
+}

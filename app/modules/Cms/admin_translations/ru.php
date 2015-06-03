@@ -51,6 +51,6 @@ return array(
     'View Site' => 'На сайт',
     'Show preview image in the publication' => 'Показать изображение внутри статьи',
     'Log in please' => 'Авторизируйтесь, пожалуйста',
-    '' => '',
-    '' => '',
+    'Publications types' => 'Типы публикаций',
+    'All' => 'Все',
 );

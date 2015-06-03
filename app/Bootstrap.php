@@ -179,7 +179,6 @@ class Bootstrap
             ->addJs(ROOT . "/vendor/noty/jquery.noty.js")
             ->addJs(ROOT . "/vendor/noty/themes/default.js")
             ->addJs(ROOT . "/vendor/noty/layouts/center.js")
-            ->addJs(ROOT . "/vendor/fancybox/jquery.fancybox.pack.js")
             ->addJs(ROOT . "/static/js/library.js")
             ->addJs(ROOT . "/static/js/rotation.js")
             ->addJs(ROOT . "/static/js/main.js")

@@ -5,5 +5,5 @@ return array(
     'Логин' => 'Login',
     'Активен' => 'Active',
     'Создание страницы' => 'Khanh Beo',
-    'Добавление языка' => 'Dich thuat'
+    'Добавление языка' => 'Dich thuat',
 );

@@ -45,7 +45,7 @@ abstract class Form extends \Phalcon\Forms\Form
             switch (true) {
                 case $element instanceof Check :
                 {
-                    $html .= '<div class="field">';
+                    $html .= '<div class="field checkbox">';
                     $html .= '<div class="ui toggle checkbox">';
                     $html .= $element;
                     if ($element->getLabel()) {

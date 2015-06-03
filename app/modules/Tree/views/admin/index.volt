@@ -16,6 +16,10 @@
     </li>
 {%- endmacro %}
 
+<div class="ui blue segment">
+    You can drag and drop tree elements to change order and relations
+</div>
+
 <div class="ui segment">
 
     {% for root, root_title in roots %}
