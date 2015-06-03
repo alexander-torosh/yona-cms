@@ -65,7 +65,7 @@ Just clone the repository:
 git clone git@github.com:oleksandr-torosh/yona-cms.git
 ```
 
-[Full installation guide](http://doc.yonacms.com/reference/install.html)
+[Full installation guide](http://doc.yonacms.com/en/reference/install.html)
 
 ##Features
 
@@ -76,7 +76,7 @@ git clone git@github.com:oleksandr-torosh/yona-cms.git
 * Yona CMS is really fast!
 
 [Project website](http://yonacms.com/)  
-[Documentation](http://doc.yonacms.com/)  
+[Documentation](http://doc.yonacms.com/en/)  
 
 Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-torosh/yona-cms/blob/master/CHANGELOG.md)
 
