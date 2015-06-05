@@ -10,6 +10,8 @@
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
     <link href="/vendor/semantic-1.12.3/semantic.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!--less-->
     {{ assets.outputLess('modules-admin-less') }}
@@ -21,6 +23,8 @@
 
     <script src="/vendor/js/jquery-1.11.0.min.js"></script>
     <script src="/vendor/semantic-1.12.3/semantic.min.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <script src="/vendor/js/jquery.address.js"></script>
     <script src="/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script src="/static/js/admin.js"></script>
@@ -35,7 +39,7 @@
 
 {{ partial('admin/nav') }}
 
-<div class="container">
+<div class="">
     {% if registry.cms['TECHNICAL_WORKS'] %}
         <div class="ui red inverted segment">
             The site under maintenance.<br>

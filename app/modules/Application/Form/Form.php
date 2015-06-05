@@ -8,9 +8,10 @@
 
 namespace Application\Form;
 
-use \Phalcon\Forms\Element\Hidden;
-use \Phalcon\Forms\Element\Check;
-use \Phalcon\Forms\Element\File;
+use Phalcon\Forms\Element\Hidden;
+use Phalcon\Forms\Element\Check;
+use Phalcon\Forms\Element\File;
+use Application\Form\Element\Image;
 
 abstract class Form extends \Phalcon\Forms\Form
 {
@@ -57,6 +58,10 @@ abstract class Form extends \Phalcon\Forms\Form
                     $html .= '</div>';
                 }
                     break;
+                case $element instanceof Image : {
+                    $html = $this->renderImage($element);
+                }
+                    break;
                 case $element instanceof File :
                 {
                     $html .= '<div class="inline field">';
@@ -91,6 +96,43 @@ abstract class Form extends \Phalcon\Forms\Form
                 $html .= $this->renderDecorated($element->getName());
             }
         }
+        return $html;
+    }
+
+    private function renderImage($element)
+    {
+        $html = '<div class="form-group">';
+
+        if ($element->getLabel()) {
+            $html .= '<label>' . $element->getLabel() . '</label>';
+        }
+        if ($element->getValue()) {
+            $html .= '<section onclick="selectText(this);">' . $element->getValue() . '</section>';
+        } else {
+            $html .= '<br>';
+        }
+
+        $html .= '<div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail" data-trigger="fileinput"
+                                 style="width: 200px; min-height: 100px">';
+
+        if ($element->getValue()) {
+            $html .= '<img src="' . $element->getValue() . '" width="200">';
+        }
+
+        $html .= '</div>
+                        <div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="' . $element->getName() . '">
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-exists"
+                               data-dismiss="fileinput">Remove</a>
+                        </div>
+                    </div>
+                </div>';
+
         return $html;
     }
 

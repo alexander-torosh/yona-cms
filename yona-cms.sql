@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 29, 2015 at 05:26 PM
+-- Generation Time: Jun 05, 2015 at 03:24 PM
 -- Server version: 5.6.23
 -- PHP Version: 5.6.9-1~dotdeb+7.1
 
@@ -113,9 +113,9 @@ CREATE TABLE IF NOT EXISTS `language` (
 --
 
 INSERT INTO `language` (`id`, `iso`, `locale`, `name`, `short_name`, `url`, `sortorder`, `primary`) VALUES
-(1, 'ru', 'ru_RU', 'Русский', 'Рус', 'ru', 2, '0'),
+(1, 'ru', 'ru_RU', 'Русский', 'Рус', 'ru', 3, '0'),
 (2, 'en', 'en_EN', 'English', 'Eng', 'en', 1, '1'),
-(3, 'uk', 'uk_UA', 'Українська', 'Укр', 'uk', 3, '0');
+(3, 'uk', 'uk_UA', 'Українська', 'Укр', 'uk', 2, '0');
 
 -- --------------------------------------------------------
 
@@ -244,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `updated_at` datetime DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `preview_inner` enum('1','0') NOT NULL DEFAULT '1',
+  `preview_src` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
@@ -252,12 +253,12 @@ CREATE TABLE IF NOT EXISTS `publication` (
 -- Dumping data for table `publication`
 --
 
-INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`) VALUES
-(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2014-11-26 09:54:15', '2014-08-19 00:00:00', '1'),
-(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2014-11-26 09:52:58', '2014-08-21 00:00:00', '1'),
-(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-04-29 12:34:35', '2014-11-05 00:00:00', '1'),
-(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-05-26 17:08:58', '2014-11-06 00:00:00', '0'),
-(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-04-29 11:17:41', '2015-04-29 00:00:00', '0');
+INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`, `preview_src`) VALUES
+(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-05 14:50:14', '2014-08-19 00:00:00', '0', '/img/original/publication/0/1.jpg'),
+(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-05 15:19:09', '2014-08-21 00:00:00', '1', '/img/original/publication/0/2.jpg'),
+(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-05 15:19:19', '2014-11-05 00:00:00', '1', '/img/original/publication/0/3.jpg'),
+(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-05 14:50:32', '2014-11-06 00:00:00', '0', '/img/original/publication/0/4.jpg'),
+(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-05 15:20:40', '2015-06-05 14:32:44', '0', '/img/original/publication/0/5.jpg');
 
 -- --------------------------------------------------------
 
@@ -484,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `translation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `translate`
@@ -541,7 +542,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (48, 'uk', 'Страница №', 'Сторінка №'),
 (49, 'en', 'Полная версия', 'Full version'),
 (50, 'en', 'Мобильная версия', 'Mobile version'),
-(51, 'en', 'Services', 'Se'),
+(51, 'en', 'Services', 'Services'),
 (52, 'en', 'Printing', 'Printing'),
 (53, 'en', 'Design', 'Design'),
 (54, 'ru', 'Полная версия', 'Полная версия'),
@@ -553,7 +554,10 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (60, 'uk', 'Мобильная версия', 'Мобільна версія'),
 (61, 'uk', 'Services', 'Services'),
 (62, 'uk', 'Printing', 'Printing'),
-(63, 'uk', 'Design', 'Design');
+(63, 'uk', 'Design', 'Design'),
+(64, 'en', 'Latest news', 'Latest news'),
+(65, 'ru', 'Latest news', 'Последние новости'),
+(66, 'uk', 'Latest news', 'Останні новини');
 
 -- --------------------------------------------------------
 

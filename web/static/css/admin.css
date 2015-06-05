@@ -90,3 +90,6 @@ textarea {
 .ui.form .field + .field.checkbox {
     margin-top: 34px;
 }
+.ui.form .field.checkbox + .field.checkbox {
+    margin-top: inherit;
+}

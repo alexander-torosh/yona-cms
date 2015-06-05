@@ -1,6 +1,20 @@
 /*
 * Главный Less-файл CSS стилей.
 */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
 @wrapper-max-width: 1380px;
 @wrapper-min-width: 940px;
 
@@ -10,11 +24,11 @@
 @font-size: 13px;
 @line-height: 18px;
 
-@gray: #CCCCCC;
+@gray: #cccccc;
 @gray-light: @gray + #222222;
 @placeholder-color: @gray;
 
-@link: #3F83B6;
+@link: #3f83b6;
 
 body {
     color: @font-color;
@@ -226,8 +240,8 @@ header {
 }
 
 pre {
-    background-color: #EEEEEE;
-    border: 1px solid #CCCCCC;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
     padding: 10px 20px;
     border-radius: 20px;
 }
@@ -340,6 +354,11 @@ footer {
     > .back {
         display: block;
         margin-top: 20px;
+    }
+
+    .image.inner {
+        float: left;
+        margin: 0 20px 10px 0;
     }
 }
 

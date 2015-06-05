@@ -29,7 +29,7 @@
                 <th style="width: 100px"></th>
                 <th>Title</th>
                 <th>Type of Publication</th>
-                <th>Created Date</th>
+                <th>Publication Date</th>
                 <th>Thumbs Inside</th>
                 <th>Url</th>
             </tr>

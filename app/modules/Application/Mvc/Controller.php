@@ -52,7 +52,7 @@ class Controller extends \Phalcon\Mvc\Controller
     public function setAdminEnvironment()
     {
         $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
-        $this->view->setLayout('admin');
+        $this->view->setLayout(null);
     }
 
 }

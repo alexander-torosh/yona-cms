@@ -29,22 +29,22 @@ class AdminController extends Controller
             $type_id = $typeEntity->getId();
         }
 
-        $cond_array = array();
+        $cond_array = [];
         if ($type) {
             $cond_array[] = "type_id = $type_id";
         }
         $conditions = implode(' AND ', $cond_array);
 
-        $publications = Publication::find(array(
+        $publications = Publication::find([
             "conditions" => $conditions,
-            "order" => "date DESC, id DESC"
-        ));
+            "order"      => "date DESC, id DESC"
+        ]);
 
-        $paginator = new \Phalcon\Paginator\Adapter\Model(array(
-            "data" => $publications,
+        $paginator = new \Phalcon\Paginator\Adapter\Model([
+            "data"  => $publications,
             "limit" => 20,
-            "page" => $page
-        ));
+            "page"  => $page
+        ]);
         $this->view->paginate = $paginator->getPaginate();
 
         $this->view->types = $types;
@@ -57,7 +57,7 @@ class AdminController extends Controller
 
     public function addAction()
     {
-        $this->view->pick(array('admin/edit'));
+        $this->view->pick(['admin/edit']);
         $form = new PublicationForm();
         $model = new Publication();
 
@@ -157,33 +157,32 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             if ($this->request->hasFiles() == true) {
                 foreach ($this->request->getUploadedFiles() as $file) {
-                    if (!in_array($file->getType(), array(
+                    if (!in_array($file->getType(), [
                         'image/bmp',
                         'image/jpeg',
                         'image/png',
-                    ))
+                    ])
                     ) {
                         return $this->flash->error($this->helper->at('Only allow image formats jpg, jpeg, png, bmp'));
                     }
 
-                    $imageFilter = new \Image\Storage(array(
-                        'id' => $model->getId(),
+                    $imageFilter = new \Image\Storage([
+                        'id'   => $model->getId(),
                         'type' => 'publication',
-                    ));
-
-                    $resize_x = 1000;
-
-                    $successMsg = $this->helper->at('Photo added');
-
+                    ]);
                     $imageFilter->removeCached();
 
+                    $resize_x = 1000;
                     $image = new \Phalcon\Image\Adapter\GD($file->getTempName());
                     if ($image->getWidth() > $resize_x) {
                         $image->resize($resize_x);
                     }
                     $image->save($imageFilter->originalAbsPath());
 
-                    $this->flash->success($successMsg);
+                    $model->setPreviewSrc($imageFilter->originalRelPath());
+                    $model->update();
+
+                    $this->flash->success($this->helper->at('Photo added'));
                 }
             }
         }

@@ -1,3 +1,11 @@
+v.0.1.9
+- Semantic UI Bootstrap 3 theme integrated;
+- Added support for custom Bootstrap 3 components;
+- Added Application\Form\Elements\Image form element and his nice viewing for uploading images using jasny-boostrap library;
+- Added bootstrap-datetimepicker form Publication module;
+- Some interface fixes;
+- Updated DB fileds for publication table;
+
 v.0.1.8
 - Added Tree Category module;
 - Changed ACL role/permission system. Added ACL config file - /app/config/acl.php. Added roles;

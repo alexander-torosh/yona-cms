@@ -34,3 +34,11 @@ $(function() {
     });
 
 });
+
+function selectText(element) {
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}

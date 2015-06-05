@@ -1,5 +1,4 @@
 <form method="post" class="ui form" action="" enctype="multipart/form-data">
-    <input type="hidden" name="form" value="1">
 
     <!--controls-->
     <div class="ui segment">
@@ -35,34 +34,22 @@
     <!--end controls-->
 
     <div class="ui segment">
-        {{ form.renderDecorated('type_id') }}
-        {{ form.renderDecorated('title') }}
-        {{ form.renderDecorated('slug') }}
-        {{ form.renderDecorated('date') }}
-
-        <!--image-->
-        <div class="field">
-            Upload Image<br>
-            {{ form.render('image') }}
-        </div>
-        {% set image = helper.image([
-        'id': model.getId(),
-        'type': 'publication',
-        'width': 200,
-        'hash': true
-        ]) %}
-        {% if image.isExists() %}
-            <div class="ui image" style="margin-bottom:20px;">
-                {{ image.imageHtml() }}
+        <div class="ui grid">
+            <div class="twelve wide column">
+                {{ form.renderDecorated('title') }}
+                {{ form.renderDecorated('slug') }}
+                {{ form.renderDecorated('meta_title') }}
+                {{ form.renderDecorated('meta_description') }}
+                {{ form.renderDecorated('meta_keywords') }}
+                {{ form.renderDecorated('text') }}
             </div>
-            {{ form.renderDecorated('preview_inner') }}
-        {% endif %}
-        <!--/end image-->
-
-        {{ form.renderDecorated('meta_title') }}
-        {{ form.renderDecorated('meta_description') }}
-        {{ form.renderDecorated('meta_keywords') }}
-        {{ form.renderDecorated('text') }}
+            <div class="four wide column">
+                {{ form.renderDecorated('type_id') }}
+                {{ form.renderDecorated('date') }}
+                {{ form.renderDecorated('preview_src') }}
+                {{ form.renderDecorated('preview_inner') }}
+            </div>
+        </div>
     </div>
 
 </form>
@@ -79,28 +66,14 @@
     });
 </script><!--/end ui semantic-->
 
-<link rel="stylesheet" href="/vendor/pickadate/themes/classic.css">
-<link rel="stylesheet" href="/vendor/pickadate/themes/classic.date.css">
-<script src="/vendor/pickadate/picker.js"></script>
-<script src="/vendor/pickadate/picker.date.js"></script>
+<link rel="stylesheet" href="/vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.css">
+<script src="/vendor/bootstrap/datetimepicker/moment.js"></script>
+<script src="/vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script>
-    $(function () {
-//        $.extend($.fn.pickadate.defaults, {
-//            monthsFull: [ 'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря' ],
-//            monthsShort: [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек' ],
-//            weekdaysFull: [ 'воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота' ],
-//            weekdaysShort: [ 'вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ],
-//            today: 'сегодня',
-//            clear: 'очистить',
-//            close: 'закрыть',
-//            firstDay: 1,
-//            format: 'yyyy-mm-dd',
-//            formatSubmit: 'yyyy-mm-dd'
-//        });
-
-        $("#date").pickadate({
-
-        });
+    $('#date').datetimepicker({
+        locale: 'en',
+        format: 'YYYY-MM-DD HH:mm:ss',
+        showClose: true
     });
 </script>
 
@@ -129,5 +102,4 @@
 
         file_browser_callback: elFinderBrowser
     });
-
 </script>
