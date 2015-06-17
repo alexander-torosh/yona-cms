@@ -6,28 +6,28 @@ $application = include_once APPLICATION_ENV . '/application.php';
  * ============================================================================
  * Configuration
  */
-$config = array(
-    'loader' => array(
-        'namespaces' => array(
+$config = [
+    'loader'         => [
+        'namespaces' => [
             'Application' => APPLICATION_PATH . '/modules/Application',
-            'Cms' => APPLICATION_PATH . '/modules/Cms',
+            'Cms'         => APPLICATION_PATH . '/modules/Cms',
 
             // Setup yours vendors namespaces, example:
             // 'Zend' => APPLICATION_PATH . '/../vendor/zendframework/zendframework/library/Zend',
 
-        ),
-    ),
-    'modules' => array(
-        'cms' => array(
+        ],
+    ],
+    'modules'        => [
+        'cms' => [
             'className' => 'Cms\Module',
-            'path' => APPLICATION_PATH . '/modules/Cms/Module.php'
-        ),
-    ),
-    'database' => $application['database'],
-    'cache' => $application['cache'],
-    'metadata_cache' => $application['metadata_cache'],
+            'path'      => APPLICATION_PATH . '/modules/Cms/Module.php'
+        ],
+    ],
+    'database'       => (isset($application['database'])) ? $application['database'] : null,
+    'cache'          => (isset($application['cache'])) ? $application['cache'] : null,
+    'memcahce'       => (isset($application['memcahce'])) ? $application['memcahce'] : null,
     'admin_language' => 'en', // ru, en. All translations contains in /app/modules/Cms/admin_translations
-);
+];
 /**
  * ============================================================================
  */

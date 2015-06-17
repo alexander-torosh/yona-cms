@@ -1,3 +1,10 @@
+v.0.1.10
+- Multilingual models cache lifetime placed in Application\Mvc\Model::CACHE_LIFETIME constant;
+- Multilingual models cache data correctly clean after saving entity; 
+- Memcache host and port placed in configuration files;
+- Minor fixes;
+- Added LICENSE.txt;
+
 v.0.1.9
 - Semantic UI Bootstrap 3 theme integrated;
 - Added support for custom Bootstrap 3 components;

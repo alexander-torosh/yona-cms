@@ -9,7 +9,9 @@ namespace Application\Mvc;
 
 class Model extends \Phalcon\Mvc\Model
 {
-    protected $translations = array(); // Массив переводов
+    const CACHE_LIFETIME = 300;
+
+    protected $translations = []; // Массив переводов
 
     private static $lang = 'en'; // Язык по-умолчанию
     private static $translateCache = true; // Флаг использования кеша переводов
@@ -93,14 +95,14 @@ class Model extends \Phalcon\Mvc\Model
             $lang = self::$lang;
         }
         $conditions = "foreign_id = :foreign_id: AND lang = :lang: AND key = :key:";
-        $parameters = array(
+        $parameters = [
             'foreign_id' => $this->getId(),
-            'lang' => $lang,
-            'key' => $key
-        );
-        $entity = $model->findFirst(array(
+            'lang'       => $lang,
+            'key'        => $key
+        ];
+        $entity = $model->findFirst([
             $conditions,
-            'bind' => $parameters));
+            'bind' => $parameters]);
         if (!$entity) {
             $entity = new $this->translateModel();
             $entity->setForeignId($this->getId());
@@ -140,14 +142,22 @@ class Model extends \Phalcon\Mvc\Model
         }
         $model = new $this->translateModel();
         $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
-        $params = array('conditions' => $query);
+        $params = ['conditions' => $query];
+
         if (self::$translateCache) {
-            $params['cache'] = array(
-                'key' => $this->translateCacheKey(),
-                'lifetime' => 60,
-            );
+            $cache = $this->getDi()->get('cache');
+            $data = $cache->get($this->translateCacheKey());
+            if (!$data) {
+                $data = $model->find($params);
+                if ($data) {
+                    $cache->save($this->translateCacheKey(), $data, self::CACHE_LIFETIME);
+                }
+            }
+        } else {
+            $data = $model->find($params);
         }
-        $this->translations = $model->find($params);
+
+        $this->translations = $data;
     }
 
 }

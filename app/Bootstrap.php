@@ -86,8 +86,8 @@ class Bootstrap
             case 'memcache':
                 $cache = new \Phalcon\Cache\Backend\Memcache(
                     $cacheFrontend, array(
-                    "host" => "localhost",
-                    "port" => "11211"
+                    "host" => $config->memcache->host,
+                    "port" => $config->memcache->port,
                 ));
                 break;
         }
@@ -96,18 +96,7 @@ class Bootstrap
 
         \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
 
-
-        switch ($config->metadata_cache) {
-            case 'memory':
-                $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
-                break;
-            case 'apc':
-                $modelsMetadata = new \Phalcon\Mvc\Model\MetaData\Apc(array(
-                    "lifetime" => 60,
-                    "prefix" => HOST_HASH,
-                ));
-                break;
-        }
+        $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
         $di->set('modelsMetadata', $modelsMetadata);
 
 
