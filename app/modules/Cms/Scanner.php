@@ -12,11 +12,14 @@ class Scanner
     public function search()
     {
         $phrases = array();
-        $files = $this->rsearch(APPLICATION_PATH, "/.*\.(volt|php|phtml|^volt.php)$/");
+        $files_modules = $this->rsearch(APPLICATION_PATH . '/modules', "/.*\\.(volt|php|phtml)$/");
+        $files_views = $this->rsearch(APPLICATION_PATH . '/views', "/.*\\.(volt|php|phtml)$/");
+        $files = array_merge($files_modules, $files_views);
         if ($files) {
             foreach ($files as $file) {
+                var_dump($file);
                 $contents = file_get_contents($file);
-                $pattern = "/translate\('(.+?)'\)/";
+                $pattern = "/translate\\('(.+?)'\\)/";
                 $matchesCount = preg_match_all($pattern, $contents, $matches);
                 if ($matchesCount) {
                     foreach ($matches[1] as $match) {
