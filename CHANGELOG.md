@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.0.2  
+## v0.2  
 
 - You don't need create virtual host for starting using YonaCms anymore. Applied simple localhost dynamic configuration as **http://localhost/yona-cms/web/**;
   
@@ -18,7 +18,7 @@
 
 - Interface and translate fixes;
 
-## v.0.1.10  
+## v0.1.10  
 
 - Multilingual models cache lifetime placed in **Application\Mvc\Model::CACHE_LIFETIME** constant;
   
@@ -32,7 +32,7 @@
   
 - Added LICENSE.md;  
 
-## v.0.1.9  
+## v0.1.9  
 
 - Semantic UI Bootstrap 3 theme integrated; 
  
@@ -46,7 +46,7 @@
   
 - Updated DB fileds for publication table;  
 
-## v.0.1.8
+## v0.1.8
 
 - Added Tree Category module;
 
@@ -58,7 +58,7 @@
 
 - Update Semantic UI version;
 
-## v.0.1.7
+## v0.1.7
 
 - Added a system of modular widgets; Added widget for example at home page;
 
@@ -70,7 +70,7 @@
 
 - Deleted Slider module;
 
-## v.0.1.6
+## v0.1.6
 
 - Improved multilingual caching components;
 
@@ -78,23 +78,23 @@
 
 - Added foreign key index from `translate`.`lang` to `language`.`iso`;
 
-## v.0.1.5
+## v0.1.5
 
 - Added some translations into Russian to the admin panel;
 
 - Added module Menu; Construction of the menu tree to the definition of active pages;
 
-## v.0.1.4
+## v0.1.4
 
 - Identifying and correcting a few PHP Notice;
 
 - Admin interface launched in part to adapt to the English language. The admin can choose the language in the configuration;
 
-## v.0.1.3
+## v0.1.3
 
 - Fixed non-critical error validation authorization form to the admin panel;
 
-## v.0.1.2
+## v0.1.2
 
 - Added localization administrative panel;
 
@@ -112,7 +112,7 @@
 
 - Updated SQL-dump;
 
-## v.0.1.1
+## v0.1.1
 
 - Fixed safety (# 13, # 12, # 11 - thanks for report xboston);
 
@@ -122,7 +122,7 @@
 
 - SQL-dump is laid out as a simple .sql file, not .gz archive;
 
-## v.0.1
+## v0.1
 
 - Configuration files are divided into directories development, production;
 
