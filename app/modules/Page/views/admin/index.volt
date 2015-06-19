@@ -1,7 +1,7 @@
 <!--controls-->
 <div class="ui segment">
 
-    <a href="/page/admin/add" class="ui button positive">
+    <a href="{{ url.get() }}page/admin/add" class="ui button positive">
         <i class="icon plus"></i> Add New
     </a>
 
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     {% for item in entries %}
-        {% set link = "/page/admin/edit/" ~ item.getId() %}
+        {% set link = url.get() ~ "page/admin/edit/" ~ item.getId() %}
         <tr>
             <td><a href="{{ link }}?lang={{ constant('LANG') }}" class="mini ui icon button"><i class="icon edit"></i>
                     id = {{ item.getId() }}</a></td>

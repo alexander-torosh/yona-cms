@@ -3,28 +3,24 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/page/admin?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left arrow"></i> Back
+        <a href="{{ url.get() }}page/admin?lang={{ constant('LANG') }}" class="ui button">
+            <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Save
+            <i class="save icon"></i> {{ helper.at('Save') }}
         </div>
 
         {% if model.getId() %}
-        
-            <a href="/page/admin/add" class="ui button">
-                <i class="icon add"></i> Add
-            </a>
 
-            <a href="/page/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
-                <i class="icon trash"></i> Trash
+            <a href="{{ url.get() }}page/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
+                <i class="icon trash"></i> {{ helper.at('Delete') }}
             </a>
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
                    href="{{ helper.langUrl(['for':'page','slug':model.getSlug()]) }}">
-                    View Online
+                    {{ helper.at('View Online') }}
                 </a>
             {% endif %}
 
@@ -56,7 +52,7 @@
     });
 </script><!--/end ui semantic-->
 
-<script type="text/javascript" src="/vendor/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="{{ url.get() }}vendor/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
     tinymce.init({
         selector: "#text",

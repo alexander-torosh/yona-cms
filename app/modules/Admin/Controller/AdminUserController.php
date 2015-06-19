@@ -48,7 +48,7 @@ class AdminUserController extends Controller
                 $model->setCheckboxes($post);
                 if ($model->save()) {
                     $this->flash->success($this->helper->at('User created', ['name' => $model->getLogin()]));
-                    return $this->redirect('admin/admin-user');
+                    $this->redirect($this->url->get() . 'admin/admin-user');
                 } else {
                     $this->flashErrors($model);
                 }
@@ -68,7 +68,7 @@ class AdminUserController extends Controller
     {
         $model = AdminUser::findFirst($id);
         if (!$model) {
-            $this->redirect('/admin/admin-user');
+            $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         $form = new AdminUserForm();
@@ -80,7 +80,7 @@ class AdminUserController extends Controller
                 $model->setCheckboxes($post);
                 if ($model->save() == true) {
                     $this->flash->success('User <b>' . $model->getLogin() . '</b> has been saved');
-                    return $this->redirect('/admin/admin-user');
+                    return $this->redirect($this->url->get() . 'admin/admin-user');
                 } else {
                     $this->flashErrors($model);
                 }
@@ -102,18 +102,18 @@ class AdminUserController extends Controller
     {
         $model = AdminUser::findFirst($id);
         if (!$model) {
-            return $this->redirect('admin/admin-user');
+            return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         if ($model->getLogin() == 'admin') {
             $this->flash->error('Admin user cannot be deleted');
-            return $this->redirect('/admin/admin-user');
+            return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         if ($this->request->isPost()) {
             $model->delete();
             $this->flash->warning('Deleting user <b>' . $model->getLogin() . '</b>');
-            return $this->redirect('/admin/admin-user');
+            return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         $this->view->model = $model;

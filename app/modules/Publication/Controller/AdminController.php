@@ -14,7 +14,6 @@ class AdminController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-publication');
-
     }
 
     public function indexAction()
@@ -51,8 +50,7 @@ class AdminController extends Controller
         $this->view->type = $type;
         $this->view->type_id = $type_id;
 
-        $this->view->title = $this->helper->at('Manage Publications');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Publications'), true);
     }
 
     public function addAction()
@@ -78,7 +76,7 @@ class AdminController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success($this->helper->at('Publication created'));
-                        return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                        return $this->redirect($this->url->get() . 'publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -93,8 +91,7 @@ class AdminController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = $this->helper->at('Create a publication');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Create a publication'), true);
 
     }
 
@@ -117,7 +114,7 @@ class AdminController extends Controller
                     $this->uploadImage($model);
                     $this->flash->success($this->helper->at('Publication edited'));
 
-                    return $this->redirect('/publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                    return $this->redirect($this->url->get() . 'publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -130,8 +127,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = $this->helper->at('Edit publication');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Edit publication'), true);
     }
 
     public function deleteAction($id)
@@ -141,15 +137,14 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $model->delete();
             if ($model->getType_id()) {
-                $this->redirect('/publication/admin/' . $model->getType()->getSlug());
+                $this->redirect($this->url->get() . 'publication/admin/' . $model->getType()->getSlug());
             } else {
-                $this->redirect('/publication/admin');
+                $this->redirect($this->url->get() . 'publication/admin');
             }
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->at('Unpublishing');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Unpublishing'), true);
     }
 
     private function uploadImage($model)

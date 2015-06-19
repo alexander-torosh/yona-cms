@@ -28,7 +28,7 @@ class RobotsController extends Controller
                 $result = file_put_contents($this->robotsFilePath, $robots);
                 if ($result) {
                     $this->flash->success('File robots.txt has been saved');
-                    $this->redirect('/seo/robots');
+                    $this->redirect($this->url->get() . 'seo/robots');
                 } else {
                     $this->flash->error('Error! The robots.txt file is not updated. Check the write permissions to the file.');
                 }

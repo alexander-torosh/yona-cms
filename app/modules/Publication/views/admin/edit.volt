@@ -3,28 +3,24 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/publication/admin/{{ type }}?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left arrow"></i> Back
+        <a href="{{ url.get() }}publication/admin/{{ type }}?lang={{ constant('LANG') }}" class="ui button">
+            <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Save
+            <i class="save icon"></i> {{ helper.at('Save') }}
         </div>
 
         {% if model.getId() %}
 
-            <a href="/publication/admin/{{ type }}/add" class="ui button">
-                <i class="icon add"></i> Add New
-            </a>
-
-            <a href="/publication/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
-                <i class="icon trash"></i> Delete
+            <a href="{{ url.get() }}publication/admin/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
+                <i class="icon trash"></i> {{ helper.at('Delete') }}
             </a>
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
                    href="{{ helper.langUrl(['for':'publication','type':model.getTypeSlug(), 'slug':model.getSlug()]) }}">
-                    View Online
+                    {{ helper.at('View Online') }}
                 </a>
             {% endif %}
 
@@ -66,9 +62,9 @@
     });
 </script><!--/end ui semantic-->
 
-<link rel="stylesheet" href="/vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.css">
-<script src="/vendor/bootstrap/datetimepicker/moment.js"></script>
-<script src="/vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="{{ url.path() }}vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.css">
+<script src="{{ url.path() }}vendor/bootstrap/datetimepicker/moment.js"></script>
+<script src="{{ url.path() }}vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script>
     $('#date').datetimepicker({
         locale: 'en',
@@ -77,7 +73,7 @@
     });
 </script>
 
-<script type="text/javascript" src="/vendor/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="{{ url.path() }}vendor/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
     tinymce.init({
         selector: "#text",

@@ -17,7 +17,7 @@ class IndexController extends Controller
         if (!$typeModel) {
             throw new Exception("Publication hasn't type = '$type''");
         }
-
+        
         $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10 ;
         $limit = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {

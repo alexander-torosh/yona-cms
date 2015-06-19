@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2015 at 03:24 PM
+-- Generation Time: Jun 19, 2015 at 12:30 PM
 -- Server version: 5.6.23
 -- PHP Version: 5.6.9-1~dotdeb+7.1
 
@@ -64,7 +64,9 @@ CREATE TABLE IF NOT EXISTS `cms_configuration` (
 --
 
 INSERT INTO `cms_configuration` (`key`, `value`) VALUES
+('ADMIN_EMAIL', 'webmaster@localhost'),
 ('DEBUG_MODE', '1'),
+('DISPLAY_CHANGELOG', '1'),
 ('PROFILER', '1'),
 ('TECHNICAL_WORKS', '0'),
 ('WIDGETS_CACHE', '1');
@@ -174,8 +176,8 @@ CREATE TABLE IF NOT EXISTS `page` (
 --
 
 INSERT INTO `page` (`id`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'index', '2014-08-03 15:18:47', '2015-05-22 16:32:17'),
-(2, 'contacts', '2014-08-03 22:25:13', '2015-05-21 17:26:05');
+(1, 'index', '2014-08-03 15:18:47', '2015-06-18 16:00:29'),
+(2, 'contacts', '2014-08-03 22:25:13', '2015-06-18 16:08:00');
 
 -- --------------------------------------------------------
 
@@ -255,10 +257,10 @@ CREATE TABLE IF NOT EXISTS `publication` (
 
 INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`, `preview_src`) VALUES
 (1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-05 14:50:14', '2014-08-19 00:00:00', '0', '/img/original/publication/0/1.jpg'),
-(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-05 15:19:09', '2014-08-21 00:00:00', '1', '/img/original/publication/0/2.jpg'),
+(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-18 16:15:43', '2014-08-21 00:00:00', '1', '/img/original/publication/0/2.jpg'),
 (3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-05 15:19:19', '2014-11-05 00:00:00', '1', '/img/original/publication/0/3.jpg'),
 (4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-05 14:50:32', '2014-11-06 00:00:00', '0', '/img/original/publication/0/4.jpg'),
-(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-05 15:20:40', '2015-06-05 14:32:44', '0', '/img/original/publication/0/5.jpg');
+(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-17 09:37:34', '2015-06-05 14:32:44', '0', '/img/original/publication/0/5.jpg');
 
 -- --------------------------------------------------------
 
@@ -470,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 
 INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
 (1, 'Новости', 'route', NULL, 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41'),
-(2, 'Contacts', 'url', '/contacts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-05-21 17:16:55');
+(2, 'Contacts', 'url', '/contacts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-06-19 11:42:56');
 
 -- --------------------------------------------------------
 

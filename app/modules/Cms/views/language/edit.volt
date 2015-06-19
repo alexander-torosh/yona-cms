@@ -3,7 +3,7 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/cms/language" class="ui button">
+        <a href="{{ url.get() }}cms/language" class="ui button">
             <i class="icon left arrow"></i> Back
         </a>
 
@@ -13,11 +13,7 @@
 
         {% if model.getId() %}
 
-            <a href="/cms/language/add" class="ui button">
-                <i class="icon add"></i> Add New
-            </a>
-
-            <a href="/cms/language/delete/{{ model.getId() }}" class="ui button red">
+            <a href="{{ url.get() }}cms/language/delete/{{ model.getId() }}" class="ui button red">
                 <i class="icon trash"></i> Delete
             </a>
 

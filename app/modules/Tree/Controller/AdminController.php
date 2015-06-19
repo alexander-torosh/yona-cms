@@ -67,7 +67,7 @@ class AdminController extends Controller
         $form = new CategoryForm();
         $model = Category::findFirst($id);
         if (!$model) {
-            $this->redirect('/tree/admin?lang=' . LANG);
+            $this->redirect($this->url->get() . 'tree/admin?lang=' . LANG);
         }
 
         if ($this->request->isPost()) {
@@ -75,7 +75,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->flash->success($this->helper->at('Updated has been successful'));
-                    $this->redirect('/tree/admin?lang=' . LANG);
+                    $this->redirect($this->url->get() . 'tree/admin?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -117,7 +117,6 @@ class AdminController extends Controller
             die('post ajax required');
         }
 
-        //$root = $this->request->getPost('root');
         $data = $this->request->getPost('data');
 
         foreach ($data as $el) {

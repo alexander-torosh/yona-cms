@@ -1,18 +1,9 @@
-<?php
-
-/**
- * @copyright Copyright (c) 2011 - 2015 Aleksandr Torosh (http://wezoom.com.ua)
- * @author Aleksandr Torosh <webtorua@gmail.com>
-*/
-
-?>
-
 <div class="ui segment">
-    <a href="/widget/admin/index" class="ui button">
+    <a href="{{ url.get() }}widget/admin/index" class="ui button">
         <i class="icon left arrow"></i> Back
     </a>
     {% if widget is defined %}
-        <a href="/widget/admin/delete/{{ widget.getId() }}" class="ui button red">
+        <a href="{{ url.get() }}widget/admin/delete/{{ widget.getId() }}" class="ui button red">
             <i class="icon trash"></i> Delete
         </a>
     {% endif %}
@@ -36,9 +27,9 @@
     $('.ui.form').form({});
 </script>
 
-<link rel="stylesheet" href="/vendor/codemirror-4.2/lib/codemirror.css">
+<link rel="stylesheet" href="{{ url.get() }}vendor/codemirror-4.2/lib/codemirror.css">
 
-<script src="/vendor/codemirror-4.2/codemirror-compressed.js"></script>
+<script src="{{ url.get() }}vendor/codemirror-4.2/codemirror-compressed.js"></script>
 
 <script>
     $(function () {

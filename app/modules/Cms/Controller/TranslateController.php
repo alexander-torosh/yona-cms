@@ -46,7 +46,7 @@ class TranslateController extends Controller
             $key = HOST_HASH . md5("Translate::findByLang($lang)");
             $this->cache->delete($key);
 
-            $this->redirect('/cms/translate?lang=' . LANG);
+            return $this->redirect($this->url->get() . 'cms/translate?lang=' . LANG);
         }
 
         $scanner = new Scanner();

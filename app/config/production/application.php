@@ -1,17 +1,22 @@
 <?php
 
 return [
-    'database' => [
+    'base_path' => '/',
+
+    'database'  => [
         'adapter'  => 'Mysql',
         'host'     => 'localhost',
         'username' => '',
         'password' => '',
-        'dbname'   => '',
+        'dbname'   => 'yona-cms',
         'charset'  => 'utf8',
     ],
-    'memcache' => [
+
+    'memcache'  => [
         'host' => 'localhost',
         'port' => 11211,
     ],
-    'cache'    => 'file', // file, memcache
+
+    'cache'     => 'file',
+    //'cache'     => 'memcache',
 ];

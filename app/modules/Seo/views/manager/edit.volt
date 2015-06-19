@@ -3,7 +3,7 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/seo/manager" class="ui button">
+        <a href="{{ url.get() }}seo/manager" class="ui button">
             <i class="icon left arrow"></i> Back
         </a>
 
@@ -13,11 +13,7 @@
 
         {% if model.getId() %}
 
-            <a href="/seo/manager/add" class="ui button">
-                <i class="icon add"></i> Add New
-            </a>
-
-            <a href="/seo/manager/delete/{{ model.getId() }}" class="ui button red">
+            <a href="{{ url.get() }}seo/manager/delete/{{ model.getId() }}" class="ui button red">
                 <i class="icon trash"></i> Delete
             </a>
 

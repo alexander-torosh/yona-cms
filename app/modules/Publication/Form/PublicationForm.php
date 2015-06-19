@@ -31,7 +31,7 @@ class PublicationForm extends Form
         $title->addValidator(new PresenceOf([
             'message' => 'Title can not be empty'
         ]));
-        $title->setLabel('Title');
+        $title->setLabel($this->helper->at('Title'));
         $this->add($title);
 
         $slug = new Text('slug');

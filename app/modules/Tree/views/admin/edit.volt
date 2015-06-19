@@ -1,27 +1,30 @@
-<form action="/tree/admin/edit/{{ model.getId() }}" method="post" class="ui form">
+<form action="{{ url.get() }}tree/admin/edit/{{ model.getId() }}" method="post" class="ui form">
 
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/tree/admin?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left arrow"></i> Back
+        <a href="{{ url.get() }}tree/admin?lang={{ constant('LANG') }}" class="ui button">
+            <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Save
+            <i class="save icon"></i> {{ helper.at('Save') }}
         </div>
 
     </div>
     <!--end controls-->
 
-    <div class="two fields">
-        <div class="field">
-            {{ form.renderDecorated('slug') }}
-        </div>
-        <div class="field">
-            {{ form.renderDecorated('title') }}
+    <div class="ui segment">
+        <div class="two fields">
+            <div class="field">
+                {{ form.renderDecorated('slug') }}
+            </div>
+            <div class="field">
+                {{ form.renderDecorated('title') }}
+            </div>
         </div>
     </div>
+
 </form>
 
 <!--ui semantic-->

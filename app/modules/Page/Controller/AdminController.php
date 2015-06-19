@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function addAction()
     {
-        $this->view->pick(array('admin/edit'));
+        $this->view->pick(['admin/edit']);
         $form = new PageForm();
         $model = new Page();
 
@@ -46,7 +46,7 @@ class AdminController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success($this->helper->at('Page created'));
-                        return $this->redirect('/page/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                        return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -75,7 +75,7 @@ class AdminController extends Controller
         $model = Page::findFirst($id);
 
         if ($model->getSlug() == 'index') {
-            $form->get('slug')->setAttribute('disabled','disabled');
+            $form->get('slug')->setAttribute('disabled', 'disabled');
         }
 
         if ($this->request->isPost()) {
@@ -91,7 +91,7 @@ class AdminController extends Controller
                     $key = md5("Page::findFirst($query)");
                     $this->cache->delete($key);
 
-                    return $this->redirect('/page/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                    return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -118,7 +118,7 @@ class AdminController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect('/page/admin');
+            $this->redirect($this->url->get() . 'page/admin');
         }
 
         $this->view->model = $model;

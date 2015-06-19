@@ -2,23 +2,25 @@
 
 namespace Image;
 
-define('IMG_ROOT_REL_PATH', '/img');
-define('IMG_ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('IMG_STORAGE_SERVER', '');
+use Phalcon\Mvc\User\Component;
+
+define('IMG_ROOT_REL_PATH', 'img');
 define('DIR_SEP', '/');
+define('IMG_ROOT_PATH', ROOT . DIR_SEP);
+define('IMG_STORAGE_SERVER', '');
 define('IMG_EXTENSION', 'jpg');
 define('NOIMAGE', '/static/images/noimage.jpg');
 
-define('IMG_DEBUG_MODE', false);
+define('IMG_DEBUG_MODE', true);
 
-class Storage
+class Storage extends Component
 {
 
-    private static $STRATEGIES = array(
+    private static $STRATEGIES = [
         'w', // Масштабируем по ширине
         'wh', // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
         'a', // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
-    );
+    ];
     private $id = null;
     private $image_hash = null;
     private $type = 'publication';
@@ -27,14 +29,14 @@ class Storage
     private $height = null;
     private $container = false;
     private $hash = false;
-    private $attributes = array();
+    private $attributes = [];
     private $exists = true;
     private $widthHeight = true;
     private $stretch = true;
 
     private $params; // для no-image
 
-    public function __construct(array $params = array(), array $attributes = array())
+    public function __construct(array $params = [], array $attributes = [])
     {
         $this->params = $params; // для no-image
         if (isset($params['id'])) {
@@ -94,7 +96,7 @@ class Storage
 
         $attributes = $this->attributes;
         if ($this->widthHeight) {
-            if ($this->stretch && in_array($this->strategy, array('wh', 'a'))) {
+            if ($this->stretch && in_array($this->strategy, ['wh', 'a'])) {
                 $this->stretch = false;
             }
             if ($this->stretch) {
@@ -127,11 +129,11 @@ class Storage
             $attributes['height'] = $this->height;
         }
 
-        $result = '<img src="' . $src . '"';
+        $result = '<img src="' . $this->config->base_path . $src . '"';
 
         $attributes['alt'] = (isset($attributes['alt'])) ? htmlspecialchars($attributes['alt'], ENT_QUOTES) : '';
 
-        $attributesHtmlArray = array();
+        $attributesHtmlArray = [];
         foreach ($attributes as $el => $val) {
             $attributesHtmlArray[] = $el . '="' . $val . '"';
         }
@@ -155,7 +157,7 @@ class Storage
     public function cachedRelPath()
     {
         $cachedRelPath = $this->calculateCachedRelPath(); // Рассчитываем по входящим параметрам относительный путь к кешированному файлу
-        $cachedAbsPath = IMG_ROOT_PATH . $cachedRelPath; // Совмещаем относительный путь с корневым, получаем абсолютный путь
+        $cachedAbsPath = IMG_ROOT_PATH. $cachedRelPath; // Совмещаем относительный путь с корневым, получаем абсолютный путь
         if (!file_exists($cachedAbsPath)) { // Проверяем существование такого файла. если файл не существует:
             $this->generateCachedImage(); // Генерируем кеш-файл по заданным параметрам
         }
@@ -165,7 +167,7 @@ class Storage
 
     public function cachedAbsPath()
     {
-        return IMG_ROOT_PATH . $this->cachedRelPath();
+        return IMG_ROOT_PATH. $this->cachedRelPath();
 
     }
 
@@ -198,10 +200,10 @@ class Storage
     {
         $imageSize = getimagesize($this->originalAbsPath());
         if ($imageSize) {
-            return array(
-                'width' => $imageSize[0],
+            return [
+                'width'  => $imageSize[0],
                 'height' => $imageSize[1]
-            );
+            ];
         }
 
     }
@@ -230,7 +232,7 @@ class Storage
      */
     private function calculateCachedRelPath()
     {
-        $pathParts = array();
+        $pathParts = [];
         $pathParts[] = IMG_ROOT_REL_PATH;
         $pathParts[] = 'cache';
         $pathParts[] = $this->type;
@@ -242,7 +244,7 @@ class Storage
         }
         $pathParts[] = $idPart;
 
-        $fileParts = array();
+        $fileParts = [];
         $fileParts[] = $this->id;
         if ($this->image_hash) {
             $fileParts[] = $this->image_hash;
@@ -273,7 +275,7 @@ class Storage
      */
     private function calculateOriginalRelPath()
     {
-        $pathParts = array();
+        $pathParts = [];
         $pathParts[] = IMG_ROOT_REL_PATH;
         $pathParts[] = 'original';
         $pathParts[] = $this->type;
@@ -285,7 +287,7 @@ class Storage
         }
         $pathParts[] = $idPart;
 
-        $fileParts = array();
+        $fileParts = [];
         $fileParts[] = $this->id;
         if ($this->image_hash) {
             $fileParts[] = $this->image_hash;
@@ -316,7 +318,7 @@ class Storage
         require_once __DIR__ . '/PHPThumb/ThumbLib.inc.php';
         $image = \PhpThumbFactory::create($originalAbsPath);
         if (MOBILE_DEVICE) { // Для мобильных устройств отдаем изображение с качеством на уровне 60%
-            $options = array('jpegQuality' => 60);
+            $options = ['jpegQuality' => 60];
             $image->setOptions($options);
         }
         switch ($this->strategy) {
@@ -347,7 +349,7 @@ class Storage
 
     public function cropOriginal($left, $top, $width, $height)
     {
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
+        $originalAbsPath = IMG_ROOT_PATH. $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
         if (!file_exists($originalAbsPath)) {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} не существует");
@@ -399,7 +401,7 @@ class Storage
             return;
         }
 
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
+        $originalAbsPath = IMG_ROOT_PATH. $this->calculateOriginalRelPath();
         $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1)); // Абсолютный путь директории
 
         if ($this->image_hash) {
@@ -447,16 +449,16 @@ class Storage
         if (file_exists($cachedAbsPath)) {
             $imageSize = getimagesize($cachedAbsPath);
             if ($imageSize) {
-                return array(
-                    'width' => $imageSize[0],
+                return [
+                    'width'  => $imageSize[0],
                     'height' => $imageSize[1]
-                );
+                ];
             }
         } else {
-            return array(
-                'width' => null,
+            return [
+                'width'  => null,
                 'height' => null
-            );
+            ];
         }
 
     }

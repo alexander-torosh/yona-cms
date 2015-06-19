@@ -1,24 +1,11 @@
-<?php
-
-/**
- * @copyright Copyright (c) 2011 - 2013 Aleksandr Torosh (http://wezoom.com.ua)
- * @author Aleksandr Torosh <webtorua@gmail.com>
- */
-
-$title = 'Удаление новости';
-$this->tag->prependTitle($title);
-?>
-
-<p>
-    <a href="/widget/admin/edit/<?php echo $widget->getId() ?>" class="ui button">
-        <i class="icon left arrow"></i> Back
+<div class="ui segment">
+    <a href="{{ url.get() }}widget/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
+        <i class="icon left arrow"></i> {{ helper.at('Back') }}
     </a>
-</p>
 
-<div class="ui segment" style="font-weight: bold;font-size: 20px;">
-    <?php echo $widget->getId(); ?> | <?php echo $widget->getTitle(); ?>
+    <form method="post" class="ui negative message form" action="">
+        <p>{{ helper.at('Delete widget') }} <b>{{ model.getId() }} | {{ model.getTitle() }}</b>?</p>
+        <button type="submit" class="ui button negative"><i class="icon trash"></i> {{ helper.at('Delete') }}</button>
+    </form>
+
 </div>
-
-<form action="" method="post">
-    <input type="submit" class="ui negative submit button" value="Delete" />
-</form>

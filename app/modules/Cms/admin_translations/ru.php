@@ -5,6 +5,8 @@
  */
 
 return array(
+    'YonaCms Admin Panel' => 'Административная панель YonaCms',
+    'Warning. Found admin user with name yona' => 'Найден административный пользователь <b>yona</b>, для повышения безопасности рекомендуется удалить этого пользователя и создать новую персональную учетную запись',
     'List of Languages' => 'Список языков',
     'Title' => 'Название',
     'Slug' => 'Транслитерация',
@@ -27,7 +29,7 @@ return array(
     'Configuration CMS' => 'Конфигурация CMS',
     'Debug mode, display application errors' => 'Режим отладки, вывод ошибок приложения',
     'The site under maintenance' => 'Режим "На сайте проводятся технические работы"',
-    'Setting saved' => 'Настройки сохранены',
+    'Configuration saved' => 'Конфигурация сохранена',
     'Auto fill empty cells' => 'Проставить пустые ячейки исходными значениями',
     'Manage Languages' => 'Список языков',
     'Manage Users' => 'Администраторы',
@@ -53,4 +55,7 @@ return array(
     'Log in please' => 'Авторизируйтесь, пожалуйста',
     'Publications types' => 'Типы публикаций',
     'All' => 'Все',
+    'Tree Categories' => 'Древовидные категории',
+    'Filemanager recomendation' => 'Для корректного открытия файлов на сайте, настоятельно рекомендуем все не латинские или кириллические названия файлов переделать в латинские (английские)',
+    'CMS Configuration' => 'Конфигурация CMS',
 );

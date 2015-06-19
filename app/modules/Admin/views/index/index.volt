@@ -1,5 +1,5 @@
-{% if changelog %}
-    <div class="ui segment updates">
+{% if changelog is defined %}
+    <div class="ui segment changelog">
         <h3>Latest updates in YonaCms:</h3>
         {{ changelog }}
     </div>

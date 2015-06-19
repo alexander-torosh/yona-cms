@@ -3,7 +3,7 @@
     {% if helper.isAdminSession() %}
         <p style="font-weight: bold;font-size:120%;">
             <a class="noajax"
-               href="/publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">Редактировать публикацию</a>
+               href="{{ url.get() }}publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">Редактировать публикацию</a>
         </p>
     {% endif %}
 

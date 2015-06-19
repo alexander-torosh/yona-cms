@@ -22,8 +22,7 @@ class TypeController extends Controller
     {
         $this->view->entries = Type::find();
 
-        $this->view->title = 'Manage Types of Publication';
-        $this->helper->title($this->view->title);
+        $this->helper->title('Manage Types of Publication', true);
     }
 
     public function addAction()
@@ -43,7 +42,7 @@ class TypeController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success('Type created');
-                        return $this->redirect('/publication/type/edit/' . $model->getId() . '?lang=' . LANG);
+                        return $this->redirect($this->url->get() . 'publication/type/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -57,9 +56,7 @@ class TypeController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-
-        $this->view->title = 'Добавление типа публикаций';
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Adding Type of Publication'));
     }
 
     public function editAction($id)
@@ -75,7 +72,7 @@ class TypeController extends Controller
                 $model->updateFields($post);
                 if ($model->update()) {
                     $this->flash->success('Type created');
-                    return $this->redirect('/publication/type/edit/' . $model->getId() . '?lang=' . LANG);
+                    return $this->redirect($this->url->get() . 'publication/type/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -88,9 +85,7 @@ class TypeController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-
-        $this->view->title = 'Manage Type of Publications';
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Type of Publication'));
     }
 
     public function deleteAction($id)
@@ -98,19 +93,17 @@ class TypeController extends Controller
         $model = Type::findFirst($id);
         $count = Type::count();
         if ($count == 1) {
-            $this->flash->error('Can not Delete the last Type');
+            $this->flash->error($this->helper->at('Can not Delete the last Publication Type'));
             return;
         }
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect('/publication/type');
+            $this->redirect($this->url->get() . 'publication/type');
         }
 
         $this->view->model = $model;
-
-        $this->view->title = 'Delete Type';
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Delete Type'));
     }
 
 } 

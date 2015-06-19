@@ -28,7 +28,7 @@ class SitemapController extends Controller
                 $result = file_put_contents($this->sitemapFilePath, $sitemap);
                 if ($result) {
                     $this->flash->success('File sitemap.xml has been saved');
-                    $this->redirect('/seo/sitemap');
+                    $this->redirect($this->url->get() . 'seo/sitemap');
                 } else {
                     $this->flash->error('Error! The sitemap.xml file is not updated. Check the write permissions to the file.');
                 }

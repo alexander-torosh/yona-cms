@@ -21,10 +21,12 @@ class Configuration extends \Phalcon\Mvc\Model
      * Если таблица в БД будет пустая, она автоматически заполнится значениями по-умолчанию
      */
     public static $keys = [
-        'DEBUG_MODE' => 1,
-        'TECHNICAL_WORKS' => 0,
-        'PROFILER' => 1,
-        'WIDGETS_CACHE' => 0,
+        'DEBUG_MODE'        => 1,
+        'TECHNICAL_WORKS'   => 0,
+        'PROFILER'          => 1,
+        'WIDGETS_CACHE'     => 0,
+        'DISPLAY_CHANGELOG' => 1,
+        'ADMIN_EMAIL'       => 'webmaster@localhost',
     ];
 
     public $key;
@@ -46,9 +48,13 @@ class Configuration extends \Phalcon\Mvc\Model
 
     public function updateCheckboxes($post)
     {
-        foreach (array_keys(self::$keys) as $key) {
+        foreach (self::$keys as $key => $value) {
             if ($this->key == $key) {
-                $this->value = (isset($post[$key])) ? 1 : 0;
+                if ($value === 1 || $value === 0) {
+                    $this->value = (isset($post[$key])) ? 1 : 0;
+                } else {
+                    $this->value = $post[$key];
+                }
             }
         }
     }

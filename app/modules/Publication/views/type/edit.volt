@@ -3,7 +3,7 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/publication/type?lang={{ constant('LANG') }}" class="ui button">
+        <a href="{{ url.get() }}publication/type?lang={{ constant('LANG') }}" class="ui button">
             <i class="icon left arrow"></i> Back
         </a>
 
@@ -13,11 +13,7 @@
 
         {% if model.getId() %}
 
-            <a href="/publication/type/add" class="ui button">
-                <i class="icon add"></i> Add New
-            </a>
-
-            <a href="/publication/type/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
+            <a href="{{ url.get() }}publication/type/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
                 <i class="icon trash"></i> Delete
             </a>
 

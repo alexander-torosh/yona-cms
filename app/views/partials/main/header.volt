@@ -1,5 +1,5 @@
 <a class="logo" href="{{ helper.langUrl(['for':'index']) }}">
-    <img src="/static/images/logo.png" alt="">
+    <img src="{{ url.path() }}static/images/logo.png" alt="">
 </a>
 
 <!--Github stars-->

@@ -1,10 +1,11 @@
 <div class="ui segment">
-    <a href="/page/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
-        <i class="icon left arrow"></i> Back
+    <a href="{{ url.get() }}page/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
+        <i class="icon left arrow"></i> {{ helper.at('Back') }}
     </a>
-</div>
 
-<form method="post" class="ui negative message form" action="">
-    <p>Remote page <b>{{ model.getTitle() }}</b>?</p>
-    <button type="submit" class="ui button negative"><i class="icon trash"></i> Delete</button>
-</form>
+    <form method="post" class="ui form segment negative message" action="">
+        <p>{{ helper.at('Remove page') }} <b>{{ model.getTitle() }}</b>?</p>
+        <button type="submit" class="ui button negative"><i class="icon trash"></i> {{ helper.at('Delete') }}</button>
+    </form>
+
+</div>
