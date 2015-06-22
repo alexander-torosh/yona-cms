@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v0.2.1
+
+- Fixed bug with 'SITE NAME' translation in /app/plugins/TitlePlugin.php;
+
+- Fixed bug with Logout button in Admin dashboard in /app/modules/Admin/Controller/IndexController.php::logoutAction();
+
+- Fixed bug with unused fancybox library initialization in Page module;
+
+- Some refactoring for 'contacts.html' page. Now it places in Page module;
+
+- Interface changes for Widget module;
+
 ## v0.2  
 
 - You don't need create virtual host for starting using YonaCms anymore. Applied simple localhost dynamic configuration as **http://localhost/yona-cms/web/**;

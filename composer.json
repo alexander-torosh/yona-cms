@@ -1,6 +1,6 @@
 {
   "name": "oleksandr-torosh/yona-cms",
-  "version": "0.2",
+  "version": "0.2.1",
   "title": "Yona CMS",
   "description": "Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (v 1.3.x). Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.",
   "type": "project",
