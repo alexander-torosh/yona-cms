@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'base_path' => 'http://localhost/yona-cms/web/',
-    //'base_path' => '/',
+    'base_path' => '/',
+    //'base_path' => 'http://localhost/yona-cms/web/',
 
     'database'  => [
         'adapter'  => 'Mysql',

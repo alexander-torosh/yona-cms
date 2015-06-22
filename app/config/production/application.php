@@ -2,13 +2,14 @@
 
 return [
     'base_path' => '/',
+    //'base_path' => 'http://localhost/yona-cms/web/',
 
     'database'  => [
         'adapter'  => 'Mysql',
         'host'     => 'localhost',
         'username' => '',
         'password' => '',
-        'dbname'   => 'yona-cms',
+        'dbname'   => '',
         'charset'  => 'utf8',
     ],
 

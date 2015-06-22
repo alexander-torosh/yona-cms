@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @copyright Copyright (c) 2011 - 2014 Oleksandr Torosh (http://wezoom.net)
  * @author Oleksandr Torosh <web@wezoom.net>
  */
@@ -11,13 +11,14 @@ class Scanner
 
     public function search()
     {
-        $phrases = array();
-        $files_modules = $this->rsearch(APPLICATION_PATH . '/modules', "/.*\\.(volt|php|phtml)$/");
-        $files_views = $this->rsearch(APPLICATION_PATH . '/views', "/.*\\.(volt|php|phtml)$/");
-        $files = array_merge($files_modules, $files_views);
+        $phrases = [];
+        $files_pattern = "/.*\\.(volt|php|phtml)$/";
+        $files_plugins = $this->rsearch(APPLICATION_PATH . '/plugins', $files_pattern);
+        $files_modules = $this->rsearch(APPLICATION_PATH . '/modules', $files_pattern);
+        $files_views = $this->rsearch(APPLICATION_PATH . '/views', $files_pattern);
+        $files = array_merge($files_plugins, $files_views, $files_modules);
         if ($files) {
             foreach ($files as $file) {
-                var_dump($file);
                 $contents = file_get_contents($file);
                 $pattern = "/translate\\('(.+?)'\\)/";
                 $matchesCount = preg_match_all($pattern, $contents, $matches);
@@ -38,7 +39,7 @@ class Scanner
         $dir = new \RecursiveDirectoryIterator($folder);
         $ite = new \RecursiveIteratorIterator($dir);
         $files = new \RegexIterator($ite, $pattern, \RegexIterator::GET_MATCH);
-        $fileList = array();
+        $fileList = [];
         foreach ($files as $file) {
             $fileList = array_merge($fileList, $file);
         }
