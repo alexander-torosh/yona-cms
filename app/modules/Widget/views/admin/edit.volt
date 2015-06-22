@@ -28,7 +28,6 @@
 </script>
 
 <link rel="stylesheet" href="{{ url.get() }}vendor/codemirror-4.2/lib/codemirror.css">
-
 <script src="{{ url.get() }}vendor/codemirror-4.2/codemirror-compressed.js"></script>
 
 <script>

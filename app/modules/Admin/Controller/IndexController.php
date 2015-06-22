@@ -35,7 +35,7 @@ class IndexController extends Controller
         }
 
         if ($this->registry->cms['DISPLAY_CHANGELOG']) {
-            $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
+            $changelog = file_get_contents(APPLICATION_PATH . '/../CHANGELOG.md');
             $changelog_html = Markdown::defaultTransform($changelog);
             $this->view->changelog = $changelog_html;
         }
@@ -92,8 +92,7 @@ class IndexController extends Controller
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $this->session->remove('auth');
-                $this->response->redirect($this->url->get());
-                return $this->response->send();
+                $this->redirect($this->url->get());
             } else {
                 die("Security errors");
             }

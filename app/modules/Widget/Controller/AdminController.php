@@ -18,10 +18,9 @@ class AdminController extends Controller
 
     public function indexAction()
     {
-        $this->view->setVar('entries', Widget::find());
+        $this->view->entries = Widget::find();
 
-        $this->view->title = $this->helper->at('Manage Widgets');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Widgets'), true);
 
     }
 

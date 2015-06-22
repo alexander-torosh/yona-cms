@@ -27,20 +27,4 @@ class IndexController extends Controller
 
     }
 
-    public function contactsAction()
-    {
-        $page = Page::findCachedBySlug('contacts');
-        if (!$page) {
-            throw new Exception("Page 'contacts' not found");
-            return;
-        }
-
-        $this->helper->title()->append($page->getMeta_title());
-        $this->helper->meta()->set('description', $page->getMeta_description());
-        $this->helper->meta()->set('keywords', $page->getMeta_keywords());
-        $this->view->page = $page;
-
-        $this->helper->menu->setActive('contacts');
-    }
-
 }

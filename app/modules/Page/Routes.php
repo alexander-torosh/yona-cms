@@ -21,6 +21,12 @@ class Routes
             'action' => 'index'
         ), 'page');
 
+        $router->addML('/contacts.html', array(
+            'module' => 'page',
+            'controller' => 'index',
+            'action' => 'contacts',
+        ), 'contacts');
+
         return $router;
 
     }
