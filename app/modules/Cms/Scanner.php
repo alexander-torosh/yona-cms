@@ -17,7 +17,7 @@ class Scanner
         $files_modules = $this->rsearch(APPLICATION_PATH.'/modules', $files_pattern);
         $files_views = $this->rsearch(APPLICATION_PATH.'/views', $files_pattern);
         $files = array_merge($files_plugins, $files_views, $files_modules);
-        if ($files) {
+        if (!empty($files)) {
             foreach ($files as $file) {
                 $contents = file_get_contents($file);
                 $pattern = "/translate\\('(.+?)'\\)/";

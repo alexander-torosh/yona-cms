@@ -40,7 +40,7 @@ class SeoManager extends Plugin
         $match_url_entry = $this->matchingUrl($_SERVER['REQUEST_URI']);
 
         if ($match_url_entry) {
-            return $this->pick($match_url_entry);
+            $this->pick($match_url_entry);
         } elseif ($route_name && !in_array($route_name, ['default', 'default_action', 'default_controller'])) {
             if (!$this->matchingRoute($route_name, $dispatcher_params, $request_params)) {
                 if ($module && $controller && $action) {
@@ -87,6 +87,7 @@ class SeoManager extends Plugin
                 }
             }
         }
+        return false;
     }
 
     private function matchingMCA($module, $controller, $action, $dispatcher_params, $request_params)

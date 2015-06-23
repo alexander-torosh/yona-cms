@@ -88,6 +88,7 @@ class Bootstrap
             "prefix"   => HOST_HASH,
         ]);
 
+        $cache = null;
         switch ($config->cache) {
             case 'file':
                 $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [

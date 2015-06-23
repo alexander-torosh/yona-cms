@@ -25,9 +25,9 @@ class LastModified extends Plugin
                     $IfModifiedSince = strtotime(substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 5));
         }
 
-        if ($IfModifiedSince && $IfModifiedSince >= $LastModified_unix) {
+        if ($IfModifiedSince !== null && $IfModifiedSince >= $LastModified_unix) {
             header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
-            exit;
+            $this->response->send();
         }
 
         $response->setHeader('Last-Modified', $LastModified);

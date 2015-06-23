@@ -65,7 +65,7 @@ class Configuration extends \Phalcon\Mvc\Model
     public function getValueByKey($key, $cache = true)
     {
         $config = $this->getConfig($cache);
-        if ($config) {
+        if (!empty($config)) {
             if (array_key_exists($key, $config)) {
                 return $config[$key];
             }

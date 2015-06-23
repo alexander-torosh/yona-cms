@@ -44,7 +44,7 @@ abstract class Form extends \Phalcon\Forms\Form
             echo $element;
         } else {
             switch (true) {
-                case $element instanceof Check :
+                case $element instanceof Check:
                     $html .= '<div class="field checkbox">';
                     $html .= '<div class="ui toggle checkbox">';
                     $html .= $element;
@@ -57,11 +57,11 @@ abstract class Form extends \Phalcon\Forms\Form
                     $html .= '</div>';
                     break;
 
-                case $element instanceof Image :
+                case $element instanceof Image:
                     $html = $this->renderImage($element);
                     break;
 
-                case $element instanceof File :
+                case $element instanceof File:
                     $html .= '<div class="inline field">';
                     if ($element->getLabel()) {
                         $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
@@ -70,7 +70,7 @@ abstract class Form extends \Phalcon\Forms\Form
                     $html .= '</div>';
                     break;
 
-                default :
+                default:
                     $html .= '<div class="field">';
                     if ($element->getLabel()) {
                         $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
