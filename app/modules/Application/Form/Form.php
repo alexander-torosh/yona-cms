@@ -99,6 +99,9 @@ abstract class Form extends \Phalcon\Forms\Form
 		return $html;
 	}
 
+	/**
+	 * @param Image $element
+	 */
 	private function renderImage($element)
 	{
 		$html = '<div class="form-group">';

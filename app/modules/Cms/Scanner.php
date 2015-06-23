@@ -34,6 +34,10 @@ class Scanner
 		return $phrases;
 	}
 
+	/**
+	 * @param string $folder
+	 * @param string $pattern
+	 */
 	private function rsearch($folder, $pattern)
 	{
 		$dir = new \RecursiveDirectoryIterator($folder);

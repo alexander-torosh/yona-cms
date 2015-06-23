@@ -465,6 +465,7 @@ class Storage extends Component
 
 	/**
 	 * Проверяем блокировку оригинала изображения. Если нет, то блокируем
+	 * @param string $originalAbsPath
 	 */
 	private function lockOriginal($originalAbsPath)
 	{
@@ -490,6 +491,7 @@ class Storage extends Component
 
 	/**
 	 * Снимаем блокировку оригинала изображения
+	 * @param string $originalAbsPath
 	 */
 	private function unlockOriginal($originalAbsPath)
 	{
@@ -499,6 +501,7 @@ class Storage extends Component
 
 	/**
 	 * Возвращает имя файла для блокировки оригинала изображения
+	 * @return string
 	 */
 	private function getLockFileName($originalAbsPath)
 	{
