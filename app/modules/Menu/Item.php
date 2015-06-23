@@ -81,7 +81,7 @@ class Item
     {
         if (!empty($this->li_attributes)) {
             foreach ($this->li_attributes as $key => $value) {
-                $this->li_attributes_str .= ' ' . $key . '="' . $value . '"';
+                $this->li_attributes_str .= ' '.$key.'="'.$value.'"';
             }
         }
     }
@@ -90,7 +90,7 @@ class Item
     {
         if (!empty($this->a_attributes)) {
             foreach ($this->a_attributes as $key => $value) {
-                $this->a_attributes_str .= ' ' . $key . '="' . $value . '"';
+                $this->a_attributes_str .= ' '.$key.'="'.$value.'"';
             }
         }
     }

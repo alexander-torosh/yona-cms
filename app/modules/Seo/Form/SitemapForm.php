@@ -12,9 +12,9 @@ use Phalcon\Forms\Element\TextArea;
 class SitemapForm extends Form
 {
 
-	public function initialize()
-	{
-		$this->add((new TextArea('sitemap', ['style' => 'height:600px;']))->setLabel('Contents'));
-	}
+    public function initialize()
+    {
+        $this->add((new TextArea('sitemap', ['style' => 'height:600px;']))->setLabel('Contents'));
+    }
 
 } 

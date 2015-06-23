@@ -329,7 +329,7 @@ class Bootstrap
         }
 
         $response->sendHeaders();
-
+        
         echo $response->getContent();
     }
 

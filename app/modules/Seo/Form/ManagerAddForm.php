@@ -14,17 +14,17 @@ use Seo\Model\Manager;
 class ManagerAddForm extends Form
 {
 
-	public function initialize()
-	{
-		$this->add(
-			(new Text('custom_name'))
-				->setLabel($this->helper->at('Business name, for convenience'))
-		);
+    public function initialize()
+    {
+        $this->add(
+            (new Text('custom_name'))
+                ->setLabel($this->helper->at('Business name, for convenience'))
+        );
 
-		$this->add(
-			(new Select('type', Manager::$types))
-				->setLabel('Type')
-		);
-	}
+        $this->add(
+            (new Select('type', Manager::$types))
+                ->setLabel('Type')
+        );
+    }
 
 }

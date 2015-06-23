@@ -5,14 +5,14 @@
  * */
 
 return array(
-	'Image',
-	'Index',
-	'Admin',
-	'Widget',
-	'FileManager',
-	'Page',
-	'Publication',
-	'Seo',
-	'Menu',
-	'Tree',
+    'Image',
+    'Index',
+    'Admin',
+    'Widget',
+    'FileManager',
+    'Page',
+    'Publication',
+    'Seo',
+    'Menu',
+    'Tree',
 );

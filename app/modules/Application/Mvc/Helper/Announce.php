@@ -11,28 +11,28 @@ namespace Application\Mvc\Helper;
 class Announce
 {
 
-	public function announce($incomeString, $num = 300)
-	{
-		$stringStriped = strip_tags($incomeString);
-		if (!$stringStriped) {
-			return;
-		}
+    public function announce($incomeString, $num = 300)
+    {
+        $stringStriped = strip_tags($incomeString);
+        if (!$stringStriped) {
+            return;
+        }
 
-		$textBr = str_replace(array("\r\n", "\r", "\n"), "<br>", $stringStriped);
-		$string   = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
+        $textBr = str_replace(array("\r\n", "\r", "\n"), "<br>", $stringStriped);
+        $string = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
 
-		if (mb_strlen($string, 'utf-8') < $num) {
-			return $string;
-		}
+        if (mb_strlen($string, 'utf-8') < $num) {
+            return $string;
+        }
 
-		$subString = mb_substr($string, 0, $num, 'utf-8');
-		$array     = explode(' ', $subString);
+        $subString = mb_substr($string, 0, $num, 'utf-8');
+        $array     = explode(' ', $subString);
 
-		$array[count($array) - 1] = '...';
-		$output                   = implode(' ', $array);
+        $array[count($array) - 1] = '...';
+        $output                   = implode(' ', $array);
 
-		return $output;
+        return $output;
 
-	}
+    }
 
 }

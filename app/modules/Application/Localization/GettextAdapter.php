@@ -21,85 +21,85 @@
 namespace Application\Localization;
 
 use Phalcon\Translate\Adapter,
-	Phalcon\Translate\AdapterInterface,
-	Phalcon\Translate\Exception;
+    Phalcon\Translate\AdapterInterface,
+    Phalcon\Translate\Exception;
 
 class GettextAdapter extends Adapter implements AdapterInterface
 {
 
-	/**
-	 * Phalcon\Translate\Adapter\Gettext constructor
-	 *
-	 * @param array $options
-	 */
-	public function __construct($options)
-	{
+    /**
+     * Phalcon\Translate\Adapter\Gettext constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options)
+    {
 
-		if (!is_array($options)) {
-			throw new Exception('Invalid options');
-		}
+        if (!is_array($options)) {
+            throw new Exception('Invalid options');
+        }
 
-		if (!isset($options['locale'])) {
-			throw new Exception('Parameter "locale" is required');
-		}
+        if (!isset($options['locale'])) {
+            throw new Exception('Parameter "locale" is required');
+        }
 
-		if (!isset($options['lang'])) {
-			throw new Exception('Parameter "lang" is required');
-		}
+        if (!isset($options['lang'])) {
+            throw new Exception('Parameter "lang" is required');
+        }
 
-		if (!isset($options['file'])) {
-			throw new Exception('Parameter "file" is required');
-		}
+        if (!isset($options['file'])) {
+            throw new Exception('Parameter "file" is required');
+        }
 
-		if (!isset($options['directory'])) {
-			throw new Exception('Parameter "directory" is required');
-		}
+        if (!isset($options['directory'])) {
+            throw new Exception('Parameter "directory" is required');
+        }
 
-		putenv("LC_ALL=" . $options['locale']);
-		putenv("LC_LANG=" . $options['lang']);
-		setlocale(LC_ALL, $options['locale']);
-		bindtextdomain($options['file'], $options['directory']);
-		textdomain($options['file']);
+        putenv("LC_ALL=".$options['locale']);
+        putenv("LC_LANG=".$options['lang']);
+        setlocale(LC_ALL, $options['locale']);
+        bindtextdomain($options['file'], $options['directory']);
+        textdomain($options['file']);
 
-		bind_textdomain_codeset($options['file'], 'UTF-8');
+        bind_textdomain_codeset($options['file'], 'UTF-8');
 
-	}
+    }
 
-	/**
-	 * Returns the translation related to the given key
-	 *
-	 * @param	string $index
-	 * @param	array $placeholders
-	 * @return	string
-	 */
-	public function query($index, $placeholders = null)
-	{
-		if ($placeholders == null) {
-			return gettext($index);
-		}
+    /**
+     * Returns the translation related to the given key
+     *
+     * @param	string $index
+     * @param	array $placeholders
+     * @return	string
+     */
+    public function query($index, $placeholders = null)
+    {
+        if ($placeholders == null) {
+            return gettext($index);
+        }
 
-		$translation = gettext($index);
+        $translation = gettext($index);
 
-		if (is_array($placeholders)) {
-			foreach ($placeholders as $key => $value) {
-				$translation = str_replace('%' . $key . '%', $value, $translation);
-			}
-		}
+        if (is_array($placeholders)) {
+            foreach ($placeholders as $key => $value) {
+                $translation = str_replace('%'.$key.'%', $value, $translation);
+            }
+        }
 
-		return $translation;
+        return $translation;
 
-	}
+    }
 
-	/**
-	 * Check whether is defined a translation key in gettext
-	 *
-	 * @param 	string $index
-	 * @return	bool
-	 */
-	public function exists($index)
-	{
-		return gettext($index) !== '';
+    /**
+     * Check whether is defined a translation key in gettext
+     *
+     * @param 	string $index
+     * @return	bool
+     */
+    public function exists($index)
+    {
+        return gettext($index) !== '';
 
-	}
+    }
 
 }
