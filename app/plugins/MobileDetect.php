@@ -4,21 +4,23 @@
  * @copyright Copyright (c) 2011 - 2015 Oleksandr Torosh (http://wezoom.net)
  * @author Oleksandr Torosh <web@wezoom.net>
  */
-class MobileDetectPlugin
+
+namespace YonaCMS\Plugin;
+
+class MobileDetect
 {
 
-    public function __construct($session, $view)
+    public function __construct($session, $view, $request)
     {
         require_once APPLICATION_PATH.'/../vendor/Mobile_Detect.php';
-        $detect = new Mobile_Detect();
+        $detect = new \Mobile_Detect();
 
-        if (isset($_GET['mobile'])) {
-            if ($_GET['mobile'] == 'false') {
-                $session->set('device_detect', 'normal');
-            }
-            if ($_GET['mobile'] == 'true') {
-                $session->set('device_detect', 'mobile');
-            }
+        $mobile = $request->getQuery('mobile');
+        if ($mobile == 'false') {
+            $session->set('device_detect', 'normal');
+        }
+        if ($mobile == 'true') {
+            $session->set('device_detect', 'mobile');
         }
 
         $isMobile = false;

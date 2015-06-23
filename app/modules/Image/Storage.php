@@ -317,14 +317,7 @@ class Storage extends Component
     {
         // Абсолютный путь оригинального изображения
         $originalAbsPath = IMG_ROOT_PATH.$this->calculateOriginalRelPath();
-        if (!file_exists($originalAbsPath)) {
-            if (IMG_DEBUG_MODE) {
-                throw new \Exception("Файл {$originalAbsPath} не существует");
-            } else {
-                $this->exists = false;
-            }
-            return;
-        }
+        $this->checkOriginalExists($originalAbsPath);
 
         require_once __DIR__.'/PHPThumb/ThumbLib.inc.php';
         $image = \PhpThumbFactory::create($originalAbsPath);
@@ -348,25 +341,23 @@ class Storage extends Component
                 break;
         }
 
-        // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
-        if ($this->lockOriginal($originalAbsPath)) {
-            // Сохраняем кешированное изображение
-            $image->save($this->getCachedAbsPath());
-            // Снимаем блокировку
-            $this->unlockOriginal($originalAbsPath);
-        } else {
-            if (IMG_DEBUG_MODE) {
-                throw new \Exception("Файл {$originalAbsPath} заблокирован механизмом проверки _LOCK или не существует");
-            } else {
-                $this->exists = false;
-            }
-            return;
-        }
+        $this->saveImage($image, $originalAbsPath);
     }
 
     public function cropOriginal($left, $top, $width, $height)
     {
         $originalAbsPath = IMG_ROOT_PATH.$this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
+        $this->checkOriginalExists($originalAbsPath);
+
+        require_once __DIR__.'/PHPThumb/ThumbLib.inc.php';
+        $image = \PhpThumbFactory::create($originalAbsPath);
+        $image->crop($left, $top, $width, $height);
+
+        $this->saveImage($image, $originalAbsPath);
+    }
+
+    private function checkOriginalExists($originalAbsPath)
+    {
         if (!file_exists($originalAbsPath)) {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} не существует");
@@ -375,15 +366,14 @@ class Storage extends Component
             }
             return;
         }
+    }
 
-        require_once __DIR__.'/PHPThumb/ThumbLib.inc.php';
-        $image = \PhpThumbFactory::create($originalAbsPath);
-        $image->crop($left, $top, $width, $height);
-
+    private function saveImage($image, $originalAbsPath)
+    {
         // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
         if ($this->lockOriginal($originalAbsPath)) {
             // Сохраняем кешированное изображение
-            $image->save($originalAbsPath);
+            $image->save($this->getCachedAbsPath());
             // Снимаем блокировку
             $this->unlockOriginal($originalAbsPath);
         } else {

@@ -6,12 +6,14 @@
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
 
+namespace YonaCMS\Plugin;
+
 use Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\User\Plugin,
     Phalcon\Mvc\View,
     Application\Acl\DefaultAcl;
 
-class AclPlugin extends Plugin
+class Acl extends Plugin
 {
 
     public function __construct(DefaultAcl $acl, Dispatcher $dispatcher, View $view)

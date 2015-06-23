@@ -18,7 +18,7 @@ use Seo\Model\Manager;
  * @package Seo\Plugin
  * @variable $matched_route \Seo\Model\Manager
  */
-class SeoManagerPlugin extends Plugin
+class SeoManager extends Plugin
 {
 
     public function __construct(Dispatcher $dispatcher, Request $request, Router $router, View $view)

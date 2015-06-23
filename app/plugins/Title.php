@@ -4,9 +4,11 @@
      * @author Oleksandr Torosh <web@wezoom.net>
      */
 
+namespace YonaCMS\Plugin;
+
 use \Phalcon\Mvc\User\Plugin;
 
-class TitlePlugin extends Plugin
+class Title extends Plugin
 {
 
     public function __construct($di)

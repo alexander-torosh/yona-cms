@@ -6,10 +6,12 @@
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
 
+namespace YonaCMS\Plugin;
+
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Mvc\Dispatcher;
 
-class LocalizationPlugin extends Plugin
+class Localization extends Plugin
 {
 
     public function __construct(Dispatcher $dispatcher)
@@ -42,7 +44,7 @@ class LocalizationPlugin extends Plugin
             define('LANG_URL', $defaultLang->getUrl());
         }
 
-        $translations = Cms\Model\Translate::findCachedByLangInArray(LANG);
+        $translations = \Cms\Model\Translate::findCachedByLangInArray(LANG);
         $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
 
     }

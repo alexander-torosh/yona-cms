@@ -17,9 +17,10 @@ class Config
         $config_default = [
             'loader'    => [
                 'namespaces' => [
-                    'Application' => APPLICATION_PATH.'/modules/Application',
-                    'Cms'         => APPLICATION_PATH.'/modules/Cms',
-                    'Michelf'     => APPLICATION_PATH.'/../vendor/php-markdown-lib/Michelf',
+                    'YonaCMS\Plugin' => APPLICATION_PATH.'/plugins/',
+                    'Application'    => APPLICATION_PATH.'/modules/Application',
+                    'Cms'            => APPLICATION_PATH.'/modules/Cms',
+                    'Michelf'        => APPLICATION_PATH.'/../vendor/php-markdown-lib/Michelf',
                 ],
             ],
             'modules'   => [

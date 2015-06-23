@@ -4,9 +4,11 @@
  * @author Oleksandr Torosh <web@wezoom.net>
  */
 
+namespace YonaCMS\Plugin;
+
 use Phalcon\Mvc\User\Plugin;
 
-class LastModifiedPlugin extends Plugin
+class LastModified extends Plugin
 {
 
     public function __construct($response)

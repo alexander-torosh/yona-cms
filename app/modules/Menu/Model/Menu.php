@@ -5,6 +5,7 @@
  */
 
 use \Application\Mvc\Model;
+use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Menu extends Model
 {
@@ -61,7 +62,7 @@ class Menu extends Model
 
     public static function treeUpperLeafs($root)
     {
-        $entries = Category::find([
+        $entries = Menu::find([
             'root = :root: AND parent_id IS NULL',
             'order' => 'left_key',
             'bind'  => ['root' => $root]

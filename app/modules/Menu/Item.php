@@ -61,15 +61,12 @@ class Item
         if (isset($this->li_attributes['class'])) {
             $class[] = $this->li_attributes['class'];
         }
-
         if (in_array($this->id, $this->active_items)) {
             $class[] = 'active';
-        } else {
-            if (!empty($this->children)) {
-                foreach ($this->children as $child) {
-                    if (in_array($child->id, $this->active_items)) {
-                        $class[] = 'active';
-                    }
+        } elseif (!empty($this->children)) {
+            foreach ($this->children as $child) {
+                if (in_array($child->id, $this->active_items)) {
+                    $class[] = 'active';
                 }
             }
         }

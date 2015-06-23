@@ -1,5 +1,7 @@
 <?php
 
+namespace YonaCMS;
+
 /**
  * Bootstrap
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
@@ -8,7 +10,7 @@
 class Bootstrap
 {
 
-    public function run()
+    public function init()
     {
         $di = new \Phalcon\DI\FactoryDefault();
 
@@ -125,16 +127,16 @@ class Bootstrap
 
 
         $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di, $view, $config) {
-            new LocalizationPlugin($dispatcher);
-            new AdminLocalizationPlugin($config);
-            new AclPlugin($di->get('acl'), $dispatcher, $view);
-            new MobileDetectPlugin($di->get('session'), $view);
+            new \YonaCMS\Plugin\Localization($dispatcher);
+            new \YonaCMS\Plugin\AdminLocalization($config);
+            new \YonaCMS\Plugin\Acl($di->get('acl'), $dispatcher, $view);
+            new \YonaCMS\Plugin\MobileDetect($di->get('session'), $view, $di->get('request'));
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
-            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
-            new TitlePlugin($di);
-            new LastModifiedPlugin($di->get('response'));
+            new \Seo\Plugin\SeoManager($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
+            new \YonaCMS\Plugin\Title($di);
+            new \YonaCMS\Plugin\LastModified($di->get('response'));
         });
 
 
@@ -329,7 +331,7 @@ class Bootstrap
         }
 
         $response->sendHeaders();
-        
+
         echo $response->getContent();
     }
 

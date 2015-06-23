@@ -6,9 +6,11 @@
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
 
+namespace YonaCMS\Plugin;
+
 use Phalcon\Mvc\User\Plugin;
 
-class AdminLocalizationPlugin extends Plugin
+class AdminLocalization extends Plugin
 {
 
     public function __construct($config)
