@@ -11,39 +11,39 @@ namespace Application\Mvc\Helper;
 class ActiveMenu extends \Phalcon\Mvc\User\Component
 {
 
-    private static $instance;
-    private $active = null;
+	private static $instance;
+	private $active = null;
 
-    public static function getInstance()
-    {
-        if (!self::$instance) {
-            self::$instance = new ActiveMenu();
-        }
-        return self::$instance;
-    }
+	public static function getInstance()
+	{
+		if (!self::$instance) {
+			self::$instance = new ActiveMenu();
+		}
+		return self::$instance;
+	}
 
-    public function setActive($value)
-    {
-        $this->active = $value;
-    }
+	public function setActive($value)
+	{
+		$this->active = $value;
+	}
 
-    public function getActive()
-    {
-        return $this->active;
-    }
+	public function getActive()
+	{
+		return $this->active;
+	}
 
-    public function isActive($value)
-    {
-        if ($this->active == $value) {
-            return true;
-        }
-    }
+	public function isActive($value)
+	{
+		if ($this->active == $value) {
+			return true;
+		}
+	}
 
-    public function activeClass($value)
-    {
-        if ($this->isActive($value)) {
-            return ' active';
-        }
-    }
+	public function activeClass($value)
+	{
+		if ($this->isActive($value)) {
+			return ' active';
+		}
+	}
 
 }

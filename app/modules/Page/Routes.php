@@ -13,22 +13,22 @@ use Application\Mvc\Router\DefaultRouter;
 class Routes
 {
 
-    public function init(DefaultRouter $router)
-    {
-        $router->addML('/{slug:[a-zA-Z_-]+}.html', array(
-            'module' => 'page',
-            'controller' => 'index',
-            'action' => 'index'
-        ), 'page');
+	public function init(DefaultRouter $router)
+	{
+		$router->addML('/{slug:[a-zA-Z_-]+}.html', array(
+			'module' => 'page',
+			'controller' => 'index',
+			'action' => 'index'
+		), 'page');
 
-        $router->addML('/contacts.html', array(
-            'module' => 'page',
-            'controller' => 'index',
-            'action' => 'contacts',
-        ), 'contacts');
+		$router->addML('/contacts.html', array(
+			'module' => 'page',
+			'controller' => 'index',
+			'action' => 'contacts',
+		), 'contacts');
 
-        return $router;
+		return $router;
 
-    }
+	}
 
 }

@@ -21,53 +21,53 @@ use Phalcon\Validation\Validator\PresenceOf;
 class AdminUserForm extends Form
 {
 
-    public function initialize()
-    {
-        $this->add(
-            (new Text('login', [
-                'required' => true,
-            ]))->setLabel('Login')
-        );
+	public function initialize()
+	{
+		$this->add(
+			(new Text('login', [
+				'required' => true,
+			]))->setLabel('Login')
+		);
 
-        $this->add(
-            (new Email('email', [
-                'required' => true,
-            ]))
-                ->addValidator(new ValidatorEmail([
-                    'message' => 'Email format is invalid',
-                ]))
-                ->setLabel('Email')
-        );
+		$this->add(
+			(new Email('email', [
+				'required' => true,
+			]))
+				->addValidator(new ValidatorEmail([
+					'message' => 'Email format is invalid',
+				]))
+				->setLabel('Email')
+		);
 
-        $this->add(
-            (new Text('name'))
-                ->setLabel('Name')
-        );
+		$this->add(
+			(new Text('name'))
+				->setLabel('Name')
+		);
 
-        $this->add(
-            (new Select('role', AdminUser::$roles))
-                ->setLabel('Role')
-        );
+		$this->add(
+			(new Select('role', AdminUser::$roles))
+				->setLabel('Role')
+		);
 
-        $this->add(
-            (new Password('password'))
-                ->setLabel('Password')
-        );
+		$this->add(
+			(new Password('password'))
+				->setLabel('Password')
+		);
 
-        $this->add(
-            (new Check('active'))
-                ->setLabel('Active')
-        );
-    }
+		$this->add(
+			(new Check('active'))
+				->setLabel('Active')
+		);
+	}
 
-    public function initAdding()
-    {
-        $password = $this->get('password');
-        $password->setAttribute('required', true);
-        $password->addValidator(new PresenceOf([
-            'message' => 'Password is required',
-        ]));
+	public function initAdding()
+	{
+		$password = $this->get('password');
+		$password->setAttribute('required', true);
+		$password->addValidator(new PresenceOf([
+			'message' => 'Password is required',
+		]));
 
-    }
+	}
 
 }

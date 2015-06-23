@@ -11,9 +11,9 @@ namespace Seo;
 class Routes
 {
 
-    public function init($router)
-    {
-        return $router;
-    }
+	public function init($router)
+	{
+		return $router;
+	}
 
 }
