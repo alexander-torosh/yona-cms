@@ -501,6 +501,7 @@ class Storage extends Component
 
 	/**
 	 * Возвращает имя файла для блокировки оригинала изображения
+	 * @param string $originalAbsPath
 	 * @return string
 	 */
 	private function getLockFileName($originalAbsPath)
