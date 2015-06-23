@@ -11,7 +11,7 @@ namespace Application\Mvc\Helper;
 class Announce
 {
 
-    public function announce($incomeString, $num = 300)
+    public function getString($incomeString, $num = 300)
     {
         $stringStriped = strip_tags($incomeString);
         if (!$stringStriped) {

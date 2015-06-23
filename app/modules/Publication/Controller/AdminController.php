@@ -20,18 +20,17 @@ class AdminController extends Controller
     {
         $page = $this->request->getQuery('page', 'int', 1);
         $type = $this->dispatcher->getParam('type');
+        $type_id = null;
 
         $types = Type::find();
 
+        $cond_array = [];
         if ($type) {
             $typeEntity = Type::getCachedBySlug($type);
             $type_id = $typeEntity->getId();
-        }
-
-        $cond_array = [];
-        if ($type) {
             $cond_array[] = "type_id = $type_id";
         }
+
         $conditions = implode(' AND ', $cond_array);
 
         $publications = Publication::find([
@@ -97,7 +96,7 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $form = new PublicationForm();
         $model = Publication::findFirst($id);
 

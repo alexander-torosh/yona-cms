@@ -1,7 +1,5 @@
 <?php
-
 /**
- * AdminUser
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
@@ -10,8 +8,6 @@ namespace Admin\Model;
 
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use stdClass;
-
-require_once __DIR__.'/../../../../vendor/password.php';
 
 class AdminUser extends \Phalcon\Mvc\Model
 {
@@ -34,6 +30,11 @@ class AdminUser extends \Phalcon\Mvc\Model
         'editor'     => 'Editor',
         'admin'      => 'Admin',
     ];
+
+    public function initialize()
+    {
+        require_once __DIR__.'/../../../../vendor/password.php';
+    }
 
     public function setCheckboxes($post)
     {

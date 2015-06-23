@@ -44,8 +44,7 @@ abstract class Form extends \Phalcon\Forms\Form
             echo $element;
         } else {
             switch (true) {
-                case $element instanceof Check :
-                {
+                case $element instanceof Check:
                     $html .= '<div class="field checkbox">';
                     $html .= '<div class="ui toggle checkbox">';
                     $html .= $element;
@@ -56,31 +55,28 @@ abstract class Form extends \Phalcon\Forms\Form
                     }
                     $html .= '</div>';
                     $html .= '</div>';
-                }
                     break;
-                case $element instanceof Image : {
+
+                case $element instanceof Image:
                     $html = $this->renderImage($element);
-                }
                     break;
-                case $element instanceof File :
-                {
+
+                case $element instanceof File:
                     $html .= '<div class="inline field">';
                     if ($element->getLabel()) {
                         $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
-                }
                     break;
-                default :
-                    {
+
+                default:
                     $html .= '<div class="field">';
                     if ($element->getLabel()) {
                         $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
-                    }
             }
         }
 
@@ -128,7 +124,7 @@ abstract class Form extends \Phalcon\Forms\Form
                             <span class="btn btn-default btn-file">
                                 <span class="fileinput-new">Select image</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input type="file" name="' . $element->getName().'">
+                                <input type="file" name="'.$element->getName().'">
                             </span>
                             <a href="#" class="btn btn-default fileinput-exists"
                                data-dismiss="fileinput">Remove</a>

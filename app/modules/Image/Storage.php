@@ -205,7 +205,7 @@ class Storage extends Component
     public function originalWidthHeight()
     {
         $imageSize = getimagesize($this->originalAbsPath());
-        if ($imageSize) {
+        if (!empty($imageSize)) {
             return [
                 'width'  => $imageSize[0],
                 'height' => $imageSize[1]
@@ -452,7 +452,7 @@ class Storage extends Component
         $cachedAbsPath = IMG_ROOT_PATH.$this->calculateCachedRelPath();
         if (file_exists($cachedAbsPath)) {
             $imageSize = getimagesize($cachedAbsPath);
-            if ($imageSize) {
+            if (!empty($imageSize)) {
                 return [
                     'width'  => $imageSize[0],
                     'height' => $imageSize[1]
