@@ -14,49 +14,49 @@ use Cms\Model\Language;
 class DefaultRouter extends Router
 {
 
-	const ML_PREFIX = 'ml__';
+    const ML_PREFIX = 'ml__';
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
 
-		//$this->setDefaultModule('index'); // removed
-		$this->setDefaultController('index');
-		$this->setDefaultAction('index');
+        //$this->setDefaultModule('index'); // removed
+        $this->setDefaultController('index');
+        $this->setDefaultAction('index');
 
-		$this->add('/:module/:controller/:action/:params', array(
-			'module' => 1,
-			'controller' => 2,
-			'action' => 3,
-			'params' => 4
-		))->setName('default');
-		$this->add('/:module/:controller', array(
-			'module' => 1,
-			'controller' => 2,
-			'action' => 'index',
-		))->setName('default_action');
-		$this->add('/:module', array(
-			'module' => 1,
-			'controller' => 'index',
-			'action' => 'index',
-		))->setName('default_controller');
+        $this->add('/:module/:controller/:action/:params', array(
+            'module' => 1,
+            'controller' => 2,
+            'action' => 3,
+            'params' => 4
+        ))->setName('default');
+        $this->add('/:module/:controller', array(
+            'module' => 1,
+            'controller' => 2,
+            'action' => 'index',
+        ))->setName('default_action');
+        $this->add('/:module', array(
+            'module' => 1,
+            'controller' => 'index',
+            'action' => 'index',
+        ))->setName('default_controller');
 
-	}
+    }
 
-	public function addML($pattern, $paths = null, $name)
-	{
-		$languages = Language::findCachedLanguages();
+    public function addML($pattern, $paths = null, $name)
+    {
+        $languages = Language::findCachedLanguages();
 
-		foreach ($languages as $lang) {
-			$iso = $lang->getIso();
-			if ($lang->getPrimary()) {
-				$this->add($pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
-			} else {
-				$new_pattern = '/' . $lang->getUrl() . $pattern;
-				$paths['lang'] = $iso; // будущее значение константы LANG
-				$this->add($new_pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
-			}
-		}
-	}
+        foreach ($languages as $lang) {
+            $iso = $lang->getIso();
+            if ($lang->getPrimary()) {
+                $this->add($pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
+            } else {
+                $new_pattern = '/' . $lang->getUrl() . $pattern;
+                $paths['lang'] = $iso; // будущее значение константы LANG
+                $this->add($new_pattern, $paths)->setName(self::ML_PREFIX . $name . '_' . $iso);
+            }
+        }
+    }
 
 }

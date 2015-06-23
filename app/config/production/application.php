@@ -1,23 +1,23 @@
 <?php
 
 return [
-	'base_path' => '/',
-	//'base_path' => 'http://localhost/yona-cms/web/',
+    'base_path' => '/',
+    //'base_path' => 'http://localhost/yona-cms/web/',
 
-	'database'  => [
-		'adapter'  => 'Mysql',
-		'host'     => 'localhost',
-		'username' => '',
-		'password' => '',
-		'dbname'   => '',
-		'charset'  => 'utf8',
-	],
+    'database'  => [
+        'adapter'  => 'Mysql',
+        'host'     => 'localhost',
+        'username' => '',
+        'password' => '',
+        'dbname'   => '',
+        'charset'  => 'utf8',
+    ],
 
-	'memcache'  => [
-		'host' => 'localhost',
-		'port' => 11211,
-	],
+    'memcache'  => [
+        'host' => 'localhost',
+        'port' => 11211,
+    ],
 
-	'cache'     => 'file',
-	//'cache'     => 'memcache',
+    'cache'     => 'file',
+    //'cache'     => 'memcache',
 ];
