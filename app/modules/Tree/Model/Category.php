@@ -46,7 +46,7 @@ class Category extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
+                "message" => "Category with slug '".$this->slug."' is already exists. Take another title"
             ]
         ));
 

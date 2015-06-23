@@ -22,14 +22,14 @@ class Javascript extends Model
     public function afterUpdate()
     {
         $cache = $this->getDi()->get('cache');
-        $key = HOST_HASH . md5("Javascript::getCachedScript({$this->id})");
+        $key = HOST_HASH.md5("Javascript::getCachedScript({$this->id})");
         $cache->delete($key);
     }
 
     public static function findCachedById($id)
     {
-        $key = HOST_HASH . md5("Javascript::getCachedScript($id)");
-        $result = self::findFirst(array( "id ='{$id}'",
+        $key = HOST_HASH.md5("Javascript::getCachedScript($id)");
+        $result = self::findFirst(array("id ='{$id}'",
             'cache' => array(
                 'key' => $key,
                 'lifetime' => 1200, //20 min

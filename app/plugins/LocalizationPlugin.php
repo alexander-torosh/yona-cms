@@ -32,7 +32,7 @@ class LocalizationPlugin extends Plugin
         foreach ($languages as $language) {
             if ($langParam == $language->getIso()) {
                 define('LANG', $language->getIso());
-                define('LANG_URL', '/' . $language->getUrl());
+                define('LANG_URL', '/'.$language->getUrl());
             }
         }
         if (!defined('LANG')) {

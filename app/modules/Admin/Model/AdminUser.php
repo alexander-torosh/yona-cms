@@ -167,7 +167,7 @@ class AdminUser extends \Phalcon\Mvc\Model
             'bind'       => ['id' => $id],
             'columns'    => ['role'],
             'cache'      => [
-                'key'      => HOST_HASH . md5('Admin\Model\AdminUser::getRoleById::' . $id),
+                'key'      => HOST_HASH.md5('Admin\Model\AdminUser::getRoleById::'.$id),
                 'lifetime' => 60,
             ]
         ]);

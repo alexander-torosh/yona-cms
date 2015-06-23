@@ -22,7 +22,7 @@ class AclPlugin extends Plugin
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();
 
-        $resourceKey = $module . '/' . $controller;
+        $resourceKey = $module.'/'.$controller;
         $resourceVal = $action;
 
         if ($acl->isResource($resourceKey)) {
@@ -57,7 +57,7 @@ class AclPlugin extends Plugin
             return $this->redirect('/admin');
         }
 
-        $view->setViewsDir(__DIR__ . '/../modules/Index/views/');
+        $view->setViewsDir(__DIR__.'/../modules/Index/views/');
         $view->setPartialsDir('');
         $view->message = "$role - Access Denied to resource <b>$resourceKey::$resourceVal</b>";
         $view->partial('error/error403');
@@ -71,7 +71,7 @@ class AclPlugin extends Plugin
 
     private function resourceNotFound($resourceKey, View $view)
     {
-        $view->setViewsDir(__DIR__ . '/../modules/Index/views/');
+        $view->setViewsDir(__DIR__.'/../modules/Index/views/');
         $view->setPartialsDir('');
         $view->message = "Acl resource <b>$resourceKey</b> in <b>/app/config/acl.php</b> not exists";
         $view->partial('error/error404');
@@ -92,7 +92,7 @@ class AclPlugin extends Plugin
                 header('HTTP/1.1 302 Moved Temporarily');
                 break;
         }
-        header('Location: ' . $url);
+        header('Location: '.$url);
         exit;
     }
 

@@ -20,7 +20,7 @@ class Module
          * Setting up the view component
          */
         $view = $di->get('view');
-        $view->setViewsDir(__DIR__ . '/views/');
+        $view->setViewsDir(__DIR__.'/views/');
 
     }
 

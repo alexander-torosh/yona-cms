@@ -11,7 +11,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $slug = $this->dispatcher->getParam('slug','string');
+        $slug = $this->dispatcher->getParam('slug', 'string');
         $page = Page::findCachedBySlug($slug);
         if (!$page) {
             throw new Exception("Page '$slug.html' not found");

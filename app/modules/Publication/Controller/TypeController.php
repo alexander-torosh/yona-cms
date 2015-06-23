@@ -42,7 +42,7 @@ class TypeController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success('Type created');
-                        return $this->redirect($this->url->get() . 'publication/type/edit/' . $model->getId() . '?lang=' . LANG);
+                        return $this->redirect($this->url->get().'publication/type/edit/'.$model->getId().'?lang='.LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -72,7 +72,7 @@ class TypeController extends Controller
                 $model->updateFields($post);
                 if ($model->update()) {
                     $this->flash->success('Type created');
-                    return $this->redirect($this->url->get() . 'publication/type/edit/' . $model->getId() . '?lang=' . LANG);
+                    return $this->redirect($this->url->get().'publication/type/edit/'.$model->getId().'?lang='.LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -99,7 +99,7 @@ class TypeController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect($this->url->get() . 'publication/type');
+            $this->redirect($this->url->get().'publication/type');
         }
 
         $this->view->model = $model;

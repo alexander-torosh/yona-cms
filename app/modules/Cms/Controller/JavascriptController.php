@@ -34,7 +34,7 @@ class JavascriptController extends Controller
                 $body->setText($this->request->getPost('body'));
                 if ($head->save() && $body->save()) {
                     $this->flash->success($this->helper->at('Updated has been successful'));
-                    return $this->redirect($this->url->get() . 'cms/javascript');
+                    return $this->redirect($this->url->get().'cms/javascript');
                 } else {
                     $this->flash->error($this->helper->at('Errors saving'));
                 }

@@ -28,7 +28,7 @@ class Controller extends \Phalcon\Mvc\Controller
                 header('HTTP/1.1 302 Moved Temporarily');
                 break;
         }
-        header('Location: ' . $url);
+        header('Location: '.$url);
         exit;
     }
 
@@ -44,14 +44,14 @@ class Controller extends \Phalcon\Mvc\Controller
 
     public function flashErrors($model)
     {
-        foreach($model->getMessages() as $message) {
+        foreach ($model->getMessages() as $message) {
             $this->flash->error($message);
         }
     }
 
     public function setAdminEnvironment()
     {
-        $this->view->setMainView(MAIN_VIEW_PATH . 'admin');
+        $this->view->setMainView(MAIN_VIEW_PATH.'admin');
         $this->view->setLayout(null);
     }
 

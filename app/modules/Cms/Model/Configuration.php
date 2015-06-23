@@ -38,7 +38,7 @@ class Configuration extends \Phalcon\Mvc\Model
          * Проверка на наличие ключа в перечне подустимых ключей
          */
         if (!array_key_exists($this->key, self::$keys)) {
-            $message = new Message('Key ' . $this->key . ' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
+            $message = new Message('Key '.$this->key.' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
             $this->appendMessage($message);
             return false;
         }
@@ -109,7 +109,7 @@ class Configuration extends \Phalcon\Mvc\Model
         if (array_key_exists($key, self::$keys)) {
             $this->key = $key;
         } else {
-            die($key . ' does not exists in Configuration\Model\Configuration::$keys');
+            die($key.' does not exists in Configuration\Model\Configuration::$keys');
         }
     }
 

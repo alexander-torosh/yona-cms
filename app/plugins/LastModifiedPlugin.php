@@ -24,7 +24,7 @@ class LastModifiedPlugin extends Plugin
         }
 
         if ($IfModifiedSince && $IfModifiedSince >= $LastModified_unix) {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+            header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
             exit;
         }
 

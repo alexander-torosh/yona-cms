@@ -67,12 +67,12 @@ class Item
 
         if (!empty($li_attributes)) {
             foreach ($li_attributes as $key => $value) {
-                $this->li_attributes_str .= ' ' . $key . '="' . $value . '"';
+                $this->li_attributes_str .= ' '.$key.'="'.$value.'"';
             }
         }
         if (!empty($a_attributes)) {
-            foreach($a_attributes as $key => $value) {
-                $this->a_attributes_str .= ' ' . $key . '="' . $value . '"';
+            foreach ($a_attributes as $key => $value) {
+                $this->a_attributes_str .= ' '.$key.'="'.$value.'"';
             }
         }
 

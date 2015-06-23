@@ -13,9 +13,9 @@ class Scanner
     {
         $phrases = [];
         $files_pattern = "/.*\\.(volt|php|phtml)$/";
-        $files_plugins = $this->rsearch(APPLICATION_PATH . '/plugins', $files_pattern);
-        $files_modules = $this->rsearch(APPLICATION_PATH . '/modules', $files_pattern);
-        $files_views = $this->rsearch(APPLICATION_PATH . '/views', $files_pattern);
+        $files_plugins = $this->rsearch(APPLICATION_PATH.'/plugins', $files_pattern);
+        $files_modules = $this->rsearch(APPLICATION_PATH.'/modules', $files_pattern);
+        $files_views = $this->rsearch(APPLICATION_PATH.'/views', $files_pattern);
         $files = array_merge($files_plugins, $files_views, $files_modules);
         if ($files) {
             foreach ($files as $file) {

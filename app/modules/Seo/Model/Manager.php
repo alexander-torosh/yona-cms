@@ -89,7 +89,7 @@ class Manager extends Model
     public function afterValidation()
     {
         if ($this->language) {
-            $this->route_ml = DefaultRouter::ML_PREFIX . $this->route . '_' . $this->language;
+            $this->route_ml = DefaultRouter::ML_PREFIX.$this->route.'_'.$this->language;
         } else {
             $this->route_ml = $this->route;
         }
@@ -244,19 +244,19 @@ class Manager extends Model
 
     public static function urlCacheKey($url)
     {
-        $key = HOST_HASH . md5('Seo\Model\Manager::url::' . $url);
+        $key = HOST_HASH.md5('Seo\Model\Manager::url::'.$url);
         return $key;
     }
 
     public static function routeCacheKey($route_name, $lang)
     {
-        $key = HOST_HASH . md5('Seo\Model\Manager::' . DefaultRouter::ML_PREFIX . $route_name . '_' . $lang);
+        $key = HOST_HASH.md5('Seo\Model\Manager::'.DefaultRouter::ML_PREFIX.$route_name.'_'.$lang);
         return $key;
     }
 
     public static function mcaCacheKey($module, $controller, $action, $lang)
     {
-        $key = HOST_HASH . md5('Seo\Model\Manager::' . $module . '::' . $controller . '::' . $action . '_' . $lang);
+        $key = HOST_HASH.md5('Seo\Model\Manager::'.$module.'::'.$controller.'::'.$action.'_'.$lang);
         return $key;
     }
 

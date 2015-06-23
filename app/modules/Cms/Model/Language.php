@@ -145,7 +145,7 @@ class Language extends Model
 
     public static function cacheKey()
     {
-        return HOST_HASH . md5('Language::findCachedLanguages');
+        return HOST_HASH.md5('Language::findCachedLanguages');
     }
 
     public function getUpperSortorder()
@@ -159,7 +159,7 @@ class Language extends Model
     {
         if ($this->getPrimary() == 1) {
             $languages = $this->find();
-            foreach($languages as $lang) {
+            foreach ($languages as $lang) {
                 if ($lang->getId() != $this->getId()) {
                     $lang->setPrimary(0);
                     $lang->save();
