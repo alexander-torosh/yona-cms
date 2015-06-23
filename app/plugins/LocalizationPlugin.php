@@ -35,8 +35,12 @@ class LocalizationPlugin extends Plugin
 				define('LANG_URL', '/' . $language->getUrl());
 			}
 		}
-		if (!defined('LANG')) define('LANG', $defaultLang->getIso());
-		if (!defined('LANG_URL')) define('LANG_URL', $defaultLang->getUrl());
+		if (!defined('LANG')) {
+			define('LANG', $defaultLang->getIso());
+		}
+		if (!defined('LANG_URL')) {
+			define('LANG_URL', $defaultLang->getUrl());
+		}
 
 		$translations = Cms\Model\Translate::findCachedByLangInArray(LANG);
 		$this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
