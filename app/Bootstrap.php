@@ -13,7 +13,7 @@ class Bootstrap
         $di = new \Phalcon\DI\FactoryDefault();
 
         // Config
-        require_once APPLICATION_PATH . '/modules/Cms/Config.php';
+        require_once APPLICATION_PATH.'/modules/Cms/Config.php';
         $config = \Cms\Config::get();
         $di->set('config', $config);
 
@@ -25,7 +25,7 @@ class Bootstrap
         // Loader
         $loader = new \Phalcon\Loader();
         $loader->registerNamespaces($config->loader->namespaces->toArray());
-        $loader->registerDirs([APPLICATION_PATH . "/plugins/"]);
+        $loader->registerDirs([APPLICATION_PATH."/plugins/"]);
         $loader->register();
 
 
@@ -44,14 +44,14 @@ class Bootstrap
         $view = new \Phalcon\Mvc\View();
 
         define('MAIN_VIEW_PATH', '../../../views/');
-        $view->setMainView(MAIN_VIEW_PATH . 'main');
-        $view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
+        $view->setMainView(MAIN_VIEW_PATH.'main');
+        $view->setLayoutsDir(MAIN_VIEW_PATH.'/layouts/');
         $view->setLayout('main');
-        $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
+        $view->setPartialsDir(MAIN_VIEW_PATH.'/partials/');
 
         // Volt
         $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
-        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/cache/volt/']);
+        $volt->setOptions(['compiledPath' => APPLICATION_PATH.'/cache/volt/']);
 
         // Volt compiler functions
         $compiler = $volt->getCompiler();
@@ -92,7 +92,7 @@ class Bootstrap
         switch ($config->cache) {
             case 'file':
                 $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [
-                    "cacheDir" => __DIR__ . "/cache/backend/"
+                    "cacheDir" => __DIR__."/cache/backend/"
                 ]);
                 break;
             case 'memcache':
@@ -127,14 +127,14 @@ class Bootstrap
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
 
-        $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di, $view, $config) {
+        $eventsManager->attach("dispatch:beforeDispatchLoop", function($event, $dispatcher, $di) use ($di, $view, $config) {
             new LocalizationPlugin($dispatcher);
             new AdminLocalizationPlugin($config);
             new AclPlugin($di->get('acl'), $dispatcher, $view);
             new MobileDetectPlugin($di->get('session'), $view);
         });
 
-        $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
+        $eventsManager->attach("dispatch:afterDispatchLoop", function($event, $dispatcher, $di) use ($di) {
             new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
             new TitlePlugin($di);
             new LastModifiedPlugin($di->get('response'));
@@ -146,7 +146,7 @@ class Bootstrap
             $profiler = new \Phalcon\Db\Profiler();
             $di->set('profiler', $profiler);
 
-            $eventsManager->attach('db', function ($event, $db) use ($profiler) {
+            $eventsManager->attach('db', function($event, $db) use ($profiler) {
                 if ($event->getType() == 'beforeQuery') {
                     $profiler->startProfile($db->getSQLStatement());
                 }
@@ -175,12 +175,12 @@ class Bootstrap
         $js_collection = $assetsManager->collection('js')
             ->setLocal(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/js.js')
+            ->setTargetPath(ROOT.'/assets/js.js')
             ->setTargetUri('assets/js.js')
             ->join(true);
         if ($config->assets->js) {
             foreach ($config->assets->js as $js) {
-                $js_collection->addJs(ROOT . '/' . $js);
+                $js_collection->addJs(ROOT.'/'.$js);
             }
         }
 
@@ -188,7 +188,7 @@ class Bootstrap
         $assetsManager->collection('modules-admin-js')
             ->setLocal(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/modules-admin.js')
+            ->setTargetPath(ROOT.'/assets/modules-admin.js')
             ->setTargetUri('assets/modules-admin.js')
             ->join(true);
 
@@ -196,10 +196,10 @@ class Bootstrap
         $assetsManager->collection('modules-admin-less')
             ->setLocal(true)
             ->addFilter(new \Application\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/assets/modules-admin.less')
+            ->setTargetPath(ROOT.'/assets/modules-admin.less')
             ->setTargetUri('assets/modules-admin.less')
             ->join(true)
-            ->addCss(APPLICATION_PATH . '/modules/Admin/assets/admin.less');
+            ->addCss(APPLICATION_PATH.'/modules/Admin/assets/admin.less');
 
         $di->set('assets', $assetsManager);
 
@@ -259,7 +259,7 @@ class Bootstrap
 
         $moduleName = \Application\Utils\ModuleName::camelize($router->getModuleName());
 
-        $ModuleClassName = $moduleName . '\Module';
+        $ModuleClassName = $moduleName.'\Module';
         if (class_exists($ModuleClassName)) {
             $module = new $ModuleClassName;
             $module->registerAutoloaders();
@@ -280,7 +280,7 @@ class Bootstrap
             } catch (\Phalcon\Exception $e) {
                 // Errors catching
 
-                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+                $view->setViewsDir(__DIR__.'/modules/Index/views/');
                 $view->setPartialsDir('');
                 $view->e = $e;
 

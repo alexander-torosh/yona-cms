@@ -18,12 +18,12 @@ class Modules
 
         if (!empty($modules_list)) {
             foreach ($modules_list as $module) {
-                $namespaces[$module] = APPLICATION_PATH . '/modules/' . $module;
+                $namespaces[$module] = APPLICATION_PATH.'/modules/'.$module;
                 $simple = Text::uncamelize($module);
                 $simple = str_replace('_', '-', $simple);
                 $modules[$simple] = array(
-                    'className' => $module . '\Module',
-                    'path' => APPLICATION_PATH . '/modules/' . $module . '/Module.php'
+                    'className' => $module.'\Module',
+                    'path' => APPLICATION_PATH.'/modules/'.$module.'/Module.php'
                 );
             }
         }

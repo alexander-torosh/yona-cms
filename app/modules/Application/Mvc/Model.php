@@ -33,7 +33,8 @@ class Model extends \Phalcon\Mvc\Model
      */
     public function afterFetch()
     {
-        if ($this->translateModel && defined('LANG')) { // Если есть массив переводов и установлена константа активного языка
+        if ($this->translateModel && defined('LANG')) {
+// Если есть массив переводов и установлена константа активного языка
             self::setLang(LANG); // Устанавливаем текущий язык
             $this->getTranslations(); // Извлекаем переводы со связанной таблицы переводов
         }
@@ -66,7 +67,7 @@ class Model extends \Phalcon\Mvc\Model
      */
     public static function setTranslateCache($value)
     {
-        self::$translateCache = (bool)$value;
+        self::$translateCache = (bool) $value;
     }
 
     /**
@@ -118,8 +119,8 @@ class Model extends \Phalcon\Mvc\Model
         if (!$this->getId()) {
             return false;
         }
-        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
-        $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
+        $query = 'foreign_id = '.$this->getId().' AND lang = "'.LANG.'"';
+        $key = HOST_HASH.md5($this->getSource().'_translate '.$query);
         return $key;
     }
 
@@ -141,7 +142,7 @@ class Model extends \Phalcon\Mvc\Model
             return false;
         }
         $model = new $this->translateModel();
-        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
+        $query = 'foreign_id = '.$this->getId().' AND lang = "'.LANG.'"';
         $params = ['conditions' => $query];
 
         if (self::$translateCache) {

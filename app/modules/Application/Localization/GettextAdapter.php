@@ -55,8 +55,8 @@ class GettextAdapter extends Adapter implements AdapterInterface
             throw new Exception('Parameter "directory" is required');
         }
 
-        putenv("LC_ALL=" . $options['locale']);
-        putenv("LC_LANG=" . $options['lang']);
+        putenv("LC_ALL=".$options['locale']);
+        putenv("LC_LANG=".$options['lang']);
         setlocale(LC_ALL, $options['locale']);
         bindtextdomain($options['file'], $options['directory']);
         textdomain($options['file']);
@@ -82,7 +82,7 @@ class GettextAdapter extends Adapter implements AdapterInterface
 
         if (is_array($placeholders)) {
             foreach ($placeholders as $key => $value) {
-                $translation = str_replace('%' . $key . '%', $value, $translation);
+                $translation = str_replace('%'.$key.'%', $value, $translation);
             }
         }
 

@@ -40,19 +40,19 @@ class LangSwitcher extends Component
                 $href = $url->get($url_args);
             } else {
                 $uri = $router->getRewriteUri();
-                $href = $uri . $requestQuery->getSymbol() . '?lang=' . $lang;
+                $href = $uri.$requestQuery->getSymbol().'?lang='.$lang;
             }
         } else {
             $uri = $router->getRewriteUri();
-            $href = $uri . $requestQuery->getSymbol() . '?lang=' . $lang;
+            $href = $uri.$requestQuery->getSymbol().'?lang='.$lang;
         }
 
         if ($lang == LANG) {
-            $html = '<span>' . $string . '</span>';
+            $html = '<span>'.$string.'</span>';
         } elseif ($view->disabledLang == $lang) {
-            $html = '<span class="disabled">' . $string . '</span>';
+            $html = '<span class="disabled">'.$string.'</span>';
         } else {
-            $html = '<a href="' . $href . '">' . $string . '</a>';
+            $html = '<a href="'.$href.'">'.$string.'</a>';
         }
 
         return $html;
@@ -64,10 +64,10 @@ class LangSwitcher extends Component
         $iso_array = Language::findCachedLanguagesIso();
         if (!empty($iso_array)) {
             foreach ($iso_array as $iso) {
-                $route_name = str_replace('_' . $iso, '', $route_name);
+                $route_name = str_replace('_'.$iso, '', $route_name);
             }
         }
-        return $route_name . '_' . $lang;
+        return $route_name.'_'.$lang;
     }
 
 } 

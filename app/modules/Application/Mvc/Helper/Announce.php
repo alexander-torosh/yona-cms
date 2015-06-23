@@ -19,7 +19,7 @@ class Announce
         }
 
         $textBr = str_replace(array("\r\n", "\r", "\n"), "<br>", $stringStriped);
-        $string   = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
+        $string = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
 
         if (mb_strlen($string, 'utf-8') < $num) {
             return $string;

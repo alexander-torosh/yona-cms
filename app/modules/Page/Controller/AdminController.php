@@ -46,7 +46,7 @@ class AdminController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success($this->helper->at('Page created'));
-                        return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                        return $this->redirect($this->url->get().'page/admin/edit/'.$model->getId().'?lang='.LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -70,7 +70,7 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id = (int)$id;
+        $id = (int) $id;
         $form = new PageForm();
         $model = Page::findFirst($id);
 
@@ -91,7 +91,7 @@ class AdminController extends Controller
                     $key = md5("Page::findFirst($query)");
                     $this->cache->delete($key);
 
-                    return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
+                    return $this->redirect($this->url->get().'page/admin/edit/'.$model->getId().'?lang='.LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -118,7 +118,7 @@ class AdminController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect($this->url->get() . 'page/admin');
+            $this->redirect($this->url->get().'page/admin');
         }
 
         $this->view->model = $model;

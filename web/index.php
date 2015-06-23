@@ -9,7 +9,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'index.php') || strpos($_SERVER['REQUEST_URI
         array('', '', ''),
         str_replace('?', '', $_SERVER['REQUEST_URI'])
     );
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . $replaced_url);
+    header('Location: http://'.$_SERVER['HTTP_HOST'].$replaced_url);
     exit;
 }
 

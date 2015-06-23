@@ -43,10 +43,10 @@ class TranslateController extends Controller
             $this->flash->success($this->helper->at('Saved has been successful'));
 
             $lang = LANG;
-            $key = HOST_HASH . md5("Translate::findByLang($lang)");
+            $key = HOST_HASH.md5("Translate::findByLang($lang)");
             $this->cache->delete($key);
 
-            return $this->redirect($this->url->get() . 'cms/translate?lang=' . LANG);
+            return $this->redirect($this->url->get().'cms/translate?lang='.LANG);
         }
 
         $scanner = new Scanner();

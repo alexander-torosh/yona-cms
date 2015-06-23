@@ -33,9 +33,9 @@ abstract class Form extends \Phalcon\Forms\Form
 
         if (count($messages)) {
             $html .= '<div class="ui error message">';
-            $html .= '<div class="header">' . $this->helper->translate('Ошибка валидации формы') . '</div>';
+            $html .= '<div class="header">'.$this->helper->translate('Ошибка валидации формы').'</div>';
             foreach ($messages as $message) {
-                $html .= '<p>' . $message . '</p>';
+                $html .= '<p>'.$message.'</p>';
             }
             $html .= '</div>';
         }
@@ -66,7 +66,7 @@ abstract class Form extends \Phalcon\Forms\Form
                 {
                     $html .= '<div class="inline field">';
                     if ($element->getLabel()) {
-                        $html .= '<label for="' . $element->getName() . '">' . $helper->translate($element->getLabel()) . '</label>';
+                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
@@ -76,7 +76,7 @@ abstract class Form extends \Phalcon\Forms\Form
                     {
                     $html .= '<div class="field">';
                     if ($element->getLabel()) {
-                        $html .= '<label for="' . $element->getName() . '">' . $helper->translate($element->getLabel()) . '</label>';
+                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
                     }
                     $html .= $element;
                     $html .= '</div>';
@@ -107,10 +107,10 @@ abstract class Form extends \Phalcon\Forms\Form
         $html = '<div class="form-group">';
 
         if ($element->getLabel()) {
-            $html .= '<label>' . $element->getLabel() . '</label>';
+            $html .= '<label>'.$element->getLabel().'</label>';
         }
         if ($element->getValue()) {
-            $html .= '<section onclick="selectText(this);">' . $element->getValue() . '</section>';
+            $html .= '<section onclick="selectText(this);">'.$element->getValue().'</section>';
         } else {
             $html .= '<br>';
         }
@@ -120,7 +120,7 @@ abstract class Form extends \Phalcon\Forms\Form
                                  style="width: 200px; min-height: 100px">';
 
         if ($element->getValue()) {
-            $html .= '<img src="' . $element->getValue() . '" width="200">';
+            $html .= '<img src="'.$element->getValue().'" width="200">';
         }
 
         $html .= '</div>

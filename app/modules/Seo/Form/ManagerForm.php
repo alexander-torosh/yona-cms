@@ -21,15 +21,15 @@ class ManagerForm extends Form
         $config = $this->getDi()->get('config');
         $modules = $config->modules->toArray();
         $modulesArray = array('' => ' - ');
-        foreach($modules as $module => $val) {
-            if (!in_array($module, array('cms','image','admin','widget','file-manager','seo','tree'))) {
+        foreach ($modules as $module => $val) {
+            if (!in_array($module, array('cms', 'image', 'admin', 'widget', 'file-manager', 'seo', 'tree'))) {
                 $modulesArray[$module] = $module;
             }
         }
 
         $languages = Language::findCachedLanguages();
         $languagesArray = array('' => ' - ');
-        foreach($languages as $lang) {
+        foreach ($languages as $lang) {
             $languagesArray[$lang->getIso()] = $lang->getName();
         }
 
@@ -39,7 +39,7 @@ class ManagerForm extends Form
         $this->add((new Select('module', $modulesArray))->setLabel('Module'));
         $this->add((new Text('controller'))->setLabel('Controller'));
         $this->add((new Text('action'))->setLabel('Action'));
-        $this->add((new Select('language', $languagesArray,array('data-description' => 'If the router is multilingual - Indicates the language')))->setLabel('Language'));
+        $this->add((new Select('language', $languagesArray, array('data-description' => 'If the router is multilingual - Indicates the language')))->setLabel('Language'));
         $this->add((new TextArea('route_params_json', array('data-description' => 'Example: {"type" : "news", "page" : 1}')))->setLabel('Route Parameters. JSON'));
         $this->add((new TextArea('query_params_json', array('data-description' => 'Example: {"limit" : 10, "display" : "table"}')))->setLabel('Parameters GET. JSON'));
         $this->add((new Text('head_title'))->setLabel('title'));

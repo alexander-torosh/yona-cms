@@ -9,7 +9,7 @@ class MobileDetectPlugin
 
     public function __construct($session, $view)
     {
-        require_once APPLICATION_PATH . '/../vendor/Mobile_Detect.php';
+        require_once APPLICATION_PATH.'/../vendor/Mobile_Detect.php';
         $detect = new Mobile_Detect();
 
         if (isset($_GET['mobile'])) {
@@ -37,7 +37,7 @@ class MobileDetectPlugin
         define('MOBILE_DEVICE', ($isMobile) ? true : false);
 
         if (MOBILE_DEVICE) {
-            $view->setMainView(MAIN_VIEW_PATH . 'mobile');
+            $view->setMainView(MAIN_VIEW_PATH.'mobile');
         }
     }
 
