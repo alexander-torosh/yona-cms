@@ -11,9 +11,9 @@ use Application\Mvc\ModelTranslate;
 class MenuTranslate extends ModelTranslate
 {
 
-    public function getSource()
-    {
-        return "menu_translate";
-    }
+	public function getSource()
+	{
+		return "menu_translate";
+	}
 
 }

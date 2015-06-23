@@ -3,14 +3,14 @@
 // Костыль для переадресаций index.php, index.html на соотв. роуты, пример: '/index.php/news' -> '/news'
 // Данное решение было сделано для облегчения настройки веб-сервера и выполнения SEO-требований
 if (strpos($_SERVER['REQUEST_URI'], 'index.php') || strpos($_SERVER['REQUEST_URI'], 'index.html')) {
-    header('HTTP/1.0 301 Moved Permanently');
-    $replaced_url = str_replace(
-        array('index.php/', 'index.php', 'index.html'),
-        array('', '', ''),
-        str_replace('?', '', $_SERVER['REQUEST_URI'])
-    );
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . $replaced_url);
-    exit;
+	header('HTTP/1.0 301 Moved Permanently');
+	$replaced_url = str_replace(
+		array('index.php/', 'index.php', 'index.html'),
+		array('', '', ''),
+		str_replace('?', '', $_SERVER['REQUEST_URI'])
+	);
+	header('Location: http://' . $_SERVER['HTTP_HOST'] . $replaced_url);
+	exit;
 }
 
 chdir(dirname(__DIR__));

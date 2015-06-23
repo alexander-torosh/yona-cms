@@ -11,9 +11,9 @@ use Application\Mvc\ModelTranslate;
 class CategoryTranslate extends ModelTranslate
 {
 
-    public function getSource()
-    {
-        return "tree_category_translate";
-    }
+	public function getSource()
+	{
+		return "tree_category_translate";
+	}
 
 }

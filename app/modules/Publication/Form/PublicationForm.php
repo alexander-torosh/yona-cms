@@ -21,50 +21,50 @@ use Publication\Model\Type;
 class PublicationForm extends Form
 {
 
-    public function initialize()
-    {
-        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']), []);
-        $type->setLabel('Type of Publication');
-        $this->add($type);
+	public function initialize()
+	{
+		$type = new Select('type_id', Type::cachedListArray(['key' => 'id']), []);
+		$type->setLabel('Type of Publication');
+		$this->add($type);
 
-        $title = new Text('title', ['required' => true]);
-        $title->addValidator(new PresenceOf([
-            'message' => 'Title can not be empty'
-        ]));
-        $title->setLabel($this->helper->at('Title'));
-        $this->add($title);
+		$title = new Text('title', ['required' => true]);
+		$title->addValidator(new PresenceOf([
+			'message' => 'Title can not be empty'
+		]));
+		$title->setLabel($this->helper->at('Title'));
+		$this->add($title);
 
-        $slug = new Text('slug');
-        $slug->setLabel('Slug');
-        $this->add($slug);
+		$slug = new Text('slug');
+		$slug->setLabel('Slug');
+		$this->add($slug);
 
-        $date = new Text('date');
-        $date->setLabel('Publication Date');
-        $this->add($date);
+		$date = new Text('date');
+		$date->setLabel('Publication Date');
+		$this->add($date);
 
-        $text = new TextArea('text');
-        $text->setLabel('Text');
-        $this->add($text);
+		$text = new TextArea('text');
+		$text->setLabel('Text');
+		$this->add($text);
 
-        $meta_title = new Text('meta_title', ['required' => true]);
-        $meta_title->setLabel('meta-title');
-        $this->add($meta_title);
+		$meta_title = new Text('meta_title', ['required' => true]);
+		$meta_title->setLabel('meta-title');
+		$this->add($meta_title);
 
-        $meta_description = new TextArea('meta_description');
-        $meta_description->setLabel('meta-description');
-        $this->add($meta_description);
+		$meta_description = new TextArea('meta_description');
+		$meta_description->setLabel('meta-description');
+		$this->add($meta_description);
 
-        $meta_keywords = new TextArea('meta_keywords');
-        $meta_keywords->setLabel('meta-keywords');
-        $this->add($meta_keywords);
+		$meta_keywords = new TextArea('meta_keywords');
+		$meta_keywords->setLabel('meta-keywords');
+		$this->add($meta_keywords);
 
-        $preview_inner = new Check('preview_inner');
-        $preview_inner->setLabel('Show preview image inside publication');
-        $this->add($preview_inner);
+		$preview_inner = new Check('preview_inner');
+		$preview_inner->setLabel('Show preview image inside publication');
+		$this->add($preview_inner);
 
-        $image = new Image('preview_src');
-        $image->setLabel('Thumbnail Image');
-        $this->add($image);
-    }
+		$image = new Image('preview_src');
+		$image->setLabel('Thumbnail Image');
+		$this->add($image);
+	}
 
 } 

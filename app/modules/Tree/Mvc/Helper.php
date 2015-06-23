@@ -12,9 +12,9 @@ use Tree\Model\Category;
 class Helper extends Component
 {
 
-    public function treeUpperLeafs($root)
-    {
-        return Category::treeUpperLeafs($root);
-    }
+	public function treeUpperLeafs($root)
+	{
+		return Category::treeUpperLeafs($root);
+	}
 
 }

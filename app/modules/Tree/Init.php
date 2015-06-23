@@ -12,9 +12,9 @@ use Tree\Mvc\Helper;
 class Init extends Component
 {
 
-    public function init()
-    {
-        $this->getDi()->set('tree_helper', new Helper());
-    }
+	public function init()
+	{
+		$this->getDi()->set('tree_helper', new Helper());
+	}
 
 }
