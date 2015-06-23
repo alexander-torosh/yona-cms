@@ -29,7 +29,7 @@ class Controller extends \Phalcon\Mvc\Controller
                 break;
         }
         header('Location: '.$url);
-        exit;
+        $this->response->send();
     }
 
     public function returnJSON($response)
@@ -39,7 +39,6 @@ class Controller extends \Phalcon\Mvc\Controller
         $this->response->setContentType('application/json', 'UTF-8');
         $this->response->setContent(json_encode($response));
         $this->response->send();
-
     }
 
     public function flashErrors($model)

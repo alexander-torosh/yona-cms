@@ -130,7 +130,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function announce($incomeString, $num)
     {
         $object = new \Application\Mvc\Helper\Announce();
-        return $object->announce($incomeString, $num);
+        return $object->getString($incomeString, $num);
     }
 
     public function dbProfiler()

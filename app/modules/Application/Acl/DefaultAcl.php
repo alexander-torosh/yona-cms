@@ -20,6 +20,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
         /**
          * Full list of Roles
          */
+        $roles = [];
         $roles['guest'] = new \Phalcon\Acl\Role('guest', 'Guest');
         $roles['member'] = new \Phalcon\Acl\Role('member', 'Member');
 

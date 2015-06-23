@@ -10,7 +10,7 @@ namespace YonaCMS;
 class Bootstrap
 {
 
-    public function init()
+    public function run()
     {
         $di = new \Phalcon\DI\FactoryDefault();
 

@@ -25,4 +25,4 @@ define('PUBLIC_PATH', __DIR__);
 
 require_once APPLICATION_PATH.'/Bootstrap.php';
 $bootstrap = new YonaCMS\Bootstrap();
-$bootstrap->init();
+$bootstrap->run();

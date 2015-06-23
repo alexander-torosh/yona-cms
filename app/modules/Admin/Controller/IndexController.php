@@ -92,13 +92,13 @@ class IndexController extends Controller
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $this->session->remove('auth');
-                $this->redirect($this->url->get());
             } else {
-                die("Security errors");
+                $this->flash->error("Security errors");
             }
         } else {
-            die("Security errors");
+            $this->flash->error("Security errors");
         }
+        $this->redirect($this->url->get());
     }
 
 }
