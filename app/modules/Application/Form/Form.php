@@ -16,7 +16,7 @@ use Application\Form\Element\Image;
 abstract class Form extends \Phalcon\Forms\Form
 {
 
-    private $helper;
+    protected $helper;
 
     public function renderDecorated($name)
     {
