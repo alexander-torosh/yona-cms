@@ -20,15 +20,13 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-page');
         Page::setTranslateCache(false);
-
     }
 
     public function indexAction()
     {
         $this->view->entries = Page::find();
 
-        $this->view->title = $this->helper->at('Manage Pages');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Pages'), true);
     }
 
     public function addAction()
@@ -58,14 +56,10 @@ class AdminController extends Controller
             }
         }
 
-        $helper = $this->di->get('helper');
-        $this->view->title = $helper->at('Manage Pages');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Pages'), true);
 
         $this->view->model = $model;
         $this->view->form = $form;
-
-
     }
 
     public function editAction($id)
@@ -104,8 +98,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = $this->helper->at('Edit Page');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Edit Page'), true);
     }
 
     public function deleteAction($id)
@@ -122,8 +115,7 @@ class AdminController extends Controller
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->at('Delete Page');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Delete Page'), true);
     }
 
 } 

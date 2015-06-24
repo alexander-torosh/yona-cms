@@ -53,8 +53,9 @@ class Bootstrap
 
         // Volt
         $volt = new \Application\Mvc\View\Engine\Volt($view, $di);
-        $volt->initCompiler();
         $volt->setOptions(['compiledPath' => APPLICATION_PATH.'/cache/volt/']);
+        $volt->initCompiler();
+
 
         $phtml = new \Phalcon\Mvc\View\Engine\Php($view, $di);
         $viewEngines = [

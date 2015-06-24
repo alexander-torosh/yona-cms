@@ -16,21 +16,21 @@ use Application\Form\Element\Image;
 abstract class Form extends \Phalcon\Forms\Form
 {
 
+    private $helper;
+
     public function renderDecorated($name)
     {
         if (!$this->has($name)) {
             return "form element '$name' not found<br />";
         }
 
-        $element = $this->get($name);
-
         /** @var \Application\Mvc\Helper $helper */
-        $helper = $this->getDI()->get('helper');
+        $this->helper = $this->getDI()->get('helper');
 
+        $element = $this->get($name);
         $messages = $this->getMessagesFor($element->getName());
 
         $html = '';
-
         if (count($messages)) {
             $html .= '<div class="ui error message">';
             $html .= '<div class="header">'.$this->helper->translate('Ошибка валидации формы').'</div>';
@@ -63,18 +63,14 @@ abstract class Form extends \Phalcon\Forms\Form
 
                 case $element instanceof File:
                     $html .= '<div class="inline field">';
-                    if ($element->getLabel()) {
-                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
-                    }
+                    $html .= $this->makeLabel($element);
                     $html .= $element;
                     $html .= '</div>';
                     break;
 
                 default:
                     $html .= '<div class="field">';
-                    if ($element->getLabel()) {
-                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
-                    }
+                    $html .= $this->makeLabel($element);
                     $html .= $element;
                     $html .= '</div>';
             }
@@ -95,8 +91,18 @@ abstract class Form extends \Phalcon\Forms\Form
         return $html;
     }
 
+    private function makeLabel($element)
+    {
+        if ($element->getLabel()) {
+            return '<label for="'.$element->getName().'">'.$this->helper->translate($element->getLabel()).'</label>';
+        } else {
+            return '';
+        }
+    }
+
     /**
      * @param Image $element
+     * @return string $html
      */
     private function renderImage($element)
     {
