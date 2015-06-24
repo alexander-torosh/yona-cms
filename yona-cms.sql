@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2015 at 12:30 PM
+-- Generation Time: Jun 24, 2015 at 12:00 PM
 -- Server version: 5.6.23
--- PHP Version: 5.6.9-1~dotdeb+7.1
+-- PHP Version: 5.6.10-1~dotdeb+7.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `preview_inner` enum('1','0') NOT NULL DEFAULT '1',
+  `preview_inner` enum('1','0') DEFAULT '1',
   `preview_src` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `publication_translate` (
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
 
 --
 -- Dumping data for table `publication_translate`
