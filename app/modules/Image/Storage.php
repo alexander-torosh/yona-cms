@@ -36,24 +36,27 @@ class Storage extends Component
 
     public function __construct(array $params = [], array $attributes = [])
     {
-        $id_result = $this->setIdFromParams($params);
-        if (!$id_result) {
-            return false;
-        }
+        $this->setIdFromParams($params);
+        $this->attributes = $attributes;
 
-        $this->image_hash = (isset($params['image_hash'])) ? $params['image_hash'] : null;
         $this->type = (isset($params['type'])) ? $params['type'] : 'publication';
         $this->strategy = (isset($params['strategy'])) ? $params['strategy'] : 'w';
+        $this->container = (isset($params['container'])) ? $params['container'] : false;
+        $this->image_hash = (isset($params['image_hash'])) ? $params['image_hash'] : null;
+        $this->hash = (isset($params['hash'])) ? $params['hash'] : false;
+
+        $this->setDimensionsAttributes($params);
+    }
+
+    private function setDimensionsAttributes(array $params = [])
+    {
         $this->width = (isset($params['width'])) ? $params['width'] : 100;
         $this->height = (isset($params['height'])) ? $params['height'] : null;
-        $this->container = (isset($params['container'])) ? $params['container'] : false;
-        $this->hash = (isset($params['hash'])) ? $params['hash'] : false;
 
         $this->widthHeight = (isset($params['widthHeight'])) ? $params['widthHeight'] : true;
         $this->widthHeight = (isset($params['widthHeight']) && MOBILE_DEVICE) ? false : true;
 
         $this->stretch = (isset($params['stretch'])) ? $params['stretch'] : null;
-        $this->attributes = $attributes;
     }
 
     private function setIdFromParams($params)
@@ -64,12 +67,10 @@ class Storage extends Component
             } else {
                 $this->id = $params['id'];
             }
-            return true;
         } else {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("ID не определен");
             }
-            return false;
         }
     }
 
