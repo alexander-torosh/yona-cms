@@ -59,7 +59,7 @@ class Helper extends \Phalcon\Mvc\User\Component
      */
     public function staticWidget($id)
     {
-        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH.md5("Widget::findFirst({$id})"))));
+        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH . md5("Widget::findFirst({$id})"))));
         if ($widget) {
             return $widget->getHtml();
         }
@@ -68,7 +68,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function langUrl($params)
     {
         $routeName = $params['for'];
-        $routeName = DefaultRouter::ML_PREFIX.$routeName.'_'.LANG;
+        $routeName = DefaultRouter::ML_PREFIX . $routeName . '_' . LANG;
         $params['for'] = $routeName;
         return $this->url->get($params);
     }
@@ -108,7 +108,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function error($code = 404)
     {
         $helper = new \Application\Mvc\Helper\ErrorReporting();
-        return $helper->{'error'.$code}();
+        return $helper->{'error' . $code}();
 
     }
 
@@ -176,7 +176,7 @@ class Helper extends \Phalcon\Mvc\User\Component
         $partialsDir = '';
         if ($module) {
             $moduleName = \Application\Utils\ModuleName::camelize($module);
-            $partialsDir = '../../../modules/'.$moduleName.'/views/';
+            $partialsDir = '../../../modules/' . $moduleName . '/views/';
         }
         $view->setPartialsDir($partialsDir);
 

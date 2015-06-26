@@ -145,7 +145,7 @@ class Language extends Model
 
     public static function cacheKey()
     {
-        return HOST_HASH.md5('Language::findCachedLanguages');
+        return HOST_HASH . md5('Language::findCachedLanguages');
     }
 
     public function getUpperSortorder()

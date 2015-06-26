@@ -67,7 +67,7 @@ class Page extends Model
     public static function findCachedBySlug($slug)
     {
         $query = "slug = '$slug'";
-        $key = HOST_HASH.md5("Page::findFirst($query)");
+        $key = HOST_HASH . md5("Page::findFirst($query)");
         $page = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
         return $page;
     }

@@ -9,7 +9,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'index.php') || strpos($_SERVER['REQUEST_URI
         array('', '', ''),
         str_replace('?', '', $_SERVER['REQUEST_URI'])
     );
-    header('Location: http://'.$_SERVER['HTTP_HOST'].$replaced_url);
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . $replaced_url);
     exit;
 }
 
@@ -20,9 +20,9 @@ define('HOST_HASH', substr(md5($_SERVER['HTTP_HOST']), 0, 12));
 
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-define('APPLICATION_PATH', (APPLICATION_ENV == 'development') ? __DIR__.'/../app' : __DIR__.'/../app');
+define('APPLICATION_PATH', (APPLICATION_ENV == 'development') ? __DIR__ . '/../app' : __DIR__ . '/../app');
 define('PUBLIC_PATH', __DIR__);
 
-require_once APPLICATION_PATH.'/Bootstrap.php';
+require_once APPLICATION_PATH . '/Bootstrap.php';
 $bootstrap = new YonaCMS\Bootstrap();
 $bootstrap->run();

@@ -119,8 +119,8 @@ class Model extends \Phalcon\Mvc\Model
         if (!$this->getId()) {
             return false;
         }
-        $query = 'foreign_id = '.$this->getId().' AND lang = "'.LANG.'"';
-        $key = HOST_HASH.md5($this->getSource().'_translate '.$query);
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
+        $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
         return $key;
     }
 
@@ -142,7 +142,7 @@ class Model extends \Phalcon\Mvc\Model
             return false;
         }
         $model = new $this->translateModel();
-        $query = 'foreign_id = '.$this->getId().' AND lang = "'.LANG.'"';
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
         $params = ['conditions' => $query];
 
         if (self::$translateCache) {

@@ -43,7 +43,7 @@ class LanguageController extends Controller
                 if ($model->save()) {
                     $this->cache->delete(Language::cacheKey());
                     $this->flash->success($this->helper->at('Updated has been successful'));
-                    return $this->redirect($this->url->get().'cms/language');
+                    return $this->redirect($this->url->get() . 'cms/language');
                 } else {
                     $this->flashErrors($model);
                 }
@@ -72,7 +72,7 @@ class LanguageController extends Controller
                     $model->setOnlyOnePrimary();
                     $this->flash->success($this->helper->at('Updated has been successful'));
                     $this->cache->delete(Language::cacheKey());
-                    return $this->redirect($this->url->get().'cms/language/edit/'.$model->getId());
+                    return $this->redirect($this->url->get() . 'cms/language/edit/' . $model->getId());
                 } else {
                     $this->flashErrors($model);
                 }
@@ -97,7 +97,7 @@ class LanguageController extends Controller
         if ($this->request->isPost()) {
             $this->cache->delete(Language::cacheKey());
             $model->delete();
-            return $this->redirect($this->url->get().'cms/language');
+            return $this->redirect($this->url->get() . 'cms/language');
         }
 
         $this->view->model = $model;

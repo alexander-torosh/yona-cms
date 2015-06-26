@@ -44,7 +44,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
         /**
          * Include resources permissions list from file /app/config/acl.php
          */
-        $resources = include APPLICATION_PATH.'/config/acl.php';
+        $resources = include APPLICATION_PATH . '/config/acl.php';
 
         foreach ($resources as $roles_resources) {
             foreach ($roles_resources as $resource => $actions) {

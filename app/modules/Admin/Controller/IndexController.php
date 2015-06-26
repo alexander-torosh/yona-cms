@@ -25,7 +25,7 @@ class IndexController extends Controller
         $auth = $this->session->get('auth');
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
             $this->flash->notice($this->helper->at('Log in please'));
-            $this->redirect($this->url->get().'admin/index/login');
+            $this->redirect($this->url->get() . 'admin/index/login');
         }
 
         // Проверка пользователя yona
@@ -35,7 +35,7 @@ class IndexController extends Controller
         }
 
         if ($this->registry->cms['DISPLAY_CHANGELOG']) {
-            $changelog = file_get_contents(APPLICATION_PATH.'/../CHANGELOG.md');
+            $changelog = file_get_contents(APPLICATION_PATH . '/../CHANGELOG.md');
             $changelog_html = Markdown::defaultTransform($changelog);
             $this->view->changelog = $changelog_html;
         }
@@ -63,7 +63,7 @@ class IndexController extends Controller
                             if ($user->isActive()) {
                                 $this->session->set('auth', $user->getAuthData());
                                 $this->flash->success($this->helper->translate("Welcome to the administrative control panel!"));
-                                return $this->redirect($this->url->get().'admin');
+                                return $this->redirect($this->url->get() . 'admin');
                             } else {
                                 $this->flash->error($this->helper->translate("User is not activated yet"));
                             }

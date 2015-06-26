@@ -75,7 +75,7 @@ class AdminController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success($this->helper->at('Publication created'));
-                        return $this->redirect($this->url->get().'publication/admin/edit/'.$model->getId().'?lang='.LANG);
+                        return $this->redirect($this->url->get() . 'publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -96,7 +96,7 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id = (int)$id;
+        $id = (int) $id;
         $form = new PublicationForm();
         $model = Publication::findFirst($id);
 
@@ -113,7 +113,7 @@ class AdminController extends Controller
                     $this->uploadImage($model);
                     $this->flash->success($this->helper->at('Publication edited'));
 
-                    return $this->redirect($this->url->get().'publication/admin/edit/'.$model->getId().'?lang='.LANG);
+                    return $this->redirect($this->url->get() . 'publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -136,9 +136,9 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $model->delete();
             if ($model->getType_id()) {
-                $this->redirect($this->url->get().'publication/admin/'.$model->getType()->getSlug());
+                $this->redirect($this->url->get() . 'publication/admin/' . $model->getType()->getSlug());
             } else {
-                $this->redirect($this->url->get().'publication/admin');
+                $this->redirect($this->url->get() . 'publication/admin');
             }
         }
 

@@ -12,21 +12,21 @@ class Config
     public static function get()
     {
 
-        $application = include_once APPLICATION_PATH.'/config/'.APPLICATION_ENV.'/application.php';
+        $application = include_once APPLICATION_PATH . '/config/' . APPLICATION_ENV . '/application.php';
 
         $config_default = [
             'loader'    => [
                 'namespaces' => [
-                    'YonaCMS\Plugin' => APPLICATION_PATH.'/plugins/',
-                    'Application'    => APPLICATION_PATH.'/modules/Application',
-                    'Cms'            => APPLICATION_PATH.'/modules/Cms',
-                    'Michelf'        => APPLICATION_PATH.'/../vendor/php-markdown-lib/Michelf',
+                    'YonaCMS\Plugin' => APPLICATION_PATH . '/plugins/',
+                    'Application'    => APPLICATION_PATH . '/modules/Application',
+                    'Cms'            => APPLICATION_PATH . '/modules/Cms',
+                    'Michelf'        => APPLICATION_PATH . '/../vendor/php-markdown-lib/Michelf',
                 ],
             ],
             'modules'   => [
                 'cms' => [
                     'className' => 'Cms\Module',
-                    'path'      => APPLICATION_PATH.'/modules/Cms/Module.php'
+                    'path'      => APPLICATION_PATH . '/modules/Cms/Module.php'
                 ],
             ],
             'base_path' => (isset($application['base_path'])) ? $application['base_path'] : null,
@@ -36,11 +36,11 @@ class Config
             'assets'    => (isset($application['assets'])) ? $application['assets'] : null,
         ];
 
-        $global = include_once APPLICATION_PATH.'/config/global.php';
+        $global = include_once APPLICATION_PATH . '/config/global.php';
 
         // Modules configuration list
-        $modules_list = include_once APPLICATION_PATH.'/config/modules.php';
-        require_once APPLICATION_PATH.'/modules/Application/Loader/Modules.php';
+        $modules_list = include_once APPLICATION_PATH . '/config/modules.php';
+        require_once APPLICATION_PATH . '/modules/Application/Loader/Modules.php';
         $modules = new \Application\Loader\Modules();
         $modules_config = $modules->modulesConfig($modules_list);
 

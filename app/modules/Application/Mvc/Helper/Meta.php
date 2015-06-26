@@ -33,7 +33,7 @@ class Meta extends \Phalcon\Mvc\User\Component
         if (array_key_exists($name, self::$storage)) {
             $content = self::$storage[$name];
             $escaper = new \Phalcon\Escaper();
-            return '<meta name="'.$name.'" content="'.$escaper->escapeHtml($content).'">';
+            return '<meta name="' . $name . '" content="' . $escaper->escapeHtml($content) . '">';
         }
     }
 

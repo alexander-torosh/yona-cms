@@ -25,7 +25,7 @@ class Proxy extends \Phalcon\Mvc\User\Component
         $this->namespace = $namespace;
 
         ucfirst($namespace);
-        $class = $namespace.'\\Widget\\'.$namespace.'Widget';
+        $class = $namespace . '\\Widget\\' . $namespace . 'Widget';
         $this->object = new $class();
         $this->object->setModule($namespace);
 
@@ -54,7 +54,7 @@ class Proxy extends \Phalcon\Mvc\User\Component
         try {
             if ($this->cacheEnabled) {
                 $paramsString = md5(serialize($params));
-                $cacheKey = md5($this->namespace.'::'.$method.$paramsString.LANG.(string) MOBILE_DEVICE);
+                $cacheKey = md5($this->namespace . '::' . $method . $paramsString . LANG . (string) MOBILE_DEVICE);
                 $results = self::$cache->get($cacheKey);
                 if (!$results) {
                     if (method_exists($this->object, $method)) {
@@ -68,7 +68,7 @@ class Proxy extends \Phalcon\Mvc\User\Component
                             return $results;
                         }
                     } else {
-                        echo $this->namespace.'Widget::'.$method.' not exists';
+                        echo $this->namespace . 'Widget::' . $method . ' not exists';
                     }
                 } else {
                     if ($results == self::NULLCACHE) {
@@ -82,7 +82,7 @@ class Proxy extends \Phalcon\Mvc\User\Component
             }
         } catch (\Exception $e) {
             $this->cacheEnabled = false;
-            echo '<!--'.htmlspecialchars('Error. '.$this->namespace.'Widget::'.$method.'. '.$e->getMessage()).'-->';
+            echo '<!--' . htmlspecialchars('Error. ' . $this->namespace . 'Widget::' . $method . '. ' . $e->getMessage()) . '-->';
         }
 
     }

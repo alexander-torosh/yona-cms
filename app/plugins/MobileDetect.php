@@ -12,7 +12,7 @@ class MobileDetect
 
     public function __construct($session, $view, $request)
     {
-        require_once APPLICATION_PATH.'/../vendor/Mobile_Detect.php';
+        require_once APPLICATION_PATH . '/../vendor/Mobile_Detect.php';
         $detect = new \Mobile_Detect();
 
         $mobile = $request->getQuery('mobile');
@@ -39,7 +39,7 @@ class MobileDetect
         define('MOBILE_DEVICE', ($isMobile) ? true : false);
 
         if (MOBILE_DEVICE) {
-            $view->setMainView(MAIN_VIEW_PATH.'mobile');
+            $view->setMainView(MAIN_VIEW_PATH . 'mobile');
         }
     }
 
