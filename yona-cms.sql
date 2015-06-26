@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 24, 2015 at 12:00 PM
+-- Generation Time: Jun 26, 2015 at 09:10 AM
 -- Server version: 5.6.23
 -- PHP Version: 5.6.10-1~dotdeb+7.3
 
@@ -487,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `translation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `translate`
@@ -497,7 +497,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (1, 'ru', 'Ошибка валидации формы', 'Ошибка валидации формы'),
 (2, 'ru', 'Подробнее', 'Подробнее'),
 (3, 'ru', 'Назад к перечню публикаций', 'Назад к перечню публикаций'),
-(4, 'ru', 'SITE NAME', 'Yona CMS'),
+(4, 'ru', 'SITE NAME', 'Yona CMS Русская версия'),
 (5, 'ru', 'Главная', 'Главная'),
 (6, 'ru', 'Новости', 'Новости'),
 (7, 'ru', 'Контакты', 'Контакты'),
@@ -511,7 +511,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (15, 'uk', 'Ошибка валидации формы', 'Помилка валідації форми'),
 (16, 'uk', 'Подробнее', 'Детальніше'),
 (17, 'uk', 'Назад к перечню публикаций', 'Повернутись до переліку публікацій'),
-(18, 'uk', 'SITE NAME', 'Yona CMS'),
+(18, 'uk', 'SITE NAME', 'Yona CMS Українська версія'),
 (19, 'uk', 'Главная', 'Головна'),
 (20, 'uk', 'Новости', 'Новини'),
 (21, 'uk', 'Контакты', 'Контакти'),
@@ -559,7 +559,13 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (63, 'uk', 'Design', 'Design'),
 (64, 'en', 'Latest news', 'Latest news'),
 (65, 'ru', 'Latest news', 'Последние новости'),
-(66, 'uk', 'Latest news', 'Останні новини');
+(66, 'uk', 'Latest news', 'Останні новини'),
+(67, 'en', 'Entries not found', 'Entries not found'),
+(68, 'en', 'Back to publications list', 'Back to publications list'),
+(69, 'uk', 'Entries not found', 'Записів не знайдено'),
+(70, 'uk', 'Back to publications list', 'Повернутись до переліку публікацій'),
+(71, 'ru', 'Entries not found', 'Записи не найдены'),
+(72, 'ru', 'Back to publications list', 'Обратно к перечню публикаций');
 
 -- --------------------------------------------------------
 

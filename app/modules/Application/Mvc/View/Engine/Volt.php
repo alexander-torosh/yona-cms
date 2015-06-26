@@ -19,7 +19,7 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
             return '$this->helper';
         });
         $compiler->addFunction('translate', function ($resolvedArgs) {
-            return '$this->helper->translate('.$resolvedArgs.')';
+            return '$this->helper->translate(\'.$resolvedArgs.\')';
         });
         $compiler->addFunction('langUrl', function ($resolvedArgs) {
             return '$this->helper->langUrl('.$resolvedArgs.')';

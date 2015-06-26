@@ -1,16 +1,16 @@
 <ul id="menu">
-    {{ helper.menu.item( translate('Home'), 'index', langUrl(['for':'index']) ) }}
-    {{ helper.menu.item( translate('News'), 'news', langUrl(['for':'publications', 'type':'news']) ) }}
-    {{ helper.menu.item( translate('Articles'), 'articles', langUrl(['for':'publications', 'type':'articles']) ) }}
-    {{ helper.menu.item( translate('Contacts'), 'contacts', langUrl(['for':'contacts']) ) }}
-    {{ helper.menu.item( translate('Admin'), null, url(['for':'admin']), ['li':['class':'last'], 'a':['class':'noajax']] ) }}
+    {{ helper.menu.item( helper.translate('Home'), 'index', helper.langUrl(['for':'index']) ) }}
+    {{ helper.menu.item( helper.translate('News'), 'news', helper.langUrl(['for':'publications', 'type':'news']) ) }}
+    {{ helper.menu.item( helper.translate('Articles'), 'articles', helper.langUrl(['for':'publications', 'type':'articles']) ) }}
+    {{ helper.menu.item( helper.translate('Contacts'), 'contacts', helper.langUrl(['for':'contacts']) ) }}
+    {{ helper.menu.item( helper.translate('Admin'), null, url(['for':'admin']), ['li':['class':'last'], 'a':['class':'noajax']] ) }}
     {#
         submenu items exampple:
 
-        {{ helper.menu.item( translate('Services'), 'services', langUrl(['for':'services']), [],
+        {{ helper.menu.item( 'Services', 'services', langUrl(['for':'services']), [],
         [
-            helper.menu.item( translate('Printing'), 'printing', langUrl(['for':'printing']) ),
-            helper.menu.item( translate('Design'), 'design', langUrl(['for':'design']) )
+            helper.menu.item( 'Printing', 'printing', langUrl(['for':'printing']) ),
+            helper.menu.item( 'Design', 'design', langUrl(['for':'design']) )
         ]
         ) }}
 
