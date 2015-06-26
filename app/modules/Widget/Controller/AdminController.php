@@ -14,6 +14,8 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-widget');
 
+        $this->view->languages_disabled = true;
+
     }
 
     public function indexAction()

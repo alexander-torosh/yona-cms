@@ -24,7 +24,6 @@ abstract class Form extends \Phalcon\Forms\Form
             return "form element '$name' not found<br />";
         }
 
-        /** @var \Application\Mvc\Helper $helper */
         $this->helper = $this->getDI()->get('helper');
 
         $element = $this->get($name);
@@ -122,7 +121,8 @@ abstract class Form extends \Phalcon\Forms\Form
                                  style="width: 200px; min-height: 100px">';
 
         if ($element->getValue()) {
-            $html .= '<img src="' . $element->getValue() . '" width="200">';
+            $url = $this->getDI()->get('url');
+            $html .= '<img src="' . $url->path() . $element->getValue() . '" width="200">';
         }
 
         $html .= '</div>

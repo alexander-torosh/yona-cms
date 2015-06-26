@@ -39,6 +39,7 @@ class Localization extends Plugin
         }
         if (!defined('LANG')) {
             define('LANG', $defaultLang->getIso());
+            \Application\Mvc\Model::$lang = $defaultLang->getIso();
         }
         if (!defined('LANG_URL')) {
             define('LANG_URL', $defaultLang->getUrl());

@@ -34,7 +34,7 @@ class WidgetForm extends Form
         $title->setLabel('Title');
 
         $html = new TextArea("html");
-        $html->setLabel('HTML (multilingual)');
+        $html->setLabel('HTML');
 
         $this->add($id);
         $this->add($title);

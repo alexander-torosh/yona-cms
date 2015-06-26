@@ -13,7 +13,7 @@ class Model extends \Phalcon\Mvc\Model
 
     protected $translations = []; // Массив переводов
 
-    private static $lang = 'en'; // Язык по-умолчанию
+    public static $lang = 'en'; // Язык по-умолчанию
     private static $translateCache = true; // Флаг использования кеша переводов
 
     /**
@@ -34,7 +34,7 @@ class Model extends \Phalcon\Mvc\Model
     public function afterFetch()
     {
         if ($this->translateModel && defined('LANG')) {
-// Если есть массив переводов и установлена константа активного языка
+            // Если есть массив переводов и установлена константа активного языка
             self::setLang(LANG); // Устанавливаем текущий язык
             $this->getTranslations(); // Извлекаем переводы со связанной таблицы переводов
         }
