@@ -108,8 +108,6 @@ class Configuration extends \Phalcon\Mvc\Model
     {
         if (array_key_exists($key, self::$keys)) {
             $this->key = $key;
-        } else {
-            die($key . ' does not exists in Configuration\Model\Configuration::$keys');
         }
     }
 

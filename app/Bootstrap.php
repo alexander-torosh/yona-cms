@@ -325,7 +325,9 @@ class Bootstrap
         $response = $di['response'];
 
         // AJAX
-        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
+        $request = $di['request'];
+        $_ajax = $request->getQuery('_ajax');
+        if ($_ajax) {
             $contents = $view->getContent();
 
             $return = new \stdClass();

@@ -37,7 +37,7 @@ class SeoManager extends Plugin
         $request_params = $request->getQuery();
         unset($request_params['_url']);
 
-        $match_url_entry = $this->matchingUrl($_SERVER['REQUEST_URI']);
+        $match_url_entry = $this->matchingUrl($request->getURI());
 
         if ($match_url_entry) {
             $this->pick($match_url_entry);

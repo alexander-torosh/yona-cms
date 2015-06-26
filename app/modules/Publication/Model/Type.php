@@ -103,7 +103,7 @@ class Type extends Model
                     $list[$el->getSlug()] = $value;
                 }
             }
-            $cache->save($key, $list, 60);
+            $cache->save($key, $list, 120);
         }
 
         return $list;
@@ -111,18 +111,16 @@ class Type extends Model
 
     public static function getCachedBySlug($slug)
     {
-        $cache = DI::getDefault()->get('cache');
-        $key = self::cacheSlugKey($slug);
-        $data = $cache->get($key);
-        if (!$data) {
-            $data = self::findFirst([
-                'slug = :slug:',
-                'bind'  => [
-                    'slug' => $slug,
-                ],
-            ]);
-            $cache->save($key, $data, 60);
-        }
+        $data = self::findFirst([
+            'slug = :slug:',
+            'bind' => [
+                'slug' => $slug,
+            ],
+            'cache' => [
+                'key' => self::cacheSlugKey($slug),
+                'lifetime' => 120,
+            ]
+        ]);
 
         return $data;
     }

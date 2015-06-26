@@ -321,15 +321,15 @@ class Storage extends Component
             $image->setOptions($options);
         }
         switch ($this->strategy) {
-            case 'w' :
+            case 'w':
                 // Масштабируем по ширине
                 $image->resize($this->width);
                 break;
-            case 'wh' :
+            case 'wh':
                 // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
                 $image->resize($this->width, $this->height);
                 break;
-            case 'a' :
+            case 'a':
                 // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
                 $image->adaptiveResize($this->width, $this->height);
                 break;

@@ -106,7 +106,8 @@ class AdminController extends Controller
         $model = Page::findFirst($id);
 
         if ($model->getSlug() == 'index') {
-            die($this->helper->at('Index page can not be removed'));
+            $this->flash->error($this->helper->at('Index page can not be removed'));
+            return $this->redirect($this->url->get() . 'page/admin');
         }
 
         if ($this->request->isPost()) {

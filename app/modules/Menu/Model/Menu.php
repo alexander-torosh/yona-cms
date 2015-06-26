@@ -3,6 +3,7 @@
  * @copyright Copyright (c) 2011 - 2015 Oleksandr Torosh (http://yonastudio.com)
  * @author Oleksandr Torosh <webtorua@gmail.com>
  */
+namespace Menu\Model\Menu;
 
 use \Application\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
