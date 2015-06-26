@@ -47,7 +47,7 @@ class ManagerController extends Controller
                     $form->bind($post, $model);
                     if ($model->update()) {
                         $this->flash->success('This entry was posted');
-                        $this->redirect($this->url->get().'seo/manager');
+                        $this->redirect($this->url->get() . 'seo/manager');
                     } else {
                         $this->flashErrors($model);
                     }
@@ -79,7 +79,7 @@ class ManagerController extends Controller
                 if ($model->save()) {
                     $this->cache->delete(Manager::routeCacheKey($model->getRoute(), LANG));
                     $this->flash->success('SEO record edited');
-                    $this->redirect($this->url->get().'seo/manager/edit/'.$id);
+                    $this->redirect($this->url->get() . 'seo/manager/edit/' . $id);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -104,7 +104,7 @@ class ManagerController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect($this->url->get().'seo/manager');
+            $this->redirect($this->url->get() . 'seo/manager');
         }
 
         $this->view->model = $model;

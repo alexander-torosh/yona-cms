@@ -14,7 +14,7 @@ class ErrorReporting extends \Phalcon\Mvc\User\Component
     {
         $response = $this->getDi()->get('response');
         $response->setHeader(404, 'Not Found');
-        $response->setContent(include __DIR__.'/../../../Index/views/error/404.phtml');
+        $response->setContent(include __DIR__ . '/../../../Index/views/error/404.phtml');
 
     }
 
@@ -22,7 +22,7 @@ class ErrorReporting extends \Phalcon\Mvc\User\Component
     {
         $response = $this->getDi()->get('response');
         $response->setHeader(503, 'Service Unavailable');
-        $response->setContent(include __DIR__.'/../../../Index/views/error/503.phtml');
+        $response->setContent(include __DIR__ . '/../../../Index/views/error/503.phtml');
 
     }
 

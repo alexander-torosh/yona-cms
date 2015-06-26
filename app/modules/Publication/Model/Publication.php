@@ -64,7 +64,7 @@ class Publication extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Страница с такой транслитерацией = '".$this->slug."' уже существует"
+                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
             ]
         ));
 
@@ -101,7 +101,7 @@ class Publication extends Model
 
     public static function cacheSlugKey($slug)
     {
-        $key = HOST_HASH.md5('Publication\Model\Publication; slug = '.$slug);
+        $key = HOST_HASH . md5('Publication\Model\Publication; slug = ' . $slug);
         return $key;
     }
 

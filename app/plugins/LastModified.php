@@ -26,7 +26,7 @@ class LastModified extends Plugin
         }
 
         if ($IfModifiedSince !== null && $IfModifiedSince >= $LastModified_unix) {
-            header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
+            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             $this->response->send();
         }
 

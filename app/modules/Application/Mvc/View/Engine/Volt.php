@@ -22,13 +22,13 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
             return '$this->helper->translate(\'.$resolvedArgs.\')';
         });
         $compiler->addFunction('langUrl', function ($resolvedArgs) {
-            return '$this->helper->langUrl('.$resolvedArgs.')';
+            return '$this->helper->langUrl(' . $resolvedArgs . ')';
         });
         $compiler->addFunction('image', function ($resolvedArgs) {
-            return '(new \Image\Storage('.$resolvedArgs.'))';
+            return '(new \Image\Storage(' . $resolvedArgs . '))';
         });
         $compiler->addFunction('widget', function ($resolvedArgs) {
-            return '(new \Application\Widget\Proxy('.$resolvedArgs.'))';
+            return '(new \Application\Widget\Proxy(' . $resolvedArgs . '))';
         });
 
         $compiler->addFunction('substr', 'substr');

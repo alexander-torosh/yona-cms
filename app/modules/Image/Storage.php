@@ -63,7 +63,7 @@ class Storage extends Component
     {
         if (isset($params['id'])) {
             if (preg_match('/^\d+$/', $params['id'])) {
-                $this->id = (int)$params['id'];
+                $this->id = (int) $params['id'];
             } else {
                 $this->id = $params['id'];
             }

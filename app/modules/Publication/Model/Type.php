@@ -50,7 +50,7 @@ class Type extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Тип публикаций с таким URL раздела = '".$this->slug."' существует"
+                "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' существует"
             ]
         ));
 
@@ -129,12 +129,12 @@ class Type extends Model
 
     public static function cacheSlugKey($slug)
     {
-        return HOST_HASH.md5('Publication\Model\Type; slug = '.$slug);
+        return HOST_HASH . md5('Publication\Model\Type; slug = ' . $slug);
     }
 
     public static function cacheListKey($params)
     {
-        return HOST_HASH.md5('Publication\Model\Type; list; '.serialize($params));
+        return HOST_HASH . md5('Publication\Model\Type; list; ' . serialize($params));
     }
 
     /**

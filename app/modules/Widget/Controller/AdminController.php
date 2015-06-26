@@ -33,7 +33,7 @@ class AdminController extends Controller
             $form->bind($_POST, $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect($this->url->get().'widget/admin/edit/'.$widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -57,7 +57,7 @@ class AdminController extends Controller
         $id = $this->filter->sanitize($id, "string");
         $widget = Widget::findFirst(["id = '$id'"]);
         if (!$widget) {
-            $this->redirect($this->url->get().'widget/admin/add');
+            $this->redirect($this->url->get() . 'widget/admin/add');
         }
 
         $form = new WidgetForm();
@@ -67,7 +67,7 @@ class AdminController extends Controller
             $form->bind($_POST, $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect($this->url->get().'widget/admin/edit/'.$widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -93,7 +93,7 @@ class AdminController extends Controller
 
             if ($this->request->isPost()) {
                 $model->delete();
-                $this->redirect($this->url->get().'widget/admin/index');
+                $this->redirect($this->url->get() . 'widget/admin/index');
             }
 
             $this->view->model = $model;

@@ -32,7 +32,7 @@ class ConfigurationController extends Controller
             if ($form->isValid($post)) {
                 if ($this->saveFormData($post)) {
                     $this->flash->success($this->helper->at('Configuration saved'));
-                    $this->redirect($this->url->get().'cms/configuration');
+                    $this->redirect($this->url->get() . 'cms/configuration');
                 }
             } else {
                 $this->flashErrors($form);

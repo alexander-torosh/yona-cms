@@ -33,7 +33,7 @@ class AdminUser extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        require_once __DIR__.'/../../../../vendor/password.php';
+        require_once __DIR__ . '/../../../../vendor/password.php';
     }
 
     public function setCheckboxes($post)
@@ -168,7 +168,7 @@ class AdminUser extends \Phalcon\Mvc\Model
             'bind'       => ['id' => $id],
             'columns'    => ['role'],
             'cache'      => [
-                'key'      => HOST_HASH.md5('Admin\Model\AdminUser::getRoleById::'.$id),
+                'key'      => HOST_HASH . md5('Admin\Model\AdminUser::getRoleById::' . $id),
                 'lifetime' => 60,
             ]
         ]);

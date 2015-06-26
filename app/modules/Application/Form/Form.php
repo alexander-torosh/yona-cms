@@ -33,9 +33,9 @@ abstract class Form extends \Phalcon\Forms\Form
         $html = '';
         if (count($messages)) {
             $html .= '<div class="ui error message">';
-            $html .= '<div class="header">'.$this->helper->translate('Ошибка валидации формы').'</div>';
+            $html .= '<div class="header">' . $this->helper->translate('Ошибка валидации формы') . '</div>';
             foreach ($messages as $message) {
-                $html .= '<p>'.$message.'</p>';
+                $html .= '<p>' . $message . '</p>';
             }
             $html .= '</div>';
         }
@@ -94,7 +94,7 @@ abstract class Form extends \Phalcon\Forms\Form
     private function makeLabel($element)
     {
         if ($element->getLabel()) {
-            return '<label for="'.$element->getName().'">'.$this->helper->translate($element->getLabel()).'</label>';
+            return '<label for="' . $element->getName() . '">' . $this->helper->translate($element->getLabel()) . '</label>';
         } else {
             return '';
         }
@@ -109,10 +109,10 @@ abstract class Form extends \Phalcon\Forms\Form
         $html = '<div class="form-group">';
 
         if ($element->getLabel()) {
-            $html .= '<label>'.$element->getLabel().'</label>';
+            $html .= '<label>' . $element->getLabel() . '</label>';
         }
         if ($element->getValue()) {
-            $html .= '<section onclick="selectText(this);">'.$element->getValue().'</section>';
+            $html .= '<section onclick="selectText(this);">' . $element->getValue() . '</section>';
         } else {
             $html .= '<br>';
         }
@@ -122,7 +122,7 @@ abstract class Form extends \Phalcon\Forms\Form
                                  style="width: 200px; min-height: 100px">';
 
         if ($element->getValue()) {
-            $html .= '<img src="'.$element->getValue().'" width="200">';
+            $html .= '<img src="' . $element->getValue() . '" width="200">';
         }
 
         $html .= '</div>
@@ -130,7 +130,7 @@ abstract class Form extends \Phalcon\Forms\Form
                             <span class="btn btn-default btn-file">
                                 <span class="fileinput-new">Select image</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input type="file" name="'.$element->getName().'">
+                                <input type="file" name="'.$element->getName() . '">
                             </span>
                             <a href="#" class="btn btn-default fileinput-exists"
                                data-dismiss="fileinput">Remove</a>
