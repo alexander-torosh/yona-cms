@@ -4,9 +4,9 @@
      * @author Oleksandr Torosh <web@wezoom.net>
      */
 
-namespace Application\Mvc;
+namespace Application\Mvc\Model;
 
-class ModelTranslate extends \Phalcon\Mvc\Model
+class Translate extends \Phalcon\Mvc\Model
 {
 
     public $id;

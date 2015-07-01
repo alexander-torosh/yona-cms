@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2015 at 09:10 AM
+-- Generation Time: Jul 01, 2015 at 05:52 PM
 -- Server version: 5.6.23
 -- PHP Version: 5.6.10-1~dotdeb+7.3
 
@@ -249,18 +249,18 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `preview_src` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `publication`
 --
 
 INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`, `preview_src`) VALUES
-(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-05 14:50:14', '2014-08-19 00:00:00', '0', '/img/original/publication/0/1.jpg'),
-(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-18 16:15:43', '2014-08-21 00:00:00', '1', '/img/original/publication/0/2.jpg'),
-(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-05 15:19:19', '2014-11-05 00:00:00', '1', '/img/original/publication/0/3.jpg'),
-(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-05 14:50:32', '2014-11-06 00:00:00', '0', '/img/original/publication/0/4.jpg'),
-(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-17 09:37:34', '2015-06-05 14:32:44', '0', '/img/original/publication/0/5.jpg');
+(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-26 16:48:36', '2014-08-19 00:00:00', '0', 'img/original/publication/0/1.jpg'),
+(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-26 16:48:44', '2014-08-21 00:00:00', '1', 'img/original/publication/0/2.jpg'),
+(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-26 16:48:53', '2014-11-05 00:00:00', '1', 'img/original/publication/0/3.jpg'),
+(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-26 16:49:02', '2014-11-06 00:00:00', '0', 'img/original/publication/0/4.jpg'),
+(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-30 17:12:13', '2015-06-05 14:32:44', '0', 'img/original/publication/0/5.jpg');
 
 -- --------------------------------------------------------
 
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `publication_translate` (
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=86 ;
 
 --
 -- Dumping data for table `publication_translate`
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `publication_type` (
   `slug` varchar(50) DEFAULT NULL,
   `limit` int(4) DEFAULT NULL,
   `format` enum('list','grid') DEFAULT NULL,
-  `display_date` enum('0','1') NOT NULL DEFAULT '0',
+  `display_date` enum('0','1') DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `publication_type_translate` (
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=85 ;
 
 --
 -- Dumping data for table `publication_type_translate`
@@ -472,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 
 INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
 (1, 'Новости', 'route', NULL, 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41'),
-(2, 'Contacts', 'url', '/contacts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-06-19 11:42:56');
+(2, 'Contacts', 'url', '/contacts.html', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-06-26 17:04:29');
 
 -- --------------------------------------------------------
 

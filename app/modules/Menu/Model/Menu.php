@@ -5,7 +5,7 @@
  */
 namespace Menu\Model\Menu;
 
-use \Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Menu extends Model

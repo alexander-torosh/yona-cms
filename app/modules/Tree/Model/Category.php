@@ -6,7 +6,7 @@
 
 namespace Tree\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Category extends Model

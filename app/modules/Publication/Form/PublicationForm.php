@@ -23,7 +23,7 @@ class PublicationForm extends Form
 
     public function initialize()
     {
-        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']), []);
+        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']));
         $type->setLabel('Type of Publication');
         $this->add($type);
 

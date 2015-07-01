@@ -6,7 +6,8 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Helper\CmsCache;
+use Application\Mvc\Model\Model;
 use Phalcon\DI;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
@@ -65,6 +66,29 @@ class Type extends Model
         $cache->delete(self::cacheSlugKey($this->getSlug()));
     }
 
+    public function afterSave()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    public function afterDelete()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    private function buildCmsTypesCache()
+    {
+        $types = self::find();
+        $save = [];
+        foreach($types as $type) {
+            $save[$type->getSlug()] = [
+                'id' => $type->getId(),
+                'slug' => $type->getSlug(),
+            ];
+        }
+        return $save;
+    }
+
     public function updateFields($data)
     {
         if (!$this->getSlug()) {
@@ -81,6 +105,11 @@ class Type extends Model
         } else {
             $this->setDisplay_date(0);
         }
+    }
+
+    public static function types()
+    {
+        return CmsCache::getInstance()->get('publication_types');
     }
 
     public static function cachedListArray($params = [])
@@ -118,7 +147,7 @@ class Type extends Model
             ],
             'cache' => [
                 'key' => self::cacheSlugKey($slug),
-                'lifetime' => 120,
+                'lifetime' => 86400,
             ]
         ]);
 

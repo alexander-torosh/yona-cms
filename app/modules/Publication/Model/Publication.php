@@ -2,7 +2,7 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;

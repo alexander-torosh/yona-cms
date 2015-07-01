@@ -7,7 +7,7 @@
 namespace Seo\Model;
 
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Application\Mvc\Router\DefaultRouter;
 use Phalcon\Mvc\Model\Message;
 

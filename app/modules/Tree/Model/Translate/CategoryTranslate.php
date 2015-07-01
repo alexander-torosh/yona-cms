@@ -6,9 +6,9 @@
 
 namespace Tree\Model\Translate;
 
-use Application\Mvc\ModelTranslate;
+use Application\Mvc\Model\Translate;
 
-class CategoryTranslate extends ModelTranslate
+class CategoryTranslate extends Translate
 {
 
     public function getSource()

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.2.2
+
+- Created **\Application\Mvc\Helper\CmsCache** component;
+
+- All caching for translates, languages, publication types now stored in **/app/cache/cms**. Lowered count of SQL queries for cold start;
+
+- Translations for admin replaced to **/app/translations/admin**;
+
 ## v0.2.1
 
 - Fixed bug with 'SITE NAME' translation in /app/plugins/TitlePlugin.php;

@@ -9,6 +9,9 @@ namespace Cms;
 class Scanner
 {
 
+    /**
+     * @return array $phrases
+     */
     public function search()
     {
         $phrases = [];
@@ -37,6 +40,7 @@ class Scanner
     /**
      * @param string $folder
      * @param string $pattern
+     * @return array $fileList
      */
     private function rsearch($folder, $pattern)
     {

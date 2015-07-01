@@ -18,7 +18,7 @@ class ManagerAddForm extends Form
     {
         $this->add(
             (new Text('custom_name'))
-                ->setLabel($this->helper->at('Business name, for convenience'))
+                ->setLabel('Business name, for convenience')
         );
 
         $this->add(

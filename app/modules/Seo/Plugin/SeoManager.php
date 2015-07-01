@@ -21,6 +21,8 @@ use Seo\Model\Manager;
 class SeoManager extends Plugin
 {
 
+    const CACHE_LIFETIME = 120;
+
     public function __construct(Dispatcher $dispatcher, Request $request, Router $router, View $view)
     {
         if ($view->getLayout() == 'admin') {
@@ -41,7 +43,7 @@ class SeoManager extends Plugin
 
         if ($match_url_entry) {
             $this->pick($match_url_entry);
-        } elseif ($route_name && !in_array($route_name, ['default', 'default_action', 'default_controller'])) {
+        } /*elseif ($route_name && !in_array($route_name, ['default', 'default_action', 'default_controller'])) {
             if (!$this->matchingRoute($route_name, $dispatcher_params, $request_params)) {
                 if ($module && $controller && $action) {
                     $this->matchingMCA($module, $controller, $action, $dispatcher_params, $request_params);
@@ -49,7 +51,7 @@ class SeoManager extends Plugin
             }
         } elseif ($module && $controller && $action) {
             $this->matchingMCA($module, $controller, $action, $dispatcher_params, $request_params);
-        }
+        }*/
     }
 
     private function matchingUrl($url)
@@ -61,7 +63,7 @@ class SeoManager extends Plugin
             ],
             'cache' => [
                 'key'      => Manager::urlCacheKey($url),
-                'lifetime' => 60,
+                'lifetime' => self::CACHE_LIFETIME,
             ],
         ]);
     }
@@ -77,7 +79,7 @@ class SeoManager extends Plugin
             ],
             'cache' => [
                 'key'      => Manager::routeCacheKey($route_name, LANG),
-                'lifetime' => 60,
+                'lifetime' => self::CACHE_LIFETIME,
             ],
         ]);
         if ($manager_matched_routes) {
@@ -103,7 +105,7 @@ class SeoManager extends Plugin
             ],
             'cache' => [
                 'key'      => Manager::mcaCacheKey($module, $controller, $action, LANG),
-                'lifetime' => 60,
+                'lifetime' => self::CACHE_LIFETIME,
             ],
         ]);
         if ($manager_matched_routes) {

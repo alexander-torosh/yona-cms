@@ -30,7 +30,7 @@ class ManagerForm extends Form
         $languages = Language::findCachedLanguages();
         $languagesArray = array('' => ' - ');
         foreach ($languages as $lang) {
-            $languagesArray[$lang->getIso()] = $lang->getName();
+            $languagesArray[$lang['iso']] = $lang['name'];
         }
 
         $this->add((new Text('custom_name'))->setLabel('Business name, for convenience'));

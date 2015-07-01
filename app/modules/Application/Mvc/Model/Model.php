@@ -5,13 +5,15 @@
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
  * @author Aleksandr Torosh <webtorua@gmail.com>
  */
-namespace Application\Mvc;
+namespace Application\Mvc\Model;
 
 class Model extends \Phalcon\Mvc\Model
 {
     const CACHE_LIFETIME = 300;
 
-    protected $translations = []; // Массив переводов
+    protected $translations_array = []; // Массив переводов
+    public $translations = [];
+    public $fields = [];
 
     public static $lang = 'en'; // Язык по-умолчанию
     private static $translateCache = true; // Флаг использования кеша переводов
@@ -36,7 +38,8 @@ class Model extends \Phalcon\Mvc\Model
         if ($this->translateModel && defined('LANG')) {
             // Если есть массив переводов и установлена константа активного языка
             self::setLang(LANG); // Устанавливаем текущий язык
-            $this->getTranslations(); // Извлекаем переводы со связанной таблицы переводов
+            $this->initTranslationsArray(); // Извлекаем переводы со связанной таблицы переводов
+            $this->initTranslations();
         }
     }
 
@@ -73,21 +76,16 @@ class Model extends \Phalcon\Mvc\Model
     /**
      * Извлечение единичного перевода по имени переменной
      */
-    public function getMLVariable($variable)
+    public function getMLVariable($key)
     {
-        if (!empty($this->translations)) {
-            foreach ($this->translations as $translation) {
-                if ($translation->getKey() == $variable) {
-                    return $translation->getValue();
-                }
-            }
+        if (array_key_exists($key, $this->translations)) {
+            return $this->translations[$key];
         }
 
     }
 
     public function setMLVariable($key, $value, $lang = null)
     {
-
         if (!$this->getId()) {
             return false;
         }
@@ -136,7 +134,7 @@ class Model extends \Phalcon\Mvc\Model
     /**
      * Извлечение массива переводов
      */
-    private function getTranslations()
+    private function initTranslationsArray()
     {
         if (!$this->getId()) {
             return false;
@@ -158,7 +156,16 @@ class Model extends \Phalcon\Mvc\Model
             $data = $model->find($params);
         }
 
-        $this->translations = $data;
+        $this->translations_array = $data;
+    }
+
+    public function initTranslations()
+    {
+        if (!empty($this->translations_array)) {
+            foreach($this->translations_array as $translation) {
+                $this->translations[$translation->getKey()] = $translation->getValue();
+            }
+        }
     }
 
 }

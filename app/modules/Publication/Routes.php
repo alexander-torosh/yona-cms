@@ -16,7 +16,7 @@ class Routes
 
     public function init($router)
     {
-        $types_keys = array_keys(Type::cachedListArray());
+        $types_keys = array_keys(Type::types());
         $types_regex = '(' . implode('|', $types_keys) . ')';
 
         $router->add('/publication/admin/{type:' . $types_regex . '}', array(

@@ -7,6 +7,7 @@
 namespace Cms\Controller;
 
 use Application\Mvc\Controller;
+use Application\Mvc\Helper\CmsCache;
 use Cms\Model\Translate;
 use Cms\Scanner;
 
@@ -40,6 +41,8 @@ class TranslateController extends Controller
                     }
                 }
             }
+
+            CmsCache::getInstance()->save('translates', $this->buildCmsTranslatesCache());
             $this->flash->success($this->helper->at('Saved has been successful'));
 
             $lang = LANG;
@@ -56,4 +59,13 @@ class TranslateController extends Controller
         $this->view->model = $model;
     }
 
+    private function buildCmsTranslatesCache()
+    {
+        $entries = Translate::find();
+        $save = [];
+        foreach ($entries as $el) {
+            $save[$el->getLang()][$el->getPhrase()] = $el->getTranslation();
+        }
+        return $save;
+    }
 }
