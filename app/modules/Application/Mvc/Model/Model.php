@@ -12,6 +12,7 @@ class Model extends \Phalcon\Mvc\Model
     const CACHE_LIFETIME = 300;
 
     protected $translations_array = []; // Массив переводов
+
     public $translations = [];
     public $fields = [];
 

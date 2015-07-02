@@ -50,11 +50,11 @@ class PublicationForm extends Form
         $meta_title->setLabel('meta-title');
         $this->add($meta_title);
 
-        $meta_description = new TextArea('meta_description');
+        $meta_description = new TextArea('meta_description', ['style' => 'height:4em; min-height: inherit']);
         $meta_description->setLabel('meta-description');
         $this->add($meta_description);
 
-        $meta_keywords = new TextArea('meta_keywords');
+        $meta_keywords = new TextArea('meta_keywords', ['style' => 'height:4em; min-height: inherit']);
         $meta_keywords->setLabel('meta-keywords');
         $this->add($meta_keywords);
 
