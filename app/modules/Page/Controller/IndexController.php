@@ -15,7 +15,6 @@ class IndexController extends Controller
         $page = Page::findCachedBySlug($slug);
         if (!$page) {
             throw new Exception("Page '$slug.html' not found");
-            return;
         }
 
         $this->helper->title()->append($page->getMeta_title());
@@ -30,7 +29,6 @@ class IndexController extends Controller
         $page = Page::findCachedBySlug('contacts');
         if (!$page) {
             throw new Exception("Page 'contacts' not found");
-            return;
         }
 
         $this->helper->title()->append($page->getMeta_title());

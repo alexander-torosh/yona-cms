@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function addAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $root = $this->request->getPost('root');
@@ -95,7 +95,7 @@ class AdminController extends Controller
     public function deleteAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $category_id = $this->request->getPost('category_id');
@@ -114,7 +114,7 @@ class AdminController extends Controller
     public function saveTreeAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $data = $this->request->getPost('data');

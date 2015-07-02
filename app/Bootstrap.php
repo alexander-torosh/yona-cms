@@ -106,8 +106,7 @@ class Bootstrap
             }
             $initClassName = str_replace('Module', 'Init', $module['className']);
             if (class_exists($initClassName)) {
-                $initClass = new $initClassName();
-                $initClass->init($di);
+                new $initClassName();
             }
         }
         $di->set('router', $router);
@@ -214,7 +213,8 @@ class Bootstrap
 
         $view->registerEngines($viewEngines);
 
-        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
+        $ajax = $di->get('request')->getQuery('_ajax');
+        if ($ajax) {
             $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
         }
 

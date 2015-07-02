@@ -22,12 +22,12 @@ class Menu extends Model
     private $root = 'top';
     private $parent_id;
     private $work_title;
-    private $title; // translate
     private $depth = 0;
     private $left_key;
     private $right_key;
     private $created_at;
     private $updated_at;
+    public  $title; // translate
 
     public static $roots = [
         'top' => 'Top Menu',
@@ -236,6 +236,22 @@ class Menu extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkTitle()
+    {
+        return $this->work_title;
+    }
+
+    /**
+     * @param mixed $work_title
+     */
+    public function setWorkTitle($work_title)
+    {
+        $this->work_title = $work_title;
     }
 
 }

@@ -59,11 +59,9 @@ class IndexController extends Controller
         $publication = Publication::findCachedBySlug($slug);
         if (!$publication) {
             throw new Exception("Publication '$slug.html' not found");
-            return;
         }
         if ($publication->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
-            return;
         }
 
         $this->helper->title()->append($publication->getMeta_title());

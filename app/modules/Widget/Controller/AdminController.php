@@ -32,7 +32,7 @@ class AdminController extends Controller
         $form = new WidgetForm();
 
         if ($this->request->isPost()) {
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
                     $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
@@ -66,7 +66,7 @@ class AdminController extends Controller
         $form->remove('id');
         if ($this->request->isPost()) {
 
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
                     $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());

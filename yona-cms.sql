@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2015 at 05:52 PM
+-- Generation Time: Jul 02, 2015 at 12:27 PM
 -- Server version: 5.6.23
 -- PHP Version: 5.6.10-1~dotdeb+7.3
 
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `preview_src` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `publication`
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `publication_translate` (
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `publication_translate`
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `publication_type_translate` (
   PRIMARY KEY (`id`),
   KEY `foreign_id` (`foreign_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `publication_type_translate`
@@ -445,17 +445,7 @@ INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `va
 
 CREATE TABLE IF NOT EXISTS `seo_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `custom_name` varchar(50) DEFAULT NULL,
-  `type` enum('url','route','mca') NOT NULL DEFAULT 'url',
   `url` varchar(255) DEFAULT NULL,
-  `route` varchar(50) DEFAULT NULL,
-  `route_ml` varchar(60) DEFAULT NULL,
-  `module` varchar(50) DEFAULT NULL,
-  `controller` varchar(50) DEFAULT NULL,
-  `action` varchar(50) DEFAULT NULL,
-  `language` varchar(50) DEFAULT NULL,
-  `route_params_json` text,
-  `query_params_json` text,
   `head_title` varchar(500) DEFAULT NULL,
   `meta_description` varchar(500) DEFAULT NULL,
   `meta_keywords` varchar(500) DEFAULT NULL,
@@ -470,9 +460,9 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 -- Dumping data for table `seo_manager`
 --
 
-INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
-(1, 'Новости', 'route', NULL, 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41'),
-(2, 'Contacts', 'url', '/contacts.html', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-06-26 17:04:29');
+INSERT INTO `seo_manager` (`id`, `url`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
+(1, '/news', 'Latest News', 'Greate latest and fresh news!', 'news, latest news, fresh news', '<p>Presenting your attention the latest news!</p>', '2014-09-30 10:39:23', '2015-07-02 11:28:57'),
+(2, '/contacts.html', 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-07-02 11:19:40');
 
 -- --------------------------------------------------------
 

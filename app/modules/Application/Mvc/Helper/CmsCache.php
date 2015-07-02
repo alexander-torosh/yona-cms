@@ -5,7 +5,9 @@
  */
 namespace Application\Mvc\Helper;
 
-class CmsCache
+use Phalcon\Mvc\User\Component;
+
+class CmsCache extends Component
 {
 
     private static $instance = null;
@@ -37,7 +39,11 @@ class CmsCache
 
     public function save($key, $data)
     {
-        file_put_contents($this->file($key), json_encode($data));
+        try {
+            file_put_contents($this->file($key), json_encode($data));
+        } catch (\Exception $e) {
+            $this->flash->error($e->getMessage());
+        }
     }
 
     private function file($key)

@@ -23,12 +23,12 @@ class Category extends Model
     private $root = 'articles';
     private $parent_id;
     private $slug;
-    private $title; // translate
     private $depth = 0;
     private $left_key;
     private $right_key;
     private $created_at;
     private $updated_at;
+    public  $title; // translate
 
     public static $roots = [
         'articles' => 'Articles',
