@@ -80,7 +80,7 @@ class Type extends Model
     {
         $types = self::find();
         $save = [];
-        foreach($types as $type) {
+        foreach ($types as $type) {
             $save[$type->getSlug()] = [
                 'id' => $type->getId(),
                 'slug' => $type->getSlug(),

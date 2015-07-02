@@ -162,7 +162,7 @@ class Model extends \Phalcon\Mvc\Model
     public function initTranslations()
     {
         if (!empty($this->translations_array)) {
-            foreach($this->translations_array as $translation) {
+            foreach ($this->translations_array as $translation) {
                 $this->translations[$translation->getKey()] = $translation->getValue();
             }
         }
