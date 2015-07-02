@@ -163,7 +163,6 @@ class Bootstrap
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher) use ($di) {
             new \Seo\Plugin\SeoManager($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
             new \YonaCMS\Plugin\Title($di);
-            new \YonaCMS\Plugin\LastModified($di->get('response'));
         });
 
         // Profiler

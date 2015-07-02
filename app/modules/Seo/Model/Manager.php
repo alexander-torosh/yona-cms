@@ -57,8 +57,8 @@ class Manager extends Model
     private function buildCmsSeoManagerCache()
     {
         $entries = self::find();
+        $save = [];
         if (!empty($entries)) {
-            $save = [];
             foreach ($entries as $el) {
                 $save[$el->getUrl()] = [
                     'id'               => $el->getId(),
