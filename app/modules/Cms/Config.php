@@ -32,7 +32,7 @@ class Config
             'base_path' => (isset($application['base_path'])) ? $application['base_path'] : null,
             'database'  => (isset($application['database'])) ? $application['database'] : null,
             'cache'     => (isset($application['cache'])) ? $application['cache'] : null,
-            'memcache'  => (isset($application['memcahce'])) ? $application['memcache'] : null,
+            'memcache'  => (isset($application['memcache'])) ? $application['memcache'] : null,
             'assets'    => (isset($application['assets'])) ? $application['assets'] : null,
         ];
 
