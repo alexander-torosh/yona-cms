@@ -14,7 +14,7 @@ class SitemapController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-sitemap');
-        $this->sitemapFilePath = PUBLIC_PATH . '/sitemap.xml';
+        $this->sitemapFilePath = ROOT . '/sitemap.xml';
         $this->view->languages_disabled = true;
     }
 

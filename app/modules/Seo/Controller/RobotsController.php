@@ -14,7 +14,7 @@ class RobotsController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-robots');
-        $this->robotsFilePath = PUBLIC_PATH . '/robots.txt';
+        $this->robotsFilePath = ROOT . '/robots.txt';
         $this->view->languages_disabled = true;
     }
 

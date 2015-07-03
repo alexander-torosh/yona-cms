@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.3.1
+
+- Minimized index.php code; Created **YonaCms\Plugin\CheckPoint** plugin for detecting index.php, index.html in Request URI;
+
+- Removed PUBLIC_PATH constant;
+
+- Fix bug with creating new languages;
+
 ## v0.3
 
 - Semantic UI updated to v2.0;

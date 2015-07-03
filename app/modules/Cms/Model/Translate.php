@@ -49,6 +49,21 @@ class Translate extends Model
         return $result;
     }
 
+    public static function buildCmsTranslatesCache()
+    {
+        $save = [];
+        $languages = Language::find();
+        foreach($languages as $lang) {
+            $save[$lang->getIso()] = [""=>""];
+        }
+
+        $entries = Translate::find();
+        foreach ($entries as $el) {
+            $save[$el->getLang()][$el->getPhrase()] = $el->getTranslation();
+        }
+        return $save;
+    }
+
     /**
      * @param mixed $id
      */

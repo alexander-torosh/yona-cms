@@ -154,6 +154,7 @@ class Bootstrap
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
         $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher) use ($di) {
+            new \YonaCMS\Plugin\CheckPoint($di->get('request'));
             new \YonaCMS\Plugin\Localization($dispatcher);
             new \YonaCMS\Plugin\AdminLocalization($di->get('config'));
             new \YonaCMS\Plugin\Acl($di->get('acl'), $dispatcher, $di->get('view'));

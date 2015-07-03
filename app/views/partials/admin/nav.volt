@@ -1,6 +1,6 @@
 <div class="ui left fixed vertical pointing inverted menu">
-    <a class="item{{ helper.activeMenu().activeClass('admin-home') }}" href="{{ url(['for': 'admin']) }}">
-        <i class="browser icon"></i> {{ helper.at('Admin Dashboard') }}
+    <a class="item{{ helper.activeMenu().activeClass('admin-home') }} header" href="{{ url(['for': 'admin']) }}">
+        Yona CMS
     </a>
 
     <div class="item">

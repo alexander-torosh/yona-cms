@@ -42,7 +42,7 @@ class TranslateController extends Controller
                 }
             }
 
-            CmsCache::getInstance()->save('translates', $this->buildCmsTranslatesCache());
+            CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
             $this->flash->success($this->helper->at('Saved has been successful'));
 
             $lang = LANG;
@@ -59,13 +59,5 @@ class TranslateController extends Controller
         $this->view->model = $model;
     }
 
-    private function buildCmsTranslatesCache()
-    {
-        $entries = Translate::find();
-        $save = [];
-        foreach ($entries as $el) {
-            $save[$el->getLang()][$el->getPhrase()] = $el->getTranslation();
-        }
-        return $save;
-    }
+
 }

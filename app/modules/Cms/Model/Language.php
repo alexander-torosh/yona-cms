@@ -95,11 +95,13 @@ class Language extends Model
     public function afterSave()
     {
         CmsCache::getInstance()->save('languages', $this->buildCmsLanguagesCache());
+        CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
     }
 
     public function afterDelete()
     {
         CmsCache::getInstance()->save('languages', $this->buildCmsLanguagesCache());
+        CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
     }
 
     private function buildCmsLanguagesCache()
