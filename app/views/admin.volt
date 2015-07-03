@@ -57,6 +57,10 @@
         {{ flash.output() }}
 
         {{ content() }}
+
+        <hr>
+        <a href="http://yonacms.com" class="works-on" target="_blank">Works on Yona CMS</a>
+
     </div>
 
 {{ assets.outputJs('modules-admin-js') }}
