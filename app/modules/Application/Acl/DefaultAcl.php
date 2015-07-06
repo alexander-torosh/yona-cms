@@ -37,7 +37,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
         /**
          * Backend roles
          */
-        $this->addRole($roles['journalist']);
+        $this->addRole($roles['journalist'], $roles['guest']);
         $this->addRole($roles['editor'], $roles['journalist']);
         $this->addRole($roles['admin']);
 
