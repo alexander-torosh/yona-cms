@@ -42,12 +42,14 @@
 
 <!--ui semantic-->
 <script>
-    $('.ui.form').form({
-        title: {
-            identifier: 'title',
-            rules: [
-                {type: 'empty'}
-            ]
+    $(".ui.form").form({
+        fields: {
+            title: {
+                identifier: 'title',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->

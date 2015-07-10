@@ -35,11 +35,13 @@
 <!--ui semantic-->
 <script>
     $('.ui.form').form({
-        url: {
-            identifier: 'url',
-            rules: [
-                {type: 'empty'}
-            ]
+        fields: {
+            url: {
+                identifier: 'url',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->

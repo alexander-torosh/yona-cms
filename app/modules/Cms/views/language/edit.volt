@@ -39,35 +39,37 @@
 <!--ui semantic-->
 <script>
     $('.ui.form').form({
-        iso: {
-            identifier: 'iso',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        locale: {
-            identifier: 'locale',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        name: {
-            identifier: 'name',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        short_name: {
-            identifier: 'short_name',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        url: {
-            identifier: 'url',
-            rules: [
-                {type: 'empty'}
-            ]
+        fields: {
+            iso: {
+                identifier: 'iso',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            locale: {
+                identifier: 'locale',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            name: {
+                identifier: 'name',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            short_name: {
+                identifier: 'short_name',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            url: {
+                identifier: 'url',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->

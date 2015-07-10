@@ -30,17 +30,19 @@
 <!--ui semantic-->
 <script>
     $('.ui.form').form({
-        title: {
-            identifier: 'title',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        slug: {
-            identifier: 'slug',
-            rules: [
-                {type: 'empty'}
-            ]
+        fields: {
+            title: {
+                identifier: 'title',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            slug: {
+                identifier: 'slug',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->
