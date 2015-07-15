@@ -30,8 +30,9 @@
         <tr>
             <th style="width: 100px"></th>
             <th>{{ helper.at('Title') }}</th>
+            <th style="width: 50px;">{{ helper.at('Image') }}</th>
             <th>{{ helper.at('Type of Publication') }}</th>
-            <th>{{ helper.at('Publication Date') }}</th>
+            <th style="width: 150px">{{ helper.at('Publication Date') }}</th>
             <th>{{ helper.at('Thumbs Inside') }}</th>
             <th>{{ helper.at('Url') }}</th>
         </tr>
@@ -39,13 +40,15 @@
         <tbody>
         {% for item in paginate.items %}
             {% set link = url.get() ~ "publication/admin/edit/" ~ item.getId() %}
+            {% set image = helper.image(['id':item.getId(),'type':'publication','width':50]) %}
             <tr>
                 <td><a href="{{ link }}?lang={{ constant('LANG') }}" class="mini ui icon button"><i
                                 class="icon edit"></i> id = {{ item.getId() }}</a></td>
                 <td><a href="{{ link }}?lang={{ constant('LANG') }}">{{ item.getTitle() }}</a></td>
+                <td><a href="{{ link }}?lang={{ constant('LANG') }}">{% if image.isExists() %}{{ image.imageHTML() }}{% endif %}</a></td>
                 <td>{{ item.getTypeTitle() }}</td>
                 <td>{{ item.getDate() }}</td>
-                <td>{% if item.preview_inner %}<i class="icon checkmark green"></i>{% endif %}</td>
+                <td>{% if item.getPreviewInner() %}<i class="icon checkmark green"></i>{% endif %}</td>
                 {% set url = helper.langUrl(['for':'publication', 'type':item.getTypeSlug(), 'slug':item.getSlug()]) %}
                 <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
             </tr>

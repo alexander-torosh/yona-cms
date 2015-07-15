@@ -2,7 +2,7 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -26,19 +26,20 @@ class Publication extends Model
         ]);
     }
 
-    public $id;
-    public $type_id;
-    public $title;
-    public $slug;
-    public $text;
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
-    public $created_at;
-    public $updated_at;
-    public $date;
-    public $preview_src;
-    public $preview_inner;
+    private $id;
+    private $type_id;
+    private $slug;
+    private $created_at;
+    private $updated_at;
+    private $date;
+    private $preview_src;
+    private $preview_inner;
+
+    protected $title;
+    protected $text;
+    protected $meta_title;
+    protected $meta_description;
+    protected $meta_keywords;
 
     public function beforeCreate()
     {
@@ -64,7 +65,7 @@ class Publication extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Страница с такой транслитерацией = '".$this->slug."' уже существует"
+                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
             ]
         ));
 
@@ -101,7 +102,7 @@ class Publication extends Model
 
     public static function cacheSlugKey($slug)
     {
-        $key = HOST_HASH.md5('Publication\Model\Publication; slug = '.$slug);
+        $key = HOST_HASH . md5('Publication\Model\Publication; slug = ' . $slug);
         return $key;
     }
 

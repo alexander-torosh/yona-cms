@@ -12,7 +12,7 @@ use Tree\Mvc\Helper;
 class Init extends Component
 {
 
-    public function init()
+    public function __construct()
     {
         $this->getDi()->set('tree_helper', new Helper());
     }

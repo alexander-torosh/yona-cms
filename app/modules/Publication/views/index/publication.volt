@@ -3,7 +3,7 @@
     {% if helper.isAdminSession() %}
         <p style="font-weight: bold;font-size:120%;">
             <a class="noajax"
-               href="{{ url.get() }}publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">Редактировать публикацию</a>
+               href="{{ url.get() }}publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">{{ helper.at('Edit publication') }}</a>
         </p>
     {% endif %}
 
@@ -25,6 +25,6 @@
 
     {{ publication.getText() }}
 
-    <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}" class="back">&larr; {{ helper.translate('Back к перечню публикаций') }}</a>
+    <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}" class="back">&larr; {{ helper.translate('Back to publications list') }}</a>
 
 </article>

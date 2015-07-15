@@ -16,26 +16,25 @@ use Application\Form\Element\Image;
 abstract class Form extends \Phalcon\Forms\Form
 {
 
+    protected $helper;
+
     public function renderDecorated($name)
     {
         if (!$this->has($name)) {
             return "form element '$name' not found<br />";
         }
 
+        $this->helper = $this->getDI()->get('helper');
+
         $element = $this->get($name);
-
-        /** @var \Application\Mvc\Helper $helper */
-        $helper = $this->getDI()->get('helper');
-
         $messages = $this->getMessagesFor($element->getName());
 
         $html = '';
-
         if (count($messages)) {
             $html .= '<div class="ui error message">';
-            $html .= '<div class="header">'.$this->helper->translate('Ошибка валидации формы').'</div>';
+            $html .= '<div class="header">' . $this->helper->translate('Ошибка валидации формы') . '</div>';
             foreach ($messages as $message) {
-                $html .= '<p>'.$message.'</p>';
+                $html .= '<p>' . $message . '</p>';
             }
             $html .= '</div>';
         }
@@ -63,18 +62,14 @@ abstract class Form extends \Phalcon\Forms\Form
 
                 case $element instanceof File:
                     $html .= '<div class="inline field">';
-                    if ($element->getLabel()) {
-                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
-                    }
+                    $html .= $this->makeLabel($element);
                     $html .= $element;
                     $html .= '</div>';
                     break;
 
                 default:
                     $html .= '<div class="field">';
-                    if ($element->getLabel()) {
-                        $html .= '<label for="'.$element->getName().'">'.$helper->translate($element->getLabel()).'</label>';
-                    }
+                    $html .= $this->makeLabel($element);
                     $html .= $element;
                     $html .= '</div>';
             }
@@ -95,18 +90,28 @@ abstract class Form extends \Phalcon\Forms\Form
         return $html;
     }
 
+    private function makeLabel($element)
+    {
+        if ($element->getLabel()) {
+            return '<label for="' . $element->getName() . '">' . $this->helper->translate($element->getLabel()) . '</label>';
+        } else {
+            return '';
+        }
+    }
+
     /**
      * @param Image $element
+     * @return string $html
      */
     private function renderImage($element)
     {
         $html = '<div class="form-group">';
 
         if ($element->getLabel()) {
-            $html .= '<label>'.$element->getLabel().'</label>';
+            $html .= '<label>' . $element->getLabel() . '</label>';
         }
         if ($element->getValue()) {
-            $html .= '<section onclick="selectText(this);">'.$element->getValue().'</section>';
+            $html .= '<section onclick="selectText(this);">' . $element->getValue() . '</section>';
         } else {
             $html .= '<br>';
         }
@@ -116,7 +121,8 @@ abstract class Form extends \Phalcon\Forms\Form
                                  style="width: 200px; min-height: 100px">';
 
         if ($element->getValue()) {
-            $html .= '<img src="'.$element->getValue().'" width="200">';
+            $url = $this->getDI()->get('url');
+            $html .= '<img src="' . $url->path() . $element->getValue() . '" width="200">';
         }
 
         $html .= '</div>
@@ -124,7 +130,7 @@ abstract class Form extends \Phalcon\Forms\Form
                             <span class="btn btn-default btn-file">
                                 <span class="fileinput-new">Select image</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input type="file" name="'.$element->getName().'">
+                                <input type="file" name="'.$element->getName() . '">
                             </span>
                             <a href="#" class="btn btn-default fileinput-exists"
                                data-dismiss="fileinput">Remove</a>

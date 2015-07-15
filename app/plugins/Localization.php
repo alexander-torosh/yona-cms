@@ -8,6 +8,7 @@
 
 namespace YonaCMS\Plugin;
 
+use Application\Mvc\Helper\CmsCache;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Mvc\Dispatcher;
 
@@ -16,8 +17,11 @@ class Localization extends Plugin
 
     public function __construct(Dispatcher $dispatcher)
     {
-        $languages = \Cms\Model\Language::findCachedLanguages();
-        $defaultLang = $languages[0];
+        $cmsCache = new CmsCache();
+        $languages = $cmsCache->get('languages');
+
+        $defaultLangArray = array_values(array_slice($languages, 0, 1));
+        $defaultLang = $defaultLangArray[0];
 
         $request = $this->getDI()->get('request');
         $queryLang = $request->getQuery('lang');
@@ -28,25 +32,24 @@ class Localization extends Plugin
         }
 
         if (!$langParam) {
-            $langParam = $defaultLang->getIso();
+            $langParam = $defaultLang['iso'];
         }
 
         foreach ($languages as $language) {
-            if ($langParam == $language->getIso()) {
-                define('LANG', $language->getIso());
-                define('LANG_URL', '/'.$language->getUrl());
+            if ($langParam == $language['iso']) {
+                define('LANG', $language['iso']);
+                define('LANG_URL', '/' . $language['url']);
             }
         }
         if (!defined('LANG')) {
-            define('LANG', $defaultLang->getIso());
+            define('LANG', $defaultLang['iso']);
+            \Application\Mvc\Model\Model::$lang = $defaultLang['iso'];
         }
         if (!defined('LANG_URL')) {
-            define('LANG_URL', $defaultLang->getUrl());
+            define('LANG_URL', $defaultLang['url']);
         }
 
         $translations = \Cms\Model\Translate::findCachedByLangInArray(LANG);
-        $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
-
+        $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(['content' => $translations]));
     }
-
 }

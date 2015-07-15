@@ -25,8 +25,8 @@ class AdminController extends Controller
         $this->view->roots = Category::$roots;
 
         $assets = $this->getDI()->get('assets');
-        $assets->collection('modules-admin-less')->addCss(__DIR__.'/../assets/tree.less');
-        $assets->collection('modules-admin-js')->addJs(__DIR__.'/../assets/tree.js');
+        $assets->collection('modules-admin-less')->addCss(__DIR__ . '/../assets/tree.less');
+        $assets->collection('modules-admin-js')->addJs(__DIR__ . '/../assets/tree.js');
 
         $this->helper->title($this->helper->at('Tree Categories'), true);
     }
@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function addAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $root = $this->request->getPost('root');
@@ -67,7 +67,7 @@ class AdminController extends Controller
         $form = new CategoryForm();
         $model = Category::findFirst($id);
         if (!$model) {
-            $this->redirect($this->url->get().'tree/admin?lang='.LANG);
+            $this->redirect($this->url->get() . 'tree/admin?lang=' . LANG);
         }
 
         if ($this->request->isPost()) {
@@ -75,7 +75,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->flash->success($this->helper->at('Updated has been successful'));
-                    $this->redirect($this->url->get().'tree/admin?lang='.LANG);
+                    $this->redirect($this->url->get() . 'tree/admin?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -95,7 +95,7 @@ class AdminController extends Controller
     public function deleteAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $category_id = $this->request->getPost('category_id');
@@ -114,7 +114,7 @@ class AdminController extends Controller
     public function saveTreeAction()
     {
         if (!$this->request->getPost() || !$this->request->isAjax()) {
-            die('post ajax required');
+            return $this->flash->error('post ajax required');
         }
 
         $data = $this->request->getPost('data');

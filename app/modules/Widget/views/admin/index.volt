@@ -8,7 +8,7 @@
     <tr>
         <th style="width:150px">{{ helper.at('ID') }}</th>
         <th style="width: 200px">{{ helper.at('Title') }}</th>
-        <th>{{ helper.at('HTML (multilingual)') }}</th>
+        <th>{{ helper.at('HTML') }}</th>
     </tr>
     </thead>
     <tbody>

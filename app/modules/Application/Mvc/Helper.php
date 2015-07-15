@@ -59,7 +59,7 @@ class Helper extends \Phalcon\Mvc\User\Component
      */
     public function staticWidget($id)
     {
-        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH.md5("Widget::findFirst({$id})"))));
+        $widget = \Widget\Model\Widget::findFirst(["id='{$id}'", "cache" => ["lifetime" => 120, "key" => HOST_HASH . md5("Widget::findFirst({$id})")]]);
         if ($widget) {
             return $widget->getHtml();
         }
@@ -68,7 +68,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function langUrl($params)
     {
         $routeName = $params['for'];
-        $routeName = DefaultRouter::ML_PREFIX.$routeName.'_'.LANG;
+        $routeName = DefaultRouter::ML_PREFIX . $routeName . '_' . LANG;
         $params['for'] = $routeName;
         return $this->url->get($params);
     }
@@ -108,7 +108,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function error($code = 404)
     {
         $helper = new \Application\Mvc\Helper\ErrorReporting();
-        return $helper->{'error'.$code}();
+        return $helper->{'error' . $code}();
 
     }
 
@@ -144,7 +144,7 @@ class Helper extends \Phalcon\Mvc\User\Component
         return get_defined_constants()[$name];
     }
 
-    public function image($args, $attributes = array())
+    public function image($args, $attributes = [])
     {
         $imageFilter = new \Image\Storage($args, $attributes);
         return $imageFilter;
@@ -154,12 +154,6 @@ class Helper extends \Phalcon\Mvc\User\Component
     {
         $object = new \Application\Mvc\Helper\RequestQuery();
         return $object->getSymbol();
-    }
-
-    public function slider($id)
-    {
-        $helper = new \Slider\Mvc\Helper();
-        return $helper->slider($id);
     }
 
     public function javascript($id)
@@ -176,7 +170,7 @@ class Helper extends \Phalcon\Mvc\User\Component
         $partialsDir = '';
         if ($module) {
             $moduleName = \Application\Utils\ModuleName::camelize($module);
-            $partialsDir = '../../../modules/'.$moduleName.'/views/';
+            $partialsDir = '../../../modules/' . $moduleName . '/views/';
         }
         $view->setPartialsDir($partialsDir);
 

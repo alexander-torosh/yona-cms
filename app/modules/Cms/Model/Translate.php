@@ -6,6 +6,7 @@
 
 namespace Cms\Model;
 
+use Application\Mvc\Helper\CmsCache;
 use Phalcon\DI;
 use Phalcon\Mvc\Model;
 
@@ -22,43 +23,15 @@ class Translate extends Model
     public $phrase;
     public $translation;
 
+    public static function translates()
+    {
+        return CmsCache::getInstance()->get('translates');
+    }
+
     public static function findCachedByLangInArray($lang = null)
     {
-        if (!$lang) {
-            $lang = LANG;
-        }
-        $cache = DI::getDefault()->get('cache');
-        $data = $cache->get(self::cacheKey($lang));
-        if (!$data) {
-            $data = self::find(array(
-                'lang = :lang:',
-                'bind' => array(
-                    'lang' => $lang,
-                ),
-            ));
-            if ($data) {
-                $cache->save(self::cacheKey($lang), $data, 300);
-            }
-        }
-
-        $translations = array();
-        if ($data) {
-            foreach ($data as $el) {
-                $translations[$el->getPhrase()] = $el->getTranslation();
-            }
-        }
-        return $translations;
-    }
-
-    public function afterUpdate()
-    {
-        $cache = $this->getDI()->get('cache');
-        $cache->delete(self::cacheKey(LANG));
-    }
-
-    public static function cacheKey($lang)
-    {
-        return HOST_HASH.md5("Translate::findByLang($lang)"); ;
+        $translates = self::translates();
+        return $translates[$lang];
     }
 
     public function findByPhraseAndLang($phrase, $lang = null)
@@ -66,14 +39,29 @@ class Translate extends Model
         if (!$lang) {
             $lang = LANG;
         }
-        $result = self::findFirst(array(
+        $result = self::findFirst([
             'phrase = :phrase: AND lang = :lang:',
-            'bind' => array(
+            'bind' => [
                 'phrase' => $phrase,
-                'lang' => $lang,
-            )
-        ));
+                'lang'   => $lang,
+            ]
+        ]);
         return $result;
+    }
+
+    public static function buildCmsTranslatesCache()
+    {
+        $save = [];
+        $languages = Language::find();
+        foreach($languages as $lang) {
+            $save[$lang->getIso()] = [""=>""];
+        }
+
+        $entries = Translate::find();
+        foreach ($entries as $el) {
+            $save[$el->getLang()][$el->getPhrase()] = $el->getTranslation();
+        }
+        return $save;
     }
 
     /**
@@ -139,6 +127,4 @@ class Translate extends Model
     {
         return $this->translation;
     }
-
-
 }

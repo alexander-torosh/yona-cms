@@ -14,6 +14,8 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-widget');
 
+        $this->view->languages_disabled = true;
+
     }
 
     public function indexAction()
@@ -30,10 +32,10 @@ class AdminController extends Controller
         $form = new WidgetForm();
 
         if ($this->request->isPost()) {
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect($this->url->get().'widget/admin/edit/'.$widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -57,17 +59,17 @@ class AdminController extends Controller
         $id = $this->filter->sanitize($id, "string");
         $widget = Widget::findFirst(["id = '$id'"]);
         if (!$widget) {
-            $this->redirect($this->url->get().'widget/admin/add');
+            $this->redirect($this->url->get() . 'widget/admin/add');
         }
 
         $form = new WidgetForm();
         $form->remove('id');
         if ($this->request->isPost()) {
 
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect($this->url->get().'widget/admin/edit/'.$widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -93,7 +95,7 @@ class AdminController extends Controller
 
             if ($this->request->isPost()) {
                 $model->delete();
-                $this->redirect($this->url->get().'widget/admin/index');
+                $this->redirect($this->url->get() . 'widget/admin/index');
             }
 
             $this->view->model = $model;

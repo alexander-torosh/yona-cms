@@ -23,7 +23,7 @@ class PublicationForm extends Form
 
     public function initialize()
     {
-        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']), []);
+        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']));
         $type->setLabel('Type of Publication');
         $this->add($type);
 
@@ -31,7 +31,7 @@ class PublicationForm extends Form
         $title->addValidator(new PresenceOf([
             'message' => 'Title can not be empty'
         ]));
-        $title->setLabel($this->helper->at('Title'));
+        $title->setLabel('Title');
         $this->add($title);
 
         $slug = new Text('slug');
@@ -50,11 +50,11 @@ class PublicationForm extends Form
         $meta_title->setLabel('meta-title');
         $this->add($meta_title);
 
-        $meta_description = new TextArea('meta_description');
+        $meta_description = new TextArea('meta_description', ['style' => 'height:4em; min-height: inherit']);
         $meta_description->setLabel('meta-description');
         $this->add($meta_description);
 
-        $meta_keywords = new TextArea('meta_keywords');
+        $meta_keywords = new TextArea('meta_keywords', ['style' => 'height:4em; min-height: inherit']);
         $meta_keywords->setLabel('meta-keywords');
         $this->add($meta_keywords);
 

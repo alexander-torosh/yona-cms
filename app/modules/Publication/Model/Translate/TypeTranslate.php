@@ -6,9 +6,9 @@
 
 namespace Publication\Model\Translate;
 
-use Application\Mvc\ModelTranslate;
+use Application\Mvc\Model\Translate;
 
-class TypeTranslate extends ModelTranslate
+class TypeTranslate extends Translate
 {
 
     public function getSource()

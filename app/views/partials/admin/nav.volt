@@ -1,76 +1,80 @@
-<div class="ui black inverted tiered menu">
-    <a class="item{{ helper.activeMenu().activeClass('admin-home') }}" href="{{ url(['for': 'admin']) }}">
-        <i class="browser icon"></i> {{ helper.at('Admin Dashboard') }}
+<div class="ui left fixed vertical pointing inverted menu">
+    <a class="item{{ helper.activeMenu().activeClass('admin-home') }} header" href="{{ url(['for': 'admin']) }}">
+        Yona CMS
     </a>
 
-    <div class="ui dropdown item">
-        <i class="font icon"></i> {{ helper.at('Contents') }} <i class="icon dropdown"></i>
+    <div class="item">
+        <div class="header">{{ helper.at('Contents') }} <i class="font icon"></i></div>
 
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('admin-page') }}" href="{{ url.get() }}page/admin">
-                <i class="file outline icon"></i> {{ helper.at('Manage Pages') }}
+                {{ helper.at('Pages') }} <i class="file outline icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}"
                href="{{ url.get() }}publication/admin">
-                <i class="calendar icon"></i> {{ helper.at('Manage Publication') }}
+                {{ helper.at('Publications') }} <i class="calendar icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="{{ url.get() }}widget/admin">
-                <i class="text file icon"></i> {{ helper.at('Manage Widget') }}
+                {{ helper.at('Widgets') }} <i class="text file icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('tree') }}" href="{{ url.get() }}tree/admin">
-                <i class="tree icon"></i> {{ helper.at('Tree Categories') }}
+                {{ helper.at('Tree Categories') }} <i class="tree icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="{{ url.get() }}file-manager">
-                <i class="file image outline icon"></i> {{ helper.at('File Manager') }}
+                {{ helper.at('File Manager') }} <i class="file image outline icon"></i>
             </a>
         </div>
     </div>
-    <div class="ui dropdown item">
-        <i class="lab icon"></i> SEO <i class="icon dropdown"></i>
+
+    <div class="item">
+        <div class="header">SEO <i class="lab icon"></i></div>
 
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="{{ url.get() }}seo/robots">
-                <i class="android icon"></i> Robots.txt
+                Robots.txt <i class="android icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('seo-sitemap') }}" href="{{ url.get() }}seo/sitemap">
-                <i class="sitemap icon"></i> Sitemap.xml
+                Sitemap.xml <i class="sitemap icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('seo-manager') }}" href="{{ url.get() }}seo/manager">
-                <i class="lightbulb icon"></i> SEO Manager
+                SEO Manager <i class="lightbulb icon"></i>
             </a>
         </div>
     </div>
-    <div class="ui dropdown item">
-        <i class="wrench icon"></i> {{ helper.at('Admin') }} <i class="icon dropdown"></i>
+    <div class="item">
+        <div class="header">{{ helper.at('Admin') }} <i class="wrench icon"></i></div>
 
         <div class="menu">
             <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="{{ url.get() }}admin/admin-user">
-                <i class="user icon"></i> {{ helper.at('Manage Users') }}
+                {{ helper.at('Manage Users') }} <i class="user icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="{{ url.get() }}cms/configuration">
-                <i class="settings icon"></i> {{ helper.at('CMS Configuration') }}
+                {{ helper.at('CMS Configuration') }} <i class="settings icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-language') }}" href="{{ url.get() }}cms/language">
-                <i class="globe icon"></i> {{ helper.at('Languages') }}
+                {{ helper.at('Languages') }} <i class="globe icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="{{ url.get() }}cms/translate">
-                <i class="book icon"></i> {{ helper.at('Translate') }}
+                {{ helper.at('Translate') }} <i class="book icon"></i>
             </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}"
                href="{{ url.get() }}cms/javascript">
-                <i class="code icon"></i> {{ '<head>, <body> javascript'|escape }}
+                {{ '<head>, <body> javascript'|escape }} <i class="code icon"></i>
             </a>
         </div>
     </div>
-    <a href="javascript:void(0);" class="item right" onclick="document.getElementById('logout-form').submit()">
-        <i class="plane icon"></i> {{ helper.at('Logout') }}
-    </a>
+    <div class="item">
+        <a href="{{ url.get() }}" class="ui primary tiny button" target="_blank">
+            <i class="home icon"></i>{{ helper.at('View Site') }}
+        </a>
+        <br><br>
+        <a href="javascript:void(0);" class="ui tiny button" onclick="document.getElementById('logout-form').submit()">
+            <i class="plane icon"></i>{{ helper.at('Logout') }}
+        </a>
 
-    <form action="{{ url.get() }}admin/index/logout" method="post" style="display: none;" id="logout-form">
-        <input type="hidden" name="{{ security.getTokenKey() }}"
-               value="{{ security.getToken() }}">
-    </form>
-    <a href="{{ url.get() }}" class="item right" target="_blank">
-        <i class="home icon"></i> {{ helper.at('View Site') }}
-    </a>
+        <form action="{{ url.get() }}admin/index/logout" method="post" style="display: none;" id="logout-form">
+            <input type="hidden" name="{{ security.getTokenKey() }}"
+                   value="{{ security.getToken() }}">
+        </form>
+    </div>
 </div>

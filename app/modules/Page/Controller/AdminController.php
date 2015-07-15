@@ -20,15 +20,13 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-page');
         Page::setTranslateCache(false);
-
     }
 
     public function indexAction()
     {
         $this->view->entries = Page::find();
 
-        $this->view->title = $this->helper->at('Manage Pages');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Pages'), true);
     }
 
     public function addAction()
@@ -46,7 +44,7 @@ class AdminController extends Controller
                     $model->updateFields($post);
                     if ($model->update()) {
                         $this->flash->success($this->helper->at('Page created'));
-                        return $this->redirect($this->url->get().'page/admin/edit/'.$model->getId().'?lang='.LANG);
+                        return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                     } else {
                         $this->flashErrors($model);
                     }
@@ -58,14 +56,10 @@ class AdminController extends Controller
             }
         }
 
-        $helper = $this->di->get('helper');
-        $this->view->title = $helper->at('Manage Pages');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Pages'), true);
 
         $this->view->model = $model;
         $this->view->form = $form;
-
-
     }
 
     public function editAction($id)
@@ -91,7 +85,7 @@ class AdminController extends Controller
                     $key = md5("Page::findFirst($query)");
                     $this->cache->delete($key);
 
-                    return $this->redirect($this->url->get().'page/admin/edit/'.$model->getId().'?lang='.LANG);
+                    return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -104,8 +98,7 @@ class AdminController extends Controller
 
         $this->view->model = $model;
         $this->view->form = $form;
-        $this->view->title = $this->helper->at('Edit Page');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Edit Page'), true);
     }
 
     public function deleteAction($id)
@@ -113,17 +106,17 @@ class AdminController extends Controller
         $model = Page::findFirst($id);
 
         if ($model->getSlug() == 'index') {
-            die($this->helper->at('Index page can not be removed'));
+            $this->flash->error($this->helper->at('Index page can not be removed'));
+            return $this->redirect($this->url->get() . 'page/admin');
         }
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect($this->url->get().'page/admin');
+            $this->redirect($this->url->get() . 'page/admin');
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->at('Delete Page');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Delete Page'), true);
     }
 
 } 

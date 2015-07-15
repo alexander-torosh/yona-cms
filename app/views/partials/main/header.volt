@@ -11,11 +11,11 @@
 {{ helper.staticWidget('phone') }}
 
 {% set languages = helper.languages() %}
-{% if languages.count() > 1 %}
+{% if languages|length > 1 %}
     <div class="languages">
         {% for language in languages %}
             <div class="lang">
-                {{ helper.langSwitcher(language.getIso(), language.getName()) }}
+                {{ helper.langSwitcher(language['iso'], language['name']) }}
             </div>
         {% endfor %}
     </div>

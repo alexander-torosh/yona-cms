@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2015 at 12:30 PM
+-- Generation Time: Jul 02, 2015 at 12:27 PM
 -- Server version: 5.6.23
--- PHP Version: 5.6.9-1~dotdeb+7.1
+-- PHP Version: 5.6.10-1~dotdeb+7.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `preview_inner` enum('1','0') NOT NULL DEFAULT '1',
+  `preview_inner` enum('1','0') DEFAULT '1',
   `preview_src` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
@@ -256,11 +256,11 @@ CREATE TABLE IF NOT EXISTS `publication` (
 --
 
 INSERT INTO `publication` (`id`, `type_id`, `slug`, `created_at`, `updated_at`, `date`, `preview_inner`, `preview_src`) VALUES
-(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-05 14:50:14', '2014-08-19 00:00:00', '0', '/img/original/publication/0/1.jpg'),
-(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-18 16:15:43', '2014-08-21 00:00:00', '1', '/img/original/publication/0/2.jpg'),
-(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-05 15:19:19', '2014-11-05 00:00:00', '1', '/img/original/publication/0/3.jpg'),
-(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-05 14:50:32', '2014-11-06 00:00:00', '0', '/img/original/publication/0/4.jpg'),
-(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-17 09:37:34', '2015-06-05 14:32:44', '0', '/img/original/publication/0/5.jpg');
+(1, 1, 'phalcon-132-released', '2014-08-22 10:33:26', '2015-06-26 16:48:36', '2014-08-19 00:00:00', '0', 'img/original/publication/0/1.jpg'),
+(2, 1, 'phalcon-community-hangout', '2014-08-22 10:42:08', '2015-06-26 16:48:44', '2014-08-21 00:00:00', '1', 'img/original/publication/0/2.jpg'),
+(3, 2, 'builtwith-phalcon', '2014-11-05 18:00:20', '2015-06-26 16:48:53', '2014-11-05 00:00:00', '1', 'img/original/publication/0/3.jpg'),
+(4, 2, 'vtoraya-statya', '2014-11-06 18:23:17', '2015-06-26 16:49:02', '2014-11-06 00:00:00', '0', 'img/original/publication/0/4.jpg'),
+(5, 1, 'new-modular-widgets-system', '2015-04-29 10:42:49', '2015-06-30 17:12:13', '2015-06-05 14:32:44', '0', 'img/original/publication/0/5.jpg');
 
 -- --------------------------------------------------------
 
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `publication_type` (
   `slug` varchar(50) DEFAULT NULL,
   `limit` int(4) DEFAULT NULL,
   `format` enum('list','grid') DEFAULT NULL,
-  `display_date` enum('0','1') NOT NULL DEFAULT '0',
+  `display_date` enum('0','1') DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -445,17 +445,7 @@ INSERT INTO `publication_type_translate` (`id`, `foreign_id`, `lang`, `key`, `va
 
 CREATE TABLE IF NOT EXISTS `seo_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `custom_name` varchar(50) DEFAULT NULL,
-  `type` enum('url','route','mca') NOT NULL DEFAULT 'url',
   `url` varchar(255) DEFAULT NULL,
-  `route` varchar(50) DEFAULT NULL,
-  `route_ml` varchar(60) DEFAULT NULL,
-  `module` varchar(50) DEFAULT NULL,
-  `controller` varchar(50) DEFAULT NULL,
-  `action` varchar(50) DEFAULT NULL,
-  `language` varchar(50) DEFAULT NULL,
-  `route_params_json` text,
-  `query_params_json` text,
   `head_title` varchar(500) DEFAULT NULL,
   `meta_description` varchar(500) DEFAULT NULL,
   `meta_keywords` varchar(500) DEFAULT NULL,
@@ -470,9 +460,9 @@ CREATE TABLE IF NOT EXISTS `seo_manager` (
 -- Dumping data for table `seo_manager`
 --
 
-INSERT INTO `seo_manager` (`id`, `custom_name`, `type`, `url`, `route`, `route_ml`, `module`, `controller`, `action`, `language`, `route_params_json`, `query_params_json`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
-(1, 'Новости', 'route', NULL, 'publications', 'ml__publications_ru', NULL, NULL, NULL, 'ru', '{"type" : "news"}', '', 'Последние новости', 'Самые свежие и последние новости!', 'новости, последние, свежие', 'Представляем вашему вниманию самые последние и последние новости!', '2014-09-30 10:39:23', '2014-11-27 11:11:41'),
-(2, 'Contacts', 'url', '/contacts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-06-19 11:42:56');
+INSERT INTO `seo_manager` (`id`, `url`, `head_title`, `meta_description`, `meta_keywords`, `seo_text`, `created_at`, `updated_at`) VALUES
+(1, '/news', 'Latest News', 'Greate latest and fresh news!', 'news, latest news, fresh news', '<p>Presenting your attention the latest news!</p>', '2014-09-30 10:39:23', '2015-07-02 11:28:57'),
+(2, '/contacts.html', 'Yona CMS Contacts', '', '', '', '2015-05-21 16:33:14', '2015-07-02 11:19:40');
 
 -- --------------------------------------------------------
 
@@ -487,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `translate` (
   `translation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `translate`
@@ -497,7 +487,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (1, 'ru', 'Ошибка валидации формы', 'Ошибка валидации формы'),
 (2, 'ru', 'Подробнее', 'Подробнее'),
 (3, 'ru', 'Назад к перечню публикаций', 'Назад к перечню публикаций'),
-(4, 'ru', 'SITE NAME', 'Yona CMS'),
+(4, 'ru', 'SITE NAME', 'Yona CMS Русская версия'),
 (5, 'ru', 'Главная', 'Главная'),
 (6, 'ru', 'Новости', 'Новости'),
 (7, 'ru', 'Контакты', 'Контакты'),
@@ -511,7 +501,7 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (15, 'uk', 'Ошибка валидации формы', 'Помилка валідації форми'),
 (16, 'uk', 'Подробнее', 'Детальніше'),
 (17, 'uk', 'Назад к перечню публикаций', 'Повернутись до переліку публікацій'),
-(18, 'uk', 'SITE NAME', 'Yona CMS'),
+(18, 'uk', 'SITE NAME', 'Yona CMS Українська версія'),
 (19, 'uk', 'Главная', 'Головна'),
 (20, 'uk', 'Новости', 'Новини'),
 (21, 'uk', 'Контакты', 'Контакти'),
@@ -559,7 +549,13 @@ INSERT INTO `translate` (`id`, `lang`, `phrase`, `translation`) VALUES
 (63, 'uk', 'Design', 'Design'),
 (64, 'en', 'Latest news', 'Latest news'),
 (65, 'ru', 'Latest news', 'Последние новости'),
-(66, 'uk', 'Latest news', 'Останні новини');
+(66, 'uk', 'Latest news', 'Останні новини'),
+(67, 'en', 'Entries not found', 'Entries not found'),
+(68, 'en', 'Back to publications list', 'Back to publications list'),
+(69, 'uk', 'Entries not found', 'Записів не знайдено'),
+(70, 'uk', 'Back to publications list', 'Повернутись до переліку публікацій'),
+(71, 'ru', 'Entries not found', 'Записи не найдены'),
+(72, 'ru', 'Back to publications list', 'Обратно к перечню публикаций');
 
 -- --------------------------------------------------------
 

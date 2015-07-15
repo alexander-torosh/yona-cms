@@ -9,9 +9,10 @@
 
     <link href="{{ url.path() }}favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    <link href="{{ url.path() }}vendor/semantic-1.12.3/semantic.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url.path() }}vendor/semantic-2.0/semantic.min.css" rel="stylesheet" type="text/css">
     <link href="{{ url.path() }}vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet"
+          type="text/css">
 
     <!--less-->
     {{ assets.outputLess('modules-admin-less') }}
@@ -20,7 +21,7 @@
     <!--/less-->
 
     <script src="{{ url.path() }}vendor/js/jquery-1.11.0.min.js"></script>
-    <script src="{{ url.path() }}vendor/semantic-1.12.3/semantic.min.js"></script>
+    <script src="{{ url.path() }}vendor/semantic-2.0/semantic.min.js"></script>
     <script src="{{ url.path() }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/js/jquery.address.js"></script>
@@ -35,29 +36,32 @@
 </head>
 <body>
 
-{{ partial('admin/nav') }}
+    {{ partial('admin/nav') }}
 
-<div class="">
-    {% if registry.cms['TECHNICAL_WORKS'] %}
-        <div class="ui red inverted segment">
-            The site under maintenance.<br>
-            Please do not perform any action until the work is completed.
-        </div>
-    {% endif %}
+    <div class="content">
+        {% if registry.cms['TECHNICAL_WORKS'] %}
+            <div class="ui red inverted segment">
+                The site under maintenance.<br>
+                Please do not perform any action until the work is completed.
+            </div>
+        {% endif %}
 
-    {% if title is defined %}
-        <h1>{{ title }}</h1>
-    {% endif %}
+        {% if title is defined %}
+            <h1>{{ title }}</h1>
+        {% endif %}
 
-    {% if languages_disabled is not defined %}
-        {{ partial('admin/languages') }}
-    {% endif %}
+        {% if languages_disabled is not defined %}
+            {{ partial('admin/languages') }}
+        {% endif %}
 
-    {{ flash.output() }}
+        {{ flash.output() }}
 
-    {{ content() }}
+        {{ content() }}
 
-</div>
+        <hr>
+        <a href="http://yonacms.com" class="works-on" target="_blank">Works on Yona CMS</a>
+
+    </div>
 
 {{ assets.outputJs('modules-admin-js') }}
 

@@ -42,7 +42,7 @@ class IndexController extends Controller
 
         $this->helper->title()->append($typeModel->getHead_title());
         if ($page > 1) {
-            $this->helper->title()->append($this->helper->translate('Страница №').' '.$page);
+            $this->helper->title()->append($this->helper->translate('Страница №') . ' ' . $page);
         }
         $this->view->title = $typeModel->getTitle();
         $this->view->format = $typeModel->getFormat();
@@ -59,11 +59,9 @@ class IndexController extends Controller
         $publication = Publication::findCachedBySlug($slug);
         if (!$publication) {
             throw new Exception("Publication '$slug.html' not found");
-            return;
         }
         if ($publication->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
-            return;
         }
 
         $this->helper->title()->append($publication->getMeta_title());

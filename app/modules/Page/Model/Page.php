@@ -2,7 +2,7 @@
 
 namespace Page\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -67,7 +67,7 @@ class Page extends Model
     public static function findCachedBySlug($slug)
     {
         $query = "slug = '$slug'";
-        $key = HOST_HASH.md5("Page::findFirst($query)");
+        $key = HOST_HASH . md5("Page::findFirst($query)");
         $page = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
         return $page;
     }

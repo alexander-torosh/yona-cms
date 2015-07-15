@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
- * @author Aleksandr Torosh <webtorua@gmail.com>
- */
+     * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
+     * @author Aleksandr Torosh <webtorua@gmail.com>
+     */
 
 namespace Cms\Model;
 
@@ -22,13 +22,13 @@ class Javascript extends Model
     public function afterUpdate()
     {
         $cache = $this->getDi()->get('cache');
-        $key = HOST_HASH.md5("Javascript::getCachedScript({$this->id})");
+        $key = HOST_HASH . md5("Javascript::getCachedScript({$this->id})");
         $cache->delete($key);
     }
 
     public static function findCachedById($id)
     {
-        $key = HOST_HASH.md5("Javascript::getCachedScript($id)");
+        $key = HOST_HASH . md5("Javascript::getCachedScript($id)");
         $result = self::findFirst(array("id ='{$id}'",
             'cache' => array(
                 'key' => $key,

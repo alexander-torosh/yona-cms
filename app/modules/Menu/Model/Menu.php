@@ -3,8 +3,9 @@
  * @copyright Copyright (c) 2011 - 2015 Oleksandr Torosh (http://yonastudio.com)
  * @author Oleksandr Torosh <webtorua@gmail.com>
  */
+namespace Menu\Model\Menu;
 
-use \Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Menu extends Model
@@ -21,12 +22,12 @@ class Menu extends Model
     private $root = 'top';
     private $parent_id;
     private $work_title;
-    private $title; // translate
     private $depth = 0;
     private $left_key;
     private $right_key;
     private $created_at;
     private $updated_at;
+    public  $title; // translate
 
     public static $roots = [
         'top' => 'Top Menu',
@@ -43,7 +44,7 @@ class Menu extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Category with slug '".$this->slug."' is already exists. Take another title"
+                "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
             ]
         ));
 
@@ -235,6 +236,22 @@ class Menu extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkTitle()
+    {
+        return $this->work_title;
+    }
+
+    /**
+     * @param mixed $work_title
+     */
+    public function setWorkTitle($work_title)
+    {
+        $this->work_title = $work_title;
     }
 
 }

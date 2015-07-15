@@ -16,7 +16,6 @@ class IndexController extends Controller
         $page = Page::findCachedBySlug('index');
         if (!$page) {
             throw new Exception("Page 'index' not found");
-            return;
         }
         $this->helper->title()->append($page->getMeta_title());
         $this->helper->meta()->set('description', $page->getMeta_description());

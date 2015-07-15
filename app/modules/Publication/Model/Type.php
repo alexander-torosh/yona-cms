@@ -6,7 +6,8 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Helper\CmsCache;
+use Application\Mvc\Model\Model;
 use Phalcon\DI;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
@@ -50,7 +51,7 @@ class Type extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Тип публикаций с таким URL раздела = '".$this->slug."' существует"
+                "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' существует"
             ]
         ));
 
@@ -63,6 +64,29 @@ class Type extends Model
 
         $cache = $this->getDi()->get('cache');
         $cache->delete(self::cacheSlugKey($this->getSlug()));
+    }
+
+    public function afterSave()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    public function afterDelete()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    private function buildCmsTypesCache()
+    {
+        $types = self::find();
+        $save = [];
+        foreach ($types as $type) {
+            $save[$type->getSlug()] = [
+                'id' => $type->getId(),
+                'slug' => $type->getSlug(),
+            ];
+        }
+        return $save;
     }
 
     public function updateFields($data)
@@ -81,6 +105,11 @@ class Type extends Model
         } else {
             $this->setDisplay_date(0);
         }
+    }
+
+    public static function types()
+    {
+        return CmsCache::getInstance()->get('publication_types');
     }
 
     public static function cachedListArray($params = [])
@@ -103,7 +132,7 @@ class Type extends Model
                     $list[$el->getSlug()] = $value;
                 }
             }
-            $cache->save($key, $list, 60);
+            $cache->save($key, $list, 120);
         }
 
         return $list;
@@ -111,30 +140,28 @@ class Type extends Model
 
     public static function getCachedBySlug($slug)
     {
-        $cache = DI::getDefault()->get('cache');
-        $key = self::cacheSlugKey($slug);
-        $data = $cache->get($key);
-        if (!$data) {
-            $data = self::findFirst([
-                'slug = :slug:',
-                'bind'  => [
-                    'slug' => $slug,
-                ],
-            ]);
-            $cache->save($key, $data, 60);
-        }
+        $data = self::findFirst([
+            'slug = :slug:',
+            'bind' => [
+                'slug' => $slug,
+            ],
+            'cache' => [
+                'key' => self::cacheSlugKey($slug),
+                'lifetime' => 86400,
+            ]
+        ]);
 
         return $data;
     }
 
     public static function cacheSlugKey($slug)
     {
-        return HOST_HASH.md5('Publication\Model\Type; slug = '.$slug);
+        return HOST_HASH . md5('Publication\Model\Type; slug = ' . $slug);
     }
 
     public static function cacheListKey($params)
     {
-        return HOST_HASH.md5('Publication\Model\Type; list; '.serialize($params));
+        return HOST_HASH . md5('Publication\Model\Type; list; ' . serialize($params));
     }
 
     /**

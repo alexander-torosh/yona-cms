@@ -37,14 +37,14 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
         /**
          * Backend roles
          */
-        $this->addRole($roles['journalist']);
+        $this->addRole($roles['journalist'], $roles['guest']);
         $this->addRole($roles['editor'], $roles['journalist']);
         $this->addRole($roles['admin']);
 
         /**
          * Include resources permissions list from file /app/config/acl.php
          */
-        $resources = include APPLICATION_PATH.'/config/acl.php';
+        $resources = include APPLICATION_PATH . '/config/acl.php';
 
         foreach ($resources as $roles_resources) {
             foreach ($roles_resources as $resource => $actions) {

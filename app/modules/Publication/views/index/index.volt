@@ -7,7 +7,7 @@
             {{ helper.modulePartial('index/format/' ~ format, ['item':item]) }}
         {% endfor %}
     {% else %}
-        <p>Публикации отсутствуют</p>
+        <p>{{ helper.translate('Entries not found') }}</p>
     {% endif %}
 
 </div>

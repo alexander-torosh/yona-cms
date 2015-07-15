@@ -6,7 +6,7 @@
 
 namespace Tree\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Category extends Model
@@ -23,12 +23,12 @@ class Category extends Model
     private $root = 'articles';
     private $parent_id;
     private $slug;
-    private $title; // translate
     private $depth = 0;
     private $left_key;
     private $right_key;
     private $created_at;
     private $updated_at;
+    public  $title; // translate
 
     public static $roots = [
         'articles' => 'Articles',
@@ -46,7 +46,7 @@ class Category extends Model
         $this->validate(new Uniqueness(
             [
                 "field"   => "slug",
-                "message" => "Category with slug '".$this->slug."' is already exists. Take another title"
+                "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
             ]
         ));
 
