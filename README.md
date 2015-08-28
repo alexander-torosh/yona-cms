@@ -69,7 +69,7 @@ composer install
 Just clone the repository:
 
 ```
-git clone git@github.com:oleksandr-torosh/yona-cms.git
+git clone https://github.com/oleksandr-torosh/yona-cms
 ```
 
 [Full installation guide](http://doc.yonacms.com/en/reference/install.html)
