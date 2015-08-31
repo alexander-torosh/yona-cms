@@ -12,13 +12,13 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $type = $this->dispatcher->getParam('type','string');
+        $type = $this->dispatcher->getParam('type', 'string');
         $typeModel = Type::getCachedBySlug($type);
         if (!$typeModel) {
             throw new Exception("Publication hasn't type = '$type''");
         }
-
-        $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10 ;
+        
+        $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10;
         $limit = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {
             $paginatorLimit = (int) $limit;
@@ -28,7 +28,7 @@ class IndexController extends Controller
         $page = $this->request->getQuery('page', 'int', 1);
 
         $publications = Publication::find(array(
-            "type = {$typeModel->getId()}",
+            "type_id = {$typeModel->getId()}",
             "order" => "date DESC",
         ));
 
@@ -41,24 +41,27 @@ class IndexController extends Controller
         $this->view->paginate = $paginator->getPaginate();
 
         $this->helper->title()->append($typeModel->getHead_title());
+        if ($page > 1) {
+            $this->helper->title()->append($this->helper->translate('Страница №') . ' ' . $page);
+        }
         $this->view->title = $typeModel->getTitle();
         $this->view->format = $typeModel->getFormat();
         $this->view->type = $type;
+
+        $this->helper->menu->setActive($type);
     }
 
     public function publicationAction()
     {
-        $slug = $this->dispatcher->getParam('slug','string');
-        $type = $this->dispatcher->getParam('type','string');
+        $slug = $this->dispatcher->getParam('slug', 'string');
+        $type = $this->dispatcher->getParam('type', 'string');
 
         $publication = Publication::findCachedBySlug($slug);
         if (!$publication) {
             throw new Exception("Publication '$slug.html' not found");
-            return;
         }
         if ($publication->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
-            return;
         }
 
         $this->helper->title()->append($publication->getMeta_title());
@@ -66,6 +69,7 @@ class IndexController extends Controller
         $this->helper->meta()->set('keywords', $publication->getMeta_keywords());
 
         $this->view->publication = $publication;
+        $this->helper->menu->setActive($type);
 
     }
 

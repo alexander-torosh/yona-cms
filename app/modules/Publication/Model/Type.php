@@ -1,12 +1,14 @@
 <?php
- /**
+/**
  * @copyright Copyright (c) 2011 - 2014 Oleksandr Torosh (http://wezoom.net)
  * @author Oleksandr Torosh <web@wezoom.net>
  */
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Helper\CmsCache;
+use Application\Mvc\Model\Model;
+use Phalcon\DI;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Type extends Model
@@ -30,27 +32,27 @@ class Type extends Model
     public $meta_keywords; // translate
     public $seo_text; // translate
 
-    public static $formats = array(
-        'list' => 'Список',
-        'grid' => 'Сетка',
-    );
+    public static $formats = [
+        'list' => 'List',
+        'grid' => 'Grid',
+    ];
 
     public function initialize()
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
 
-        $this->hasMany('id', 'Publication\Model\Publication', 'type_id', array(
+        $this->hasMany('id', 'Publication\Model\Publication', 'type_id', [
             'alias' => 'publications'
-        ));
+        ]);
     }
 
     public function validation()
     {
         $this->validate(new Uniqueness(
-            array(
-                "field" => "slug",
-                "message" => "Тип публикаций с таким URL раздела = '".$this->slug."' существует"
-            )
+            [
+                "field"   => "slug",
+                "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' существует"
+            ]
         ));
 
         return $this->validationHasFailed() != true;
@@ -62,7 +64,29 @@ class Type extends Model
 
         $cache = $this->getDi()->get('cache');
         $cache->delete(self::cacheSlugKey($this->getSlug()));
-        $cache->delete(self::cacheListKey());
+    }
+
+    public function afterSave()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    public function afterDelete()
+    {
+        CmsCache::getInstance()->save('publication_types', $this->buildCmsTypesCache());
+    }
+
+    private function buildCmsTypesCache()
+    {
+        $types = self::find();
+        $save = [];
+        foreach ($types as $type) {
+            $save[$type->getSlug()] = [
+                'id' => $type->getId(),
+                'slug' => $type->getSlug(),
+            ];
+        }
+        return $save;
     }
 
     public function updateFields($data)
@@ -83,27 +107,32 @@ class Type extends Model
         }
     }
 
-    public static function cachedListArray($params = array())
+    public static function types()
     {
-        $result = self::find(array(
-            'cache' => array(
-                'key' => self::cacheListKey(),
-                'lifetime' => 60,
-            ),
-        ));
+        return CmsCache::getInstance()->get('publication_types');
+    }
 
-        $list = array();
-        foreach($result as $el) {
-            if (isset($params['value']) && $params['value']) {
-                $value = $el->{$params['value']};
-            } else {
-                $value = $el->getTitle();
+    public static function cachedListArray($params = [])
+    {
+        $cache = DI::getDefault()->get('cache');
+        $key = self::cacheListKey($params);
+        $list = $cache->get($key);
+        if (!$list) {
+            $result = self::find();
+            $list = [];
+            foreach ($result as $el) {
+                if (isset($params['value']) && $params['value']) {
+                    $value = $el->{$params['value']};
+                } else {
+                    $value = $el->getTitle();
+                }
+                if (isset($params['key']) && $params['key']) {
+                    $list[$el->{$params['key']}] = $value;
+                } else {
+                    $list[$el->getSlug()] = $value;
+                }
             }
-            if (isset($params['key']) && $params['key']) {
-                $list[$el->{$params['key']}] = $value;
-            } else {
-                $list[$el->getSlug()] = $value;
-            }
+            $cache->save($key, $list, 120);
         }
 
         return $list;
@@ -111,17 +140,18 @@ class Type extends Model
 
     public static function getCachedBySlug($slug)
     {
-        $result = self::findFirst(array(
+        $data = self::findFirst([
             'slug = :slug:',
-            'bind' => array(
+            'bind' => [
                 'slug' => $slug,
-            ),
-            'cache' => array(
+            ],
+            'cache' => [
                 'key' => self::cacheSlugKey($slug),
-                'lifetime' => 60,
-            ),
-        ));
-        return $result;
+                'lifetime' => 86400,
+            ]
+        ]);
+
+        return $data;
     }
 
     public static function cacheSlugKey($slug)
@@ -129,9 +159,9 @@ class Type extends Model
         return HOST_HASH . md5('Publication\Model\Type; slug = ' . $slug);
     }
 
-    public static function cacheListKey()
+    public static function cacheListKey($params)
     {
-        return HOST_HASH . md5('Publication\Model\Type; list');
+        return HOST_HASH . md5('Publication\Model\Type; list; ' . serialize($params));
     }
 
     /**
@@ -301,6 +331,5 @@ class Type extends Model
         return $this->display_date;
     }
 
-    
 
 } 

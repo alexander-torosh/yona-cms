@@ -1,14 +1,17 @@
-{% if phrases is not empty %}
+{% if phrases is defined %}
     <form method="post" action="" class="ui form segment" enctype="application/x-www-form-urlencoded">
         <div class="field">
-            <input type="submit" class="ui button positive" value="Сохранить">
-			<button type="button" class="ui button blue" onclick="fillEmpties();">Проставить пустые ячейки исходными значениями</button>
+            <input type="submit" class="ui button positive" value="Save">
+			<button type="button" class="ui button blue" onclick="fillEmpties();">Auto fill empty cells</button>
         </div>
-        <table class="ui table small">
+        <table class="ui table very compact celled">
+            <thead>
             <tr>
-                <th style="text-align: right; width: 25%;">Исходник</th>
-                <th>Перевод</th>
+                <th style="text-align: right; width: 25%;">Phrase</th>
+                <th>Translation</th>
             </tr>
+            </thead>
+            <tbody>
             {% for phrase in phrases %}
                 <tr>
                     <td style="text-align: right;">
@@ -20,13 +23,14 @@
                     </td>
                 </tr>
             {% endfor %}
+            </tbody>
         </table>
         <div class="field">
-            <input type="submit" class="ui button positive" value="Сохранить">
+            <input type="submit" class="ui button positive" value="Save">
         </div>
     </form>
 {% else %}
-    <div class="ui blue inverted segment">Исходники переводов не обнарежены</div>
+    <div class="ui blue inverted segment">Sources translations not found</div>
 {% endif %}
 
 <script>

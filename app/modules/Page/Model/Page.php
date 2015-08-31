@@ -2,7 +2,7 @@
 
 namespace Page\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -57,7 +57,7 @@ class Page extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "slug",
-                "message" => "Страница с такой транслитерацией уже существует"
+                "message" => "Page with slug is already exists"
             )
         ));
 

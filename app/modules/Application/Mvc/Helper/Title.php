@@ -15,13 +15,16 @@ class Title extends \Phalcon\Mvc\User\Component
     private static $parts = array();
     private static $separator = ' | ';
 
-    public static function getInstance($title = null)
+    public static function getInstance($title = null, $h1 = false)
     {
         if (!self::$instance) {
             self::$instance = new Title();
         }
         if ($title) {
             self::$instance->append($title);
+            if ($h1) {
+                self::$instance->getDi()->get('view')->setVar('title', $title);
+            }
         }
         return self::$instance;
 

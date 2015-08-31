@@ -27,8 +27,8 @@ class LanguageController extends Controller
             'order' => 'primary DESC, sortorder ASC',
         ));
 
-        $this->view->title = 'Список языков';
-        $this->helper->title('Список языков');
+        $this->view->title = $this->helper->at('Manage Languages');
+        $this->helper->title($this->view->title);
     }
 
     public function addAction()
@@ -42,8 +42,8 @@ class LanguageController extends Controller
             if ($form->isValid()) {
                 if ($model->save()) {
                     $this->cache->delete(Language::cacheKey());
-                    $this->flash->success('Информация обновлена');
-                    return $this->redirect('/cms/language');
+                    $this->flash->success($this->helper->at('Updated has been successful'));
+                    return $this->redirect($this->url->get() . 'cms/language');
                 } else {
                     $this->flashErrors($model);
                 }
@@ -55,7 +55,7 @@ class LanguageController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Добавление языка';
+        $this->view->title = $this->helper->at('Adding language');
         $this->helper->title($this->view->title);
     }
 
@@ -69,9 +69,10 @@ class LanguageController extends Controller
             if ($form->isValid()) {
                 ($this->request->getPost('primary') != null) ? $model->setPrimary(1) : $model->setPrimary(0);
                 if ($model->save()) {
-                    $this->flash->success('Информация обновлена');
+                    $model->setOnlyOnePrimary();
+                    $this->flash->success($this->helper->at('Updated has been successful'));
                     $this->cache->delete(Language::cacheKey());
-                    return $this->redirect('/cms/language/edit/' . $model->getId());
+                    return $this->redirect($this->url->get() . 'cms/language/edit/' . $model->getId());
                 } else {
                     $this->flashErrors($model);
                 }
@@ -85,13 +86,23 @@ class LanguageController extends Controller
         $this->view->model = $model;
         $this->view->form = $form;
 
-        $this->view->title = 'Редактирование языка';
+        $this->view->title = 'Editing language';
         $this->helper->title($this->view->title);
     }
 
     public function deleteAction($id)
     {
+        $model = Language::findFirst($id);
 
+        if ($this->request->isPost()) {
+            $this->cache->delete(Language::cacheKey());
+            $model->delete();
+            return $this->redirect($this->url->get() . 'cms/language');
+        }
+
+        $this->view->model = $model;
+        $this->view->title = $this->helper->at('Removing language');
+        $this->helper->title($this->view->title);
     }
 
 } 

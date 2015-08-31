@@ -3,28 +3,25 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/publication/type?lang={{ constant('LANG') }}" class="ui button">
-            <i class="icon left"></i> Назад
+        <a href="{{ url.get() }}publication/type?lang={{ constant('LANG') }}" class="ui button">
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model.getId() %}
 
-            <a href="/publication/type/add" class="ui button">
-                <i class="icon add"></i> Добавить
-            </a>
-
-            <a href="/publication/type/delete/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+            <a href="{{ url.get() }}publication/type/delete/{{ model.getId() }}?lang={{ constant('LANG') }}"
+               class="ui button red">
+                <i class="icon trash"></i> Delete
             </a>
 
             {% if model.getId() %}
                 <a class="ui blue button" target="_blank"
                    href="{{ helper.langUrl(['for':'publications','type':model.getSlug()]) }}">
-                    Посмотреть раздел на сайте
+                    See section on site
                 </a>
             {% endif %}
 
@@ -50,17 +47,19 @@
 <!--ui semantic-->
 <script>
     $('.ui.form').form({
-        title: {
-            identifier: 'title',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        slug: {
-            identifier: 'slug',
-            rules: [
-                {type: 'empty'}
-            ]
+        fields: {
+            title: {
+                identifier: 'title',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            slug: {
+                identifier: 'slug',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->

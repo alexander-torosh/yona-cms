@@ -3,21 +3,19 @@
     {% if helper.isAdminSession() %}
         <p style="font-weight: bold;font-size:120%;">
             <a class="noajax"
-               href="/publication/admin/edit/{{ publication.getId() }}">Редактировать публикацию</a>
+               href="{{ url.get() }}publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">{{ helper.at('Edit publication') }}</a>
         </p>
     {% endif %}
 
     <h1>{{ publication.getTitle() }}</h1>
 
-    {% if publication.getType() in ['events'] %}
-        <section class="date">{{ publication.getDate('d.m.Y') }}</section>
-    {% endif %}
+    <section class="date">{{ publication.getDate('d.m.Y') }}</section>
 
     {% if publication.preview_inner %}
         {% set image = helper.image([
         'id': publication.getId(),
         'type': 'publication',
-        'width': 205,
+        'width': 300,
         'strategy': 'w'
         ]) %}
         <div class="image inner">
@@ -27,8 +25,6 @@
 
     {{ publication.getText() }}
 
-    <p>
-        <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}">&larr; {{ helper.translate('Назад к перечню публикаций') }}</a>
-    </p>
+    <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}" class="back">&larr; {{ helper.translate('Back to publications list') }}</a>
 
 </article>

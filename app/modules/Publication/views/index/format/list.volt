@@ -1,7 +1,7 @@
 {% set image = helper.image([
 'id': item.getId(),
 'type': 'publication',
-'width': 240,
+'width': 300,
 'strategy': 'w'
 ]) %}
 {% set link = helper.langUrl(['for':'publication', 'type':item.getTypeSlug(), 'slug':item.getSlug()]) %}

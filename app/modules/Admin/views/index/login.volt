@@ -7,49 +7,46 @@
 
         <title>Login</title>
 
-        <link href="/vendor/semantic/css/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ url.path() }}vendor/semantic-2.0/semantic.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-            <script src="/vendor/js/html5shiv.js"></script>
-            <script src="/vendor/js/respond.min.js"></script>
+            <script src="{{ url.path() }}vendor/js/html5shiv.js"></script>
+            <script src="{{ url.path() }}vendor/js/respond.min.js"></script>
         <![endif]-->
         <style>
         .container {
-            width: 600px;
+            width: 400px;
             margin: 100px auto 0;
         }
         </style>
     </head>
     <body>
         <div class="container">
-            <form class="ui form segment" method="post">
+            <form class="ui form segment" method="post" action="{{ url.get() }}admin/index/login">
+                <h1>Admin panel</h1>
                 {{ flash.output() }}
-                <div class="field">
-                    <label>Логин</label>
-                    <div class="ui left labeled icon input">
-                        <input name="login" id="login" type="text" placeholder="Username">
+                <div class="required field">
+                    <label>Login</label>
+                    <div class="ui icon input">
+                        {{ form.render('login') }}
                         <i class="user icon"></i>
-                        <div class="ui corner label">
-                            <i class="icon asterisk"></i>
-                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label>Пароль</label>
-                    <div class="ui left labeled icon input">
-                        <input name="password" id="password" type="password">
+                <div class="required field">
+                    <label>Password</label>
+                    <div class="ui icon input">
+                        {{ form.render('password') }}
                         <i class="lock icon"></i>
-                        <div class="ui corner label">
-                            <i class="icon asterisk"></i>
-                        </div>
                     </div>
                 </div>
                 <div class="ui error message">
-                    <div class="header">Ошибки</div>
+                    <div class="header">Errors</div>
                 </div>
-                <input type="submit" id="submit" class="ui blue submit button" value="Login">
+                <input type="hidden" name="{{ security.getTokenKey() }}"
+                       value="{{ security.getToken() }}"/>
+                <input type="submit" id="submit" class="ui blue submit button" value="Log in">
             </form>
-        </div> <!-- /container -->
+        </div>
     </body>
 </html>

@@ -16,9 +16,12 @@ class ConfigurationForm extends Form
 
     public function initialize()
     {
-        $this->add((new Check('DEBUG_MODE'))->setDefault(1)->setLabel('Режим отладки, вывод ошибок приложения'));
-        $this->add((new Check('TECHNICAL_WORKS'))->setDefault(1)->setLabel('Режим "На сайте проводятся технические работы"'));
-        $this->add((new Check('PROFILER'))->setDefault(1)->setLabel('DB Profiler'));
+        $this->add((new Check('DEBUG_MODE'))->setLabel('Debug mode, display application errors'));
+        $this->add((new Check('PROFILER'))->setLabel('DB Profiler'));
+        $this->add((new Check('DISPLAY_CHANGELOG'))->setLabel('Display Changelog at Admin dashboard startpage'));
+        $this->add((new Check('WIDGETS_CACHE'))->setLabel('Widgets caching'));
+        $this->add((new Text('ADMIN_EMAIL'))->setLabel('Admin Email'));
+        $this->add((new Check('TECHNICAL_WORKS'))->setLabel('Site is under maintenance'));
 
     }
 

@@ -3,19 +3,17 @@
     <!--tabs-->
     <div class="ui tabular menu init">
         <a class="item active" data-tab="main">
-            Главные
+            Main
         </a>
     </div>
     <!--/end tabs-->
 
     <!--tab main-->
     <div class="ui segment tab active" data-tab="main">
-        {{ form.renderDecorated('DEBUG_MODE') }}
-        {{ form.renderDecorated('TECHNICAL_WORKS') }}
-        {{ form.renderDecorated('PROFILER') }}
+        {{ form.renderAll() }}
     </div>
     <!--/end tab main-->
 
     <input type="hidden" name="form" value="1">
-    <button type="submit" class="ui button positive"><i class="icon save"></i> Сохранить</button>
+    <button type="submit" class="ui button positive"><i class="icon save"></i> Save</button>
 </form>

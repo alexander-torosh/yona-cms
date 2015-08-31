@@ -14,7 +14,7 @@ class RobotsController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-robots');
-        $this->robotsFilePath = PUBLIC_PATH . '/robots.txt';
+        $this->robotsFilePath = ROOT . '/robots.txt';
         $this->view->languages_disabled = true;
     }
 
@@ -27,41 +27,20 @@ class RobotsController extends Controller
                 $robots = $this->request->getPost('robots', 'string');
                 $result = file_put_contents($this->robotsFilePath, $robots);
                 if ($result) {
-                    $this->flash->success('Файл robots.txt обновлен');
-                    $this->redirect('/seo/robots');
+                    $this->flash->success('File robots.txt has been saved');
+                    $this->redirect($this->url->get() . 'seo/robots');
                 } else {
-                    $this->flash->error('Ошибка! Файл robots.txt не обновлен. Проверьте права на запись файла.');
+                    $this->flash->error('Error! The robots.txt file is not updated. Check the write permissions to the file.');
                 }
             } else {
                 $this->flashErrors($form);
             }
-
-            /*$file = $this->request->getPost('file');
-            $w_file = file_put_contents($this->robotsFilePath, $file);
-            if ($w_file !== false){
-                $this->flash->success('Файл robots.txt обновлен');
-                $this->redirect('/seo/robots');
-            } else {
-                $this->flash->error('Ошибка! Файл robots.txt не обновлен');
-                $this->view->file = $file;
-            }*/
-
         } else {
             $robots = file_get_contents($this->robotsFilePath);
             $form->get('robots')->setDefault($robots);
-            //$r_file = file_get_contents($this->robotsFilePath);
-            /*if ($r_file !== false){
-                $this->view->file = $r_file;
-            } else {
-                $this->flash->error('Файл robots.txt ещё не создан или к нему нет доступа');
-                $this->view->file = '';
-
-            }*/
         }
 
-        $title = 'Редактирование robots.txt';
-        $this->helper->title($title);
-        $this->view->title = $title;
+        $this->helper->title('Editing robots.txt', true);
         $this->view->form = $form;
 
 

@@ -1,68 +1,80 @@
-<div class="ui black inverted tiered menu">
-    <a class="item{{ helper.activeMenu().activeClass('admin-home') }}" href="{{ url(['for': 'admin']) }}">
-        <i class="browser icon"></i> Админ-панель
+<div class="ui left fixed vertical pointing inverted menu">
+    <a class="item{{ helper.activeMenu().activeClass('admin-home') }} header" href="{{ url(['for': 'admin']) }}">
+        Yona CMS
     </a>
-    <div class="ui dropdown item">
-        <i class="font icon"></i> Контент <i class="icon dropdown"></i>
+
+    <div class="item">
+        <div class="header">{{ helper.at('Contents') }} <i class="font icon"></i></div>
+
         <div class="menu">
-            <a class="item{{ helper.activeMenu().activeClass('admin-page') }}" href="/page/admin">
-                <i class="file outline icon"></i> Статические страницы
+            <a class="item{{ helper.activeMenu().activeClass('admin-page') }}" href="{{ url.get() }}page/admin">
+                {{ helper.at('Pages') }} <i class="file outline icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}" href="/publication/admin">
-                <i class="calendar icon"></i> Публикации
+            <a class="item{{ helper.activeMenu().activeClass('admin-publication') }}"
+               href="{{ url.get() }}publication/admin">
+                {{ helper.at('Publications') }} <i class="calendar icon"></i>
             </a>
-            {#<a class="item{{ helper.activeMenu().activeClass('admin-projects') }}" href="/projects/admin">
-                <i class="home icon"></i> Проекты
+            <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="{{ url.get() }}widget/admin">
+                {{ helper.at('Widgets') }} <i class="text file icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-video') }}" href="/video/admin">
-                <i class="video icon"></i> Видео
-            </a>#}
-            <a class="item{{ helper.activeMenu().activeClass('admin-slider') }}" href="/slider/admin">
-                <i class="resize horizontal icon"></i> Слайдеры
+            <a class="item{{ helper.activeMenu().activeClass('tree') }}" href="{{ url.get() }}tree/admin">
+                {{ helper.at('Tree Categories') }} <i class="tree icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-widget') }}" href="/widget/admin">
-                <i class="text file icon"></i> Статические виджеты
-            </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="/file-manager">
-                <i class="attachment icon"></i> Файловый менеджер
+            <a class="item{{ helper.activeMenu().activeClass('admin-fm') }}" href="{{ url.get() }}file-manager">
+                {{ helper.at('File Manager') }} <i class="file image outline icon"></i>
             </a>
         </div>
     </div>
-    <div class="ui dropdown item">
-        <i class="lab icon"></i> SEO <i class="icon dropdown"></i>
+
+    <div class="item">
+        <div class="header">SEO <i class="lab icon"></i></div>
+
         <div class="menu">
-            <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="/seo/robots">
-                <i class="android icon"></i> Robots.txt
+            <a class="item{{ helper.activeMenu().activeClass('seo-robots') }}" href="{{ url.get() }}seo/robots">
+                Robots.txt <i class="android icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('seo-manager') }}" href="/seo/manager">
-                <i class="lightbulb icon"></i> SEO Менеджер
+            <a class="item{{ helper.activeMenu().activeClass('seo-sitemap') }}" href="{{ url.get() }}seo/sitemap">
+                Sitemap.xml <i class="sitemap icon"></i>
+            </a>
+            <a class="item{{ helper.activeMenu().activeClass('seo-manager') }}" href="{{ url.get() }}seo/manager">
+                SEO Manager <i class="lightbulb icon"></i>
             </a>
         </div>
     </div>
-    <div class="ui dropdown item">
-        <i class="wrench icon"></i> Администрирование <i class="icon dropdown"></i>
+    <div class="item">
+        <div class="header">{{ helper.at('Admin') }} <i class="wrench icon"></i></div>
+
         <div class="menu">
-            <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="/admin/admin-user">
-                <i class="user icon"></i> Администраторы
+            <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="{{ url.get() }}admin/admin-user">
+                {{ helper.at('Manage Users') }} <i class="user icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="/cms/configuration">
-                <i class="settings icon"></i> Конфигурация
+            <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="{{ url.get() }}cms/configuration">
+                {{ helper.at('CMS Configuration') }} <i class="settings icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-language') }}" href="/cms/language">
-                <i class="globe icon"></i> Языки
+            <a class="item{{ helper.activeMenu().activeClass('admin-language') }}" href="{{ url.get() }}cms/language">
+                {{ helper.at('Languages') }} <i class="globe icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="/cms/translate">
-                <i class="book icon"></i> Переводы
+            <a class="item{{ helper.activeMenu().activeClass('admin-translate') }}" href="{{ url.get() }}cms/translate">
+                {{ helper.at('Translate') }} <i class="book icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}" href="/cms/javascript">
-                <i class="code icon"></i> {{ '<head>, <body> javascript'|escape }}
+            <a class="item{{ helper.activeMenu().activeClass('admin-javascript') }}"
+               href="{{ url.get() }}cms/javascript">
+                {{ '<head>, <body> javascript'|escape }} <i class="code icon"></i>
             </a>
         </div>
     </div>
-    <a href="/admin/index/logout" class="item right">
-        <i class="plane icon"></i> Вылет
-    </a>
-    <a href="/" class="item right" target="_blank">
-        <i class="home icon"></i> На сайт
-    </a>
+    <div class="item">
+        <a href="{{ url.get() }}" class="ui primary tiny button" target="_blank">
+            <i class="home icon"></i>{{ helper.at('View Site') }}
+        </a>
+        <br><br>
+        <a href="javascript:void(0);" class="ui tiny button" onclick="document.getElementById('logout-form').submit()">
+            <i class="plane icon"></i>{{ helper.at('Logout') }}
+        </a>
+
+        <form action="{{ url.get() }}admin/index/logout" method="post" style="display: none;" id="logout-form">
+            <input type="hidden" name="{{ security.getTokenKey() }}"
+                   value="{{ security.getToken() }}">
+        </form>
+    </div>
 </div>

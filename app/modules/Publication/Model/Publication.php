@@ -2,7 +2,7 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -21,23 +21,25 @@ class Publication extends Model
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
 
-        $this->belongsTo('type_id', 'Publication\Model\Type', 'id', array(
+        $this->belongsTo('type_id', 'Publication\Model\Type', 'id', [
             'alias' => 'type'
-        ));
+        ]);
     }
 
-    public $id;
-    public $type_id;
-    public $title;
-    public $slug;
-    public $text;
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
-    public $created_at;
-    public $updated_at;
-    public $date;
-    public $preview_inner;
+    private $id;
+    private $type_id;
+    private $slug;
+    private $created_at;
+    private $updated_at;
+    private $date;
+    private $preview_src;
+    private $preview_inner;
+
+    protected $title;
+    protected $text;
+    protected $meta_title;
+    protected $meta_description;
+    protected $meta_keywords;
 
     public function beforeCreate()
     {
@@ -58,20 +60,13 @@ class Publication extends Model
         $cache->delete(self::cacheSlugKey($this->getSlug()));
     }
 
-    public function beforeValidation()
-    {
-        if ($_POST['form']) {
-            $this->preview_inner = (isset($_POST['preview_inner'])) ? 1 : 0;
-        }
-    }
-
     public function validation()
     {
         $this->validate(new Uniqueness(
-            array(
-                "field" => "slug",
-                "message" => "Страница с такой транслитерацией = '".$this->slug."' уже существует"
-            )
+            [
+                "field"   => "slug",
+                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
+            ]
         ));
 
         return $this->validationHasFailed() != true;
@@ -92,15 +87,16 @@ class Publication extends Model
         if (!$this->getMeta_title()) {
             $this->setMeta_title($data['title']);
         }
+        $this->setPreviewInner(isset($data['preview_inner']) ? 1 : 0);
     }
 
     public static function findCachedBySlug($slug)
     {
-        $publication = self::findFirst(array("slug = '$slug'",
-            'cache' => array(
-                'key' => self::cacheSlugKey($slug),
-                'lifetime' => 60)
-        ));
+        $publication = self::findFirst(["slug = '$slug'",
+            'cache' => [
+                'key'      => self::cacheSlugKey($slug),
+                'lifetime' => 60]
+        ]);
         return $publication;
     }
 
@@ -205,26 +201,22 @@ class Publication extends Model
         $this->date = $date;
     }
 
-    public function getDate($format = 'Y-m-d')
+    public function getDate($format = 'Y-m-d H:i:s')
     {
         if ($format) {
-            return date($format, strtotime($this->date));
+            if ($this->date) {
+                return date($format, strtotime($this->date));
+            }
         } else {
             return $this->date;
         }
     }
 
-    /**
-     * @param mixed $type_id
-     */
     public function setType_id($type_id)
     {
         $this->type_id = $type_id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getType_id()
     {
         return $this->type_id;
@@ -233,7 +225,7 @@ class Publication extends Model
     public function getTypeTitle()
     {
         if ($this->type_id) {
-            $types = Type::cachedListArray(array('key' => 'id'));
+            $types = Type::cachedListArray(['key' => 'id']);
             if (array_key_exists($this->type_id, $types)) {
                 return $types[$this->type_id];
             }
@@ -243,27 +235,31 @@ class Publication extends Model
     public function getTypeSlug()
     {
         if ($this->type_id) {
-            $types = Type::cachedListArray(array('key' => 'id', 'value' => 'slug'));
+            $types = Type::cachedListArray(['key' => 'id', 'value' => 'slug']);
             if (array_key_exists($this->type_id, $types)) {
                 return $types[$this->type_id];
             }
         }
     }
 
-    /**
-     * @param mixed $preview_inner
-     */
     public function setPreviewInner($preview_inner)
     {
         $this->preview_inner = $preview_inner;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPreviewInner()
     {
         return $this->preview_inner;
+    }
+
+    public function getPreviewSrc()
+    {
+        return $this->preview_src;
+    }
+
+    public function setPreviewSrc($preview_src)
+    {
+        $this->preview_src = $preview_src;
     }
 
 }

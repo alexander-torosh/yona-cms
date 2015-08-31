@@ -1,5 +1,7 @@
 <?php
 
+namespace YonaCMS;
+
 /**
  * Bootstrap
  * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
@@ -12,146 +14,55 @@ class Bootstrap
     {
         $di = new \Phalcon\DI\FactoryDefault();
 
-
-        $config = include APPLICATION_PATH . '/config/application.php';
+        // Config
+        require_once APPLICATION_PATH . '/modules/Cms/Config.php';
+        $config = \Cms\Config::get();
         $di->set('config', $config);
 
-
+        // Registry
         $registry = new \Phalcon\Registry();
+        $di->set('registry', $registry);
 
-
+        // Loader
         $loader = new \Phalcon\Loader();
         $loader->registerNamespaces($config->loader->namespaces->toArray());
-        $loader->registerDirs(array(APPLICATION_PATH . "/plugins/"));
+        $loader->registerDirs([APPLICATION_PATH . "/plugins/"]);
         $loader->register();
 
-
-        $db = new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-            "host" => $config->database->host,
+        // Database
+        $db = new \Phalcon\Db\Adapter\Pdo\Mysql([
+            "host"     => $config->database->host,
             "username" => $config->database->username,
             "password" => $config->database->password,
-            "dbname" => $config->database->dbname,
-            "charset" => $config->database->charset,
-        ));
+            "dbname"   => $config->database->dbname,
+            "charset"  => $config->database->charset,
+        ]);
         $di->set('db', $db);
 
+        // View
+        $this->initView($di);
 
-        $view = new \Phalcon\Mvc\View();
-
-        define('MAIN_VIEW_PATH', '../../../views/');
-        $view->setMainView(MAIN_VIEW_PATH . 'main');
-        $view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
-        $view->setLayout('main');
-        $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
-
-        $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
-        $volt->setOptions(array('compiledPath' => APPLICATION_PATH . '/cache/volt/'));
-
-        $phtml = new \Phalcon\Mvc\View\Engine\Php($view, $di);
-        $viewEngines = array(
-            ".volt" => $volt,
-            ".phtml" => $phtml,
-        );
-        $registry->viewEngines = $viewEngines;
-
-        $view->registerEngines($viewEngines);
-
-        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
-            $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
-        }
-
-        $di->set('view', $view);
-
-
-        $viewSimple = new \Phalcon\Mvc\View\Simple();
-        $viewSimple->registerEngines($viewEngines);
-        $di->set('viewSimple', $viewSimple);
-
-
+        // URL
         $url = new \Phalcon\Mvc\Url();
-        $url->setBasePath('/');
-        $url->setBaseUri('/');
+        $url->setBasePath($config->base_path);
+        $url->setBaseUri($config->base_path);
+        $di->set('url', $url);
 
-        $cacheFrontend = new \Phalcon\Cache\Frontend\Data(array(
-            "lifetime" => 60,
-            "prefix" => HOST_HASH,
-        ));
+        // Cache
+        $this->initCache($di);
 
-        switch ($config->cache) {
-            case 'file':
-                $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, array(
-                    "cacheDir" => __DIR__ . "/cache/backend/"
-                ));
-                break;
-            case 'memcache':
-                $cache = new \Phalcon\Cache\Backend\Memcache(
-                    $cacheFrontend, array(
-                    "host" => "localhost",
-                    "port" => "11211"
-                ));
-                break;
-        }
-        $di->set('cache', $cache);
-        $di->set('modelsCache', $cache);
-
-
-        switch ($config->metadata_cache) {
-            case 'memory':
-                $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
-                break;
-            case 'apc':
-                $modelsMetadata = new \Phalcon\Mvc\Model\MetaData\Apc(array(
-                    "lifetime" => 60,
-                    "prefix" => HOST_HASH,
-                ));
-                break;
-        }
-        $di->set('modelsMetadata', $modelsMetadata);
-
-        /**
-         * CMS Конфигурация
-         */
+        // CMS
         $cmsModel = new \Cms\Model\Configuration();
         $registry->cms = $cmsModel->getConfig(); // Отправляем в Registry
 
-
+        // Application
         $application = new \Phalcon\Mvc\Application();
-
         $application->registerModules($config->modules->toArray());
 
+        // Events Manager, Dispatcher
+        $this->initEventManager($di);
 
-        $eventsManager = new \Phalcon\Events\Manager();
-        $dispatcher = new \Phalcon\Mvc\Dispatcher();
-
-
-        $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher, $di) use ($di) {
-            new LocalizationPlugin($dispatcher);
-            new AclPlugin($di->get('acl'), $dispatcher);
-        });
-
-        $eventsManager->attach("dispatch:afterDispatchLoop",function ($event, $dispatcher, $di) use ($di) {
-            new \Seo\Plugin\SeoManagerPlugin($dispatcher, $di->get('request'), $di->get('router'));
-            new TitlePlugin($di);
-        });
-
-        $profiler = new \Phalcon\Db\Profiler();
-
-        $eventsManager->attach('db', function ($event, $db) use ($profiler) {
-            if ($event->getType() == 'beforeQuery') {
-                $profiler->startProfile($db->getSQLStatement());
-            }
-            if ($event->getType() == 'afterQuery') {
-                $profiler->stopProfile();
-            }
-        });
-
-        $db->setEventsManager($eventsManager);
-        $di->set('profiler', $profiler);
-
-
-        $dispatcher->setEventsManager($eventsManager);
-        $di->set('dispatcher', $dispatcher);
-
+        // Session
         $session = new \Phalcon\Session\Adapter\Files();
         $session->start();
         $di->set('session', $session);
@@ -159,54 +70,32 @@ class Bootstrap
         $acl = new \Application\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
-        $assetsManager = new \Application\Assets\Manager();
-        $assetsManager->collection('js')
-            ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/js.js')
-            ->setTargetUri('assets/js.js')
-            ->join(true)
+        // JS Assets
+        $this->initAssetsManager($di);
 
-            ->addJs(ROOT . "/vendor/history/native.history.js")
-            ->addJs(ROOT . "/vendor/noty/jquery.noty.js")
-            ->addJs(ROOT . "/vendor/noty/themes/default.js")
-            ->addJs(ROOT . "/vendor/noty/layouts/center.js")
-            ->addJs(ROOT . "/vendor/fancybox/jquery.fancybox.pack.js")
-            ->addJs(ROOT . "/static/js/library.js")
-            ->addJs(ROOT . "/static/js/rotation.js")
-            ->addJs(ROOT . "/static/js/main.js")
-            ->addJs(ROOT . "/static/js/ajax.js");
-
-        $assetsManager->collection('modules-less')
-            ->setLocal(true)
-            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
-            ->addFilter(new \Application\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/assets/modules.less')
-            ->setTargetUri('assets/modules.less')
-            ->join(true);
-
-        $assetsManager->collection('modules-admin-less')
-            ->setLocal(true)
-            //->addFilter(new \Phalcon\Assets\Filters\Cssmin())
-            ->addFilter(new \Application\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/assets/modules-admin.less')
-            ->setTargetUri('assets/modules-admin.less')
-            ->join(true);
-
-        $di->set('assets', $assetsManager);
-
-        $flash = new \Phalcon\Flash\Session(array(
-            'error' => 'ui red inverted segment',
+        // Flash helper
+        $flash = new \Phalcon\Flash\Session([
+            'error'   => 'ui red inverted segment',
             'success' => 'ui green inverted segment',
-            'notice' => 'ui blue inverted segment',
+            'notice'  => 'ui blue inverted segment',
             'warning' => 'ui orange inverted segment',
-        ));
+        ]);
         $di->set('flash', $flash);
 
         $di->set('helper', new \Application\Mvc\Helper());
 
-        $di->set('registry', $registry);
+        // Routing
+        $this->initRouting($application, $di);
 
+        $application->setDI($di);
+
+        // Main dispatching process
+        $this->dispatch($di);
+
+    }
+
+    private function initRouting($application, $di)
+    {
         $router = new \Application\Mvc\Router\DefaultRouter();
         $router->setDi($di);
         foreach ($application->getModules() as $module) {
@@ -217,16 +106,154 @@ class Bootstrap
             }
             $initClassName = str_replace('Module', 'Init', $module['className']);
             if (class_exists($initClassName)) {
-                $initClass = new $initClassName();
-                $initClass->init($di);
+                new $initClassName();
             }
         }
         $di->set('router', $router);
+    }
 
-        $application->setDI($di);
+    private function initAssetsManager($di)
+    {
+        $config = $di->get('config');
+        $assetsManager = new \Application\Assets\Manager();
+        $js_collection = $assetsManager->collection('js')
+            ->setLocal(true)
+            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
+            ->setTargetPath(ROOT . '/assets/js.js')
+            ->setTargetUri('assets/js.js')
+            ->join(true);
+        if ($config->assets->js) {
+            foreach ($config->assets->js as $js) {
+                $js_collection->addJs(ROOT . '/' . $js);
+            }
+        }
 
-        $this->dispatch($di);
+        // Admin JS Assets
+        $assetsManager->collection('modules-admin-js')
+            ->setLocal(true)
+            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
+            ->setTargetPath(ROOT . '/assets/modules-admin.js')
+            ->setTargetUri('assets/modules-admin.js')
+            ->join(true);
 
+        // Admin LESS Assets
+        $assetsManager->collection('modules-admin-less')
+            ->setLocal(true)
+            ->addFilter(new \Application\Assets\Filter\Less())
+            ->setTargetPath(ROOT . '/assets/modules-admin.less')
+            ->setTargetUri('assets/modules-admin.less')
+            ->join(true)
+            ->addCss(APPLICATION_PATH . '/modules/Admin/assets/admin.less');
+
+        $di->set('assets', $assetsManager);
+    }
+
+    private function initEventManager($di)
+    {
+        $eventsManager = new \Phalcon\Events\Manager();
+        $dispatcher = new \Phalcon\Mvc\Dispatcher();
+
+        $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher) use ($di) {
+            new \YonaCMS\Plugin\CheckPoint($di->get('request'));
+            new \YonaCMS\Plugin\Localization($dispatcher);
+            new \YonaCMS\Plugin\AdminLocalization($di->get('config'));
+            new \YonaCMS\Plugin\Acl($di->get('acl'), $dispatcher, $di->get('view'));
+            new \YonaCMS\Plugin\MobileDetect($di->get('session'), $di->get('view'), $di->get('request'));
+        });
+
+        $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher) use ($di) {
+            new \Seo\Plugin\SeoManager($dispatcher, $di->get('request'), $di->get('router'), $di->get('view'));
+            new \YonaCMS\Plugin\Title($di);
+        });
+
+        // Profiler
+        $registry = $di->get('registry');
+        if ($registry->cms['PROFILER']) {
+            $profiler = new \Phalcon\Db\Profiler();
+            $di->set('profiler', $profiler);
+
+            $eventsManager->attach('db', function ($event, $db) use ($profiler) {
+                if ($event->getType() == 'beforeQuery') {
+                    $profiler->startProfile($db->getSQLStatement());
+                }
+                if ($event->getType() == 'afterQuery') {
+                    $profiler->stopProfile();
+                }
+            });
+        }
+
+        $db = $di->get('db');
+        $db->setEventsManager($eventsManager);
+
+        $dispatcher->setEventsManager($eventsManager);
+        $di->set('dispatcher', $dispatcher);
+    }
+
+    private function initView($di)
+    {
+        $view = new \Phalcon\Mvc\View();
+
+        define('MAIN_VIEW_PATH', '../../../views/');
+        $view->setMainView(MAIN_VIEW_PATH . 'main');
+        $view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
+        $view->setLayout('main');
+        $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
+
+        // Volt
+        $volt = new \Application\Mvc\View\Engine\Volt($view, $di);
+        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/cache/volt/']);
+        $volt->initCompiler();
+
+
+        $phtml = new \Phalcon\Mvc\View\Engine\Php($view, $di);
+        $viewEngines = [
+            ".volt"  => $volt,
+            ".phtml" => $phtml,
+        ];
+
+        $view->registerEngines($viewEngines);
+
+        $ajax = $di->get('request')->getQuery('_ajax');
+        if ($ajax) {
+            $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
+        }
+
+        $di->set('view', $view);
+
+        return $view;
+    }
+
+    private function initCache($di)
+    {
+        $config = $di->get('config');
+
+        $cacheFrontend = new \Phalcon\Cache\Frontend\Data([
+            "lifetime" => 60,
+            "prefix"   => HOST_HASH,
+        ]);
+
+        $cache = null;
+        switch ($config->cache) {
+            case 'file':
+                $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [
+                    "cacheDir" => __DIR__ . "/cache/backend/"
+                ]);
+                break;
+            case 'memcache':
+                $cache = new \Phalcon\Cache\Backend\Memcache(
+                    $cacheFrontend, [
+                    "host" => $config->memcache->host,
+                    "port" => $config->memcache->port,
+                ]);
+                break;
+        }
+        $di->set('cache', $cache, true);
+        $di->set('modelsCache', $cache, true);
+
+        \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
+
+        $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
+        $di->set('modelsMetadata', $modelsMetadata);
     }
 
     private function dispatch($di)
@@ -257,24 +284,34 @@ class Bootstrap
 
         $view->start();
 
-        try {
+        $registry = $di['registry'];
+        if ($registry->cms['DEBUG_MODE']) {
+            $debug = new \Phalcon\Debug();
+            $debug->listen();
+
             $dispatcher->dispatch();
-        } catch (\Phalcon\Exception $e) {
-            $view->setViewsDir(__DIR__ . '/modules/Index/views/');
-            $view->setPartialsDir('');
-            $view->e = $e;
+        } else {
+            try {
+                $dispatcher->dispatch();
+            } catch (\Phalcon\Exception $e) {
+                // Errors catching
 
-            if ($e instanceof Phalcon\Mvc\Dispatcher\Exception) {
-                $response->setHeader(404, 'Not Found');
-                $view->partial('error/error404');
-            } else {
-                $response->setHeader(503, 'Service Unavailable');
-                $view->partial('error/error503');
+                $view->setViewsDir(__DIR__ . '/modules/Index/views/');
+                $view->setPartialsDir('');
+                $view->e = $e;
+
+                if ($e instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+                    $response->setHeader(404, 'Not Found');
+                    $view->partial('error/error404');
+                } else {
+                    $response->setHeader(503, 'Service Unavailable');
+                    $view->partial('error/error503');
+                }
+                $response->sendHeaders();
+                echo $response->getContent();
+                return;
+
             }
-            $response->sendHeaders();
-            echo $response->getContent();
-            return;
-
         }
 
         $view->render(
@@ -287,7 +324,10 @@ class Bootstrap
 
         $response = $di['response'];
 
-        if (isset($_GET['_ajax']) && $_GET['_ajax']) {
+        // AJAX
+        $request = $di['request'];
+        $_ajax = $request->getQuery('_ajax');
+        if ($_ajax) {
             $contents = $view->getContent();
 
             $return = new \stdClass();

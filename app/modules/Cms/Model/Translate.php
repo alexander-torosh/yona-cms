@@ -6,6 +6,8 @@
 
 namespace Cms\Model;
 
+use Application\Mvc\Helper\CmsCache;
+use Phalcon\DI;
 use Phalcon\Mvc\Model;
 
 class Translate extends Model
@@ -21,29 +23,15 @@ class Translate extends Model
     public $phrase;
     public $translation;
 
+    public static function translates()
+    {
+        return CmsCache::getInstance()->get('translates');
+    }
+
     public static function findCachedByLangInArray($lang = null)
     {
-        if (!$lang) {
-            $lang = LANG;
-        }
-        $key = HOST_HASH . md5("Translate::findByLang($lang)");
-        $result = self::find(array(
-            'lang = :lang:',
-            'bind' => array(
-                'lang' => $lang,
-            ),
-            'cache' => array(
-                'key' => $key,
-                'lifetime' => 300,
-            )
-        ));
-        $translations = array();
-        if ($result) {
-            foreach($result as $el) {
-                $translations[$el->getPhrase()] = $el->getTranslation();
-            }
-        }
-        return $translations;
+        $translates = self::translates();
+        return $translates[$lang];
     }
 
     public function findByPhraseAndLang($phrase, $lang = null)
@@ -51,14 +39,29 @@ class Translate extends Model
         if (!$lang) {
             $lang = LANG;
         }
-        $result = self::findFirst(array(
+        $result = self::findFirst([
             'phrase = :phrase: AND lang = :lang:',
-            'bind' => array(
+            'bind' => [
                 'phrase' => $phrase,
-                'lang' => $lang,
-            )
-        ));
+                'lang'   => $lang,
+            ]
+        ]);
         return $result;
+    }
+
+    public static function buildCmsTranslatesCache()
+    {
+        $save = [];
+        $languages = Language::find();
+        foreach($languages as $lang) {
+            $save[$lang->getIso()] = [""=>""];
+        }
+
+        $entries = Translate::find();
+        foreach ($entries as $el) {
+            $save[$el->getLang()][$el->getPhrase()] = $el->getTranslation();
+        }
+        return $save;
     }
 
     /**
@@ -124,6 +127,4 @@ class Translate extends Model
     {
         return $this->translation;
     }
-
-
 }

@@ -18,15 +18,15 @@ class PageForm extends Form
     public function initialize()
     {
         $title = new Text('title', array('required' => true));
-        $title->setLabel('Название');
+        $title->setLabel('Title');
         $this->add($title);
 
         $slug = new Text('slug');
-        $slug->setLabel('Транслитерация');
+        $slug->setLabel('Slug');
         $this->add($slug);
 
         $text = new TextArea('text');
-        $text->setLabel('Текст');
+        $text->setLabel('Text');
         $this->add($text);
 
         $meta_title = new Text('meta_title', array('required' => true));

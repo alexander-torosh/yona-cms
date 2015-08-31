@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
- * @author Aleksandr Torosh <webtorua@gmail.com>
- */
+     * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
+     * @author Aleksandr Torosh <webtorua@gmail.com>
+     */
 
 namespace Cms\Model;
 
@@ -29,7 +29,7 @@ class Javascript extends Model
     public static function findCachedById($id)
     {
         $key = HOST_HASH . md5("Javascript::getCachedScript($id)");
-        $result = self::findFirst(array( "id ='{$id}'",
+        $result = self::findFirst(array("id ='{$id}'",
             'cache' => array(
                 'key' => $key,
                 'lifetime' => 1200, //20 min

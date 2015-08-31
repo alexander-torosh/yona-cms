@@ -1,15 +1,17 @@
-function elFinderBrowser (field_name, url, type, win) {
-    tinymce.activeEditor.windowManager.open({
-        file: '/vendor/elfinder-2.1/elfinder_tinymce.html',// use an absolute path!
+function elFinderBrowser_3 (field_name, url, type, win) {
+    var elfinder_url = '/vendor/elfinder-2.1/elfinder_tinymce_3.html';    // use an absolute path!
+    tinyMCE.activeEditor.windowManager.open({
+        file: elfinder_url,
         title: 'elFinder 2.0',
         width: 900,
         height: 450,
-        resizable: 'yes'
+        resizable: 'yes',
+        inline: 'yes',    // This parameter only has an effect if you use the inlinepopups plugin!
+        popup_css: false, // Disable TinyMCE's default popup CSS
+        close_previous: 'no'
     }, {
-        setUrl: function (url) {
-            console.log(url);
-            win.document.getElementById(field_name).value = url.url;
-        }
+        window: win,
+        input: field_name
     });
     return false;
 }
@@ -34,3 +36,11 @@ $(function() {
     });
 
 });
+
+function selectText(element) {
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}

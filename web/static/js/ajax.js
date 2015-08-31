@@ -44,19 +44,21 @@ function AjaxViewModel() {
     self.getData = function (url) {
         self.preUpdate();
 
-        $.getJSON(url, {_ajax: true}, function (response) {
+        $.ajax(url,{
+            data: {_ajax: true},
+            dataType: "json"
+        }).done(function(response) {
             if (response.success) {
                 self.update(response, url);
-            } else {
-                alert('Ошибка');
-                self.update(response, url);
+                self.postUpdate(response);
             }
-            self.postUpdate(response);
+        }).fail(function() {
+            alert('Ошибка загрузки страницы');
         });
     }
 
     self.preUpdate = function () {
-        document.body.style.opacity = 0.2;
+        //document.body.style.opacity = 0.2;
     }
 
     self.update = function (response, href) {
@@ -73,13 +75,11 @@ function AjaxViewModel() {
 
         self.bind();
 
-        setTimeout(initFancybox, 50);
-
         $('html,body').animate({
             scrollTop: 0
         }, 300);
 
-        document.body.style.opacity = 1;
+        //document.body.style.opacity = 1;
 
         if (response) {
             document.body.setAttribute('class','');
@@ -95,7 +95,7 @@ function AjaxViewModel() {
         }
 
         var n = document.createTextNode(' ');
-        var disp = element.style.display;  // don't worry about previous display style
+        var disp = element.style.display;
 
         element.appendChild(n);
         element.style.display = 'none';

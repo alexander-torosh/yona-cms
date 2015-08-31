@@ -8,6 +8,7 @@
 
 namespace Publication\Form;
 
+use Application\Form\Element\Image;
 use Phalcon\Forms\Element\Check;
 use Phalcon\Validation\Validator\PresenceOf;
 use Application\Form\Form;
@@ -22,48 +23,47 @@ class PublicationForm extends Form
 
     public function initialize()
     {
-        $type = new Select('type_id', Type::cachedListArray(array('key' => 'id')), array());
-        $type->setLabel('Тип пубикации');
+        $type = new Select('type_id', Type::cachedListArray(['key' => 'id']));
+        $type->setLabel('Type of Publication');
         $this->add($type);
 
-        $title = new Text('title', array('required' => true));
-        $title->addValidator(new PresenceOf(array(
-            'message' => 'Укажите название страницы'
-        )));
-        $title->setLabel('Название');
+        $title = new Text('title', ['required' => true]);
+        $title->addValidator(new PresenceOf([
+            'message' => 'Title can not be empty'
+        ]));
+        $title->setLabel('Title');
         $this->add($title);
 
         $slug = new Text('slug');
-        $slug->setLabel('Транслитерация');
+        $slug->setLabel('Slug');
         $this->add($slug);
 
         $date = new Text('date');
-        $date->setLabel('Дата публикации');
+        $date->setLabel('Publication Date');
         $this->add($date);
 
         $text = new TextArea('text');
-        $text->setLabel('Текст');
+        $text->setLabel('Text');
         $this->add($text);
 
-        $meta_title = new Text('meta_title', array('required' => true));
+        $meta_title = new Text('meta_title', ['required' => true]);
         $meta_title->setLabel('meta-title');
         $this->add($meta_title);
 
-        $meta_description = new TextArea('meta_description');
+        $meta_description = new TextArea('meta_description', ['style' => 'height:4em; min-height: inherit']);
         $meta_description->setLabel('meta-description');
         $this->add($meta_description);
 
-        $meta_keywords = new TextArea('meta_keywords');
+        $meta_keywords = new TextArea('meta_keywords', ['style' => 'height:4em; min-height: inherit']);
         $meta_keywords->setLabel('meta-keywords');
         $this->add($meta_keywords);
 
         $preview_inner = new Check('preview_inner');
-        $preview_inner->setLabel('Превью внутри публикации');
-        $preview_inner->setDefault(1);
+        $preview_inner->setLabel('Show preview image inside publication');
         $this->add($preview_inner);
 
-        $image = new File('image');
-        $image->setLabel('Загрузить превью');
+        $image = new Image('preview_src');
+        $image->setLabel('Thumbnail Image');
         $this->add($image);
     }
 

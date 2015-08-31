@@ -1,4 +1,6 @@
-<div class="ui segment updates">
-    <h3>Последние обновления YonaCms:</h3>
-    {{ changelog }}
-</div>
+{% if changelog is defined %}
+    <div class="ui segment changelog">
+        <h3>Latest updates in YonaCms:</h3>
+        {{ changelog }}
+    </div>
+{% endif %}

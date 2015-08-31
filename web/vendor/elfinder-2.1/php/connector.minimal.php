@@ -60,7 +60,7 @@ $opts = array(
     'roots' => array(
         array(
             'driver' => 'LocalFileSystem', // driver for accessing file system (REQUIRED)
-            'path' => $_SERVER['DOCUMENT_ROOT'] . '/static/files/', // path to files (REQUIRED)
+            'path' => __DIR__ . '/../../../static/files/', // path to files (REQUIRED)
             'URL' => '/static/files/', // URL to files (REQUIRED)
             'accessControl' => 'access' // disable and hide dot starting files (OPTIONAL)
         )

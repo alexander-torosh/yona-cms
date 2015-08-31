@@ -7,13 +7,13 @@
             {{ helper.modulePartial('index/format/' ~ format, ['item':item]) }}
         {% endfor %}
     {% else %}
-        <p>Публикации отсутствуют</p>
+        <p>{{ helper.translate('Entries not found') }}</p>
     {% endif %}
 
 </div>
 
 {% if paginate.total_pages > 1 %}
     <div class="pagination">
-        {{ partial('main/pagination', ['paginate':paginate, 'url':publicationsLink] ) }}
+        {{ partial('main/pagination', ['paginate':paginate] ) }}
     </div>
 {% endif %}

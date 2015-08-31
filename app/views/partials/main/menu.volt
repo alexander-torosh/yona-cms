@@ -1,12 +1,18 @@
 <ul id="menu">
-    <li>
-        <a href="{{ helper.langUrl(['for':'index']) }}" data-menu="home">{{ helper.translate('Главная') }}</a>
-    </li>
-    <li>
-        <a href="{{ helper.langUrl(['for':'publications', 'type':'news']) }}"
-           data-menu="publications-news">{{ helper.translate('Новости') }}</a>
-    </li>
-    <li>
-        <a href="{{ helper.langUrl(['for':'contacts']) }}" data-menu="contacts">{{ helper.translate('Контакты') }}</a>
-    </li>
+    {{ helper.menu.item( helper.translate('Home'), 'index', helper.langUrl(['for':'index']) ) }}
+    {{ helper.menu.item( helper.translate('News'), 'news', helper.langUrl(['for':'publications', 'type':'news']) ) }}
+    {{ helper.menu.item( helper.translate('Articles'), 'articles', helper.langUrl(['for':'publications', 'type':'articles']) ) }}
+    {{ helper.menu.item( helper.translate('Contacts'), 'contacts', helper.langUrl(['for':'contacts']) ) }}
+    {{ helper.menu.item( helper.translate('Admin'), null, url(['for':'admin']), ['li':['class':'last'], 'a':['class':'noajax']] ) }}
+    {#
+        submenu items exampple:
+
+        {{ helper.menu.item( 'Services', 'services', langUrl(['for':'services']), [],
+        [
+            helper.menu.item( 'Printing', 'printing', langUrl(['for':'printing']) ),
+            helper.menu.item( 'Design', 'design', langUrl(['for':'design']) )
+        ]
+        ) }}
+
+    #}
 </ul>

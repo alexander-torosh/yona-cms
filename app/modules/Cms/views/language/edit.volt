@@ -3,22 +3,18 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="/cms/language" class="ui button">
-            <i class="icon left"></i> Назад
+        <a href="{{ url.get() }}cms/language" class="ui button">
+            <i class="icon left arrow"></i> Back
         </a>
 
         <div class="ui positive submit button">
-            <i class="save icon"></i> Сохранить
+            <i class="save icon"></i> Save
         </div>
 
         {% if model.getId() %}
 
-            <a href="/cms/language/add" class="ui button">
-                <i class="icon add"></i> Добавить
-            </a>
-
-            <a href="/cms/language/delete/{{ model.getId() }}" class="ui button red">
-                <i class="icon trash"></i> Удалить
+            <a href="{{ url.get() }}cms/language/delete/{{ model.getId() }}" class="ui button red">
+                <i class="icon trash"></i> Delete
             </a>
 
         {% endif %}
@@ -28,7 +24,9 @@
 
     <div class="ui segment">
         {{ form.renderDecorated('iso') }}
+        {{ form.renderDecorated('locale') }}
         {{ form.renderDecorated('name') }}
+        {{ form.renderDecorated('short_name') }}
         {{ form.renderDecorated('url') }}
         {% if model.getId() %}
             {{ form.renderDecorated('sortorder') }}
@@ -41,17 +39,37 @@
 <!--ui semantic-->
 <script>
     $('.ui.form').form({
-        iso: {
-            identifier: 'iso',
-            rules: [
-                {type: 'empty'}
-            ]
-        },
-        name: {
-            identifier: 'name',
-            rules: [
-                {type: 'empty'}
-            ]
+        fields: {
+            iso: {
+                identifier: 'iso',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            locale: {
+                identifier: 'locale',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            name: {
+                identifier: 'name',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            short_name: {
+                identifier: 'short_name',
+                rules: [
+                    {type: 'empty'}
+                ]
+            },
+            url: {
+                identifier: 'url',
+                rules: [
+                    {type: 'empty'}
+                ]
+            }
         }
     });
 </script><!--/end ui semantic-->

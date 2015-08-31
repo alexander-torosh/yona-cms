@@ -1,13 +1,11 @@
-<p>
-    <a href="/page/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
-        <i class="icon left"></i> Назад
+<div class="ui segment">
+    <a href="{{ url.get() }}page/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
+        <i class="icon left arrow"></i> {{ helper.at('Back') }}
     </a>
-</p>
 
+    <form method="post" class="ui form segment negative message" action="">
+        <p>{{ helper.at('Remove page') }} <b>{{ model.getTitle() }}</b>?</p>
+        <button type="submit" class="ui button negative"><i class="icon trash"></i> {{ helper.at('Delete') }}</button>
+    </form>
 
-<form method="post" class="ui form" action="">
-    <div class="ui segment">
-        <b>{{ model.getTitle() }}</b>
-    </div>
-    <input type="submit" class="ui button negative" value="Удалить">
-</form>
+</div>

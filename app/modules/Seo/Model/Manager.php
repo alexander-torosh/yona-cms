@@ -7,7 +7,9 @@
 namespace Seo\Model;
 
 
-use Application\Mvc\Model;
+use Application\Mvc\Helper\CmsCache;
+use Application\Mvc\Model\Model;
+use Application\Mvc\Router\DefaultRouter;
 use Phalcon\Mvc\Model\Message;
 
 class Manager extends Model
@@ -18,55 +20,17 @@ class Manager extends Model
         return "seo_manager";
     }
 
-    protected $translateModel = 'Seo\Model\Translate\ManagerTranslate';  // translate
-
     public $id;
-    public $custom_name;
-    public $route;
-    public $module;
-    public $controller;
-    public $action;
-    public $language;
-    public $route_params_json;
-    public $query_params_json;
-    public $head_title; // translate
-    public $meta_description; // translate
-    public $meta_keywords; // translate
-    public $seo_text; // translate
+    public $url;
+    public $head_title;
+    public $meta_description;
+    public $meta_keywords;
+    public $seo_text;
     public $created_at;
     public $updated_at;
 
-    public function initialize()
-    {
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
-    }
-
     public function validation()
     {
-        if ($this->route || $this->route_params_json) {
-            if ($this->module || $this->controller || $this->action) {
-                $message = new Message('Необходимо использовать Route или Module-Controller-Action. Одновременное указание параметров невозможно');
-                $this->appendMessage($message);
-                return false;
-            }
-        }
-        if ($this->route_params_json) {
-            $valid_json = json_decode($this->route_params_json);
-            if (!$valid_json) {
-                $message = new Message('Параметры Route должны быть в формате JSON');
-                $this->appendMessage($message);
-                return false;
-            }
-        }
-        if ($this->query_params_json) {
-            $valid_json = json_decode($this->query_params_json);
-            if (!$valid_json) {
-                $message = new Message('Параметры GET должны быть в формате JSON');
-                $this->appendMessage($message);
-                return false;
-            }
-        }
-
         return $this->validationHasFailed() != true;
     }
 
@@ -80,24 +44,51 @@ class Manager extends Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-    public function setAction($action)
+    public function afterSave()
     {
-        $this->action = $action;
+        CmsCache::getInstance()->save('seo_manager', $this->buildCmsSeoManagerCache());
     }
 
-    public function getAction()
+    public function afterDelete()
     {
-        return $this->action;
+        CmsCache::getInstance()->save('seo_manager', $this->buildCmsSeoManagerCache());
     }
 
-    public function setController($controller)
+    private function buildCmsSeoManagerCache()
     {
-        $this->controller = $controller;
+        $entries = self::find();
+        $save = [];
+        if (!empty($entries)) {
+            foreach ($entries as $el) {
+                $save[$el->getUrl()] = [
+                    'id'               => $el->getId(),
+                    'url'              => $el->getUrl(),
+                    'head_title'       => $el->getHead_title(),
+                    'meta_description' => $el->getMeta_description(),
+                    'meta_keywords'    => $el->getMeta_keywords(),
+                    'seo_text'         => $el->getSeo_text(),
+                ];
+            }
+        }
+        return $save;
     }
 
-    public function getController()
+    public static function urls()
     {
-        return $this->controller;
+        return CmsCache::getInstance()->get('seo_manager');
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $request = $this->getDI()->get('request');
+        $host = $request->getHttpHost();
+        $url = str_replace(['http://' . $host, 'https://' . $host], ['', ''], $url);
+        $this->url = $url;
     }
 
     public function setCreatedAt($created_at)
@@ -110,104 +101,9 @@ class Manager extends Model
         return $this->created_at;
     }
 
-    public function setCustomName($custom_name)
-    {
-        $this->custom_name = $custom_name;
-    }
-
-    public function getCustomName()
-    {
-        return $this->custom_name;
-    }
-
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    public function setHead_title($head_title)
-    {
-        $this->setMLVariable('head_title', $head_title);
-    }
-
-    public function getHead_title()
-    {
-        return $this->getMLVariable('head_title');
-    }
-
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setLanguage($language)
-    {
-        $this->language = ($language) ? $language : null ;
-    }
-
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    public function setMeta_description($meta_description)
-    {
-        $this->setMLVariable('meta_description', $meta_description);
-    }
-
-    public function getMeta_description()
-    {
-        return $this->getMLVariable('meta_description');
-    }
-
-    public function setMeta_keywords($meta_keywords)
-    {
-        $this->setMLVariable('meta_keywords', $meta_keywords);
-    }
-
-    public function getMeta_keywords()
-    {
-        return $this->getMLVariable('meta_keywords');
-    }
-
-    public function setModule($module)
-    {
-        $this->module = ($module) ? $module : null;
-    }
-
-    public function getModule()
-    {
-        return $this->module;
-    }
-
-    public function setQueryParamsJson($query_params_json)
-    {
-        $this->query_params_json = ($query_params_json) ? $query_params_json : null;
-    }
-
-    public function getQueryParamsJson()
-    {
-        return $this->query_params_json;
-    }
-
-    public function setRouteParamsJson($route_params_json)
-    {
-        $this->route_params_json = ($route_params_json) ? $route_params_json : null ;
-    }
-
-    public function getRouteParamsJson()
-    {
-        return $this->route_params_json;
-    }
-
-    public function setSeo_text($seo_text)
-    {
-        $this->setMLVariable('seo_text', $seo_text);
-    }
-
-    public function getSeo_text()
-    {
-        return $this->getMLVariable('seo_text');
     }
 
     public function setUpdatedAt($updated_at)
@@ -220,15 +116,45 @@ class Manager extends Model
         return $this->updated_at;
     }
 
-    public function setRoute($route)
+    public function setHead_title($head_title)
     {
-        $this->route = $route;
+        $this->head_title = $head_title;
     }
 
-    public static function routeCacheKey($route_name, $lang)
+    public function getHead_title()
     {
-        $key = HOST_HASH . md5('Seo\Model\Manager::' . $route_name . $lang);
-        return $key;
+        return $this->head_title;
     }
+
+    public function setMeta_description($meta_description)
+    {
+        $this->meta_description = $meta_description;
+    }
+
+    public function getMeta_description()
+    {
+        return $this->meta_description;
+    }
+
+    public function setMeta_keywords($meta_keywords)
+    {
+        $this->meta_keywords = $meta_keywords;
+    }
+
+    public function getMeta_keywords()
+    {
+        return $this->meta_keywords;
+    }
+
+    public function setSeo_text($seo_text)
+    {
+        $this->seo_text = $seo_text;
+    }
+
+    public function getSeo_text()
+    {
+        return $this->seo_text;
+    }
+
 
 }

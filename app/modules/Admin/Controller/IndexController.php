@@ -11,6 +11,7 @@ namespace Admin\Controller;
 use Application\Mvc\Controller;
 use Admin\Model\AdminUser;
 use Admin\Form\LoginForm;
+use Michelf\Markdown;
 use Phalcon\Mvc\View;
 
 class IndexController extends Controller
@@ -23,22 +24,23 @@ class IndexController extends Controller
 
         $auth = $this->session->get('auth');
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
-            $this->flash->notice($this->helper->translate("Авторизируйтесь пожалуйста"));
-            $this->response->redirect('admin/index/login');
-            return $this->response->send();
+            $this->flash->notice($this->helper->at('Log in please'));
+            $this->redirect($this->url->get() . 'admin/index/login');
         }
 
         // Проверка пользователя yona
-        $wezoom = AdminUser::findFirst("login = 'yona'");
-        if ($wezoom) {
-            $this->flash->warning("Обнаружен административный пользователь 'yona', для соблюдения мер безопасности, его необходимо удалить и создать новую личную учетную запись");
+        $yona = AdminUser::findFirst("login = 'yona'");
+        if ($yona) {
+            $this->flash->warning($this->helper->at('Warning. Found admin user with name yona'));
         }
 
-        $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
-        $this->view->changelog = nl2br(trim($changelog));
+        if ($this->registry->cms['DISPLAY_CHANGELOG']) {
+            $changelog = file_get_contents(APPLICATION_PATH . '/../CHANGELOG.md');
+            $changelog_html = Markdown::defaultTransform($changelog);
+            $this->view->changelog = $changelog_html;
+        }
 
-        $this->view->title = 'Административная панель YonaCms';
-        $this->helper->title()->append('Стартовая страница');
+        $this->helper->title($this->helper->at('YonaCms Admin Panel'), true);
 
         $this->helper->activeMenu()->setActive('admin-home');
 
@@ -51,41 +53,52 @@ class IndexController extends Controller
         $form = new LoginForm();
 
         if ($this->request->isPost()) {
-            if ($form->isValid($this->request->getPost())) {
-                $login = $this->request->getPost('login', 'string');
-                $password = $this->request->getPost('password', 'string');
-                $user = AdminUser::findFirst("login='$login'");
-                if ($user) {
-                    if ($user->checkPassword($password)) {
-                        if ($user->isActive()) {
-                            $this->session->set('auth', $user->getAuthData());
-                            $this->flash->success($this->helper->translate("Приветствуем в административной панели управления!"));
-                            $this->response->redirect('admin');
-                            return $this->response->send();
+            if ($this->security->checkToken()) {
+                if ($form->isValid($this->request->getPost())) {
+                    $login = $this->request->getPost('login', 'string');
+                    $password = $this->request->getPost('password', 'string');
+                    $user = AdminUser::findFirst("login='$login'");
+                    if ($user) {
+                        if ($user->checkPassword($password)) {
+                            if ($user->isActive()) {
+                                $this->session->set('auth', $user->getAuthData());
+                                $this->flash->success($this->helper->translate("Welcome to the administrative control panel!"));
+                                return $this->redirect($this->url->get() . 'admin');
+                            } else {
+                                $this->flash->error($this->helper->translate("User is not activated yet"));
+                            }
                         } else {
-                            $this->flash->error($this->helper->translate("Пользователь не активирован"));
+                            $this->flash->error($this->helper->translate("Incorrect login or password"));
                         }
                     } else {
-                        $this->flash->error($this->helper->translate("Неверный логин или пароль"));
+                        $this->flash->error($this->helper->translate("Incorrect login or password"));
                     }
                 } else {
-                    $this->flash->error($this->helper->translate("Неверный логин или пароль"));
+                    foreach ($form->getMessages() as $message) {
+                        $this->flash->error($message);
+                    }
                 }
             } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
+                $this->flash->error($this->helper->translate("Security errors"));
             }
         }
+
+        $this->view->form = $form;
 
     }
 
     public function logoutAction()
     {
-        $this->session->remove('auth');
-        $this->response->redirect('');
-        return $this->response->send();
-
+        if ($this->request->isPost()) {
+            if ($this->security->checkToken()) {
+                $this->session->remove('auth');
+            } else {
+                $this->flash->error("Security errors");
+            }
+        } else {
+            $this->flash->error("Security errors");
+        }
+        $this->redirect($this->url->get());
     }
 
 }
