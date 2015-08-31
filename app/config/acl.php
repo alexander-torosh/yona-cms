@@ -9,6 +9,7 @@ return [
         'index/error'       => '*',
         'page/index'        => '*',
         'publication/index' => '*',
+        'sitemap/index'     => '*',
     ],
     'member'     => [
         'index/index' => '*',

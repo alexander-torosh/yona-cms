@@ -15,4 +15,5 @@ return array(
     'Seo',
     'Menu',
     'Tree',
+    'Sitemap',
 );

@@ -17,6 +17,7 @@ class Model extends \Phalcon\Mvc\Model
     public $fields = [];
 
     public static $lang = 'en'; // Язык по-умолчанию
+    public static $custom_lang = '';
     private static $translateCache = true; // Флаг использования кеша переводов
 
     /**
@@ -38,7 +39,12 @@ class Model extends \Phalcon\Mvc\Model
     {
         if ($this->translateModel && defined('LANG')) {
             // Если есть массив переводов и установлена константа активного языка
-            self::setLang(LANG); // Устанавливаем текущий язык
+            if(self::$custom_lang){
+                self::setLang(self::$custom_lang);
+            } else {
+                self::setLang(LANG); // Устанавливаем текущий язык
+            }
+
             $this->initTranslationsArray(); // Извлекаем переводы со связанной таблицы переводов
             $this->initTranslations();
         }
@@ -59,6 +65,14 @@ class Model extends \Phalcon\Mvc\Model
     public static function setLang($lang)
     {
         self::$lang = $lang;
+    }
+
+    /**
+     * Установка другого языка  для карты сайта
+     */
+    public static function setCustomLang($lang)
+    {
+        self::$custom_lang = $lang;
     }
 
     /**
@@ -118,7 +132,7 @@ class Model extends \Phalcon\Mvc\Model
         if (!$this->getId()) {
             return false;
         }
-        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . self::$lang . '"';
         $key = HOST_HASH . md5($this->getSource() . '_translate ' . $query);
         return $key;
     }
@@ -141,7 +155,7 @@ class Model extends \Phalcon\Mvc\Model
             return false;
         }
         $model = new $this->translateModel();
-        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . LANG . '"';
+        $query = 'foreign_id = ' . $this->getId() . ' AND lang = "' . self::$lang . '"';
         $params = ['conditions' => $query];
 
         if (self::$translateCache) {
