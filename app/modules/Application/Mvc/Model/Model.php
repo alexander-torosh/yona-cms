@@ -17,7 +17,7 @@ class Model extends \Phalcon\Mvc\Model
     public $fields = [];
 
     public static $lang = 'en'; // Язык по-умолчанию
-    public static $custom_lang = '';
+    public static $custom_lang = ''; // Используется для создания карты сайта
     private static $translateCache = true; // Флаг использования кеша переводов
 
     /**
@@ -38,7 +38,7 @@ class Model extends \Phalcon\Mvc\Model
     public function afterFetch()
     {
         if ($this->translateModel && defined('LANG')) {
-            // Если есть массив переводов и установлена константа активного языка
+            // Если есть массив переводов и установлена константа активного языка или другого языка
             if(self::$custom_lang){
                 self::setLang(self::$custom_lang);
             } else {

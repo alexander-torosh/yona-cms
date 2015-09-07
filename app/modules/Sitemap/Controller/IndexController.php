@@ -23,13 +23,18 @@ class IndexController extends Controller
                 'model' => 'Publication',
                 'where' => "", // preview_inner='0'  ,  etc.
                 'getLink' => function($model, $lang){
-                    return $this->langUrlCustom(['for' => 'publication', 'type' => $model->getTypeSlug(), 'slug' => $model->getSlug()], $lang);
+                    return $this->langUrlCustom([
+                        'for' => 'publication',
+                        'type' => $model->getTypeSlug(),
+                        'slug' => $model->getSlug()], $lang);
                 }
             ],[
                 'class' => 'Page',
                 'model' => 'Page',
                 'getLink'      => function($model, $lang){
-                    return $this->langUrlCustom(['for' => 'page', 'slug' => $model->getSlug()], $lang);
+                    return $this->langUrlCustom([
+                        'for' => 'page',
+                        'slug' => $model->getSlug()], $lang);
                 },
             ]
         ];
