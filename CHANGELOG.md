@@ -1,10 +1,16 @@
 # CHANGELOG
 
-## v0.3.2
+## v0.4
 
 - Updated Semantic UI to version 2.1.4;
 
 - Fixed bug in \Cms\Scanner;
+
+- Moved all 3rd party libraries to **composer.json**;
+
+- Installation process now requires composer;
+
+- Added Phinx library for database migrations;
 
 ## v0.3.1
 

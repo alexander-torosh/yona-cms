@@ -28,6 +28,7 @@ class Bootstrap
         $loader->registerNamespaces($config->loader->namespaces->toArray());
         $loader->registerDirs([APPLICATION_PATH . "/plugins/"]);
         $loader->register();
+        require_once APPLICATION_PATH . '/../vendor/autoload.php';
 
         // Database
         $db = new \Phalcon\Db\Adapter\Pdo\Mysql([
@@ -201,7 +202,7 @@ class Bootstrap
 
         // Volt
         $volt = new \Application\Mvc\View\Engine\Volt($view, $di);
-        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/cache/volt/']);
+        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/../data/cache/volt/']);
         $volt->initCompiler();
 
 
@@ -236,7 +237,7 @@ class Bootstrap
         switch ($config->cache) {
             case 'file':
                 $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [
-                    "cacheDir" => __DIR__ . "/cache/backend/"
+                    "cacheDir" => APPLICATION_PATH . "/../data/cache/backend/"
                 ]);
                 break;
             case 'memcache':

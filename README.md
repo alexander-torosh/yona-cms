@@ -64,12 +64,17 @@ or
 composer install
 ```
 
-### Installing via GitHub
+After updating code, run composer update:
+```
+composer update
+```
 
-Just clone the repository:
+### Permissions
 
 ```
-git clone https://github.com/oleksandr-torosh/yona-cms
+chmod a+w data -R
+chmod a+w web/assets -R
+chmod a+w web/img -R
 ```
 
 [Full installation guide](http://doc.yonacms.com/en/reference/install.html)
@@ -87,7 +92,8 @@ Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-toros
 ##Requirements
 
 * php 5.4+
-* phalcon 1.3.2+
+* phalcon 1.3.4+
+* phalcon 2.0.7+
 * mysql
 * php-intl
 * apache (+mod_rewrite) or nginx

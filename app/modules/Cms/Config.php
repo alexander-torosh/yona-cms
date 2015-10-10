@@ -12,7 +12,7 @@ class Config
     public static function get()
     {
 
-        $application = include_once APPLICATION_PATH . '/config/' . APPLICATION_ENV . '/application.php';
+        $application = include_once APPLICATION_PATH . '/config/environment/' . APPLICATION_ENV . '.php';
 
         $config_default = [
             'loader'    => [
@@ -20,7 +20,6 @@ class Config
                     'YonaCMS\Plugin' => APPLICATION_PATH . '/plugins/',
                     'Application'    => APPLICATION_PATH . '/modules/Application',
                     'Cms'            => APPLICATION_PATH . '/modules/Cms',
-                    'Michelf'        => APPLICATION_PATH . '/../vendor/php-markdown-lib/Michelf',
                 ],
             ],
             'modules'   => [
