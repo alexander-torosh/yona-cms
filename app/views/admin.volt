@@ -9,7 +9,7 @@
 
     <link href="{{ url.path() }}favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    <link href="{{ url.path() }}vendor/semantic-2.0/semantic.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url.path() }}vendor/semantic-2.1/semantic.min.css" rel="stylesheet" type="text/css">
     <link href="{{ url.path() }}vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet"
           type="text/css">
@@ -21,7 +21,7 @@
     <!--/less-->
 
     <script src="{{ url.path() }}vendor/js/jquery-1.11.0.min.js"></script>
-    <script src="{{ url.path() }}vendor/semantic-2.0/semantic.min.js"></script>
+    <script src="{{ url.path() }}vendor/semantic-2.1/semantic.min.js"></script>
     <script src="{{ url.path() }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/js/jquery.address.js"></script>

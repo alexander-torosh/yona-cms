@@ -22,13 +22,15 @@ class Scanner
         $files = array_merge($files_plugins, $files_views, $files_modules);
         if (!empty($files)) {
             foreach ($files as $file) {
-                $contents = file_get_contents($file);
-                $pattern = "/translate\\('(.+?)'\\)/";
-                $matchesCount = preg_match_all($pattern, $contents, $matches);
-                if ($matchesCount) {
-                    foreach ($matches[1] as $match) {
-                        if (!in_array($match, $phrases)) {
-                            $phrases[] = $match;
+                if (file_exists($file)) {
+                    $contents = file_get_contents($file);
+                    $pattern = "/translate\\('(.+?)'\\)/";
+                    $matchesCount = preg_match_all($pattern, $contents, $matches);
+                    if ($matchesCount) {
+                        foreach ($matches[1] as $match) {
+                            if (!in_array($match, $phrases)) {
+                                $phrases[] = $match;
+                            }
                         }
                     }
                 }
