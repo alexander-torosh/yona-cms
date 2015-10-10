@@ -12,6 +12,8 @@
 
 - Added Phinx library for database migrations;
 
+- Updated README.md;
+
 ## v0.3.1
 
 - Minimized index.php code; Created **YonaCms\Plugin\CheckPoint** plugin for detecting index.php, index.html in Request URI;
