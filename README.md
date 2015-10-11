@@ -103,7 +103,11 @@ Open http://yona-cms/admin and auth:
 
 Change **admin** user password and delete **yona** user.
 
-### Phinx
+### Database
+Edit **/app/config/environment/development.php** and setup database connection.
+Import MySQL dump file **yona-cms.sql** 
+
+### Phinx migrations
 
 https://phinx.org/
 Library for creation, executing and rollback migrations
