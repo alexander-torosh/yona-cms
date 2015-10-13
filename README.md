@@ -37,6 +37,11 @@ After some time, do not forget run composer update for update dependencies:
 composer update
 ```
 
+Composer is required. It will install required libraries.
+If you have error with **autoload.php** file, the reason - missed **composer update** installation step.
+
+[How to install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+
 ### Permissions
 
 ```
