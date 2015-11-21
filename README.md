@@ -3,13 +3,18 @@
 [![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/?branch=master)
 
-Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 1.3.x or 2.x supported)  
+Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 1.3.4+ or 2.0.x supported)  
 
 Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.
 
 [Project website](http://yonacms.com/)  
 [Documentation](http://doc.yonacms.com/en/) - old version. See installation guide in README.md  
 [Demo](http://demo.yonacms.com/)  
+
+## Announce
+
+Now YonaCMS team prepare to new 0.5 release with new project structure and development features.
+.. Composer, Bower, Phinx migrations.
 
 ## Installation
 
