@@ -16,6 +16,8 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 Now YonaCMS team prepare to new 0.5 release with new project structure and development features.
 .. Composer, Bower, Phinx migrations, REST API Bootstrap, Queues, Conjob tasks, AWS S3 and other cool stuffs =)
 
+Also, YonaCMS will migrate to Phalcon 2.1 without supporting of lower Phalcon versions.
+
 ## Installation
 
 ### Composer
