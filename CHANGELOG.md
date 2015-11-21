@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.4.1
+
+- Fixed error message about image format on Publication Save;
+
+- composer.json Phalcon required version downgraded to 1.3.4;
+
 ## v0.4
 
 - Updated Semantic UI to version 2.1.4;
