@@ -151,6 +151,9 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             if ($this->request->hasFiles() == true) {
                 foreach ($this->request->getUploadedFiles() as $file) {
+                    if (!$file->getTempName()) {
+                        return;
+                    }
                     if (!in_array($file->getType(), [
                         'image/bmp',
                         'image/jpeg',
