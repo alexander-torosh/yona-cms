@@ -107,7 +107,7 @@ Open http://yona-cms/admin and auth:
 * password: yonacmsphalcon
 
 Change **admin** user password and delete **yona** user.
-
+. Y
 ### Database
 Edit **/app/config/environment/development.php** and setup database connection.
 Import MySQL dump file **yona-cms.sql**

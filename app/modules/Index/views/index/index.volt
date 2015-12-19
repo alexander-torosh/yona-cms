@@ -1,9 +1,7 @@
-<div class="central">
-    <article>
-        {{ page.getText() }}
-    </article>
-</div>
-<div class="sidebar">
-    {{ helper.widget('Publication').lastNews() }}
+<div class="twelve wide column">
+    {{ page.getText() }}
 </div>
 
+<div class="four wide column">
+    {{ helper.widget('Publication').lastNews() }}
+</div>

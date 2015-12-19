@@ -16,8 +16,6 @@ class Item
     public $children = [];
 
     private $href;
-    private $li_attributes = [];
-    private $li_attributes_str;
     private $a_attributes = [];
     private $a_attributes_str;
     private $active_items = [];
@@ -35,9 +33,6 @@ class Item
         $this->url = $url;
         $this->params = $params;
 
-        if (isset($this->params['li'])) {
-            $this->li_attributes = $this->params['li'];
-        }
         if (isset($this->params['a'])) {
             $this->a_attributes = $this->params['a'];
         }
@@ -45,21 +40,18 @@ class Item
 
     public function make()
     {
-        $this->makeLiClass();
-        $this->makeLiAttributesStr();
+        $this->makeAClass();
+        //$this->makeLiAttributesStr();
         $this->makeAAttributesStr();
 
         $this->href = ($this->url) ? $this->url : "javascript:void(0);";
     }
 
-    private function makeLiClass()
+    private function makeAClass()
     {
-        $class = [];
+        $class = ['item'];
         if (!empty($this->children)) {
             $class[] = 'parent';
-        }
-        if (isset($this->li_attributes['class'])) {
-            $class[] = $this->li_attributes['class'];
         }
         if (in_array($this->id, $this->active_items)) {
             $class[] = 'active';
@@ -71,16 +63,7 @@ class Item
             }
         }
 
-        $this->li_attributes['class'] = implode(' ', $class);
-    }
-
-    private function makeLiAttributesStr()
-    {
-        if (!empty($this->li_attributes)) {
-            foreach ($this->li_attributes as $key => $value) {
-                $this->li_attributes_str .= ' ' . $key . '="' . $value . '"';
-            }
-        }
+        $this->a_attributes['class'] = implode(' ', $class);
     }
 
     private function makeAAttributesStr()
@@ -104,21 +87,18 @@ class Item
 
     public function render()
     {
-        $html = "<li{$this->li_attributes_str}>
-            <a href=\"{$this->href}\"{$this->a_attributes_str}>{$this->title}</a>\n";
+        $html = "<a href=\"{$this->href}\"{$this->a_attributes_str}>{$this->title}</a>\n";
 
         if (!empty($this->children)) {
-            $html .= "<ul>";
+            $html .= "<div>";
             foreach ($this->children as $child) {
                 $childItem = new Item($child->title, $child->id, $child->url, $child->params);
                 $childItem->setActiveItems($this->active_items);
                 $childItem->make();
                 $html .= $childItem->render();
             }
-            $html .= "</ul>";
+            $html .= "</div>";
         }
-
-        $html .= "</li>\n";
 
         return $html;
     }

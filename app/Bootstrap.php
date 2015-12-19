@@ -71,9 +71,6 @@ class Bootstrap
         $acl = new \Application\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
-        // JS Assets
-        $this->initAssetsManager($di);
-
         // Flash helper
         $flash = new \Phalcon\Flash\Session([
             'error'   => 'ui red inverted segment',
@@ -111,42 +108,6 @@ class Bootstrap
             }
         }
         $di->set('router', $router);
-    }
-
-    private function initAssetsManager($di)
-    {
-        $config = $di->get('config');
-        $assetsManager = new \Application\Assets\Manager();
-        $js_collection = $assetsManager->collection('js')
-            ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/js.js')
-            ->setTargetUri('assets/js.js')
-            ->join(true);
-        if ($config->assets->js) {
-            foreach ($config->assets->js as $js) {
-                $js_collection->addJs(ROOT . '/' . $js);
-            }
-        }
-
-        // Admin JS Assets
-        $assetsManager->collection('modules-admin-js')
-            ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/modules-admin.js')
-            ->setTargetUri('assets/modules-admin.js')
-            ->join(true);
-
-        // Admin LESS Assets
-        $assetsManager->collection('modules-admin-less')
-            ->setLocal(true)
-            ->addFilter(new \Application\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/assets/modules-admin.less')
-            ->setTargetUri('assets/modules-admin.less')
-            ->join(true)
-            ->addCss(APPLICATION_PATH . '/modules/Admin/assets/admin.less');
-
-        $di->set('assets', $assetsManager);
     }
 
     private function initEventManager($di)
@@ -196,8 +157,8 @@ class Bootstrap
 
         define('MAIN_VIEW_PATH', '../../../views/');
         $view->setMainView(MAIN_VIEW_PATH . 'main');
-        $view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
-        $view->setLayout('main');
+        //$view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
+        //$view->setLayout('main');
         $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
 
         // Volt
@@ -326,7 +287,7 @@ class Bootstrap
         $response = $di['response'];
 
         // AJAX
-        $request = $di['request'];
+        /*$request = $di['request'];
         $_ajax = $request->getQuery('_ajax');
         if ($_ajax) {
             $contents = $view->getContent();
@@ -346,9 +307,9 @@ class Bootstrap
             }
             $response->setContentType('application/json', 'UTF-8');
             $response->setContent(json_encode($return));
-        } else {
+        } else {*/
             $response->setContent($view->getContent());
-        }
+        //}
 
         $response->sendHeaders();
 

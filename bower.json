@@ -1,0 +1,19 @@
+{
+  "name": "yona-cms",
+  "dependencies": {
+    "less": "*",
+    "jquery": "*",
+    "semantic-ui": "2.*",
+    "html5shiv": "*",
+    "respond": "*",
+    "jasny-bootstrap": "*",
+    "font-awesome": "4.*",
+    "noty": "*",
+    "toastr": "*",
+    "bootstrap": "3.*",
+    "eonasdan-bootstrap-datetimepicker": "*",
+    "CodeMirror": "4.*",
+    "jquery-ui": "*",
+    "nestedSortable": "*"
+  }
+}

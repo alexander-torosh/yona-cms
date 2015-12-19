@@ -24,9 +24,11 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->view->roots = Category::$roots;
 
-        $assets = $this->getDI()->get('assets');
-        $assets->collection('modules-admin-less')->addCss(__DIR__ . '/../assets/tree.less');
-        $assets->collection('modules-admin-js')->addJs(__DIR__ . '/../assets/tree.js');
+        $this->assets
+            ->addCss('static/css/custom/tree.css')
+            ->addJs('components/jquery-ui/jquery-ui.min.js')
+            ->addJs('components/nestedSortable/jquery.ui.nestedSortable.js')
+            ->addJs('static/js/custom/tree.js');
 
         $this->helper->title($this->helper->at('Tree Categories'), true);
     }
@@ -48,9 +50,9 @@ class AdminController extends Controller
             if ($model->update()) {
                 $this->returnJSON([
                     'success' => true,
-                    'id' => $model->getId(),
-                    'slug' => $model->getSlug(),
-                    'title' => $title,
+                    'id'      => $model->getId(),
+                    'slug'    => $model->getSlug(),
+                    'title'   => $title,
                 ]);
             } else {
                 $this->returnJSON(['error' => implode(' | ', $model->getMessages())]);
@@ -105,7 +107,7 @@ class AdminController extends Controller
             if ($model->delete()) {
                 $this->returnJSON([
                     'success' => true,
-                    'root' => $model->getRoot(),
+                    'root'    => $model->getRoot(),
                 ]);
             }
         }

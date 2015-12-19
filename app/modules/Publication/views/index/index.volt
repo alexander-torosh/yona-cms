@@ -1,4 +1,4 @@
-<h1>{{ title }}</h1>
+<h1 class="ui header">{{ title }}</h1>
 
 <div class="publications {{ format }}">
 

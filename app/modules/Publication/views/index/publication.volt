@@ -7,7 +7,7 @@
         </p>
     {% endif %}
 
-    <h1>{{ publication.getTitle() }}</h1>
+    <h1 class="ui header">{{ publication.getTitle() }}</h1>
 
     <section class="date">{{ publication.getDate('d.m.Y') }}</section>
 

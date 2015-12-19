@@ -9,61 +9,69 @@
 
     <link href="{{ url.path() }}favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    <link href="{{ url.path() }}vendor/semantic-2.1/semantic.min.css" rel="stylesheet" type="text/css">
-    <link href="{{ url.path() }}vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet"
-          type="text/css">
+    <!-- global css assets -->
+    {{ stylesheet_link('components/font-awesome/css/font-awesome.min.css') }}
+    {{ stylesheet_link('components/semantic-ui/dist/semantic.min.css') }}
+    {{ stylesheet_link('static/custom/bootstrap/bootstrap.css') }}
+    {{ stylesheet_link('components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}
+    <!-- /end global css assets -->
+
+    <!-- page css assets -->
+    {{ assets.outputCss() }}
+    <!-- /end page css assets -->
 
     <!--less-->
-    {{ assets.outputLess('modules-admin-less') }}
-
-    <script src="{{ url.path() }}vendor/js/less-1.7.3.min.js" type="text/javascript"></script>
+    <link href="{{ url.path() }}static/less/admin.less" rel="stylesheet/less" type="text/css">
+    {{ javascript_include('components/less/dist/less.min.js') }}
     <!--/less-->
-
-    <script src="{{ url.path() }}vendor/js/jquery-1.11.0.min.js"></script>
-    <script src="{{ url.path() }}vendor/semantic-2.1/semantic.min.js"></script>
-    <script src="{{ url.path() }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
-    <script src="{{ url.path() }}vendor/js/jquery.address.js"></script>
-    <script src="{{ url.path() }}vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
-    <script src="{{ url.path() }}static/js/admin.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="{{ url.path() }}vendor/js/html5shiv.js"></script>
-    <script src="{{ url.path() }}vendor/js/respond.min.js"></script>
+    {{ javascript_include('components/html5shiv/dist/html5shiv.min.js') }}
+    {{ javascript_include('components/respond/dest/respond.min.js') }}
     <![endif]-->
 </head>
 <body>
 
-    {{ partial('admin/nav') }}
+{{ partial('admin/nav') }}
 
-    <div class="content">
-        {% if registry.cms['TECHNICAL_WORKS'] %}
-            <div class="ui red inverted segment">
-                The site under maintenance.<br>
-                Please do not perform any action until the work is completed.
-            </div>
-        {% endif %}
+<div class="content">
+    {% if registry.cms['TECHNICAL_WORKS'] %}
+        <div class="ui red inverted segment">
+            The site under maintenance.<br>
+            Please do not perform any action until the work is completed.
+        </div>
+    {% endif %}
 
-        {% if title is defined %}
-            <h1>{{ title }}</h1>
-        {% endif %}
+    {% if title is defined %}
+        <h1>{{ title }}</h1>
+    {% endif %}
 
-        {% if languages_disabled is not defined %}
-            {{ partial('admin/languages') }}
-        {% endif %}
+    {% if languages_disabled is not defined %}
+        {{ partial('admin/languages') }}
+    {% endif %}
 
-        {{ flash.output() }}
+    {{ flash.output() }}
 
-        {{ content() }}
+    {{ content() }}
 
-        <hr>
-        <a href="http://yonacms.com" class="works-on" target="_blank">Works on Yona CMS</a>
+    <hr>
+    <a href="http://yonacms.com" class="works-on" target="_blank">Works on Yona CMS</a>
 
-    </div>
+</div>
 
-{{ assets.outputJs('modules-admin-js') }}
+    <!-- global js assets -->
+    {{ javascript_include('components/jquery/dist/jquery.min.js') }}
+    {{ javascript_include('components/semantic-ui/dist/semantic.min.js') }}
+    <script src="{{ url.path() }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
+    {{ javascript_include('static/js/admin.js') }},
+    <!-- /end global js assets -->
+
+    <!-- page js assets -->
+    {{ assets.outputJs() }}
+    <!-- /end page js assets -->
 
 </body>
 </html>

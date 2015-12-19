@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.4.1
+
+- Partially moved vendor frontend vendors to BOWER;
+
 ## v0.4
 
 - Updated Semantic UI to version 2.1.4;
