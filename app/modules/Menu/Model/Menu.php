@@ -16,8 +16,6 @@ class Menu extends Model
         return "menu";
     }
 
-    protected $translateModel = 'Menu\Model\Translate\MenuTranslate'; // translate
-
     private $id;
     private $root = 'top';
     private $parent_id;
@@ -27,7 +25,7 @@ class Menu extends Model
     private $right_key;
     private $created_at;
     private $updated_at;
-    public  $title; // translate
+    public  $title;
 
     public static $roots = [
         'top' => 'Top Menu',
@@ -36,7 +34,6 @@ class Menu extends Model
     public function initialize()
     {
         $this->belongsTo('parent_id', 'Category\Model\Category', 'id', ['alias' => 'Parent']);
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 
     public function validation()

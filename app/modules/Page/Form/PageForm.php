@@ -17,29 +17,17 @@ class PageForm extends Form
 
     public function initialize()
     {
-        $title = new Text('title', array('required' => true));
-        $title->setLabel('Title');
-        $this->add($title);
+        $this->add((new Text('title', ['required' => true]))->setLabel('Title'));
 
-        $slug = new Text('slug');
-        $slug->setLabel('Slug');
-        $this->add($slug);
+        $this->add((new Text('slug'))->setLabel('Slug'));
 
-        $text = new TextArea('text');
-        $text->setLabel('Text');
-        $this->add($text);
+        $this->add((new Text('head_title'))->setLabel('Head Title'));
 
-        $meta_title = new Text('meta_title', array('required' => true));
-        $meta_title->setLabel('meta-title');
-        $this->add($meta_title);
+        $this->add((new TextArea('meta_description'))->setLabel('Meta Description'));
 
-        $meta_description = new TextArea('meta_description');
-        $meta_description->setLabel('meta-description');
-        $this->add($meta_description);
+        $this->add((new TextArea('meta_keywords'))->setLabel('Meta Keywords'));
 
-        $meta_keywords = new TextArea('meta_keywords');
-        $meta_keywords->setLabel('meta-keywords');
-        $this->add($meta_keywords);
+        $this->add((new TextArea('text'))->setLabel('Text'));
     }
 
 } 

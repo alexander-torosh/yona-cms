@@ -15,21 +15,19 @@ class Page extends Model
         return "page";
     }
 
-    protected $translateModel = 'Page\Model\Translate\PageTranslate'; // translate
-
     public $id;
     public $slug;
-    public $title; // translate
-    public $text; // translate
-    public $meta_title; // translate
-    public $meta_description; // translate
-    public $meta_keywords; // translate
+    public $title;
+    public $head_title;
+    public $meta_description;
+    public $meta_keywords;
+    public $text;
     public $created_at;
     public $updated_at;
 
     public function initialize()
     {
-        $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
+
     }
 
     public function beforeCreate()
@@ -42,13 +40,15 @@ class Page extends Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-    public function updateFields($data)
+    public function beforeValidation()
     {
         if (!$this->getSlug()) {
-            $this->setSlug(Transliterator::slugify($data['title']));
+            $this->setSlug(Transliterator::slugify($this->getTitle()));
+        } else {
+            $this->setSlug(Transliterator::slugify($this->getSlug()));
         }
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($data['title']);
+        if (!$this->getHeadTitle()) {
+            $this->setHeadTitle($this->getTitle());
         }
     }
 
@@ -107,7 +107,7 @@ class Page extends Model
     /**
      * @param mixed $meta_description
      */
-    public function setMeta_description($meta_description)
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
     }
@@ -115,7 +115,7 @@ class Page extends Model
     /**
      * @return mixed
      */
-    public function getMeta_description()
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
@@ -123,7 +123,7 @@ class Page extends Model
     /**
      * @param mixed $meta_keywords
      */
-    public function setMeta_keywords($meta_keywords)
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
     }
@@ -131,7 +131,7 @@ class Page extends Model
     /**
      * @return mixed
      */
-    public function getMeta_keywords()
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
@@ -139,17 +139,17 @@ class Page extends Model
     /**
      * @param mixed $meta_title
      */
-    public function setMeta_title($meta_title)
+    public function setHeadTitle($head_title)
     {
-        $this->setMLVariable('meta_title', $meta_title);
+        $this->setMLVariable('head_title', $head_title);
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_title()
+    public function getHeadTitle()
     {
-        return $this->getMLVariable('meta_title');
+        return $this->getMLVariable('head_title');
     }
 
     /**

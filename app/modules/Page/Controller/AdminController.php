@@ -19,7 +19,6 @@ class AdminController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-page');
-        Page::setTranslateCache(false);
     }
 
     public function indexAction()
@@ -40,14 +39,8 @@ class AdminController extends Controller
             $form->bind($post, $model);
             if ($form->isValid()) {
                 if ($model->create()) {
-                    $form->bind($post, $model);
-                    $model->updateFields($post);
-                    if ($model->update()) {
-                        $this->flash->success($this->helper->at('Page created'));
-                        return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
-                    } else {
-                        $this->flashErrors($model);
-                    }
+                    $this->flash->success($this->helper->at('Page created'));
+                    return $this->redirect($this->url->get() . 'page/admin/edit/' . $model->getId() . '?lang=' . LANG);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -64,7 +57,7 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $form = new PageForm();
         $model = Page::findFirst($id);
 
@@ -76,7 +69,6 @@ class AdminController extends Controller
             $post = $this->request->getPost();
             $form->bind($post, $model);
             if ($form->isValid()) {
-                $model->updateFields($post);
                 if ($model->save()) {
                     $this->flash->success($this->helper->at('Updated has been successful'));
 

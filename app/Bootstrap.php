@@ -201,11 +201,16 @@ class Bootstrap
                     "cacheDir" => APPLICATION_PATH . "/../data/cache/backend/"
                 ]);
                 break;
-            case 'memcache':
-                $cache = new \Phalcon\Cache\Backend\Memcache(
+            case 'memcached':
+                $cache = new \Phalcon\Cache\Backend\Libmemcached(
                     $cacheFrontend, [
-                    "host" => $config->memcache->host,
-                    "port" => $config->memcache->port,
+                    "servers" => [
+                        [
+                            "host"   => $config->memcached->host,
+                            "port"   => $config->memcached->port,
+                            "weight" => "1",
+                        ],
+                    ],
                 ]);
                 break;
         }
@@ -214,7 +219,25 @@ class Bootstrap
 
         \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
 
-        $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
+        $modelsMetadata = null;
+        switch ($config->modelsMetadata) {
+            case 'memory':
+                $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
+                break;
+            case 'memcached':
+                $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Libmemcached([
+                    'lifetime' => 3600,
+                    'prefix' => HOST_HASH,
+                    'servers' => [
+                        [
+                            "host"   => $config->memcached->host,
+                            "port"   => $config->memcached->port,
+                            "weight" => "1",
+                        ],
+                    ],
+                ]);
+                break;
+        }
         $di->set('modelsMetadata', $modelsMetadata);
     }
 
@@ -308,7 +331,7 @@ class Bootstrap
             $response->setContentType('application/json', 'UTF-8');
             $response->setContent(json_encode($return));
         } else {*/
-            $response->setContent($view->getContent());
+        $response->setContent($view->getContent());
         //}
 
         $response->sendHeaders();

@@ -31,8 +31,8 @@ class Config
             'base_path' => (isset($application['base_path'])) ? $application['base_path'] : null,
             'database'  => (isset($application['database'])) ? $application['database'] : null,
             'cache'     => (isset($application['cache'])) ? $application['cache'] : null,
-            'memcache'  => (isset($application['memcache'])) ? $application['memcache'] : null,
-            'assets'    => (isset($application['assets'])) ? $application['assets'] : null,
+            'memcached'  => (isset($application['memcached'])) ? $application['memcached'] : null,
+            'modelsMetadata' => (isset($application['modelsMetadata'])) ? $application['modelsMetadata'] : null,
         ];
 
         $global = include_once APPLICATION_PATH . '/config/global.php';

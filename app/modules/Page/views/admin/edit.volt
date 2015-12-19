@@ -7,9 +7,9 @@
             <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 
-        <div class="ui positive submit button">
+        <button type="submit" class="ui positive submit button">
             <i class="save icon"></i> {{ helper.at('Save') }}
-        </div>
+        </button>
 
         {% if model.getId() %}
 
@@ -30,29 +30,10 @@
     <!--end controls-->
 
     <div class="ui segment">
-        {{ form.renderDecorated('title') }}
-        {{ form.renderDecorated('slug') }}
-        {{ form.renderDecorated('meta_title') }}
-        {{ form.renderDecorated('meta_description') }}
-        {{ form.renderDecorated('meta_keywords') }}
-        {{ form.renderDecorated('text') }}
+        {{ form.renderAll() }}
     </div>
 
 </form>
-
-<!--ui semantic-->
-<script>
-    $(".ui.form").form({
-        fields: {
-            title: {
-                identifier: 'title',
-                rules: [
-                    {type: 'empty'}
-                ]
-            }
-        }
-    });
-</script><!--/end ui semantic-->
 
 <script type="text/javascript" src="{{ url.get() }}vendor/tiny_mce_3/tiny_mce.js"></script>
 <script type="text/javascript">

@@ -13,11 +13,14 @@ return [
         'charset'  => 'utf8',
     ],
 
-    'memcache'  => [
+    'memcached'  => [
         'host' => 'localhost',
         'port' => 11211,
     ],
 
-    'cache'     => 'file',
-    //'cache'     => 'memcache',
+    //'cache'     => 'file',
+    'cache'     => 'memcached',
+
+    //'modelsMetadata' => 'memory',
+    'modelsMetadata' => 'memcached'
 ];
