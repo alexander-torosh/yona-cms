@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v0.5
+
+- Integrated Bower; Frontend libraries moved to public/components;
+
+- Full rewrote of Services Loading;
+
+- Removed Bootstrap.php;
+
+- Full rewrote of configuration and environments; Used Dotenv ("vlucas/phpdotenv") library;
+ 
+- Removed flexible multilingual support; Leaved 3 main languages;
+
+- Decreased Database queries count for whole project; 
+
+- Increased speed and performance;
+
+- Main CMS namespace directory moved to src/Yona;
+
+- Used Composer auto-loader as main;
+
+- Used Flysystem as main images storage adapter;
+
 ## v0.4.1
 
 - Partially moved vendor frontend vendors to BOWER;

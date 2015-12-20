@@ -22,6 +22,7 @@ class Localization extends Plugin
 
         $defaultLangArray = array_values(array_slice($languages, 0, 1));
         $defaultLang = $defaultLangArray[0];
+        define('DEFAULT_LANG', $defaultLang['iso']);
 
         $request = $this->getDI()->get('request');
         $queryLang = $request->getQuery('lang');

@@ -1,27 +1,32 @@
-<div class="ui container">
+<div class="ui stackable three column grid container">
 
-    <a class="logo" href="{{ helper.langUrl(['for':'index']) }}">
-        <img src="{{ url.path() }}static/images/logo.png" alt="">
-    </a>
-
-    <!--Github stars-->
-    <div style="position: absolute;top:10px;left:270px;z-index: 0;height: 30px;overflow: hidden;">
-        <iframe frameborder="none"
-                src="http://ghbtns.com/github-btn.html?user=oleksandr-torosh&repo=yona-cms&type=watch&count=true&size=large"></iframe>
+    <div class="column">
+        <a class="logo" href="{{ helper.langUrl(['for':'index']) }}">
+            <img src="{{ url.path() }}static/images/logo.png" alt="">
+        </a>
     </div>
-    <!--/Github stars-->
+    <div class="column">
 
-    {{ helper.staticWidget('phone') }}
-
-    {% set languages = helper.languages() %}
-    {% if languages|length > 1 %}
-        <div class="languages">
-            {% for language in languages %}
-                <div class="lang">
-                    {{ helper.langSwitcher(language['iso'], language['name']) }}
-                </div>
-            {% endfor %}
+        <!--Github stars-->
+        <div style="z-index: 0;height: 30px;overflow: hidden; margin-bottom: 10px;">
+            <iframe frameborder="none"
+                    src="http://ghbtns.com/github-btn.html?user=oleksandr-torosh&repo=yona-cms&type=watch&count=true&size=large"></iframe>
         </div>
-    {% endif %}
+        <!--/Github stars-->
+
+        {{ helper.staticWidget('phone') }}
+    </div>
+    <div class="column">
+        {% set languages = helper.languages() %}
+        {% if languages|length > 1 %}
+            <ul class="languages">
+                {% for language in languages %}
+                    <li class="lang">
+                        {{ helper.langSwitcher(language['iso'], language['name']) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 
 </div>

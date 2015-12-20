@@ -9,7 +9,7 @@ namespace Application\Mvc\Model;
 
 class Model extends \Phalcon\Mvc\Model
 {
-    public static $lang = 'en';
+    public static $lang;
 
     public function afterFetch()
     {
@@ -35,7 +35,7 @@ class Model extends \Phalcon\Mvc\Model
         } else {
             $searchLang = LANG;
         }
-        if ($searchLang != self::$lang) {
+        if ($searchLang != DEFAULT_LANG) {
             return '_' . $searchLang;
         } else {
             return '';

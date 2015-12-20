@@ -18,26 +18,7 @@
     {{ form.renderDecorated('title') }}
     {{ form.renderDecorated('html') }}
 
-    <div class="ui positive submit button">
+    <button type="submit" class="ui positive submit button">
         <i class="save icon"></i> Save
-    </div>
+    </button>
 </form>
-
-<script>
-    $('.ui.form').form({});
-</script>
-
-<link rel="stylesheet" href="{{ url.get() }}vendor/codemirror-4.2/lib/codemirror.css">
-<script src="{{ url.get() }}vendor/codemirror-4.2/codemirror-compressed.js"></script>
-
-<script>
-    $(function () {
-        CodeMirror.fromTextArea(document.getElementById('html'), {
-            lineNumbers: true,               // показывать номера строк
-            matchBrackets: true,             // подсвечивать парные скобки
-            mode: "htmlmixed", // стиль подсветки
-            indentUnit: 4,                    // размер табуляции
-            viewportMargin: Infinity
-        });
-    });
-</script>

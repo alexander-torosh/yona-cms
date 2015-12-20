@@ -15,7 +15,6 @@ class AdminController extends Controller
         $this->helper->activeMenu()->setActive('admin-widget');
 
         $this->view->languages_disabled = true;
-
     }
 
     public function indexAction()
@@ -24,6 +23,8 @@ class AdminController extends Controller
 
         $this->helper->title($this->helper->at('Manage Widgets'), true);
 
+        $this->initAssets();
+        $this->assets->addJs('static/js/custom/widget/admin/index.js');
     }
 
     public function addAction()
@@ -52,6 +53,8 @@ class AdminController extends Controller
         $this->view->title = $this->helper->at('Adding widget');
         $this->helper->title($this->view->title);
 
+        $this->initAssets();
+        $this->assets->addJs('static/js/custom/widget/admin/edit.js');
     }
 
     public function editAction($id)
@@ -85,6 +88,8 @@ class AdminController extends Controller
 
         $this->helper->title($this->helper->at('Editing widget'), true);
 
+        $this->initAssets();
+        $this->assets->addJs('static/js/custom/widget/admin/edit.js');
     }
 
     public function deleteAction($id)
@@ -100,7 +105,13 @@ class AdminController extends Controller
 
             $this->view->model = $model;
         }
+    }
 
+    private function initAssets()
+    {
+        $this->assets
+            ->addCss('components/CodeMirror/lib/codemirror.css')
+            ->addJs('components/CodeMirror/lib/codemirror.js');
     }
 
 }

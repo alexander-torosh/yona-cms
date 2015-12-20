@@ -20,7 +20,7 @@ class WidgetForm extends Form
 
     public function initialize()
     {
-        $id = new Text("id");
+        $id = new Text("id", ['required' => 1]);
         $id->addValidator(new PresenceOf(array(
             'message' => 'ID can not be empty.'
         )));
@@ -30,7 +30,7 @@ class WidgetForm extends Form
         )));
         $id->setLabel('ID');
 
-        $title = new Text("title");
+        $title = new Text("title", ['required' => 1]);
         $title->setLabel('Title');
 
         $html = new TextArea("html");

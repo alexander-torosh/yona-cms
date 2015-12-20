@@ -11,7 +11,7 @@
 <table class="ui table very compact celled">
     <thead>
     <tr>
-        <th style="width: 100px"></th>
+        <th style="width: 100px">Edit</th>
         <th>Title</th>
         <th>Url</th>
     </tr>

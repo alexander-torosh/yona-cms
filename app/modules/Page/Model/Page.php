@@ -3,32 +3,45 @@
 namespace Page\Model;
 
 use Application\Mvc\Model\Model;
+use Phalcon\Di;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
 
 class Page extends Model
 {
+    const CACHE_SLUG_KEY = 'Page by slug';
 
     public function getSource()
     {
         return "page";
     }
 
-    public $id;
-    public $slug;
-    public $title;
-    public $head_title;
-    public $meta_description;
-    public $meta_keywords;
-    public $text;
-    public $created_at;
-    public $updated_at;
+    protected $id;
+    protected $slug;
 
-    public function initialize()
-    {
+    protected $title;
+    protected $title_uk;
+    protected $title_ru;
 
-    }
+    protected $head_title;
+    protected $head_title_uk;
+    protected $head_title_ru;
+
+    protected $meta_description;
+    protected $meta_description_uk;
+    protected $meta_description_ru;
+
+    protected $meta_keywords;
+    protected $meta_keywords_uk;
+    protected $meta_keywords_ru;
+
+    protected $text;
+    protected $text_uk;
+    protected $text_ru;
+
+    protected $created_at;
+    protected $updated_at;
 
     public function beforeCreate()
     {
@@ -54,22 +67,31 @@ class Page extends Model
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
-            array(
-                "field" => "slug",
-                "message" => "Page with slug is already exists"
-            )
-        ));
+        $this->validate(new Uniqueness([
+            "field"   => "slug",
+            "message" => "Page with slug is already exists"
+        ]));
 
         return $this->validationHasFailed() != true;
     }
 
+    public function afterUpdate()
+    {
+        $this->getDi()->get('cacheManager')->delete([
+            self::CACHE_SLUG_KEY,
+            $this->getSlug()
+        ]);
+    }
+
     public static function findCachedBySlug($slug)
     {
-        $query = "slug = '$slug'";
-        $key = HOST_HASH . md5("Page::findFirst($query)");
-        $page = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
-        return $page;
+        $cacheManager = Di::getDefault()->get('cacheManager');
+        return $cacheManager->load([
+            self::CACHE_SLUG_KEY,
+            $slug
+        ], function () use ($slug) {
+            return self::findFirstBySlug($slug);
+        }, 300);
     }
 
     /**

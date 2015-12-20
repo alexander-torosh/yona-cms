@@ -1,6 +1,7 @@
 <?php
 
 namespace YonaCMS;
+use Yona\Cache\Manager;
 
 /**
  * Bootstrap
@@ -80,6 +81,7 @@ class Bootstrap
         ]);
         $di->set('flash', $flash);
 
+        $di->set('cacheManager', new Manager());
         $di->set('helper', new \Application\Mvc\Helper());
 
         // Routing
@@ -157,8 +159,6 @@ class Bootstrap
 
         define('MAIN_VIEW_PATH', '../../../views/');
         $view->setMainView(MAIN_VIEW_PATH . 'main');
-        //$view->setLayoutsDir(MAIN_VIEW_PATH . '/layouts/');
-        //$view->setLayout('main');
         $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
 
         // Volt
