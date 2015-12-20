@@ -2,15 +2,13 @@
 
 ## v0.5
 
-- Integrated Bower; Frontend libraries moved to public/components;
-
 - Full rewrote of Services Loading;
 
 - Removed Bootstrap.php;
 
-- Full rewrote of configuration and environments; Used Dotenv ("vlucas/phpdotenv") library;
+- Full rewrote of configuration and environments. Used Dotenv ("vlucas/phpdotenv") library;
  
-- Removed flexible multilingual support; Leaved 3 main languages;
+- Removed flexible multilingual support. Leaved 3 main languages;
 
 - Decreased Database queries count for whole project; 
 
@@ -21,6 +19,10 @@
 - Used Composer auto-loader as main;
 
 - Used Flysystem as main images storage adapter;
+
+- Integrated Bower; Frontend libraries moved to public/components;
+
+- Remade assets system. Removed javascript initializations from .volt files - puts to the end of page in separate files;
 
 ## v0.4.1
 

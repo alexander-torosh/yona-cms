@@ -28,7 +28,7 @@ class AdminController extends Controller
             ->addCss('static/css/custom/tree.css')
             ->addJs('components/jquery-ui/jquery-ui.min.js')
             ->addJs('components/nestedSortable/jquery.ui.nestedSortable.js')
-            ->addJs('static/js/custom/tree.js');
+            ->addJs('static/js/custom/tree/admin.js');
 
         $this->helper->title($this->helper->at('Tree Categories'), true);
     }

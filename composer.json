@@ -43,6 +43,9 @@
     "michelf/php-markdown": "*",
     "mandrill/mandrill": "1.*",
     "mobiledetect/mobiledetectlib": "^2.8",
-    "league/flysystem": "*"
+    "league/flysystem": "*",
+    "league/glide": "*",
+    "studio-42/elfinder": "*",
+    "barryvdh/elfinder-flysystem-driver": "*"
   }
 }
