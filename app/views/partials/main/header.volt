@@ -1,8 +1,8 @@
 <div class="ui stackable three column grid container">
 
     <div class="column">
-        <a class="logo" href="{{ helper.langUrl(['for':'index']) }}">
-            <img src="{{ url.path() }}static/images/logo.png" alt="">
+        <a class="logo{% if router.getRewriteUri() == '/' %} animated bounceInLeft{% endif %}" href="{{ helper.langUrl(['for':'index']) }}">
+            <img src="{{ url.path() }}static/images/logo.png" alt="Yona CMS">
         </a>
     </div>
     <div class="column">

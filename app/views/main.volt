@@ -24,16 +24,22 @@
     <!-- global css assets -->
     {{ stylesheet_link('components/font-awesome/css/font-awesome.min.css') }}
     {{ stylesheet_link('components/semantic-ui/dist/semantic.min.css') }}
+    {{ stylesheet_link('components/animate.css/animate.min.css') }}
     <!-- /end global css assets -->
 
     <!-- page css assets -->
     {{ assets.outputCss() }}
     <!-- /end page css assets -->
 
-    <!--less-->
-    <link href="{{ url.path() }}static/less/main.less" rel="stylesheet/less" type="text/css">
-    {{ javascript_include('components/less/dist/less.min.js') }}
-    <!--/less-->
+    {% if constant('APPLICATION_ENV') == 'development' %}
+        <!--less-->
+        <link href="{{ url.path() }}static/less/main.less" rel="stylesheet/less" type="text/css">
+        {{ javascript_include('components/less/dist/less.min.js') }}
+        <!--/less-->
+    {% else %}
+        {# You need configure Less compiler plugin and place generated css to `static/css/compilled` #}
+        {{ stylesheet_link('statuc/css/compilled/main.css') }}
+    {% endif %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
