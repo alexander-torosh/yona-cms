@@ -11,6 +11,8 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 [Documentation](http://doc.yonacms.com/en/) - old version. See installation guide in README.md  
 [Demo](http://demo.yonacms.com/)  
 
+Also, you can check [development](https://github.com/oleksandr-torosh/yona-cms/tree/dev) branch with new functions and libraries
+
 ## Announce
 
 Now YonaCMS team prepare to new 0.5 release with new project structure and development features.
