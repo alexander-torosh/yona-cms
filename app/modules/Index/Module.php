@@ -2,26 +2,21 @@
 
 namespace Index;
 
-class Module
+use Phalcon\DiInterface;
+use Phalcon\Mvc\ModuleDefinitionInterface;
+
+class Module implements ModuleDefinitionInterface
 {
 
-    public function registerAutoloaders()
+    public function registerAutoloaders(DiInterface $di = null)
     {
 
     }
 
-    public function registerServices($di)
+    public function registerServices(DiInterface $di)
     {
-        $dispatcher = $di->get('dispatcher');
-        $dispatcher->setDefaultNamespace('Index\Controller');
-        $di->set('dispatcher', $dispatcher);
-
-        /**
-         * Setting up the view component
-         */
-        $view = $di->get('view');
-        $view->setViewsDir(__DIR__ . '/views/');
-
+        $di->get('dispatcher')->setDefaultNamespace('Index\Controller');
+        $di->get('view')->setViewsDir(__DIR__ . '/views/');
     }
 
 }

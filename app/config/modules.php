@@ -5,9 +5,9 @@
  * */
 
 return array(
-    'Image',
     'Index',
     'Admin',
+    'Image',
     'Widget',
     'FileManager',
     'Page',

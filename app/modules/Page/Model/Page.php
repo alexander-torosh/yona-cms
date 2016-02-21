@@ -7,6 +7,7 @@ use Phalcon\Di;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
+use Yona\Cache\Keys;
 
 class Page extends Model
 {
@@ -23,19 +24,15 @@ class Page extends Model
     protected $title;
     protected $title_uk;
     protected $title_ru;
-
     protected $head_title;
     protected $head_title_uk;
     protected $head_title_ru;
-
     protected $meta_description;
     protected $meta_description_uk;
     protected $meta_description_ru;
-
     protected $meta_keywords;
     protected $meta_keywords_uk;
     protected $meta_keywords_ru;
-
     protected $text;
     protected $text_uk;
     protected $text_ru;
@@ -78,7 +75,7 @@ class Page extends Model
     public function afterUpdate()
     {
         $this->getDi()->get('cacheManager')->delete([
-            self::CACHE_SLUG_KEY,
+            Keys::PAGE_BY_SLUG,
             $this->getSlug()
         ]);
     }
@@ -87,7 +84,7 @@ class Page extends Model
     {
         $cacheManager = Di::getDefault()->get('cacheManager');
         return $cacheManager->load([
-            self::CACHE_SLUG_KEY,
+            Keys::PAGE_BY_SLUG,
             $slug
         ], function () use ($slug) {
             return self::findFirstBySlug($slug);

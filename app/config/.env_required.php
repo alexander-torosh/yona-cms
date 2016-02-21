@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'APP_ENV',
+    'BASE_URI',
+
+    'DATABASE_CONNECT_TYPE',
+    'DATABASE_CONNECT_POINT',
+    'DATABASE_NAME',
+    'DATABASE_USER',
+    'DATABASE_PASS',
+
+    'CACHE_ADAPTER',
+
+    'SESSION_ADAPTER',
+
+    'MEMCACHE_HOST',
+    'MEMCACHE_PORT',
+
+    'REDIS_HOST',
+    'REDIS_PORT',
+    'REDIS_PERSISTENT',
+    'REDIS_LIFETIME',
+    'REDIS_PREFIX',
+    'REDIS_UNIQUE_ID',
+
+    'CRYPT_KEY',
+];

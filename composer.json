@@ -46,6 +46,7 @@
     "league/flysystem": "*",
     "league/glide": "*",
     "studio-42/elfinder": "*",
-    "barryvdh/elfinder-flysystem-driver": "*"
+    "barryvdh/elfinder-flysystem-driver": "*",
+    "php-console/php-console": "*"
   }
 }

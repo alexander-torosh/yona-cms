@@ -7,9 +7,9 @@
             <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 
-        <div class="ui positive submit button">
+        <button type="submit" class="ui positive submit button">
             <i class="save icon"></i> {{ helper.at('Save') }}
-        </div>
+        </button>
 
         {% if model.getId() %}
 
@@ -49,20 +49,6 @@
     </div>
 
 </form>
-
-<!--ui semantic-->
-<script>
-    $( ".ui.form" ).form({
-        fields: {
-            title: {
-                identifier: 'title',
-                rules: [
-                    {type: 'empty'}
-                ]
-            }
-        }
-    });
-</script><!--/end ui semantic-->
 
 <link rel="stylesheet" href="{{ url.path() }}vendor/bootstrap/datetimepicker/bootstrap-datetimepicker.min.css">
 <script src="{{ url.path() }}vendor/bootstrap/datetimepicker/moment.js"></script>

@@ -4,8 +4,8 @@ namespace Publication\Model;
 
 use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
-use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
+use Yona\Cache\Keys;
 
 class Publication extends Model
 {
@@ -15,31 +15,38 @@ class Publication extends Model
         return "publication";
     }
 
-    protected $translateModel = 'Publication\Model\Translate\PublicationTranslate'; // translate
+    protected $id;
+    protected $type_id;
+    protected $slug;
+    protected $date;
+
+    protected $title;
+    protected $title_uk;
+    protected $title_ru;
+    protected $head_title;
+    protected $head_title_uk;
+    protected $head_title_ru;
+    protected $meta_description;
+    protected $meta_description_uk;
+    protected $meta_description_ru;
+    protected $meta_keywords;
+    protected $meta_keywords_uk;
+    protected $meta_keywords_ru;
+    protected $text;
+    protected $text_uk;
+    protected $text_ru;
+
+    protected $preview_src;
+    protected $preview_inner;
+    protected $created_at;
+    protected $updated_at;
 
     public function initialize()
     {
-        $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
-
         $this->belongsTo('type_id', 'Publication\Model\Type', 'id', [
-            'alias' => 'type'
+            'alias' => 'Type'
         ]);
     }
-
-    private $id;
-    private $type_id;
-    private $slug;
-    private $created_at;
-    private $updated_at;
-    private $date;
-    private $preview_src;
-    private $preview_inner;
-
-    protected $title;
-    protected $text;
-    protected $meta_title;
-    protected $meta_description;
-    protected $meta_keywords;
 
     public function beforeCreate()
     {
@@ -53,21 +60,18 @@ class Publication extends Model
 
     public function afterUpdate()
     {
-        parent::afterUpdate();
-
-        $cache = $this->getDi()->get('cache');
-
-        $cache->delete(self::cacheSlugKey($this->getSlug()));
+        $this->getDi()->get('cacheManager')->delete([
+            Keys::PUBLICATION_BY_SLUG,
+            $this->getSlug()
+        ]);
     }
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "slug",
-                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
-            ]
-        ));
+        $this->validate(new Uniqueness([
+            "field"   => "slug",
+            "message" => "Page with slug = '" . $this->slug . "' already exists"
+        ]));
 
         return $this->validationHasFailed() != true;
     }
@@ -77,43 +81,19 @@ class Publication extends Model
         if (!$this->date) {
             $this->date = date("Y-m-d H:i:s");
         }
+        if (!$this->getSlug()) {
+            $this->setSlug(Transliterator::slugify($this->getTitle()));
+        } else {
+            $this->setSlug(Transliterator::slugify($this->getSlug()));
+        }
+        if (!$this->getHeadTitle()) {
+            $this->setHeadTitle($this->getTitle());
+        }
     }
 
     public function updateFields($data)
     {
-        if (!$this->getSlug()) {
-            $this->setSlug(Transliterator::slugify($data['title']));
-        }
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($data['title']);
-        }
         $this->setPreviewInner(isset($data['preview_inner']) ? 1 : 0);
-    }
-
-    public static function findCachedBySlug($slug)
-    {
-        $publication = self::findFirst(["slug = '$slug'",
-            'cache' => [
-                'key'      => self::cacheSlugKey($slug),
-                'lifetime' => 60]
-        ]);
-        return $publication;
-    }
-
-    public static function cacheSlugKey($slug)
-    {
-        $key = HOST_HASH . md5('Publication\Model\Publication; slug = ' . $slug);
-        return $key;
-    }
-
-    public function setCreatedAt($created_at)
-    {
-        $this->created_at = $created_at;
-    }
-
-    public function getCreatedAt()
-    {
-        return $this->created_at;
     }
 
     public function setId($id)
@@ -126,74 +106,100 @@ class Publication extends Model
         return $this->id;
     }
 
-    public function setMeta_description($meta_description)
+    /**
+     * @param mixed $meta_description
+     */
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
     }
 
-    public function getMeta_description()
+    /**
+     * @return mixed
+     */
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
 
-    public function setMeta_keywords($meta_keywords)
+    /**
+     * @param mixed $meta_keywords
+     */
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
     }
 
-    public function getMeta_keywords()
+    /**
+     * @return mixed
+     */
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
 
-    public function setMeta_title($meta_title)
+    /**
+     * @param mixed $meta_title
+     */
+    public function setHeadTitle($head_title)
     {
-        $this->setMLVariable('meta_title', $meta_title);
+        $this->setMLVariable('head_title', $head_title);
     }
 
-    public function getMeta_title()
+    /**
+     * @return mixed
+     */
+    public function getHeadTitle()
     {
-        return $this->getMLVariable('meta_title');
+        return $this->getMLVariable('head_title');
     }
 
+    /**
+     * @param mixed $slug
+     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSlug()
     {
         return $this->slug;
     }
 
+    /**
+     * @param mixed $text
+     */
     public function setText($text)
     {
         $this->setMLVariable('text', $text);
     }
 
+    /**
+     * @return mixed
+     */
     public function getText()
     {
         return $this->getMLVariable('text');
     }
 
+    /**
+     * @param mixed $title
+     */
     public function setTitle($title)
     {
         $this->setMLVariable('title', $title);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         return $this->getMLVariable('title');
-    }
-
-    public function setUpdatedAt($updated_at)
-    {
-        $this->updated_at = $updated_at;
-    }
-
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
     }
 
     public function setDate($date)
@@ -212,12 +218,12 @@ class Publication extends Model
         }
     }
 
-    public function setType_id($type_id)
+    public function setTypeId($type_id)
     {
         $this->type_id = $type_id;
     }
 
-    public function getType_id()
+    public function getTypeId()
     {
         return $this->type_id;
     }
@@ -260,6 +266,26 @@ class Publication extends Model
     public function setPreviewSrc($preview_src)
     {
         $this->preview_src = $preview_src;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 
 }

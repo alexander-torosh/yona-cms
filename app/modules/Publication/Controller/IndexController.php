@@ -6,6 +6,7 @@ use Application\Mvc\Controller;
 use Publication\Model\Publication;
 use Phalcon\Exception;
 use Publication\Model\Type;
+use Yona\Cache\Keys;
 
 class IndexController extends Controller
 {
@@ -56,10 +57,16 @@ class IndexController extends Controller
         $slug = $this->dispatcher->getParam('slug', 'string');
         $type = $this->dispatcher->getParam('type', 'string');
 
-        $publication = Publication::findCachedBySlug($slug);
+        $publication = $this->cacheManager->load([
+            Keys::PUBLICATION_BY_SLUG,
+            $slug
+        ], function() use ($slug) {
+            return Publication::findFirstBySlug($slug);
+        }, 300);
         if (!$publication) {
             throw new Exception("Publication '$slug.html' not found");
         }
+
         if ($publication->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
         }

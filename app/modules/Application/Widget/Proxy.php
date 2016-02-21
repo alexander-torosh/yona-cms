@@ -13,7 +13,7 @@ class Proxy extends \Phalcon\Mvc\User\Component
 
     const NULLCACHE = 'NULLCACHE';
 
-    public static $cache = null; // injected
+    private $cache;
     private $cacheEnabled = true;
     private $cacheTime = 60;
     private $object;
@@ -22,6 +22,8 @@ class Proxy extends \Phalcon\Mvc\User\Component
 
     public function __construct($namespace = 'Index', array $params = array())
     {
+        $this->cache = $this->getDI()->get('cache');
+
         $this->namespace = $namespace;
 
         ucfirst($namespace);

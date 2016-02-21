@@ -15,6 +15,7 @@
     "CodeMirror": "4.*",
     "jquery-ui": "*",
     "nestedSortable": "*",
-    "animate.css": "*"
+    "animate.css": "*",
+    "zeroclipboard": "*"
   }
 }

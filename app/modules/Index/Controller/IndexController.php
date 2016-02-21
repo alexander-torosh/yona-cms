@@ -2,9 +2,9 @@
 
 namespace Index\Controller;
 
-use Application\Mvc\Controller;
 use Page\Model\Page;
 use Phalcon\Exception;
+use Phalcon\Mvc\Controller;
 
 class IndexController extends Controller
 {

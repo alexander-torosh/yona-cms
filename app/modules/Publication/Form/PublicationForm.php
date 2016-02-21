@@ -46,7 +46,7 @@ class PublicationForm extends Form
         $text->setLabel('Text');
         $this->add($text);
 
-        $meta_title = new Text('meta_title', ['required' => true]);
+        $meta_title = new Text('meta_title');
         $meta_title->setLabel('meta-title');
         $this->add($meta_title);
 

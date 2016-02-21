@@ -26,7 +26,6 @@ class Bootstrap
 
         // Loader
         $loader = new \Phalcon\Loader();
-        $loader->registerNamespaces($config->loader->namespaces->toArray());
         $loader->registerDirs([APPLICATION_PATH . "/plugins/"]);
         $loader->register();
         require_once APPLICATION_PATH . '/../vendor/autoload.php';

@@ -1,13 +1,6 @@
 <?php
 
 return [
-    'loader'         => [
-        'namespaces' => [
-            // Here you can setup your new vendor namespace, example:
-            // 'Zend' => APPLICATION_PATH . '/../vendor/zendframework/zendframework/library/Zend',
-        ],
-    ],
-
     // Language for admin dashboard.
     // Values: ru, en.
     // All translations contains in /app/modules/Cms/admin_translations in files with names ru.php, en.php.

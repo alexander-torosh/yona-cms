@@ -10,7 +10,7 @@ use Yona\View\Engine\Volt;
 class View extends \Phalcon\Mvc\View
 {
 
-    public function __construct($options)
+    public function __construct($options = null)
     {
         parent::__construct($options);
 

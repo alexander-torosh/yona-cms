@@ -68,17 +68,12 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
             $form->bind($post, $model);
+            $model->updateFields($post);
 
             if ($form->isValid()) {
                 if ($model->create()) {
-                    $form->bind($post, $model);
-                    $model->updateFields($post);
-                    if ($model->update()) {
-                        $this->flash->success($this->helper->at('Publication created'));
-                        return $this->redirect($this->url->get() . 'publication/admin/edit/' . $model->getId() . '?lang=' . LANG);
-                    } else {
-                        $this->flashErrors($model);
-                    }
+                    $this->flash->success($this->helper->at('Publication created'));
+                    return $this->redirect($this->url('publication/admin/edit/' . $model->getId() . '?lang=' . LANG));
                 } else {
                     $this->flashErrors($model);
                 }
@@ -96,11 +91,11 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $form = new PublicationForm();
         $model = Publication::findFirst($id);
 
-        if ($model->getType_id()) {
+        if ($model->getTypeId()) {
             $this->view->type = $model->getType()->getSlug();
         }
 
@@ -151,6 +146,9 @@ class AdminController extends Controller
         if ($this->request->isPost()) {
             if ($this->request->hasFiles() == true) {
                 foreach ($this->request->getUploadedFiles() as $file) {
+                    if (!$file->getTempName()) {
+                        return;
+                    }
                     if (!in_array($file->getType(), [
                         'image/bmp',
                         'image/jpeg',

@@ -4,29 +4,15 @@ return [
 
     // frontend
     'guest'      => [
-        'admin/index'       => '*',
         'index/index'       => '*',
         'index/error'       => '*',
         'page/index'        => '*',
         'publication/index' => '*',
         'sitemap/index'     => '*',
+        'admin/index'       => '*',
     ],
     'member'     => [
         'index/index' => '*',
-    ],
-    // backend
-    'journalist' => [
-        'publication/admin'  => [
-            'index',
-            'add',
-            'edit',
-        ],
-        'page/admin'         => [
-            'index',
-            'add',
-            'edit',
-        ],
-        'file-manager/index' => '*',
     ],
     'editor'     => [
         'publication/admin'  => '*',
