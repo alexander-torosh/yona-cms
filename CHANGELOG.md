@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.4.2
+
+- Fixed underscore getters/setters on Page and Publication modules;
+
 ## v0.4.1
 
 - Fixed error message about image format on Publication Save;
@@ -59,11 +63,11 @@
 ## v0.2  
 
 - You don't need create virtual host for starting using YonaCms anymore. Applied simple localhost dynamic configuration as **http://localhost/yona-cms/web/**;
-  
+
 - Added 'base_path' variable in configuration;
-  
+
 - Configuration file **/app/config/config.php** deprecated and refactored. Now basic config placed in **/app/config/global.php** and **/app/modules/Cms/Config.php**;
-  
+
 - Added some settings in Cms Configuration interface;  
 
 - Custom admin.less placed in **/app/modules/Admin/assets/**
@@ -77,29 +81,29 @@
 ## v0.1.10  
 
 - Multilingual models cache lifetime placed in **Application\Mvc\Model::CACHE_LIFETIME** constant;
-  
+
 - Multilingual models cache data correctly clean after saving entity;
-  
+
 - Memcache host and port placed in configuration files;
-  
+
 - **Cms\Scanner** for translations scanning only **/app/modules/** and **/app/views/** directories;
-  
+
 - Minor fixes;
-  
+
 - Added LICENSE.md;  
 
 ## v0.1.9  
 
-- Semantic UI Bootstrap 3 theme integrated; 
- 
+- Semantic UI Bootstrap 3 theme integrated;
+
 - Added support for custom Bootstrap 3 components;  
 
 - Added **Application\Form\Elements\Image** form element and his nice viewing for uploading images using jasny-boostrap library;
-  
+
 - Added bootstrap-datetimepicker form Publication module;
-  
+
 - Some interface fixes;
-  
+
 - Updated DB fileds for publication table;  
 
 ## v0.1.8

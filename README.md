@@ -3,7 +3,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/?branch=master)
 
-Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 1.3.4+ or 2.0.x supported)  
+Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 2.0.x supported)
 
 Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.
 
@@ -84,7 +84,7 @@ server {
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         # fastcgi_pass 127.0.0.1:9000;
 
-        fastcgi_index /index.php;
+        fastcgi_index index.php;
 
         include /etc/nginx/fastcgi_params;
 
@@ -167,8 +167,7 @@ Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-toros
 
 ## Requirements
 
-* php 5.4+
-* phalcon 1.3.5+
+* php 5.5+
 * phalcon 2.0.7+
 * mysql
 * php-intl
