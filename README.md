@@ -119,7 +119,7 @@ Change **admin** user password and delete **yona** user.
 
 ### Database
 Edit **/app/config/environment/development.php** and setup database connection.
-Import MySQL dump file **yona-cms.sql** 
+Import MySQL dump file **yona-cms.sql**
 
 ### Phinx migrations
 
