@@ -167,7 +167,7 @@ Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-toros
 
 ## Requirements
 
-* php 5.5+
+* php 5.4+
 * phalcon 2.0.7+
 * mysql
 * php-intl
