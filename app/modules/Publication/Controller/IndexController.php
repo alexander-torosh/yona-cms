@@ -17,7 +17,7 @@ class IndexController extends Controller
         if (!$typeModel) {
             throw new Exception("Publication hasn't type = '$type''");
         }
-        
+
         $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10;
         $limit = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {
@@ -40,7 +40,7 @@ class IndexController extends Controller
 
         $this->view->paginate = $paginator->getPaginate();
 
-        $this->helper->title()->append($typeModel->getHead_title());
+        $this->helper->title()->append($typeModel->getHeadTitle());
         if ($page > 1) {
             $this->helper->title()->append($this->helper->translate('Страница №') . ' ' . $page);
         }
@@ -64,13 +64,13 @@ class IndexController extends Controller
             throw new Exception("Publication type <> $type");
         }
 
-        $this->helper->title()->append($publication->getMeta_title());
-        $this->helper->meta()->set('description', $publication->getMeta_description());
-        $this->helper->meta()->set('keywords', $publication->getMeta_keywords());
+        $this->helper->title()->append($publication->getMetaTitle());
+        $this->helper->meta()->set('description', $publication->getMetaDescription());
+        $this->helper->meta()->set('keywords', $publication->getMetaKeywords());
 
         $this->view->publication = $publication;
         $this->helper->menu->setActive($type);
 
     }
 
-} 
+}

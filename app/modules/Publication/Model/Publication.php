@@ -84,8 +84,8 @@ class Publication extends Model
         if (!$this->getSlug()) {
             $this->setSlug(Transliterator::slugify($data['title']));
         }
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($data['title']);
+        if (!$this->getMetaTitle()) {
+            $this->setMetaTitle($data['title']);
         }
         $this->setPreviewInner(isset($data['preview_inner']) ? 1 : 0);
     }
@@ -109,6 +109,7 @@ class Publication extends Model
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
+        return $this;
     }
 
     public function getCreatedAt()
@@ -119,6 +120,7 @@ class Publication extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId()
@@ -126,32 +128,35 @@ class Publication extends Model
         return $this->id;
     }
 
-    public function setMeta_description($meta_description)
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
+        return $this;
     }
 
-    public function getMeta_description()
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
 
-    public function setMeta_keywords($meta_keywords)
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
+        return $this;
     }
 
-    public function getMeta_keywords()
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
 
-    public function setMeta_title($meta_title)
+    public function setMetaTitle($meta_title)
     {
         $this->setMLVariable('meta_title', $meta_title);
+        return $this;
     }
 
-    public function getMeta_title()
+    public function getMetaTitle()
     {
         return $this->getMLVariable('meta_title');
     }
@@ -159,6 +164,7 @@ class Publication extends Model
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function getSlug()
@@ -169,6 +175,7 @@ class Publication extends Model
     public function setText($text)
     {
         $this->setMLVariable('text', $text);
+        return $this;
     }
 
     public function getText()
@@ -179,6 +186,7 @@ class Publication extends Model
     public function setTitle($title)
     {
         $this->setMLVariable('title', $title);
+        return $this;
     }
 
     public function getTitle()
@@ -189,6 +197,7 @@ class Publication extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+        return $this;
     }
 
     public function getUpdatedAt()
@@ -199,6 +208,7 @@ class Publication extends Model
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
     }
 
     public function getDate($format = 'Y-m-d H:i:s')
@@ -212,12 +222,13 @@ class Publication extends Model
         }
     }
 
-    public function setType_id($type_id)
+    public function setTypeId($type_id)
     {
         $this->type_id = $type_id;
+        return $this;
     }
 
-    public function getType_id()
+    public function getTypeId()
     {
         return $this->type_id;
     }
@@ -245,6 +256,7 @@ class Publication extends Model
     public function setPreviewInner($preview_inner)
     {
         $this->preview_inner = $preview_inner;
+        return $this;
     }
 
     public function getPreviewInner()
@@ -260,6 +272,7 @@ class Publication extends Model
     public function setPreviewSrc($preview_src)
     {
         $this->preview_src = $preview_src;
+        return $this;
     }
 
 }

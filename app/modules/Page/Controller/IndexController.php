@@ -31,7 +31,7 @@ class IndexController extends Controller
             throw new Exception("Page 'contacts' not found");
         }
 
-        $this->helper->title()->append($page->getMeta_title());
+        $this->helper->title()->append($page->getMetaTitle());
         $this->helper->meta()->set('description', $page->getMetaDescription());
         $this->helper->meta()->set('keywords', $page->getMetaKeywords());
         $this->view->page = $page;

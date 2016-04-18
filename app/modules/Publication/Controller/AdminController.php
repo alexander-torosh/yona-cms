@@ -100,7 +100,7 @@ class AdminController extends Controller
         $form = new PublicationForm();
         $model = Publication::findFirst($id);
 
-        if ($model->getType_id()) {
+        if ($model->getTypeId()) {
             $this->view->type = $model->getType()->getSlug();
         }
 
@@ -135,7 +135,7 @@ class AdminController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            if ($model->getType_id()) {
+            if ($model->getTypeId()) {
                 $this->redirect($this->url->get() . 'publication/admin/' . $model->getType()->getSlug());
             } else {
                 $this->redirect($this->url->get() . 'publication/admin');
@@ -185,4 +185,4 @@ class AdminController extends Controller
         }
     }
 
-} 
+}

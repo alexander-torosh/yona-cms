@@ -97,13 +97,13 @@ class Type extends Model
         if (!$this->getTitle()) {
             $this->setTitle($data['title']);
         }
-        if (!$this->getHead_title()) {
-            $this->setHead_title($data['title']);
+        if (!$this->getHeadTitle()) {
+            $this->setHeadTitle($data['title']);
         }
         if (isset($data['display_date'])) {
-            $this->setDisplay_date(1);
+            $this->setDisplayDate(1);
         } else {
-            $this->setDisplay_date(0);
+            $this->setDisplayDate(0);
         }
     }
 
@@ -170,6 +170,7 @@ class Type extends Model
     public function setTitle($title)
     {
         $this->setMLVariable('title', $title);
+        return $this;
     }
 
     /**
@@ -186,6 +187,7 @@ class Type extends Model
     public function setFormat($format)
     {
         $this->format = $format;
+        return $this;
     }
 
     /**
@@ -206,15 +208,16 @@ class Type extends Model
     /**
      * @param mixed $head_title
      */
-    public function setHead_title($head_title)
+    public function setHeadTitle($head_title)
     {
         $this->setMLVariable('head_title', $head_title);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getHead_title()
+    public function getHeadTitle()
     {
         return $this->getMLVariable('head_title');
     }
@@ -225,6 +228,7 @@ class Type extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -241,6 +245,7 @@ class Type extends Model
     public function setLimit($limit)
     {
         $this->limit = $limit;
+        return $this;
     }
 
     /**
@@ -254,15 +259,16 @@ class Type extends Model
     /**
      * @param mixed $meta_description
      */
-    public function setMeta_description($meta_description)
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_description()
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
@@ -270,15 +276,16 @@ class Type extends Model
     /**
      * @param mixed $meta_keywords
      */
-    public function setMeta_keywords($meta_keywords)
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_keywords()
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
@@ -286,15 +293,16 @@ class Type extends Model
     /**
      * @param mixed $seo_text
      */
-    public function setSeo_text($seo_text)
+    public function setSeoText($seo_text)
     {
         $this->setMLVariable('seo_text', $seo_text);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getSeo_text()
+    public function getSeoText()
     {
         return $this->getMLVariable('seo_text');
     }
@@ -305,6 +313,7 @@ class Type extends Model
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
     }
 
     /**
@@ -318,18 +327,19 @@ class Type extends Model
     /**
      * @param mixed $display_date
      */
-    public function setDisplay_date($display_date)
+    public function setDisplayDate($display_date)
     {
         $this->display_date = $display_date;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getDisplay_date()
+    public function getDisplayDate()
     {
         return $this->display_date;
     }
 
 
-} 
+}
