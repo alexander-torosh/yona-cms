@@ -33,7 +33,7 @@
             {% set pub_link = helper.langUrl(['for':'publications', 'type': item.getSlug()]) %}
             <td><a href="{{ pub_link }}" target="_blank">{{ pub_link }}</a></td>
             <td>{{ item.getFormatTitle() }}</td>
-            <td>{% if item.getDisplay_date() %}<i class="icon checkmark green"></i>{% endif %}</td>
+            <td>{% if item.getDisplayDate() %}<i class="icon checkmark green"></i>{% endif %}</td>
         </tr>
     {% endfor %}
     </tbody>
