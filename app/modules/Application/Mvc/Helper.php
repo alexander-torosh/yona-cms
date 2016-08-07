@@ -48,9 +48,9 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
-    public function widget($params)
+    public function widget($namespace = 'Index',array $params = [])
     {
-        return new \Application\Widget\Proxy($params);
+        return new \Application\Widget\Proxy($namespace,$params);
     }
 
     /**
