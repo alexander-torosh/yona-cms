@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
- * @author Aleksandr Torosh <webtorua@gmail.com>
- */
+     * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.com.ua)
+     * @author Aleksandr Torosh <webtorua@gmail.com>
+     */
 
 namespace Cms\Controller;
 
@@ -31,8 +31,8 @@ class ConfigurationController extends Controller
             $post = $this->request->getPost();
             if ($form->isValid($post)) {
                 if ($this->saveFormData($post)) {
-                    $this->flash->success($this->helper->at('Setting saved'));
-                    $this->redirect('/cms/configuration');
+                    $this->flash->success($this->helper->at('Configuration saved'));
+                    $this->redirect($this->url->get() . 'cms/configuration');
                 }
             } else {
                 $this->flashErrors($form);
@@ -42,10 +42,7 @@ class ConfigurationController extends Controller
         }
 
         $this->view->form = $form;
-
-        $title = $this->helper->at('CMS Configuration');
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->helper->title($this->helper->at('CMS Configuration'), true);
     }
 
     public function saveFormData($post)
@@ -62,6 +59,7 @@ class ConfigurationController extends Controller
             } else {
                 $model->setValue($value);
             }
+            $model->updateCheckboxes($post);
             if (!$model->save()) {
                 $result = false;
                 $this->flashErrors($model);

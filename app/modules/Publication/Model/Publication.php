@@ -2,7 +2,7 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -21,23 +21,25 @@ class Publication extends Model
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
 
-        $this->belongsTo('type_id', 'Publication\Model\Type', 'id', array(
+        $this->belongsTo('type_id', 'Publication\Model\Type', 'id', [
             'alias' => 'type'
-        ));
+        ]);
     }
 
-    public $id;
-    public $type_id;
-    public $title;
-    public $slug;
-    public $text;
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
-    public $created_at;
-    public $updated_at;
-    public $date;
-    public $preview_inner;
+    private $id;
+    private $type_id;
+    private $slug;
+    private $created_at;
+    private $updated_at;
+    private $date;
+    private $preview_src;
+    private $preview_inner;
+
+    protected $title;
+    protected $text;
+    protected $meta_title;
+    protected $meta_description;
+    protected $meta_keywords;
 
     public function beforeCreate()
     {
@@ -58,20 +60,13 @@ class Publication extends Model
         $cache->delete(self::cacheSlugKey($this->getSlug()));
     }
 
-    public function beforeValidation()
-    {
-        if ($_POST['form']) {
-            $this->preview_inner = (isset($_POST['preview_inner'])) ? 1 : 0;
-        }
-    }
-
     public function validation()
     {
         $this->validate(new Uniqueness(
-            array(
-                "field" => "slug",
-                "message" => "Страница с такой транслитерацией = '".$this->slug."' уже существует"
-            )
+            [
+                "field"   => "slug",
+                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
+            ]
         ));
 
         return $this->validationHasFailed() != true;
@@ -89,18 +84,19 @@ class Publication extends Model
         if (!$this->getSlug()) {
             $this->setSlug(Transliterator::slugify($data['title']));
         }
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($data['title']);
+        if (!$this->getMetaTitle()) {
+            $this->setMetaTitle($data['title']);
         }
+        $this->setPreviewInner(isset($data['preview_inner']) ? 1 : 0);
     }
 
     public static function findCachedBySlug($slug)
     {
-        $publication = self::findFirst(array("slug = '$slug'",
-            'cache' => array(
-                'key' => self::cacheSlugKey($slug),
-                'lifetime' => 60)
-        ));
+        $publication = self::findFirst(["slug = '$slug'",
+            'cache' => [
+                'key'      => self::cacheSlugKey($slug),
+                'lifetime' => 60]
+        ]);
         return $publication;
     }
 
@@ -113,6 +109,7 @@ class Publication extends Model
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
+        return $this;
     }
 
     public function getCreatedAt()
@@ -123,6 +120,7 @@ class Publication extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId()
@@ -130,32 +128,35 @@ class Publication extends Model
         return $this->id;
     }
 
-    public function setMeta_description($meta_description)
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
+        return $this;
     }
 
-    public function getMeta_description()
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
 
-    public function setMeta_keywords($meta_keywords)
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
+        return $this;
     }
 
-    public function getMeta_keywords()
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
 
-    public function setMeta_title($meta_title)
+    public function setMetaTitle($meta_title)
     {
         $this->setMLVariable('meta_title', $meta_title);
+        return $this;
     }
 
-    public function getMeta_title()
+    public function getMetaTitle()
     {
         return $this->getMLVariable('meta_title');
     }
@@ -163,6 +164,7 @@ class Publication extends Model
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function getSlug()
@@ -173,6 +175,7 @@ class Publication extends Model
     public function setText($text)
     {
         $this->setMLVariable('text', $text);
+        return $this;
     }
 
     public function getText()
@@ -183,6 +186,7 @@ class Publication extends Model
     public function setTitle($title)
     {
         $this->setMLVariable('title', $title);
+        return $this;
     }
 
     public function getTitle()
@@ -193,6 +197,7 @@ class Publication extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+        return $this;
     }
 
     public function getUpdatedAt()
@@ -203,29 +208,27 @@ class Publication extends Model
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
     }
 
-    public function getDate($format = 'Y-m-d')
+    public function getDate($format = 'Y-m-d H:i:s')
     {
         if ($format) {
-            return date($format, strtotime($this->date));
+            if ($this->date) {
+                return date($format, strtotime($this->date));
+            }
         } else {
             return $this->date;
         }
     }
 
-    /**
-     * @param mixed $type_id
-     */
-    public function setType_id($type_id)
+    public function setTypeId($type_id)
     {
         $this->type_id = $type_id;
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getType_id()
+    public function getTypeId()
     {
         return $this->type_id;
     }
@@ -233,7 +236,7 @@ class Publication extends Model
     public function getTypeTitle()
     {
         if ($this->type_id) {
-            $types = Type::cachedListArray(array('key' => 'id'));
+            $types = Type::cachedListArray(['key' => 'id']);
             if (array_key_exists($this->type_id, $types)) {
                 return $types[$this->type_id];
             }
@@ -243,27 +246,33 @@ class Publication extends Model
     public function getTypeSlug()
     {
         if ($this->type_id) {
-            $types = Type::cachedListArray(array('key' => 'id', 'value' => 'slug'));
+            $types = Type::cachedListArray(['key' => 'id', 'value' => 'slug']);
             if (array_key_exists($this->type_id, $types)) {
                 return $types[$this->type_id];
             }
         }
     }
 
-    /**
-     * @param mixed $preview_inner
-     */
     public function setPreviewInner($preview_inner)
     {
         $this->preview_inner = $preview_inner;
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPreviewInner()
     {
         return $this->preview_inner;
+    }
+
+    public function getPreviewSrc()
+    {
+        return $this->preview_src;
+    }
+
+    public function setPreviewSrc($preview_src)
+    {
+        $this->preview_src = $preview_src;
+        return $this;
     }
 
 }

@@ -7,12 +7,12 @@
 
         <title>Login</title>
 
-        <link href="/vendor/semantic-1.0.0/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ url.path() }}vendor/semantic-2.1/semantic.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-            <script src="/vendor/js/html5shiv.js"></script>
-            <script src="/vendor/js/respond.min.js"></script>
+            <script src="{{ url.path() }}vendor/js/html5shiv.js"></script>
+            <script src="{{ url.path() }}vendor/js/respond.min.js"></script>
         <![endif]-->
         <style>
         .container {
@@ -23,7 +23,7 @@
     </head>
     <body>
         <div class="container">
-            <form class="ui form segment" method="post">
+            <form class="ui form segment" method="post" action="{{ url.get() }}admin/index/login">
                 <h1>Admin panel</h1>
                 {{ flash.output() }}
                 <div class="required field">
@@ -47,6 +47,6 @@
                        value="{{ security.getToken() }}"/>
                 <input type="submit" id="submit" class="ui blue submit button" value="Log in">
             </form>
-        </div> <!-- /container -->
+        </div>
     </body>
 </html>

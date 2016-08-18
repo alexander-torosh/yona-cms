@@ -2,41 +2,65 @@
 
 namespace Image;
 
-define('IMG_ROOT_REL_PATH', '/img');
-define('IMG_ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('IMG_STORAGE_SERVER', '');
+use Phalcon\Mvc\User\Component;
+
+define('IMG_ROOT_REL_PATH', 'img');
 define('DIR_SEP', '/');
+define('IMG_ROOT_PATH', ROOT . DIR_SEP);
+define('IMG_STORAGE_SERVER', '');
 define('IMG_EXTENSION', 'jpg');
 define('NOIMAGE', '/static/images/noimage.jpg');
 
-define('IMG_DEBUG_MODE', false);
+define('IMG_DEBUG_MODE', true);
 
-class Storage
+class Storage extends Component
 {
 
-    private static $STRATEGIES = array(
+    private static $STRATEGIES = [
         'w', // Масштабируем по ширине
         'wh', // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
         'a', // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
-    );
+    ];
     private $id = null;
     private $image_hash = null;
     private $type = 'publication';
     private $strategy = 'w';
-    private $width = '100';
+    private $width = 100;
     private $height = null;
     private $container = false;
     private $hash = false;
-    private $attributes = array();
+    private $attributes = [];
     private $exists = true;
     private $widthHeight = true;
     private $stretch = true;
 
-    private $params; // для no-image
-
-    public function __construct(array $params = array(), array $attributes = array())
+    public function __construct(array $params = [], array $attributes = [])
     {
-        $this->params = $params; // для no-image
+        $this->setIdFromParams($params);
+        $this->attributes = $attributes;
+
+        $this->type = (isset($params['type'])) ? $params['type'] : 'publication';
+        $this->strategy = (isset($params['strategy'])) ? $params['strategy'] : 'w';
+        $this->container = (isset($params['container'])) ? $params['container'] : false;
+        $this->image_hash = (isset($params['image_hash'])) ? $params['image_hash'] : null;
+        $this->hash = (isset($params['hash'])) ? $params['hash'] : false;
+
+        $this->setDimensionsAttributes($params);
+    }
+
+    private function setDimensionsAttributes(array $params = [])
+    {
+        $this->width = (isset($params['width'])) ? $params['width'] : 100;
+        $this->height = (isset($params['height'])) ? $params['height'] : null;
+
+        $this->widthHeight = (isset($params['widthHeight'])) ? $params['widthHeight'] : true;
+        $this->widthHeight = (isset($params['widthHeight']) && MOBILE_DEVICE) ? false : true;
+
+        $this->stretch = (isset($params['stretch'])) ? $params['stretch'] : null;
+    }
+
+    private function setIdFromParams($params)
+    {
         if (isset($params['id'])) {
             if (preg_match('/^\d+$/', $params['id'])) {
                 $this->id = (int) $params['id'];
@@ -47,41 +71,7 @@ class Storage
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("ID не определен");
             }
-            return;
         }
-        if (isset($params['image_hash'])) {
-            $this->image_hash = $params['image_hash'];
-        }
-        if (isset($params['type'])) {
-            $this->type = $params['type'];
-        }
-        if (isset($params['strategy'])) {
-            $this->strategy = $params['strategy'];
-        }
-        if (isset($params['width'])) {
-            $this->width = $params['width'];
-        }
-        if (isset($params['height'])) {
-            $this->height = $params['height'];
-        }
-        if (isset($params['container'])) {
-            $this->container = $params['container'];
-        }
-        if (isset($params['hash'])) {
-            $this->hash = $params['hash'];
-        }
-        if (isset($params['widthHeight'])) {
-            $this->widthHeight = $params['widthHeight'];
-
-            if (MOBILE_DEVICE) {
-                $this->widthHeight = false;
-            }
-        }
-        if (isset($params['stretch'])) {
-            $this->stretch = $params['stretch'];
-        }
-        $this->attributes = $attributes;
-
     }
 
     /**
@@ -91,10 +81,36 @@ class Storage
     public function imageHtml()
     {
         //Из заданных параметров и атрибутов составляем html-тэг
+        $attributes = $this->attributesForImageHtml();
 
+        // Получаем относительный адрес файла кешированного изображения
+        $src = $this->cachedRelPath();
+
+        if ($this->exists) {
+            if ($this->hash) {
+                $src .= '?' . microtime();
+            }
+        } else {
+            $src = NOIMAGE;
+            $attributes['width'] = $this->width;
+            $attributes['height'] = $this->height;
+        }
+
+        $attr_src = 'src="' . $this->config->base_path . $src . '"';
+        $result = '<img ' . $attr_src . $this->attributesResultForImageHtml($attributes) . '/>';
+
+        if ($this->container) {
+            $result = '<div class="img-container" style="width:' . $this->width . 'px; height:' . $this->height . 'px">' . $result . '</div>';
+        }
+
+        return $result;
+    }
+
+    private function attributesForImageHtml()
+    {
         $attributes = $this->attributes;
         if ($this->widthHeight) {
-            if ($this->stretch && in_array($this->strategy, array('wh', 'a'))) {
+            if ($this->stretch && in_array($this->strategy, ['wh', 'a'])) {
                 $this->stretch = false;
             }
             if ($this->stretch) {
@@ -114,52 +130,20 @@ class Storage
                 }
             }
         }
-
-        $src = $this->cachedRelPath(); // Получаем относительный адрес файла кешированного изображения
-
-        if ($this->exists) {
-            if ($this->hash) {
-                $src .= '?' . microtime();
-            }
-        } else {
-            // КОСТЫЛЬ, возвращает кешированный no-image с запрошенными параметрами.
-            // В будущем нужно будет переписать.
-            $noImageParams = $this->params;
-            $noImageParams['type'] = 'no-image';
-            if ($this->type == 'profile_avatar') {
-                $noImageParams['id'] = 2;
-            } else {
-                $noImageParams['id'] = 1;
-            }
-//            var_dump($noImageParams);
-//            die;
-
-            $noImage = new self($noImageParams);
-            $src = $noImage->cachedRelPath();
-//            $src = NOIMAGE;
-//            $attributes['width'] = $this->width;
-//            $attributes['height'] = $this->height;
-        }
-
-        $result = '<img src="' . $src . '"';
-
         $attributes['alt'] = (isset($attributes['alt'])) ? htmlspecialchars($attributes['alt'], ENT_QUOTES) : '';
+        return $attributes;
+    }
 
-        $attributesHtmlArray = array();
+    private function attributesResultForImageHtml($attributes)
+    {
+        $attributesHtmlArray = [];
         foreach ($attributes as $el => $val) {
             $attributesHtmlArray[] = $el . '="' . $val . '"';
         }
         $attributesHtml = implode(' ', $attributesHtmlArray);
         $attributesHtmlResult = ($attributesHtml) ? ' ' . $attributesHtml : '';
 
-        $result .= $attributesHtmlResult . '/>';
-
-        if ($this->container) {
-            $result = '<div class="img-container" style="width:' . $this->width . 'px; height:' . $this->height . 'px">' . $result . '</div>';
-        }
-
-        return $result;
-
+        return $attributesHtmlResult;
     }
 
     /**
@@ -168,10 +152,14 @@ class Storage
      */
     public function cachedRelPath()
     {
-        $cachedRelPath = $this->calculateCachedRelPath(); // Рассчитываем по входящим параметрам относительный путь к кешированному файлу
-        $cachedAbsPath = IMG_ROOT_PATH . $cachedRelPath; // Совмещаем относительный путь с корневым, получаем абсолютный путь
-        if (!file_exists($cachedAbsPath)) { // Проверяем существование такого файла. если файл не существует:
-            $this->generateCachedImage(); // Генерируем кеш-файл по заданным параметрам
+        // Рассчитываем по входящим параметрам относительный путь к кешированному файлу
+        $cachedRelPath = $this->calculateCachedRelPath();
+        // Совмещаем относительный путь с корневым, получаем абсолютный путь
+        $cachedAbsPath = IMG_ROOT_PATH . $cachedRelPath;
+        // Проверяем существование такого файла. если файл не существует:
+        if (!file_exists($cachedAbsPath)) {
+            // Генерируем кеш-файл по заданным параметрам
+            $this->generateCachedImage();
         }
         return IMG_STORAGE_SERVER . $cachedRelPath;
 
@@ -211,11 +199,11 @@ class Storage
     public function originalWidthHeight()
     {
         $imageSize = getimagesize($this->originalAbsPath());
-        if ($imageSize) {
-            return array(
+        if (!empty($imageSize)) {
+            return [
                 'width'  => $imageSize[0],
                 'height' => $imageSize[1]
-            );
+            ];
         }
 
     }
@@ -244,7 +232,7 @@ class Storage
      */
     private function calculateCachedRelPath()
     {
-        $pathParts = array();
+        $pathParts = [];
         $pathParts[] = IMG_ROOT_REL_PATH;
         $pathParts[] = 'cache';
         $pathParts[] = $this->type;
@@ -256,7 +244,7 @@ class Storage
         }
         $pathParts[] = $idPart;
 
-        $fileParts = array();
+        $fileParts = [];
         $fileParts[] = $this->id;
         if ($this->image_hash) {
             $fileParts[] = $this->image_hash;
@@ -274,8 +262,10 @@ class Storage
             $fileParts[] = $this->height;
         }
 
-        $path = implode(DIR_SEP, $pathParts); // "img/preview/405"
-        $file = implode('_', $fileParts); // "405102_1_w_100"
+        // "img/preview/405"
+        $path = implode(DIR_SEP, $pathParts);
+        // "405102_1_w_100"
+        $file = implode('_', $fileParts);
 
         return $path . DIR_SEP . $file . '.jpg';
 
@@ -287,7 +277,7 @@ class Storage
      */
     private function calculateOriginalRelPath()
     {
-        $pathParts = array();
+        $pathParts = [];
         $pathParts[] = IMG_ROOT_REL_PATH;
         $pathParts[] = 'original';
         $pathParts[] = $this->type;
@@ -299,14 +289,16 @@ class Storage
         }
         $pathParts[] = $idPart;
 
-        $fileParts = array();
+        $fileParts = [];
         $fileParts[] = $this->id;
         if ($this->image_hash) {
             $fileParts[] = $this->image_hash;
         }
 
-        $path = implode(DIR_SEP, $pathParts); // "img/original/preview/405"
-        $file = implode('_', $fileParts); // "405102_1"
+        // "img/original/preview/405"
+        $path = implode(DIR_SEP, $pathParts);
+        // "405102_1"
+        $file = implode('_', $fileParts);
 
         return $path . DIR_SEP . $file . '.jpg';
 
@@ -317,51 +309,49 @@ class Storage
      */
     private function generateCachedImage()
     {
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
-        if (!file_exists($originalAbsPath)) {
-            if (IMG_DEBUG_MODE) {
-                throw new \Exception("Файл {$originalAbsPath} не существует");
-            } else {
-                $this->exists = false;
-            }
-            return;
-        }
+        // Абсолютный путь оригинального изображения
+        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
+        $this->checkOriginalExists($originalAbsPath);
 
         require_once __DIR__ . '/PHPThumb/ThumbLib.inc.php';
         $image = \PhpThumbFactory::create($originalAbsPath);
-        if (MOBILE_DEVICE) { // Для мобильных устройств отдаем изображение с качеством на уровне 60%
-            $options = array('jpegQuality' => 60);
+        // Для мобильных устройств отдаем изображение с качеством на уровне 60%
+        if (MOBILE_DEVICE) {
+            $options = ['jpegQuality' => 60];
             $image->setOptions($options);
         }
         switch ($this->strategy) {
-            case 'w' :
-                $image->resize($this->width); // Масштабируем по ширине
+            case 'w':
+                // Масштабируем по ширине
+                $image->resize($this->width);
                 break;
-            case 'wh' :
-                $image->resize($this->width, $this->height); // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
+            case 'wh':
+                // Масштабируем по заданной ширине и высоте. Изображение подганяется в этот прямоугольник
+                $image->resize($this->width, $this->height);
                 break;
-            case 'a' :
-                $image->adaptiveResize($this->width, $this->height); // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
+            case 'a':
+                // Центрируем и обрезаем изображение по заданной высоте и ширине таким образом, чтоб оно полностью заполнило пространство
+                $image->adaptiveResize($this->width, $this->height);
                 break;
         }
 
-        if ($this->lockOriginal($originalAbsPath)) { // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
-            $image->save($this->getCachedAbsPath()); // Сохраняем кешированное изображение
-            $this->unlockOriginal($originalAbsPath); // Снимаем блокировку
-        } else {
-            if (IMG_DEBUG_MODE) {
-                throw new \Exception("Файл {$originalAbsPath} заблокирован механизмом проверки _LOCK или не существует");
-            } else {
-                $this->exists = false;
-            }
-            return;
-        }
-
+        $this->saveImage($image, $originalAbsPath);
     }
 
     public function cropOriginal($left, $top, $width, $height)
     {
         $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
+        $this->checkOriginalExists($originalAbsPath);
+
+        require_once __DIR__ . '/PHPThumb/ThumbLib.inc.php';
+        $image = \PhpThumbFactory::create($originalAbsPath);
+        $image->crop($left, $top, $width, $height);
+
+        $this->saveImage($image, $originalAbsPath);
+    }
+
+    private function checkOriginalExists($originalAbsPath)
+    {
         if (!file_exists($originalAbsPath)) {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} не существует");
@@ -370,16 +360,16 @@ class Storage
             }
             return;
         }
+    }
 
-        //$image = new \Phalcon\Image\Adapter\Imagick($originalAbsPath);
-        //$image->crop($width, $height, $left, $top);
-        require_once __DIR__ . '/PHPThumb/ThumbLib.inc.php';
-        $image = \PhpThumbFactory::create($originalAbsPath);
-        $image->crop($left, $top, $width, $height);
-
-        if ($this->lockOriginal($originalAbsPath)) { // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
-            $image->save($originalAbsPath); // Сохраняем кешированное изображение
-            $this->unlockOriginal($originalAbsPath); // Снимаем блокировку
+    private function saveImage($image, $originalAbsPath)
+    {
+        // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
+        if ($this->lockOriginal($originalAbsPath)) {
+            // Сохраняем кешированное изображение
+            $image->save($this->getCachedAbsPath());
+            // Снимаем блокировку
+            $this->unlockOriginal($originalAbsPath);
         } else {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Файл {$originalAbsPath} заблокирован механизмом проверки _LOCK или не существует");
@@ -388,7 +378,6 @@ class Storage
             }
             return;
         }
-
     }
 
     /**
@@ -398,7 +387,6 @@ class Storage
     {
         $this->removeCached();
         $this->removeOriginal($removeAll);
-
     }
 
     /**
@@ -429,7 +417,6 @@ class Storage
                 }
             }
         }
-
     }
 
     /**
@@ -449,7 +436,6 @@ class Storage
                 }
             }
         }
-
     }
 
     /**
@@ -460,23 +446,24 @@ class Storage
         $cachedAbsPath = IMG_ROOT_PATH . $this->calculateCachedRelPath();
         if (file_exists($cachedAbsPath)) {
             $imageSize = getimagesize($cachedAbsPath);
-            if ($imageSize) {
-                return array(
+            if (!empty($imageSize)) {
+                return [
                     'width'  => $imageSize[0],
                     'height' => $imageSize[1]
-                );
+                ];
             }
         } else {
-            return array(
+            return [
                 'width'  => null,
                 'height' => null
-            );
+            ];
         }
-
     }
 
     /**
      * Проверяем блокировку оригинала изображения. Если нет, то блокируем
+     * @param string $originalAbsPath
+     * @return boolean true|false
      */
     private function lockOriginal($originalAbsPath)
     {
@@ -497,25 +484,25 @@ class Storage
                 return false;
             }
         }
-
     }
 
     /**
      * Снимаем блокировку оригинала изображения
+     * @param string $originalAbsPath
      */
     private function unlockOriginal($originalAbsPath)
     {
         unlink($this->getLockFileName($originalAbsPath));
-
     }
 
     /**
      * Возвращает имя файла для блокировки оригинала изображения
+     * @param string $originalAbsPath
+     * @return string
      */
     private function getLockFileName($originalAbsPath)
     {
         return preg_replace('/\.' . IMG_EXTENSION . '/i', '_lock.' . IMG_EXTENSION, $originalAbsPath);
-
     }
 
     /**
@@ -525,14 +512,16 @@ class Storage
     private function getOriginalAbsPath()
     {
         $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
-        $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1)); // Абсолютный путь директории
+        // Абсолютный путь директории
+        $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1));
 
-        if (!is_dir($originalAbsPathDir)) { // Если директория отсутствует
-            mkdir($originalAbsPathDir, 0777, true); // Создаем дерево директорий
+        // Если директория отсутствует
+        if (!is_dir($originalAbsPathDir)) {
+            // Создаем дерево директорий
+            mkdir($originalAbsPathDir, 0777, true);
         }
 
         return $originalAbsPath;
-
     }
 
     /**
@@ -542,12 +531,14 @@ class Storage
     private function getCachedAbsPath()
     {
         $cachedAbsPath = IMG_ROOT_PATH . $this->calculateCachedRelPath();
-        $cachedAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $cachedAbsPath), 0, -1)); // Абсолютный путь директории
+        // Абсолютный путь директории
+        $cachedAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $cachedAbsPath), 0, -1));
 
-        if (!is_dir($cachedAbsPathDir)) { // Если директория отсутствует
-            mkdir($cachedAbsPathDir, 0777, true); // Создаем дерево директорий
+        // Если директория отсутствует
+        if (!is_dir($cachedAbsPathDir)) {
+            // Создаем дерево директорий
+            mkdir($cachedAbsPathDir, 0777, true);
         }
-
         return $cachedAbsPath;
 
     }

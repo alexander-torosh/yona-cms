@@ -11,7 +11,7 @@ namespace Application\Mvc\Helper;
 class Announce
 {
 
-    public function announce($incomeString, $num = 300)
+    public function getString($incomeString, $num = 300)
     {
         $stringStriped = strip_tags($incomeString);
         if (!$stringStriped) {
@@ -19,7 +19,7 @@ class Announce
         }
 
         $textBr = str_replace(array("\r\n", "\r", "\n"), "<br>", $stringStriped);
-        $string   = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
+        $string = mb_substr(strip_tags($textBr), 0, 300, 'utf-8');
 
         if (mb_strlen($string, 'utf-8') < $num) {
             return $string;

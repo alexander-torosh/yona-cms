@@ -24,8 +24,6 @@
 
 </div>
 
-{# partial('main/callback') #}
-
 {% if registry.cms['PROFILER'] %}
     {{ helper.dbProfiler() }}
 {% endif %}

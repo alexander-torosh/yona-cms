@@ -15,60 +15,81 @@ class Item
     public $params;
     public $children = [];
 
-    private $li_attributes_str;
     private $href;
+    private $li_attributes = [];
+    private $li_attributes_str;
+    private $a_attributes = [];
     private $a_attributes_str;
     private $active_items = [];
 
+    /**
+     * @param $title
+     * @param integer $id
+     * @param string $url
+     * @param array $params
+     */
     public function __construct($title, $id = null, $url = null, array $params = [])
     {
         $this->title = $title;
         $this->id = $id;
         $this->url = $url;
         $this->params = $params;
+
+        if (isset($this->params['li'])) {
+            $this->li_attributes = $this->params['li'];
+        }
+        if (isset($this->params['a'])) {
+            $this->a_attributes = $this->params['a'];
+        }
     }
 
     public function make()
     {
-        $li_attributes = [];
-        //$a_attributes = [];
+        $this->makeLiClass();
+        $this->makeLiAttributesStr();
+        $this->makeAAttributesStr();
 
-        $li_class = '';
-        $li_class_active = false;
+        $this->href = ($this->url) ? $this->url : "javascript:void(0);";
+    }
+
+    private function makeLiClass()
+    {
+        $class = [];
         if (!empty($this->children)) {
-            $li_class = 'parent';
+            $class[] = 'parent';
         }
-        if (isset($this->params['li_class'])) {
-            $li_class .= $this->params['li_class'];
+        if (isset($this->li_attributes['class'])) {
+            $class[] = $this->li_attributes['class'];
         }
         if (in_array($this->id, $this->active_items)) {
-            $li_class_active = true;
-        } else {
-            if (!empty($this->children)) {
-                foreach ($this->children as $child) {
-                    if (in_array($child->id, $this->active_items)) {
-                        $li_class_active = true;
-                    }
+            $class[] = 'active';
+        } elseif (!empty($this->children)) {
+            foreach ($this->children as $child) {
+                if (in_array($child->id, $this->active_items)) {
+                    $class[] = 'active';
                 }
             }
         }
-        if ($li_class_active) {
-            if ($li_class) {
-                $li_class .= ' ';
-            }
-            $li_class .= 'active';
-        }
-        if ($li_class) {
-            $li_attributes['class'] = $li_class;
-        }
 
-        if (!empty($li_attributes)) {
-            foreach ($li_attributes as $key => $value) {
+        $this->li_attributes['class'] = implode(' ', $class);
+    }
+
+    private function makeLiAttributesStr()
+    {
+        if (!empty($this->li_attributes)) {
+            foreach ($this->li_attributes as $key => $value) {
                 $this->li_attributes_str .= ' ' . $key . '="' . $value . '"';
             }
         }
+    }
 
-        $this->href = ($this->url) ? $this->url : "javascript:void(0);";
+    private function makeAAttributesStr()
+    {
+        if (!empty($this->a_attributes)) {
+            foreach ($this->a_attributes as $key => $value) {
+                $this->a_attributes_str .= ' ' . $key . '="' . $value . '"';
+            }
+        }
     }
 
     public function setActiveItems($active_items)
@@ -89,7 +110,7 @@ class Item
         if (!empty($this->children)) {
             $html .= "<ul>";
             foreach ($this->children as $child) {
-                $childItem = new MenuItem($child->title, $child->id, $child->url, $child->params);
+                $childItem = new Item($child->title, $child->id, $child->url, $child->params);
                 $childItem->setActiveItems($this->active_items);
                 $childItem->make();
                 $html .= $childItem->render();

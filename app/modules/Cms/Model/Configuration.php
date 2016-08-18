@@ -21,28 +21,16 @@ class Configuration extends \Phalcon\Mvc\Model
      * Если таблица в БД будет пустая, она автоматически заполнится значениями по-умолчанию
      */
     public static $keys = [
-        'DEBUG_MODE' => 1,
-        'TECHNICAL_WORKS' => 0,
-        'PROFILER' => 1,
+        'DEBUG_MODE'        => 1,
+        'TECHNICAL_WORKS'   => 0,
+        'PROFILER'          => 1,
+        'WIDGETS_CACHE'     => 0,
+        'DISPLAY_CHANGELOG' => 1,
+        'ADMIN_EMAIL'       => 'webmaster@localhost',
     ];
 
     public $key;
     public $value;
-
-    public function beforeValidation()
-    {
-        if ($_POST['form']) {
-            if ($this->key == 'DEBUG_MODE') {
-                $this->value = (isset($_POST['DEBUG_MODE'])) ? 1 : 0 ;
-            }
-            if ($this->key == 'TECHNICAL_WORKS') {
-                $this->value = (isset($_POST['TECHNICAL_WORKS'])) ? 1 : 0 ;
-            }
-            if ($this->key == 'PROFILER') {
-                $this->value = (isset($_POST['PROFILER'])) ? 1 : 0 ;
-            }
-        }
-    }
 
     public function validation()
     {
@@ -50,12 +38,25 @@ class Configuration extends \Phalcon\Mvc\Model
          * Проверка на наличие ключа в перечне подустимых ключей
          */
         if (!array_key_exists($this->key, self::$keys)) {
-            $message = new Message('Key '.$this->key.' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
+            $message = new Message('Key ' . $this->key . ' does not found in the list of valid keys Configuration\Model\Configuration::$keys');
             $this->appendMessage($message);
             return false;
         }
 
         return $this->validationHasFailed() != true;
+    }
+
+    public function updateCheckboxes($post)
+    {
+        foreach (self::$keys as $key => $value) {
+            if ($this->key == $key) {
+                if ($value === 1 || $value === 0) {
+                    $this->value = (isset($post[$key])) ? 1 : 0;
+                } else {
+                    $this->value = $post[$key];
+                }
+            }
+        }
     }
 
     /**
@@ -64,7 +65,7 @@ class Configuration extends \Phalcon\Mvc\Model
     public function getValueByKey($key, $cache = true)
     {
         $config = $this->getConfig($cache);
-        if ($config) {
+        if (!empty($config)) {
             if (array_key_exists($key, $config)) {
                 return $config[$key];
             }
@@ -94,7 +95,7 @@ class Configuration extends \Phalcon\Mvc\Model
     {
         $config = $this->getConfig();
         $entity = new \stdClass();
-        foreach($config as $key => $value) {
+        foreach ($config as $key => $value) {
             $entity->$key = $value;
         }
         return $entity;
@@ -107,8 +108,6 @@ class Configuration extends \Phalcon\Mvc\Model
     {
         if (array_key_exists($key, self::$keys)) {
             $this->key = $key;
-        } else {
-            die($key  . ' does not exists in Configuration\Model\Configuration::$keys');
         }
     }
 

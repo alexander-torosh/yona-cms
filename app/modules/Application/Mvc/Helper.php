@@ -48,13 +48,18 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
+    public function widget($namespace = 'Index', array $params = [])
+    {
+        return new \Application\Widget\Proxy($namespace, $params);
+    }
+
     /**
      * Вызов выджета из модуля StaticWidget
      * @param $id - идентификатор виджета, например "phone"
      */
-    public function widget($id)
+    public function staticWidget($id)
     {
-        $widget = \Widget\Model\Widget::findFirst(array("id='{$id}'", "cache" => array("lifetime" => 30, "key" => HOST_HASH . md5("Widget::findFirst({$id})"))));
+        $widget = \Widget\Model\Widget::findFirst(["id='{$id}'", "cache" => ["lifetime" => 120, "key" => HOST_HASH . md5("Widget::findFirst({$id})")]]);
         if ($widget) {
             return $widget->getHtml();
         }
@@ -107,9 +112,9 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     }
 
-    public function title($title = null)
+    public function title($title = null, $h1 = false)
     {
-        return \Application\Mvc\Helper\Title::getInstance($title);
+        return \Application\Mvc\Helper\Title::getInstance($title, $h1);
     }
 
     public function meta()
@@ -125,7 +130,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function announce($incomeString, $num)
     {
         $object = new \Application\Mvc\Helper\Announce();
-        return $object->announce($incomeString, $num);
+        return $object->getString($incomeString, $num);
     }
 
     public function dbProfiler()
@@ -139,7 +144,7 @@ class Helper extends \Phalcon\Mvc\User\Component
         return get_defined_constants()[$name];
     }
 
-    public function image($args, $attributes = array())
+    public function image($args, $attributes = [])
     {
         $imageFilter = new \Image\Storage($args, $attributes);
         return $imageFilter;
@@ -149,12 +154,6 @@ class Helper extends \Phalcon\Mvc\User\Component
     {
         $object = new \Application\Mvc\Helper\RequestQuery();
         return $object->getSymbol();
-    }
-
-    public function slider($id)
-    {
-        $helper = new \Slider\Mvc\Helper();
-        return $helper->slider($id);
     }
 
     public function javascript($id)

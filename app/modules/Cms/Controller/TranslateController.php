@@ -7,6 +7,7 @@
 namespace Cms\Controller;
 
 use Application\Mvc\Controller;
+use Application\Mvc\Helper\CmsCache;
 use Cms\Model\Translate;
 use Cms\Scanner;
 
@@ -40,13 +41,15 @@ class TranslateController extends Controller
                     }
                 }
             }
+
+            CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
             $this->flash->success($this->helper->at('Saved has been successful'));
 
             $lang = LANG;
             $key = HOST_HASH . md5("Translate::findByLang($lang)");
             $this->cache->delete($key);
 
-            $this->redirect('/cms/translate?lang=' . LANG);
+            return $this->redirect($this->url->get() . 'cms/translate?lang=' . LANG);
         }
 
         $scanner = new Scanner();
@@ -55,5 +58,6 @@ class TranslateController extends Controller
         $this->view->phrases = $phrases;
         $this->view->model = $model;
     }
+
 
 }

@@ -10,9 +10,7 @@
 
     <!--tab main-->
     <div class="ui segment tab active" data-tab="main">
-        {{ form.renderDecorated('DEBUG_MODE') }}
-        {{ form.renderDecorated('TECHNICAL_WORKS') }}
-        {{ form.renderDecorated('PROFILER') }}
+        {{ form.renderAll() }}
     </div>
     <!--/end tab main-->
 

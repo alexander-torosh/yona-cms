@@ -1,11 +1,11 @@
 <!--controls-->
 <div class="ui segment">
 
-    <a href="/publication/admin?lang={{ constant('LANG') }}" class="ui button">
+    <a href="{{ url.get() }}publication/admin?lang={{ constant('LANG') }}" class="ui button">
         <i class="icon left arrow"></i> Manage Publications
     </a>
 
-    <a href="/publication/type/add" class="ui button positive">
+    <a href="{{ url.get() }}publication/type/add" class="ui button positive">
         <i class="icon plus"></i> Add New
     </a>
 
@@ -24,7 +24,7 @@
     </thead>
     <tbody>
     {% for item in entries %}
-        {% set link = "/publication/type/edit/" ~ item.getId() %}
+        {% set link = url.get() ~ "publication/type/edit/" ~ item.getId() %}
         <tr>
             <td><a href="{{ link }}?lang={{ constant('LANG') }}" class="mini ui icon button"><i class="icon edit"></i>
                     id = {{ item.getId() }}</a></td>
@@ -33,7 +33,7 @@
             {% set pub_link = helper.langUrl(['for':'publications', 'type': item.getSlug()]) %}
             <td><a href="{{ pub_link }}" target="_blank">{{ pub_link }}</a></td>
             <td>{{ item.getFormatTitle() }}</td>
-            <td>{% if item.getDisplay_date() %}<i class="icon checkmark green"></i>{% endif %}</td>
+            <td>{% if item.getDisplayDate() %}<i class="icon checkmark green"></i>{% endif %}</td>
         </tr>
     {% endfor %}
     </tbody>

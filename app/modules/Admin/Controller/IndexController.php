@@ -11,6 +11,7 @@ namespace Admin\Controller;
 use Application\Mvc\Controller;
 use Admin\Model\AdminUser;
 use Admin\Form\LoginForm;
+use Michelf\Markdown;
 use Phalcon\Mvc\View;
 
 class IndexController extends Controller
@@ -23,22 +24,23 @@ class IndexController extends Controller
 
         $auth = $this->session->get('auth');
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
-            $this->flash->notice($this->helper->translate("Авторизируйтесь пожалуйста"));
-            $this->response->redirect('admin/index/login');
-            return $this->response->send();
+            $this->flash->notice($this->helper->at('Log in please'));
+            $this->redirect($this->url->get() . 'admin/index/login');
         }
 
         // Проверка пользователя yona
-        $wezoom = AdminUser::findFirst("login = 'yona'");
-        if ($wezoom) {
-            $this->flash->warning("Found the administrative user 'yona', to comply with security measures, it is necessary to Delete and create a new personal account");
+        $yona = AdminUser::findFirst("login = 'yona'");
+        if ($yona) {
+            $this->flash->warning($this->helper->at('Warning. Found admin user with name yona'));
         }
 
-        $changelog = file_get_contents(ROOT . '/../CHANGELOG.md');
-        $this->view->changelog = nl2br(trim($changelog));
+        if ($this->registry->cms['DISPLAY_CHANGELOG']) {
+            $changelog = file_get_contents(APPLICATION_PATH . '/../CHANGELOG.md');
+            $changelog_html = Markdown::defaultTransform($changelog);
+            $this->view->changelog = $changelog_html;
+        }
 
-        $this->view->title = $this->helper->translate('YonaCms Admin Panel');
-        $this->helper->title()->append($this->helper->translate('Home'));
+        $this->helper->title($this->helper->at('YonaCms Admin Panel'), true);
 
         $this->helper->activeMenu()->setActive('admin-home');
 
@@ -61,8 +63,7 @@ class IndexController extends Controller
                             if ($user->isActive()) {
                                 $this->session->set('auth', $user->getAuthData());
                                 $this->flash->success($this->helper->translate("Welcome to the administrative control panel!"));
-                                $this->response->redirect('admin');
-                                return $this->response->send();
+                                return $this->redirect($this->url->get() . 'admin');
                             } else {
                                 $this->flash->error($this->helper->translate("User is not activated yet"));
                             }
@@ -91,14 +92,13 @@ class IndexController extends Controller
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $this->session->remove('auth');
-                $this->response->redirect('');
-                return $this->response->send();
             } else {
-                die("Security errors");
+                $this->flash->error("Security errors");
             }
         } else {
-            die("Security errors");
+            $this->flash->error("Security errors");
         }
+        $this->redirect($this->url->get());
     }
 
 }

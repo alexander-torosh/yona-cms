@@ -14,14 +14,15 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-widget');
 
+        $this->view->languages_disabled = true;
+
     }
 
     public function indexAction()
     {
-        $this->view->setVar('entries', Widget::find());
+        $this->view->entries = Widget::find();
 
-        $this->view->title = $this->helper->at('Manage Widgets');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Manage Widgets'), true);
 
     }
 
@@ -31,10 +32,10 @@ class AdminController extends Controller
         $form = new WidgetForm();
 
         if ($this->request->isPost()) {
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect('/widget/admin/edit/' . $widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -55,20 +56,20 @@ class AdminController extends Controller
 
     public function editAction($id)
     {
-        $id   = $this->filter->sanitize($id, "string");
-        $widget = Widget::findFirst(array("id = '$id'"));
+        $id = $this->filter->sanitize($id, "string");
+        $widget = Widget::findFirst(["id = '$id'"]);
         if (!$widget) {
-            $this->redirect('/widget/admin/add');
+            $this->redirect($this->url->get() . 'widget/admin/add');
         }
 
         $form = new WidgetForm();
         $form->remove('id');
         if ($this->request->isPost()) {
 
-            $form->bind($_POST, $widget);
+            $form->bind($this->request->getPost(), $widget);
             if ($form->isValid()) {
                 if ($widget->save()) {
-                    $this->redirect('/widget/admin/edit/' . $widget->getId());
+                    $this->redirect($this->url->get() . 'widget/admin/edit/' . $widget->getId());
                 } else {
                     $this->flashErrors($widget);
                 }
@@ -82,23 +83,22 @@ class AdminController extends Controller
         $this->view->setVar('form', $form);
         $this->view->setVar('widget', $widget);
 
-        $this->view->title = $this->helper->at('Editing widget');
-        $this->helper->title($this->view->title);
+        $this->helper->title($this->helper->at('Editing widget'), true);
 
     }
 
     public function deleteAction($id)
     {
-        $id   = $this->filter->sanitize($id, "string");
-        $widget = Widget::findFirst(array("id = '$id'"));
-        if ($widget) {
+        $id = $this->filter->sanitize($id, "string");
+        $model = Widget::findFirst(["id = '$id'"]);
+        if ($model) {
 
             if ($this->request->isPost()) {
-                $widget->delete();
-                $this->redirect('/widget/admin/index');
+                $model->delete();
+                $this->redirect($this->url->get() . 'widget/admin/index');
             }
 
-            $this->view->setVar('widget', $widget);
+            $this->view->model = $model;
         }
 
     }

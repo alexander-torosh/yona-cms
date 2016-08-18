@@ -1,0 +1,409 @@
+/*
+* Главный Less-файл CSS стилей.
+*/
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+@wrapper-max-width: 1380px;
+@wrapper-min-width: 940px;
+
+@item-padding-bottom: 40px;
+
+@font-color: #434343;
+@font-size: 13px;
+@line-height: 18px;
+
+@gray: #cccccc;
+@gray-light: @gray + #222222;
+@placeholder-color: @gray;
+
+@link: #3f83b6;
+
+body {
+    color: @font-color;
+    font-family: Arial, sans-serif;
+    font-size: @font-size;
+    line-height: @line-height;
+}
+
+#wrapper {
+    width: @wrapper-max-width;
+    max-width: 100%;
+    min-width: @wrapper-min-width;
+    margin: 0 auto;
+}
+
+.wrapper-in {
+    padding: 0 20px;
+}
+
+a {
+    color: @link;
+}
+
+a:hover {
+    color: @link + #333333;
+}
+
+a:visited {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+h3 {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+article ul {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 10px;
+
+    ul {
+        list-style: circle;
+        margin-bottom: 0;
+    }
+}
+
+article ol {
+    list-style: decimal;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+li {
+
+}
+
+.input {
+    padding: 7px 10px;
+    border: 1px solid @font-color;
+}
+
+input, textarea, button {
+    .input();
+}
+
+.table {
+    margin-bottom: 10px;
+
+    th {
+        background: @gray-light;
+        font-weight: bold;
+        text-align: center;
+    }
+    td, th {
+        border: 1px solid @gray;
+        padding: 2px 4px;
+    }
+}
+
+::-webkit-input-placeholder {
+    color: @placeholder-color;
+}
+
+:-moz-placeholder {
+    color: @placeholder-color;
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    color: @placeholder-color;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: @placeholder-color;
+}
+
+.rotation {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img-container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.margin-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.padding-lr {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+header {
+    height: 50px;
+    margin-bottom: 20px;
+    position: relative;
+
+    .logo {
+        display: block;
+        margin-top: 20px;
+        width: 30%;
+        max-width: 255px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .languages {
+        float: right;
+        margin-top: 20px;
+
+        .lang {
+            display: inline-block;
+            margin: 0 0 0 10px;
+
+        }
+    }
+
+    .phone {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        font-size: 20px;
+    }
+}
+
+#menu {
+    margin-bottom: 20px;
+    > li {
+        display: inline-block;
+        margin-right: 20px;
+        > a {
+            font-size: @font-size + 5;
+        }
+    }
+    li.active {
+        > a {
+            font-weight: bold;
+        }
+    }
+}
+
+#main {
+    margin-bottom: 20px;
+
+    .central {
+        display: inline-block;
+        vertical-align: top;
+        width: 68%;
+        margin-right: 1%;
+    }
+
+    .sidebar {
+        display: inline-block;
+        vertical-align: top;
+        width: 30%;
+    }
+
+}
+
+pre {
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+footer {
+    padding: 20px 0 40px;
+    border-top: 1px solid @gray;
+
+    .device-version {
+        float: right;
+    }
+}
+
+.publications {
+    @image-width: 240px;
+
+    > .item {
+        padding-bottom: @item-padding-bottom;
+        display: inline-block;
+    }
+
+    &.list {
+
+        > .item {
+            display: block;
+
+            &.with-image {
+                > .image {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 25%;
+                    margin-right: 2%;
+
+                    > img {
+                        max-width: 100%;
+                    }
+                }
+                > .text {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 72%;
+                }
+            }
+
+            > .text {
+                > * {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+                > .title {
+                    font-weight: bold;
+                    font-size: @font-size + 5;
+                    line-height: @line-height + 5;
+                }
+                > .date {
+                    font-style: italic;
+                    color: #999999;
+                }
+            }
+
+        }
+    }
+
+    &.grid {
+        margin-left: -2%;
+        margin-right: -2%;
+
+        > .item {
+            width: 21%;
+            margin-left: 2%;
+            margin-right: 2%;
+            vertical-align: top;
+
+            > .text {
+                > .title {
+                    display: block;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                    font-size: @font-size + 5;
+                    line-height: @line-height + 5;
+                }
+                > .date {
+                    font-style: italic;
+                    color: #999999;
+                }
+                > .announce {
+                    margin-bottom: 10px;
+                }
+            }
+
+            > .image {
+                display: block;
+                margin-bottom: 10px;
+
+                > img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.publication {
+    > .date {
+        margin-bottom: 20px;
+        font-style: italic;
+        color: #999999;
+    }
+
+    > .back {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .image.inner {
+        float: left;
+        margin: 0 20px 10px 0;
+    }
+}
+
+.widget {
+    float: left;
+    margin: 0 0 20px;
+}
+
+.last.publications {
+
+    > h3 {
+        margin-bottom: 20px;
+    }
+
+    > .items {
+
+        > .item {
+            margin-bottom: 20px;
+
+            > .image {
+                display: inline-block;
+                vertical-align: top;
+                margin-right: -120px;
+            }
+            > .image + .content {
+                margin-left: 140px;
+            }
+            > .content {
+                display: inline-block;
+                vertical-align: top;
+
+                > .title {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-size: 15px;
+                }
+                > .date {
+                    font-style: italic;
+                    color: #999999;
+                    margin-bottom: 5px;
+                }
+                > .announce {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

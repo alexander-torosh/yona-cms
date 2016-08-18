@@ -30,7 +30,7 @@ class Menu
     public function item($title, $id = null, $url = null, array $params = [], array $children = [])
     {
         $item = new Item($title, $id, $url, $params);
-        if ($children) {
+        if (!empty($children)) {
             $item->setChildren($children);
         }
         $item->setActiveItems($this->active_items);

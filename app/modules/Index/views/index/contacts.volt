@@ -1,3 +1,0 @@
-<article>
-    {{ page.getText() }}
-</article>

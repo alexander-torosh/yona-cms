@@ -6,6 +6,8 @@
 
 namespace Cms\Model;
 
+use Application\Mvc\Helper\CmsCache;
+use Phalcon\DI;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
@@ -33,46 +35,46 @@ class Language extends Model
          * ISO
          */
         $this->validate(new Uniqueness(
-            array(
-                "field" => "iso",
+            [
+                "field"   => "iso",
                 "message" => "The inputted ISO language is existing"
-            )
+            ]
         ));
-        $this->validate(new PresenceOf(array(
-            'field' => 'iso',
+        $this->validate(new PresenceOf([
+            'field'   => 'iso',
             'message' => 'ISO is required'
-        )));
+        ]));
 
         /**
          * Name
          */
         $this->validate(new Uniqueness(
-            array(
-                "field" => "name",
+            [
+                "field"   => "name",
                 "message" => "The inputted name is existing"
-            )
+            ]
         ));
-        $this->validate(new PresenceOf(array(
-            'field' => 'name',
+        $this->validate(new PresenceOf([
+            'field'   => 'name',
             'message' => 'Name is required'
-        )));
+        ]));
 
         /**
          * URL
          */
         $this->validate(new Uniqueness(
-            array(
-                "field" => "url",
+            [
+                "field"   => "url",
                 "message" => "The inputted URL is existing"
-            )
+            ]
         ));
 
 
         if ($this->primary == 0) {
-            $this->validate(new PresenceOf(array(
-                'field' => 'url',
+            $this->validate(new PresenceOf([
+                'field'   => 'url',
                 'message' => 'URL is required'
-            )));
+            ]));
         }
 
         return $this->validationHasFailed() != true;
@@ -82,6 +84,49 @@ class Language extends Model
     {
         $this->sortorder = $this->getUpperSortorder() + 1;
 
+    }
+
+    public function afterUpdate()
+    {
+        $cache = $this->getDI()->get('cache');
+        $cache->delete(self::cacheKey());
+    }
+
+    public function afterSave()
+    {
+        CmsCache::getInstance()->save('languages', $this->buildCmsLanguagesCache());
+        CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
+    }
+
+    public function afterDelete()
+    {
+        CmsCache::getInstance()->save('languages', $this->buildCmsLanguagesCache());
+        CmsCache::getInstance()->save('translates', Translate::buildCmsTranslatesCache());
+    }
+
+    private function buildCmsLanguagesCache()
+    {
+        $modelsManager = DI::getDefault()->get('modelsManager');
+        $qb = $modelsManager->createBuilder();
+        $qb->from('Cms\Model\Language');
+        $qb->orderBy('primary DESC, sortorder ASC');
+
+        $entries = $qb->getQuery()->execute();
+        $save = [];
+        if ($entries->count()) {
+            foreach ($entries as $el) {
+                $save[$el->getIso()] = [
+                    'id'         => $el->getId(),
+                    'iso'        => $el->getIso(),
+                    'locale'     => $el->getLocale(),
+                    'name'       => $el->getName(),
+                    'short_name' => $el->getShort_name(),
+                    'url'        => $el->getUrl(),
+                    'primary'    => $el->getPrimary(),
+                ];
+            }
+        }
+        return $save;
     }
 
     public function afterValidation()
@@ -100,22 +145,16 @@ class Language extends Model
 
     public static function findCachedLanguages()
     {
-        return self::find(array(
-            'order' => 'primary DESC, sortorder ASC',
-            'cache' => array(
-                'key' => self::cacheKey(),
-                'lifetime' => 300,
-            ),
-        ));
+        return CmsCache::getInstance()->get('languages');
     }
 
     public static function findCachedLanguagesIso()
     {
         $languages = self::findCachedLanguages();
-        $iso_array = array();
+        $iso_array = [];
         if (!empty($languages)) {
             foreach ($languages as $lang) {
-                $iso_array[] = $lang->getIso();
+                $iso_array[] = $lang['iso'];
             }
         }
         return $iso_array;
@@ -125,7 +164,7 @@ class Language extends Model
     {
         $languages = self::findCachedLanguages();
         foreach ($languages as $lang) {
-            if ($iso == $lang->getIso()) {
+            if ($iso == $lang['iso']) {
                 return $lang;
             }
         }
@@ -147,7 +186,7 @@ class Language extends Model
     {
         if ($this->getPrimary() == 1) {
             $languages = $this->find();
-            foreach($languages as $lang) {
+            foreach ($languages as $lang) {
                 if ($lang->getId() != $this->getId()) {
                     $lang->setPrimary(0);
                     $lang->save();

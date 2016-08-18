@@ -1,0 +1,24 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/data/migrations
+
+environments:
+    default_migration_table: phinxlog
+    default_database: yona-cms
+
+    development:
+        adapter: mysql
+        host: localhost
+        name: yona-cms
+        user: root
+        pass: '111'
+        port: 3306
+        charset: utf8
+
+    production:
+        adapter: mysql
+        host: localhost
+        name: yona-cms
+        user: root
+        pass: '111'
+        port: 3306
+        charset: utf8

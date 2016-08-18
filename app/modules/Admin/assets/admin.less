@@ -1,0 +1,71 @@
+body {
+    padding: 10px;
+}
+
+.content {
+    margin-left: 220px;
+}
+
+.field .description {
+    margin-top: 0.3em;
+    color: #999999;
+    font-size: 13px;
+}
+
+#categories-list {
+    position: absolute;
+    background: white;
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    width: 200px;
+    display: none;
+    z-index: 100;
+
+    > .remove {
+        float: right;
+        cursor: pointer;
+        margin-right: -5px;
+
+    }
+
+    a {
+        color: #666666;
+        line-height: 18px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 0;
+
+        > li {
+            font-size: 13px;
+            line-height: 13px;
+        }
+
+        ul {
+            margin-top: 0px;
+            padding-left: 20px;
+        }
+    }
+}
+
+.changelog {
+    max-height: 480px;
+    overflow: auto;
+
+    ul {
+        list-style: disc;
+        margin-left: 40px;
+    }
+}
+
+.works-on {
+    display: block;
+    margin: 20px 0;
+    text-align: right;
+}
+
+.ui.form .field.checkbox + .field.checkbox {
+    margin-top: inherit;
+}

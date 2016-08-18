@@ -19,110 +19,106 @@ class AdminUserController extends Controller
     {
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('admin-user');
-        $this->view->languages_disabled = true;
 
+        $this->view->languages_disabled = true;
     }
 
     public function indexAction()
     {
-        $this->view->entries = AdminUser::find(array(
-                    "order" => "id DESC"
-        ));
+        $this->view->entries = AdminUser::find([
+            "order" => "id DESC"
+        ]);
 
-        $this->view->title = $this->helper->at('Manage Users');
-        $this->helper->title()->append($this->view->title);
-
+        $this->helper->title($this->helper->at('Manage Users'), true);
     }
 
     public function addAction()
     {
-        $this->view->pick(array('admin-user/edit'));
+        $this->view->pick(['admin-user/edit']);
 
+        $model = new AdminUser();
         $form = new AdminUserForm();
         $form->initAdding();
 
         if ($this->request->isPost()) {
             $model = new AdminUser();
-            $form->bind($this->request->getPost(), $model);
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
             if ($form->isValid()) {
+                $model->setCheckboxes($post);
                 if ($model->save()) {
                     $this->flash->success($this->helper->at('User created', ['name' => $model->getLogin()]));
-                    $this->response->redirect('admin/admin-user');
-                    return $this->response->send();
+                    $this->redirect($this->url->get() . 'admin/admin-user');
                 } else {
-                    foreach ($model->getMessages() as $message) {
-                        $this->flash->error($message);
-                    }
+                    $this->flashErrors($model);
                 }
             } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
+                $this->flashErrors($form);
             }
         }
 
         $this->view->form = $form;
+        $this->view->model = $model;
         $this->view->submitButton = $this->helper->at('Add New');
 
-        $this->view->title = $this->helper->at('Administrator');
-        $this->helper->title()->append($this->view->title);
-
+        $this->helper->title($this->helper->at('Administrator'), true);
     }
 
     public function editAction($id)
     {
-        $form  = new AdminUserForm();
-        $model = AdminUser::findFirst("id = $id");
-
-        if ($this->request->isPost()) {
-            $form->bind($this->request->getPost(), $model);
-            if ($form->isValid()) {
-                if ($model->save() == true) {
-                    $this->flash->success('User <b>'.$model->getLogin().'</b> has been saved');
-                    $this->response->redirect('admin/admin-user');
-                    return $this->response->send();
-                } else {
-                    foreach ($model->getMessages() as $message) {
-                        $this->flash->error($message);
-                    }
-                }
-            } else {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
-            }
-        } else {
-            $form->setEntity($model->getPopulateData());
+        $model = AdminUser::findFirst($id);
+        if (!$model) {
+            $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
-        $this->view->form = $form;
+        $form = new AdminUserForm();
+
+        if ($this->request->isPost()) {
+            $post = $this->request->getPost();
+            $form->bind($post, $model);
+            if ($form->isValid()) {
+                $model->setCheckboxes($post);
+                if ($model->save() == true) {
+                    $this->flash->success('User <b>' . $model->getLogin() . '</b> has been saved');
+                    return $this->redirect($this->url->get() . 'admin/admin-user');
+                } else {
+                    $this->flashErrors($model);
+                }
+            } else {
+                $this->flashErrors($form);
+            }
+        } else {
+            $form->setEntity($model);
+        }
+
         $this->view->submitButton = $this->helper->at('Save');
+        $this->view->form = $form;
         $this->view->model = $model;
 
-        $this->view->title = $this->helper->at('Manage Users');
-        $this->helper->title()->append($this->view->title);
-
+        $this->helper->title($this->helper->at('Manage Users'), true);
     }
 
     public function deleteAction($id)
     {
-        $model = AdminUser::findFirst("id = $id");
+        $model = AdminUser::findFirst($id);
         if (!$model) {
-            $this->response->redirect('admin/admin-user');
-            return $this->response->send();
+            return $this->redirect($this->url->get() . 'admin/admin-user');
+        }
+
+        if ($model->getLogin() == 'admin') {
+            $this->flash->error('Admin user cannot be deleted');
+            return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->flash->warning('Deleting user <b>'.$model->getLogin().'</b>');
-            $this->response->redirect('admin/admin-user');
-            return $this->response->send();
+            $this->flash->warning('Deleting user <b>' . $model->getLogin() . '</b>');
+            return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
         $this->view->model = $model;
-        $this->view->title = $this->helper->at('Delete User');
-        $this->helper->title()->append($this->view->title);
 
+        $this->helper->title($this->helper->at('Delete User'), true);
     }
 
 }

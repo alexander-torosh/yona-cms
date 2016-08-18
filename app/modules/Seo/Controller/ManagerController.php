@@ -7,6 +7,7 @@
 namespace Seo\Controller;
 
 use Application\Mvc\Controller;
+use Seo\Form\ManagerAddForm;
 use Seo\Form\ManagerForm;
 use Seo\Model\Manager;
 
@@ -15,7 +16,6 @@ class ManagerController extends Controller
 
     public function initialize()
     {
-        Manager::setTranslateCache(false);
         $this->setAdminEnvironment();
         $this->helper->activeMenu()->setActive('seo-manager');
         $this->view->languages_disabled = true;
@@ -23,19 +23,16 @@ class ManagerController extends Controller
 
     public function indexAction()
     {
-        $entries = Manager::find(array(
-            'order' => 'route ASC, module ASC, controller ASC, action ASC, id ASC'
-        ));
-        $this->view->entries = $entries;
+        $this->view->entries = Manager::find([
+            'order' => 'id DESC'
+        ]);
 
-        $title = 'SEO-Manager';
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->helper->title('SEO-Manager', true);
     }
 
     public function addAction()
     {
-        $this->view->pick(array('manager/edit'));
+        $this->view->pick(['manager/edit']);
         $model = new Manager();
         $form = new ManagerForm();
 
@@ -43,14 +40,9 @@ class ManagerController extends Controller
             $post = $this->request->getPost();
             $form->bind($post, $model);
             if ($form->isValid()) {
-                if ($model->create()) {
-                    $form->bind($post, $model);
-                    if ($model->update()) {
-                        $this->flash->success('This entry was posted');
-                        $this->redirect('/seo/manager');
-                    } else {
-                        $this->flashErrors($model);
-                    }
+                if ($model->save()) {
+                    $this->flash->success('This entry was posted');
+                    $this->redirect($this->url->get() . 'seo/manager');
                 } else {
                     $this->flashErrors($model);
                 }
@@ -59,13 +51,10 @@ class ManagerController extends Controller
             }
         }
 
-        $title = 'Create a record SEO-Manager';
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->helper->title('Create SEO-Manager record', true);
 
         $this->view->model = $model;
         $this->view->form = $form;
-
     }
 
     public function editAction($id)
@@ -77,9 +66,8 @@ class ManagerController extends Controller
             $form->bind($this->request->getPost(), $model);
             if ($form->isValid()) {
                 if ($model->save()) {
-                    $this->cache->delete(Manager::routeCacheKey($model->getRoute(), LANG));
                     $this->flash->success('SEO record edited');
-                    $this->redirect('/seo/manager/edit/' . $id);
+                    $this->redirect($this->url->get() . 'seo/manager/edit/' . $id);
                 } else {
                     $this->flashErrors($model);
                 }
@@ -90,9 +78,7 @@ class ManagerController extends Controller
             $form->setEntity($model);
         }
 
-        $title = 'Editing the SEO-manager';
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->helper->title('Editing SEO-manager record', true);
 
         $this->view->model = $model;
         $this->view->form = $form;
@@ -104,13 +90,11 @@ class ManagerController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->redirect('/seo/manager');
+            $this->redirect($this->url->get() . 'seo/manager');
         }
 
         $this->view->model = $model;
-        $title = 'Delete SEO-Manager';
-        $this->view->title = $title;
-        $this->helper->title($title);
+        $this->helper->title('Deleting SEO-Manager record', true);
     }
 
 } 

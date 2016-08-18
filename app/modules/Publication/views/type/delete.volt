@@ -1,5 +1,5 @@
 <div class="ui segment">
-    <a href="/publication/type/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
+    <a href="{{ url.get() }}publication/type/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" class="ui button">
         <i class="icon left arrow"></i> Back
     </a>
 </div>

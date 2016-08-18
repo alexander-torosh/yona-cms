@@ -8,7 +8,9 @@
 
 namespace Admin\Form;
 
+use Admin\Model\AdminUser;
 use Application\Form\Form;
+use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Password;
@@ -21,46 +23,50 @@ class AdminUserForm extends Form
 
     public function initialize()
     {
-        $login = new Text('login', array(
-            'required' => true,
-            'autocomplete' => 'off',
-        ));
-        $login->setLabel('Login');
+        $this->add(
+            (new Text('login', [
+                'required' => true,
+            ]))->setLabel('Login')
+        );
 
-        $email = new Email('email', array(
-            'required' => true,
-            'autocomplete' => 'off',
-        ));
-        $email->addValidator(new ValidatorEmail(array(
-            'message' => 'Email format is invalid',
-        )));
-        $email->addValidator(new PresenceOf(array(
-            'message' => 'Email is required',
-        )));
-        $email->setLabel('Email');
+        $this->add(
+            (new Email('email', [
+                'required' => true,
+            ]))
+                ->addValidator(new ValidatorEmail([
+                    'message' => 'Email format is invalid',
+                ]))
+                ->setLabel('Email')
+        );
 
-        $password = new Password('password', array(
-            'autocomplete' => 'off',
-        ));
-        $password->setLabel('Password');
+        $this->add(
+            (new Text('name'))
+                ->setLabel('Name')
+        );
 
-        $active = new Check('active');
-        $active->setLabel('Active');
+        $this->add(
+            (new Select('role', AdminUser::$roles))
+                ->setLabel('Role')
+        );
 
-        $this->add($login);
-        $this->add($email);
-        $this->add($password);
-        $this->add($active);
+        $this->add(
+            (new Password('password'))
+                ->setLabel('Password')
+        );
 
+        $this->add(
+            (new Check('active'))
+                ->setLabel('Active')
+        );
     }
 
     public function initAdding()
     {
         $password = $this->get('password');
         $password->setAttribute('required', true);
-        $password->addValidator(new PresenceOf(array(
+        $password->addValidator(new PresenceOf([
             'message' => 'Password is required',
-        )));
+        ]));
 
     }
 

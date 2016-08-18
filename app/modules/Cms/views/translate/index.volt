@@ -30,7 +30,7 @@
         </div>
     </form>
 {% else %}
-    <div class="ui blue inverted segment">Sources translations not obnarezheny</div>
+    <div class="ui blue inverted segment">Sources translations not found</div>
 {% endif %}
 
 <script>

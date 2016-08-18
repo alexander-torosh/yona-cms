@@ -2,7 +2,7 @@
 
 namespace Page\Model;
 
-use Application\Mvc\Model;
+use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Application\Localization\Transliterator;
@@ -47,8 +47,8 @@ class Page extends Model
         if (!$this->getSlug()) {
             $this->setSlug(Transliterator::slugify($data['title']));
         }
-        if (!$this->getMeta_title()) {
-            $this->setMeta_title($data['title']);
+        if (!$this->getMetaTitle()) {
+            $this->setMetaTitle($data['title']);
         }
     }
 
@@ -57,7 +57,7 @@ class Page extends Model
         $this->validate(new Uniqueness(
             array(
                 "field" => "slug",
-                "message" => "Page with slug is already existed"
+                "message" => "Page with slug is already exists"
             )
         ));
 
@@ -78,6 +78,7 @@ class Page extends Model
     public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
+        return $this;
     }
 
     /**
@@ -94,6 +95,7 @@ class Page extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -107,15 +109,16 @@ class Page extends Model
     /**
      * @param mixed $meta_description
      */
-    public function setMeta_description($meta_description)
+    public function setMetaDescription($meta_description)
     {
         $this->setMLVariable('meta_description', $meta_description);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_description()
+    public function getMetaDescription()
     {
         return $this->getMLVariable('meta_description');
     }
@@ -123,15 +126,16 @@ class Page extends Model
     /**
      * @param mixed $meta_keywords
      */
-    public function setMeta_keywords($meta_keywords)
+    public function setMetaKeywords($meta_keywords)
     {
         $this->setMLVariable('meta_keywords', $meta_keywords);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_keywords()
+    public function getMetaKeywords()
     {
         return $this->getMLVariable('meta_keywords');
     }
@@ -139,15 +143,16 @@ class Page extends Model
     /**
      * @param mixed $meta_title
      */
-    public function setMeta_title($meta_title)
+    public function setMetaTitle($meta_title)
     {
         $this->setMLVariable('meta_title', $meta_title);
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMeta_title()
+    public function getMetaTitle()
     {
         return $this->getMLVariable('meta_title');
     }
@@ -158,6 +163,7 @@ class Page extends Model
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
     }
 
     /**
@@ -174,6 +180,7 @@ class Page extends Model
     public function setText($text)
     {
         $this->setMLVariable('text', $text);
+        return $this;
     }
 
     /**
@@ -190,6 +197,7 @@ class Page extends Model
     public function setTitle($title)
     {
         $this->setMLVariable('title', $title);
+        return $this;
     }
 
     /**
@@ -206,6 +214,7 @@ class Page extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+        return $this;
     }
 
     /**

@@ -1,5 +1,9 @@
-{{ helper.slider(2) }}
+<div class="central">
+    <article>
+        {{ page.getText() }}
+    </article>
+</div>
+<div class="sidebar">
+    {{ helper.widget('Publication').lastNews() }}
+</div>
 
-<article>
-    {{ page.getText() }}
-</article>
