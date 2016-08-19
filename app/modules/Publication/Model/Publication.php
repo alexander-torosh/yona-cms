@@ -3,8 +3,8 @@
 namespace Publication\Model;
 
 use Application\Mvc\Model\Model;
-use Phalcon\Mvc\Model\Validator\Uniqueness;
-use Phalcon\Mvc\Model\Validator\PresenceOf;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 use Application\Localization\Transliterator;
 
 class Publication extends Model
@@ -62,14 +62,13 @@ class Publication extends Model
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "slug",
-                "message" => "Страница с такой транслитерацией = '" . $this->slug . "' уже существует"
-            ]
-        ));
-
-        return $this->validationHasFailed() != true;
+      $validator->add('slug', new UniquenessValidator(
+          [
+              "model"   => $this,
+              "message" => $this->getDi()->get('helper')->translate("Publishcation with slug is already exists")
+          ]
+      ));
+      return $this->validate($validator);
     }
 
     public function afterValidation()
