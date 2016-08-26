@@ -3,8 +3,8 @@
 namespace Page\Model;
 
 use Application\Mvc\Model\Model;
-use Phalcon\Mvc\Model\Validator\Uniqueness;
-use Phalcon\Mvc\Model\Validator\PresenceOf;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 use Application\Localization\Transliterator;
 
 class Page extends Model
@@ -54,14 +54,13 @@ class Page extends Model
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
-            array(
-                "field" => "slug",
-                "message" => "Page with slug is already exists"
-            )
-        ));
-
-        return $this->validationHasFailed() != true;
+      $validator->add('slug', new UniquenessValidator(
+          [
+              "model"   => $this,
+              "message" => $this->getDi()->get('helper')->translate("Page with slug is already exists")
+          ]
+      ));
+      return $this->validate($validator);
     }
 
     public static function findCachedBySlug($slug)
