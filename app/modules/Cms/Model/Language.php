@@ -9,8 +9,9 @@ namespace Cms\Model;
 use Application\Mvc\Helper\CmsCache;
 use Phalcon\DI;
 use Phalcon\Mvc\Model;
-use Phalcon\Mvc\Model\Validator\Uniqueness;
-use Phalcon\Mvc\Model\Validator\PresenceOf;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness;
+use Phalcon\Validation\Validator\PresenceOf;
 
 class Language extends Model
 {
@@ -31,54 +32,50 @@ class Language extends Model
 
     public function validation()
     {
+        $validator = new Validation();
+
         /**
-         * ISO
-         */
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "iso",
-                "message" => "The inputted ISO language is existing"
-            ]
-        ));
-        $this->validate(new PresenceOf([
-            'field'   => 'iso',
+        * ISO
+        */
+        $validator->add('iso', new Uniqueness([
+            'model' => $this,
+            "message" => "The inputted ISO language is existing"
+        ]));
+        $validator->add('iso', new PresenceOf([
+            'model' => $this,
             'message' => 'ISO is required'
         ]));
 
         /**
-         * Name
-         */
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "name",
-                "message" => "The inputted name is existing"
-            ]
-        ));
-        $this->validate(new PresenceOf([
-            'field'   => 'name',
+        * Name
+        */
+        $validator->add('name', new Uniqueness([
+            'model' => $this,
+            "message" => "The inputted name is existing"
+        ]));
+        $validator->add('name', new PresenceOf([
+            'model' => $this,
             'message' => 'Name is required'
         ]));
 
         /**
-         * URL
-         */
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "url",
-                "message" => "The inputted URL is existing"
-            ]
-        ));
+        * URL
+        */
+        $validator->add('url', new Uniqueness([
+            'model' => $this,
+            "message" => "The inputted URL is existing"
+        ]
+    ));
 
-
-        if ($this->primary == 0) {
-            $this->validate(new PresenceOf([
-                'field'   => 'url',
-                'message' => 'URL is required'
-            ]));
-        }
-
-        return $this->validationHasFailed() != true;
+    if ($this->primary == 0) {
+        $validator->add('url', new PresenceOf([
+            'model' => $this,
+            'message' => 'URL is required'
+        ]));
     }
+
+    return $this->validationHasFailed() != true;
+}
 
     public function afterCreate()
     {
