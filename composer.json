@@ -32,7 +32,7 @@
   "require": {
     "php": ">=5.4",
     "ext-intl": "*",
-    "ext-phalcon": "2.0.*",
+    "ext-phalcon": ">=2.0.7",
     "robmorgan/phinx": "dev-master",
     "michelf/php-markdown": "*",
     "mandrill/mandrill": "1.*",
