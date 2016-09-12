@@ -3,22 +3,11 @@
 [![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/?branch=master)
 
-Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 2.0.x supported)
+Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 3.x supported)
 
 Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.
 
 [Project website](http://yonacms.com/)  
-[Documentation](http://doc.yonacms.com/en/) - old version. See installation guide in README.md  
-[Demo](http://demo.yonacms.com/)  
-
-Also, you can check [development](https://github.com/oleksandr-torosh/yona-cms/tree/dev) branch with new functions and libraries
-
-## Announce
-
-Now YonaCMS team prepare to new 0.5 release with new project structure and development features.
-.. Composer, Bower, Phinx migrations, REST API Bootstrap, Queues, Conjob tasks, AWS S3 and other cool stuffs =)
-
-Also, YonaCMS will migrate to Phalcon 2.1 without supporting of lower Phalcon versions.
 
 ## Installation
 
@@ -167,8 +156,8 @@ Current version and updates in [CHANGELOG.md](https://github.com/oleksandr-toros
 
 ## Requirements
 
-* php 5.4+
-* phalcon 2.0.7+
+* php 5.6+
+* phalcon 3.0.0+
 * mysql
 * php-intl
 * apache (+mod_rewrite) or nginx
