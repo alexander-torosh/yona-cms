@@ -16,4 +16,5 @@ return array(
     'Menu',
     'Tree',
     'Sitemap',
+    'Api',
 );
