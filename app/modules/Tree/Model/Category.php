@@ -8,6 +8,8 @@ namespace Tree\Model;
 
 use Application\Mvc\Model\Model;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Category extends Model
 {
@@ -43,14 +45,14 @@ class Category extends Model
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
-            [
-                "field"   => "slug",
-                "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
-            ]
+        $validator = new Validation();
+        $validator->add('slug', new UniquenessValidator(
+           [
+               "model"   => $this,
+               "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
+           ]
         ));
-
-        return $this->validationHasFailed() != true;
+        return $this->validate($validator);
     }
 
     public function beforeCreate()
