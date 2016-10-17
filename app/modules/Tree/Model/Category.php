@@ -6,9 +6,8 @@
 
 namespace Tree\Model;
 
-use Application\Mvc\Model\Model;
-use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Validation;
+use Application\Mvc\Model\Model;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Category extends Model
@@ -257,6 +256,4 @@ class Category extends Model
     {
         $this->updated_at = $updated_at;
     }
-
-
 }
