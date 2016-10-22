@@ -54,6 +54,7 @@ class Page extends Model
 
     public function validation()
     {
+      $validator = new Validation();
       $validator->add('slug', new UniquenessValidator(
           [
               "model"   => $this,
@@ -65,9 +66,17 @@ class Page extends Model
 
     public static function findCachedBySlug($slug)
     {
-        $query = "slug = '$slug'";
+        $queryML = "key = 'slug' and value = '$slug'";
+        $key = HOST_HASH . md5("Page::findFirst($queryML)");
+        $slugRecord = Translate\PageTranslate::findFirst([$queryML, 'cache' => array('key' => $key, 'lifetime' => 60)]);
+
         $key = HOST_HASH . md5("Page::findFirst($query)");
-        $page = self::findFirst(array($query, 'cache' => array('key' => $key, 'lifetime' => 60)));
+        $page = self::findFirst([
+          'conditions' => 'id = :pageId:',
+          'bind' => ['pageId' => $slugRecord->foreign_id],
+          'cache' => array('key' => $key, 'lifetime' => 60)
+          ]);
+          var_dump($pages);
         return $page;
     }
 
@@ -161,7 +170,7 @@ class Page extends Model
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->setMLVariable('slug', $slug);
         return $this;
     }
 
@@ -170,7 +179,7 @@ class Page extends Model
      */
     public function getSlug()
     {
-        return $this->slug;
+        return $this->getMLVariable('slug');
     }
 
     /**
