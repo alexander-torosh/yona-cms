@@ -93,18 +93,19 @@ class Publication extends Model
     public static function findCachedBySlug($slug)
     {
         $slugRecord = Translate\PublicationTranslate::findFirst([
-          "key = 'slug' and value = '$slug'",
-          'cache' => [
-            'key'      => self::cacheSlugKey($slug),
-            'lifetime' => 60
-        ]]);
+            "key = 'slug' and value = '$slug'",
+            "cache" => [
+                "key"      => self::cacheSlugKey($slug),
+                "lifetime" => 60
+            ]
+        ]);
 
         $publication = self::findFirst([
             'conditions' => 'id = :idPost:',
             'bind' => ['idPost' => $slugRecord->foreign_id],
             'cache' => [
-              'key'       => self::cacheSlugKey($slug . 'original'),
-              'lifetime'  => 60
+                'key'       => self::cacheSlugKey($slug . 'original'),
+                'lifetime'  => 60
             ]
         ]);
 
