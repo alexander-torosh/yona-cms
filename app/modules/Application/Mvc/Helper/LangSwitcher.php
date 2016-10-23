@@ -17,10 +17,9 @@ class LangSwitcher extends Component
         $router = $this->getDI()->get('router');
         $view = $this->getDI()->get('view');
         $url = $this->getDI()->get('url');
+
         $requestQuery = new RequestQuery();
-
         $matched_route = $router->getMatchedRoute();
-
         if ($matched_route) {
             $route_name = $matched_route->getName();
             $route_name_changed = $this->changeRouteName($route_name, $lang);
@@ -31,10 +30,14 @@ class LangSwitcher extends Component
                 $url_args['for'] = $route_name_changed;
 
                 $route_params = $router->getParams();
+
                 if ($route_params) {
                     foreach ($route_params as $param_key => $param_val) {
                         $url_args[$param_key] = $param_val;
                     }
+
+                    $mlSlug = $this->getMLSlug($matched_route, $route_params, $lang);
+                    $url_args['slug'] = $mlSlug;
                 }
 
                 $href = $url->get($url_args);
@@ -70,4 +73,28 @@ class LangSwitcher extends Component
         return $route_name . '_' . $lang;
     }
 
-} 
+    private function getMLSlug($matched_route, $route_params, $lang)
+    {
+        $paths = $matched_route->getPaths();
+        $module = $paths['module'];
+
+        $curSLug = $route_params['slug'];
+        // query moudle entity id.
+        $query = "key = 'slug' and value = '$curSLug'";
+        $modelName = \Phalcon\Text::camelize($module);
+        $modelTranslateName = "{$modelName}Translate";
+        $translateModel = "{$modelName}\Model\Translate\\{$modelName}Translate";
+        $slugRecord = $translateModel::findFirst([$query]);
+        // query all slug.
+        $mlSlug = $translateModel::findFirst([
+            'conditions' => 'foreign_id = :id: AND lang = :lang: AND key = "slug"',
+            'bind'       => [
+                'id'     => $slugRecord->foreign_id,
+                'lang'   => $lang
+            ],
+        ]);
+
+        return $mlSlug->value;
+    }
+
+}
