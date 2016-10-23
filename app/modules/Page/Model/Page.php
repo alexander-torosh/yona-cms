@@ -67,7 +67,7 @@ class Page extends Model
     public static function findCachedBySlug($slug)
     {
         $queryML = "key = 'slug' and value = '$slug'";
-        $key = HOST_HASH . md5("Page::findFirst($queryML)");
+        $key = HOST_HASH . md5("Translate\PageTranslate::findFirst($queryML)");
         $slugRecord = Translate\PageTranslate::findFirst([$queryML, 'cache' => array('key' => $key, 'lifetime' => 60)]);
 
         $key = HOST_HASH . md5("Page::findFirst($query)");
