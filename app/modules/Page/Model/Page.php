@@ -72,11 +72,10 @@ class Page extends Model
 
         $key = HOST_HASH . md5("Page::findFirst($query)");
         $page = self::findFirst([
-          'conditions' => 'id = :pageId:',
-          'bind' => ['pageId' => $slugRecord->foreign_id],
-          'cache' => array('key' => $key, 'lifetime' => 60)
-          ]);
-          var_dump($pages);
+            'conditions' => 'id = :pageId:',
+            'bind' => ['pageId' => $slugRecord->foreign_id],
+            'cache' => ['key' => $key, 'lifetime' => 60]
+        ]);
         return $page;
     }
 
