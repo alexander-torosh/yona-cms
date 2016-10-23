@@ -62,6 +62,7 @@ class Publication extends Model
 
     public function validation()
     {
+      $validator = new Validation();
       $validator->add('slug', new UniquenessValidator(
           [
               "model"   => $this,
@@ -91,11 +92,22 @@ class Publication extends Model
 
     public static function findCachedBySlug($slug)
     {
-        $publication = self::findFirst(["slug = '$slug'",
+        $slugRecord = Translate\PublicationTranslate::findFirst([
+          "key = 'slug' and value = '$slug'",
+          'cache' => [
+            'key'      => self::cacheSlugKey($slug),
+            'lifetime' => 60
+        ]]);
+
+        $publication = self::findFirst([
+            'conditions' => 'id = :idPost:',
+            'bind' => ['idPost' => $slugRecord->foreign_id],
             'cache' => [
-                'key'      => self::cacheSlugKey($slug),
-                'lifetime' => 60]
+              'key'       => self::cacheSlugKey($slug . 'original'),
+              'lifetime'  => 60
+            ]
         ]);
+
         return $publication;
     }
 
@@ -162,13 +174,13 @@ class Publication extends Model
 
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->setMLVariable('slug', $slug);
         return $this;
     }
 
     public function getSlug()
     {
-        return $this->slug;
+        return $this->getMLVariable('slug');
     }
 
     public function setText($text)
