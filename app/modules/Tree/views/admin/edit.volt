@@ -1,4 +1,4 @@
-<form action="{{ url.get() }}tree/admin/edit/{{ model.getId() }}" method="post" class="ui form">
+<form action="{{ url.get() }}tree/admin/edit/{{ model.getId() }}?lang={{ constant('LANG') }}" method="post" class="ui form">
 
     <!--controls-->
     <div class="ui segment">
