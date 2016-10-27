@@ -3,7 +3,7 @@
         <div class="item">
             <span class="title">{{ leaf.getTitle() }}</span>
             <span class="info">({{ leaf.getSlug() }})</span>
-            <a href="{{ url }}tree/admin/edit/{{ leaf.getId() }}"><i class="icon edit"></i></a>
+            <a href="{{ url }}tree/admin/edit/{{ leaf.getId() }}?lang={{ constant('LANG') }}"><i class="icon edit"></i></a>
             <a href="javascript:void(0);" onclick="deleteCategory({{ leaf.getId() }}, this)" class="delete"><i class="icon trash"></i></a>
         </div>
         {% if leaf.hasChildren() %}
