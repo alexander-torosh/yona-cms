@@ -60,7 +60,7 @@ class Helper extends \Phalcon\Mvc\User\Component
      * Вызов выджета из модуля StaticWidget
      * @param $id - идентификатор виджета, например "phone"
      */
-    public function staticWidget($id, $params)
+    public function staticWidget($id, $params = [])
     {
         $mergeConfig = array_merge(self::StaticWidgetDefaultOptions, $params);
         $widget = \Widget\Model\Widget::findFirst(["id='{$id}'", "cache" => ["lifetime" => $mergeConfig["lifetime"], "key" => HOST_HASH . md5("Widget::findFirst({$id})")]]);
