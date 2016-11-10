@@ -62,13 +62,14 @@ class Publication extends Model
 
     public function validation()
     {
-      $validator->add('slug', new UniquenessValidator(
-          [
-              "model"   => $this,
-              "message" => $this->getDi()->get('helper')->translate("Publishcation with slug is already exists")
-          ]
-      ));
-      return $this->validate($validator);
+        $validator = new Validation();
+        $validator->add('slug', new UniquenessValidator(
+            [
+                "model"   => $this,
+                "message" => $this->getDi()->get('helper')->translate("Publishcation with slug is already exists")
+            ]
+        ));
+        return $this->validate($validator);
     }
 
     public function afterValidation()
