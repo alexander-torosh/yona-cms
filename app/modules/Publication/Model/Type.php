@@ -9,7 +9,8 @@ namespace Publication\Model;
 use Application\Mvc\Helper\CmsCache;
 use Application\Mvc\Model\Model;
 use Phalcon\DI;
-use Phalcon\Mvc\Model\Validator\Uniqueness;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Type extends Model
 {
@@ -48,14 +49,14 @@ class Type extends Model
 
     public function validation()
     {
-        $this->validate(new Uniqueness(
+        $validator = new Validation();
+        $validator->add('slug', new UniquenessValidator(
             [
-                "field"   => "slug",
+                "model"   => $this,
                 "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' существует"
             ]
         ));
-
-        return $this->validationHasFailed() != true;
+        return $this->validate($validator);
     }
 
     public function afterUpdate()
