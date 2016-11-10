@@ -54,13 +54,14 @@ class Page extends Model
 
     public function validation()
     {
-      $validator->add('slug', new UniquenessValidator(
-          [
-              "model"   => $this,
-              "message" => $this->getDi()->get('helper')->translate("Page with slug is already exists")
-          ]
-      ));
-      return $this->validate($validator);
+        $validator = new Validation();
+        $validator->add('slug', new UniquenessValidator(
+            [
+                "model"   => $this,
+                "message" => $this->getDi()->get('helper')->translate("Page with slug is already exists")
+            ]
+        ));
+        return $this->validate($validator);
     }
 
     public static function findCachedBySlug($slug)
