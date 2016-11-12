@@ -62,7 +62,6 @@ class AdminController extends Controller
         if ($type) {
             $typeEntity = Type::getCachedBySlug($type);
             $form->get('type_id')->setDefault($typeEntity->getId());
-            $this->view->type = $type;
         }
 
         if ($this->request->isPost()) {
@@ -87,6 +86,7 @@ class AdminController extends Controller
             }
         }
 
+        $this->view->type = $type;
         $this->view->model = $model;
         $this->view->form = $form;
 

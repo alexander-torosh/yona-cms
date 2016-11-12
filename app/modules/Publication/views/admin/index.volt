@@ -1,7 +1,7 @@
 <!--controls-->
 <div class="ui segment">
 
-    <a href="{{ url.get() }}publication/admin/{{ type }}/add" class="ui button positive">
+    <a href="{{ url.get() }}publication/admin/{{ type is not empty ? type ~ '/' : '' }}/add" class="ui button positive">
         <i class="icon plus"></i> {{ helper.at('Add New') }}
     </a>
 
