@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.5.0
+
+- Minimal Phalcon version requirement is 3.0.0;
+
+- Improved count of MySQL queries to fetch translation values for Page and Publication models. Added fields sub-queries for more better performance;
+
+- Created CachaManager component for more effective working with cache keys and results;
+
 ## v0.4.2
 
 - Fixed underscore getters/setters on Page and Publication modules;

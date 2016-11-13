@@ -7,19 +7,27 @@
 namespace Publication\Widget;
 
 use Application\Widget\AbstractWidget;
+use Publication\Model\Helper\PublicationHelper;
 
 class PublicationWidget extends AbstractWidget
 {
 
     public function lastNews($limit = 5)
     {
-        $qb = $this->modelsManager->createBuilder();
-        $qb->addFrom('Publication\Model\Publication', 'p');
-        $qb->leftJoin('Publication\Model\Type', null, 't');
-        $qb->andWhere('t.slug = :type:', ['type' => 'news']);
-        $qb->andWhere('p.date <= NOW()');
-        $qb->orderBy('p.date DESC');
-        $qb->limit($limit);
+        $publicationHelper = new PublicationHelper();
+        $fields = $publicationHelper->translateFieldsSubQuery();
+
+        $columns = ['p.*', 't_slug' => 't.slug'];
+        $columns = array_merge($columns, $fields);
+
+        $qb = $this->modelsManager->createBuilder()
+            ->columns($columns)
+            ->addFrom('Publication\Model\Publication', 'p')
+            ->leftJoin('Publication\Model\Type', null, 't')
+            ->andWhere('t.slug = :type:', ['type' => 'news'])
+            ->andWhere('p.date <= NOW()')
+            ->orderBy('p.date DESC')
+            ->limit($limit);
 
         $entries = $qb->getQuery()->execute();
 

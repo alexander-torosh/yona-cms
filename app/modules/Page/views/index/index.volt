@@ -1,3 +1,3 @@
 <article>
-    {{ page.getText() }}
+    {{ text }}
 </article>

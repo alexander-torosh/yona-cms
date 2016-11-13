@@ -3,6 +3,7 @@
 namespace Publication\Controller;
 
 use Application\Mvc\Controller;
+use Publication\Model\Helper\PublicationHelper;
 use Publication\Model\Publication;
 use Phalcon\Exception;
 use Publication\Model\Type;
@@ -56,21 +57,22 @@ class IndexController extends Controller
         $slug = $this->dispatcher->getParam('slug', 'string');
         $type = $this->dispatcher->getParam('type', 'string');
 
-        $publication = Publication::findCachedBySlug($slug);
-        if (!$publication) {
+        $publicationHelper = new PublicationHelper();
+        $publicationResult = $publicationHelper->publicationBySlug($slug);
+        if (!$publicationResult) {
             throw new Exception("Publication '$slug.html' not found");
         }
-        if ($publication->getTypeSlug() != $type) {
+        if ($publicationResult->p->getTypeSlug() != $type) {
             throw new Exception("Publication type <> $type");
         }
 
-        $this->helper->title()->append($publication->getMetaTitle());
-        $this->helper->meta()->set('description', $publication->getMetaDescription());
-        $this->helper->meta()->set('keywords', $publication->getMetaKeywords());
+        $this->helper->title()->append($publicationResult->meta_title);
+        $this->helper->meta()->set('description', $publicationResult->meta_description);
+        $this->helper->meta()->set('keywords', $publicationResult->meta_keywords);
 
-        $this->view->publication = $publication;
         $this->helper->menu->setActive($type);
 
+        $this->view->publicationResult = $publicationResult;
     }
 
 }

@@ -3,7 +3,8 @@
     <!--controls-->
     <div class="ui segment">
 
-        <a href="{{ url.get() }}publication/admin{{ type is not empty ? '/' ~ type ~ '/' : '' }}?lang={{ constant('LANG') }}" class="ui button">
+        {% set typeBackUrl = ((type is defined) ? '/' ~ type : '') %}
+        <a href="{{ url.get() }}publication/admin{{ typeBackUrl }}?lang={{ constant('LANG') }}" class="ui button">
             <i class="icon left arrow"></i> {{ helper.at('Back') }}
         </a>
 

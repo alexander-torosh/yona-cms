@@ -1,6 +1,7 @@
 <?php
 
 namespace YonaCMS;
+use Application\Cache\Manager as CacheManager;
 
 /**
  * Bootstrap
@@ -247,6 +248,13 @@ class Bootstrap
                     "port" => $config->memcache->port,
                 ]);
                 break;
+            case 'memcached':
+                $cache = new \Phalcon\Cache\Backend\Libmemcached(
+                    $cacheFrontend, [
+                    "host" => $config->memcached->host,
+                    "port" => $config->memcached->port,
+                ]);
+                break;
         }
         $di->set('cache', $cache, true);
         $di->set('modelsCache', $cache, true);
@@ -255,6 +263,8 @@ class Bootstrap
 
         $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
         $di->set('modelsMetadata', $modelsMetadata);
+
+        $di->set('cacheManager', new CacheManager());
     }
 
     private function dispatch($di)

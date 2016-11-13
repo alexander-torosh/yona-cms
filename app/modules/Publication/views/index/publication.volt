@@ -3,17 +3,17 @@
     {% if helper.isAdminSession() %}
         <p style="font-weight: bold;font-size:120%;">
             <a class="noajax"
-               href="{{ url.get() }}publication/admin/edit/{{ publication.getId() }}?lang={{ constant('LANG') }}">{{ helper.at('Edit publication') }}</a>
+               href="{{ url.get() }}publication/admin/edit/{{ publicationResult.p.getId() }}?lang={{ constant('LANG') }}">{{ helper.at('Edit publication') }}</a>
         </p>
     {% endif %}
 
-    <h1>{{ publication.getTitle() }}</h1>
+    <h1>{{ publicationResult.title }}</h1>
 
-    <section class="date">{{ publication.getDate('d.m.Y') }}</section>
+    <section class="date">{{ publicationResult.p.getDate('d.m.Y') }}</section>
 
-    {% if publication.preview_inner %}
+    {% if publicationResult.p.preview_inner %}
         {% set image = helper.image([
-        'id': publication.getId(),
+        'id': publicationResult.p.getId(),
         'type': 'publication',
         'width': 300,
         'strategy': 'w'
@@ -23,8 +23,8 @@
         </div>
     {% endif %}
 
-    {{ publication.getText() }}
+    {{ publicationResult.text }}
 
-    <a href="{{ helper.langUrl(['for':'publications','type':publication.getTypeSlug()]) }}" class="back">&larr; {{ helper.translate('Back to publications list') }}</a>
+    <a href="{{ helper.langUrl(['for':'publications','type':publicationResult.t_slug]) }}" class="back">&larr; {{ helper.translate('Back to publications list') }}</a>
 
 </article>

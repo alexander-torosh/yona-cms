@@ -18,6 +18,10 @@ return [
         'port' => 11211,
     ],
 
-    'cache'     => 'file',
-    //'cache'     => 'memcache',
+    'memcached'  => [
+        'host' => 'localhost',
+        'port' => 11211,
+    ],
+
+    'cache'     => 'memcached', // memcache, memcached
 ];

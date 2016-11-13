@@ -11,7 +11,6 @@ class Config
 
     public static function get()
     {
-
         $application = include_once APPLICATION_PATH . '/config/environment/' . APPLICATION_ENV . '.php';
 
         $config_default = [
@@ -32,6 +31,7 @@ class Config
             'database'  => (isset($application['database'])) ? $application['database'] : null,
             'cache'     => (isset($application['cache'])) ? $application['cache'] : null,
             'memcache'  => (isset($application['memcache'])) ? $application['memcache'] : null,
+            'memcached'  => (isset($application['memcached'])) ? $application['memcached'] : null,
             'assets'    => (isset($application['assets'])) ? $application['assets'] : null,
         ];
 

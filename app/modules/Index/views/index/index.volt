@@ -1,6 +1,6 @@
 <div class="central">
     <article>
-        {{ page.getText() }}
+        {{ text }}
     </article>
 </div>
 <div class="sidebar">

@@ -1,5 +1,5 @@
 <article>
-    {{ page.getText() }}
+    {{ text }}
 
 
     <br>

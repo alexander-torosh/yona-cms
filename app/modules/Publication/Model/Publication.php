@@ -2,6 +2,7 @@
 
 namespace Publication\Model;
 
+use Application\Cache\Keys;
 use Application\Mvc\Model\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
@@ -14,8 +15,6 @@ class Publication extends Model
     {
         return "publication";
     }
-
-    protected $translateModel = 'Publication\Model\Translate\PublicationTranslate'; // translate
 
     public function initialize()
     {
@@ -34,12 +33,21 @@ class Publication extends Model
     private $date;
     private $preview_src;
     private $preview_inner;
-
+    
     protected $title;
     protected $text;
     protected $meta_title;
     protected $meta_description;
     protected $meta_keywords;
+
+    protected $translateModel = 'Publication\Model\Translate\PublicationTranslate'; // translate
+    protected $translateFields = [
+        'title',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'text'
+    ];
 
     public function beforeCreate()
     {
@@ -58,6 +66,12 @@ class Publication extends Model
         $cache = $this->getDi()->get('cache');
 
         $cache->delete(self::cacheSlugKey($this->getSlug()));
+
+        $this->cacheManager->delete([
+            Keys::PUBLICATION,
+            $this->slug,
+            self::$lang
+        ]);
     }
 
     public function validation()
