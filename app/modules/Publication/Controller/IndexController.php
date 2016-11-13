@@ -13,31 +13,45 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $type = $this->dispatcher->getParam('type', 'string');
+        $type      = $this->dispatcher->getParam('type', 'string');
         $typeModel = Type::getCachedBySlug($type);
         if (!$typeModel) {
             throw new Exception("Publication hasn't type = '$type''");
         }
 
         $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10;
-        $limit = $this->request->getQuery('limit', 'string', $typeLimit);
+        $limit     = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {
-            $paginatorLimit = (int) $limit;
+            $paginatorLimit = (int)$limit;
         } else {
             $paginatorLimit = 9999;
         }
         $page = $this->request->getQuery('page', 'int', 1);
 
-        $publications = Publication::find(array(
+        /*$publications = Publication::find(array(
             "type_id = {$typeModel->getId()}",
             "order" => "date DESC",
-        ));
+        ));*/
 
-        $paginator = new \Phalcon\Paginator\Adapter\Model(array(
-            "data" => $publications,
+        $publicationHelper = new PublicationHelper();
+        $fields = $publicationHelper->translateFieldsSubQuery();
+
+        $columns = ['p.*', 't_slug' => 't.slug'];
+        $columns = array_merge($columns, $fields);
+
+        $qb = $this->modelsManager->createBuilder()
+            ->columns($columns)
+            ->addFrom('Publication\Model\Publication', 'p')
+            ->leftJoin('Publication\Model\Type', null, 't')
+            ->andWhere('t.slug = :type:', ['type' => 'news'])
+            ->andWhere('p.date <= NOW()')
+            ->orderBy('p.date DESC');
+
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder([
+            "builder"  => $qb,
             "limit" => $paginatorLimit,
-            "page" => $page
-        ));
+            "page"  => $page
+        ]);
 
         $this->view->paginate = $paginator->getPaginate();
 
@@ -45,9 +59,9 @@ class IndexController extends Controller
         if ($page > 1) {
             $this->helper->title()->append($this->helper->translate('Страница №') . ' ' . $page);
         }
-        $this->view->title = $typeModel->getTitle();
+        $this->view->title  = $typeModel->getTitle();
         $this->view->format = $typeModel->getFormat();
-        $this->view->type = $type;
+        $this->view->type   = $type;
 
         $this->helper->menu->setActive($type);
     }
