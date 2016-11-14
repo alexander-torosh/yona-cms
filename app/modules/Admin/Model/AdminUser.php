@@ -34,7 +34,7 @@ class AdminUser extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        require_once __DIR__ . '/../../../plugins/password.php';
+        
     }
 
     public function setCheckboxes($post)

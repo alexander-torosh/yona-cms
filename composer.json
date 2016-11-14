@@ -35,7 +35,6 @@
     "ext-phalcon": ">=3.0",
     "robmorgan/phinx": "dev-master",
     "michelf/php-markdown": "*",
-    "mandrill/mandrill": "1.*",
     "mobiledetect/mobiledetectlib": "^2.8",
     "sneakybobito/phalcon-stubs": "*"
   }
