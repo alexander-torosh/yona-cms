@@ -6,7 +6,7 @@
 
 - Improved count of MySQL queries to fetch translation values for Page and Publication models. Added fields sub-queries for more better performance;
 
-- Created CachaManager component for more effective working with cache keys and results;
+- Created CacheManager component for more effective working with cache keys and results;
 
 ## v0.4.2
 
