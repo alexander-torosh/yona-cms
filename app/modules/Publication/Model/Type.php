@@ -53,7 +53,7 @@ class Type extends Model
         $validator->add('slug', new UniquenessValidator(
             [
                 "model"   => $this,
-                "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' существует"
+                "message" => "Тип публикаций с таким URL раздела = '" . $this->slug . "' уже существует"
             ]
         ));
         return $this->validate($validator);
