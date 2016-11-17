@@ -43,7 +43,7 @@ class IndexController extends Controller
             ->columns($columns)
             ->addFrom('Publication\Model\Publication', 'p')
             ->leftJoin('Publication\Model\Type', null, 't')
-            ->andWhere('t.slug = :type:', ['type' => 'news'])
+            ->andWhere('t.slug = :type:', ['type' => $type])
             ->andWhere('p.date <= NOW()')
             ->orderBy('p.date DESC');
 
