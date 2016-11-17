@@ -11,7 +11,9 @@
         <a class="image" href="{{ link }}">{{ image.imageHTML() }}</a>
     {% endif %}
     <div class="text">
+    {% if item.p.getTypeDisplayDate() %}
         <section class="date">{{ item.p.getDate('d.m.Y') }}</section>
+    {% endif %}
         <a href="{{ link }}" class="title">{{ item.title }}</a>
         <section class="announce">{{ helper.announce(item.text, 300) }}</section>
 
