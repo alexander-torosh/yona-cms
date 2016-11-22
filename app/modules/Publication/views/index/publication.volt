@@ -9,7 +9,9 @@
 
     <h1>{{ publicationResult.title }}</h1>
 
+    {% if publicationResult.p.getTypeDisplayDate() %}
     <section class="date">{{ publicationResult.p.getDate('d.m.Y') }}</section>
+    {% endif %}
 
     {% if publicationResult.p.preview_inner %}
         {% set image = helper.image([

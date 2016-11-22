@@ -267,6 +267,16 @@ class Publication extends Model
         }
     }
 
+    public function getTypeDisplayDate()
+    {
+        if ($this->type_id) {
+            $types = Type::cachedListArray(['key' => 'id', 'value' => 'display_date']);
+            if (array_key_exists($this->type_id, $types)) {
+                return $types[$this->type_id];
+            }
+        }
+    }
+
     public function setPreviewInner($preview_inner)
     {
         $this->preview_inner = $preview_inner;
