@@ -319,7 +319,7 @@ class Bootstrap
                     $view->partial('error/error503');
                 }
 
-                echo $response->send()->getContent();
+                $response->send();
                 return;
             }
         }
@@ -359,7 +359,7 @@ class Bootstrap
             $response->setContent($view->getContent());
         }
 
-        echo $response->send()->getContent();
+        $response->send();
     }
 
 }
