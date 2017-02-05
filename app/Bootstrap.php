@@ -92,7 +92,8 @@ class Bootstrap
         $application->setDI($di);
 
         // Main dispatching process
-        $this->dispatch($di);
+        $response = $this->dispatch($di);
+        $response->send();
 
     }
 
@@ -319,8 +320,7 @@ class Bootstrap
                     $view->partial('error/error503');
                 }
 
-                $response->send();
-                return;
+                return $response;
             }
         }
 
@@ -357,7 +357,7 @@ class Bootstrap
             $response->setContent($view->getContent());
         }
 
-        $response->send();
+        return $response;
     }
 
 }
