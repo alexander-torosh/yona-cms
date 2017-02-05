@@ -332,8 +332,6 @@ class Bootstrap
 
         $view->finish();
 
-        $response = $di['response'];
-
         // AJAX
         $request = $di['request'];
         $_ajax = $request->getQuery('_ajax');
