@@ -6,7 +6,7 @@
 
 namespace Publication\Model\Translate;
 
-use Application\Mvc\Model\Translate;
+use Yona\Mvc\Model\Translate;
 
 class PublicationTranslate extends Translate
 {

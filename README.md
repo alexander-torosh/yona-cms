@@ -9,7 +9,14 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 
 [Project website](http://yonacms.com/)  
 
-## Installation
+## Docker
+
+    docker-compose build
+    docker-compose up
+    
+Open http://localhost:8000
+
+## Regular installation
 
 ### Composer
 

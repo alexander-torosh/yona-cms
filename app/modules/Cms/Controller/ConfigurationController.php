@@ -6,7 +6,7 @@
 
 namespace Cms\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Cms\Form\ConfigurationForm;
 use Cms\Model\Configuration;
 

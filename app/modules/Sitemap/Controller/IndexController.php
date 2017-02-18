@@ -2,9 +2,9 @@
 
 namespace Sitemap\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Cms\Model\Language;
-use Application\Mvc\Router\DefaultRouter;
+use Yona\Mvc\Router\DefaultRouter;
 
 
 class IndexController extends Controller

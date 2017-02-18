@@ -5,7 +5,7 @@
 
 namespace Publication\Model\Helper;
 
-use Application\Cache\Keys;
+use Yona\Cache\Keys;
 use Publication\Model\Publication;
 
 class PublicationHelper extends Publication

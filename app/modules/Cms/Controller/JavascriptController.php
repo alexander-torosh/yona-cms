@@ -6,7 +6,7 @@
 
 namespace Cms\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Cms\Model\Javascript;
 use Cms\Form\JavascriptForm;
 

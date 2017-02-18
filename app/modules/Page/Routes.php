@@ -8,7 +8,7 @@
 
 namespace Page;
 
-use Application\Mvc\Router\DefaultRouter;
+use Yona\Mvc\Router\DefaultRouter;
 
 class Routes
 {

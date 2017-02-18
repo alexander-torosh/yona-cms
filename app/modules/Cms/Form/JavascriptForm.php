@@ -6,7 +6,7 @@
 
 namespace Cms\Form;
 
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Hidden;
 

@@ -8,10 +8,9 @@
 
 namespace Admin\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Admin\Model\AdminUser;
 use Admin\Form\LoginForm;
-use Michelf\Markdown;
 use Phalcon\Mvc\View;
 
 class IndexController extends Controller
@@ -34,14 +33,7 @@ class IndexController extends Controller
             $this->flash->warning($this->helper->at('Warning. Found admin user with name yona'));
         }
 
-        if ($this->registry->cms['DISPLAY_CHANGELOG']) {
-            $changelog = file_get_contents(APPLICATION_PATH . '/../CHANGELOG.md');
-            $changelog_html = Markdown::defaultTransform($changelog);
-            $this->view->changelog = $changelog_html;
-        }
-
         $this->helper->title($this->helper->at('YonaCms Admin Panel'), true);
-
         $this->helper->activeMenu()->setActive('admin-home');
 
     }

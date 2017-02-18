@@ -7,7 +7,7 @@
 namespace Tree\Model;
 
 use Phalcon\Validation;
-use Application\Mvc\Model\Model;
+use Yona\Mvc\Model\Model;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Category extends Model

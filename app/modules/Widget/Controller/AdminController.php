@@ -2,7 +2,7 @@
 
 namespace Widget\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Widget\Model\Widget;
 use Widget\Form\WidgetForm;
 

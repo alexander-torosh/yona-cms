@@ -7,9 +7,9 @@
 namespace Seo\Model;
 
 
-use Application\Mvc\Helper\CmsCache;
-use Application\Mvc\Model\Model;
-use Application\Mvc\Router\DefaultRouter;
+use Yona\Mvc\Helper\CmsCache;
+use Yona\Mvc\Model\Model;
+use Yona\Mvc\Router\DefaultRouter;
 use Phalcon\Mvc\Model\Message;
 
 class Manager extends Model

@@ -6,7 +6,7 @@
 
 namespace Publication\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Publication\Form\TypeForm;
 use Publication\Model\Type;
 

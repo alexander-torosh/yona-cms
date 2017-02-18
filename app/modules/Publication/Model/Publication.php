@@ -2,11 +2,11 @@
 
 namespace Publication\Model;
 
-use Application\Cache\Keys;
-use Application\Mvc\Model\Model;
+use Yona\Cache\Keys;
+use Yona\Mvc\Model\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
-use Application\Localization\Transliterator;
+use Yona\Localization\Transliterator;
 
 class Publication extends Model
 {
@@ -67,7 +67,7 @@ class Publication extends Model
 
         $cache->delete(self::cacheSlugKey($this->getSlug()));
 
-        $this->cacheManager->delete([
+        $this->getDi()->get('cacheManager')->delete([
             Keys::PUBLICATION,
             $this->slug,
             self::$lang

@@ -6,7 +6,7 @@
 
 namespace Seo\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Seo\Form\ManagerAddForm;
 use Seo\Form\ManagerForm;
 use Seo\Model\Manager;

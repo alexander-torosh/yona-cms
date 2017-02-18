@@ -11,7 +11,7 @@ namespace Widget\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Regex;
 

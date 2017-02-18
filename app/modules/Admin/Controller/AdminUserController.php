@@ -8,7 +8,7 @@
 
 namespace Admin\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Admin\Form\AdminUserForm;
 use Admin\Model\AdminUser;
 

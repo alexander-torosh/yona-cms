@@ -6,7 +6,7 @@
 
 namespace Publication\Form;
 
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;

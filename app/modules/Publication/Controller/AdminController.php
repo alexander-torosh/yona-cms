@@ -2,7 +2,7 @@
 
 namespace Publication\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Publication\Model\Publication;
 use Publication\Form\PublicationForm;
 use Publication\Model\Type;

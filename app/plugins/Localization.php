@@ -8,7 +8,7 @@
 
 namespace YonaCMS\Plugin;
 
-use Application\Mvc\Helper\CmsCache;
+use Yona\Mvc\Helper\CmsCache;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Mvc\Dispatcher;
 
@@ -43,7 +43,7 @@ class Localization extends Plugin
         }
         if (!defined('LANG')) {
             define('LANG', $defaultLang['iso']);
-            \Application\Mvc\Model\Model::$lang = $defaultLang['iso'];
+            \Yona\Mvc\Model\Model::$lang = $defaultLang['iso'];
         }
         if (!defined('LANG_URL')) {
             define('LANG_URL', $defaultLang['url']);

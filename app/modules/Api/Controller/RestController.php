@@ -14,7 +14,7 @@ namespace Api\Controller;
  *
  * @package Api\Controller
  */
-class RestController extends \Application\Mvc\Controller
+class RestController extends \Yona\Mvc\Controller
 {
 
     /**

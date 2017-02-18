@@ -2,11 +2,11 @@
 
 namespace Page\Model;
 
-use Application\Cache\Keys;
-use Application\Mvc\Model\Model;
+use Yona\Cache\Keys;
+use Yona\Mvc\Model\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
-use Application\Localization\Transliterator;
+use Yona\Localization\Transliterator;
 
 class Page extends Model
 {

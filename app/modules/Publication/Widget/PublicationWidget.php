@@ -6,7 +6,7 @@
 
 namespace Publication\Widget;
 
-use Application\Widget\AbstractWidget;
+use Yona\Widget\AbstractWidget;
 use Publication\Model\Helper\PublicationHelper;
 
 class PublicationWidget extends AbstractWidget

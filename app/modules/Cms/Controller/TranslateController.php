@@ -6,8 +6,8 @@
 
 namespace Cms\Controller;
 
-use Application\Mvc\Controller;
-use Application\Mvc\Helper\CmsCache;
+use Yona\Mvc\Controller;
+use Yona\Mvc\Helper\CmsCache;
 use Cms\Model\Translate;
 use Cms\Scanner;
 

@@ -11,7 +11,7 @@ namespace YonaCMS\Plugin;
 use Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\User\Plugin,
     Phalcon\Mvc\View,
-    Application\Acl\DefaultAcl;
+    Yona\Acl\DefaultAcl;
 
 class Acl extends Plugin
 {

@@ -6,8 +6,8 @@
 
 namespace Tree\Controller;
 
-use Application\Localization\Transliterator;
-use Application\Mvc\Controller;
+use Yona\Localization\Transliterator;
+use Yona\Mvc\Controller;
 use Tree\Form\CategoryForm;
 use Tree\Model\Category;
 

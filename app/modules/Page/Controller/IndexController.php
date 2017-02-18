@@ -2,7 +2,7 @@
 
 namespace Page\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Page\Model\Helper\PageHelper;
 use Page\Model\Page;
 use Phalcon\Mvc\Dispatcher\Exception;

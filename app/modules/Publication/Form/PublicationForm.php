@@ -8,10 +8,10 @@
 
 namespace Publication\Form;
 
-use Application\Form\Element\Image;
+use Yona\Form\Element\Image;
 use Phalcon\Forms\Element\Check;
 use Phalcon\Validation\Validator\PresenceOf;
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Select;

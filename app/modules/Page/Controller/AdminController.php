@@ -8,7 +8,7 @@
 
 namespace Page\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Page\Model\Page;
 use Page\Form\PageForm;
 

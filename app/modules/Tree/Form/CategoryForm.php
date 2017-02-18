@@ -9,7 +9,7 @@ namespace Tree\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class CategoryForm extends \Application\Form\Form
+class CategoryForm extends \Yona\Form\Form
 {
 
     public function initialize()

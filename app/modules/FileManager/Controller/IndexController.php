@@ -2,7 +2,7 @@
 
 namespace FileManager\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 
 class IndexController extends Controller
 {

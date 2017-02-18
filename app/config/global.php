@@ -10,13 +10,7 @@ return [
 
     'assets'         => [
         'js' => [
-            'static/js/library.js',
-            'static/js/rotation.js',
             'static/js/main.js',
-
-            // just comment two lines below if you don't need pages transitions via AJAX
-            'vendor/history/native.history.js',
-            'static/js/ajax.js',
         ],
     ],
 

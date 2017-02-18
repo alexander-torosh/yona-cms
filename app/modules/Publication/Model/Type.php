@@ -6,8 +6,8 @@
 
 namespace Publication\Model;
 
-use Application\Mvc\Helper\CmsCache;
-use Application\Mvc\Model\Model;
+use Yona\Mvc\Helper\CmsCache;
+use Yona\Mvc\Model\Model;
 use Phalcon\DI;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;

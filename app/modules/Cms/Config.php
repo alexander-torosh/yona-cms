@@ -39,8 +39,8 @@ class Config
 
         // Modules configuration list
         $modules_list = include_once APPLICATION_PATH . '/config/modules.php';
-        require_once APPLICATION_PATH . '/modules/Application/Loader/Modules.php';
-        $modules = new \Application\Loader\Modules();
+        require_once APPLICATION_PATH . '/library/Yona/Loader/Modules.php';
+        $modules = new \Yona\Loader\Modules();
         $modules_config = $modules->modulesConfig($modules_list);
 
         $config = array_merge_recursive($config_default, $global, $modules_config);

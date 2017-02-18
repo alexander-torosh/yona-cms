@@ -7,7 +7,7 @@
 namespace Seo\Form;
 
 
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 

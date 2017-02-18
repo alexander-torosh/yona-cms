@@ -6,7 +6,7 @@
 
 namespace Cms\Model;
 
-use Application\Mvc\Helper\CmsCache;
+use Yona\Mvc\Helper\CmsCache;
 use Phalcon\DI;
 use Phalcon\Mvc\Model;
 

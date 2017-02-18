@@ -2,7 +2,7 @@
 
 namespace Publication\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Publication\Model\Helper\PublicationHelper;
 use Publication\Model\Publication;
 use Phalcon\Exception;

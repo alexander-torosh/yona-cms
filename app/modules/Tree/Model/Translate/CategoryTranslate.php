@@ -6,7 +6,7 @@
 
 namespace Tree\Model\Translate;
 
-use Application\Mvc\Model\Translate;
+use Yona\Mvc\Model\Translate;
 
 class CategoryTranslate extends Translate
 {

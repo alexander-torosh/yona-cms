@@ -1,7 +1,8 @@
 <?php
 
 namespace YonaCMS;
-use Application\Cache\Manager as CacheManager;
+
+use Yona\Cache\Manager as CacheManager;
 
 /**
  * Bootstrap
@@ -54,7 +55,7 @@ class Bootstrap
         $this->initCache($di);
 
         // CMS
-        $cmsModel = new \Cms\Model\Configuration();
+        $cmsModel      = new \Cms\Model\Configuration();
         $registry->cms = $cmsModel->getConfig(); // Отправляем в Registry
 
         // Application
@@ -69,7 +70,7 @@ class Bootstrap
         $session->start();
         $di->set('session', $session);
 
-        $acl = new \Application\Acl\DefaultAcl();
+        $acl = new \Yona\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
         // JS Assets
@@ -84,7 +85,7 @@ class Bootstrap
         ]);
         $di->set('flash', $flash);
 
-        $di->set('helper', new \Application\Mvc\Helper());
+        $di->set('helper', new \Yona\Mvc\Helper());
 
         // Routing
         $this->initRouting($application, $di);
@@ -98,13 +99,13 @@ class Bootstrap
 
     private function initRouting($application, $di)
     {
-        $router = new \Application\Mvc\Router\DefaultRouter();
+        $router = new \Yona\Mvc\Router\DefaultRouter();
         $router->setDi($di);
         foreach ($application->getModules() as $module) {
             $routesClassName = str_replace('Module', 'Routes', $module['className']);
             if (class_exists($routesClassName)) {
                 $routesClass = new $routesClassName();
-                $router = $routesClass->init($router);
+                $router      = $routesClass->init($router);
             }
             $initClassName = str_replace('Module', 'Init', $module['className']);
             if (class_exists($initClassName)) {
@@ -116,8 +117,8 @@ class Bootstrap
 
     private function initAssetsManager($di)
     {
-        $config = $di->get('config');
-        $assetsManager = new \Application\Assets\Manager();
+        $config        = $di->get('config');
+        $assetsManager = new \Yona\Assets\Manager();
         $js_collection = $assetsManager->collection('js')
             ->setLocal(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
@@ -141,7 +142,7 @@ class Bootstrap
         // Admin LESS Assets
         $assetsManager->collection('modules-admin-less')
             ->setLocal(true)
-            ->addFilter(new \Application\Assets\Filter\Less())
+            ->addFilter(new \Yona\Assets\Filter\Less())
             ->setTargetPath(ROOT . '/assets/modules-admin.less')
             ->setTargetUri('assets/modules-admin.less')
             ->join(true)
@@ -153,14 +154,13 @@ class Bootstrap
     private function initEventManager($di)
     {
         $eventsManager = new \Phalcon\Events\Manager();
-        $dispatcher = new \Phalcon\Mvc\Dispatcher();
+        $dispatcher    = new \Phalcon\Mvc\Dispatcher();
 
         $eventsManager->attach("dispatch:beforeDispatchLoop", function ($event, $dispatcher) use ($di) {
             new \YonaCMS\Plugin\CheckPoint($di->get('request'));
             new \YonaCMS\Plugin\Localization($dispatcher);
             new \YonaCMS\Plugin\AdminLocalization($di->get('config'));
             new \YonaCMS\Plugin\Acl($di->get('acl'), $dispatcher, $di->get('view'));
-            new \YonaCMS\Plugin\MobileDetect($di->get('session'), $di->get('view'), $di->get('request'));
         });
 
         $eventsManager->attach("dispatch:afterDispatchLoop", function ($event, $dispatcher) use ($di) {
@@ -202,23 +202,18 @@ class Bootstrap
         $view->setPartialsDir(MAIN_VIEW_PATH . '/partials/');
 
         // Volt
-        $volt = new \Application\Mvc\View\Engine\Volt($view, $di);
+        $volt = new \Yona\Mvc\View\Engine\Volt($view, $di);
         $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/../data/cache/volt/']);
         $volt->initCompiler();
 
 
-        $phtml = new \Phalcon\Mvc\View\Engine\Php($view, $di);
+        $phtml       = new \Phalcon\Mvc\View\Engine\Php($view, $di);
         $viewEngines = [
             ".volt"  => $volt,
             ".phtml" => $phtml,
         ];
 
         $view->registerEngines($viewEngines);
-
-        $ajax = $di->get('request')->getQuery('_ajax');
-        if ($ajax) {
-            $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
-        }
 
         $di->set('view', $view);
 
@@ -259,7 +254,7 @@ class Bootstrap
         $di->set('cache', $cache, true);
         $di->set('modelsCache', $cache, true);
 
-        \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
+        \Yona\Widget\Proxy::$cache = $cache; // Modules Widget System
 
         $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
         $di->set('modelsMetadata', $modelsMetadata);
@@ -284,7 +279,7 @@ class Bootstrap
         $dispatcher->setActionName($router->getActionName());
         $dispatcher->setParams($router->getParams());
 
-        $moduleName = \Application\Utils\ModuleName::camelize($router->getModuleName());
+        $moduleName = \Yona\Utils\ModuleName::camelize($router->getModuleName());
 
         $ModuleClassName = $moduleName . '\Module';
         if (class_exists($ModuleClassName)) {
@@ -335,31 +330,7 @@ class Bootstrap
 
         $response = $di['response'];
 
-        // AJAX
-        $request = $di['request'];
-        $_ajax = $request->getQuery('_ajax');
-        if ($_ajax) {
-            $contents = $view->getContent();
-
-            $return = new \stdClass();
-            $return->html = $contents;
-            $return->title = $di->get('helper')->title()->get();
-            $return->success = true;
-
-            if ($view->bodyClass) {
-                $return->bodyClass = $view->bodyClass;
-            }
-
-            $headers = $response->getHeaders()->toArray();
-            if (isset($headers[404]) || isset($headers[503])) {
-                $return->success = false;
-            }
-            $response->setContentType('application/json', 'UTF-8');
-            $response->setContent(json_encode($return));
-        } else {
-            $response->setContent($view->getContent());
-        }
-
+        $response->setContent($view->getContent());
         $response->sendHeaders();
 
         echo $response->getContent();

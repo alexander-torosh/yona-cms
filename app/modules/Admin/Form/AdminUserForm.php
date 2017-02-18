@@ -9,7 +9,7 @@
 namespace Admin\Form;
 
 use Admin\Model\AdminUser;
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Email;

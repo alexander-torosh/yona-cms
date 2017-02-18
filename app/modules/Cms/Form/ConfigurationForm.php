@@ -6,7 +6,7 @@
 
 namespace Cms\Form;
 
-use Application\Form\Form;
+use Yona\Form\Form;
 use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
@@ -21,8 +21,6 @@ class ConfigurationForm extends Form
         $this->add((new Check('DISPLAY_CHANGELOG'))->setLabel('Display Changelog at Admin dashboard startpage'));
         $this->add((new Check('WIDGETS_CACHE'))->setLabel('Widgets caching'));
         $this->add((new Text('ADMIN_EMAIL'))->setLabel('Admin Email'));
-        $this->add((new Check('TECHNICAL_WORKS'))->setLabel('Site is under maintenance'));
-
     }
 
 } 

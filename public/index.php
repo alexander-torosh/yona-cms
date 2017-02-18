@@ -11,10 +11,11 @@ if (isset($_SERVER['APPLICATION_ENV'])) {
     $applicationEnv = (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production');
 }
 define('APPLICATION_ENV', $applicationEnv);
-
-
 define('APPLICATION_PATH', __DIR__ . '/../app');
 
-require_once APPLICATION_PATH . '/Bootstrap.php';
+// Composer autoload
+require_once __DIR__. '/../vendor/autoload.php';
+
+require_once __DIR__ . '/../app/Bootstrap.php';
 $bootstrap = new YonaCMS\Bootstrap();
 $bootstrap->run();

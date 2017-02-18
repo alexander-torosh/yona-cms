@@ -1,0 +1,26 @@
+{
+  "name": "yona-cms",
+  "version": "1.0.0",
+  "description": "Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework. Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksandr-torosh/yona-cms.git"
+  },
+  "keywords": [
+    "phalcon",
+    "modules",
+    "modular",
+    "yona",
+    "php",
+    "cms"
+  ],
+  "author": "Oleksandr Torosh",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/oleksandr-torosh/yona-cms/issues"
+  },
+  "homepage": "https://github.com/oleksandr-torosh/yona-cms#readme",
+  "dependencies": {
+    "webpack": "^2.2.1"
+  }
+}

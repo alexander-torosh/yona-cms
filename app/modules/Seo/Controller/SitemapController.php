@@ -2,7 +2,7 @@
 
 namespace Seo\Controller;
 
-use Application\Mvc\Controller;
+use Yona\Mvc\Controller;
 use Seo\Form\SitemapForm;
 
 class SitemapController extends Controller

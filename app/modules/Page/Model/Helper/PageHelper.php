@@ -5,7 +5,7 @@
 
 namespace Page\Model\Helper;
 
-use Application\Cache\Keys;
+use Yona\Cache\Keys;
 use Page\Model\Page;
 
 class PageHelper extends Page
