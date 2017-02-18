@@ -9,6 +9,10 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 
 [Project website](http://yonacms.com/)  
 
+## PHP 7 support, Docker
+
+For using complete Docker compose stack check this branch [php7.0](https://github.com/oleksandr-torosh/yona-cms/tree/php7.0)
+
 ## Installation
 
 ### Composer
