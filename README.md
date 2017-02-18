@@ -1,3 +1,9 @@
+# php7.0 branch
+
+In this branch I will make current development and project improvements.
+Entire project will be refactored. Will be implemented independent API and CLI entry-points.
+All frontend assets will be rewritten.
+
 # Yona CMS
 
 [![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
@@ -15,6 +21,8 @@ Has a convenient modular structure. Has simple configuration and architecture. C
     docker-compose up
     
 Open http://localhost:8000
+
+Then import yona-cms.sql to mysql database
 
 ## Regular installation
 
