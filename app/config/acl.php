@@ -42,7 +42,6 @@ return [
     ],
     'admin'      => [
         'admin/admin-user'   => '*',
-        'cms/configuration'  => '*',
         'cms/translate'      => '*',
         'cms/language'       => '*',
         'cms/javascript'     => '*',

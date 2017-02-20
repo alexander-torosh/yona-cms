@@ -8,6 +8,7 @@
 
 namespace Yona\Mvc;
 
+use Yona\Cache\Keys;
 use Yona\Mvc\Router\DefaultRouter;
 use Cms\Model\Language;
 
@@ -25,6 +26,38 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function __construct()
     {
         $this->menu = \Menu\Helper\Menu::getInstance();
+    }
+
+    public function scriptsBundlePath($name = 'main')
+    {
+        return $this->cacheManager->load([
+            Keys::ASSETS_HASH,
+            $name
+
+        ], function () use ($name) {
+            $file = file_get_contents(ROOT . '/../data/assets/scripts.json');
+
+            $json = json_decode($file, true);
+            $path = $json['assetsByChunkName'][$name];
+
+            return 'dist/' . $path;
+        }, 0);
+    }
+
+    public function stylesBundlePath($name = 'style')
+    {
+        return $this->cacheManager->load([
+            Keys::ASSETS_HASH,
+            $name
+
+        ], function () use ($name) {
+            $file = file_get_contents(ROOT . '/../data/assets/styles.json');
+
+            $json = json_decode($file, true);
+            $path = $json['assetsByChunkName'][$name][0];
+
+            return 'dist/' . $path;
+        }, 0);
     }
 
     /**
@@ -63,7 +96,9 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function staticWidget($id, $params = [])
     {
         $mergeConfig = array_merge(self::StaticWidgetDefaultOptions, $params);
-        $widget = \Widget\Model\Widget::findFirst(["id='{$id}'", "cache" => ["lifetime" => $mergeConfig["lifetime"], "key" => HOST_HASH . md5("Widget::findFirst({$id})")]]);
+        $widget      = \Widget\Model\Widget::findFirst(["id='{$id}'",
+                                                        "cache" => ["lifetime" => $mergeConfig["lifetime"],
+                                                                    "key"      => HOST_HASH . md5("Widget::findFirst({$id})")]]);
         if ($widget) {
             return $widget->getHtml();
         }
@@ -71,8 +106,8 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function langUrl($params)
     {
-        $routeName = $params['for'];
-        $routeName = DefaultRouter::ML_PREFIX . $routeName . '_' . LANG;
+        $routeName     = $params['for'];
+        $routeName     = DefaultRouter::ML_PREFIX . $routeName . '_' . LANG;
         $params['for'] = $routeName;
         return $this->url->get($params);
     }
@@ -91,7 +126,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function cacheExpire($seconds)
     {
-        $response = $this->getDi()->get('response');
+        $response   = $this->getDi()->get('response');
         $expireDate = new \DateTime();
         $expireDate->modify("+$seconds seconds");
         $response->setExpires($expireDate);
@@ -101,7 +136,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     public function isAdminSession()
     {
         $session = $this->getDi()->get('session');
-        $auth = $session->get('auth');
+        $auth    = $session->get('auth');
         if ($auth) {
             if ($auth->admin_session == true) {
                 return true;
@@ -170,10 +205,10 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     public function modulePartial($template, $data, $module = null)
     {
-        $view = clone $this->getDi()->get('view');
+        $view        = clone $this->getDi()->get('view');
         $partialsDir = '';
         if ($module) {
-            $moduleName = \Yona\Utils\ModuleName::camelize($module);
+            $moduleName  = \Yona\Utils\ModuleName::camelize($module);
             $partialsDir = '../../../modules/' . $moduleName . '/views/';
         }
         $view->setPartialsDir($partialsDir);

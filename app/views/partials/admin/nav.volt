@@ -48,9 +48,6 @@
             <a class="item{{ helper.activeMenu().activeClass('admin-user') }}" href="{{ url.get() }}admin/admin-user">
                 {{ helper.at('Manage Users') }} <i class="user icon"></i>
             </a>
-            <a class="item{{ helper.activeMenu().activeClass('admin-cms') }}" href="{{ url.get() }}cms/configuration">
-                {{ helper.at('CMS Configuration') }} <i class="settings icon"></i>
-            </a>
             <a class="item{{ helper.activeMenu().activeClass('admin-language') }}" href="{{ url.get() }}cms/language">
                 {{ helper.at('Languages') }} <i class="globe icon"></i>
             </a>

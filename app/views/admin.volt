@@ -26,7 +26,6 @@
     <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/js/jquery.address.js"></script>
     <script src="{{ url.path() }}vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
-    <script src="{{ url.path() }}static/js/admin.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,12 +38,6 @@
     {{ partial('admin/nav') }}
 
     <div class="content">
-        {% if registry.cms['TECHNICAL_WORKS'] %}
-            <div class="ui red inverted segment">
-                The site under maintenance.<br>
-                Please do not perform any action until the work is completed.
-            </div>
-        {% endif %}
 
         {% if title is defined %}
             <h1>{{ title }}</h1>
@@ -63,7 +56,7 @@
 
     </div>
 
-{{ assets.outputJs('modules-admin-js') }}
+    {{ javascript_include(helper.assetsBundlePath('admin')) }}
 
 </body>
 </html>

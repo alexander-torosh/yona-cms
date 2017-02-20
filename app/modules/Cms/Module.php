@@ -13,7 +13,7 @@ class Module
     public function registerServices($di)
     {
         $dispatcher = $di->get('dispatcher');
-        $dispatcher->setDefaultNamespace("Cms\Controller");
+        $dispatcher->setDefaultNamespace('Cms\Controller');
         $di->set('dispatcher', $dispatcher);
 
         /**

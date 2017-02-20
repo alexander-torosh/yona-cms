@@ -54,10 +54,6 @@ class Bootstrap
         // Cache
         $this->initCache($di);
 
-        // CMS
-        $cmsModel      = new \Cms\Model\Configuration();
-        $registry->cms = $cmsModel->getConfig(); // Отправляем в Registry
-
         // Application
         $application = new \Phalcon\Mvc\Application();
         $application->registerModules($config->modules->toArray());
@@ -117,34 +113,22 @@ class Bootstrap
 
     private function initAssetsManager($di)
     {
-        $config        = $di->get('config');
         $assetsManager = new \Yona\Assets\Manager();
-        $js_collection = $assetsManager->collection('js')
-            ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/js.js')
-            ->setTargetUri('assets/js.js')
-            ->join(true);
-        if ($config->assets->js) {
-            foreach ($config->assets->js as $js) {
-                $js_collection->addJs(ROOT . '/' . $js);
-            }
-        }
 
         // Admin JS Assets
         $assetsManager->collection('modules-admin-js')
             ->setLocal(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/assets/modules-admin.js')
-            ->setTargetUri('assets/modules-admin.js')
+            ->setTargetPath(ROOT . '/dist/old/modules-admin.js')
+            ->setTargetUri('dist/old/modules-admin.js')
             ->join(true);
 
         // Admin LESS Assets
         $assetsManager->collection('modules-admin-less')
             ->setLocal(true)
             ->addFilter(new \Yona\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/assets/modules-admin.less')
-            ->setTargetUri('assets/modules-admin.less')
+            ->setTargetPath(ROOT . '/dist/old/modules-admin.less')
+            ->setTargetUri('dist/old/modules-admin.less')
             ->join(true)
             ->addCss(APPLICATION_PATH . '/modules/Admin/assets/admin.less');
 
@@ -169,8 +153,7 @@ class Bootstrap
         });
 
         // Profiler
-        $registry = $di->get('registry');
-        if ($registry->cms['PROFILER']) {
+        if (APPLICATION_ENV == 'development') {
             $profiler = new \Phalcon\Db\Profiler();
             $di->set('profiler', $profiler);
 

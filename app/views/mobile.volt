@@ -35,10 +35,6 @@
     <script src="{{ url.path() }}static/vendor/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!--js-->
-    {{ assets.outputJs('js') }}
-    <!--/js-->
-
     {{ helper.javascript('head') }}
 
 </head>

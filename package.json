@@ -21,6 +21,15 @@
   },
   "homepage": "https://github.com/oleksandr-torosh/yona-cms#readme",
   "dependencies": {
+    "css-loader": "^0.26.1",
+    "fontawesome": "^4.7.0",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.1",
+    "style-loader": "^0.13.1",
     "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^2.0.0-rc.3"
   }
 }
