@@ -24,10 +24,6 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->view->roots = Category::$roots;
 
-        $assets = $this->getDI()->get('assets');
-        $assets->collection('modules-admin-less')->addCss(__DIR__ . '/../assets/tree.less');
-        $assets->collection('modules-admin-js')->addJs(__DIR__ . '/../assets/tree.js');
-
         $this->helper->title($this->helper->at('Tree Categories'), true);
     }
 

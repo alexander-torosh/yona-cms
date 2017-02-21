@@ -52,7 +52,8 @@ const extractSass = new ExtractTextPlugin({
 
 var StylesheetConfig = {
   entry: {
-    style: path.join(APP_PATH, 'styles', 'style.scss')
+    main: path.join(APP_PATH, 'styles', 'main.scss'),
+    admin: path.join(APP_PATH, 'styles', 'admin.scss')
   },
   output: {
     filename: '[chunkhash].[name].css',

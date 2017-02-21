@@ -69,9 +69,6 @@ class Bootstrap
         $acl = new \Yona\Acl\DefaultAcl();
         $di->set('acl', $acl);
 
-        // JS Assets
-        $this->initAssetsManager($di);
-
         // Flash helper
         $flash = new \Phalcon\Flash\Session([
             'error'   => 'ui red inverted segment',
@@ -109,30 +106,6 @@ class Bootstrap
             }
         }
         $di->set('router', $router);
-    }
-
-    private function initAssetsManager($di)
-    {
-        $assetsManager = new \Yona\Assets\Manager();
-
-        // Admin JS Assets
-        $assetsManager->collection('modules-admin-js')
-            ->setLocal(true)
-            ->addFilter(new \Phalcon\Assets\Filters\Jsmin())
-            ->setTargetPath(ROOT . '/dist/old/modules-admin.js')
-            ->setTargetUri('dist/old/modules-admin.js')
-            ->join(true);
-
-        // Admin LESS Assets
-        $assetsManager->collection('modules-admin-less')
-            ->setLocal(true)
-            ->addFilter(new \Yona\Assets\Filter\Less())
-            ->setTargetPath(ROOT . '/dist/old/modules-admin.less')
-            ->setTargetUri('dist/old/modules-admin.less')
-            ->join(true)
-            ->addCss(APPLICATION_PATH . '/modules/Admin/assets/admin.less');
-
-        $di->set('assets', $assetsManager);
     }
 
     private function initEventManager($di)

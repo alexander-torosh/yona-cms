@@ -13,7 +13,7 @@
 
     <link href="{{ url.path() }}favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-    {{ stylesheet_link(helper.stylesBundlePath('style')) }}
+    {{ stylesheet_link(helper.stylesBundlePath('main')) }}
 
     {{ helper.javascript('head') }}
 

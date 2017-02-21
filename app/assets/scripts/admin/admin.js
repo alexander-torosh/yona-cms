@@ -1,3 +1,5 @@
+require('./../../../modules/Tree/assets/tree.js');
+
 function elFinderBrowser_3 (field_name, url, type, win) {
     var elfinder_url = '/vendor/elfinder-2.1/elfinder_tinymce_3.html';    // use an absolute path!
     tinyMCE.activeEditor.windowManager.open({

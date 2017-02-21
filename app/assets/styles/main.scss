@@ -33,10 +33,7 @@ $placeholder-color: $gray;
 $link: #3f83b6;
 
 body {
-  color: $font-color;
-  font-family: Arial, sans-serif;
-  font-size: $font-size;
-  line-height: $line-height;
+
 }
 
 #wrapper {
@@ -209,6 +206,8 @@ header {
 
 #menu {
   margin-bottom: 20px;
+  padding: 0;
+
   > li {
     display: inline-block;
     margin-right: 20px;
