@@ -13,47 +13,73 @@ Yona CMS - open source content management system (CMS). Written in Phalcon PHP F
 
 Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.
 
-[Project website](http://yonacms.com/)  
+[Project website](http://yonacms.com/)
+
+# Installation for development
+
+Clone application from git repository.
+
+    git clone https://github.com/oleksandr-torosh/yona-cms -b php7.0
+    cd yona-cms
 
 ## Docker
+
+The easiest way to run project on your localhost is Docker containers. Application is already configured and all what you need is run next lines:
 
     docker-compose build
     docker-compose up
     
-Open http://localhost:8000
+If you haven't installed Docker yet, please, visit downloading page https://www.docker.com/products/overview#/install_the_platform and install latest version. It's absolutely free.
+    
+### phpMyAdmin
 
-Then import yona-cms.sql to mysql database
+Open http://localhost:8080
+Enter next credentials:
 
-## Regular installation
+    server: 172.10.0.5
+    login: root
+    password: 111
+
+Then import `yona-cms.sql` file to mysql database. You can find this SQL dump file in project root directory.
 
 ### Composer
 
-Run
-```
-composer create-project oleksandr-torosh/yona-cms -s dev
-```
+Install composer dependencies:
 
-Or create composer.json file and install dependencies:
-```json
-{  
-    "require": {  
-        "oleksandr-torosh/yona-cms": "dev-master"  
-    }  
-}
-```
-```
-composer install
-```
-
-After some time, do not forget run composer update for update dependencies:
-```
-composer update
-```
+    composer install
 
 Composer is required. It will install required libraries.
 If you have error with **autoload.php** file, the reason - missed **composer update** installation step.
 
 [How to install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+
+### NPM
+
+Yona CMS uses modern Node.js npm libraries and packing js/css assets via powerful `webpack` tool.
+
+Install npm dependencies:
+
+    npm install
+    
+Install Webpack (https://webpack.js.org/)
+    
+    sudo npm install -g webpack
+
+Compile assets
+
+    webpack
+    
+Development. Run webpack listener for generating assets on files changes
+
+    webpack -d --watch
+    
+### Checking your installation
+
+Open http://localhost:8000 and check Yona CMS installation
+
+## Virtual hosting installation
+
+@TODO Write description
 
 ### Permissions
 

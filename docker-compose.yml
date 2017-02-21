@@ -3,8 +3,9 @@ version: '2'
 services:
   web:
     image: "nginx:1.11-alpine"
+    container_name: web
     ports:
-        - "8000:80"
+      - "8000:80"
     volumes:
       - ./:/yona-cms
       - ./docker/log:/var/log/nginx
@@ -18,6 +19,7 @@ services:
 
   php7:
     build: ./docker/php7/
+    container_name: php7
     volumes:
       - ./:/yona-cms
       - ./docker/conf/www.conf:/etc/php/7.0/fpm/pool.d/www.conf
@@ -33,6 +35,7 @@ services:
 
   mysql:
     image: "mariadb:10.1.21"
+    container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=111
       - MYSQL_DATABASE=yona-cms
@@ -46,6 +49,22 @@ services:
     networks:
       app_net:
         ipv4_address: 172.10.0.5
+
+  phpmyadmin:
+    image: "phpmyadmin/phpmyadmin"
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+     - MYSQL_ROOT_PASSWORD=111
+     - MYSQL_USER=root
+    restart: always
+    ports:
+     - "8080:80"
+    volumes:
+     - /sessions
+    networks:
+      app_net:
+        ipv4_address: 172.10.0.6
 
 networks:
   app_net:

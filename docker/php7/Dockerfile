@@ -26,8 +26,8 @@ RUN wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/loca
 
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 
-# Ubuntu 16.04+ or Debian 9+
-RUN sudo apt-get install php7.0-phalcon
+# Phalcon
+RUN sudo apt-get install -y php7.0-phalcon
 
 RUN mkdir -p /yona-cms
 WORKDIR /yona-cms
