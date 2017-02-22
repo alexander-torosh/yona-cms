@@ -15,23 +15,23 @@ class IndexController extends Controller
 
     public function initialize()
     {
-        $this->cacheViewKey =  HOST_HASH . md5('Sitemap\Model\Sitemap');
+        $this->cacheViewKey = HOST_HASH . md5('Sitemap\Model\Sitemap');
 
         $this->models = [
             [
                 'class' => 'Publication',
                 'model' => 'Publication',
                 'where' => "", // preview_inner='0'  ,  etc.
-                'getLink' => function($model, $lang){
+                'getLink' => function ($model, $lang) {
                     return $this->langUrlCustom([
                         'for' => 'publication',
                         'type' => $model->getTypeSlug(),
                         'slug' => $model->getSlug()], $lang);
                 }
-            ],[
+            ], [
                 'class' => 'Page',
                 'model' => 'Page',
-                'getLink'      => function($model, $lang){
+                'getLink'      => function ($model, $lang) {
                     return $this->langUrlCustom([
                         'for' => 'page',
                         'slug' => $model->getSlug()], $lang);
@@ -43,19 +43,19 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $this->view->setRenderLevel( \Phalcon\Mvc\View::LEVEL_NO_RENDER );
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
         $cache = $this->getDi()->get('cache');
         $sitemap_xml = $cache->get($this->cacheViewKey);
 
-        if(!$sitemap_xml){
+        if (!$sitemap_xml) {
             $langs = Language::find(['columns' => 'iso,primary']);
 
             //link(s) for main-page(s)
-            foreach ($langs as $lang){
+            foreach ($langs as $lang) {
                 $suffix = !$lang['primary'] ? $lang['iso'] . '/' : '';
                 $this->links[] = [
-                    'url' => 'http://' . $_SERVER['HTTP_HOST'] .  '/' . $suffix,
-                    'updated_at' => date('c',time()),
+                    'url' => 'http://' . $_SERVER['HTTP_HOST'] . '/' . $suffix,
+                    'updated_at' => date('c', time()),
                 ];
             }
 
@@ -68,9 +68,9 @@ class IndexController extends Controller
                 foreach ($langs as $lang) {
                     foreach ($rows as $row) {
                         $row::setCustomLang($lang->iso);
-                        if($row->getSlug() !== 'index' && $row->getTitle()){
+                        if ($row->getSlug() !== 'index' && $row->getTitle()) {
                             $this->links[] = [
-                                'url'        => 'http://' . $_SERVER['HTTP_HOST'] .  $m['getLink']($row, $lang->iso),
+                                'url'        => 'http://' . $_SERVER['HTTP_HOST'] . $m['getLink']($row, $lang->iso),
                                 'updated_at' => date('c', strtotime($row->getUpdatedAt())),
                             ];
                         }
@@ -97,7 +97,7 @@ class IndexController extends Controller
 
     private function getRawXml()
     {
-        $this->view->setRenderLevel( \Phalcon\Mvc\View::LEVEL_ACTION_VIEW );
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         $this->view->links = $this->links;
         $this->view->start();
         $this->view->setLayoutsDir('../views/');

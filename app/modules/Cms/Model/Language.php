@@ -35,8 +35,8 @@ class Language extends Model
         $validator = new Validation();
 
         /**
-        * ISO
-        */
+         * ISO
+         */
         $validator->add('iso', new Uniqueness([
             'model' => $this,
             "message" => "The inputted ISO language is existing"
@@ -47,8 +47,8 @@ class Language extends Model
         ]));
 
         /**
-        * Name
-        */
+         * Name
+         */
         $validator->add('name', new Uniqueness([
             'model' => $this,
             "message" => "The inputted name is existing"
@@ -59,8 +59,8 @@ class Language extends Model
         ]));
 
         /**
-        * URL
-        */
+         * URL
+         */
         $validator->add('url', new Uniqueness([
             'model' => $this,
             "message" => "The inputted URL is existing"
@@ -280,7 +280,7 @@ class Language extends Model
     }
 
     /**
-     * @param mixed $primary
+     * @param integer $primary
      */
     public function setPrimary($primary)
     {

@@ -46,10 +46,10 @@ class Category extends Model
     {
         $validator = new Validation();
         $validator->add('slug', new UniquenessValidator(
-           [
-               "model"   => $this,
-               "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
-           ]
+            [
+                "model"   => $this,
+                "message" => "Category with slug '" . $this->slug . "' is already exists. Take another title"
+            ]
         ));
         return $this->validate($validator);
     }

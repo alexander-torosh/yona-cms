@@ -20,9 +20,9 @@ class PageHelper extends Page
             $slug,
             $lang
 
-        ], function() use ($slug, $lang, $lifeTime) {
+        ], function () use ($slug, $lang, $lifeTime) {
             $columns = ['p.*'];
-            foreach($this->translateFields as $field) {
+            foreach ($this->translateFields as $field) {
                 $columns[] = "(SELECT t.value FROM [$this->translateModel] AS t WHERE t.foreign_id = p.id AND t.lang = '$lang' AND t.key = '$field') AS $field";
             }
 

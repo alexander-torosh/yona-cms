@@ -250,7 +250,7 @@ class Type extends Model
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getLimit()
     {
@@ -326,7 +326,7 @@ class Type extends Model
     }
 
     /**
-     * @param mixed $display_date
+     * @param integer $display_date
      */
     public function setDisplayDate($display_date)
     {

@@ -20,7 +20,7 @@ class PublicationHelper extends Publication
             $slug,
             $lang
 
-        ], function() use ($slug, $lang, $lifeTime) {
+        ], function () use ($slug, $lang, $lifeTime) {
             $columns = [
                 'p.*',
                 't_slug' => 't.slug'
@@ -47,7 +47,7 @@ class PublicationHelper extends Publication
         $lang = ($lang) ? $lang : LANG;
         
         $fields = [];
-        foreach($this->translateFields as $field) {
+        foreach ($this->translateFields as $field) {
             $fields[] = "(SELECT tr.value FROM [$this->translateModel] AS tr WHERE tr.foreign_id = p.id AND tr.lang = '$lang' AND tr.key = '$field') AS $field";
         }
         return $fields;

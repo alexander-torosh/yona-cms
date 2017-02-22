@@ -18,6 +18,9 @@ abstract class Form extends \Phalcon\Forms\Form
 
     protected $helper;
 
+    /**
+     * @param string $name
+     */
     public function renderDecorated($name)
     {
         if (!$this->has($name)) {
@@ -90,6 +93,9 @@ abstract class Form extends \Phalcon\Forms\Form
         return $html;
     }
 
+    /**
+     * @param \Phalcon\Forms\ElementInterface|null $element
+     */
     private function makeLabel($element)
     {
         if ($element->getLabel()) {
