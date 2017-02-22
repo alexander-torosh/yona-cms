@@ -146,6 +146,9 @@ class AdminController extends Controller
         $this->helper->title($this->helper->at('Unpublishing'), true);
     }
 
+    /**
+     * @param Publication|null $model
+     */
     private function uploadImage($model)
     {
         if ($this->request->isPost()) {

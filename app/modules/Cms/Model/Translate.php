@@ -7,7 +7,6 @@
 namespace Cms\Model;
 
 use Yona\Mvc\Helper\CmsCache;
-use Phalcon\DI;
 use Phalcon\Mvc\Model;
 
 class Translate extends Model
@@ -34,6 +33,9 @@ class Translate extends Model
         return $translates[$lang];
     }
 
+    /**
+     * @param string $phrase
+     */
     public function findByPhraseAndLang($phrase, $lang = null)
     {
         if (!$lang) {
@@ -53,7 +55,7 @@ class Translate extends Model
     {
         $save = [];
         $languages = Language::find();
-        foreach($languages as $lang) {
+        foreach ($languages as $lang) {
             $save[$lang->getIso()] = [""=>""];
         }
 
@@ -97,7 +99,7 @@ class Translate extends Model
     }
 
     /**
-     * @param mixed $phrase
+     * @param string $phrase
      */
     public function setPhrase($phrase)
     {

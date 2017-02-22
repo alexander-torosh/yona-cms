@@ -8,10 +8,10 @@
 
 namespace YonaCMS\Plugin;
 
-use Phalcon\Mvc\Dispatcher,
-    Phalcon\Mvc\User\Plugin,
-    Phalcon\Mvc\View,
-    Yona\Acl\DefaultAcl;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\User\Plugin;
+use Phalcon\Mvc\View;
+use Yona\Acl\DefaultAcl;
 
 class Acl extends Plugin
 {
@@ -53,6 +53,10 @@ class Acl extends Plugin
 
     }
 
+    /**
+     * @param string $resourceKey
+     * @param string $resourceVal
+     */
     private function accessDenied($role, $resourceKey = null, $resourceVal = null, View $view)
     {
         if (in_array($role, ['guest', 'member'])) {
@@ -71,6 +75,9 @@ class Acl extends Plugin
         exit;
     }
 
+    /**
+     * @param string $resourceKey
+     */
     private function resourceNotFound($resourceKey, View $view)
     {
         $view->setViewsDir(__DIR__ . '/../modules/Index/views/');
@@ -84,6 +91,9 @@ class Acl extends Plugin
         exit;
     }
 
+    /**
+     * @param string $url
+     */
     private function redirect($url, $code = 302)
     {
         switch ($code) {

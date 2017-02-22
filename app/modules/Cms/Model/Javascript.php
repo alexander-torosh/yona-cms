@@ -1,8 +1,8 @@
 <?php
 /**
-     * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
-     * @author Aleksandr Torosh <webtorua@gmail.com>
-     */
+ * @copyright Copyright (c) 2011 - 2014 Aleksandr Torosh (http://wezoom.net)
+ * @author Aleksandr Torosh <webtorua@gmail.com>
+ */
 
 namespace Cms\Model;
 

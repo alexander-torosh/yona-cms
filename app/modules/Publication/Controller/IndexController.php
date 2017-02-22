@@ -22,7 +22,7 @@ class IndexController extends Controller
         $typeLimit = ($typeModel->getLimit()) ? $typeModel->getLimit() : 10;
         $limit     = $this->request->getQuery('limit', 'string', $typeLimit);
         if ($limit != 'all') {
-            $paginatorLimit = (int)$limit;
+            $paginatorLimit = (int) $limit;
         } else {
             $paginatorLimit = 9999;
         }

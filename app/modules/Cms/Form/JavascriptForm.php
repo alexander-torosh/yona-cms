@@ -8,7 +8,6 @@ namespace Cms\Form;
 
 use Yona\Form\Form;
 use Phalcon\Forms\Element\TextArea;
-use Phalcon\Forms\Element\Hidden;
 
 class JavascriptForm extends Form
 {

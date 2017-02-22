@@ -14,7 +14,7 @@ define('APPLICATION_ENV', $applicationEnv);
 define('APPLICATION_PATH', __DIR__ . '/../app');
 
 // Composer autoload
-require_once __DIR__. '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 require_once __DIR__ . '/../app/Bootstrap.php';
 $bootstrap = new YonaCMS\Bootstrap();

@@ -350,6 +350,9 @@ class Storage extends Component
         $this->saveImage($image, $originalAbsPath);
     }
 
+    /**
+     * @param string $originalAbsPath
+     */
     private function checkOriginalExists($originalAbsPath)
     {
         if (!file_exists($originalAbsPath)) {
@@ -362,6 +365,9 @@ class Storage extends Component
         }
     }
 
+    /**
+     * @param string $originalAbsPath
+     */
     private function saveImage($image, $originalAbsPath)
     {
         // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами

@@ -6,7 +6,6 @@
 
 namespace Admin\Model;
 use Phalcon\Validation;
-use Phalcon\Validation\Validator\Email as EmailValidator;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 use stdClass;
 
@@ -45,20 +44,20 @@ class AdminUser extends \Phalcon\Mvc\Model
     public function validation()
     {
 
-       $validator = new Validation();
-       $validator->add('login', new UniquenessValidator(
-           [
-               "model"   => $this,
-               "message" => $this->getDi()->get('helper')->translate("The Login must be unique")
-           ]
-       ));
-       $validator->add('email', new UniquenessValidator(
-           [
-               "model"   => $this,
-               "message" => $this->getDi()->get('helper')->translate("The Email must be unique")
-           ]
-       ));
-       return $this->validate($validator);
+        $validator = new Validation();
+        $validator->add('login', new UniquenessValidator(
+            [
+                "model"   => $this,
+                "message" => $this->getDi()->get('helper')->translate("The Login must be unique")
+            ]
+        ));
+        $validator->add('email', new UniquenessValidator(
+            [
+                "model"   => $this,
+                "message" => $this->getDi()->get('helper')->translate("The Email must be unique")
+            ]
+        ));
+        return $this->validate($validator);
     }
 
     public function getId()
@@ -145,6 +144,9 @@ class AdminUser extends \Phalcon\Mvc\Model
         }
     }
 
+    /**
+     * @param integer $active
+     */
     public function setActive($active)
     {
         $this->active = $active;

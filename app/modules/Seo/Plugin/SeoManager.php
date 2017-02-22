@@ -35,6 +35,9 @@ class SeoManager extends Plugin
         }
     }
 
+    /**
+     * @param string|null $url
+     */
     private function matchingUrl($url)
     {
         $urls = Manager::urls();

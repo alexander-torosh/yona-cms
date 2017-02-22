@@ -13,6 +13,9 @@ class AbstractWidget extends \Phalcon\Mvc\User\Component
 
     private $module;
 
+    /**
+     * @param string $template
+     */
     public function widgetPartial($template, array $data = array())
     {
         return $this->helper->modulePartial($template, $data, $this->module);

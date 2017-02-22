@@ -40,7 +40,7 @@ class Model extends \Phalcon\Mvc\Model
     {
         if ($this->translateModel && defined('LANG')) {
             // Если есть массив переводов и установлена константа активного языка или другого языка
-            if(self::$custom_lang){
+            if (self::$custom_lang) {
                 self::setLang(self::$custom_lang);
             } else {
                 self::setLang(LANG); // Устанавливаем текущий язык

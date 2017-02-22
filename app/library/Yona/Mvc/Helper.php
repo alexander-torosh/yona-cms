@@ -62,6 +62,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     /**
      * Мультиязычный перевод строки по сайту/пользовательской_части
+     * @param string $string
      */
     public function translate($string, $placeholders = null)
     {
@@ -74,6 +75,7 @@ class Helper extends \Phalcon\Mvc\User\Component
 
     /**
      * Мультиязычный перевод строки по админке
+     * @param string $string
      */
     public function at($string, $placeholders = null)
     {

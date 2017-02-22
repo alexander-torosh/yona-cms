@@ -90,6 +90,10 @@ class Bootstrap
 
     }
 
+    /**
+     * @param \Phalcon\Mvc\Application $application
+     * @param \Phalcon\Di\FactoryDefault $di
+     */
     private function initRouting($application, $di)
     {
         $router = new \Yona\Mvc\Router\DefaultRouter();
@@ -108,6 +112,9 @@ class Bootstrap
         $di->set('router', $router);
     }
 
+    /**
+     * @param \Phalcon\Di\FactoryDefault $di
+     */
     private function initEventManager($di)
     {
         $eventsManager = new \Phalcon\Events\Manager();
@@ -147,6 +154,9 @@ class Bootstrap
         $di->set('dispatcher', $dispatcher);
     }
 
+    /**
+     * @param \Phalcon\Di\FactoryDefault $di
+     */
     private function initView($di)
     {
         $view = new \Phalcon\Mvc\View();
@@ -176,6 +186,9 @@ class Bootstrap
         return $view;
     }
 
+    /**
+     * @param \Phalcon\Di\FactoryDefault $di
+     */
     private function initCache($di)
     {
         $config = $di->get('config');
@@ -218,6 +231,9 @@ class Bootstrap
         $di->set('cacheManager', new CacheManager());
     }
 
+    /**
+     * @param \Phalcon\Di\FactoryDefault $di
+     */
     private function dispatch($di)
     {
         $router = $di['router'];
