@@ -6,8 +6,8 @@ All frontend assets will be rewritten.
 
 # Yona CMS
 
-[![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=php7.0)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/php7.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=php7.0)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=php7.0)
 
 Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 3.x supported)
 

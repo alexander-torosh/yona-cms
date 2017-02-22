@@ -27,7 +27,6 @@ class Storage extends Component
     private $strategy = 'w';
     private $width = 100;
     private $height = null;
-    private $container = false;
     private $hash = false;
     private $attributes = [];
     private $exists = true;
@@ -41,7 +40,6 @@ class Storage extends Component
 
         $this->type = (isset($params['type'])) ? $params['type'] : 'publication';
         $this->strategy = (isset($params['strategy'])) ? $params['strategy'] : 'w';
-        $this->container = (isset($params['container'])) ? $params['container'] : false;
         $this->image_hash = (isset($params['image_hash'])) ? $params['image_hash'] : null;
         $this->hash = (isset($params['hash'])) ? $params['hash'] : false;
 
@@ -98,10 +96,6 @@ class Storage extends Component
 
         $attr_src = 'src="' . $this->config->base_path . $src . '"';
         $result = '<img ' . $attr_src . $this->attributesResultForImageHtml($attributes) . '/>';
-
-        if ($this->container) {
-            $result = '<div class="img-container" style="width:' . $this->width . 'px; height:' . $this->height . 'px">' . $result . '</div>';
-        }
 
         return $result;
     }
