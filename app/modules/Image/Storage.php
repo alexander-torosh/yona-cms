@@ -94,12 +94,12 @@ class Storage extends Component
             $this->attributes['height'] = $this->height;
         }
 
-        $attr_src = 'src="' . $this->config->base_path . $src . '"';
+        $attr_src = 'src="' . $this->getDi()->get('config')->base_path . $src . '"';
         $result = '<img ' . $attr_src . $this->attributesResultForImageHtml($this->attributes) . '/>';
 
         return $result;
     }
-    
+
     private function attributesForImageHtml()
     {
         if ($this->widthHeight) {
