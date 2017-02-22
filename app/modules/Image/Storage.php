@@ -79,7 +79,7 @@ class Storage extends Component
     public function imageHtml()
     {
         //Из заданных параметров и атрибутов составляем html-тэг
-        $attributes = $this->attributesForImageHtml();
+        $this->attributesForImageHtml();
 
         // Получаем относительный адрес файла кешированного изображения
         $src = $this->cachedRelPath();
@@ -90,16 +90,16 @@ class Storage extends Component
             }
         } else {
             $src = NOIMAGE;
-            $attributes['width'] = $this->width;
-            $attributes['height'] = $this->height;
+            $this->attributes['width'] = $this->width;
+            $this->attributes['height'] = $this->height;
         }
 
         $attr_src = 'src="' . $this->config->base_path . $src . '"';
-        $result = '<img ' . $attr_src . $this->attributesResultForImageHtml($attributes) . '/>';
+        $result = '<img ' . $attr_src . $this->attributesResultForImageHtml($this->attributes) . '/>';
 
         return $result;
     }
-
+    
     private function attributesForImageHtml()
     {
         if ($this->widthHeight) {
@@ -502,7 +502,6 @@ class Storage extends Component
         $lockFileName = $this->getLockFileName($originalAbsPath);
         if (file_exists($lockFileName)) {
             return false;
-
         } else {
             $handle = fopen($lockFileName, 'w+');
             if (flock($handle, LOCK_EX)) {
@@ -510,7 +509,6 @@ class Storage extends Component
                 flock($handle, LOCK_UN);
                 fclose($handle);
                 return true;
-
             } else {
                 if ($handle) {
                     fclose($handle);
