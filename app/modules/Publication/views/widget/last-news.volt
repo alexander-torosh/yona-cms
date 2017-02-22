@@ -5,15 +5,15 @@
         <div class="items">
             {% for item in entries %}
                 {% set url = helper.langUrl([
-                'for':'publication',
-                'type':item.t_slug,
-                'slug':item.p.getSlug()
+                    'for':'publication',
+                    'type':item.t_slug,
+                    'slug':item.p.getSlug()
                 ]) %}
                 {% set image = helper.image([
-                'id':item.p.getId(),
-                'type':'publication',
-                'width': 100,
-                'strategy': 'w'
+                    'id':item.p.getId(),
+                    'type':'publication',
+                    'width': 100,
+                    'strategy': 'w'
                 ],[
                 'alt':item.title|escape_attr
                 ]) %}

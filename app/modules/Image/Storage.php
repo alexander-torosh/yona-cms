@@ -170,14 +170,16 @@ class Storage extends Component
             // Генерируем кеш-файл по заданным параметрам
             $this->generateCachedImage();
         }
-        return IMG_STORAGE_SERVER . $cachedRelPath;
 
+        return IMG_STORAGE_SERVER . $cachedRelPath;
     }
 
+    /**
+     * @return string
+     */
     public function cachedAbsPath()
     {
         return IMG_ROOT_PATH . $this->cachedRelPath();
-
     }
 
     /**
@@ -186,7 +188,6 @@ class Storage extends Component
     public function originalRelPath()
     {
         return IMG_STORAGE_SERVER . $this->calculateOriginalRelPath();
-
     }
 
     /**
@@ -194,10 +195,13 @@ class Storage extends Component
      */
     public function originalAbsPath()
     {
-        return $this->getOriginalAbsPath();
-
+        return $this->getAbsPath(true);
     }
 
+    /**
+     * @param $file
+     * @return bool
+     */
     public function save($file)
     {
         if (file_exists($file)) {
@@ -205,6 +209,9 @@ class Storage extends Component
         }
     }
 
+    /**
+     * @return array
+     */
     public function originalWidthHeight()
     {
         $imageSize = getimagesize($this->originalAbsPath());
@@ -214,25 +221,25 @@ class Storage extends Component
                 'height' => $imageSize[1]
             ];
         }
-
     }
 
+    /**
+     * @return int
+     */
     public function cachedFileSize()
     {
         $path = $this->cachedAbsPath();
         if (file_exists($path)) {
             return filesize($path);
         }
-
     }
 
+    /**
+     * @return bool
+     */
     public function isExists()
     {
-        if (file_exists($this->getOriginalAbsPath())) {
-            return true;
-        } else {
-            return false;
-        }
+        return (file_exists($this->getAbsPath(true))) ? true : false ;
     }
 
     /**
@@ -260,29 +267,30 @@ class Storage extends Component
         }
         if (in_array($this->strategy, self::$STRATEGIES)) {
             $fileParts[] = $this->strategy;
+
+            $fileParts[] = $this->width;
+            if ($this->height) {
+                $fileParts[] = $this->height;
+            }
+
+            // "img/preview/405"
+            $path = implode(DIR_SEP, $pathParts);
+            // "405102_1_w_100"
+            $file = implode('_', $fileParts);
+
+            return $path . DIR_SEP . $file . '.jpg';
+
         } else {
             if (IMG_DEBUG_MODE) {
                 throw new \Exception("Параметр 'strategy' указан неверно");
             }
-            return;
         }
-        $fileParts[] = $this->width;
-        if ($this->height) {
-            $fileParts[] = $this->height;
-        }
-
-        // "img/preview/405"
-        $path = implode(DIR_SEP, $pathParts);
-        // "405102_1_w_100"
-        $file = implode('_', $fileParts);
-
-        return $path . DIR_SEP . $file . '.jpg';
-
     }
 
     /**
      * Рассчитываем по входящим параметрам относительный путь к оригинальному файлу
      * /img/original/preview/405/405102_1.jpg
+     * @return string
      */
     private function calculateOriginalRelPath()
     {
@@ -310,11 +318,11 @@ class Storage extends Component
         $file = implode('_', $fileParts);
 
         return $path . DIR_SEP . $file . '.jpg';
-
     }
 
     /**
      * генерируем кеш-файл по заданным параметрам
+     * @throws \Exception
      */
     private function generateCachedImage()
     {
@@ -347,6 +355,13 @@ class Storage extends Component
         $this->saveImage($image, $originalAbsPath);
     }
 
+    /**
+     * @param $left
+     * @param $top
+     * @param $width
+     * @param $height
+     * @throws \Exception
+     */
     public function cropOriginal($left, $top, $width, $height)
     {
         $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath(); // Абсолютный путь оригинального изображения
@@ -360,7 +375,8 @@ class Storage extends Component
     }
 
     /**
-     * @param string $originalAbsPath
+     * @param $originalAbsPath
+     * @throws \Exception
      */
     private function checkOriginalExists($originalAbsPath)
     {
@@ -370,19 +386,20 @@ class Storage extends Component
             } else {
                 $this->exists = false;
             }
-            return;
         }
     }
 
     /**
-     * @param string $originalAbsPath
+     * @param $image
+     * @param $originalAbsPath
+     * @throws \Exception
      */
     private function saveImage($image, $originalAbsPath)
     {
         // Если оригинал не заблокирован, блокируем. Это необходимо для предотвращения множественной генерации кеш-файла параллельными запросами
         if ($this->lockOriginal($originalAbsPath)) {
             // Сохраняем кешированное изображение
-            $image->save($this->getCachedAbsPath());
+            $image->save($this->getAbsPath(false));
             // Снимаем блокировку
             $this->unlockOriginal($originalAbsPath);
         } else {
@@ -391,12 +408,12 @@ class Storage extends Component
             } else {
                 $this->exists = false;
             }
-            return;
         }
     }
 
     /**
      * Удаляет оригинальные и кешированные изображения
+     * @param bool $removeAll
      */
     public function remove($removeAll = true)
     {
@@ -406,6 +423,7 @@ class Storage extends Component
 
     /**
      * Удаляет оригинальные изображения
+     * @param bool $removeAll
      */
     public function removeOriginal($removeAll = true)
     {
@@ -413,22 +431,21 @@ class Storage extends Component
             if (file_exists($this->originalAbsPath())) {
                 unlink($this->originalAbsPath());
             }
-            return;
-        }
-
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
-        $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1)); // Абсолютный путь директории
-
-        if ($this->image_hash) {
-            $search = $originalAbsPathDir . "/" . $this->id . "_*.jpg";
         } else {
-            $search = $originalAbsPathDir . "/" . $this->id . ".jpg";
-        }
-        $files = glob($search);
-        if (!empty($files)) {
-            foreach ($files as $file) {
-                if (is_file($file)) {
-                    unlink($file);
+            $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
+            $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1)); // Абсолютный путь директории
+
+            if ($this->image_hash) {
+                $search = $originalAbsPathDir . "/" . $this->id . "_*.jpg";
+            } else {
+                $search = $originalAbsPathDir . "/" . $this->id . ".jpg";
+            }
+            $files = glob($search);
+            if (!empty($files)) {
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
                 }
             }
         }
@@ -485,6 +502,7 @@ class Storage extends Component
         $lockFileName = $this->getLockFileName($originalAbsPath);
         if (file_exists($lockFileName)) {
             return false;
+
         } else {
             $handle = fopen($lockFileName, 'w+');
             if (flock($handle, LOCK_EX)) {
@@ -492,6 +510,7 @@ class Storage extends Component
                 flock($handle, LOCK_UN);
                 fclose($handle);
                 return true;
+
             } else {
                 if ($handle) {
                     fclose($handle);
@@ -521,41 +540,24 @@ class Storage extends Component
     }
 
     /**
-     * Возвращает абсолютный путь к оригинальному изображению.
-     * При необходимости генерируется дерево директорий для сохранения оригинальных файлов
+     * @param bool $original
+     * @return string
+     * @throws \Exception
      */
-    private function getOriginalAbsPath()
+    private function getAbsPath($original = true)
     {
-        $originalAbsPath = IMG_ROOT_PATH . $this->calculateOriginalRelPath();
+        $absPath = IMG_ROOT_PATH . (($original) ? $this->calculateOriginalRelPath() : $this->calculateCachedRelPath());
+
         // Абсолютный путь директории
-        $originalAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $originalAbsPath), 0, -1));
+        $absPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $absPath), 0, -1));
 
         // Если директория отсутствует
-        if (!is_dir($originalAbsPathDir)) {
+        if (!is_dir($absPathDir)) {
             // Создаем дерево директорий
-            mkdir($originalAbsPathDir, 0777, true);
+            mkdir($absPathDir, 0777, true);
         }
 
-        return $originalAbsPath;
-    }
-
-    /**
-     * Возвращает абсолютный путь к кешированному изображению.
-     * При необходимости генерируется дерево директорий для сохранения кеш-файлов
-     */
-    private function getCachedAbsPath()
-    {
-        $cachedAbsPath = IMG_ROOT_PATH . $this->calculateCachedRelPath();
-        // Абсолютный путь директории
-        $cachedAbsPathDir = implode(DIR_SEP, array_slice(explode(DIR_SEP, $cachedAbsPath), 0, -1));
-
-        // Если директория отсутствует
-        if (!is_dir($cachedAbsPathDir)) {
-            // Создаем дерево директорий
-            mkdir($cachedAbsPathDir, 0777, true);
-        }
-        return $cachedAbsPath;
-
+        return $absPath;
     }
 
 }
