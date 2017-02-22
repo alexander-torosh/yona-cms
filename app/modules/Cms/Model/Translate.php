@@ -107,7 +107,7 @@ class Translate extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPhrase()
     {

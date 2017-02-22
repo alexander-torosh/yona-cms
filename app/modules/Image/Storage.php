@@ -109,8 +109,7 @@ class Storage extends Component
             $this->changeAttributesInAccordanceWithStretch();
         }
         $this->attributes['alt'] = (isset($this->attributes['alt'])) ?
-            htmlspecialchars($this->attributes['alt'], ENT_QUOTES) :
-            '';
+            htmlspecialchars($this->attributes['alt'], ENT_QUOTES) : '';
     }
 
     private function changeAttributesInAccordanceWithStretch()
@@ -239,7 +238,7 @@ class Storage extends Component
      */
     public function isExists()
     {
-        return (file_exists($this->getAbsPath(true))) ? true : false ;
+        return (file_exists($this->getAbsPath(true))) ? true : false;
     }
 
     /**

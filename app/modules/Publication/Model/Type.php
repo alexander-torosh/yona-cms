@@ -335,7 +335,7 @@ class Type extends Model
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getDisplayDate()
     {
