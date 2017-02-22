@@ -108,30 +108,45 @@ class Storage extends Component
 
     private function attributesForImageHtml()
     {
-        $attributes = $this->attributes;
         if ($this->widthHeight) {
             if ($this->stretch && in_array($this->strategy, ['wh', 'a'])) {
                 $this->stretch = false;
             }
-            if ($this->stretch) {
-                if ($this->width) {
-                    $attributes['width'] = $this->width;
-                }
-                if ($this->height) {
-                    $attributes['height'] = $this->height;
-                }
-            } else {
-                $widthHeight = $this->getImageWidthHeight();
-                if ($widthHeight['width']) {
-                    $attributes['width'] = $widthHeight['width'];
-                }
-                if ($widthHeight['height']) {
-                    $attributes['height'] = $widthHeight['height'];
-                }
-            }
+            $this->changeAttributesInAccordanceWithStretch();
         }
-        $attributes['alt'] = (isset($attributes['alt'])) ? htmlspecialchars($attributes['alt'], ENT_QUOTES) : '';
-        return $attributes;
+        $this->attributes['alt'] = (isset($this->attributes['alt'])) ?
+            htmlspecialchars($this->attributes['alt'], ENT_QUOTES) :
+            '';
+    }
+
+    private function changeAttributesInAccordanceWithStretch()
+    {
+        if ($this->stretch) {
+            $this->changeAttributesForStretch();
+        } else {
+            $this->changeAttributesWithoutStretch();
+        }
+    }
+
+    private function changeAttributesForStretch()
+    {
+        if ($this->width) {
+            $this->attributes['width'] = $this->width;
+        }
+        if ($this->height) {
+            $this->attributes['height'] = $this->height;
+        }
+    }
+
+    private function changeAttributesWithoutStretch()
+    {
+        $widthHeight = $this->getImageWidthHeight();
+        if ($widthHeight['width']) {
+            $this->attributes['width'] = $widthHeight['width'];
+        }
+        if ($widthHeight['height']) {
+            $this->attributes['height'] = $widthHeight['height'];
+        }
     }
 
     private function attributesResultForImageHtml($attributes)
