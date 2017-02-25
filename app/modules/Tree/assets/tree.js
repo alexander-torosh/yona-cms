@@ -2,6 +2,7 @@ $(function () {
 
   var treeCategories = $("#tree-categories");
   console.log(treeCategories);
+  
   if (treeCategories) {
     initNestedSortable();
 

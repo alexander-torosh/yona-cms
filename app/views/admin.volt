@@ -16,12 +16,12 @@
 
     <script src="{{ url.path() }}vendor/js/jquery-1.11.0.min.js"></script>
     <script src="{{ url.path() }}vendor/semantic-2.1/semantic.min.js"></script>
-    <script src="{{ url.path() }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <script src="{{ url.path() }}vendor/js/jquery.address.js"></script>
     <script src="{{ url.path() }}vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
-    <script src="{{ url.path() }}vendor/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-    <script src="{{ url.path() }}vendor/js/jquery.mjs.nestedSortable.js"></script>
+
+    {# cusom connected CSS files/libraries #}
+    {{ assets.outputCss() }}
 
     {{ stylesheet_link(helper.stylesBundlePath('admin')) }}
 
@@ -49,6 +49,10 @@
 
     </div>
 
+    {# cusom connected JS files/libraries #}
+    {{ assets.outputJs() }}
+
+    {# compilled webpack scripts bundle #}
     {{ javascript_include(helper.scriptsBundlePath('admin')) }}
 
 </body>

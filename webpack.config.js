@@ -46,6 +46,10 @@ var JavaScriptConfig = {
   ]
 };
 
+if (process.env.NODE_ENV == 'development') {
+  JavaScriptConfig['devtool'] = "cheap-eval-source-map";
+}
+
 const extractSass = new ExtractTextPlugin({
   filename: "[chunkhash].[name].css"
 });
@@ -81,25 +85,6 @@ var StylesheetConfig = {
           path.join(path.resolve(__dirname, 'data', 'assets'), "styles.json"),
           JSON.stringify(stats.toJson())
         );
-
-        // Remove old dist files
-        /*try {
-         var files = fs.readdirSync(DIST_PATH);
-         } catch (e) {
-         console.log(e);
-         return;
-         }
-         if (files.length > 0) {
-         for (var i = 0; i < files.length; i++) {
-         var filePath = DIST_PATH + '/' + files[i];
-         if (fs.statSync(filePath).isFile()) {
-         if (path.extname(filePath) == '.css') {
-         //fs.unlinkSync(filePath);
-         //console.log('removed ' + filePath);
-         }
-         }
-         }
-         }*/
       });
     }
   ]

@@ -1,6 +1,7 @@
 .idea/
 vendor/
 node_modules/
+public/components/
 
 composer.lock
 composer.phar

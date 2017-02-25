@@ -1,3 +1,1 @@
-(function(){
-  require('./admin/admin.js');
-});
+require('./admin/admin.js');

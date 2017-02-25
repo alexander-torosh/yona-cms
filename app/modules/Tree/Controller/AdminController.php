@@ -24,6 +24,9 @@ class AdminController extends Controller
         $this->setAdminEnvironment();
         $this->view->roots = Category::$roots;
 
+        $this->assets->addJs('components/jquery-ui/jquery-ui.min.js');
+        $this->assets->addJs('components/nestedSortable/jquery.ui.nestedSortable.js');
+
         $this->helper->title($this->helper->at('Tree Categories'), true);
     }
 

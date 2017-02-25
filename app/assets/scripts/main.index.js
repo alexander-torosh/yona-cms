@@ -1,3 +1,1 @@
-(function(){
-  require('./main/main.js');
-});
+require('./main/main.js');

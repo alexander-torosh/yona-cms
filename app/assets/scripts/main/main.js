@@ -1,5 +1,5 @@
-require('bootstrap');
+"use strict";
 
-document.addEventListener("DOMContentLoaded", function(event) {
-
+$(function(){
+  console.log('main');
 });

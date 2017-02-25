@@ -117,7 +117,7 @@ abstract class Form extends \Phalcon\Forms\Form
             $html .= '<label>' . $element->getLabel() . '</label>';
         }
         if ($element->getValue()) {
-            $html .= '<section onclick="selectText(this);">' . $element->getValue() . '</section>';
+            $html .= '<section class="select-text">' . $element->getValue() . '</section>';
         } else {
             $html .= '<br>';
         }
