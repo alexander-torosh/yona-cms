@@ -35,7 +35,7 @@ class Helper extends \Phalcon\Mvc\User\Component
             $name
 
         ], function () use ($name) {
-            $file = file_get_contents(ROOT . '/../data/assets/scripts.json');
+            $file = file_get_contents(APPLICATION_PATH . '/data/assets/scripts.json');
 
             $json = json_decode($file, true);
             $path = $json['assetsByChunkName'][$name];
@@ -51,7 +51,7 @@ class Helper extends \Phalcon\Mvc\User\Component
             $name
 
         ], function () use ($name) {
-            $file = file_get_contents(ROOT . '/../data/assets/styles.json');
+            $file = file_get_contents(APPLICATION_PATH . '/data/assets/styles.json');
 
             $json = json_decode($file, true);
             $path = $json['assetsByChunkName'][$name][0];

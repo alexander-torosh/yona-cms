@@ -53,9 +53,29 @@ If you have error with **autoload.php** file, the reason - missed **composer upd
 
 [How to install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
+### Node.js
+
+Yona CMS uses Node.js for managing assets and frontend libraries/packages.
+[Download and install Node.js](https://nodejs.org/en/download/)
+
+### Bower
+
+If we need just public shared JS/CSS library without additional complexity, we're using Bower.
+Install if not installed yet:
+
+    sudo npm install -g bower
+    
+Then install bower dependencies:
+
+    bower install
+    
+#### Updating bower libraries/packages
+
+    bower update
+
 ### NPM
 
-Yona CMS uses modern Node.js npm libraries and packing js/css assets via powerful `webpack` tool.
+Yona CMS uses modern npm libraries and packing js/css assets via powerful `webpack` tool.
 
 Install npm dependencies:
 
@@ -73,6 +93,10 @@ Development. Run webpack listener for generating assets on files changes
 
     webpack -d --watch
     
+#### Updating npm libraries/packages
+
+    npm update
+    
 ### Checking your installation
 
 Open http://localhost:8000 and check Yona CMS installation
@@ -84,10 +108,11 @@ Open http://localhost:8000 and check Yona CMS installation
 ### Permissions
 
 ```
-chmod a+w data -R
+chmod a+w app/data -R
 chmod a+w public/assets -R
 chmod a+w public/img -R
 chmod a+w public/robots.txt
+chmod a+w public/sitemap.txt
 ```
 
 ### Nginx
@@ -156,7 +181,7 @@ Import MySQL dump file **yona-cms.sql**
 https://phinx.org/
 Library for creation, executing and rollback migrations
 
-Creation migration class in /data/migrations
+Creation migration class in `app/data/migrations`
 ```
 php vendor/bin/phinx create NewMigrationName
 ```

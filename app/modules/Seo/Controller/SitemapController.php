@@ -44,6 +44,10 @@ class SitemapController extends Controller
         $this->helper->title($title);
         $this->view->title = $title;
         $this->view->form = $form;
+
+        $this->assets
+            ->addJs('components/codemirror/lib/codemirror.js')
+            ->addCss('components/codemirror/lib/codemirror.css');
     }
 
 }

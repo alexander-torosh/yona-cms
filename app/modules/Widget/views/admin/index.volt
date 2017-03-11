@@ -23,18 +23,19 @@
     </tbody>
 </table>
 
-<link rel="stylesheet" href="{{ url.get() }}vendor/codemirror-4.2/lib/codemirror.css">
-<script src="{{ url.get() }}vendor/codemirror-4.2/codemirror-compressed.js"></script>
-
 <script>
     $(function () {
-        CodeMirror.fromTextArea(document.querySelector('textarea'), {
-            lineNumbers: true,               // показывать номера строк
-            matchBrackets: true,             // подсвечивать парные скобки
-            mode: "htmlmixed", // стиль подсветки
-            indentUnit: 4,                    // размер табуляции
-            viewportMargin: Infinity,
-            readOnly: true
+        var elements = document.querySelectorAll('textarea');
+        $.each(elements, function(index, element){
+            var cm = CodeMirror.fromTextArea(element, {
+                lineNumbers: true,               // показывать номера строк
+                matchBrackets: true,             // подсвечивать парные скобки
+                mode: "htmlmixed",               // стиль подсветки
+                indentUnit: 4,                    // размер табуляции
+                viewportMargin: Infinity,
+                readOnly: true
+            });
+            cm.setSize('100%', '100px');
         });
     });
 </script>

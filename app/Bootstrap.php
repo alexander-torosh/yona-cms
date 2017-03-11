@@ -169,7 +169,7 @@ class Bootstrap
 
         // Volt
         $volt = new \Yona\Mvc\View\Engine\Volt($view, $di);
-        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/../data/cache/volt/']);
+        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/data/cache/volt/']);
         $volt->initCompiler();
 
 
@@ -202,7 +202,7 @@ class Bootstrap
         switch ($config->cache) {
             case 'file':
                 $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [
-                    "cacheDir" => APPLICATION_PATH . "/../data/cache/backend/"
+                    "cacheDir" => APPLICATION_PATH . "/data/cache/backend/"
                 ]);
                 break;
             case 'memcache':

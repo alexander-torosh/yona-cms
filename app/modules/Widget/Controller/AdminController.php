@@ -24,6 +24,9 @@ class AdminController extends Controller
 
         $this->helper->title($this->helper->at('Manage Widgets'), true);
 
+        $this->assets
+            ->addJs('components/codemirror/lib/codemirror.js')
+            ->addCss('components/codemirror/lib/codemirror.css');
     }
 
     public function addAction()
@@ -52,6 +55,9 @@ class AdminController extends Controller
         $this->view->title = $this->helper->at('Adding widget');
         $this->helper->title($this->view->title);
 
+        $this->assets
+            ->addJs('components/codemirror/lib/codemirror.js')
+            ->addCss('components/codemirror/lib/codemirror.css');
     }
 
     public function editAction($id)
@@ -85,6 +91,9 @@ class AdminController extends Controller
 
         $this->helper->title($this->helper->at('Editing widget'), true);
 
+        $this->assets
+            ->addJs('components/codemirror/lib/codemirror.js')
+            ->addCss('components/codemirror/lib/codemirror.css');
     }
 
     public function deleteAction($id)

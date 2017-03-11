@@ -1,0 +1,279 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "2.2.1",
+  "hash": "c3c86e10fe9623d1b481",
+  "time": 515,
+  "publicPath": "",
+  "assetsByChunkName": {
+    "admin": "ddd06d87e2889df39094.admin.js",
+    "main": "1d25c165105fd65629d9.main.js"
+  },
+  "assets": [
+    {
+      "name": "ddd06d87e2889df39094.admin.js",
+      "size": 9594,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "admin"
+      ],
+      "emitted": true
+    },
+    {
+      "name": "1d25c165105fd65629d9.main.js",
+      "size": 4140,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "emitted": true
+    }
+  ],
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "1d25c165105fd65629d9.main.js"
+      ]
+    },
+    "admin": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "ddd06d87e2889df39094.admin.js"
+      ]
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 1819,
+      "names": [
+        "admin"
+      ],
+      "files": [
+        "ddd06d87e2889df39094.admin.js"
+      ],
+      "hash": "ddd06d87e2889df39094",
+      "parents": [],
+      "origins": [
+        {
+          "moduleId": 3,
+          "module": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin.index.js",
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin.index.js",
+          "moduleName": "./app/assets/scripts/admin.index.js",
+          "loc": "",
+          "name": "admin",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 81,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "1d25c165105fd65629d9.main.js"
+      ],
+      "hash": "1d25c165105fd65629d9",
+      "parents": [],
+      "origins": [
+        {
+          "moduleId": 4,
+          "module": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main.index.js",
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main.index.js",
+          "moduleName": "./app/assets/scripts/main.index.js",
+          "loc": "",
+          "name": "main",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin/admin.js",
+      "name": "./app/assets/scripts/admin/admin.js",
+      "index": 3,
+      "index2": 3,
+      "size": 1324,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin.index.js",
+      "issuerId": 3,
+      "issuerName": "./app/assets/scripts/admin.index.js",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 3,
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin.index.js",
+          "module": "./app/assets/scripts/admin.index.js",
+          "moduleName": "./app/assets/scripts/admin.index.js",
+          "type": "cjs require",
+          "userRequest": "./admin/admin.js",
+          "loc": "1:0-27"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "'use strict';\n\n$(function () {\n\n  $('.ui.checkbox').checkbox();\n\n  $('.ui.dropdown').dropdown();\n\n  $('.ui.selection.dropdown').dropdown({\n    duration: 10\n  });\n\n  $('.ui.menu.init .item').tab();\n\n  $('[data-description]').each(function (index, element) {\n    var description = $(element).attr('data-description');\n    var descriptionElement = $('<div class=\"description\">');\n    descriptionElement.html(description);\n    $(element).after(descriptionElement);\n  });\n\n  $('.select-text').on('click', function() {\n    var selection = window.getSelection();\n    var range = document.createRange();\n    range.selectNodeContents(this);\n    selection.removeAllRanges();\n    selection.addRange(range);\n  });\n\n});\n\nrequire('./../../../modules/Tree/assets/TreeCategories.js');\n\nfunction elFinderBrowser_3(field_name, url, type, win) {\n  var elfinder_url = '/vendor/elfinder-2.1/elfinder_tinymce_3.html';    // use an absolute path!\n  tinyMCE.activeEditor.windowManager.open({\n    file: elfinder_url,\n    title: 'elFinder 2.0',\n    width: 900,\n    height: 450,\n    resizable: 'yes',\n    inline: 'yes',    // This parameter only has an effect if you use the inlinepopups plugin!\n    popup_css: false, // Disable TinyMCE's default popup CSS\n    close_previous: 'no'\n  }, {\n    window: win,\n    input: field_name\n  });\n  return false;\n}"
+    },
+    {
+      "id": 1,
+      "identifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main/main.js",
+      "name": "./app/assets/scripts/main/main.js",
+      "index": 1,
+      "index2": 0,
+      "size": 55,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1
+      ],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main.index.js",
+      "issuerId": 4,
+      "issuerName": "./app/assets/scripts/main.index.js",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 4,
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main.index.js",
+          "module": "./app/assets/scripts/main.index.js",
+          "moduleName": "./app/assets/scripts/main.index.js",
+          "type": "cjs require",
+          "userRequest": "./main/main.js",
+          "loc": "1:0-25"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "\"use strict\";\n\n$(function(){\n  console.log('main');\n});"
+    },
+    {
+      "id": 2,
+      "identifier": "/Users/oleksandr/www/yona-cms/app/modules/Tree/assets/TreeCategories.js",
+      "name": "./app/modules/Tree/assets/TreeCategories.js",
+      "index": 4,
+      "index2": 2,
+      "size": 467,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin/admin.js",
+      "issuerId": 0,
+      "issuerName": "./app/assets/scripts/admin/admin.js",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 0,
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin/admin.js",
+          "module": "./app/assets/scripts/admin/admin.js",
+          "moduleName": "./app/assets/scripts/admin/admin.js",
+          "type": "cjs require",
+          "userRequest": "./../../../modules/Tree/assets/TreeCategories.js",
+          "loc": "32:0-59"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 2,
+      "source": "'use strict';\n\nvar TreeCategories = function () {\n  var self = this;\n\n  self.init = function () {\n    $('.sortable').nestedSortable({\n      handle: 'div',\n      items: 'li',\n      toleranceElement: '> div'\n    });\n  }\n};\n\n$(function () {\n\n  var treeCategoriesElement = document.getElementById('tree-categories');\n  if (treeCategoriesElement) {\n    console.log(treeCategoriesElement);\n\n    var treeCategories = new TreeCategories();\n    treeCategories.init();\n  }\n\n});"
+    },
+    {
+      "id": 3,
+      "identifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/admin.index.js",
+      "name": "./app/assets/scripts/admin.index.js",
+      "index": 2,
+      "index2": 4,
+      "size": 28,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": "require('./admin/admin.js');"
+    },
+    {
+      "id": 4,
+      "identifier": "/Users/oleksandr/www/yona-cms/app/assets/scripts/main.index.js",
+      "name": "./app/assets/scripts/main.index.js",
+      "index": 0,
+      "index2": 1,
+      "size": 26,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": "require('./main/main.js');"
+    }
+  ],
+  "filteredModules": 0,
+  "children": []
+}

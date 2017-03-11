@@ -12,7 +12,7 @@ class CmsCache extends Component
 
     private static $instance = null;
 
-    const DIR = '/../data/cache/cms/';
+    const DIR = '/data/cache/cms/';
 
     public static function getInstance()
     {

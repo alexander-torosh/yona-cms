@@ -1,0 +1,526 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "2.2.1",
+  "hash": "daa2b89b6b08c0a119b0",
+  "time": 634,
+  "publicPath": "",
+  "assetsByChunkName": {
+    "main": [
+      "b810e0006cf590a134e3.main.css",
+      "b810e0006cf590a134e3.main.css"
+    ],
+    "admin": [
+      "b2f40218b070722392a6.admin.css",
+      "b2f40218b070722392a6.admin.css"
+    ]
+  },
+  "assets": [
+    {
+      "name": "b810e0006cf590a134e3.main.css",
+      "size": 5340,
+      "chunks": [
+        0,
+        0
+      ],
+      "chunkNames": [
+        "main",
+        "main"
+      ],
+      "emitted": true
+    },
+    {
+      "name": "b2f40218b070722392a6.admin.css",
+      "size": 1366,
+      "chunks": [
+        1,
+        1
+      ],
+      "chunkNames": [
+        "admin",
+        "admin"
+      ],
+      "emitted": true
+    }
+  ],
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "b810e0006cf590a134e3.main.css",
+        "b810e0006cf590a134e3.main.css"
+      ]
+    },
+    "admin": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "b2f40218b070722392a6.admin.css",
+        "b2f40218b070722392a6.admin.css"
+      ]
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 41,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "b810e0006cf590a134e3.main.css",
+        "b810e0006cf590a134e3.main.css"
+      ],
+      "hash": "b810e0006cf590a134e3",
+      "parents": [],
+      "origins": [
+        {
+          "moduleId": 1,
+          "module": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+          "moduleName": "./app/assets/styles/main.scss",
+          "loc": "",
+          "name": "main",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 41,
+      "names": [
+        "admin"
+      ],
+      "files": [
+        "b2f40218b070722392a6.admin.css",
+        "b2f40218b070722392a6.admin.css"
+      ],
+      "hash": "b2f40218b070722392a6",
+      "parents": [],
+      "origins": [
+        {
+          "moduleId": 0,
+          "module": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+          "moduleName": "./app/assets/styles/admin.scss",
+          "loc": "",
+          "name": "admin",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+      "name": "./app/assets/styles/admin.scss",
+      "index": 4,
+      "index2": 5,
+      "size": 41,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": "// removed by extract-text-webpack-plugin"
+    },
+    {
+      "id": 1,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+      "name": "./app/assets/styles/main.scss",
+      "index": 0,
+      "index2": 3,
+      "size": 41,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": "// removed by extract-text-webpack-plugin"
+    },
+    {
+      "id": 2,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+      "name": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+      "index": 5,
+      "index2": 4,
+      "size": 1596,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+      "issuerId": 0,
+      "issuerName": "./app/assets/styles/admin.scss",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "exports = module.exports = require(\"./../../../node_modules/css-loader/lib/css-base.js\")();\n// imports\n\n\n// module\nexports.push([module.id, \"body {\\n  padding: 10px; }\\n\\n.content {\\n  margin-left: 220px; }\\n\\n.field .description {\\n  margin-top: 0.3em;\\n  color: #999999;\\n  font-size: 13px; }\\n\\n#categories-list {\\n  position: absolute;\\n  background: white;\\n  border: 1px solid #cccccc;\\n  padding: 5px 10px;\\n  width: 200px;\\n  display: none;\\n  z-index: 100; }\\n  #categories-list > .remove {\\n    float: right;\\n    cursor: pointer;\\n    margin-right: -5px; }\\n  #categories-list a {\\n    color: #666666;\\n    line-height: 18px; }\\n  #categories-list ul {\\n    list-style: none;\\n    padding-left: 0;\\n    margin-top: 0; }\\n    #categories-list ul > li {\\n      font-size: 13px;\\n      line-height: 13px; }\\n    #categories-list ul ul {\\n      margin-top: 0px;\\n      padding-left: 20px; }\\n\\n.changelog {\\n  max-height: 480px;\\n  overflow: auto; }\\n  .changelog ul {\\n    list-style: disc;\\n    margin-left: 40px; }\\n\\n.works-on {\\n  display: block;\\n  margin: 20px 0;\\n  text-align: right; }\\n\\n.ui.form .field.checkbox + .field.checkbox {\\n  margin-top: inherit; }\\n\\n.sortable li {\\n  width: auto; }\\n  .sortable li > .item {\\n    border: 1px solid #cccccc;\\n    padding: 2px 5px;\\n    display: inline-block;\\n    margin: 2px 0; }\\n    .sortable li > .item > .title {\\n      cursor: pointer; }\\n    .sortable li > .item > .info {\\n      color: #777777;\\n      font-size: 12px;\\n      margin-right: 5px; }\\n\\n.ui-sortable-helper {\\n  background-color: #eeeeee; }\\n\", \"\"]);\n\n// exports\n"
+    },
+    {
+      "id": 3,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+      "name": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+      "index": 1,
+      "index2": 1,
+      "size": 5762,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+      "issuerId": 1,
+      "issuerName": "./app/assets/styles/main.scss",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "exports = module.exports = require(\"./../../../node_modules/css-loader/lib/css-base.js\")();\n// imports\n\n\n// module\nexports.push([module.id, \".clearfix:before,\\n.clearfix:after {\\n  content: \\\" \\\";\\n  display: table; }\\n\\n.clearfix:after {\\n  clear: both; }\\n\\n.clearfix {\\n  *zoom: 1; }\\n\\n#wrapper {\\n  width: 1380px;\\n  max-width: 100%;\\n  min-width: 940px;\\n  margin: 0 auto; }\\n\\n.wrapper-in {\\n  padding: 0 20px; }\\n\\na {\\n  color: #3f83b6; }\\n\\na:hover {\\n  color: #72b6e9; }\\n\\nh1, h2, h3, h4, h5, h6 {\\n  margin-bottom: 10px; }\\n\\nh1 {\\n  font-size: 24px;\\n  line-height: 30px; }\\n\\nh2 {\\n  font-size: 20px;\\n  line-height: 26px; }\\n\\nh3 {\\n  font-size: 16px;\\n  line-height: 22px; }\\n\\np {\\n  margin-bottom: 10px; }\\n\\narticle ul {\\n  list-style: disc;\\n  margin-left: 25px;\\n  margin-bottom: 10px; }\\n  article ul ul {\\n    list-style: circle;\\n    margin-bottom: 0; }\\n\\narticle ol {\\n  list-style: decimal;\\n  margin-left: 30px;\\n  margin-bottom: 10px; }\\n\\n.input, input, textarea, button {\\n  padding: 7px 10px;\\n  border: 1px solid #434343; }\\n\\n.table {\\n  margin-bottom: 10px; }\\n  .table th {\\n    background: #eeeeee;\\n    font-weight: bold;\\n    text-align: center; }\\n  .table td, .table th {\\n    border: 1px solid #cccccc;\\n    padding: 2px 4px; }\\n\\n::-webkit-input-placeholder {\\n  color: #cccccc; }\\n\\n:-moz-placeholder {\\n  color: #cccccc;\\n  opacity: 1; }\\n\\n::-moz-placeholder {\\n  color: #cccccc;\\n  opacity: 1; }\\n\\n:-ms-input-placeholder {\\n  color: #cccccc; }\\n\\n.rotation {\\n  -webkit-touch-callout: none;\\n  -webkit-user-select: none;\\n  -khtml-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none; }\\n\\n.img-container {\\n  display: table-cell;\\n  vertical-align: middle;\\n  text-align: center; }\\n\\n.margin-auto {\\n  margin-left: auto;\\n  margin-right: auto; }\\n\\n.padding-lr {\\n  padding-left: 10px;\\n  padding-right: 10px; }\\n\\nheader {\\n  height: 50px;\\n  margin-bottom: 20px;\\n  position: relative; }\\n  header .logo {\\n    display: block;\\n    margin-top: 20px;\\n    width: 30%;\\n    max-width: 255px; }\\n    header .logo img {\\n      max-width: 100%; }\\n  header .languages {\\n    float: right;\\n    margin-top: 20px; }\\n    header .languages .lang {\\n      display: inline-block;\\n      margin: 0 0 0 10px; }\\n  header .phone {\\n    position: absolute;\\n    top: 20px;\\n    right: 0;\\n    font-size: 20px; }\\n\\n#menu {\\n  margin-bottom: 20px;\\n  padding: 0; }\\n  #menu > li {\\n    display: inline-block;\\n    margin-right: 20px; }\\n    #menu > li > a {\\n      font-size: 18px; }\\n  #menu li.active > a {\\n    font-weight: bold; }\\n\\n#main {\\n  margin-bottom: 20px; }\\n  #main .central {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 68%;\\n    margin-right: 1%; }\\n  #main .sidebar {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 30%; }\\n\\npre {\\n  background-color: #eeeeee;\\n  border: 1px solid #cccccc;\\n  padding: 10px 20px;\\n  border-radius: 20px; }\\n\\nfooter {\\n  padding: 20px 0 40px;\\n  border-top: 1px solid #cccccc; }\\n  footer .device-version {\\n    float: right; }\\n\\n.publications > .item {\\n  padding-bottom: 40px;\\n  display: inline-block; }\\n\\n.publications.list > .item {\\n  display: block; }\\n  .publications.list > .item.with-image > .image {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 25%;\\n    margin-right: 2%; }\\n    .publications.list > .item.with-image > .image > img {\\n      max-width: 100%; }\\n  .publications.list > .item.with-image > .text {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 72%; }\\n  .publications.list > .item > .text > * {\\n    display: block;\\n    margin-bottom: 10px; }\\n  .publications.list > .item > .text > .title {\\n    font-weight: bold;\\n    font-size: 18px;\\n    line-height: 23px; }\\n  .publications.list > .item > .text > .date {\\n    font-style: italic;\\n    color: #999999; }\\n\\n.publications.grid {\\n  margin-left: -2%;\\n  margin-right: -2%; }\\n  .publications.grid > .item {\\n    width: 21%;\\n    margin-left: 2%;\\n    margin-right: 2%;\\n    vertical-align: top; }\\n    .publications.grid > .item > .text > .title {\\n      display: block;\\n      margin-bottom: 10px;\\n      font-weight: bold;\\n      font-size: 18px;\\n      line-height: 23px; }\\n    .publications.grid > .item > .text > .date {\\n      font-style: italic;\\n      color: #999999; }\\n    .publications.grid > .item > .text > .announce {\\n      margin-bottom: 10px; }\\n    .publications.grid > .item > .image {\\n      display: block;\\n      margin-bottom: 10px; }\\n      .publications.grid > .item > .image > img {\\n        width: 100%; }\\n\\n.publication > .date {\\n  margin-bottom: 20px;\\n  font-style: italic;\\n  color: #999999; }\\n\\n.publication > .back {\\n  display: block;\\n  margin-top: 20px; }\\n\\n.publication .image.inner {\\n  float: left;\\n  margin: 0 20px 10px 0; }\\n\\n.widget {\\n  float: left;\\n  margin: 0 0 20px; }\\n\\n.last.publications > h3 {\\n  margin-bottom: 20px; }\\n\\n.last.publications > .items > .item {\\n  margin-bottom: 20px; }\\n  .last.publications > .items > .item > .image {\\n    display: inline-block;\\n    vertical-align: top;\\n    margin-right: -120px; }\\n  .last.publications > .items > .item > .image + .content {\\n    margin-left: 140px; }\\n  .last.publications > .items > .item > .content {\\n    display: inline-block;\\n    vertical-align: top; }\\n    .last.publications > .items > .item > .content > .title {\\n      display: block;\\n      margin-bottom: 5px;\\n      font-size: 15px; }\\n    .last.publications > .items > .item > .content > .date {\\n      font-style: italic;\\n      color: #999999;\\n      margin-bottom: 5px; }\\n    .last.publications > .items > .item > .content > .announce {\\n      font-size: 12px; }\\n\", \"\"]);\n\n// exports\n"
+    },
+    {
+      "id": 4,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/lib/css-base.js",
+      "name": "./~/css-loader/lib/css-base.js",
+      "index": 2,
+      "index2": 0,
+      "size": 1506,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+      "issuerId": 2,
+      "issuerName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 2,
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+          "module": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+          "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+          "type": "cjs require",
+          "userRequest": "./../../../node_modules/css-loader/lib/css-base.js",
+          "loc": "1:27-88"
+        },
+        {
+          "moduleId": 3,
+          "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+          "module": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+          "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+          "type": "cjs require",
+          "userRequest": "./../../../node_modules/css-loader/lib/css-base.js",
+          "loc": "1:27-88"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 2,
+      "source": "/*\r\n\tMIT License http://www.opensource.org/licenses/mit-license.php\r\n\tAuthor Tobias Koppers @sokra\r\n*/\r\n// css base code, injected by the css-loader\r\nmodule.exports = function() {\r\n\tvar list = [];\r\n\r\n\t// return the list of modules as css string\r\n\tlist.toString = function toString() {\r\n\t\tvar result = [];\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar item = this[i];\r\n\t\t\tif(item[2]) {\r\n\t\t\t\tresult.push(\"@media \" + item[2] + \"{\" + item[1] + \"}\");\r\n\t\t\t} else {\r\n\t\t\t\tresult.push(item[1]);\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn result.join(\"\");\r\n\t};\r\n\r\n\t// import a list of modules into the list\r\n\tlist.i = function(modules, mediaQuery) {\r\n\t\tif(typeof modules === \"string\")\r\n\t\t\tmodules = [[null, modules, \"\"]];\r\n\t\tvar alreadyImportedModules = {};\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar id = this[i][0];\r\n\t\t\tif(typeof id === \"number\")\r\n\t\t\t\talreadyImportedModules[id] = true;\r\n\t\t}\r\n\t\tfor(i = 0; i < modules.length; i++) {\r\n\t\t\tvar item = modules[i];\r\n\t\t\t// skip already imported module\r\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\r\n\t\t\t//  when a module is imported multiple times with different media queries.\r\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\r\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\r\n\t\t\t\tif(mediaQuery && !item[2]) {\r\n\t\t\t\t\titem[2] = mediaQuery;\r\n\t\t\t\t} else if(mediaQuery) {\r\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\r\n\t\t\t\t}\r\n\t\t\t\tlist.push(item);\r\n\t\t\t}\r\n\t\t}\r\n\t};\r\n\treturn list;\r\n};\r\n"
+    },
+    {
+      "id": 5,
+      "identifier": "/Users/oleksandr/www/yona-cms/node_modules/style-loader/addStyles.js",
+      "name": "./~/style-loader/addStyles.js",
+      "index": 3,
+      "index2": 2,
+      "size": 7154,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [],
+      "assets": [],
+      "issuer": "/Users/oleksandr/www/yona-cms/node_modules/extract-text-webpack-plugin/loader.js??ref--0-0!/Users/oleksandr/www/yona-cms/node_modules/style-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+      "issuerId": 1,
+      "issuerName": "./app/assets/styles/main.scss",
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "/*\r\n\tMIT License http://www.opensource.org/licenses/mit-license.php\r\n\tAuthor Tobias Koppers @sokra\r\n*/\r\nvar stylesInDom = {},\r\n\tmemoize = function(fn) {\r\n\t\tvar memo;\r\n\t\treturn function () {\r\n\t\t\tif (typeof memo === \"undefined\") memo = fn.apply(this, arguments);\r\n\t\t\treturn memo;\r\n\t\t};\r\n\t},\r\n\tisOldIE = memoize(function() {\r\n\t\treturn /msie [6-9]\\b/.test(window.navigator.userAgent.toLowerCase());\r\n\t}),\r\n\tgetHeadElement = memoize(function () {\r\n\t\treturn document.head || document.getElementsByTagName(\"head\")[0];\r\n\t}),\r\n\tsingletonElement = null,\r\n\tsingletonCounter = 0,\r\n\tstyleElementsInsertedAtTop = [];\r\n\r\nmodule.exports = function(list, options) {\r\n\tif(typeof DEBUG !== \"undefined\" && DEBUG) {\r\n\t\tif(typeof document !== \"object\") throw new Error(\"The style-loader cannot be used in a non-browser environment\");\r\n\t}\r\n\r\n\toptions = options || {};\r\n\t// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>\r\n\t// tags it will allow on a page\r\n\tif (typeof options.singleton === \"undefined\") options.singleton = isOldIE();\r\n\r\n\t// By default, add <style> tags to the bottom of <head>.\r\n\tif (typeof options.insertAt === \"undefined\") options.insertAt = \"bottom\";\r\n\r\n\tvar styles = listToStyles(list);\r\n\taddStylesToDom(styles, options);\r\n\r\n\treturn function update(newList) {\r\n\t\tvar mayRemove = [];\r\n\t\tfor(var i = 0; i < styles.length; i++) {\r\n\t\t\tvar item = styles[i];\r\n\t\t\tvar domStyle = stylesInDom[item.id];\r\n\t\t\tdomStyle.refs--;\r\n\t\t\tmayRemove.push(domStyle);\r\n\t\t}\r\n\t\tif(newList) {\r\n\t\t\tvar newStyles = listToStyles(newList);\r\n\t\t\taddStylesToDom(newStyles, options);\r\n\t\t}\r\n\t\tfor(var i = 0; i < mayRemove.length; i++) {\r\n\t\t\tvar domStyle = mayRemove[i];\r\n\t\t\tif(domStyle.refs === 0) {\r\n\t\t\t\tfor(var j = 0; j < domStyle.parts.length; j++)\r\n\t\t\t\t\tdomStyle.parts[j]();\r\n\t\t\t\tdelete stylesInDom[domStyle.id];\r\n\t\t\t}\r\n\t\t}\r\n\t};\r\n}\r\n\r\nfunction addStylesToDom(styles, options) {\r\n\tfor(var i = 0; i < styles.length; i++) {\r\n\t\tvar item = styles[i];\r\n\t\tvar domStyle = stylesInDom[item.id];\r\n\t\tif(domStyle) {\r\n\t\t\tdomStyle.refs++;\r\n\t\t\tfor(var j = 0; j < domStyle.parts.length; j++) {\r\n\t\t\t\tdomStyle.parts[j](item.parts[j]);\r\n\t\t\t}\r\n\t\t\tfor(; j < item.parts.length; j++) {\r\n\t\t\t\tdomStyle.parts.push(addStyle(item.parts[j], options));\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tvar parts = [];\r\n\t\t\tfor(var j = 0; j < item.parts.length; j++) {\r\n\t\t\t\tparts.push(addStyle(item.parts[j], options));\r\n\t\t\t}\r\n\t\t\tstylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};\r\n\t\t}\r\n\t}\r\n}\r\n\r\nfunction listToStyles(list) {\r\n\tvar styles = [];\r\n\tvar newStyles = {};\r\n\tfor(var i = 0; i < list.length; i++) {\r\n\t\tvar item = list[i];\r\n\t\tvar id = item[0];\r\n\t\tvar css = item[1];\r\n\t\tvar media = item[2];\r\n\t\tvar sourceMap = item[3];\r\n\t\tvar part = {css: css, media: media, sourceMap: sourceMap};\r\n\t\tif(!newStyles[id])\r\n\t\t\tstyles.push(newStyles[id] = {id: id, parts: [part]});\r\n\t\telse\r\n\t\t\tnewStyles[id].parts.push(part);\r\n\t}\r\n\treturn styles;\r\n}\r\n\r\nfunction insertStyleElement(options, styleElement) {\r\n\tvar head = getHeadElement();\r\n\tvar lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];\r\n\tif (options.insertAt === \"top\") {\r\n\t\tif(!lastStyleElementInsertedAtTop) {\r\n\t\t\thead.insertBefore(styleElement, head.firstChild);\r\n\t\t} else if(lastStyleElementInsertedAtTop.nextSibling) {\r\n\t\t\thead.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);\r\n\t\t} else {\r\n\t\t\thead.appendChild(styleElement);\r\n\t\t}\r\n\t\tstyleElementsInsertedAtTop.push(styleElement);\r\n\t} else if (options.insertAt === \"bottom\") {\r\n\t\thead.appendChild(styleElement);\r\n\t} else {\r\n\t\tthrow new Error(\"Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.\");\r\n\t}\r\n}\r\n\r\nfunction removeStyleElement(styleElement) {\r\n\tstyleElement.parentNode.removeChild(styleElement);\r\n\tvar idx = styleElementsInsertedAtTop.indexOf(styleElement);\r\n\tif(idx >= 0) {\r\n\t\tstyleElementsInsertedAtTop.splice(idx, 1);\r\n\t}\r\n}\r\n\r\nfunction createStyleElement(options) {\r\n\tvar styleElement = document.createElement(\"style\");\r\n\tstyleElement.type = \"text/css\";\r\n\tinsertStyleElement(options, styleElement);\r\n\treturn styleElement;\r\n}\r\n\r\nfunction createLinkElement(options) {\r\n\tvar linkElement = document.createElement(\"link\");\r\n\tlinkElement.rel = \"stylesheet\";\r\n\tinsertStyleElement(options, linkElement);\r\n\treturn linkElement;\r\n}\r\n\r\nfunction addStyle(obj, options) {\r\n\tvar styleElement, update, remove;\r\n\r\n\tif (options.singleton) {\r\n\t\tvar styleIndex = singletonCounter++;\r\n\t\tstyleElement = singletonElement || (singletonElement = createStyleElement(options));\r\n\t\tupdate = applyToSingletonTag.bind(null, styleElement, styleIndex, false);\r\n\t\tremove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);\r\n\t} else if(obj.sourceMap &&\r\n\t\ttypeof URL === \"function\" &&\r\n\t\ttypeof URL.createObjectURL === \"function\" &&\r\n\t\ttypeof URL.revokeObjectURL === \"function\" &&\r\n\t\ttypeof Blob === \"function\" &&\r\n\t\ttypeof btoa === \"function\") {\r\n\t\tstyleElement = createLinkElement(options);\r\n\t\tupdate = updateLink.bind(null, styleElement);\r\n\t\tremove = function() {\r\n\t\t\tremoveStyleElement(styleElement);\r\n\t\t\tif(styleElement.href)\r\n\t\t\t\tURL.revokeObjectURL(styleElement.href);\r\n\t\t};\r\n\t} else {\r\n\t\tstyleElement = createStyleElement(options);\r\n\t\tupdate = applyToTag.bind(null, styleElement);\r\n\t\tremove = function() {\r\n\t\t\tremoveStyleElement(styleElement);\r\n\t\t};\r\n\t}\r\n\r\n\tupdate(obj);\r\n\r\n\treturn function updateStyle(newObj) {\r\n\t\tif(newObj) {\r\n\t\t\tif(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)\r\n\t\t\t\treturn;\r\n\t\t\tupdate(obj = newObj);\r\n\t\t} else {\r\n\t\t\tremove();\r\n\t\t}\r\n\t};\r\n}\r\n\r\nvar replaceText = (function () {\r\n\tvar textStore = [];\r\n\r\n\treturn function (index, replacement) {\r\n\t\ttextStore[index] = replacement;\r\n\t\treturn textStore.filter(Boolean).join('\\n');\r\n\t};\r\n})();\r\n\r\nfunction applyToSingletonTag(styleElement, index, remove, obj) {\r\n\tvar css = remove ? \"\" : obj.css;\r\n\r\n\tif (styleElement.styleSheet) {\r\n\t\tstyleElement.styleSheet.cssText = replaceText(index, css);\r\n\t} else {\r\n\t\tvar cssNode = document.createTextNode(css);\r\n\t\tvar childNodes = styleElement.childNodes;\r\n\t\tif (childNodes[index]) styleElement.removeChild(childNodes[index]);\r\n\t\tif (childNodes.length) {\r\n\t\t\tstyleElement.insertBefore(cssNode, childNodes[index]);\r\n\t\t} else {\r\n\t\t\tstyleElement.appendChild(cssNode);\r\n\t\t}\r\n\t}\r\n}\r\n\r\nfunction applyToTag(styleElement, obj) {\r\n\tvar css = obj.css;\r\n\tvar media = obj.media;\r\n\r\n\tif(media) {\r\n\t\tstyleElement.setAttribute(\"media\", media)\r\n\t}\r\n\r\n\tif(styleElement.styleSheet) {\r\n\t\tstyleElement.styleSheet.cssText = css;\r\n\t} else {\r\n\t\twhile(styleElement.firstChild) {\r\n\t\t\tstyleElement.removeChild(styleElement.firstChild);\r\n\t\t}\r\n\t\tstyleElement.appendChild(document.createTextNode(css));\r\n\t}\r\n}\r\n\r\nfunction updateLink(linkElement, obj) {\r\n\tvar css = obj.css;\r\n\tvar sourceMap = obj.sourceMap;\r\n\r\n\tif(sourceMap) {\r\n\t\t// http://stackoverflow.com/a/26603875\r\n\t\tcss += \"\\n/*# sourceMappingURL=data:application/json;base64,\" + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + \" */\";\r\n\t}\r\n\r\n\tvar blob = new Blob([css], { type: \"text/css\" });\r\n\r\n\tvar oldSrc = linkElement.href;\r\n\r\n\tlinkElement.href = URL.createObjectURL(blob);\r\n\r\n\tif(oldSrc)\r\n\t\tURL.revokeObjectURL(oldSrc);\r\n}\r\n"
+    }
+  ],
+  "filteredModules": 0,
+  "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "assetsByChunkName": {},
+      "assets": [],
+      "entrypoints": {
+        "undefined": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "extract-text-webpack-plugin-output-filename"
+          ]
+        }
+      },
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 3102,
+          "names": [],
+          "files": [
+            "extract-text-webpack-plugin-output-filename"
+          ],
+          "hash": "a0e3fb022ddf5081b877",
+          "parents": [],
+          "origins": [
+            {
+              "moduleId": 1,
+              "module": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+              "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+              "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+              "loc": "",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/lib/css-base.js",
+          "name": "./~/css-loader/lib/css-base.js",
+          "index": 1,
+          "index2": 0,
+          "size": 1506,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+          "issuerId": 1,
+          "issuerName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+              "module": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+              "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+              "type": "cjs require",
+              "userRequest": "./../../../node_modules/css-loader/lib/css-base.js",
+              "loc": "1:27-88"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 1,
+          "source": "/*\r\n\tMIT License http://www.opensource.org/licenses/mit-license.php\r\n\tAuthor Tobias Koppers @sokra\r\n*/\r\n// css base code, injected by the css-loader\r\nmodule.exports = function() {\r\n\tvar list = [];\r\n\r\n\t// return the list of modules as css string\r\n\tlist.toString = function toString() {\r\n\t\tvar result = [];\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar item = this[i];\r\n\t\t\tif(item[2]) {\r\n\t\t\t\tresult.push(\"@media \" + item[2] + \"{\" + item[1] + \"}\");\r\n\t\t\t} else {\r\n\t\t\t\tresult.push(item[1]);\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn result.join(\"\");\r\n\t};\r\n\r\n\t// import a list of modules into the list\r\n\tlist.i = function(modules, mediaQuery) {\r\n\t\tif(typeof modules === \"string\")\r\n\t\t\tmodules = [[null, modules, \"\"]];\r\n\t\tvar alreadyImportedModules = {};\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar id = this[i][0];\r\n\t\t\tif(typeof id === \"number\")\r\n\t\t\t\talreadyImportedModules[id] = true;\r\n\t\t}\r\n\t\tfor(i = 0; i < modules.length; i++) {\r\n\t\t\tvar item = modules[i];\r\n\t\t\t// skip already imported module\r\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\r\n\t\t\t//  when a module is imported multiple times with different media queries.\r\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\r\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\r\n\t\t\t\tif(mediaQuery && !item[2]) {\r\n\t\t\t\t\titem[2] = mediaQuery;\r\n\t\t\t\t} else if(mediaQuery) {\r\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\r\n\t\t\t\t}\r\n\t\t\t\tlist.push(item);\r\n\t\t\t}\r\n\t\t}\r\n\t};\r\n\treturn list;\r\n};\r\n"
+        },
+        {
+          "id": 1,
+          "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/admin.scss",
+          "name": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/admin.scss",
+          "index": 0,
+          "index2": 1,
+          "size": 1596,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 0,
+          "source": "exports = module.exports = require(\"./../../../node_modules/css-loader/lib/css-base.js\")();\n// imports\n\n\n// module\nexports.push([module.id, \"body {\\n  padding: 10px; }\\n\\n.content {\\n  margin-left: 220px; }\\n\\n.field .description {\\n  margin-top: 0.3em;\\n  color: #999999;\\n  font-size: 13px; }\\n\\n#categories-list {\\n  position: absolute;\\n  background: white;\\n  border: 1px solid #cccccc;\\n  padding: 5px 10px;\\n  width: 200px;\\n  display: none;\\n  z-index: 100; }\\n  #categories-list > .remove {\\n    float: right;\\n    cursor: pointer;\\n    margin-right: -5px; }\\n  #categories-list a {\\n    color: #666666;\\n    line-height: 18px; }\\n  #categories-list ul {\\n    list-style: none;\\n    padding-left: 0;\\n    margin-top: 0; }\\n    #categories-list ul > li {\\n      font-size: 13px;\\n      line-height: 13px; }\\n    #categories-list ul ul {\\n      margin-top: 0px;\\n      padding-left: 20px; }\\n\\n.changelog {\\n  max-height: 480px;\\n  overflow: auto; }\\n  .changelog ul {\\n    list-style: disc;\\n    margin-left: 40px; }\\n\\n.works-on {\\n  display: block;\\n  margin: 20px 0;\\n  text-align: right; }\\n\\n.ui.form .field.checkbox + .field.checkbox {\\n  margin-top: inherit; }\\n\\n.sortable li {\\n  width: auto; }\\n  .sortable li > .item {\\n    border: 1px solid #cccccc;\\n    padding: 2px 5px;\\n    display: inline-block;\\n    margin: 2px 0; }\\n    .sortable li > .item > .title {\\n      cursor: pointer; }\\n    .sortable li > .item > .info {\\n      color: #777777;\\n      font-size: 12px;\\n      margin-right: 5px; }\\n\\n.ui-sortable-helper {\\n  background-color: #eeeeee; }\\n\", \"\"]);\n\n// exports\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "extract-text-webpack-plugin"
+    },
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "assetsByChunkName": {},
+      "assets": [],
+      "entrypoints": {
+        "undefined": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "extract-text-webpack-plugin-output-filename"
+          ]
+        }
+      },
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 7268,
+          "names": [],
+          "files": [
+            "extract-text-webpack-plugin-output-filename"
+          ],
+          "hash": "d364d05f855cf19ce705",
+          "parents": [],
+          "origins": [
+            {
+              "moduleId": 1,
+              "module": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+              "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+              "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+              "loc": "",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/lib/css-base.js",
+          "name": "./~/css-loader/lib/css-base.js",
+          "index": 1,
+          "index2": 0,
+          "size": 1506,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+          "issuerId": 1,
+          "issuerName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+              "module": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+              "moduleName": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+              "type": "cjs require",
+              "userRequest": "./../../../node_modules/css-loader/lib/css-base.js",
+              "loc": "1:27-88"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 1,
+          "source": "/*\r\n\tMIT License http://www.opensource.org/licenses/mit-license.php\r\n\tAuthor Tobias Koppers @sokra\r\n*/\r\n// css base code, injected by the css-loader\r\nmodule.exports = function() {\r\n\tvar list = [];\r\n\r\n\t// return the list of modules as css string\r\n\tlist.toString = function toString() {\r\n\t\tvar result = [];\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar item = this[i];\r\n\t\t\tif(item[2]) {\r\n\t\t\t\tresult.push(\"@media \" + item[2] + \"{\" + item[1] + \"}\");\r\n\t\t\t} else {\r\n\t\t\t\tresult.push(item[1]);\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn result.join(\"\");\r\n\t};\r\n\r\n\t// import a list of modules into the list\r\n\tlist.i = function(modules, mediaQuery) {\r\n\t\tif(typeof modules === \"string\")\r\n\t\t\tmodules = [[null, modules, \"\"]];\r\n\t\tvar alreadyImportedModules = {};\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar id = this[i][0];\r\n\t\t\tif(typeof id === \"number\")\r\n\t\t\t\talreadyImportedModules[id] = true;\r\n\t\t}\r\n\t\tfor(i = 0; i < modules.length; i++) {\r\n\t\t\tvar item = modules[i];\r\n\t\t\t// skip already imported module\r\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\r\n\t\t\t//  when a module is imported multiple times with different media queries.\r\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\r\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\r\n\t\t\t\tif(mediaQuery && !item[2]) {\r\n\t\t\t\t\titem[2] = mediaQuery;\r\n\t\t\t\t} else if(mediaQuery) {\r\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\r\n\t\t\t\t}\r\n\t\t\t\tlist.push(item);\r\n\t\t\t}\r\n\t\t}\r\n\t};\r\n\treturn list;\r\n};\r\n"
+        },
+        {
+          "id": 1,
+          "identifier": "/Users/oleksandr/www/yona-cms/node_modules/css-loader/index.js!/Users/oleksandr/www/yona-cms/node_modules/sass-loader/lib/loader.js!/Users/oleksandr/www/yona-cms/app/assets/styles/main.scss",
+          "name": "./~/css-loader!./~/sass-loader/lib/loader.js!./app/assets/styles/main.scss",
+          "index": 0,
+          "index2": 1,
+          "size": 5762,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 0,
+          "source": "exports = module.exports = require(\"./../../../node_modules/css-loader/lib/css-base.js\")();\n// imports\n\n\n// module\nexports.push([module.id, \".clearfix:before,\\n.clearfix:after {\\n  content: \\\" \\\";\\n  display: table; }\\n\\n.clearfix:after {\\n  clear: both; }\\n\\n.clearfix {\\n  *zoom: 1; }\\n\\n#wrapper {\\n  width: 1380px;\\n  max-width: 100%;\\n  min-width: 940px;\\n  margin: 0 auto; }\\n\\n.wrapper-in {\\n  padding: 0 20px; }\\n\\na {\\n  color: #3f83b6; }\\n\\na:hover {\\n  color: #72b6e9; }\\n\\nh1, h2, h3, h4, h5, h6 {\\n  margin-bottom: 10px; }\\n\\nh1 {\\n  font-size: 24px;\\n  line-height: 30px; }\\n\\nh2 {\\n  font-size: 20px;\\n  line-height: 26px; }\\n\\nh3 {\\n  font-size: 16px;\\n  line-height: 22px; }\\n\\np {\\n  margin-bottom: 10px; }\\n\\narticle ul {\\n  list-style: disc;\\n  margin-left: 25px;\\n  margin-bottom: 10px; }\\n  article ul ul {\\n    list-style: circle;\\n    margin-bottom: 0; }\\n\\narticle ol {\\n  list-style: decimal;\\n  margin-left: 30px;\\n  margin-bottom: 10px; }\\n\\n.input, input, textarea, button {\\n  padding: 7px 10px;\\n  border: 1px solid #434343; }\\n\\n.table {\\n  margin-bottom: 10px; }\\n  .table th {\\n    background: #eeeeee;\\n    font-weight: bold;\\n    text-align: center; }\\n  .table td, .table th {\\n    border: 1px solid #cccccc;\\n    padding: 2px 4px; }\\n\\n::-webkit-input-placeholder {\\n  color: #cccccc; }\\n\\n:-moz-placeholder {\\n  color: #cccccc;\\n  opacity: 1; }\\n\\n::-moz-placeholder {\\n  color: #cccccc;\\n  opacity: 1; }\\n\\n:-ms-input-placeholder {\\n  color: #cccccc; }\\n\\n.rotation {\\n  -webkit-touch-callout: none;\\n  -webkit-user-select: none;\\n  -khtml-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none; }\\n\\n.img-container {\\n  display: table-cell;\\n  vertical-align: middle;\\n  text-align: center; }\\n\\n.margin-auto {\\n  margin-left: auto;\\n  margin-right: auto; }\\n\\n.padding-lr {\\n  padding-left: 10px;\\n  padding-right: 10px; }\\n\\nheader {\\n  height: 50px;\\n  margin-bottom: 20px;\\n  position: relative; }\\n  header .logo {\\n    display: block;\\n    margin-top: 20px;\\n    width: 30%;\\n    max-width: 255px; }\\n    header .logo img {\\n      max-width: 100%; }\\n  header .languages {\\n    float: right;\\n    margin-top: 20px; }\\n    header .languages .lang {\\n      display: inline-block;\\n      margin: 0 0 0 10px; }\\n  header .phone {\\n    position: absolute;\\n    top: 20px;\\n    right: 0;\\n    font-size: 20px; }\\n\\n#menu {\\n  margin-bottom: 20px;\\n  padding: 0; }\\n  #menu > li {\\n    display: inline-block;\\n    margin-right: 20px; }\\n    #menu > li > a {\\n      font-size: 18px; }\\n  #menu li.active > a {\\n    font-weight: bold; }\\n\\n#main {\\n  margin-bottom: 20px; }\\n  #main .central {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 68%;\\n    margin-right: 1%; }\\n  #main .sidebar {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 30%; }\\n\\npre {\\n  background-color: #eeeeee;\\n  border: 1px solid #cccccc;\\n  padding: 10px 20px;\\n  border-radius: 20px; }\\n\\nfooter {\\n  padding: 20px 0 40px;\\n  border-top: 1px solid #cccccc; }\\n  footer .device-version {\\n    float: right; }\\n\\n.publications > .item {\\n  padding-bottom: 40px;\\n  display: inline-block; }\\n\\n.publications.list > .item {\\n  display: block; }\\n  .publications.list > .item.with-image > .image {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 25%;\\n    margin-right: 2%; }\\n    .publications.list > .item.with-image > .image > img {\\n      max-width: 100%; }\\n  .publications.list > .item.with-image > .text {\\n    display: inline-block;\\n    vertical-align: top;\\n    width: 72%; }\\n  .publications.list > .item > .text > * {\\n    display: block;\\n    margin-bottom: 10px; }\\n  .publications.list > .item > .text > .title {\\n    font-weight: bold;\\n    font-size: 18px;\\n    line-height: 23px; }\\n  .publications.list > .item > .text > .date {\\n    font-style: italic;\\n    color: #999999; }\\n\\n.publications.grid {\\n  margin-left: -2%;\\n  margin-right: -2%; }\\n  .publications.grid > .item {\\n    width: 21%;\\n    margin-left: 2%;\\n    margin-right: 2%;\\n    vertical-align: top; }\\n    .publications.grid > .item > .text > .title {\\n      display: block;\\n      margin-bottom: 10px;\\n      font-weight: bold;\\n      font-size: 18px;\\n      line-height: 23px; }\\n    .publications.grid > .item > .text > .date {\\n      font-style: italic;\\n      color: #999999; }\\n    .publications.grid > .item > .text > .announce {\\n      margin-bottom: 10px; }\\n    .publications.grid > .item > .image {\\n      display: block;\\n      margin-bottom: 10px; }\\n      .publications.grid > .item > .image > img {\\n        width: 100%; }\\n\\n.publication > .date {\\n  margin-bottom: 20px;\\n  font-style: italic;\\n  color: #999999; }\\n\\n.publication > .back {\\n  display: block;\\n  margin-top: 20px; }\\n\\n.publication .image.inner {\\n  float: left;\\n  margin: 0 20px 10px 0; }\\n\\n.widget {\\n  float: left;\\n  margin: 0 0 20px; }\\n\\n.last.publications > h3 {\\n  margin-bottom: 20px; }\\n\\n.last.publications > .items > .item {\\n  margin-bottom: 20px; }\\n  .last.publications > .items > .item > .image {\\n    display: inline-block;\\n    vertical-align: top;\\n    margin-right: -120px; }\\n  .last.publications > .items > .item > .image + .content {\\n    margin-left: 140px; }\\n  .last.publications > .items > .item > .content {\\n    display: inline-block;\\n    vertical-align: top; }\\n    .last.publications > .items > .item > .content > .title {\\n      display: block;\\n      margin-bottom: 5px;\\n      font-size: 15px; }\\n    .last.publications > .items > .item > .content > .date {\\n      font-style: italic;\\n      color: #999999;\\n      margin-bottom: 5px; }\\n    .last.publications > .items > .item > .content > .announce {\\n      font-size: 12px; }\\n\", \"\"]);\n\n// exports\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "extract-text-webpack-plugin"
+    }
+  ]
+}

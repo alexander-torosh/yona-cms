@@ -43,7 +43,9 @@ class RobotsController extends Controller
         $this->helper->title('Editing robots.txt', true);
         $this->view->form = $form;
 
-
+        $this->assets
+            ->addJs('components/codemirror/lib/codemirror.js')
+            ->addCss('components/codemirror/lib/codemirror.css');
     }
 
 }

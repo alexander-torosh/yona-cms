@@ -20,7 +20,7 @@ var JavaScriptConfig = {
     function () {
       this.plugin("done", function (stats) {
         require("fs").writeFileSync(
-          path.join(path.resolve(__dirname, 'data', 'assets'), "scripts.json"),
+          path.join(path.resolve(__dirname, 'app', 'data', 'assets'), "scripts.json"),
           JSON.stringify(stats.toJson())
         );
         // Remove old dist files
@@ -82,7 +82,7 @@ var StylesheetConfig = {
     function () {
       this.plugin("done", function (stats) {
         require("fs").writeFileSync(
-          path.join(path.resolve(__dirname, 'data', 'assets'), "styles.json"),
+          path.join(path.resolve(__dirname, 'app', 'data', 'assets'), "styles.json"),
           JSON.stringify(stats.toJson())
         );
       });

@@ -5,8 +5,6 @@
     </button>
 </form>
 
-<link rel="stylesheet" href="{{ url.path() }}vendor/codemirror-4.2/lib/codemirror.css">
-<script src="{{ url.path() }}vendor/codemirror-4.2/codemirror-compressed.js"></script>
 <script>
     $(function () {
         var codeMirror = CodeMirror.fromTextArea(document.getElementById('robots'), {
