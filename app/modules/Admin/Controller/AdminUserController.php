@@ -79,7 +79,7 @@ class AdminUserController extends Controller
             if ($form->isValid()) {
                 $model->setCheckboxes($post);
                 if ($model->save() == true) {
-                    $this->flash->success('User <b>' . $model->getLogin() . '</b> has been saved');
+                    $this->flash->success('User [' . $model->getLogin() . '] has been saved');
                     return $this->redirect($this->url->get() . 'admin/admin-user');
                 } else {
                     $this->flashErrors($model);
@@ -112,7 +112,7 @@ class AdminUserController extends Controller
 
         if ($this->request->isPost()) {
             $model->delete();
-            $this->flash->warning('Deleting user <b>' . $model->getLogin() . '</b>');
+            $this->flash->warning('Deleting user [' . $model->getLogin() . ']');
             return $this->redirect($this->url->get() . 'admin/admin-user');
         }
 
