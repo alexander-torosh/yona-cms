@@ -1,19 +1,20 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+'use strict';
 
-var path = require('path');
-var fs = require('fs');
-var _ = require('lodash');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var APP_PATH = path.resolve(__dirname, 'app', 'assets');
-var DIST_PATH = path.resolve(__dirname, 'public', 'dist');
+const path = require('path');
+const fs = require('fs');
 
-var JavaScriptConfig = {
+const APP_PATH = path.resolve(__dirname, 'app', 'assets');
+const DIST_PATH = path.resolve(__dirname, 'public', 'dist');
+
+const JavaScriptConfig = {
   entry: {
     main: path.join(APP_PATH, 'scripts', 'main.index.js'),
     admin: path.join(APP_PATH, 'scripts', 'admin.index.js')
   },
   output: {
-    filename: '[chunkhash].[name].js',
+    filename: '[name].js',
     path: DIST_PATH
   },
   plugins: [
@@ -23,44 +24,26 @@ var JavaScriptConfig = {
           path.join(path.resolve(__dirname, 'app', 'data', 'assets'), "scripts.json"),
           JSON.stringify(stats.toJson())
         );
-        // Remove old dist files
-        /*try {
-         var files = fs.readdirSync(DIST_PATH);
-         } catch (e) {
-         console.log(e);
-         return;
-         }
-         if (files.length > 0) {
-         for (var i = 0; i < files.length; i++) {
-         var filePath = DIST_PATH + '/' + files[i];
-         if (fs.statSync(filePath).isFile()) {
-         if (path.extname(filePath) == '.js') {
-         //fs.unlinkSync(filePath);
-         //console.log('removed ' + filePath);
-         }
-         }
-         }
-         }*/
       });
     }
   ]
 };
 
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV === 'development') {
   JavaScriptConfig['devtool'] = "cheap-eval-source-map";
 }
 
 const extractSass = new ExtractTextPlugin({
-  filename: "[chunkhash].[name].css"
+  filename: "[name].css"
 });
 
-var StylesheetConfig = {
+const StylesheetConfig = {
   entry: {
     main: path.join(APP_PATH, 'styles', 'main.scss'),
     admin: path.join(APP_PATH, 'styles', 'admin.scss')
   },
   output: {
-    filename: '[chunkhash].[name].css',
+    filename: '[name].css',
     path: DIST_PATH
   },
   module: {
@@ -68,7 +51,11 @@ var StylesheetConfig = {
       test: /\.scss$/,
       loader: extractSass.extract({
         loader: [{
-          loader: "css-loader"
+          loader: "css-loader",
+          options: {
+            minimize: true,
+            sourceMap: true
+          }
         }, {
           loader: "sass-loader"
         }],

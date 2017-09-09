@@ -33,10 +33,10 @@ If you haven't installed Docker yet, please, visit downloading page https://www.
     
 ### phpMyAdmin
 
-Open http://localhost:8080
+Open http://localhost:3501
 Enter next credentials:
 
-    server: 172.10.0.5
+    server: mysql
     login: root
     password: 111
 
@@ -99,7 +99,7 @@ Development. Run webpack listener for generating assets on files changes
     
 ### Checking your installation
 
-Open http://localhost:8000 and check Yona CMS installation
+Open http://localhost:3500 and check Yona CMS installation
 
 ## Virtual hosting installation
 
