@@ -1,6 +1,7 @@
 FROM debian:jessie
 
 RUN export LC_ALL=C.UTF-8
+RUN export TERM=xterm
 
 RUN apt-get update && apt-get -y install \
     wget \
@@ -15,23 +16,21 @@ RUN git config --global user.email "webtorua@gmail.com" \
 
 RUN wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 
-RUN echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list && \
-    echo 'deb-src http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list
+RUN apt-get install apt-transport-https ca-certificates && \
+wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list
 
-RUN apt-get update && apt-get -y install php7.0-fpm php7.0-mysql php7.0-curl php7.0-redis php7.0-gd php7.0-intl
+RUN apt-get update && apt-get -y install php7.1-fpm php7.1-mysql php7.1-curl php7.1-redis php7.1-gd php7.1-intl
 
 # Install composer global bin
 RUN wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     chmod +x /usr/local/bin/composer
 
-RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
-
 # Phalcon
+RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 RUN sudo apt-get install -y php7.0-phalcon
 
 RUN mkdir -p /yona-cms
 WORKDIR /yona-cms
 
-EXPOSE 9000
-
-ENTRYPOINT ["/usr/sbin/php-fpm7.0", "-FO"]
+ENTRYPOINT ["/usr/sbin/php-fpm7.1", "-FO"]

@@ -12,7 +12,7 @@ services:
       - ./docker/log:/var/log/nginx
       - ./docker/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/conf/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/conf/php.ini:/etc/php/7.0/fpm/php.ini
+      - ./docker/conf/php.ini:/etc/php/7.1/fpm/php.ini
     links:
       - php7
 
@@ -21,7 +21,7 @@ services:
     container_name: yona-cms-php7
     volumes:
       - ./:/yona-cms
-      - ./docker/conf/www.conf:/etc/php/7.0/fpm/pool.d/www.conf
+      - ./docker/conf/www.conf:/etc/php/7.1/fpm/pool.d/www.conf
     environment:
       - TERM=xterm
       - APPLICATION_ENV=development
