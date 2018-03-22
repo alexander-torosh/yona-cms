@@ -1,8 +1,5 @@
 .idea/
-vendor/
 node_modules/
-public/components/
+vendor/
 
-composer.lock
-composer.phar
 .DS_Store

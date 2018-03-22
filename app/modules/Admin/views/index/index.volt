@@ -1,1 +1,0 @@
-<h2>Welcome to Yona CMS Dashboard!</h2>

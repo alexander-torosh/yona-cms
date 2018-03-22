@@ -1,44 +1,40 @@
 {
-  "name": "oleksandr-torosh/yona-cms",
-  "version": "1.0.0",
-  "title": "Yona CMS",
-  "description": "Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework. Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.",
-  "type": "project",
-  "keywords": [
-    "phalcon",
-    "modules",
-    "modular",
-    "yona",
-    "php",
-    "cms"
-  ],
-  "homepage": "http://yonacms.com/",
-  "author": {
-    "name": "Oleksandr Torosh",
-    "url": "https://www.facebook.com/oleksandrtorosh"
-  },
-  "maintainers": [
-    {
-      "name": "Oleksandr Torosh",
-      "url": "https://www.facebook.com/oleksandrtorosh"
+    "name": "oleksandr-torosh/yona-cms",
+    "version": "1.0.0",
+    "description": "Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework. Has a convenient modular structure. Has simple configuration and architecture. Can be easily modified for any task with any loads.",
+    "type": "project",
+    "keywords": [
+        "phalcon",
+        "php",
+        "yona",
+        "cms",
+        "modules",
+        "modular",
+        "multi-lingual",
+        "i18n",
+        "l10n"
+    ],
+    "homepage": "http://yonacms.com/",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Oleksandr Torosh",
+            "email": "info@yonastudio.com"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "Oleksandr Torosh",
+            "url": "https://github.com/oleksandr-torosh"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/oleksandr-torosh/yona-cms"
+    },
+    "bugs": "https://github.com/oleksandr-torosh/yona-cms/issues",
+    "require": {
+        "php": ">=7.2",
+        "ext-phalcon": ">=3.2"
     }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/oleksandr-torosh/yona-cms"
-  },
-  "bugs": "https://github.com/oleksandr-torosh/yona-cms/issues",
-  "license": "BSD-3-Clause",
-  "autoload": {
-    "psr-4": {
-      "Yona\\": "app/library/Yona/"
-    }
-  },
-  "require": {
-    "php": ">=7.0",
-    "ext-intl": "*",
-    "ext-phalcon": ">=3.0",
-    "robmorgan/phinx": "dev-master",
-    "sneakybobito/phalcon-stubs": "*"
-  }
 }
