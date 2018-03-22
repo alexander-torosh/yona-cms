@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  web:
+    container_name: yona-web
+    build: ./docker/nginx/
+    ports:
+        - "11301:8081"
+        - "11302:8082"
+        - "11303:8083"
+    volumes:
+      - ./:/var/www/yona
+      - ./docker/config/vhost.conf:/etc/nginx/conf.d/default.conf
+    links:
+        - php
+  php:
+    container_name: yona-php
+    build: ./docker/php/
+    env_file: .env
+    volumes:
+      - ./:/var/www/yona
+    tty: true
+    links:
+      - mysql
+      - redis
+  mysql:
+    container_name: yona-mysql
+    image: "mariadb:10.3"
+    env_file: .env
+    volumes:
+      - ./docker/storage/mysql-data:/var/lib/mysql
+      - ./data/dump:/dump
+    ports:
+      - "11311:3306"
+
+  redis:
+    container_name: yona-redis
+    build: ./docker/redis/
+    ports:
+      - "11321:6379"
