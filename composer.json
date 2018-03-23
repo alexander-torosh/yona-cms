@@ -41,10 +41,7 @@
   "autoload": {
     "psr-4": {
       "Core\\": "core/",
-      "Models\\": "models/",
-      "Dashboard\\": "apps/dashboard/",
-      "Dashboard\\Application\\": "apps/dashboard/application/",
-      "Dashboard\\Index\\": "apps/dashboard/modules/Index/",
+      "Applications\\": "apps/",
       "Cli\\": "apps/cli/"
     }
   }

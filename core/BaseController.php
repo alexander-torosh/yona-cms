@@ -1,11 +1,10 @@
 <?php
 
-namespace Dashboard;
+namespace Core;
 
 use Phalcon\Http\Response;
-use Phalcon\Mvc\Controller;
 
-class ControllerAbstract extends Controller
+class BaseController extends \Phalcon\Mvc\Controller
 {
 
     /**

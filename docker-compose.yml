@@ -6,8 +6,6 @@ services:
     build: ./docker/nginx/
     ports:
         - "11301:8081"
-        - "11302:8082"
-        - "11303:8083"
     volumes:
       - ./:/var/www/yona
       - ./docker/config/vhost.conf:/etc/nginx/conf.d/default.conf
@@ -16,7 +14,9 @@ services:
   php:
     container_name: yona-php
     build: ./docker/php/
-    env_file: .env
+    environment:
+      - "APPLICATION_ENV=${APPLICATION_ENV}"
+      - "NODE_ENV=${NODE_ENV}"
     volumes:
       - ./:/var/www/yona
     tty: true
@@ -26,15 +26,17 @@ services:
   mysql:
     container_name: yona-mysql
     image: "mariadb:10.3"
-    env_file: .env
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
     volumes:
       - ./docker/storage/mysql-data:/var/lib/mysql
       - ./data/dump:/dump
     ports:
-      - "11311:3306"
+      - "11311:${MYSQL_PORT}"
 
   redis:
     container_name: yona-redis
     build: ./docker/redis/
-    ports:
-      - "11321:6379"

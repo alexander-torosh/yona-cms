@@ -1,7 +1,5 @@
 <?php
 
-$config = require BASE_PATH.'config/config.php';
-
 return [
     // Phalcon Services
     'loader'        => \Phalcon\Loader::class,

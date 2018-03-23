@@ -14,6 +14,6 @@ $dotenv->load();
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Application class
-require_once APPLICATION_PATH . '/Application.php';
-$app = new \Cli\Application();
+require_once APPLICATION_PATH . '/CliKernel.php';
+$app = new \Cli\CliKernel();
 $app->run($argv);

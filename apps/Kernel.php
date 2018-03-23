@@ -6,7 +6,7 @@ use Dashboard\Application\Plugin\ErrorHandler;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use Phalcon\Translate\Adapter\NativeArray;
 
-class Application extends \Phalcon\Mvc\Application
+class Kernel extends \Phalcon\Mvc\Application
 {
     public function run()
     {

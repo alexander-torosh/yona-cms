@@ -2,14 +2,14 @@
 
 namespace Cli;
 
-class Application extends \Phalcon\Cli\Console
+class CliKernel extends \Phalcon\Cli\Console
 {
     public function run(array $argv): void
     {
         // Service loader
         $config = include BASE_PATH . '/config/services.php';
         $di = new \Phalcon\DI\FactoryDefault\Cli();
-        $serviceLoader = new \Core\Service\LoaderService($config, $di,[],['dispatcher']);
+        $serviceLoader = new \Core\Service\LoaderService($config, $di);
         $di->set('serviceLoader', $serviceLoader, true);
 
         $loader = $di->get('loader');
