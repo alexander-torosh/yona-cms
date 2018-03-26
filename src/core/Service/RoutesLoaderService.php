@@ -20,8 +20,9 @@ class RoutesLoaderService
         }
 
         $modules = $kernel->getModules();
+        $kernelPrefix = ucfirst($kernel->getPrefix());
         foreach (array_keys($modules) as $module) {
-            $baseNamespace = ucfirst($module) . '\\' . ucfirst($kernel->getPrefix());
+            $baseNamespace = ucfirst($module) . '\\' . $kernelPrefix;
 
             // the routes for the module
             $class = $baseNamespace . '\\' . 'Routes';

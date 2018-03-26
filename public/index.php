@@ -3,8 +3,8 @@ chdir(dirname(__DIR__));
 
 \define('BASE_URI', __DIR__);
 \define('BASE_PATH', __DIR__ . '/../');
-\define('MODULES_PATH', __DIR__ . '/../modules');
-\define('APP_PATH', __DIR__ . '/../modules/Application');
+\define('MODULES_PATH', __DIR__ . '/../src/modules');
+\define('APP_PATH', __DIR__ . '/../src/app');
 
 // Autoloader for Composer packages
 require_once BASE_PATH . '/vendor/autoload.php';
@@ -12,8 +12,8 @@ require_once BASE_PATH . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(BASE_PATH);
 $dotenv->load();
 
-defined('APPLICATION_ENV') ||
-define('APPLICATION_ENV', getenv('APPLICATION_ENV') ? : 'production');
+\defined('APPLICATION_ENV') ||
+\define('APPLICATION_ENV', getenv('APPLICATION_ENV') ? : 'production');
 
 \define('IMAGES_SERVER', getenv('IMAGE_SERVER'));
 \define('STATIC_SERVER', getenv('STATIC_SERVER'));
@@ -25,11 +25,11 @@ if (APPLICATION_ENV !== 'production') {
 }
 
 // Application class
-require_once MODULES_PATH . '/KernelManager.php';
-$manager = new \Modules\KernelManager($_ENV);
+require_once APP_PATH . '/KernelManager.php';
+$manager = new \Application\KernelManager($_ENV);
 
-require_once MODULES_PATH . '/AdminKernel.php';
-$manager->setKernel(new \Modules\AdminKernel());
+require_once APP_PATH . '/Front/Kernel.php';
+$manager->setKernel(new \Application\Front\Kernel());
 
 $manager->handle();
 

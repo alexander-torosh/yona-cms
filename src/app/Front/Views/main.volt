@@ -1,0 +1,3 @@
+hi, front
+
+{{ content() }}

@@ -40,9 +40,9 @@
   },
   "autoload": {
     "psr-4": {
-      "Core\\": "core/",
-      "Modules\\": "modules/",
-      "Modules\\Application\\": "modules/Application"
+      "Core\\": "src/core/",
+      "Modules\\": "src/modules/",
+      "Application\\": "src/app"
     }
   }
 }
