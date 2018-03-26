@@ -41,8 +41,8 @@
   "autoload": {
     "psr-4": {
       "Core\\": "core/",
-      "Applications\\": "apps/",
-      "Cli\\": "apps/cli/"
+      "Modules\\": "modules/",
+      "Modules\\Application\\": "modules/Application"
     }
   }
 }

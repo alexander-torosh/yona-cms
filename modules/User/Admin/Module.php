@@ -1,28 +1,22 @@
 <?php
 
-namespace Order;
+namespace User\Admin;
 
-use Core\View;
+use Core\Interfaces\ModuleInterface;
 use Phalcon\DiInterface;
-use Phalcon\Loader;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
-class Module implements ModuleDefinitionInterface
+class Module implements ModuleDefinitionInterface, ModuleInterface
 {
+
+    public function requirements(): array
+    {
+        return [];
+    }
 
     public function registerAutoloaders(DiInterface $di = null): void
     {
-        $loader = new Loader();
-
-        $loader->registerNamespaces(
-            [
-                'User\Controllers' => __DIR__ . '/Controllers/',
-                'User\Models'      => __DIR__ . '/Models/',
-            ]
-        );
-
-        $loader->register();
     }
 
     public function registerServices(DiInterface $di): void
@@ -32,12 +26,12 @@ class Module implements ModuleDefinitionInterface
          * @var Dispatcher $dispatcher
          */
         $dispatcher = $di->get('dispatcher');
-        $dispatcher->setDefaultNamespace('User\Controllers');
+        $dispatcher->setDefaultNamespace('User\Admin\Controllers');
         $di->set('dispatcher', $dispatcher);
 
         /**
          * Setting up the view component
-         * @var View $view
+         * @var \Core\View\View $view
          */
         $view = $di->get('view');
         $view->setViewsDir(__DIR__ . '/Views/');

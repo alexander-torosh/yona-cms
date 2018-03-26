@@ -1,15 +1,12 @@
 <?php
 
+/** @var array */
+$config = \Phalcon\Di::getDefault()->get('appConfig');
+
 return [
     // Phalcon Services
     'loader'        => \Phalcon\Loader::class,
     'eventsManager' => \Phalcon\Events\Manager::class,
-    'appConfig'     => [
-        'className' => \Phalcon\Config::class,
-        'arguments' => [
-            ['type' => 'parameter', 'value' => $config],
-        ],
-    ],
 
     'view' => function($di) {
         $view = new \Core\View\View();
@@ -17,7 +14,7 @@ return [
     },
 
     // Global configuration defines
-    'base_uri'         => WEB_PATH,
+    'base_uri'         => BASE_URI,
 
     'url' => ['className' => \Phalcon\Mvc\Url::class,
         'arguments' => [
@@ -34,14 +31,7 @@ return [
     ],
 
     'flash' => ['className' => \Phalcon\Flash\Session::class,
-        'arguments' => [
-            ['type' => 'parameter', 'value' => [
-                'error'   => 'alert alert-danger',
-                'success' => 'alert alert-success',
-                'notice'  => 'alert alert-info',
-                'warning' => 'alert alert-warning',
-            ]],
-        ],
+        'arguments' => [],
     ],
 
     'db'               => [
@@ -50,19 +40,19 @@ return [
             'arguments' => [
                 'type'  => 'parameter',
                 'value' => [
-                    'host'      => $config['db']['host'],
-                    'dbname'    => $config['db']['dbname'],
-                    'username'  => $config['db']['username'],
-                    'password'  => $config['db']['password'],
-                    'port'      => $config['db']['port'],
-                    'charset'   => $config['db']['charset'],
+                    'host'      => $config['MYSQL_HOST'],
+                    'dbname'    => $config['MYSQL_DATABASE'],
+                    'username'  => $config['MYSQL_USER'],
+                    'password'  => $config['MYSQL_PASSWORD'],
+                    'port'      => $config['MYSQL_PORT'],
+                    'charset'   => $config['MYSQL_CHARSET'],
                 ],
             ],
         ],
     ],
 
     'session'          => [
-        'default'  => $config['defaults']['session_adapter'],
+        'default'  => $config['SESSION_ADAPTER'],
         'adapters' => [
             'files' => [
                 'className' => \Phalcon\Session\Adapter\Files::class,
@@ -78,11 +68,11 @@ return [
                     [
                         'type'  => 'parameter',
                         'value' => [
-                            'host'       => $config['redis']['host'],
-                            'port'       => $config['redis']['port'],
-                            'persistent' => $config['redis']['persistent'],
-                            'lifetime'   => $config['redis']['lifetime'],
-                            'prefix'     => $config['redis']['prefix'],
+                            'host'       => $config['REDIS_HOST'],
+                            'port'       => $config['REDIS_PORT'],
+                            'persistent' => $config['REDIS_PERSISTENT'],
+                            'lifetime'   => $config['REDIS_LIFETIME'],
+                            'prefix'     => $config['REDIS_PREFIX'],
                         ],
                     ],
                 ],
@@ -96,7 +86,7 @@ return [
     ],
 
     'cache'       => [
-        'default'  => $config['defaults']['cache_adapter'],
+        'default'  => $config['CACHE_ADAPTER'],
         'adapters' => [
             'files'     => [
                 'className' => Phalcon\Cache\Backend\File::class,
@@ -132,8 +122,9 @@ return [
                     [
                         'type'  => 'parameter',
                         'value' => [
-                            'host'   => $config['redis']['host'],
-                            'port'   => $config['redis']['port'],
+                            'host'       => $config['REDIS_HOST'],
+                            'port'       => $config['REDIS_PORT'],
+                            'lifetime'   => $config['REDIS_LIFETIME'],
                         ],
                     ],
                 ],
@@ -151,8 +142,9 @@ return [
             [
                 'type'  => 'parameter',
                 'value' => [
-                    'host' => $config['redis']['host'],
-                    'port' => $config['redis']['port'],
+                    'host'       => $config['REDIS_HOST'],
+                    'port'       => $config['REDIS_PORT'],
+                    'lifetime'   => $config['REDIS_LIFETIME'],
                 ],
             ],
         ],
