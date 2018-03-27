@@ -26,15 +26,13 @@ class ErrorHandler extends Plugin
         $response->send();
 
         return false;
-
     }
 
     private function closeOpenTransaction()
     {
         /** @var Adapter $db */
         $db = $this->getDI()->get('db');
-        while($db->isUnderTransaction()) {
-
+        while ($db->isUnderTransaction()) {
             // Rollback transaction
             $db->rollback();
         }

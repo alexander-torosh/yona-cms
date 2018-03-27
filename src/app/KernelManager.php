@@ -41,7 +41,6 @@ class KernelManager
     {
         $this->kernel = $kernel;
         $this->kernel->init($this->modules, $this->config);
-
     }
 
     public function handle(): void

@@ -18,7 +18,7 @@ class ErrorHandler extends Plugin
         $error = 'Oops...';
 
         // for development return the message
-        if ( APPLICATION_ENV !== 'production') {
+        if (APPLICATION_ENV !== 'production') {
             $error = $exception->getMessage();
         }
 
@@ -30,7 +30,6 @@ class ErrorHandler extends Plugin
         $response->send();
 
         return false;
-
     }
 
     private function closeOpenTransaction(): void
@@ -38,7 +37,6 @@ class ErrorHandler extends Plugin
         /** @var Adapter $db */
         $db = $this->getDI()->get('db');
         while ($db->isUnderTransaction()) {
-
             // rollback transaction
             $db->rollback();
         }

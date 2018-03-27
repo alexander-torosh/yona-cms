@@ -12,12 +12,12 @@ abstract class MicroKernel extends MicroAbstract
         $di = new \Phalcon\DI\FactoryDefault();
 
         // config
-        $di->setShared('appConfig', function() use ($config) {
+        $di->setShared('appConfig', function () use ($config) {
             return new Config($config);
         });
 
         // save modules list
-        $di->setShared('modules',function() use ($modules) {
+        $di->setShared('modules', function () use ($modules) {
             return $modules;
         });
 

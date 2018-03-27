@@ -24,7 +24,6 @@ class ModulesLoaderService
             } catch (\ReflectionException $e) {
                 continue;
             }
-
         }
 
         //Register the installed modules

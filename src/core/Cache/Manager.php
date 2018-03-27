@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CORE\Cache;
 
 use Phalcon\Mvc\User\Component;

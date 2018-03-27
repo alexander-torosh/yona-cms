@@ -12,7 +12,7 @@ abstract class WebKernel extends KernelAbstract
     public function init(array $modules, array $config)
     {
         $di = new \Phalcon\DI\FactoryDefault();
-        $di->setShared('appConfig', function() use ($config) {
+        $di->setShared('appConfig', function () use ($config) {
             return new Config($config);
         });
 

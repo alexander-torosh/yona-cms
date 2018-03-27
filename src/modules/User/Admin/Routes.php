@@ -4,8 +4,6 @@ namespace User\Admin;
 
 use Core\Interfaces\RoutesInterface;
 use Phalcon\Mvc\Router\GroupInterface;
-use Phalcon\Mvc\Router\Group as RouterGroup;
-
 
 class Routes implements RoutesInterface
 {
