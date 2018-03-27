@@ -6,7 +6,6 @@
 namespace Core\Service;
 
 use Phalcon\Config;
-use Phalcon\Di\FactoryDefault;
 use Phalcon\Di\Injectable;
 use Phalcon\DiInterface;
 use Phalcon\Exception;
