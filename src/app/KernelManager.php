@@ -2,6 +2,7 @@
 
 namespace Application;
 
+use Core\Interfaces\KernelInterface;
 use Core\KernelAbstract;
 use Phalcon\Loader;
 
@@ -36,11 +37,10 @@ class KernelManager
         $loader->register();
     }
 
-    public function setKernel(KernelAbstract $kernel): void
+    public function setKernel(KernelInterface $kernel): void
     {
         $this->kernel = $kernel;
         $this->kernel->init($this->modules, $this->config);
-
     }
 
     public function handle(): void

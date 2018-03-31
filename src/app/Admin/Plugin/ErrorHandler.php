@@ -34,33 +34,19 @@ class ErrorHandler extends Plugin
             $response->send();
 
             $this->view->disable();
-        } else if (APPLICATION_ENV !== 'production') {
-
+        } elseif (APPLICATION_ENV !== 'production') {
             echo '<p>' . $exception->getMessage() . '</p>';
             echo '<br />', PHP_EOL;
 
             echo $exception->getTraceAsString();
             die;
-
         } else {
-
             $response = new Response();
             $response->redirect(['for' => 'error-404']);
             $response->send();
-
-            /*$dispatcher->forward(
-                [
-                    'module'     => 'index',
-                    'controller' => 'error',
-                    'action'     => 'error404',
-                ]
-            );*/
-
         }
 
-
         return false;
-
     }
 
     private function closeOpenTransaction()
@@ -68,7 +54,6 @@ class ErrorHandler extends Plugin
         /** @var Adapter $db */
         $db = $this->getDI()->get('db');
         while ($db->isUnderTransaction()) {
-
             // Rollback transaction
             $db->rollback();
         }

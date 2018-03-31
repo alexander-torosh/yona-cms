@@ -36,7 +36,8 @@
   "require": {
     "php": ">=7.2",
     "ext-phalcon": ">=3.2",
-    "vlucas/phpdotenv": "^2.4"
+    "vlucas/phpdotenv": "^2.4",
+    "squizlabs/php_codesniffer": "*"
   },
   "autoload": {
     "psr-4": {

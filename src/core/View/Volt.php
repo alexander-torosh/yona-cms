@@ -8,7 +8,7 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
     {
         $compiler = $this->getCompiler();
 
-        $compiler->addFunction('const', function($resolvedArgs) {
+        $compiler->addFunction('const', function ($resolvedArgs) {
             return $resolvedArgs;
         });
 

@@ -8,13 +8,13 @@ return [
     'loader'        => \Phalcon\Loader::class,
     'eventsManager' => \Phalcon\Events\Manager::class,
 
-    'view' => function($di) {
+    'view' => function ($di) {
         $view = new \Core\View\View();
         return $view->register($di);
     },
 
     // Global configuration defines
-    'base_uri'         => BASE_URI,
+    'base_uri' => BASE_URI,
 
     'url' => ['className' => \Phalcon\Mvc\Url::class,
         'arguments' => [

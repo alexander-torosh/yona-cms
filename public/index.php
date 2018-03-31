@@ -13,7 +13,7 @@ $dotenv = new Dotenv\Dotenv(BASE_PATH);
 $dotenv->load();
 
 \defined('APPLICATION_ENV') ||
-\define('APPLICATION_ENV', getenv('APPLICATION_ENV') ? : 'production');
+\define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'production');
 
 \define('IMAGES_SERVER', getenv('IMAGE_SERVER'));
 \define('STATIC_SERVER', getenv('STATIC_SERVER'));
@@ -28,8 +28,8 @@ if (APPLICATION_ENV !== 'production') {
 require_once APP_PATH . '/KernelManager.php';
 $manager = new \Application\KernelManager($_ENV);
 
-require_once APP_PATH . '/Front/Kernel.php';
-$manager->setKernel(new \Application\Front\Kernel());
+require_once APP_PATH . '/Api/Kernel.php';
+$manager->setKernel(new \Application\Api\Kernel());
 
 $manager->handle();
 

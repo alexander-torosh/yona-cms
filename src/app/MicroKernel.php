@@ -2,32 +2,30 @@
 
 namespace Application;
 
-use Core\KernelAbstract;
-use Core\Service\ModulesLoaderService;
-use Core\Service\RoutesLoaderService;
+use Core\MicroAbstract;
 use Phalcon\Config;
 
-abstract class WebKernel extends KernelAbstract
+abstract class MicroKernel extends MicroAbstract
 {
-    public function init(array $modules, array $config)
+    public function init(array $modules, array $config): void
     {
         $di = new \Phalcon\DI\FactoryDefault();
+
+        // config
         $di->setShared('appConfig', function () use ($config) {
             return new Config($config);
         });
 
-        $modulesService = new ModulesLoaderService();
-        $modulesService->register($this, $modules);
+        // save modules list
+        $di->setShared('modules', function () use ($modules) {
+            return $modules;
+        });
 
-        // Service loader
+        // services loader
         $configServices = include APP_PATH . '/Services.php';
 
         $serviceLoader = new \Core\Service\LoaderService($configServices, $di);
         $di->set('serviceLoader', $serviceLoader, true);
-
-        // Include routers
-        $routesService = new RoutesLoaderService();
-        $routesService->include($this);
 
         $this->setDI($di);
     }
