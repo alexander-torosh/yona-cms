@@ -14,7 +14,7 @@ return [
     },
 
     // Global configuration defines
-    'base_uri' => BASE_URI,
+    'base_uri' => getenv('BASE_URI'),
 
     'url' => ['className' => \Phalcon\Mvc\Url::class,
         'arguments' => [

@@ -54,21 +54,13 @@ RUN apt-get -y update && \
     php7.2-simplexml \
     php7.2-opcache
 
-RUN git config --global user.email "nikolas.serko@gmail.com" \
-    && git config --global user.name "Nikolas Serko" \
+RUN git config --global user.email "info@yonastudio.com" \
+    && git config --global user.name "Yona CMS" \
     && git config --global push.default current
 
 # Install Phalcon v3.2
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | bash
 RUN apt-get install -y php7.2-phalcon
-#RUN git clone https://github.com/phalcon/cphalcon.git --branch 3.2.x && \
-#    cd cphalcon/build && ./install
-
-#COPY phalcon.ini /etc/php/7.1/mods-available/
-
-#WORKDIR /etc/php/7.0
-#RUN ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/25-phalcon.ini
-#RUN ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/25-phalcon.ini
 
 COPY www.conf /etc/php/7.2/fpm/pool.d/
 COPY php-fpm.conf /etc/php/7.2/fpm/
@@ -95,8 +87,6 @@ RUN usermod -aG www-data yona
 
 RUN mkdir /var/run/php && \
     chown yona:www-data /run/php/
-
-#RUN chown www-data:www-data /var/log/php7.2-fpm.log
 
 WORKDIR /var/www/yona
 

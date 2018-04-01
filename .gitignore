@@ -1,7 +1,9 @@
 .env
+.DS_Store
 
 .idea/
 node_modules/
 vendor/
 
-.DS_Store
+# Remove line above in your real project
+composer.lock
