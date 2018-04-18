@@ -16,7 +16,7 @@ RUN git config --global user.email "webtorua@gmail.com" \
 
 RUN wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 
-RUN apt-get install apt-transport-https ca-certificates && \
+RUN apt-get -y install apt-transport-https ca-certificates && \
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
 echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list
 
