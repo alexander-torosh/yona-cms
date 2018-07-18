@@ -3,8 +3,9 @@
 namespace Core;
 
 use Phalcon\Http\Response;
+use Phalcon\Mvc\Controller;
 
-class BaseController extends \Phalcon\Mvc\Controller
+class BaseController extends Controller
 {
 
     /**

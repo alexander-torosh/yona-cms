@@ -28,8 +28,8 @@ class KernelManager
         // register namespaces
         $namespaces = [];
         foreach ($this->modules as $module) {
-            $umodule = ucfirst($module);
-            $namespaces[$umodule] = MODULES_PATH . '/' . ucfirst($module);
+            $uModule = ucfirst($module);
+            $namespaces[$uModule] = MODULES_PATH . '/' . ucfirst($module);
         }
 
         $loader = new Loader();

@@ -29,7 +29,7 @@
     },
     {
       "name": "Nikolas Serko",
-      "url": "https://github.com/SerkoNikolas",
+      "url": "https://github.com/SerkoNikolas"
     }
   ],
   "repository": {
@@ -41,7 +41,7 @@
     "php": ">=7.2",
     "ext-phalcon": ">=3.2",
     "vlucas/phpdotenv": "^2.4",
-    "squizlabs/php_codesniffer": "dev-master"
+    "phalcon/ide-stubs": "^3.4"
   },
   "autoload": {
     "psr-4": {
@@ -49,5 +49,8 @@
       "Modules\\": "src/modules/",
       "Application\\": "src/app"
     }
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   }
 }

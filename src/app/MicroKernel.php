@@ -3,13 +3,15 @@
 namespace Application;
 
 use Core\MicroAbstract;
+use Core\Service\LoaderService;
 use Phalcon\Config;
+use Phalcon\DI\FactoryDefault;
 
 abstract class MicroKernel extends MicroAbstract
 {
     public function init(array $modules, array $config): void
     {
-        $di = new \Phalcon\DI\FactoryDefault();
+        $di = new FactoryDefault();
 
         // config
         $di->setShared('appConfig', function () use ($config) {
@@ -24,7 +26,7 @@ abstract class MicroKernel extends MicroAbstract
         // services loader
         $configServices = include APP_PATH . '/Services.php';
 
-        $serviceLoader = new \Core\Service\LoaderService($configServices, $di);
+        $serviceLoader = new LoaderService($configServices, $di);
         $di->set('serviceLoader', $serviceLoader, true);
 
         $this->setDI($di);

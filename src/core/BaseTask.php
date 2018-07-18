@@ -2,7 +2,9 @@
 
 namespace Core;
 
-class BaseTask extends \Phalcon\Cli\Task
+use Phalcon\Cli\Task;
+
+class BaseTask extends Task
 {
     private $startExecute;
 
