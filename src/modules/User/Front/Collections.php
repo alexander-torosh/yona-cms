@@ -1,10 +1,10 @@
 <?php
 
-namespace User\Api;
+namespace User\Front;
 
 use Core\Interfaces\CollectionsInterface;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
-use User\Api\Controllers\IndexController;
+use User\Front\Controllers\IndexController;
 
 class Collections implements CollectionsInterface
 {

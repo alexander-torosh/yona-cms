@@ -8,6 +8,6 @@ class IndexController extends BaseController
 {
     public function indexAction()
     {
-//        echo __METHOD__; die;
+        echo __METHOD__; die;
     }
 }

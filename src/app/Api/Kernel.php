@@ -4,7 +4,6 @@ namespace Application\Api;
 
 use Application\Api\Plugin\ErrorHandler;
 use Application\MicroKernel;
-use Core\Service\CollectionsLoaderService;
 
 class Kernel extends MicroKernel
 {
@@ -51,10 +50,6 @@ class Kernel extends MicroKernel
                 return $handler->handle($e);
             }
         );
-
-        // mount collections
-        $collectionsLoader = new CollectionsLoaderService();
-        $collectionsLoader->include($this);
 
         // handle app
         $this->handle();

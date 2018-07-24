@@ -4,6 +4,7 @@ namespace Application;
 
 use Core\Interfaces\KernelInterface;
 use Core\KernelAbstract;
+use Phalcon\Exception;
 use Phalcon\Loader;
 
 class KernelManager
@@ -24,6 +25,10 @@ class KernelManager
         // load modules.json
         $string = file_get_contents(__DIR__ . '/../modules.json');
         $this->modules = json_decode($string, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Wrong module.json format!');
+        }
 
         // register namespaces
         $namespaces = [];

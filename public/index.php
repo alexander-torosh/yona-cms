@@ -27,8 +27,8 @@ if (APPLICATION_ENV !== 'production') {
 require_once APP_PATH . '/KernelManager.php';
 $manager = new \Application\KernelManager($_ENV);
 
-require_once APP_PATH . '/Api/Kernel.php';
-$manager->setKernel(new \Application\Api\Kernel());
+require_once APP_PATH . '/Front/Kernel.php';
+$manager->setKernel(new \Application\Front\Kernel());
 
 $manager->handle();
 
