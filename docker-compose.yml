@@ -28,8 +28,10 @@ services:
     container_name: yona-mysql
     image: "mariadb:10.3"
     environment:
-      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=OCttcjw3DmW000v3SzZVcnGc2P12ilRR1paEWgPsp2k5"
       - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
     volumes:
       - ./docker/storage/mysql-data:/var/lib/mysql
       - ./data/dump:/dump
