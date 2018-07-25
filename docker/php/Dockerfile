@@ -58,7 +58,7 @@ RUN git config --global user.email "info@yonastudio.com" \
     && git config --global user.name "Yona CMS" \
     && git config --global push.default current
 
-# Install Phalcon v3.2
+# Install Phalcon v3.3
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | bash
 RUN apt-get install -y php7.2-phalcon
 

@@ -43,7 +43,7 @@
   "bugs": "https://github.com/oleksandr-torosh/yona-cms/issues",
   "require": {
     "php": ">=7.2",
-    "ext-phalcon": ">=3.2",
+    "ext-phalcon": ">=3.3",
     "vlucas/phpdotenv": "^2.4",
     "phalcon/ide-stubs": "^3.4"
   },
