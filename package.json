@@ -1,0 +1,26 @@
+{
+  "name": "yona-cms",
+  "version": "1.0.0",
+  "repository": "git@github.com:oleksandr-torosh/yona-cms.git",
+  "authors": [
+    {
+      "name": "Oleksandr Torosh",
+      "email": "info@yonastudio.com"
+    },
+    {
+      "name": "Nikolas Serko",
+      "email": "nikolas.serko@gmail.com"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Oleksandr Torosh",
+      "url": "https://github.com/oleksandr-torosh"
+    },
+    {
+      "name": "Nikolas Serko",
+      "url": "https://github.com/SerkoNikolas"
+    }
+  ],
+  "license": "BSD-3-Clause"
+}
