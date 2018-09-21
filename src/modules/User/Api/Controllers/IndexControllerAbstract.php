@@ -3,9 +3,9 @@
 
 namespace User\Api\Controllers;
 
-use Core\BaseController;
+use Core\ControllerAbstract;
 
-class IndexController extends BaseController
+class IndexControllerAbstract extends ControllerAbstract
 {
     public function index(): array
     {

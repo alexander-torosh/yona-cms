@@ -3,7 +3,6 @@
 namespace Core\Service;
 
 use Core\KernelAbstract;
-use Phalcon\Loader;
 use ReflectionClass;
 
 class ModulesLoaderService
@@ -17,10 +16,11 @@ class ModulesLoaderService
             try {
                 $reflector = new ReflectionClass($className);
 
-                $normalizeModules[$module] = [
+                $normalizeModules[strtolower($module)] = [
                     'className' => $className,
                     'path'      => $reflector->getFileName(),
                 ];
+
             } catch (\ReflectionException $e) {
                 continue;
             }

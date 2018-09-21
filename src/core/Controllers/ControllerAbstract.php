@@ -1,11 +1,11 @@
 <?php
 
-namespace Core;
+namespace Core\Controllers;
 
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Controller;
 
-class BaseController extends Controller
+class ControllerAbstract extends Controller
 {
 
     /**

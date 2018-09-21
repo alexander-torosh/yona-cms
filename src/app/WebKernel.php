@@ -18,18 +18,19 @@ abstract class WebKernel extends KernelAbstract
             return new Config($config);
         });
 
+        // Register Modules
         $modulesService = new ModulesLoaderService();
         $modulesService->register($this, $modules);
+
+        // Include Routes
+        $routesService = new RoutesLoaderService();
+        $routesService->include($this);
 
         // Service loader
         $configServices = include APP_PATH . '/Services.php';
 
         $serviceLoader = new LoaderService($configServices, $di);
         $di->set('serviceLoader', $serviceLoader, true);
-
-        // Include routers
-        $routesService = new RoutesLoaderService();
-        $routesService->include($this);
 
         $this->setDI($di);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Admin;
+namespace Index\Front;
 
 use Core\Interfaces\ModuleInterface;
 use Phalcon\DiInterface;
@@ -17,6 +17,7 @@ class Module implements ModuleDefinitionInterface, ModuleInterface
 
     public function registerAutoloaders(DiInterface $di = null): void
     {
+
     }
 
     public function registerServices(DiInterface $di): void

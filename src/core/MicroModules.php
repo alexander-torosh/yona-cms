@@ -51,7 +51,7 @@ class MicroModules
 
             // checks the implementation of the interface
             if ($route instanceof CollectionsInterface === false) {
-                throw new Exception("Route $colections must be instanceof CollectionsInterface");
+                throw new Exception("Route $route must be instanceof CollectionsInterface");
             }
 
             // gets all collections for the module

@@ -1,0 +1,1 @@
+<h2>Front\Controllers\IndexController::index</h2>

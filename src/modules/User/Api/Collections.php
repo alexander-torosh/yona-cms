@@ -4,7 +4,7 @@ namespace User\Api;
 
 use Core\Interfaces\CollectionsInterface;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
-use User\Api\Controllers\IndexController;
+use User\Api\Controllers\IndexControllerAbstract;
 
 class Collections implements CollectionsInterface
 {
@@ -13,9 +13,9 @@ class Collections implements CollectionsInterface
      */
     public function collections(): array
     {
-        // IndexController
+        // IndexControllerAbstract
         $index = new MicroCollection();
-        $index->setHandler(IndexController::class, true);
+        $index->setHandler(IndexControllerAbstract::class, true);
         // common prefix for all routes
         $index->setPrefix('/user');
         $index->get('/', 'index');

@@ -2,9 +2,9 @@
 
 namespace User\Admin\Controllers;
 
-use Core\BaseController;
+use Phalcon\Mvc\Controller;
 
-class IndexController extends BaseController
+class IndexController extends Controller
 {
     public function indexAction()
     {

@@ -6,5 +6,5 @@ use Phalcon\Mvc\Router\GroupInterface;
 
 interface RoutesInterface
 {
-    public function init(GroupInterface $group): GroupInterface;
+    public function init(GroupInterface $group, $moduleName): GroupInterface;
 }

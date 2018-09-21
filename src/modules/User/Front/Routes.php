@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Admin;
+namespace User\Front;
 
 use Core\Interfaces\RoutesInterface;
 use Phalcon\Mvc\Router\GroupInterface;
@@ -9,7 +9,7 @@ class Routes implements RoutesInterface
 {
     public function init(GroupInterface $group, $moduleName): GroupInterface
     {
-        $group->setPrefix('/admin/' . $moduleName);
+        $group->setPrefix($moduleName);
 
         $group->addGet('/', [
             'controller' => 'index',
