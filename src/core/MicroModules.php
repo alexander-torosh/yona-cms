@@ -44,14 +44,14 @@ class MicroModules
         // for all modules
         foreach ($this->modules as $moduleName => $module) {
             // gets route class
-            [ 'collections' => $collectionClass ] = $module;
+            ['collections' => $collectionClass] = $module;
 
             /** @var CollectionsInterface $route */
             $route = new $collectionClass();
 
             // checks the implementation of the interface
             if ($route instanceof CollectionsInterface === false) {
-                throw new Exception("Route $route must be instanceof CollectionsInterface");
+                throw new Exception("route $route must be instanceof CollectionsInterface");
             }
 
             // gets all collections for the module
@@ -104,7 +104,7 @@ class MicroModules
                 $module = new $moduleClass();
 
                 if ($module instanceof MicroModuleInterface === false) {
-                    throw new Exception("Module $moduleClass must be instanceof MicroModuleInterface");
+                    throw new Exception("module $moduleClass must be instanceof MicroModuleInterface");
                 }
 
                 // init module
