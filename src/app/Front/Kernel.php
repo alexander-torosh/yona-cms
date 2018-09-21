@@ -31,7 +31,7 @@ class Kernel extends WebKernel
         $di->set('dispatcher', $dispatcher);
 
         // Views config
-        \define('VIEW_PATH', __DIR__  . '/Views/');
+        \define('VIEW_PATH', __DIR__ . '/Views/');
 
         /** @var View $view */
         $view = $di->get('view');

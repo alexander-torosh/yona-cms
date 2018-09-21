@@ -55,7 +55,7 @@ class LoaderService extends Injectable
     }
 
     /**
-     * @param       $services
+     * @param       Config $services
      * @param array $autoLoad
      *
      * @throws Exception
@@ -92,7 +92,7 @@ class LoaderService extends Injectable
             if ($di->has($name)) {
                 $di->get($name);
             } else {
-                throw new Exception("Service $name not found in config file");
+                throw new Exception("service $name not found in config file");
             }
         }
     }
