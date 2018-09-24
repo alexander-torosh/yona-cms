@@ -5,6 +5,7 @@
 
 return [
     'require' => [
-
+        'Index',
+        'Admin',
     ],
 ];

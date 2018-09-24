@@ -7,14 +7,13 @@ use Phalcon\Mvc\Controller;
 
 class ControllerAbstract extends Controller
 {
-
     /**
      * @param array $data
      * @param int   $status
      *
      * @return Response
      */
-    public function json(array $data, int $status = 200): Response
+    protected function json(array $data, int $status = 200): Response
     {
         $this->view->disable();
 

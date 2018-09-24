@@ -5,8 +5,6 @@
 
     {{ tag.getTitle() }}
 
-    {{ javascript_include('dist/index.js') }}
-
     {{ stylesheet_link('dist/index-styles.css') }}
 
 </head>
@@ -19,5 +17,9 @@
 <hr>
 
 {{ content() }}
+
+{{ javascript_include('dist/index.js') }}
+{{ assets.outputJs() }}
+
 </body>
 </html>

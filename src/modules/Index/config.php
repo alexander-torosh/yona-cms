@@ -5,6 +5,6 @@
 
 return [
     'require' => [
-        'Admin',
+
     ],
 ];

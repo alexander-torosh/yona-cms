@@ -28,4 +28,4 @@ Install node_modules
 
     yarn install
     
-Open website in your browser http://localhost:11301
+Open website in your browser http://localhost:7500

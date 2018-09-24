@@ -1,1 +1,0 @@
-console.log('app/assets/js/index.js')

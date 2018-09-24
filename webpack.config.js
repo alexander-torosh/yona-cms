@@ -12,17 +12,13 @@ const env = process.env.NODE_ENV || 'production'
 const MODULES_PATH = path.resolve(__dirname, 'src', 'modules')
 const DIST_PATH = path.resolve(__dirname, 'public', 'dist')
 
-const uncamelize = (str, separator) => {
-  // Assume default separator is a single space.
-  if (typeof(separator) === 'undefined') {
-    separator = ' '
-  }
+const uncamelize = (str, separator = '-') => {
   // Replace all capital letters by separator followed by lowercase one
   str = str.replace(/[A-Z]/g, function (letter) {
     return separator + letter.toLowerCase()
   })
   // Remove first separator
-  return str.replace('/^' + separator + '/', '')
+  return str.replace('/^' + separator + '/', '').substr(1)
 }
 
 const presetEnv = ['@babel/preset-env', {
@@ -54,13 +50,13 @@ if (modulesContents.length > 0) {
       const moduleJsFile = path.resolve(MODULES_PATH, module, 'assets', 'js', 'index.js')
       if (fs.existsSync(moduleJsFile)) {
 
-        modulesSources[uncamelize(module)] = moduleJsFile
+        modulesSources[uncamelize(module, '-')] = moduleJsFile
       }
 
       const moduleScssFile = path.resolve(MODULES_PATH, module, 'assets', 'scss', 'index.scss')
       if (fs.existsSync(moduleScssFile)) {
 
-        modulesSources[uncamelize(module) + '-styles'] = moduleScssFile
+        modulesSources[uncamelize(module, '-') + '-styles'] = moduleScssFile
       }
     })
 
@@ -83,22 +79,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [presetEnv, '@babel/preset-flow'],
-            plugins: [
-              pluginTransformRuntime,
-              '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-syntax-dynamic-import',
-            ],
-          },
-        },
-      },
-      {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/, // (node_modules|bower_components)
         use: {
           loader: 'babel-loader',
