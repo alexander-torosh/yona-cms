@@ -1,8 +1,25 @@
 version: '3.3'
 
 services:
-  web:
-    container_name: yona-web
+
+  php:
+    container_name: yona
+    build: ./docker/php/
+    environment:
+      - "APPLICATION_ENV=${APPLICATION_ENV}"
+      - "NODE_ENV=${NODE_ENV}"
+    volumes:
+      - ./:/var/www/yona
+      - ./docker/config/php/php.ini:/etc/php/fpm/7.2/php.ini
+      - ./docker/config/php/php-fpm.conf:/etc/php/fpm/7.2/php-fpm.conf
+      - ./docker/config/php/pool.d/www.conf:/etc/php/fpm/7.2/pool.d/www.conf
+    tty: true
+    links:
+      - mysql
+      - redis
+
+  nginx:
+    container_name: yona-nginx
     build: ./docker/nginx/
     ports:
         - "11301:8081"
@@ -10,19 +27,7 @@ services:
       - ./:/var/www/yona
       - ./docker/config/vhost.conf:/etc/nginx/conf.d/default.conf
     links:
-        - php
-  php:
-    container_name: yona-php
-    build: ./docker/php/
-    environment:
-      - "APPLICATION_ENV=${APPLICATION_ENV}"
-      - "NODE_ENV=${NODE_ENV}"
-    volumes:
-      - ./:/var/www/yona
-    tty: true
-    links:
-      - mysql
-      - redis
+      - php
 
   mysql:
     container_name: yona-mysql

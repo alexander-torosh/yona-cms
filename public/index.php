@@ -2,8 +2,10 @@
 chdir(dirname(__DIR__));
 
 \define('BASE_PATH', __DIR__ . '/../');
-\define('MODULES_PATH', __DIR__ . '/../src/modules');
-\define('APP_PATH', __DIR__ . '/../src/app');
+\define('SRC_PATH', BASE_PATH . 'src/');
+\define('APP_PATH', SRC_PATH . 'app/');
+\define('MODULES_PATH', SRC_PATH . 'modules/');
+\define('CONFIG_PATH', APP_PATH . 'config/');
 
 // Autoloader for Composer packages
 require_once BASE_PATH . 'vendor/autoload.php';
@@ -19,16 +21,17 @@ $dotenv->load();
 
 //Debug
 if (APPLICATION_ENV !== 'production') {
+    ini_set('display_errors', 'On');
+    ini_set('display_startup_errors', 'On');
+    ini_set('error_reporting', 'E_ALL');
+
     $debug = new \Phalcon\Debug();
     $debug->listen();
 }
 
 // Application class
-require_once APP_PATH . '/KernelManager.php';
 $manager = new \Application\KernelManager($_ENV);
-
-require_once APP_PATH . '/Front/Kernel.php';
-$manager->setKernel(new \Application\Front\Kernel());
+$manager->setKernel(new \Application\Web\WebKernel());
 
 $manager->handle();
 

@@ -7,3 +7,6 @@ vendor/
 
 # Remove line above in your real project
 composer.lock
+
+yarn.lock
+yarn-error.log

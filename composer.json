@@ -51,7 +51,7 @@
     "psr-4": {
       "Core\\": "src/core/",
       "Modules\\": "src/modules/",
-      "Application\\": "src/app"
+      "Application\\": "src/app/src/"
     }
   },
   "require-dev": {
