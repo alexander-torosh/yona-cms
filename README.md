@@ -1,7 +1,7 @@
 # Yona CMS
 
-[![Build Status](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oleksandr-torosh/yona-cms/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/?branch=master)
 
 Yona CMS - open source content management system (CMS). Written in Phalcon PHP Framework (version 3.x supported)
 
@@ -11,7 +11,7 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 
 ## PHP 7 support, Docker
 
-For using complete Docker compose stack check this branch [php7.0](https://github.com/oleksandr-torosh/yona-cms/tree/php7.0)
+For using complete Docker compose stack check this branch [php7.0](https://github.com/alexander-torosh/yona-cms/tree/php7.0)
 
 ## Installation
 
