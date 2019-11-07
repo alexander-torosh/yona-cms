@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  php7:
+    build: ./docker/image/
+    container_name: yona-cms
+    volumes:
+      - ./:/yona-cms
+      - ./docker/config/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
+      - ./docker/config/php.ini:/etc/php/7.3/fpm/php.ini
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: yona-cms-nginx
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/yona-cms
+      - ./docker/config/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/config/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php7

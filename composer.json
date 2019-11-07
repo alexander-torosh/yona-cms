@@ -1,0 +1,25 @@
+{
+    "name": "alexander-torosh/yona-cms",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Torosh",
+            "email": "webtorua@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Api\\": "app/api/src/",
+            "Cli\\": "app/cli/src/"
+        }
+    },
+    "require": {
+        "php": ">=7.3",
+        "ext-phalcon": ">=3.4",
+        "josegonzalez/dotenv": "dev-master"
+    },
+    "require-dev": {
+        "phalcon/ide-stubs": "^3.4"
+    }
+}
