@@ -5,7 +5,7 @@
 
 namespace Api;
 
-use Api\Controller\IndexController;
+use Api\Controllers\IndexController;
 use Api\Exception\NotFoundException;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
@@ -50,7 +50,7 @@ class Router
     {
         $collection = new MicroCollection();
         $collection->setHandler(IndexController::class, true);
-        $collection->setPrefix('');
+        $collection->setPrefix('/api');
 
         $collection->get('/', 'index');
         return $collection;

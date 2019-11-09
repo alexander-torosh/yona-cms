@@ -3,7 +3,7 @@
  * @author Alexander Torosh <webtorua@gmail.com>
  */
 
-namespace Api\Controller;
+namespace Api\Controllers;
 
 use Api\ApiController;
 

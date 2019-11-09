@@ -10,6 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
+            "Web\\": "app/web/src/",
             "Api\\": "app/api/src/",
             "Cli\\": "app/cli/src/"
         }

@@ -6,7 +6,6 @@
 namespace Api;
 
 use josegonzalez\Dotenv\Loader as EnvLoader;
-use Phalcon\Debug;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Micro;
 
@@ -22,19 +21,14 @@ class ApiApplication
             ->parse()
             ->putenv();
 
-        if (getenv('APP_ENV') === 'development') {
-            $debug = new Debug();
-            $debug->listen();
-        }
-
         // Initialize micro app
         $app = new Micro();
 
         // Bind DI to the app
         $app->setDI($di);
 
-        // Create and bind an Events Manager to the app
-        $events = new Events();
+        // Create and bind an EventsManager Manager to the app
+        $events = new ApiEventsManager();
         $di->set('eventsManager', $events->getEventsManager());
 
         // Router
