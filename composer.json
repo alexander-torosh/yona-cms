@@ -6,6 +6,10 @@
         {
             "name": "Alexander Torosh",
             "email": "webtorua@gmail.com"
+        },
+        {
+            "name": "Nikolas Serko",
+            "email": "nikolas.serko@gmail.com"
         }
     ],
     "autoload": {
