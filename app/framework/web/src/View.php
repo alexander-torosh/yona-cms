@@ -19,7 +19,7 @@ class View extends PhalconView
 
         $volt = new Volt($this, $this->getDI());
         $volt->setOptions([
-            'compiledPath' => __DIR__ . '/../../../cache/volt/',
+            'compiledPath' => __DIR__ . '/../../../../cache/volt/',
         ]);
 
         $this->registerEngines([

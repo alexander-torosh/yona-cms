@@ -5,7 +5,7 @@
 
 namespace Web;
 
-use josegonzalez\Dotenv\Loader as EnvLoader;
+use Core\Config\EnvironmentLoader;
 use Phalcon\Debug;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application;
@@ -19,9 +19,9 @@ class WebApplication
         $di = new FactoryDefault();
 
         // Env configuration
-        (new EnvLoader(__DIR__ . '/../../../.env'))
-            ->parse()
-            ->putenv();
+        $env = getenv('APP_ENV');
+        $configLoader = new EnvironmentLoader();
+        $configLoader->load(__DIR__ .'/../../../../.env', $env !== 'development');
 
         if (getenv('APP_ENV') === 'development') {
             $debug = new Debug();
@@ -84,7 +84,7 @@ class WebApplication
             'message' => $e->getMessage(),
         ]);
         $app->response
-            ->setStatusCode(404)
+            ->setStatusCode(503)
             ->send();
     }
 }

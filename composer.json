@@ -10,15 +10,21 @@
     ],
     "autoload": {
         "psr-4": {
-            "Web\\": "app/web/src/",
-            "Api\\": "app/api/src/",
-            "Cli\\": "app/cli/src/"
+            "Api\\": "app/framework/api/",
+            "Cli\\": "app/framework/cli/",
+            "Core\\": "app/framework/core/",
+            "Web\\": "app/framework/web/src/",
+            "Domain\\": "app/domain/",
+            "Model\\": "app/models/"
         }
     },
     "require": {
         "php": ">=7.3",
         "ext-phalcon": ">=3.4",
-        "josegonzalez/dotenv": "dev-master"
+        "ext-json": "*",
+        "josegonzalez/dotenv": "dev-master",
+        "symfony/serializer": "^4.3",
+        "symfony/property-access": "^4.3"
     },
     "require-dev": {
         "phalcon/ide-stubs": "^3.4"

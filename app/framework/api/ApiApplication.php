@@ -5,7 +5,7 @@
 
 namespace Api;
 
-use josegonzalez\Dotenv\Loader as EnvLoader;
+use Core\Config\EnvironmentLoader;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Micro;
 
@@ -17,9 +17,9 @@ class ApiApplication
         $di = new FactoryDefault();
 
         // Env configuration
-        (new EnvLoader(__DIR__ . '/../../../.env'))
-            ->parse()
-            ->putenv();
+        $env = getenv('APP_ENV');
+        $configLoader = new EnvironmentLoader();
+        $configLoader->load(__DIR__ .'/../../../.env', $env !== 'development');
 
         // Initialize micro app
         $app = new Micro();
@@ -46,14 +46,16 @@ class ApiApplication
     {
         $app->error(
             function ($exception) use ($app) {
+                $code = $exception->getCode() ?: 503;
+
                 $response = $app->response;
                 $response->setJsonContent([
-                    'code'    => $exception->getCode(),
+                    'code'    => $code,
                     'status'  => 'error',
                     'message' => $exception->getMessage(),
                 ]);
 
-                $response->setStatusCode($exception->getCode());
+                $response->setStatusCode($code);
                 $response->send();
             }
         );

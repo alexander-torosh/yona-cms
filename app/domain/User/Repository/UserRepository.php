@@ -3,9 +3,9 @@
  * @author Alexander Torosh <webtorua@gmail.com>
  */
 
-namespace Cli;
+namespace Domain\User\Repository;
 
-class CliApplication
+class UserRepository
 {
 
 }
