@@ -14,12 +14,12 @@ class View extends PhalconView
     {
         parent::__construct($options);
 
-        $this->setViewsDir(__DIR__ . '/../view');
+        $this->setViewsDir(getenv('ROOT_DIR') . '/app/framework/web/view');
         $this->setMainView('main');
 
         $volt = new Volt($this, $this->getDI());
         $volt->setOptions([
-            'compiledPath' => __DIR__ . '/../../../../cache/volt/',
+            'compiledPath' => getenv('ROOT_DIR') . '/cache/volt/',
         ]);
 
         $this->registerEngines([

@@ -5,6 +5,14 @@
   "author": "Alexander Torosh <webtorua@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.0"
+    "@babel/preset-react": "^7.7.0",
+    "@symfony/webpack-encore": "^0.28.0",
+    "sass-loader": "^7.0.1"
+  },
+  "dependencies": {
+    "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   }
 }

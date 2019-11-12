@@ -9,6 +9,8 @@ services:
       - ./:/yona-cms
       - ./docker/config/php/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
       - ./docker/config/php/php.ini:/etc/php/7.3/fpm/php.ini
+    links:
+      - mysql
 
   nginx:
     image: nginx:1.17-alpine
@@ -21,3 +23,16 @@ services:
       - ./docker/config/nginx/default.conf:/etc/nginx/conf.d/default.conf
     links:
       - php7
+
+  mysql:
+    image: mysql:8
+    container_name: yona-cms-mysql
+    ports:
+      - 53306:3306
+    volumes:
+      - ./docker/storage/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=yona-cms
+      - MYSQL_ROOT_PASSWORD=111
+    security_opt:
+      - seccomp:unconfined

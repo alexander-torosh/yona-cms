@@ -28,7 +28,8 @@
         "ext-json": "*",
         "josegonzalez/dotenv": "dev-master",
         "symfony/serializer": "^4.3",
-        "symfony/property-access": "^4.3"
+        "symfony/property-access": "^4.3",
+        "robmorgan/phinx": "^0.11.1"
     },
     "require-dev": {
         "phalcon/ide-stubs": "^3.4"
