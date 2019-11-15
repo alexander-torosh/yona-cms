@@ -5,41 +5,47 @@
 
 namespace Api;
 
+use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
-use Phalcon\Di\FactoryDefault;
+use Phalcon\Di;
+use Phalcon\Http\Request;
+use Phalcon\Http\Response;
 use Phalcon\Mvc\Micro;
+use Phalcon\Mvc\Router;
 
 class ApiApplication
 {
     public function run()
     {
-        // Dependency Injector
-        $di = new FactoryDefault();
-
-        // Env configuration
-        $env = getenv('APP_ENV');
-        $configLoader = new EnvironmentLoader();
-        $configLoader->load(__DIR__ .'/../../../.env', $env !== 'development');
+        // DI Container
+        $container = new Di();
 
         // Initialize micro app
-        $app = new Micro();
+        $app = new Micro($container);
 
-        // Bind DI to the app
-        $app->setDI($di);
+        // Set serverCache service
+        $app->setService('serverCache', (new ApcuCache())->init(), true);
 
-        // Create and bind an EventsManager Manager to the app
-        $events = new ApiEventsManager();
-        $di->set('eventsManager', $events->getEventsManager());
+        // Env configuration
+        $configLoader = new EnvironmentLoader();
+        $configLoader->setDI($container);
+        $configLoader->load();
 
-        // Router
-        $router = new Router();
-        $app = $router->init($app);
+        // Define default services
+        $app->setService('router', new Router(), true);
+        $app->setService('request', new Request(), true);
+        $app->setService('response', new Response(), true);
+
+
+        // Initialize API Routing
+        $apiRouter = new ApiRouter();
+        $apiRouter->init($app);
 
         // Handle exceptions
         $app = $this->handleExceptions($app);
 
-        // Handle
-        $app->handle();
+        // Handle request
+        $app->handle($_SERVER["REQUEST_URI"]);
     }
 
     private function handleExceptions(Micro $app): Micro

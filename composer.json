@@ -1,4 +1,5 @@
 {
+    "version": "2.0.0",
     "name": "alexander-torosh/yona-cms",
     "type": "project",
     "license": "MIT",
@@ -18,20 +19,22 @@
             "Cli\\": "app/framework/cli/",
             "Core\\": "app/framework/core/",
             "Web\\": "app/framework/web/src/",
+            "Dashboard\\": "app/framework/web/modules/dashboard/src/",
+            "Front\\": "app/framework/web/modules/front/src/",
             "Domain\\": "app/domain/",
             "Model\\": "app/models/"
         }
     },
     "require": {
         "php": ">=7.3",
-        "ext-phalcon": ">=3.4",
         "ext-json": "*",
         "josegonzalez/dotenv": "dev-master",
         "symfony/serializer": "^4.3",
         "symfony/property-access": "^4.3",
-        "robmorgan/phinx": "^0.11.1"
+        "robmorgan/phinx": "^0.11.1",
+        "phalcon/cphalcon": "^4.0.0-rc.2"
     },
     "require-dev": {
-        "phalcon/ide-stubs": "^3.4"
+        "phalcon/ide-stubs": "^4.0.0-rc.2"
     }
 }

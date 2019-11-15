@@ -6,32 +6,30 @@
 namespace Core\Config;
 
 use josegonzalez\Dotenv\Loader;
+use Phalcon\Di\AbstractInjectionAware;
 
-class EnvironmentLoader
+class EnvironmentLoader extends AbstractInjectionAware
 {
-    const CACHE_FILEPATH = __DIR__ . '/../../../cache/app/env.php';
+    const CACHE_KEY = 'dontev-configuration';
 
-    /**
-     * @param string $filepath
-     * @param bool $caching
-     */
-    public function load(string $filepath, $caching = true)
+    public function load()
     {
-        // If caching enabled
-        if ($caching) {
-            $cachedConfiguration = $this->readConfigCache();
-            if (empty($cachedConfiguration)) {
-                $loader = $this->loadRootEnvFile($filepath);
+        // .env filepath
+        $filepath = __DIR__ . '/../../../../.env';
 
-                // Save cached file
-                $this->saveCache($loader->toArray());
+        $cachedConfiguration = $this->readConfigCache();
+        if (!$cachedConfiguration) {
+            $loader = $this->loadRootEnvFile($filepath);
 
-            } else {
-                $this->putVariablesToEnv($cachedConfiguration);
+            // Save configuration to cache if APP_ENV is not 'development'
+            if (getenv('APP_ENV') !== 'development') {
+
+                // Save configuration to cache
+                $this->saveConfigCache($loader->toArray());
             }
+
         } else {
-            // If not enabled, just load root .env file
-            $this->loadRootEnvFile($filepath);
+            $this->putVariablesToEnv($cachedConfiguration);
         }
     }
 
@@ -44,39 +42,41 @@ class EnvironmentLoader
         // Use Dotenv Loader
         $loader = new Loader($filepath);
         $loader->parse();
-
         $loader->putenv();
+
         return $loader;
     }
 
     /**
-     * @return array
+     * @return \stdClass
      */
-    private function readConfigCache(): array
+    private function readConfigCache(): ?\stdClass
     {
-        if (is_file(self::CACHE_FILEPATH)) {
-            $config = include(self::CACHE_FILEPATH);
+        $apcuCache = $this->getDI()->get('serverCache');
+        $config    = $apcuCache->get(self::CACHE_KEY);
+        if ($config) {
             return $config;
         }
-        return [];
+
+        // Default return
+        return null;
     }
 
     /**
      * @param array $configArray
      */
-    private function saveCache(array $configArray = [])
+    private function saveConfigCache(array $configArray = [])
     {
-        $configFileContents = '<?php' . PHP_EOL . PHP_EOL . 'return [' . PHP_EOL;
-        foreach ($configArray as $index => $value) {
-            $configFileContents .= '   "' . $index . '" => "' . $value . '",' . PHP_EOL;
-        }
-        $configFileContents .= '];';
-        file_put_contents(self::CACHE_FILEPATH, $configFileContents);
+        $apcuCache = $this->getDI()->get('serverCache');
+        $apcuCache->set(self::CACHE_KEY, $configArray);
     }
 
-    private function putVariablesToEnv($cachedConfiguration)
+    /**
+     * @param \stdClass $cachedConfiguration
+     */
+    private function putVariablesToEnv(\stdClass $cachedConfiguration)
     {
-        foreach($cachedConfiguration as $index => $value) {
+        foreach ($cachedConfiguration as $index => $value) {
             putenv("$index=$value");
         }
     }

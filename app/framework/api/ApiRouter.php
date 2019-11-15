@@ -10,21 +10,18 @@ use Api\Exception\NotFoundException;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
 
-class Router
+class ApiRouter
 {
     /**
      * @param Micro $app
-     * @return Micro
      */
-    public function init(Micro $app): Micro
+    public function init(Micro $app)
     {
         // Not Found
         $app = $this->handleNotFound($app);
 
         // Mount Routes
         $app->mount($this->index());
-
-        return $app;
     }
 
     /**
@@ -53,6 +50,8 @@ class Router
         $collection->setPrefix('/api');
 
         $collection->get('/', 'index');
+        $collection->get('/test', 'test');
+
         return $collection;
     }
 }

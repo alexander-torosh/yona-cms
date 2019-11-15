@@ -18,15 +18,16 @@ Connect to the main Docker container
 
     docker exec -it yona-cms bash
     
+## Development
+
+@TODO Complete this section
+    
 ## Production Performance
 
-@TODO  
-Use this article ... https://symfony.com/doc/current/performance.html
+@TODO Complete this section
 
 ## Environment configuration
 
-Cache file `env.php`
-
-Optimize composer autoloader
+**Optimize composer autoloader**
 
     composer dump-autoload --no-dev --classmap-authoritative

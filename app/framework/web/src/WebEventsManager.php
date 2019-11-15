@@ -12,7 +12,7 @@ class WebEventsManager
     /**
      * @return Manager
      */
-    public function getEventsManager(): Manager
+    public function init(): Manager
     {
         $eventsManager = new Manager();
 

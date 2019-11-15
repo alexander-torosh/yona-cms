@@ -8,18 +8,18 @@ namespace Web;
 use Phalcon\Mvc\View as PhalconView;
 use Phalcon\Mvc\View\Engine\Volt;
 
-class View extends PhalconView
+class WebView extends PhalconView
 {
-    public function __construct($options = null)
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
-        $this->setViewsDir(getenv('ROOT_DIR') . '/app/framework/web/view');
-        $this->setMainView('main');
+        $this->setViewsDir(getenv('ROOT_DIR') . '/app/framework/web/modules/front/views/');
+        $this->setMainView('front');
 
         $volt = new Volt($this, $this->getDI());
         $volt->setOptions([
-            'compiledPath' => getenv('ROOT_DIR') . '/cache/volt/',
+            'path' => getenv('ROOT_DIR') . '/cache/volt/',
         ]);
 
         $this->registerEngines([

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74cd067204f2125ef19b77b1d3e42ebe",
+    "content-hash": "5c0e19265600a7f059111b5750fb6572",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -454,6 +454,82 @@
             "time": "2018-06-19T18:55:08+00:00"
         },
         {
+            "name": "phalcon/cphalcon",
+            "version": "v4.0.0-rc.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phalcon/cphalcon.git",
+                "reference": "95484a06ff9f1f4624b83761aba4d9222026788f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phalcon/cphalcon/zipball/95484a06ff9f1f4624b83761aba4d9222026788f",
+                "reference": "95484a06ff9f1f4624b83761aba4d9222026788f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2 <8.0"
+            },
+            "provide": {
+                "psr/cache": "^1.0",
+                "psr/container": "^1.0",
+                "psr/event-dispatcher": "^0.7.0",
+                "psr/event-dispatcher-message": "^0.6.0",
+                "psr/event-dispatcher-task": "^0.6.0",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-handler": "^1.0",
+                "psr/http-server-middleware": "^1.0",
+                "psr/link": "^1.0",
+                "psr/log": "^1.1",
+                "psr/simple-cache": "^1.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.5",
+                "ext-dom": "*",
+                "ext-gd": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-psr": "^0.7",
+                "ext-xml": "*",
+                "friendsofphp/php-cs-fixer": "~2.0",
+                "mustache/mustache": "^2.12",
+                "predis/predis": "^1.1",
+                "squizlabs/php_codesniffer": "^3.4",
+                "twig/twig": "~1.36",
+                "vlucas/phpdotenv": "^2.5"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Phalcon Team",
+                    "email": "team@phalcon.io",
+                    "homepage": "https://phalcon.io/en/team"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/phalcon/cphalcon/graphs/contributors"
+                }
+            ],
+            "description": "Phalcon is an open source web framework delivered as a C extension for the PHP language providing high performance and lower resource consumption.",
+            "keywords": [
+                "extension",
+                "framework",
+                "high load",
+                "mvc",
+                "phalcon",
+                "psr-17",
+                "psr-7"
+            ],
+            "time": "2019-10-26T17:12:22+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -676,7 +752,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -740,16 +816,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d2e39dbddae68560fa6be0c576da6ad4e945b90d"
+                "reference": "831424efae0a1fe6642784bd52aae14ece6538e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d2e39dbddae68560fa6be0c576da6ad4e945b90d",
-                "reference": "d2e39dbddae68560fa6be0c576da6ad4e945b90d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/831424efae0a1fe6642784bd52aae14ece6538e6",
+                "reference": "831424efae0a1fe6642784bd52aae14ece6538e6",
                 "shasum": ""
             },
             "require": {
@@ -811,11 +887,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-05T15:00:49+00:00"
+            "time": "2019-11-13T07:29:07+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -865,16 +941,16 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v4.3.6",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "fc488a52c79b2bbe848fa9def35f2cccb47c4798"
+                "reference": "f97c69c132c08e31d291689d2d77bb0878094acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/inflector/zipball/fc488a52c79b2bbe848fa9def35f2cccb47c4798",
-                "reference": "fc488a52c79b2bbe848fa9def35f2cccb47c4798",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/f97c69c132c08e31d291689d2d77bb0878094acb",
+                "reference": "f97c69c132c08e31d291689d2d77bb0878094acb",
                 "shasum": ""
             },
             "require": {
@@ -919,7 +995,7 @@
                 "symfony",
                 "words"
             ],
-            "time": "2019-09-17T11:12:06+00:00"
+            "time": "2019-11-05T19:58:22+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1098,7 +1174,7 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v4.3.6",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
@@ -1165,16 +1241,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v4.3.6",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "cb2d8c6e82b4966a5cc5762385e6e0f70ee1388a"
+                "reference": "18f30003dbe7178dcc1f75901ecb9f4937d146f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/cb2d8c6e82b4966a5cc5762385e6e0f70ee1388a",
-                "reference": "cb2d8c6e82b4966a5cc5762385e6e0f70ee1388a",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/18f30003dbe7178dcc1f75901ecb9f4937d146f5",
+                "reference": "18f30003dbe7178dcc1f75901ecb9f4937d146f5",
                 "shasum": ""
             },
             "require": {
@@ -1241,7 +1317,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30T13:18:51+00:00"
+            "time": "2019-11-13T07:29:07+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -1303,7 +1379,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -1364,20 +1440,24 @@
     "packages-dev": [
         {
             "name": "phalcon/ide-stubs",
-            "version": "v3.4.3",
+            "version": "v4.0.0-rc.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalcon/ide-stubs.git",
-                "reference": "65144f2b0fad32b182ccb062b1efc1b4edea5d44"
+                "reference": "e21e4776f2583d13dd0cb54d667cad704a8e78cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalcon/ide-stubs/zipball/65144f2b0fad32b182ccb062b1efc1b4edea5d44",
-                "reference": "65144f2b0fad32b182ccb062b1efc1b4edea5d44",
+                "url": "https://api.github.com/repos/phalcon/ide-stubs/zipball/e21e4776f2583d13dd0cb54d667cad704a8e78cf",
+                "reference": "e21e4776f2583d13dd0cb54d667cad704a8e78cf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "3.*",
+                "vimeo/psalm": "^3.4"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -1408,20 +1488,20 @@
                 "stub",
                 "stubs"
             ],
-            "time": "2018-12-09T14:11:06+00:00"
+            "time": "2019-10-26T20:50:08+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "josegonzalez/dotenv": 20
+        "josegonzalez/dotenv": 20,
+        "phalcon/cphalcon": 5,
+        "phalcon/ide-stubs": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3",
-        "ext-phalcon": ">=3.4",
-        "ext-json": "*"
+        "php": ">=7.3"
     },
     "platform-dev": []
 }

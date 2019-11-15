@@ -11,6 +11,7 @@ services:
       - ./docker/config/php/php.ini:/etc/php/7.3/fpm/php.ini
     links:
       - mysql
+      - redis
 
   nginx:
     image: nginx:1.17-alpine
@@ -36,3 +37,7 @@ services:
       - MYSQL_ROOT_PASSWORD=111
     security_opt:
       - seccomp:unconfined
+
+  redis:
+    image: redis:4-alpine
+    container_name: yona-cms-redis
