@@ -1,2 +1,2 @@
 <h1>Front\IndexController::indexAction</h1>
-<div id="root"></div>
+<div id="homepage-root"></div>
