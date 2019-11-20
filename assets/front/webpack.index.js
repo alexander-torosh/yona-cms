@@ -1,4 +1,4 @@
-// Scripts
+// Import Scripts
 import './js/front.index.js'
 
 // Styles

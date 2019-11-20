@@ -22,8 +22,9 @@ class Module implements ModuleDefinitionInterface
         // Registering a dispatcher
         $container->set(
             'dispatcher',
-            function () {
+            function () use ($container) {
                 $dispatcher = new Dispatcher();
+                $dispatcher->setEventsManager($container->get('eventsManager'));
                 $dispatcher->setDefaultNamespace('Front\Controllers');
 
                 return $dispatcher;

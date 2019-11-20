@@ -1,12 +1,12 @@
 <html>
 <head>
     <title>{{ get_title() }}</title>
-    <link href="{{ assetsBuildResolver.getFileUrl('build/front.css') }}" rel="stylesheet">
+    <link href="{{ assetsHelper.getUrl('build/front.css') }}" rel="stylesheet">
 </head>
 <body>
     {{ content() }}
 
-    <script src="{{ assetsBuildResolver.getFileUrl('build/runtime.js') }}"></script>
-    <script src="{{ assetsBuildResolver.getFileUrl('build/front.js') }}"></script>
+    <script src="{{ assetsHelper.getUrl('build/runtime.js') }}"></script>
+    <script src="{{ assetsHelper.getUrl('build/front.js') }}"></script>
 </body>
 </html>

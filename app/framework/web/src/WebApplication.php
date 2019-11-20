@@ -5,9 +5,10 @@
 
 namespace Web;
 
+use Core\Annotations\AnnotationsManager;
 use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
-use Core\Assets\BuildResolver as AssetsBuildResolver;
+use Core\Assets\AssetsHelper;
 use Front\Module as FrontModule;
 use Dashboard\Module as DashboardModule;
 use Phalcon\Debug;
@@ -16,6 +17,7 @@ use Phalcon\Mvc\Application;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Tag;
 use Phalcon\Url;
+use Web\Exceptions\AccessDeniedException;
 
 class WebApplication
 {
@@ -40,16 +42,35 @@ class WebApplication
             $debug->listen();
         }
 
-        $container->set('router', (new WebRouter())->init(), true);
+        // Create EventsManager Manager
+        $webEventsManager = new WebEventsManager($container);
+        $eventsManager = $webEventsManager->getEventsManager();
+
+        // Save Events Manager to DI Container
+        $container->set('eventsManager', $eventsManager, true);
+
+        // Bind Events Manager to Application
+        $app->setEventsManager($container->get('eventsManager'));
+
+        // Router
+        $webRouter = new WebRouter($container, $eventsManager);
+        $container->set('router', $webRouter->getRouter(), true);
 
         // Register Web Modules
         $this->registerWebApplicationModules($app);
 
-        // Create and bind an EventsManager Manager to the app
-        $container->set('eventsManager', (new WebEventsManager())->init(), true);
+        // Annotations
+        $annotationsManager = new AnnotationsManager($container);
+        $container->set('annotations', $annotationsManager->getAnnotations(), true);
+
+        // ACL
+        $aclManager = new WebAclManager($container, $eventsManager);
+        $container->set('acl', $aclManager->getAcl(), true);
 
         // Default View
-        $container->set('view', new WebView(), true);
+        $webView = new WebView();
+        $webView->setEventsManager($eventsManager);
+        $container->set('view', $webView, true);
 
         // Url
         $url = new Url();
@@ -57,8 +78,8 @@ class WebApplication
         $container->set('url', $url);
 
         // Assets Build Resolver
-        $entrypointsManager = new AssetsBuildResolver($container);
-        $container->set('assetsBuildResolver', $entrypointsManager, true);
+        $assetsHelper = new AssetsHelper($container);
+        $container->set('assetsHelper', $assetsHelper, true);
 
         // @TODO Move it to another place
         // Tag
@@ -69,6 +90,10 @@ class WebApplication
             // Handle request
             $response = $app->handle($_SERVER["REQUEST_URI"]);
             $response->send();
+
+        } catch (AccessDeniedException $e) {
+            // Access Denied
+            $this->handleAccessDenied($app);
 
         } catch (Dispatcher\Exception $e) {
             // 404 Not Found
@@ -92,6 +117,11 @@ class WebApplication
                 'path'      => __DIR__ . '/../modules/dashboard/src/Module.php',
             ]
         ]);
+    }
+
+    private function handleAccessDenied(Application $app)
+    {
+
     }
 
     /**

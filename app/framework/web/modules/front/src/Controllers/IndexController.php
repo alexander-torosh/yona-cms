@@ -10,6 +10,11 @@ use Phalcon\Tag;
 
 class IndexController extends Controller
 {
+    /**
+     * @Access(
+     *  'guest'
+     * )
+     */
     public function indexAction()
     {
         Tag::prependTitle('Homepage');

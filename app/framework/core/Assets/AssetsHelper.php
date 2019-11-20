@@ -9,7 +9,7 @@ use Core\Exceptions\Assets\BuildEntrypointsFileNotFound;
 use Phalcon\Cache;
 use Phalcon\Di\AbstractInjectionAware;
 
-class BuildResolver extends AbstractInjectionAware
+class AssetsHelper extends AbstractInjectionAware
 {
     const CACHE_KEY = 'assets-manifest';
     const CACHE_LIFETIME = 30;
@@ -28,7 +28,7 @@ class BuildResolver extends AbstractInjectionAware
      * @throws BuildEntrypointsFileNotFound
      * @throws Cache\Exception\InvalidArgumentException
      */
-    public function init()
+    private function init()
     {
         /* @var $serverCache Cache */
         $serverCache    = $this->getDI()->get('serverCache');
@@ -53,7 +53,7 @@ class BuildResolver extends AbstractInjectionAware
         }
     }
 
-    public function getFileUrl($file = 'build/front.js')
+    public function getUrl($file = 'build/front.js')
     {
         if (isset($this->manifest->{$file})) {
             $url = $this->getDI()->get('url');

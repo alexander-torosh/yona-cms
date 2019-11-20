@@ -5,14 +5,31 @@
 
 namespace Web;
 
+use Phalcon\Di\AbstractInjectionAware;
+use Phalcon\Di\DiInterface;
+use Phalcon\Events\Manager;
 use Phalcon\Mvc\Router;
 
-class WebRouter
+class WebRouter extends AbstractInjectionAware
 {
+    /* @var $router Router */
+    private $router;
+
+    public function __construct(DiInterface $container, Manager $eventsManager) {
+        $this->setDI($container);
+        $this->init();
+        $this->router->setEventsManager($eventsManager);
+    }
+
     /**
-     * @return Router
+     * @return mixed
      */
-    public function init(): Router
+    public function getRouter(): Router
+    {
+        return $this->router;
+    }
+
+    private function init()
     {
         $router = new Router();
         $router
@@ -26,7 +43,7 @@ class WebRouter
         // Backend Router Groups
         $router->mount($this->dashboardIndex());
 
-        return $router;
+        $this->router = $router;
     }
 
     /**

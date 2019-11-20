@@ -10,6 +10,11 @@ use Phalcon\Tag;
 
 class IndexController extends Controller
 {
+    /**
+     * @Access(
+     *  'editor'
+     * )
+     */
     public function indexAction()
     {
         Tag::prependTitle('Dashboard index');
