@@ -1,5 +1,13 @@
-<h1>Dashboard Login</h1>
+<div id="auth-root">
+    <div class="ui placeholder">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+</div>
 
 <script>
-    window.REDIRECT = {{ redirect|json_encode }};
+    REDIRECT = {{ redirect|json_encode }};
 </script>

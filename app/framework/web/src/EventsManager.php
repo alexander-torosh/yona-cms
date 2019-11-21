@@ -66,7 +66,7 @@ class EventsManager extends AbstractInjectionAware
         $acl = $container->get('acl');
 
         // @TODO Replace with real value
-        $sessionRole = 'guest';
+        $sessionRole = 'editor';
 
         /* @var $annotations \Phalcon\Annotations\Adapter\Memory */
         $annotations = $container->get('annotations');

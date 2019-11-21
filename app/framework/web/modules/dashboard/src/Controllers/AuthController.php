@@ -20,6 +20,9 @@ class AuthController extends Controller
         $redirect = $this->request->getQuery('redirect');
         $sanitizedRedirect = trim(strip_tags($redirect));
 
-        $this->view->setVar('redirect', $sanitizedRedirect);
+        $this->view->setVars([
+            'hideDashboardRoot' => true,
+            'redirect' => $sanitizedRedirect
+        ]);
     }
 }

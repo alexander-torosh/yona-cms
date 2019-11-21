@@ -4,7 +4,13 @@
     <link href="{{ assetsHelper.getUrl('build/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
-    {{ content() }}
+    {% if hideDashboardRoot is defined and hideDashboardRoot %}
+        {{ content() }}
+    {% else %}
+        <div id="dashboard-root">
+            {{ content() }}
+        </div>
+    {% endif %}
 
     <script src="{{ assetsHelper.getUrl('build/runtime.js') }}"></script>
     <script src="{{ assetsHelper.getUrl('build/dashboard.js') }}"></script>

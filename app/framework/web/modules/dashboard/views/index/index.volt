@@ -1,2 +1,7 @@
-<h1>Dashboard\IndexController::indexAction</h1>
-<div id="dashboard-root"></div>
+<div class="ui placeholder">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div>
