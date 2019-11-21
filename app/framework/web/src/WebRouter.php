@@ -15,7 +15,8 @@ class WebRouter extends AbstractInjectionAware
     /* @var $router Router */
     private $router;
 
-    public function __construct(DiInterface $container, Manager $eventsManager) {
+    public function __construct(DiInterface $container, Manager $eventsManager)
+    {
         $this->setDI($container);
         $this->init();
         $this->router->setEventsManager($eventsManager);
