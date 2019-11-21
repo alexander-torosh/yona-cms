@@ -18,7 +18,8 @@ class WebEventsManager extends AbstractInjectionAware
     /* @var $eventsManager Manager */
     private $eventsManager;
 
-    public function __construct(DiInterface $container) {
+    public function __construct(DiInterface $container)
+    {
         $this->setDI($container);
         $this->init();
     }
@@ -29,13 +30,13 @@ class WebEventsManager extends AbstractInjectionAware
     }
 
         /**
-     * @return Manager
-     */
+         * @return Manager
+         */
     private function init()
     {
         $eventsManager = new Manager();
 
-        $eventsManager->attach('dispatch:beforeExecuteRoute', function(Event $event, Dispatcher $dispatcher) {
+        $eventsManager->attach('dispatch:beforeExecuteRoute', function (Event $event, Dispatcher $dispatcher) {
             return $this->dispatchBeforeExecuteRoute($dispatcher);
         });
 
@@ -78,7 +79,7 @@ class WebEventsManager extends AbstractInjectionAware
             $accessRoles = $annotationAccess->getArguments();
 
             if (!empty($accessRoles)) {
-                foreach($accessRoles as $role) {
+                foreach ($accessRoles as $role) {
                     $acl->allow($role, $controllerName, $actionName);
                 }
             }

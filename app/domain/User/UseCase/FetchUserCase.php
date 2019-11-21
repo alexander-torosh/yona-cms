@@ -12,7 +12,8 @@ class FetchUserCase
 {
     private $repository;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->repository = new UserRepository();
     }
 
