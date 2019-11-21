@@ -34,5 +34,8 @@ class Dashboard extends Component {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  ReactDOM.render(<Dashboard/>, document.getElementById('dashboard-root'))
+  const element = document.getElementById('dashboard-root')
+  if (element) {
+    ReactDOM.render(<Dashboard/>, element)
+  }
 })

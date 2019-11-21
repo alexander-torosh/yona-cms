@@ -25,5 +25,8 @@ class Auth extends Component {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  ReactDOM.render(<Auth />, document.getElementById('auth-root'))
+  const element = document.getElementById('auth-root')
+  if (element) {
+    ReactDOM.render(<Auth />, element)
+  }
 })
