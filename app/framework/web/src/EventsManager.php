@@ -13,7 +13,7 @@ use Phalcon\Events\Manager;
 use Phalcon\Mvc\Dispatcher;
 use Web\Exceptions\AccessDeniedException;
 
-class WebEventsManager extends AbstractInjectionAware
+class EventsManager extends AbstractInjectionAware
 {
     /* @var $eventsManager Manager */
     private $eventsManager;
@@ -24,14 +24,14 @@ class WebEventsManager extends AbstractInjectionAware
         $this->init();
     }
 
+    /**
+     * @return Manager
+     */
     public function getEventsManager(): Manager
     {
         return $this->eventsManager;
     }
 
-        /**
-         * @return Manager
-         */
     private function init()
     {
         $eventsManager = new Manager();
@@ -55,6 +55,11 @@ class WebEventsManager extends AbstractInjectionAware
         $this->handleControllerAccessAnnotations($container, $dispatcher);
     }
 
+    /**
+     * @param DiInterface $container
+     * @param Dispatcher $dispatcher
+     * @throws AccessDeniedException
+     */
     private function handleControllerAccessAnnotations(DiInterface $container, Dispatcher $dispatcher)
     {
         /* @var $acl Memory */

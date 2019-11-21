@@ -11,9 +11,7 @@ use Phalcon\Tag;
 class IndexController extends Controller
 {
     /**
-     * @Access(
-     *  'guest'
-     * )
+     * @Access('guest')
      */
     public function indexAction()
     {

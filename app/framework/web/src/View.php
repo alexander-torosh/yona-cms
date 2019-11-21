@@ -8,7 +8,7 @@ namespace Web;
 use Phalcon\Mvc\View as PhalconView;
 use Phalcon\Mvc\View\Engine\Volt;
 
-class WebView extends PhalconView
+class View extends PhalconView
 {
     public function __construct(array $options = [])
     {

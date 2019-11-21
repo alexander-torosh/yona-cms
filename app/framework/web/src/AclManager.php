@@ -11,10 +11,10 @@ use Phalcon\Di\AbstractInjectionAware;
 use Phalcon\Di\DiInterface;
 use Phalcon\Events\Manager;
 
-class WebAclManager extends AbstractInjectionAware
+class AclManager extends AbstractInjectionAware
 {
     const CACHE_KEY = 'acl-manager';
-    const CACHE_LIFETIME = 30;
+    const CACHE_LIFETIME = 7200;
 
     /* @var $acl Memory */
     private $acl;
@@ -40,7 +40,6 @@ class WebAclManager extends AbstractInjectionAware
 
             // Read ACL file
             $aclObject = include(__DIR__ . '/../../web/config/acl.php');
-            //$aclObject = include($aclConfigFilepath);
             if ($aclObject) {
                 $this->acl = $aclObject->acl;
 

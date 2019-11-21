@@ -7,7 +7,7 @@ namespace Api;
 
 use Phalcon\Events\Manager;
 
-class ApiEventsManager
+class EventsManager
 {
     /**
      * @return Manager

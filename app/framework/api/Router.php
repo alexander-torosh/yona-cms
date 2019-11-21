@@ -10,7 +10,7 @@ use Api\Exception\NotFoundException;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
 
-class ApiRouter
+class Router
 {
     /**
      * @param Micro $app

@@ -13,13 +13,13 @@ use Front\Module as FrontModule;
 use Dashboard\Module as DashboardModule;
 use Phalcon\Debug;
 use Phalcon\Di\FactoryDefault;
-use Phalcon\Mvc\Application;
+use Phalcon\Mvc\Application as PhalconApplication;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Tag;
 use Phalcon\Url;
 use Web\Exceptions\AccessDeniedException;
 
-class WebApplication
+class Application
 {
     public function run()
     {
@@ -27,10 +27,10 @@ class WebApplication
         $container = new FactoryDefault();
 
         // Initialize app
-        $app = new Application($container);
+        $app = new PhalconApplication($container);
 
         // Set serverCache service
-        $container->set('serverCache', (new ApcuCache())->init(), true);
+        $container->setShared('serverCache', (new ApcuCache())->init());
 
         // Env configuration
         $configLoader = new EnvironmentLoader();
@@ -43,43 +43,43 @@ class WebApplication
         }
 
         // Create EventsManager Manager
-        $webEventsManager = new WebEventsManager($container);
+        $webEventsManager = new EventsManager($container);
         $eventsManager = $webEventsManager->getEventsManager();
 
         // Save Events Manager to DI Container
-        $container->set('eventsManager', $eventsManager, true);
+        $container->setShared('eventsManager', $eventsManager);
 
         // Bind Events Manager to Application
         $app->setEventsManager($container->get('eventsManager'));
 
         // Router
-        $webRouter = new WebRouter($container, $eventsManager);
-        $container->set('router', $webRouter->getRouter(), true);
+        $webRouter = new Router($container, $eventsManager);
+        $container->setShared('router', $webRouter->getRouter());
 
         // Register Web Modules
         $this->registerWebApplicationModules($app);
 
         // Annotations
         $annotationsManager = new AnnotationsManager($container);
-        $container->set('annotations', $annotationsManager->getAnnotations(), true);
+        $container->setShared('annotations', $annotationsManager->getAnnotations());
 
         // ACL
-        $aclManager = new WebAclManager($container, $eventsManager);
-        $container->set('acl', $aclManager->getAcl(), true);
+        $aclManager = new AclManager($container, $eventsManager);
+        $container->setShared('acl', $aclManager->getAcl());
 
         // Default View
-        $webView = new WebView();
+        $webView = new View();
         $webView->setEventsManager($eventsManager);
-        $container->set('view', $webView, true);
+        $container->setShared('view', $webView);
 
         // Url
         $url = new Url();
         $url->setBaseUri('/');
-        $container->set('url', $url);
+        $container->setShared('url', $url);
 
         // Assets Build Resolver
         $assetsHelper = new AssetsHelper($container);
-        $container->set('assetsHelper', $assetsHelper, true);
+        $container->setShared('assetsHelper', $assetsHelper);
 
         // @TODO Move it to another place
         // Tag
@@ -105,7 +105,7 @@ class WebApplication
         }
     }
 
-    private function registerWebApplicationModules(Application $app)
+    private function registerWebApplicationModules(PhalconApplication $app)
     {
         $app->registerModules([
             'front'     => [
@@ -119,15 +119,23 @@ class WebApplication
         ]);
     }
 
-    private function handleAccessDenied(Application $app)
+    /**
+     * @param PhalconApplication $app
+     */
+    private function handleAccessDenied(PhalconApplication $app)
     {
-
+        $app->response
+            ->redirect($app->url->get(
+                ['for' => 'dashboardLogin'],
+                ['redirect' => $app->request->getURI()]
+            ))
+            ->send();
     }
 
     /**
-     * @param Application $app
+     * @param PhalconApplication $app
      */
-    private function notFoundError(Application $app)
+    private function notFoundError(PhalconApplication $app)
     {
         Tag::prependTitle('Page Not Found');
 
@@ -138,10 +146,10 @@ class WebApplication
     }
 
     /**
-     * @param Application $app
+     * @param PhalconApplication $app
      * @param \Exception $e
      */
-    private function serviceUnavailableError(Application $app, \Exception $e)
+    private function serviceUnavailableError(PhalconApplication $app, \Exception $e)
     {
         Tag::prependTitle('Service Unavailable');
 

@@ -8,9 +8,10 @@ namespace Web;
 use Phalcon\Di\AbstractInjectionAware;
 use Phalcon\Di\DiInterface;
 use Phalcon\Events\Manager;
-use Phalcon\Mvc\Router;
+use Phalcon\Mvc\Router as PhalconRouter;
+use Phalcon\Mvc\Router\Group;
 
-class WebRouter extends AbstractInjectionAware
+class Router extends AbstractInjectionAware
 {
     /* @var $router Router */
     private $router;
@@ -25,14 +26,14 @@ class WebRouter extends AbstractInjectionAware
     /**
      * @return mixed
      */
-    public function getRouter(): Router
+    public function getRouter(): PhalconRouter
     {
         return $this->router;
     }
 
     private function init()
     {
-        $router = new Router();
+        $router = new PhalconRouter();
         $router
             ->setDefaultModule('front')
             ->setDefaultController('index')
@@ -43,34 +44,48 @@ class WebRouter extends AbstractInjectionAware
 
         // Backend Router Groups
         $router->mount($this->dashboardIndex());
+        $router->mount($this->dashboardAuth());
 
         $this->router = $router;
     }
 
     /**
-     * @return Router\Group
+     * @return Group
      */
-    private function frontIndex(): Router\Group
+    private function frontIndex(): Group
     {
-        $group = new Router\Group([
+        $group = new Group([
             'controller' => 'index',
         ]);
         $group->setPrefix('/');
 
-        $group->add('', ['action' => 'index']);
+        $group->add('', ['action' => 'index'])->setName('homepage');
 
         return $group;
     }
 
-    private function dashboardIndex(): Router\Group
+    private function dashboardIndex(): Group
     {
-        $group = new Router\Group([
+        $group = new Group([
             'module' => 'dashboard',
             'controller' => 'index',
         ]);
         $group->setPrefix('/dashboard');
 
-        $group->add('', ['action' => 'index']);
+        $group->addGet('', ['action' => 'index'])->setName('dashboardIndex');
+
+        return $group;
+    }
+
+    private function dashboardAuth(): Group
+    {
+        $group = new Group([
+            'module' => 'dashboard',
+            'controller' => 'auth',
+        ]);
+        $group->setPrefix('/dashboard/auth');
+
+        $group->addGet('/login', ['action' => 'login'])->setName('dashboardLogin');
 
         return $group;
     }

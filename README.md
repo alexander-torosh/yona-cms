@@ -14,9 +14,35 @@ Start Docker containers in detached mode
 
     docker-compose up -d
     
+### Docker container
+    
 Connect to the main Docker container
 
     docker exec -it yona-cms bash
+    
+### Configuration
+    
+Create environment configuration file `.env` from `.env.example`
+
+    cp .env.example .env
+    
+### Assets
+    
+Install node_modules packages
+
+    yarn install
+    
+Or with npm
+
+    npm install
+    
+Build assets
+
+    yarn encore dev
+    
+Or with npm
+
+    npm encore dev
     
 ## Development
 

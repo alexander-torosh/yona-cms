@@ -11,9 +11,9 @@ use Phalcon\Di;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Micro;
-use Phalcon\Mvc\Router;
+use Phalcon\Mvc\Router as PhalconRouter;
 
-class ApiApplication
+class Application
 {
     public function run()
     {
@@ -32,13 +32,13 @@ class ApiApplication
         $configLoader->load();
 
         // Define default services
-        $app->setService('router', new Router(), true);
+        $app->setService('router', new PhalconRouter(), true);
         $app->setService('request', new Request(), true);
         $app->setService('response', new Response(), true);
 
 
         // Initialize API Routing
-        $apiRouter = new ApiRouter();
+        $apiRouter = new Router();
         $apiRouter->init($app);
 
         // Handle exceptions

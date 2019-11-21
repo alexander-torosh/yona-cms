@@ -8,7 +8,6 @@ namespace Front;
 use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\ModuleDefinitionInterface;
-use Web\WebView;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -20,28 +19,15 @@ class Module implements ModuleDefinitionInterface
     public function registerServices(DiInterface $container)
     {
         // Registering a dispatcher
-        $container->set(
-            'dispatcher',
-            function () use ($container) {
-                $dispatcher = new Dispatcher();
-                $dispatcher->setEventsManager($container->get('eventsManager'));
-                $dispatcher->setDefaultNamespace('Front\Controllers');
-
-                return $dispatcher;
-            }
-        );
+        $dispatcher = new Dispatcher();
+        $dispatcher->setEventsManager($container->get('eventsManager'));
+        $dispatcher->setDefaultNamespace('Front\Controllers');
+        $container->setShared('dispatcher', $dispatcher);
 
         // Registering the view component
-        $container->set(
-            'view',
-            function () {
-                $view = new WebView();
-                $view
-                    ->setViewsDir(__DIR__ . '/../views/')
-                    ->setMainView('front');
-
-                return $view;
-            }
-        );
+        $view = $container->get('view');
+        $view
+            ->setViewsDir(__DIR__ . '/../views/')
+            ->setMainView('front');
     }
 }

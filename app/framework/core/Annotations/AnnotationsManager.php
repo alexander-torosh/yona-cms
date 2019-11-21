@@ -12,7 +12,7 @@ use Phalcon\Annotations\Adapter\Memory;
 
 class AnnotationsManager extends AbstractInjectionAware
 {
-    const CACHE_LIFETIME = 60;
+    const CACHE_LIFETIME = 7200;
 
     private $annotations;
 

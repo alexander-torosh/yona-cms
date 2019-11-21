@@ -11,9 +11,7 @@ use Phalcon\Tag;
 class IndexController extends Controller
 {
     /**
-     * @Access(
-     *  'editor'
-     * )
+     * @Access('editor')
      */
     public function indexAction()
     {

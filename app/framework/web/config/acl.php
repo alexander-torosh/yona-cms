@@ -29,29 +29,6 @@ class Acl
         // Add Admin inheriting access from Editor
         $acl->addRole($admin, $editor);
 
-        // Front Index
-        /*$acl->addComponent(
-            'Front\Controllers\IndexController',
-            [
-                '*',
-            ]
-        );
-
-        // Dashboard Index
-        $acl->addComponent(
-            'Dashboard\Controllers\IndexController',
-            [
-                'index',
-            ]
-        );*/
-
-        // Frontend Rules
-        // $acl->allow('guest', 'Front\Controllers\IndexController', '*');
-
-        // Dashboard Rules
-        // $acl->allow('editor', 'Dashboard\Controllers\IndexController', '*');
-
-        // Save object to acl property
         $this->acl = $acl;
     }
 }

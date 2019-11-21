@@ -5,8 +5,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Api\ApiApplication;
-use Web\WebApplication;
+use Api\Application as ApiApplication;
+use Web\Application as WebApplication;
 
 if (strpos($_SERVER['REQUEST_URI'], '/api') === 0) {
     $app = new ApiApplication();
