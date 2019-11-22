@@ -6,6 +6,10 @@ Clone project with git clone
 
     git clone git@github.com:alexander-torosh/yona-cms.git
     
+Make `cache` directory writable
+
+    chmod -R a+w cache
+    
 Build Docker images
 
     docker-compose build
