@@ -26,6 +26,12 @@ Create environment configuration file `.env` from `.env.example`
 
     cp .env.example .env
     
+### Composer
+    
+Install composer libraries
+
+    composer install
+    
 ### Assets
     
 Install node_modules packages
