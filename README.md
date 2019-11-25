@@ -9,9 +9,13 @@ Has a convenient modular structure. Has simple configuration and architecture. C
 
 [Project website](http://yonacms.com/)  
 
+## New Modern Yona CMS 2 with Phalcon 4.0 and PHP 7.3
+
+Check ongoing development process in the branch [v2.0.0](https://github.com/alexander-torosh/yona-cms/tree/v2.0.0)
+
 ## PHP 7 support, Docker
 
-For using complete Docker compose stack check this branch [php7.0](https://github.com/alexander-torosh/yona-cms/tree/php7.0)
+For using complete Docker stack check this branch [php7.0](https://github.com/alexander-torosh/yona-cms/tree/php7.0)
 
 ## Installation
 
