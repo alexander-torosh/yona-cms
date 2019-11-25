@@ -5,7 +5,6 @@
 
 namespace Domain\User\UseCase;
 
-
 use Domain\User\Repository\UserRepository;
 
 class FetchUserCase
@@ -17,8 +16,8 @@ class FetchUserCase
         $this->repository = new UserRepository();
     }
 
-    public function getUserById(int $id)
+    public function getUser(int $id)
     {
-        return $this->repository->fetchUserById($id);
+        return $this->repository->fetchUser($id);
     }
 }

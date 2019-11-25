@@ -5,12 +5,48 @@
 
 namespace Domain\User\Repository;
 
-use Domain\User\Entity\User;
+use Domain\Core\DomainException;
+use Domain\User\UseCase\FetchUserCase;
+use Model\User;
+use Phalcon\Mvc\ModelInterface;
 
 class UserRepository
 {
-    public function fetchUserById(int $id): ?User
+    /**
+     * @param int $userID
+     * @return User
+     * @throws DomainException
+     */
+    public function fetchUser(int $userID): ModelInterface
     {
-        // @TODO Implement user fetching from cache and database
+        $user = User::findFirst($userID);
+        if (!$user) {
+            throw new DomainException("User {$userID} not found.");
+        }
+
+        return $user;
+    }
+
+    /**
+     * @param int $userID
+     * @param string $passwordHash
+     * @throws DomainException
+     */
+    public function updateUserPassword(int $userID, string $passwordHash)
+    {
+        $fetchUserCase = new FetchUserCase();
+        $user = $fetchUserCase->getUser($userID);
+        if (!$user) {
+            throw new DomainException("User {$userID} not found.");
+        }
+
+        $user->setPasswordHash($passwordHash);
+
+        if (!$user->update()) {
+            $messages = $user->getMessages();
+            foreach($messages as $message) {
+                throw new DomainException($message);
+            }
+        }
     }
 }
