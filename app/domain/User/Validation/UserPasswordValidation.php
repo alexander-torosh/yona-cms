@@ -26,19 +26,19 @@ class UserPasswordValidation
      */
     private static function doValidation(string $password)
     {
-        if (!self::validateLength($password)) {
+        if (false === self::validateLength($password)) {
             throw new DomainException('Password length must be at least 8 characters.');
         }
-        if (!self::validateLetters($password)) {
+        if (0 === self::validateLetters($password)) {
             throw new DomainException('Password must contain at least one letter.');
         }
-        if (!self::validateNumbers($password)) {
+        if (0 === self::validateNumbers($password)) {
             throw new DomainException('Password must contain at least one number.');
         }
-        if (!self::validateCaseDiff($password)) {
+        if (0 === self::validateCaseDiff($password)) {
             throw new DomainException('Password must contain at least one uppercase and one lowercase letter.');
         }
-        if (!self::validateWeakPasswords($password)) {
+        if (0 === self::validateWeakPasswords($password)) {
             throw new DomainException('Your password doesn\'t meet our minimum requirements. Please enter a stronger password.');
         }
     }
@@ -53,7 +53,7 @@ class UserPasswordValidation
     /**
      * @return false|int
      */
-    private static function validateLetters(string $password)
+    private static function validateLetters(string $password): int
     {
         return preg_match('/\pL/u', $password);
     }
@@ -61,15 +61,12 @@ class UserPasswordValidation
     /**
      * @return false|int
      */
-    private static function validateNumbers(string $password)
+    private static function validateNumbers(string $password): int
     {
         return preg_match('/\pN/u', $password);
     }
 
-    /**
-     * @return false|int
-     */
-    private static function validateCaseDiff(string $password)
+    private static function validateCaseDiff(string $password): int
     {
         return preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $password);
     }
