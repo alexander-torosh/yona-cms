@@ -9,18 +9,12 @@ use Phalcon\Events\Manager;
 
 class EventsManager
 {
-    /**
-     * @return Manager
-     */
     public function getEventsManager(): Manager
     {
-        $eventsManager = new Manager();
-
+        return new Manager();
         // @TODO
         /*$eventsManager->attach('test:event', function(Event $event, $app) {
             var_dump($event->getData());
         });*/
-
-        return $eventsManager;
     }
 }

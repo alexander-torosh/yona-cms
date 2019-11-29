@@ -13,7 +13,7 @@ use Phalcon\Mvc\Router\Group;
 
 class Router extends AbstractInjectionAware
 {
-    /* @var $router Router */
+    // @var $router Router
     private $router;
 
     public function __construct(DiInterface $container, Manager $eventsManager)
@@ -37,7 +37,8 @@ class Router extends AbstractInjectionAware
         $router
             ->setDefaultModule('front')
             ->setDefaultController('index')
-            ->setDefaultAction('index');
+            ->setDefaultAction('index')
+        ;
 
         // Frontend Router Groups
         $router->mount($this->frontIndex());
@@ -49,9 +50,6 @@ class Router extends AbstractInjectionAware
         $this->router = $router;
     }
 
-    /**
-     * @return Group
-     */
     private function frontIndex(): Group
     {
         $group = new Group([

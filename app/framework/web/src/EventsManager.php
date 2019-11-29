@@ -6,6 +6,7 @@
 namespace Web;
 
 use Phalcon\Acl\Adapter\Memory;
+use Phalcon\Annotations\Adapter\Memory as AnnotationsMemory;
 use Phalcon\Di\AbstractInjectionAware;
 use Phalcon\Di\DiInterface;
 use Phalcon\Events\Event;
@@ -15,7 +16,7 @@ use Web\Exceptions\AccessDeniedException;
 
 class EventsManager extends AbstractInjectionAware
 {
-    /* @var $eventsManager Manager */
+    // @var $eventsManager Manager
     private $eventsManager;
 
     public function __construct(DiInterface $container)
@@ -24,9 +25,6 @@ class EventsManager extends AbstractInjectionAware
         $this->init();
     }
 
-    /**
-     * @return Manager
-     */
     public function getEventsManager(): Manager
     {
         return $this->eventsManager;
@@ -44,7 +42,6 @@ class EventsManager extends AbstractInjectionAware
     }
 
     /**
-     * @param Dispatcher $dispatcher
      * @throws AccessDeniedException
      */
     private function dispatchBeforeExecuteRoute(Dispatcher $dispatcher)
@@ -56,24 +53,22 @@ class EventsManager extends AbstractInjectionAware
     }
 
     /**
-     * @param DiInterface $container
-     * @param Dispatcher $dispatcher
      * @throws AccessDeniedException
      */
     private function handleControllerAccessAnnotations(DiInterface $container, Dispatcher $dispatcher)
     {
-        /* @var $acl Memory */
+        // @var $acl Memory
         $acl = $container->get('acl');
 
         // @TODO Replace with real value
         $sessionRole = 'editor';
 
-        /* @var $annotations \Phalcon\Annotations\Adapter\Memory */
+        // @var $annotations AnnotationsMemory
         $annotations = $container->get('annotations');
 
         $controllerName = $dispatcher->getControllerClass();
-        $actionName     = $dispatcher->getActionName()
-            . 'Action';
+        $actionName = $dispatcher->getActionName()
+            .'Action';
 
         $acl->addComponent($controllerName, $actionName);
 

@@ -7,5 +7,4 @@ namespace Domain\User\Boundaries;
 
 class UserBoundary
 {
-
 }

@@ -5,10 +5,10 @@
 
 namespace Core\Annotations;
 
-use Phalcon\Di\AbstractInjectionAware;
-use Phalcon\Di\DiInterface;
 use Phalcon\Annotations\Adapter\Apcu;
 use Phalcon\Annotations\Adapter\Memory;
+use Phalcon\Di\AbstractInjectionAware;
+use Phalcon\Di\DiInterface;
 
 class AnnotationsManager extends AbstractInjectionAware
 {
@@ -29,7 +29,7 @@ class AnnotationsManager extends AbstractInjectionAware
 
     private function init()
     {
-        if (getenv('APP_ENV') === 'production') {
+        if ('production' === getenv('APP_ENV')) {
             $annotations = new Apcu([
                 'lifetime' => self::CACHE_LIFETIME,
             ]);

@@ -13,7 +13,6 @@ class Module implements ModuleDefinitionInterface
 {
     public function registerAutoloaders(DiInterface $container = null)
     {
-
     }
 
     public function registerServices(DiInterface $container)
@@ -27,7 +26,8 @@ class Module implements ModuleDefinitionInterface
         // Registering the view component
         $view = $container->get('view');
         $view
-            ->setViewsDir(__DIR__ . '/../views/')
-            ->setMainView('dashboard');
+            ->setViewsDir(__DIR__.'/../views/')
+            ->setMainView('dashboard')
+        ;
     }
 }

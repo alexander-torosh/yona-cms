@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Alexander Torosh <webtorua@gmail.com>
  */
@@ -22,7 +23,7 @@ class AuthController extends Controller
 
         $this->view->setVars([
             'hideDashboardRoot' => true,
-            'redirect' => $sanitizedRedirect
+            'redirect' => $sanitizedRedirect,
         ]);
     }
 }

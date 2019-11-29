@@ -16,13 +16,11 @@ class AclManager extends AbstractInjectionAware
     const CACHE_KEY = 'acl-manager';
     const CACHE_LIFETIME = 7200;
 
-    /* @var $acl Memory */
+    // @var $acl Memory
     private $acl;
 
     /**
      * AclManager constructor.
-     * @param DiInterface $container
-     * @param Manager $eventsManager
      */
     public function __construct(DiInterface $container, Manager $eventsManager)
     {
@@ -33,13 +31,12 @@ class AclManager extends AbstractInjectionAware
 
     public function init()
     {
-        /* @var $serverCache Cache */
-        $serverCache    = $this->getDI()->get('serverCache');
+        // @var $serverCache Cache
+        $serverCache = $this->getDI()->get('serverCache');
         $cachedContents = $serverCache->get(self::CACHE_KEY);
         if (!$cachedContents) {
-
             // Read ACL file
-            $aclObject = include(__DIR__ . '/../../web/config/acl.php');
+            $aclObject = include __DIR__.'/../../web/config/acl.php';
             if ($aclObject) {
                 $this->acl = $aclObject->acl;
 

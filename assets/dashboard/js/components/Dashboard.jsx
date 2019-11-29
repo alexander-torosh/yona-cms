@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
@@ -18,12 +18,12 @@ class Dashboard extends Component {
     return (
       <Router>
         <div className="Dashboard">
-          <Menu/>
+          <Menu />
           <div className="Dashboard__contents">
-            <Header/>
+            <Header />
             <div className="ui container">
               <Switch>
-                <Route exact path="/dashboard" component={Index}/>
+                <Route exact path="/dashboard" component={Index} />
               </Switch>
             </div>
           </div>
@@ -36,6 +36,6 @@ class Dashboard extends Component {
 document.addEventListener('DOMContentLoaded', (event) => {
   const element = document.getElementById('dashboard-root')
   if (element) {
-    ReactDOM.render(<Dashboard/>, element)
+    ReactDOM.render(<Dashboard />, element)
   }
 })

@@ -9,5 +9,4 @@ use Phalcon\Exception;
 
 class NotFoundException extends Exception
 {
-
 }

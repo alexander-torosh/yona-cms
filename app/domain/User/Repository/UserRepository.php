@@ -13,9 +13,9 @@ use Phalcon\Mvc\ModelInterface;
 class UserRepository
 {
     /**
-     * @param int $userID
-     * @return User
      * @throws DomainException
+     *
+     * @return User
      */
     public function fetchUser(int $userID): ModelInterface
     {
@@ -28,8 +28,6 @@ class UserRepository
     }
 
     /**
-     * @param int $userID
-     * @param string $passwordHash
      * @throws DomainException
      */
     public function updateUserPassword(int $userID, string $passwordHash)
@@ -44,7 +42,7 @@ class UserRepository
 
         if (!$user->update()) {
             $messages = $user->getMessages();
-            foreach($messages as $message) {
+            foreach ($messages as $message) {
                 throw new DomainException($message);
             }
         }

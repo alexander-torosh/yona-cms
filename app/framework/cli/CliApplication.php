@@ -9,6 +9,5 @@ class CliApplication
 {
     public function run()
     {
-
     }
 }

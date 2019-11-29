@@ -6,11 +6,11 @@
 namespace Web;
 
 use Core\Annotations\AnnotationsManager;
+use Core\Assets\AssetsHelper;
 use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
-use Core\Assets\AssetsHelper;
-use Front\Module as FrontModule;
 use Dashboard\Module as DashboardModule;
+use Front\Module as FrontModule;
 use Phalcon\Debug;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application as PhalconApplication;
@@ -37,7 +37,7 @@ class Application
         $configLoader->setDI($container);
         $configLoader->load();
 
-        if (getenv('APP_ENV') === 'development') {
+        if ('development' === getenv('APP_ENV')) {
             $debug = new Debug();
             $debug->listen();
         }
@@ -88,17 +88,14 @@ class Application
 
         try {
             // Handle request
-            $response = $app->handle($_SERVER["REQUEST_URI"]);
+            $response = $app->handle($_SERVER['REQUEST_URI']);
             $response->send();
-
         } catch (AccessDeniedException $e) {
             // Access Denied
             $this->handleAccessDenied($app);
-
         } catch (Dispatcher\Exception $e) {
             // 404 Not Found
             $this->notFoundError($app);
-
         } catch (\Exception $e) {
             // 503 Server Error
             $this->serviceUnavailableError($app, $e);
@@ -108,20 +105,17 @@ class Application
     private function registerWebApplicationModules(PhalconApplication $app)
     {
         $app->registerModules([
-            'front'     => [
+            'front' => [
                 'className' => FrontModule::class,
-                'path'      => __DIR__ . '/../modules/front/src/Module.php',
+                'path' => __DIR__.'/../modules/front/src/Module.php',
             ],
             'dashboard' => [
                 'className' => DashboardModule::class,
-                'path'      => __DIR__ . '/../modules/dashboard/src/Module.php',
-            ]
+                'path' => __DIR__.'/../modules/dashboard/src/Module.php',
+            ],
         ]);
     }
 
-    /**
-     * @param PhalconApplication $app
-     */
     private function handleAccessDenied(PhalconApplication $app)
     {
         $app->response
@@ -129,12 +123,10 @@ class Application
                 ['for' => 'dashboardLogin'],
                 ['redirect' => $app->request->getURI()]
             ))
-            ->send();
+            ->send()
+        ;
     }
 
-    /**
-     * @param PhalconApplication $app
-     */
     private function notFoundError(PhalconApplication $app)
     {
         Tag::prependTitle('Page Not Found');
@@ -142,13 +134,10 @@ class Application
         $app->view->render('errors', '404-not-found');
         $app->response
             ->setStatusCode(404)
-            ->send();
+            ->send()
+        ;
     }
 
-    /**
-     * @param PhalconApplication $app
-     * @param \Exception $e
-     */
     private function serviceUnavailableError(PhalconApplication $app, \Exception $e)
     {
         Tag::prependTitle('Service Unavailable');
@@ -158,6 +147,7 @@ class Application
         ]);
         $app->response
             ->setStatusCode(503)
-            ->send();
+            ->send()
+        ;
     }
 }

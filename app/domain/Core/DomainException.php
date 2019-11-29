@@ -7,5 +7,4 @@ namespace Domain\Core;
 
 class DomainException extends \Exception
 {
-
 }

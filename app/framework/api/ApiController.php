@@ -12,9 +12,10 @@ class ApiController extends Controller
 {
     public function json($contents)
     {
-        /* @var $response Response */
+        // @var $response Response
         $response = $this->getDI()->get('response');
         $response->setJsonContent($contents);
+
         return $response->send();
     }
 }

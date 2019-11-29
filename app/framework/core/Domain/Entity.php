@@ -15,6 +15,7 @@ class Entity implements JsonSerializable
     public function jsonSerialize()
     {
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+
         return json_decode($serializer->serialize($this, 'json'));
     }
 }

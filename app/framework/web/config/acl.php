@@ -2,9 +2,8 @@
 /**
  * @author Alexander Torosh <webtorua@gmail.com>
  */
-
-use Phalcon\Acl\Role;
 use Phalcon\Acl\Adapter\Memory;
+use Phalcon\Acl\Role;
 
 class Acl
 {
@@ -16,9 +15,9 @@ class Acl
         $acl = new Memory();
 
         // Roles
-        $admin  = new Role('admin', 'Website Administrator');
+        $admin = new Role('admin', 'Website Administrator');
         $editor = new Role('editor', 'Website Editor');
-        $guest  = new Role('guest', 'Website Guest');
+        $guest = new Role('guest', 'Website Guest');
 
         // Add Guest
         $acl->addRole($guest);

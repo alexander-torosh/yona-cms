@@ -9,5 +9,4 @@ use Phalcon\Exception;
 
 class AccessDeniedException extends Exception
 {
-
 }

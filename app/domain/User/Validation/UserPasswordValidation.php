@@ -10,8 +10,6 @@ use Domain\Core\DomainException;
 class UserPasswordValidation
 {
     /**
-     * @param string $password
-     * @return bool
      * @throws DomainException
      */
     public static function validate(string $password): bool
@@ -24,7 +22,6 @@ class UserPasswordValidation
     }
 
     /**
-     * @param string $password
      * @throws DomainException
      */
     private static function doValidation(string $password)
@@ -46,18 +43,14 @@ class UserPasswordValidation
         }
     }
 
-    /**
-     * @param string $password
-     * @return bool
-     */
     private static function validateLength(string $password): bool
     {
         $length = mb_strlen($password);
-        return ($length >= 8);
+
+        return $length >= 8;
     }
 
     /**
-     * @param string $password
      * @return false|int
      */
     private static function validateLetters(string $password)
@@ -66,7 +59,6 @@ class UserPasswordValidation
     }
 
     /**
-     * @param string $password
      * @return false|int
      */
     private static function validateNumbers(string $password)
@@ -75,7 +67,6 @@ class UserPasswordValidation
     }
 
     /**
-     * @param string $password
      * @return false|int
      */
     private static function validateCaseDiff(string $password)
@@ -83,10 +74,6 @@ class UserPasswordValidation
         return preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $password);
     }
 
-    /**
-     * @param string $password
-     * @return bool
-     */
     private static function validateWeakPasswords(string $password): bool
     {
         $weakList = [
@@ -104,6 +91,7 @@ class UserPasswordValidation
             'superman',
             'pussycat',
         ];
-        return (in_array($password, $weakList, true) === false);
+
+        return false === in_array($password, $weakList, true);
     }
 }

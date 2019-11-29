@@ -15,28 +15,22 @@ class EnvironmentLoader extends AbstractInjectionAware
     public function load()
     {
         // .env filepath
-        $filepath = __DIR__ . '/../../../../.env';
+        $filepath = __DIR__.'/../../../../.env';
 
         $cachedConfiguration = $this->readConfigCache();
         if (!$cachedConfiguration) {
             $loader = $this->loadRootEnvFile($filepath);
 
             // Save configuration to cache if APP_ENV is not 'development'
-            if (getenv('APP_ENV') !== 'development') {
-
+            if ('development' !== getenv('APP_ENV')) {
                 // Save configuration to cache
                 $this->saveConfigCache($loader->toArray());
             }
-
         } else {
             $this->putVariablesToEnv($cachedConfiguration);
         }
     }
 
-    /**
-     * @param string $filepath
-     * @return Loader
-     */
     private function loadRootEnvFile(string $filepath): Loader
     {
         // Use Dotenv Loader
@@ -53,7 +47,7 @@ class EnvironmentLoader extends AbstractInjectionAware
     private function readConfigCache(): ?\stdClass
     {
         $apcuCache = $this->getDI()->get('serverCache');
-        $config    = $apcuCache->get(self::CACHE_KEY);
+        $config = $apcuCache->get(self::CACHE_KEY);
         if ($config) {
             return $config;
         }
@@ -62,22 +56,16 @@ class EnvironmentLoader extends AbstractInjectionAware
         return null;
     }
 
-    /**
-     * @param array $configArray
-     */
     private function saveConfigCache(array $configArray = [])
     {
         $apcuCache = $this->getDI()->get('serverCache');
         $apcuCache->set(self::CACHE_KEY, $configArray);
     }
 
-    /**
-     * @param \stdClass $cachedConfiguration
-     */
     private function putVariablesToEnv(\stdClass $cachedConfiguration)
     {
         foreach ($cachedConfiguration as $index => $value) {
-            putenv("$index=$value");
+            putenv("{$index}={$value}");
         }
     }
 }

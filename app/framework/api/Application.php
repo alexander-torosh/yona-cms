@@ -36,7 +36,6 @@ class Application
         $app->setService('request', new Request(), true);
         $app->setService('response', new Response(), true);
 
-
         // Initialize API Routing
         $apiRouter = new Router();
         $apiRouter->init($app);
@@ -45,7 +44,7 @@ class Application
         $app = $this->handleExceptions($app);
 
         // Handle request
-        $app->handle($_SERVER["REQUEST_URI"]);
+        $app->handle($_SERVER['REQUEST_URI']);
     }
 
     private function handleExceptions(Micro $app): Micro
@@ -56,8 +55,8 @@ class Application
 
                 $response = $app->response;
                 $response->setJsonContent([
-                    'code'    => $code,
-                    'status'  => 'error',
+                    'code' => $code,
+                    'status' => 'error',
                     'message' => $exception->getMessage(),
                 ]);
 

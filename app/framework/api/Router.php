@@ -12,9 +12,6 @@ use Phalcon\Mvc\Micro\Collection as MicroCollection;
 
 class Router
 {
-    /**
-     * @param Micro $app
-     */
     public function init(Micro $app)
     {
         // Not Found
@@ -24,10 +21,6 @@ class Router
         $app->mount($this->index());
     }
 
-    /**
-     * @param Micro $app
-     * @return Micro
-     */
     private function handleNotFound(Micro $app): Micro
     {
         // Not Found
@@ -40,9 +33,6 @@ class Router
         return $app;
     }
 
-    /**
-     * @return MicroCollection
-     */
     private function index(): MicroCollection
     {
         $collection = new MicroCollection();

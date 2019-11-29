@@ -13,20 +13,18 @@ class ApcuCache
 {
     const DEFAULT_LIFETIME = 30;
 
-    /**
-     * @return Cache
-     */
     public function init(): Cache
     {
         $serializerFactory = new SerializerFactory();
-        $adapterFactory    = new AdapterFactory($serializerFactory);
+        $adapterFactory = new AdapterFactory($serializerFactory);
 
         $options = [
             'defaultSerializer' => 'Json',
-            'lifetime'          => self::DEFAULT_LIFETIME,
+            'lifetime' => self::DEFAULT_LIFETIME,
         ];
 
         $adapter = $adapterFactory->newInstance('apcu', $options);
+
         return new Cache($adapter);
     }
 }

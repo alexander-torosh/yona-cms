@@ -5,10 +5,10 @@
 
 namespace Domain\User\UseCase;
 
-use Exception;
 use Domain\Core\DomainException;
 use Domain\User\Repository\UserRepository;
 use Domain\User\Validation\UserPasswordValidation;
+use Exception;
 
 class UserPasswordCase
 {
@@ -23,8 +23,6 @@ class UserPasswordCase
     }
 
     /**
-     * @param int $userID
-     * @param string $password
      * @throws DomainException
      */
     public function updatePassword(int $userID, string $password)
@@ -40,21 +38,16 @@ class UserPasswordCase
     }
 
     /**
-     * @param int $userID
-     * @param string $inputPassword
-     * @return bool
      * @throws DomainException
      */
     public function isPasswordMatch(int $userID, string $inputPassword): bool
     {
         $user = $this->repository->fetchUser($userID);
+
         return password_verify($inputPassword, $user->getPasswordHash());
     }
 
     /**
-     * @param int $userID
-     * @param string $password
-     * @return string
      * @throws DomainException
      */
     public function buildPasswordHash(int $userID, string $password): string
@@ -65,16 +58,14 @@ class UserPasswordCase
     }
 
     /**
-     * @param int $userID
-     * @return string
      * @throws DomainException
      */
     private function generateSalt(int $userID): string
     {
         try {
             $length = random_int(16, 32);
-            return substr(md5($userID . microtime()), 0, $length);
 
+            return substr(md5($userID.microtime()), 0, $length);
         } catch (Exception $e) {
             throw new DomainException($e->getMessage());
         }
