@@ -3,7 +3,7 @@
  * @author Alexander Torosh <webtorua@gmail.com>
  */
 
-namespace Domain\Core;
+namespace Core\Domain;
 
 class DomainException extends \Exception
 {

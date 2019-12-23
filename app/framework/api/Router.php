@@ -6,6 +6,7 @@
 namespace Api;
 
 use Api\Controllers\IndexController;
+use Api\Controllers\UsersController;
 use Api\Exception\NotFoundException;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
@@ -19,6 +20,7 @@ class Router
 
         // Mount Routes
         $app->mount($this->index());
+        $app->mount($this->users());
     }
 
     private function handleNotFound(Micro $app): Micro
@@ -40,7 +42,17 @@ class Router
         $collection->setPrefix('/api');
 
         $collection->get('/', 'index');
-        $collection->get('/test', 'test');
+
+        return $collection;
+    }
+
+    private function users(): MicroCollection
+    {
+        $collection = new MicroCollection();
+        $collection->setHandler(UsersController::class, true);
+        $collection->setPrefix('/api/users');
+
+        $collection->get('/{userID:\d+}', 'retrieve');
 
         return $collection;
     }

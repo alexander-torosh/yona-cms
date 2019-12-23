@@ -7,7 +7,6 @@ namespace Web;
 
 use Phalcon\Di\AbstractInjectionAware;
 use Phalcon\Di\DiInterface;
-use Phalcon\Events\Manager;
 use Phalcon\Mvc\Router as PhalconRouter;
 use Phalcon\Mvc\Router\Group;
 
@@ -16,11 +15,11 @@ class Router extends AbstractInjectionAware
     // @var $router Router
     private $router;
 
-    public function __construct(DiInterface $container, Manager $eventsManager)
+    public function __construct(DiInterface $container)
     {
         $this->setDI($container);
         $this->init();
-        $this->router->setEventsManager($eventsManager);
+        $this->router->setEventsManager($container->get('eventsManager'));
     }
 
     /**

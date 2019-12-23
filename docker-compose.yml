@@ -1,7 +1,6 @@
-version: '3'
+version: "3"
 
 services:
-
   php7:
     build: ./docker/image/
     container_name: yona-cms
@@ -10,7 +9,7 @@ services:
       - ./docker/config/php/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
       - ./docker/config/php/php.ini:/etc/php/7.3/fpm/php.ini
     links:
-      - mysql
+      - postgres
       - redis
 
   nginx:
@@ -25,19 +24,27 @@ services:
     links:
       - php7
 
-  mysql:
-    image: mysql:8
-    container_name: yona-cms-mysql
-    ports:
-      - 53306:3306
+  postgres:
+    image: postgres:12
+    container_name: yona-cms-postgres
     volumes:
-      - ./docker/storage/mysql:/var/lib/mysql
+      - ./docker/storage/postgres:/var/lib/postgresql/data
     environment:
-      - MYSQL_DATABASE=yona-cms
-      - MYSQL_ROOT_PASSWORD=111
-    security_opt:
-      - seccomp:unconfined
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=111
+      - POSTGRES_DB=yona-cms
 
   redis:
     image: redis:4-alpine
     container_name: yona-cms-redis
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: yona-cms-pgadmin
+    links:
+      - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=webmaster@yonacms.com
+      - PGADMIN_DEFAULT_PASSWORD=111
+    ports:
+      - 5080:80

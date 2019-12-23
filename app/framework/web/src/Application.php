@@ -12,6 +12,7 @@ use Core\Config\EnvironmentLoader;
 use Dashboard\Module as DashboardModule;
 use Front\Module as FrontModule;
 use Phalcon\Debug;
+use Phalcon\Di\DiInterface;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application as PhalconApplication;
 use Phalcon\Mvc\Dispatcher;
@@ -32,59 +33,20 @@ class Application
         // Set serverCache service
         $container->setShared('serverCache', (new ApcuCache())->init());
 
-        // Env configuration
-        $configLoader = new EnvironmentLoader();
-        $configLoader->setDI($container);
-        $configLoader->load();
+        $this->initConfiguration($container);
 
+        // Phalcon Debug
         if ('development' === getenv('APP_ENV')) {
             $debug = new Debug();
             $debug->listen();
         }
 
-        // Create EventsManager Manager
-        $webEventsManager = new EventsManager($container);
-        $eventsManager = $webEventsManager->getEventsManager();
-
-        // Save Events Manager to DI Container
-        $container->setShared('eventsManager', $eventsManager);
-
-        // Bind Events Manager to Application
-        $app->setEventsManager($container->get('eventsManager'));
-
-        // Router
-        $webRouter = new Router($container, $eventsManager);
-        $container->setShared('router', $webRouter->getRouter());
-
-        // Register Web Modules
-        $this->registerWebApplicationModules($app);
-
-        // Annotations
-        $annotationsManager = new AnnotationsManager($container);
-        $container->setShared('annotations', $annotationsManager->getAnnotations());
-
-        // ACL
-        $aclManager = new AclManager($container, $eventsManager);
-        $container->setShared('acl', $aclManager->getAcl());
-
-        // Default View
-        $webView = new View();
-        $webView->setEventsManager($eventsManager);
-        $container->setShared('view', $webView);
-
-        // Url
-        $url = new Url();
-        $url->setBaseUri('/');
-        $container->setShared('url', $url);
-
-        // Assets Build Resolver
-        $assetsHelper = new AssetsHelper($container);
-        $container->setShared('assetsHelper', $assetsHelper);
-
-        // @TODO Move it to another place
-        // Tag
-        Tag::setTitleSeparator(' - ');
-        Tag::setTitle('Yona CMS');
+        $this->initEventsManager($app, $container);
+        $this->initDispatchingProcess($app, $container);
+        $this->initAnnotations($container);
+        $this->initAcl($container);
+        $this->initView($container);
+        $this->initApplicationServices($container);
 
         try {
             // Handle request
@@ -102,8 +64,33 @@ class Application
         }
     }
 
-    private function registerWebApplicationModules(PhalconApplication $app)
+    private function initConfiguration(DiInterface $container)
     {
+        $configLoader = new EnvironmentLoader();
+        $configLoader->setDI($container);
+        $configLoader->load();
+    }
+
+    private function initEventsManager(PhalconApplication $app, DiInterface $container)
+    {
+        // Create EventsManager Manager
+        $webEventsManager = new EventsManager($container);
+        $eventsManager = $webEventsManager->getEventsManager();
+
+        // Save Events Manager to DI Container
+        $container->setShared('eventsManager', $eventsManager);
+
+        // Bind Events Manager to Application
+        $app->setEventsManager($eventsManager);
+    }
+
+    private function initDispatchingProcess(PhalconApplication $app, DiInterface $container)
+    {
+        // Router
+        $webRouter = new Router($container);
+        $container->setShared('router', $webRouter->getRouter());
+
+        // Register Application Modules
         $app->registerModules([
             'front' => [
                 'className' => FrontModule::class,
@@ -114,6 +101,42 @@ class Application
                 'path' => __DIR__.'/../modules/dashboard/src/Module.php',
             ],
         ]);
+    }
+
+    private function initAnnotations(DiInterface $container)
+    {
+        $annotationsManager = new AnnotationsManager($container);
+        $container->setShared('annotations', $annotationsManager->getAnnotations());
+    }
+
+    private function initAcl(DiInterface $container)
+    {
+        $aclManager = new AclManager($container, $container->get('eventsManager'));
+        $container->setShared('acl', $aclManager->getAcl());
+    }
+
+    private function initView(DiInterface $container)
+    {
+        $webView = new View();
+        $webView->setEventsManager($container->get('eventsManager'));
+        $container->setShared('view', $webView);
+    }
+
+    private function initApplicationServices(DiInterface $container)
+    {
+        // Url
+        $url = new Url();
+        $url->setBaseUri('/');
+        $container->setShared('url', $url);
+
+        // Assets Build Resolver
+        $assetsHelper = new AssetsHelper($container);
+        $container->setShared('assetsHelper', $assetsHelper);
+
+        // @TODO Move it to another place
+        // Tag
+        Tag::setTitleSeparator(' - ');
+        Tag::setTitle('Yona CMS');
     }
 
     private function handleAccessDenied(PhalconApplication $app)
