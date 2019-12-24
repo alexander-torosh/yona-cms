@@ -25,19 +25,22 @@ class UserSpecification
     {
         $this->doBasicValidation();
 
-        $passwordSpecification = new UserPasswordSpecification($this->user->getPassword());
+        $uniqueEmailSpecification = new UserUniqueEmailSpecification($this->user);
+        $uniqueEmailSpecification->validate();
+
+        $passwordSpecification = new UserPasswordSpecification($this->user->revealPassword());
         $passwordSpecification->validate();
     }
 
     public function validateIdentifier()
     {
-        $userID = $this->user->getUserID();
+        $id = $this->user->getId();
 
-        if (!is_int($userID)) {
+        if (!is_int($id)) {
             throw new UserSpecificationException('Property `userID` must be integer.');
         }
 
-        if ($userID <= 0) {
+        if ($id <= 0) {
             throw new UserSpecificationException('Property `userID` must be more than 0.');
         }
     }

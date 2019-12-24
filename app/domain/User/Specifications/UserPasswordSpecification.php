@@ -55,7 +55,7 @@ class UserPasswordSpecification
         }
     }
 
-    private function validateWeakPasswords(): bool
+    private function validateWeakPasswords()
     {
         $weakList = [
             'password',
@@ -73,7 +73,7 @@ class UserPasswordSpecification
             'pussycat',
         ];
 
-        if (false === in_array($this->password, $weakList, true)) {
+        if (array_key_exists($this->password, $weakList)) {
             throw new UserSpecificationException('Your password doesn\'t meet our minimum requirements. Please enter a stronger password.');
         }
     }

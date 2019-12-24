@@ -21,8 +21,7 @@
       "Web\\": "app/framework/web/src/",
       "Dashboard\\": "app/framework/web/modules/dashboard/src/",
       "Front\\": "app/framework/web/modules/front/src/",
-      "Domain\\": "app/domain/",
-      "DbModel\\": "app/db_models/"
+      "Domain\\": "app/domain/"
     }
   },
   "require": {

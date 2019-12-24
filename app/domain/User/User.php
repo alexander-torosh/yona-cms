@@ -5,16 +5,36 @@
 
 namespace Domain\User;
 
+use Core\Domain\DomainModel;
 use Domain\User\Exceptions\UserException;
 use Domain\User\Specifications\UserPasswordSpecification;
 use Domain\User\Specifications\UserSpecification;
+use Domain\User\ValueObjects\UserRoles;
 
-class User
+class User extends DomainModel
 {
-    private $userID = 0;
+    private $id = 0;
     private $email = '';
     private $name = '';
+    private $role = UserRoles::DEFAULT_ROLE;
     private $password = '';
+    private $password_hash = '';
+
+    private $created_at;
+    private $updated_at;
+
+    public function initialize()
+    {
+        $this->setSource('users');
+
+        $this->skipAttributesOnCreate(['id', 'password', 'created_at', 'updated_at']);
+        $this->skipAttributesOnUpdate(['password']);
+    }
+
+    public function beforeUpdate()
+    {
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
 
     public function buildPasswordHash(): string
     {
@@ -27,19 +47,17 @@ class User
     /**
      * @throws DomainException
      */
-    public function doesPasswordMatch(int $userID, string $inputPassword): bool
+    public function doesPasswordMatch(string $inputPassword): bool
     {
-        $user = $this->repository->fetchUser($userID);
-
-        return password_verify($inputPassword, $user->password_hash);
+        return password_verify($inputPassword, $this->password_hash);
     }
 
-    public function setUserId(int $userID): User
+    public function setId(int $id): User
     {
-        if ($this->userID > 0) {
-            throw new UserException('Identifier `userID` is already defined.');
+        if ($this->id > 0) {
+            throw new UserException('Identifier `id` is already defined.');
         }
-        $this->userID = $userID;
+        $this->id = $id;
 
         $specification = new UserSpecification($this);
         $specification->validateIdentifier();
@@ -47,11 +65,9 @@ class User
         return $this;
     }
 
-    public function setPassword(string $password): User
+    public function getId(): int
     {
-        $this->password = $password;
-
-        return $this;
+        return (int) $this->id;
     }
 
     public function setName(string $name): User
@@ -61,6 +77,11 @@ class User
         return $this;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     public function setEmail(string $email): User
     {
         $this->email = $email;
@@ -68,19 +89,16 @@ class User
         return $this;
     }
 
-    public function getUserID(): int
-    {
-        return $this->userID;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getName(): string
+    public function setPassword(string $password): User
     {
-        return $this->name;
+        $this->password = $password;
+
+        return $this;
     }
 
     public function passwordDefined(): bool
@@ -88,17 +106,25 @@ class User
         return $this->password ? true : false;
     }
 
-    private function generatePasswordHash(): string
+    public function revealPassword(): string
     {
-        return password_hash($this->password, PASSWORD_ARGON2I, [
-            'salt' => $this->generateSalt(),
-        ]);
+        return $this->password;
     }
 
-    private function generateSalt(): string
+    public function getRole(): string
     {
-        $length = random_int(16, 32);
+        return $this->role;
+    }
 
-        return substr(md5($this->email.'_'.microtime()), 0, $length);
+    public function setRole($role): User
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    private function generatePasswordHash(): string
+    {
+        return password_hash($this->password, PASSWORD_ARGON2I);
     }
 }

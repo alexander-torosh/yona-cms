@@ -5,35 +5,41 @@ namespace Domain\User;
 use Core\Domain\DomainClientService;
 use Domain\User\Exceptions\UserException;
 use Domain\User\Factories\UserFactory;
+use Phalcon\Db\Adapter\Pdo\Postgresql;
 use stdClass;
 
 class UserClientService extends DomainClientService
 {
-    public function createUser(array $data = []): int
+    public function createUser(stdClass $data): int
     {
+        /** @var Postgresql */
         $db = $this->getDI()->get('db');
         $db->begin();
 
         try {
             $user = UserFactory::create($data);
-            $repository = new UserRepository($this->getDI());
+            $repository = new UserRepository();
 
-            $userID = $repository->insertUserIntoDb($user);
+            $id = $repository->insertUserIntoDb($user);
             $db->commit();
 
-            $user->setUserId($userID);
+            $user->setId($id);
 
-            return $user->getUserID();
+            return $user->getId();
         } catch (UserException $e) {
-            $db->rollback;
+            if ($db->isUnderTransaction()) {
+                $db->rollback();
+            }
+
+            throw $e;
         }
     }
 
     public function retrieveUserObject(array $params = []): stdClass
     {
-        $user = UserFactory::retrieve($params, $this->getDI());
+        $user = UserFactory::retrieve($params);
 
-        return $this->toJsonObject($user);
+        return UserPresenter::singleUserObject($user);
     }
 
     public function deleteUser(array $params = [])

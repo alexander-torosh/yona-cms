@@ -7,14 +7,17 @@ namespace Api;
 
 use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
+use Phalcon\Cache\AdapterFactory;
 use Phalcon\Db\Adapter\Pdo\Postgresql;
 use Phalcon\Di;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Model\Manager as ModelsManager;
-use Phalcon\Mvc\Model\Metadata\Memory as ModelsMetadata;
+use Phalcon\Mvc\Model\Metadata\Apcu as ModelsMetadataApcu;
+use Phalcon\Mvc\Model\Metadata\Memory as ModelsMetadataMemory;
 use Phalcon\Mvc\Router as PhalconRouter;
+use Phalcon\Storage\SerializerFactory;
 
 class Application
 {
@@ -69,16 +72,31 @@ class Application
         ]);
         $app->setService('db', $database, true);
         $app->setService('modelsManager', new ModelsManager());
-        $app->setService('modelsMetadata', new ModelsMetadata());
+
+        if ('development' === getenv('APP_ENV')) {
+            $app->setService('modelsMetadata', new ModelsMetadataMemory());
+        } else {
+            $serializerFactory = new SerializerFactory();
+            $adapterFactory = new AdapterFactory($serializerFactory);
+            $options = [
+                'lifetime' => 30,
+                'prefix' => getenv('DB_NAME'),
+            ];
+
+            $app->setService('modelsMetadata', new ModelsMetadataApcu($adapterFactory, $options));
+        }
     }
 
     private function handleExceptions(Micro $app): Micro
     {
         $app->error(
             function ($exception) use ($app) {
-                if ('development' === getenv('APP_ENV')) {
+                if (0 == getenv('TREAT_EXCEPTIONS')) {
                     throw $exception;
                 }
+
+                // Disable xdebug exception displaying
+                ini_set('display_errors', 0);
 
                 $code = $exception->getCode() ?: 503;
 

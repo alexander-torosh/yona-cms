@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class Entity implements JsonSerializable
+class PresenterEntity implements JsonSerializable
 {
     public function jsonSerialize()
     {

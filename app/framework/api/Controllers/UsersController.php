@@ -9,21 +9,26 @@ class UsersController extends ApiController
 {
     public function create()
     {
-        $data = $this->request->getJsonRawBody(true);
+        $data = $this->request->getJsonRawBody();
 
         $service = new UserClientService($this->getDi());
-        $userID = $service->createUser($data);
+        $id = $service->createUser($data);
 
         $this->response->setStatusCode(201);
 
-        return $this->json(['userID' => $userID]);
+        return $this->json(['id' => $id]);
     }
 
-    public function retrieve($userID)
+    public function retrieve($id)
     {
         $service = new UserClientService($this->getDi());
-        $user = $service->retrieveUserObject(['userID' => $userID]);
+        $user = $service->retrieveUserObject(['id' => $id]);
 
         return $this->json(['user' => $user]);
+    }
+
+    public function usersList()
+    {
+        return $this->json([]);
     }
 }

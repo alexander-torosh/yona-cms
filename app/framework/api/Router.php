@@ -5,6 +5,7 @@
 
 namespace Api;
 
+use Api\Controllers\AuthController;
 use Api\Controllers\IndexController;
 use Api\Controllers\UsersController;
 use Api\Exception\NotFoundException;
@@ -41,7 +42,18 @@ class Router
         $collection->setHandler(IndexController::class, true);
         $collection->setPrefix('/api');
 
-        $collection->get('/', 'index');
+        $collection->get('', 'index');
+
+        return $collection;
+    }
+
+    private function auth(): MicroCollection
+    {
+        $collection = new MicroCollection();
+        $collection->setHandler(AuthController::class, true);
+        $collection->setPrefix('/api/auth');
+
+        $collection->post('', 'authenticate');
 
         return $collection;
     }
@@ -52,6 +64,8 @@ class Router
         $collection->setHandler(UsersController::class, true);
         $collection->setPrefix('/api/users');
 
+        $collection->get('', 'usersList');
+        $collection->post('', 'create');
         $collection->get('/{userID:\d+}', 'retrieve');
 
         return $collection;

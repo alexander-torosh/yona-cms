@@ -1,7 +1,4 @@
 <?php
-/**
- * @author Alexander Torosh <webtorua@gmail.com>
- */
 
 namespace Api\Controllers;
 

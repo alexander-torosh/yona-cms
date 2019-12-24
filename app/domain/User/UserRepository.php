@@ -5,43 +5,41 @@
 
 namespace Domain\User;
 
-use Core\Domain\DomainException;
 use Core\Domain\DomainRepository;
-use DbModel\User as UserModel;
+use Domain\User\Exceptions\UserException;
 
 class UserRepository extends DomainRepository
 {
     public function insertUserIntoDb(User $user): int
     {
-        $userModel = new UserModel();
-
-        $userModel->email = $user->getEmail();
-        $userModel->name = $user->getName();
-
         if ($user->passwordDefined()) {
-            $userModel->password_hash = $user->buildPasswordHash();
+            $user->buildPasswordHash();
         }
 
-        $userModel->create();
+        if ($user->create()) {
+            return (int) $user->getDi()->get('db')->lastInsertId();
+        }
 
-        return (int) $userModel->id;
+        foreach ($user->getMessages() as $message) {
+            throw new UserException($message);
+        }
     }
 
-    public function fetchUserModelById(int $userID): UserModel
+    public function fetchUserModelById(int $id): ?User
     {
-        $result = UserModel::findFirst($userID);
+        $result = User::findFirst($id);
         if (!$result) {
-            throw new DomainException("User {$userID} not found.");
+            return null;
         }
 
         return $result;
     }
 
-    public function fetchUserModelByEmail(string $email): UserModel
+    public function fetchUserModelByEmail(string $email): ?User
     {
-        $result = UserModel::findFirstByEmail($email);
+        $result = User::findFirstByEmail($email);
         if (!$result) {
-            throw new DomainException("User with email = {$email} not found.");
+            return null;
         }
 
         return $result;
