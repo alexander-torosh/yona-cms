@@ -8,7 +8,7 @@ RUN apt install -y apt-transport-https lsb-release ca-certificates
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 RUN apt update
-RUN apt install -y php7.3 php7.3-common php7.3-cli php7.3-dev php7.3-fpm php7.3-pgsql php7.3-xml php7.3-json php7.3-apcu
+RUN apt install -y php7.3 php7.3-common php7.3-cli php7.3-dev php7.3-fpm php7.3-pgsql php7.3-xml php7.3-json php7.3-apcu php7.3-curl php7.3-mbstring
 
 # Xdebug (optional)
 RUN apt install -y php-xdebug

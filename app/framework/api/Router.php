@@ -66,7 +66,7 @@ class Router
 
         $collection->get('', 'usersList');
         $collection->post('', 'create');
-        $collection->get('/{userID:\d+}', 'retrieve');
+        $collection->get('/{userID:\d+}', 'retrieveById');
 
         return $collection;
     }

@@ -1,39 +1,43 @@
 {
-  "version": "2.0.0",
-  "name": "alexander-torosh/yona-cms",
-  "type": "project",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Alexander Torosh",
-      "email": "webtorua@gmail.com"
+    "version": "2.0.0",
+    "name": "alexander-torosh/yona-cms",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Torosh",
+            "email": "webtorua@gmail.com"
+        },
+        {
+            "name": "Nikolas Serko",
+            "email": "nikolas.serko@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Api\\": "app/framework/api/",
+            "Cli\\": "app/framework/cli/",
+            "Core\\": "app/framework/core/",
+            "Web\\": "app/framework/web/src/",
+            "Dashboard\\": "app/framework/web/modules/dashboard/src/",
+            "Front\\": "app/framework/web/modules/front/src/",
+            "Domain\\": "app/domain/"
+        }
     },
-    {
-      "name": "Nikolas Serko",
-      "email": "nikolas.serko@gmail.com"
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "josegonzalez/dotenv": "dev-master",
+        "symfony/serializer": "^4.3",
+        "symfony/property-access": "^4.3",
+        "robmorgan/phinx": "^0.11.1",
+        "phalcon/cphalcon": "^4.0.0-rc.2"
+    },
+    "require-dev": {
+        "phalcon/ide-stubs": "^4.0.0-rc.2",
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.0.0",
+        "codeception/module-phalcon": "^1.0",
+        "codeception/module-phpbrowser": "^1.0"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Api\\": "app/framework/api/",
-      "Cli\\": "app/framework/cli/",
-      "Core\\": "app/framework/core/",
-      "Web\\": "app/framework/web/src/",
-      "Dashboard\\": "app/framework/web/modules/dashboard/src/",
-      "Front\\": "app/framework/web/modules/front/src/",
-      "Domain\\": "app/domain/"
-    }
-  },
-  "require": {
-    "php": ">=7.3",
-    "ext-json": "*",
-    "josegonzalez/dotenv": "dev-master",
-    "symfony/serializer": "^4.3",
-    "symfony/property-access": "^4.3",
-    "robmorgan/phinx": "^0.11.1",
-    "phalcon/cphalcon": "^4.0.0-rc.2"
-  },
-  "require-dev": {
-    "phalcon/ide-stubs": "^4.0.0-rc.2"
-  }
 }

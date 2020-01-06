@@ -9,14 +9,19 @@ use Core\Domain\DomainModel;
 use Domain\User\Exceptions\UserException;
 use Domain\User\Specifications\UserPasswordSpecification;
 use Domain\User\Specifications\UserSpecification;
-use Domain\User\ValueObjects\UserRoles;
 
 class User extends DomainModel
 {
+    const ROLES = [
+        'member',
+        'editor',
+        'admin',
+    ];
+
     private $id = 0;
     private $email = '';
     private $name = '';
-    private $role = UserRoles::DEFAULT_ROLE;
+    private $role = self::ROLES[0];
     private $password = '';
     private $password_hash = '';
 

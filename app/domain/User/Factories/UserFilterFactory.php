@@ -9,7 +9,7 @@ class UserFilterFactory extends DomainFilterFactory
 {
     public static function sanitizeCreationData(stdClass $data): stdClass
     {
-        $locator = parent::getFilterLocator();
+        $locator = self::getFilterLocator();
 
         $result = new stdClass();
         $result->email = '';
@@ -29,27 +29,6 @@ class UserFilterFactory extends DomainFilterFactory
         if (isset($data->password)) {
             $result->password = $data->password ? $data->password : '';
         }
-
-        return $result;
-    }
-
-    public static function sanitizeRetrievingParams(array $params = []): stdClass
-    {
-        $locator = parent::getFilterLocator();
-
-        $id = 0;
-        $email = '';
-
-        if (isset($params['id'])) {
-            $id = $params['id'] ? (int) $locator->sanitize($params['id'], 'int') : 0;
-        }
-        if (isset($params['email'])) {
-            $email = $params['email'] ? $locator->sanitize($params['email'], 'email') : '';
-        }
-
-        $result = new stdClass();
-        $result->id = $id;
-        $result->email = $email;
 
         return $result;
     }

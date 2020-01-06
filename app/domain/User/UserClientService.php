@@ -35,9 +35,9 @@ class UserClientService extends DomainClientService
         }
     }
 
-    public function retrieveUserObject(array $params = []): stdClass
+    public function retrieveUserById(int $id): stdClass
     {
-        $user = UserFactory::retrieve($params);
+        $user = UserFactory::retrieveById($id);
 
         return UserPresenter::singleUserObject($user);
     }

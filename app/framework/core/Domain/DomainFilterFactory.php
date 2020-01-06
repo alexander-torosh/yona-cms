@@ -7,10 +7,16 @@ use Phalcon\Filter\FilterInterface;
 
 class DomainFilterFactory
 {
+    private static $filterLocator;
+
     protected static function getFilterLocator(): FilterInterface
     {
-        $factory = new FilterFactory();
+        if (!self::$filterLocator) {
+            $factory = new FilterFactory();
 
-        return $factory->newInstance();
+            self::$filterLocator = $factory->newInstance();
+        }
+
+        return self::$filterLocator;
     }
 }

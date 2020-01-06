@@ -19,10 +19,11 @@ class UsersController extends ApiController
         return $this->json(['id' => $id]);
     }
 
-    public function retrieve($id)
+    public function retrieveById($id)
     {
+        $id = (int) $id;
         $service = new UserClientService($this->getDi());
-        $user = $service->retrieveUserObject(['id' => $id]);
+        $user = $service->retrieveUserById($id);
 
         return $this->json(['user' => $user]);
     }

@@ -67,3 +67,24 @@ Or with npm
 **Optimize composer autoloader**
 
     composer dump-autoload --no-dev --classmap-authoritative
+
+
+
+$di = new \Phalcon\Di\DiInterface();
+$user = new User();
+$user->setDI($di);
+
+$user
+    ->setId(1)
+    ->setEmail('webmaster@mailforspam.com')
+    ->setName('YonaCMS Webmaster')
+    ->setRole('member')
+;
+
+$userPresenter = new UserPresenter();
+$result = $userPresenter->singleUserObject($user);
+
+$this->assertEquals(1, $result->id);
+$this->assertEquals('webmaster@mailforspam.com', $result->email);
+$this->assertEquals('YonaCMS Webmaster', $result->name);
+$this->assertEquals('member', $result->role);

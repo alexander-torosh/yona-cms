@@ -27,31 +27,26 @@ class UserFactory
         return $user;
     }
 
-    public static function retrieve(array $params = []): User
+    public static function retrieveById(int $id): User
     {
-        $filteredParams = UserFilterFactory::sanitizeRetrievingParams($params);
         $repository = new UserRepository();
 
-        if ($filteredParams->userID) {
-            if ($filteredParams->email) {
-                throw new UserException('Only one retrieving param should be defined: userID or email.');
-            }
-
-            $user = $repository->fetchUserModelById($filteredParams->userID);
-            if (!$user) {
-                throw new UserException("User {$filteredParams->userID} not found.");
-            }
-        } elseif ($filteredParams->email) {
-            $user = $repository->fetchUserModelByEmail($filteredParams->email);
-            if (!$user) {
-                throw new UserException("User with email = {$filteredParams->email} not found.");
-            }
-        } else {
-            throw new UserException('Bad params for retrieving User');
+        $user = $repository->fetchUserModelById($id);
+        if (!$user) {
+            throw new UserException("User {$id} not found.");
         }
 
-        $userSpecification = new UserSpecification($user);
-        $userSpecification->validate();
+        return $user;
+    }
+
+    public static function retrieveByEmail(string $email): User
+    {
+        $repository = new UserRepository();
+
+        $user = $repository->fetchUserModelByEmail($email);
+        if (!$user) {
+            throw new UserException("User with email = {$email} not found.");
+        }
 
         return $user;
     }
