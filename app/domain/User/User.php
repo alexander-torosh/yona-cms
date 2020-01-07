@@ -41,12 +41,12 @@ class User extends DomainModel
         $this->updated_at = date('Y-m-d H:i:s');
     }
 
-    public function buildPasswordHash(): string
+    public function buildPasswordHash()
     {
         $passwordSpecification = new UserPasswordSpecification($this->password);
         $passwordSpecification->validate();
 
-        return $this->generatePasswordHash();
+        $this->password_hash = $this->generatePasswordHash();
     }
 
     /**
@@ -104,11 +104,6 @@ class User extends DomainModel
         $this->password = $password;
 
         return $this;
-    }
-
-    public function passwordDefined(): bool
-    {
-        return $this->password ? true : false;
     }
 
     public function revealPassword(): string

@@ -10,14 +10,12 @@ use Domain\User\Exceptions\UserException;
 
 class UserRepository extends DomainRepository
 {
-    public function insertUserIntoDb(User $user): int
+    public function insertUserIntoDb(User $user): User
     {
-        if ($user->passwordDefined()) {
-            $user->buildPasswordHash();
-        }
+        $user->buildPasswordHash();
 
         if ($user->create()) {
-            return (int) $user->getDi()->get('db')->lastInsertId();
+            return $user;
         }
 
         foreach ($user->getMessages() as $message) {

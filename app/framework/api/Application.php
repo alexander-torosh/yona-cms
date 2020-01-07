@@ -8,7 +8,7 @@ namespace Api;
 use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
 use Phalcon\Cache\AdapterFactory;
-use Phalcon\Db\Adapter\Pdo\Postgresql;
+use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Di;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
@@ -63,7 +63,7 @@ class Application
 
     private function initDatabase(Micro $app)
     {
-        $database = new Postgresql([
+        $database = new Mysql([
             'host' => getenv('DB_HOST'),
             'port' => getenv('DB_PORT'),
             'username' => getenv('DB_USER'),

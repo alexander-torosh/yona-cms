@@ -1,0 +1,84 @@
+openapi: 3.0.0
+
+servers:
+  - description: YonaCMS Development
+    url: http://localhost:5000
+
+info:
+  description: YonaCMS API
+  version: "1.0.0"
+  title: YonaCMS API
+  contact:
+    email: alexander.torosh@gmail.com
+
+paths:
+  /api/users:
+    get:
+      description: "List Users"
+      operationId: ListUsers
+      tags:
+        - Users
+      responses:
+        "200":
+          description: "List of Users"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+    post:
+      description: "Create User"
+      operationId: CreateUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
+      responses:
+        "201":
+          description: "User creation result"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          example: "webmaster@yonacms.com"
+        name:
+          type: string
+          example: "YonaCMS Webmaster"
+        role:
+          type: string
+          example: "member"
+
+    CreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "webmaster@yonacms.com"
+        name:
+          type: string
+          example: "YonaCMS Webmaster"
+        role:
+          type: string
+          example: "member"
+        password:
+          type: string
+          example: "12#MySuperStrongPassword$%^"

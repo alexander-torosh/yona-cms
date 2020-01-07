@@ -57,6 +57,9 @@ class UserSpecification
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new UserSpecificationException('Property `email` is not valid.');
         }
+        if (\mb_strlen($email) > 70) {
+            throw new UserSpecificationException('`email` length should be less than 70 characters.');
+        }
     }
 
     private function validateName()

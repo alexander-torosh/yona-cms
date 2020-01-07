@@ -20,10 +20,8 @@ class UserClientService extends DomainClientService
             $user = UserFactory::create($data);
             $repository = new UserRepository();
 
-            $id = $repository->insertUserIntoDb($user);
+            $user = $repository->insertUserIntoDb($user);
             $db->commit();
-
-            $user->setId($id);
 
             return $user->getId();
         } catch (UserException $e) {
