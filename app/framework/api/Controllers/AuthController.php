@@ -10,9 +10,9 @@ class AuthController extends ApiController
     public function authenticate()
     {
         $data = $this->request->getJsonRawBody();
-        $service = new UserAuthService($this->getDI());
 
-        $token = $service->authenticate($data);
+        $authService = new UserAuthService($this->getDI());
+        $token = $authService->authenticate($data);
 
         return $this->json(['token' => $token]);
     }

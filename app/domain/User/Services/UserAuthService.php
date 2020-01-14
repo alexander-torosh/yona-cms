@@ -23,12 +23,25 @@ class UserAuthService extends AbstractInjectionAware
         $userFilter = new UserFilter();
         $params = $userFilter->sanitizeAuthParams($data);
 
-        $user = UserFactory::retrieveByEmail($params->email);
-        if ($user->doesPasswordMatch($data->password)) {
-            return $this->createJsonWebToken($user, $params->rememberMe);
+        if ($this->authenticationAllowed($params->email)) {
+            $user = UserFactory::retrieveByEmail($params->email);
+
+            if ($user->doesPasswordMatch($data->password)) {
+                return $this->createJsonWebToken($user, $params->rememberMe);
+            }
+
+            throw new UserException('Wrong email/password combination. Authentication failed.');
+        }
+    }
+
+    private function authenticationAllowed(string $email): bool
+    {
+        if ('' === $email) {
+            throw new UserException('Email parameter is required.');
         }
 
-        throw new UserException('Wrong email/password combination. Authentication failed.');
+        // @TODO Add email authorization retries count checking with Redis key
+        return true;
     }
 
     private function createJsonWebToken(User $user, $rememberMe = false): string
