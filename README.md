@@ -1,5 +1,8 @@
 # Yona CMS
 
+[![Build Status](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/badges/build.png?b=v2.0.0)](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/build-status/v2.0.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/badges/quality-score.png?b=v2.0.0)](https://scrutinizer-ci.com/g/alexander-torosh/yona-cms/?branch=v2.0.0)
+
 ## Installation
 
 Clone project with git clone
