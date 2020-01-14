@@ -3,20 +3,14 @@
 namespace Core\Domain;
 
 use Phalcon\Filter\FilterFactory;
-use Phalcon\Filter\FilterInterface;
 
 class DomainFilterFactory
 {
-    private static $filterLocator;
+    protected $filterLocator;
 
-    protected static function getFilterLocator(): FilterInterface
+    public function __construct()
     {
-        if (!self::$filterLocator) {
-            $factory = new FilterFactory();
-
-            self::$filterLocator = $factory->newInstance();
-        }
-
-        return self::$filterLocator;
+        $factory = new FilterFactory();
+        $this->filterLocator = $factory->newInstance();
     }
 }

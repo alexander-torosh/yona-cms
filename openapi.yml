@@ -12,6 +12,38 @@ info:
     email: alexander.torosh@gmail.com
 
 paths:
+  /api/auth:
+    post:
+      description: "Authenticate User"
+      operationId: AuthenticateUser
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "webmaster@yonacms.com"
+                password:
+                  type: string
+                  example: "12#MySuperStrongPassword$%^"
+
+      responses:
+        "200":
+          description: "Successful authentication"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "..."
+
   /api/users:
     get:
       description: "List Users"

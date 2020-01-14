@@ -5,6 +5,7 @@ namespace Domain\User\Factories;
 use Domain\User\Exceptions\UserException;
 use Domain\User\Specifications\UserSpecification;
 use Domain\User\User;
+use Domain\User\UserFilter;
 use Domain\User\UserRepository;
 use stdClass;
 
@@ -12,7 +13,8 @@ class UserFactory
 {
     public static function create(stdClass $data): User
     {
-        $filteredObject = UserFilterFactory::sanitizeCreationData($data);
+        $userFilter = new UserFilter();
+        $filteredObject = $userFilter->sanitizeCreationData($data);
 
         $user = new User();
         $user

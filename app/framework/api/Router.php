@@ -21,6 +21,7 @@ class Router
 
         // Mount Routes
         $app->mount($this->index());
+        $app->mount($this->auth());
         $app->mount($this->users());
     }
 
