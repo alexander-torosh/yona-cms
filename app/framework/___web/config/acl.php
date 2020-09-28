@@ -8,7 +8,7 @@ use Phalcon\Acl\Role;
 class Acl
 {
     // Public property for accessing configured ACL
-    public $acl;
+    public Memory $acl;
 
     public function __construct()
     {

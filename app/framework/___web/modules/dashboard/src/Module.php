@@ -8,6 +8,7 @@ namespace Dashboard;
 use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Phalcon\Tag;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -29,5 +30,7 @@ class Module implements ModuleDefinitionInterface
             ->setViewsDir(__DIR__.'/../views/')
             ->setMainView('dashboard')
         ;
+
+        Tag::setTitle('Yona CMS Dashboard');
     }
 }

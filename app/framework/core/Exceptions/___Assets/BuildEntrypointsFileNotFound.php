@@ -3,7 +3,7 @@
  * @author Alexander Torosh <webtorua@gmail.com>
  */
 
-namespace Core\Exceptions\Assets;
+namespace Core\Exceptions\___Assets;
 
 use Phalcon\Exception;
 

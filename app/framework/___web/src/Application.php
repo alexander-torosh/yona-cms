@@ -6,11 +6,12 @@
 namespace Web;
 
 use Core\Annotations\AnnotationsManager;
-use Core\Assets\AssetsHelper;
+use Core\___Assets\AssetsHelper;
 use Core\Cache\ApcuCache;
 use Core\Config\EnvironmentLoader;
 use Dashboard\Module as DashboardModule;
 use Front\Module as FrontModule;
+use Phalcon\Cache\Exception\InvalidArgumentException;
 use Phalcon\Debug;
 use Phalcon\Di\DiInterface;
 use Phalcon\Di\FactoryDefault;
@@ -87,8 +88,9 @@ class Application
     private function initDispatchingProcess(PhalconApplication $app, DiInterface $container)
     {
         // Router
-        $webRouter = new Router($container);
-        $container->setShared('router', $webRouter->getRouter());
+        $webRouter = new Router();
+        $webRouter->setDI($container);
+        $container->setShared('router', $webRouter->initRouter());
 
         // Register Application Modules
         $app->registerModules([
@@ -105,14 +107,20 @@ class Application
 
     private function initAnnotations(DiInterface $container)
     {
-        $annotationsManager = new AnnotationsManager($container);
-        $container->setShared('annotations', $annotationsManager->getAnnotations());
+        $annotationsManager = new AnnotationsManager();
+        $annotationsManager->setDI($container);
+        $container->setShared('annotations', $annotationsManager->initAnnotations());
     }
 
+    /**
+     * @param DiInterface $container
+     * @throws InvalidArgumentException
+     */
     private function initAcl(DiInterface $container)
     {
-        $aclManager = new AclManager($container, $container->get('eventsManager'));
-        $container->setShared('acl', $aclManager->getAcl());
+        $aclManager = new AclManager();
+        $aclManager->setDI($container);
+        $container->setShared('acl', $aclManager->initAcl());
     }
 
     private function initView(DiInterface $container)
@@ -124,19 +132,15 @@ class Application
 
     private function initApplicationServices(DiInterface $container)
     {
-        // Url
-        $url = new Url();
-        $url->setBaseUri('/');
-        $container->setShared('url', $url);
+        // URL service. Set base URI
+        $container->get('url')->setBaseUri('/');
+
+        // Set Title tag separator
+        Tag::setTitleSeparator(' - ');
 
         // Assets Build Resolver
         $assetsHelper = new AssetsHelper($container);
         $container->setShared('assetsHelper', $assetsHelper);
-
-        // @TODO Move it to another place
-        // Tag
-        Tag::setTitleSeparator(' - ');
-        Tag::setTitle('Yona CMS');
     }
 
     private function handleAccessDenied(PhalconApplication $app)

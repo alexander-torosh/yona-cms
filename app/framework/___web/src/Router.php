@@ -6,31 +6,12 @@
 namespace Web;
 
 use Phalcon\Di\AbstractInjectionAware;
-use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\Router as PhalconRouter;
 use Phalcon\Mvc\Router\Group;
 
 class Router extends AbstractInjectionAware
 {
-    // @var $router Router
-    private $router;
-
-    public function __construct(DiInterface $container)
-    {
-        $this->setDI($container);
-        $this->init();
-        $this->router->setEventsManager($container->get('eventsManager'));
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRouter(): PhalconRouter
-    {
-        return $this->router;
-    }
-
-    private function init()
+    public function initRouter(): PhalconRouter
     {
         $router = new PhalconRouter();
         $router
@@ -46,7 +27,10 @@ class Router extends AbstractInjectionAware
         $router->mount($this->dashboardIndex());
         $router->mount($this->dashboardAuth());
 
-        $this->router = $router;
+        // Set Router Events Manager
+        $router->setEventsManager($this->getDI()->get('eventsManager'));
+
+        return $router;
     }
 
     private function frontIndex(): Group

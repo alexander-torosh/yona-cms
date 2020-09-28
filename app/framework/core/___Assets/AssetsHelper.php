@@ -3,9 +3,9 @@
  * @author Alexander Torosh <webtorua@gmail.com>
  */
 
-namespace Core\Assets;
+namespace Core\___Assets;
 
-use Core\Exceptions\Assets\BuildEntrypointsFileNotFound;
+use Core\Exceptions\___Assets\BuildEntrypointsFileNotFound;
 use Phalcon\Cache;
 use Phalcon\Di\AbstractInjectionAware;
 

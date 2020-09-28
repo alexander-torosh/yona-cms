@@ -9,11 +9,6 @@ use Symfony\Component\Serializer\Serializer;
 
 class DomainClientService extends AbstractInjectionAware
 {
-    public function __construct($di)
-    {
-        $this->setDI($di);
-    }
-
     protected function toJsonObject($object)
     {
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);

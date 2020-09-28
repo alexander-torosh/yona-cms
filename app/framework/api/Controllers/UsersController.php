@@ -9,9 +9,10 @@ class UsersController extends ApiController
 {
     public function create()
     {
-        $data = $this->request->getJsonRawBody();
+        $service = new UserClientService();
+        $service->setDI($this->getDI());
 
-        $service = new UserClientService($this->getDi());
+        $data = $this->request->getJsonRawBody();
         $id = $service->createUser($data);
 
         $this->response->setStatusCode(201);
@@ -21,8 +22,10 @@ class UsersController extends ApiController
 
     public function retrieveById($id)
     {
+        $service = new UserClientService();
+        $service->setDI($this->getDI());
+
         $id = (int) $id;
-        $service = new UserClientService($this->getDi());
         $user = $service->retrieveUserById($id);
 
         return $this->json(['user' => $user]);

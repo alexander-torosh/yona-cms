@@ -15,6 +15,6 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        Tag::prependTitle('Dashboard index');
+        Tag::prependTitle('Index');
     }
 }

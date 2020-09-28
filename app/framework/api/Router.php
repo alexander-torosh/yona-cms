@@ -14,6 +14,9 @@ use Phalcon\Mvc\Micro\Collection as MicroCollection;
 
 class Router
 {
+    /**
+     * @param Micro $app
+     */
     public function init(Micro $app)
     {
         // Not Found
@@ -25,6 +28,10 @@ class Router
         $app->mount($this->users());
     }
 
+    /**
+     * @param Micro $app
+     * @return Micro
+     */
     private function handleNotFound(Micro $app): Micro
     {
         // Not Found
@@ -37,6 +44,9 @@ class Router
         return $app;
     }
 
+    /**
+     * @return MicroCollection
+     */
     private function index(): MicroCollection
     {
         $collection = new MicroCollection();
@@ -48,6 +58,9 @@ class Router
         return $collection;
     }
 
+    /**
+     * @return MicroCollection
+     */
     private function auth(): MicroCollection
     {
         $collection = new MicroCollection();
@@ -55,10 +68,14 @@ class Router
         $collection->setPrefix('/api/auth');
 
         $collection->post('', 'authenticate');
+        $collection->post('/csrf', 'createCsrfToken');
 
         return $collection;
     }
 
+    /**
+     * @return MicroCollection
+     */
     private function users(): MicroCollection
     {
         $collection = new MicroCollection();

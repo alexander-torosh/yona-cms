@@ -12,6 +12,7 @@ use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Di;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
+use Phalcon\Http\Response\Cookies;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Model\Manager as ModelsManager;
 use Phalcon\Mvc\Model\Metadata\Apcu as ModelsMetadataApcu;
@@ -58,7 +59,14 @@ class Application
     {
         $app->setService('router', new PhalconRouter(), true);
         $app->setService('request', new Request(), true);
-        $app->setService('response', new Response(), true);
+
+        $cookies = new Cookies();
+        $cookies->useEncryption(false);
+        $app->setService('cookies', $cookies, true);
+
+        $response = new Response();
+        $response->setCookies($cookies);
+        $app->setService('response', $response, true);
     }
 
     private function initDatabase(Micro $app)
@@ -106,6 +114,7 @@ class Application
                     'code' => $code,
                     'status' => 'error',
                     'message' => $exception->getMessage(),
+                    'trace' => $exception->getTraceAsString(),
                 ]);
 
                 $response->setStatusCode($code);

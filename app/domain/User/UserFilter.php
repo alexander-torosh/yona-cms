@@ -23,6 +23,8 @@ class UserFilter extends DomainFilterFactory
         $result = new stdClass();
         $result->email = $this->sanitizeEmail($data);
         $result->password = $this->sanitizePassword($data);
+        $result->csrfToken = $data->csrfToken ?? '';
+        $result->fingerprintHash = $data->fingerprintHash ?? '';
 
         $result->rememberMe = isset($data->rememberMe) ? (bool) $data->rememberMe : false;
 

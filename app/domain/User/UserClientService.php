@@ -10,6 +10,11 @@ use stdClass;
 
 class UserClientService extends DomainClientService
 {
+    /**
+     * @param stdClass $data
+     * @return int
+     * @throws UserException
+     */
     public function createUser(stdClass $data): int
     {
         /** @var Postgresql */
@@ -24,6 +29,7 @@ class UserClientService extends DomainClientService
             $db->commit();
 
             return $user->getId();
+
         } catch (UserException $e) {
             if ($db->isUnderTransaction()) {
                 $db->rollback();
@@ -33,6 +39,11 @@ class UserClientService extends DomainClientService
         }
     }
 
+    /**
+     * @param int $id
+     * @return stdClass
+     * @throws UserException
+     */
     public function retrieveUserById(int $id): stdClass
     {
         $user = UserFactory::retrieveById($id);

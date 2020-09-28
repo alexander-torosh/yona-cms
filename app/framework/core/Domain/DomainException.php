@@ -7,4 +7,5 @@ namespace Core\Domain;
 
 class DomainException extends \Exception
 {
+    protected $code = 422;
 }

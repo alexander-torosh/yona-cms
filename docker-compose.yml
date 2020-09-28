@@ -4,10 +4,12 @@ services:
   php7:
     build: ./docker/image/
     container_name: yona-cms
+    ports:
+      - 3000:3000
     volumes:
       - ./:/yona-cms
-      - ./docker/config/php/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
-      - ./docker/config/php/php.ini:/etc/php/7.3/fpm/php.ini
+      - ./docker/config/php/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+      - ./docker/config/php/php.ini:/etc/php/7.4/fpm/php.ini
     links:
       - mysql
       - redis
@@ -40,7 +42,7 @@ services:
       - seccomp:unconfined
 
   redis:
-    image: redis:4-alpine
+    image: redis:6-buster
     container_name: yona-cms-redis
 
   phpmyadmin:

@@ -25,17 +25,17 @@
         }
     },
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "ext-json": "*",
         "josegonzalez/dotenv": "dev-master",
         "symfony/serializer": "^4.3",
         "symfony/property-access": "^4.3",
         "robmorgan/phinx": "^0.11.1",
-        "phalcon/cphalcon": "^4.0.0-rc.2",
+        "phalcon/cphalcon": "^4.0.0",
         "firebase/php-jwt": "^5.0"
     },
     "require-dev": {
-        "phalcon/ide-stubs": "^4.0.0-rc.2",
+        "phalcon/ide-stubs": "^4.0.0",
         "codeception/codeception": "^4.0",
         "codeception/module-asserts": "^1.0.0",
         "codeception/module-phalcon": "^1.0",

@@ -18,15 +18,15 @@ class User extends DomainModel
         'admin',
     ];
 
-    private $id = 0;
-    private $email = '';
-    private $name = '';
-    private $role = self::ROLES[0];
-    private $password = '';
-    private $password_hash = '';
+    private int $id = 0;
+    private string $email = '';
+    private string $name = '';
+    private string $role = self::ROLES[0];
+    private string $password = '';
+    private string $password_hash = '';
 
-    private $created_at;
-    private $updated_at;
+    private string $created_at;
+    private string $updated_at;
 
     public function initialize()
     {
@@ -50,7 +50,8 @@ class User extends DomainModel
     }
 
     /**
-     * @throws DomainException
+     * @param string $inputPassword
+     * @return bool
      */
     public function doesPasswordMatch(string $inputPassword): bool
     {
