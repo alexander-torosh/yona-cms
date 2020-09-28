@@ -33,6 +33,15 @@ class UsersController extends ApiController
 
     public function usersList()
     {
-        return $this->json([]);
+        return $this->json([
+            [
+                'id' => 1,
+                'name' => 'John',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Tom',
+            ]
+        ]);
     }
 }

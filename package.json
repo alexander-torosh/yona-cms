@@ -6,7 +6,7 @@
   "scripts": {
     "oldDev": "yarn encore dev --watch",
     "oldOroduction": "yarn encore production",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start"
   },
