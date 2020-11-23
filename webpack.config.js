@@ -3,8 +3,8 @@ let Encore = require('@symfony/webpack-encore')
 Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
-  .addEntry('front', './assets/front/webpack.index.js')
-  .addEntry('dashboard', './assets/dashboard/webpack.index.js')
+  .addEntry('front', './src/assets/front/webpack.index.js')
+  .addEntry('dashboard', './src/assets/dashboard/webpack.index.js')
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
 

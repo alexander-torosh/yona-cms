@@ -1,0 +1,23 @@
+{
+  "build/dashboard.css": "/build/dashboard.css",
+  "build/dashboard.js": "/build/dashboard.js",
+  "build/front.css": "/build/front.css",
+  "build/front.js": "/build/front.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/fonts/brand-icons.woff2": "/build/fonts/brand-icons.278156e4.woff2",
+  "build/fonts/brand-icons.ttf": "/build/fonts/brand-icons.65a2fb6d.ttf",
+  "build/fonts/brand-icons.woff": "/build/fonts/brand-icons.cac87dc0.woff",
+  "build/fonts/brand-icons.eot": "/build/fonts/brand-icons.d68fa3e6.eot",
+  "build/fonts/icons.woff2": "/build/fonts/icons.38c6d8ba.woff2",
+  "build/fonts/icons.woff": "/build/fonts/icons.425399f8.woff",
+  "build/fonts/icons.eot": "/build/fonts/icons.a01e3f2d.eot",
+  "build/fonts/icons.ttf": "/build/fonts/icons.c656b8ca.ttf",
+  "build/fonts/outline-icons.ttf": "/build/fonts/outline-icons.53671035.ttf",
+  "build/fonts/outline-icons.woff2": "/build/fonts/outline-icons.687a4990.woff2",
+  "build/fonts/outline-icons.eot": "/build/fonts/outline-icons.752905fa.eot",
+  "build/fonts/outline-icons.woff": "/build/fonts/outline-icons.ddae9b1b.woff",
+  "build/images/brand-icons.svg": "/build/images/brand-icons.6729d297.svg",
+  "build/images/flags.png": "/build/images/flags.99f63ae7.png",
+  "build/images/icons.svg": "/build/images/icons.62d9dae4.svg",
+  "build/images/outline-icons.svg": "/build/images/outline-icons.9c4845b4.svg"
+}

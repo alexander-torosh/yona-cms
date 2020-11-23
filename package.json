@@ -4,21 +4,23 @@
   "author": "Alexander Torosh <webtorua@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "oldDev": "yarn encore dev --watch",
-    "oldOroduction": "yarn encore production",
-    "dev": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "yarn encore dev --watch",
+    "production": "yarn encore production"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/preset-react": "^7.12.7",
+    "@symfony/webpack-encore": "^0.31.0",
+    "sass-loader": "^10.1.0"
+  },
   "dependencies": {
-    "next": "^9.5.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "sass": "^1.26.11",
-    "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.8.10"
+    "fingerprintjs2": "^2.1.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.29.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.1",
+    "superagent": "^6.1.0"
   },
   "description": "CMS created with Phalcon 4 and PHP 7.4",
   "version": "2.0.0",

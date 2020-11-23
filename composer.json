@@ -15,13 +15,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Api\\": "app/framework/api/",
-            "Cli\\": "app/framework/cli/",
-            "Core\\": "app/framework/core/",
-            "Web\\": "app/framework/web/src/",
-            "Dashboard\\": "app/framework/web/modules/dashboard/src/",
-            "Front\\": "app/framework/web/modules/front/src/",
-            "Domain\\": "app/domain/"
+            "Api\\": "src/app/framework/api/",
+            "Cli\\": "src/app/framework/cli/",
+            "Core\\": "src/app/framework/core/",
+            "Web\\": "src/app/framework/web/src/",
+            "Dashboard\\": "src/app/framework/web/modules/dashboard/src/",
+            "Front\\": "src/app/framework/web/modules/front/src/",
+            "Domain\\": "src/app/domain/"
         }
     },
     "require": {
@@ -30,9 +30,10 @@
         "josegonzalez/dotenv": "dev-master",
         "symfony/serializer": "^4.3",
         "symfony/property-access": "^4.3",
-        "robmorgan/phinx": "^0.11.1",
-        "phalcon/cphalcon": "^4.0.0",
-        "firebase/php-jwt": "^5.0"
+        "phalcon/cphalcon": "^4.0",
+        "firebase/php-jwt": "^5.0",
+        "cakephp/core": "^4.1",
+        "robmorgan/phinx": "^0.12.4"
     },
     "require-dev": {
         "phalcon/ide-stubs": "^4.0.0",
